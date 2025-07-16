@@ -1,0 +1,47 @@
+<div class="panel panel-default no-border no-shadow m-b-none">
+    <div class="panel-body">
+
+        <div class="form-horizontal m-b-md">
+            <div class="row">
+                <div class="col-md-3 m-b-xs">
+                    <label class="control-label m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.RoundStatus'"></label>
+                    <span class="label text-base m-t-xs" data-bind="text: materialRound.StatusTypeName, css: 'label-' + materialRound.StatusClass()"></span>
+                </div>
+                <div class="col-md-3 m-b-xs">
+                    <label class="control-label m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Requested'"></label>
+                    <span class="form-control-static" data-bind="textDate: materialRound.RequestedDate"></span>
+                </div>
+                <div class="col-md-2 m-b-xs">
+                    <label class="control-label m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.DueDate'"></label>
+                    <span class="form-control-static" data-bind="textDate:  materialRound.DueDate"></span>
+                </div>
+                <div class="col-md-3 m-b-xs">
+                    <label class="control-label m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.StatusChanged'"></label>
+                    <span class="form-control-static text-danger" data-bind="tooltip, attr: { title: moment(materialRound.StatusChangeDate()).format(CONST.settings.shortDateTimeDisplayFormat) }, text: humanizeDate(materialRound.StatusChangeDate())"></span>
+                </div>
+                <div class="col-md-1 text-right m-b-xs">
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-sm btn-success pull-right dropdown-toggle m-t-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="enable: actions().length">
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </button>
+                        <!-- dropdown -->
+                        <ul class="dropdown-menu dropdown-menu-right w" data-bind="foreach: actions">
+                            <li>
+                                <a data-bind="text: Name, click: $root.selectAction"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--ko if: allowEdit() || links().length-->
+        <div class="panel panel-default">
+            <div class="panel-heading" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Links'"></div>
+            <div class="panel-body">
+                <!--ko compose: roundLinksCompose--><!--/ko-->
+            </div>
+        </div>
+        <!--/ko-->
+        <!-- ko compose: documentCompose --><!-- /ko -->
+    </div>
+</div>

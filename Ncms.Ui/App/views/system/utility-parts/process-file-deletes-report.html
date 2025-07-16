@@ -1,0 +1,24 @@
+﻿<div id="proccess-file-deletes-report"class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <span data-bind="restext: 'Naati.Resources.SystemResources.resources.ShowFileDeleteReport'"></span>
+        </h2>
+    </div>
+    <div class="panel-body">
+        <div class="form">
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" data-bind="click: showfiledeletereport">
+                    <i class="fa fa-check"></i>
+                    <span data-bind="restext: 'Naati.Resources.SystemResources.resources.ShowFileDeleteReport'"></span>
+                </button>
+            </div>
+            <!--ko if: showReport-->
+            <div class="form-group">
+                <textarea class="report-output" data-bind="value:reportOutput, valueUpdate: 'input'">
+
+                </textarea>
+            </div>
+            <!--/ko-->
+        </div>
+    </div>
+</div>

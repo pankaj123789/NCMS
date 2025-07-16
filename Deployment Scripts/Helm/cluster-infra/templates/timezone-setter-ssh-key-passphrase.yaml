@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-passphrase
+data:
+  SSH_PASSPHRASE: {{ .Values.sshKey.passphrase | b64enc }}
+  SSH_USER: {{ .Values.sshUser | b64enc }}

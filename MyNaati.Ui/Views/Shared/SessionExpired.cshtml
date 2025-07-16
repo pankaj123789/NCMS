@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Session Expired";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Session Expired", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        function redirectToIndex() {
+            window.location = '@Url.Action("Index", "Home")';
+        }
+
+        $(document).ready(function () {
+            window.setTimeout(redirectToIndex, 5000);
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <h2>Session Expired</h2>
+</div>
+<div class="col-lg-12">
+    <p>Your session has expired due to inactivity.  You will be redirected to the @Html.ActionLink("home page", "Index", "Home") momentarily.</p>
+</div>

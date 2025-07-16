@@ -1,0 +1,9 @@
+﻿@model MyNaati.Ui.ViewModels.Configuration.ConfigurationModel
+
+
+<a href="@Url.Content("~/Content/swf/Introduction to NAATI Online.swf")" id="learnMoreLink"><img src="@Url.Content("~/Content/Images/NaatiOnlineLearnMore.png")" style="float:left; padding-left: 1px;"/></a>
+<a href="@Url.Action("Register", "Account")"><img src="@Url.Content("~/Content/Images/NaatiOnlineRegisterNow.png")" style="float:left; padding-left: 8px;"/></a>
+@if (Model.ShowVerifyCredentials)
+{
+    <a href="@Url.Action("Credentials", "PDSearch")" id="verifyCredentialsLink"><img src="@Url.Content("~/Content/Images/NaatiOnlineVerifyCredentials.png")" style="float:left; padding-left: 8px;"/></a>
+}

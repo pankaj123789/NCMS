@@ -1,0 +1,55 @@
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" data-bind="attr: { id: modalId }">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.SystemResources.resources.Upload'"></h4>
+            </div>
+            <div class="modal-body form">
+                <div class="form">
+                    <label data-bind="reshtml: 'Naati.Resources.Document.resources.UploadFile'"></label>
+                    <div data-bind="component: { name: 'file-upload', params: fileUpload }"></div>
+                    <div class="form-group">
+                        <!-- ko ifnot: uploadCompletedSuccessfully-->
+                        <!-- ko ifnot: readyForUpload -->
+                        <button type="button" class="btn btn-primary" data-bind="enable: hasFileToUpload, click: verify">
+                            <i class="fa fa-arrow-up"></i>
+                            <span data-bind="restext: 'Naati.Resources.SystemResources.resources.Verify'"></span>
+                        </button>
+                        <!-- /ko -->
+                        <!-- ko if: readyForUpload -->
+                        <button type="button" class="btn btn-primary" data-bind="click: upload">
+                            <i class="fa fa-arrow-up"></i>
+                            <span data-bind="restext: 'Naati.Resources.SystemResources.resources.Upload'"></span>
+                        </button>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <!-- ko if: hasMessages -->
+                <div data-bind="component: { name: 'table-component', params: tableDefinition }"></div>
+                <!-- /ko -->
+            </div>
+            <div class="modal-footer">
+                <!-- ko ifnot: uploadCompletedSuccessfully -->
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+                <!-- /ko -->
+                <!-- ko if: uploadCompletedSuccessfully -->
+                <button type="button" class="btn btn-default" data-dismiss="modal"  onclick="window.location.reload()"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="validation-header-template" type="text/html">
+    <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.Type'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.Message'"></th>
+
+</script>
+<script id="validation-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: type"></td>
+        <td data-bind="text: data"></td>
+    </tr>
+</script>

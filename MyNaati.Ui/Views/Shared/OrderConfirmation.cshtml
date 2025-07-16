@@ -1,0 +1,30 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.BasePurchaseWizardModel
+
+@{
+    ViewBag.Title = "Order Confirmation";
+    ViewBag.Subtitle = "Order Successfully Submitted";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+}
+
+<p>
+    Your payment has been processed, and your order has been submitted to NAATI for processing.  Delivery of your order may take up to 4 weeks.<br />
+    Please print the details of your order below for reference.
+</p>
+
+<p>
+    Reference Number: @Model.ReferenceNumber
+</p>
+
+@{
+    Html.RenderPartial("_OrderTotalViewPartial", Model.OrderTotalModel);
+    Html.RenderPartial("_DeliveryDetailsViewPartial", Model.DeliveryDetailsModel);    
+    Html.RenderPartial("_PaymentDetailsViewPartial", Model.PaymentDetailsModel);
+}
+
+<div id="confirmationbuttons">
+    @using (Html.BeginForm())
+    {
+        <input type="submit" value="Print" />
+        <input type="submit" value="OK" />
+    }
+</div>

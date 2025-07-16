@@ -1,0 +1,42 @@
+<div class="hbox">
+    <div class="hbox" data-bind="component: { name: 'search-component', params: searchComponentOptions }">
+    </div>
+    <script id="email-queue-header-template" type="text/html">
+        <th class="sortable w-xxs" data-bind="reshtml: 'Naati.Resources.Shared.resources.Id'"></th>
+        <th class="sortable w-sm" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.DateRequested'"></th>
+        <th class="sortable w-sm" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.RequestedBy'"></th>
+        <th class="sortable w-md" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.Subject'"></th>
+        <th class="sortable w-md" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.RecipientEmail'"></th>
+        <th class="sortable w-sm" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.DateProcessed'"></th>
+        <th class="sortable w-md" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.Status'"></th>
+        <th class="w-xs">&nbsp;</th>
+    </script>
+    <script id="email-queue-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: EmailMessageId"></td>
+            <td data-bind="text: CreatedDate"></td>
+            <td data-bind="text: CreatedUserDisplayName"></td>
+            <td data-bind="text: Subject"></td>
+            <td data-bind="text: RecipientEmail"></td>
+            <td data-bind="text: LastSendAttemptDate"></td>
+            <td>
+                <!--ko if: LastSendResult-->
+                <span data-bind="text: EmailSendStatus, tooltip: { container: 'body', template: $root.largeTooltip }, attr: { title: LastSendResult }"></span>
+                <!--/ko-->
+                <!--ko ifnot: LastSendResult-->
+                <span data-bind="text: EmailSendStatus"></span>
+                <!--/ko-->
+            </td>
+            <td class="text-right">                
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default btn-xs" data-bind="tooltip: { container: '#emailQueueTable' }, resattr: { title: 'Naati.Resources.EmailMessage.resources.View' }, click: $root.viewEmail">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
+                    <a href="#" class="btn btn-default btn-xs" data-bind="tooltip: { container: '#emailQueueTable' }, resattr: { title: 'Naati.Resources.EmailMessage.resources.Resend' }, click: $root.resendEmail">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                    </a>
+                </div>                
+            </td>
+        </tr>
+    </script>
+</div>

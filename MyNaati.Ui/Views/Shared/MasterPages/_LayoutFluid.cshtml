@@ -1,0 +1,25 @@
+﻿@using MyNaati.Ui.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    @Styles.Render("~/Content/bootstrap-fileinput/css/css")
+    @Styles.Render("~/Content/themes/base/base")
+    @Styles.Render("~/Content/DataTables/css/css")
+    @Styles.Render("~/Bundles/Styles")
+    @Scripts.Render("~/Bundles/Scripts")
+    @RenderSection("Head", false)
+</head>
+<body>
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+    @if (ViewContext.IsGoogleAnalyticsEnabled())
+    {
+        @Html.Partial("_GoogleAnalytics")
+    }
+</body>
+</html>

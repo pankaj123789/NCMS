@@ -1,0 +1,37 @@
+<div class="hbox">
+    <div class="hbox" data-bind="component: {
+    name: 'search-component',
+    params: { 
+         title: title, 
+         filters: filters, 
+         searchType: searchType, 
+         searchTerm: searchTerm, 
+         searchCallback: searchCallback, 
+         tableDefinition: tableDefinition,
+         idSearchOptions: idSearchOptions
+    }
+}">
+    </div>
+    <script id="email-template-header-template" type="text/html">     
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Id'"></th>           
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.Subject'"></th>
+        <th>&nbsp;</th>
+    </script>
+    <script id="email-template-row-template" type="text/html">
+        <tr>  
+            <td data-bind="text: Id"></td>              
+            <td>                
+                <a href="#" class="text-info" data-bind="text: Name, attr: { href: '#system/email-template/' + Id }"></a>
+            </td>           
+            <td data-bind="text: Subject"></td>           
+            <td class="text-center w-xs">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#system/email-template/' + Id }, clickBubble: false, tooltip, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </script>
+</div>

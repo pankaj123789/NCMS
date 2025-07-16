@@ -1,0 +1,24 @@
+﻿<div class="form-group" data-bind="validationElement: documents">
+	<!--ko if: !rows() || !rows().length-->
+	<strong>It is not necessary to add additional files.</strong>
+	<!--/ko-->
+	<!--ko if: rows() && rows().length-->
+	<strong>Please upload the required files for this application.</strong>
+	<!--/ko-->
+	<!--ko foreach: { data: rows, as: 'r' }-->
+	<div class="row">
+		<!--ko foreach: { data: r.cols, as: 'm' }-->
+		<div data-bind="css: 'col-sm-' + (12 / r.cols.length).toString()">
+			<div data-bind="css: { 'text-danger': !m.uploaded(), 'text-success': m.uploaded }">
+				<span class="fa" data-bind="css: { 'fa-times': !m.uploaded(), 'fa-check': m.uploaded }"></span>
+				<span data-bind="text: m.DisplayName"></span>
+			</div>
+			<div class="file-loading">
+				<input type="file" multiple accept=".bmp,.gif,.jpg,.jpeg,.png,.doc,.csv,.docx,.pdf,.ppt,.pptx,.rtf,.tiff,.txt,.xls,.xlsx" data-bind="fileinput: $root.getFileOptions(m), event: $root.fileEvent">
+			</div>
+		</div>
+		<!--/ko-->
+	</div>
+	<!--/ko-->
+	<span class="help-block" data-bind="validationMessage: documents"></span>
+</div>

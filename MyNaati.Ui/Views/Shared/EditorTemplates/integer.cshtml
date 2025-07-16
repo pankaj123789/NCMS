@@ -1,0 +1,8 @@
+﻿@model int
+
+<div class="editorSet">
+    <div class="editorValue">
+        @Html.TextBoxFor(e => Model, new { @class = this.ViewData["class"] })
+        @Html.ValidationMessageFor(e => Model, "*")        
+    </div>
+</div>

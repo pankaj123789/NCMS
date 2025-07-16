@@ -1,0 +1,38 @@
+<div class="row">
+    <div data-bind="css: panelNameCss, validationElement: panel.Name">
+        <label data-bind="reshtml: 'Naati.Resources.Panel.resources.PanelName'"></label>
+        <!-- ko component: { name: 'text-input', params: panelNameOptions } -->
+        <!-- /ko -->
+    </div>
+    <div data-bind="css: panelTypeCss, validationElement: panel.PanelTypeId">
+        <label data-bind="reshtml: 'Naati.Resources.Panel.resources.PanelType'"></label>
+        <!-- ko component: { name: 'select-component', params: panelTypeOptions } -->
+        <!-- /ko -->
+    </div>
+    <div data-bind="css: languageCss, validationElement: panel.LanguageId">
+        <label data-bind="reshtml: 'Naati.Resources.Shared.resources.Language'"></label>
+        <!-- ko component: { name: 'entity-select', params: languageOptions } -->
+        <!-- /ko -->
+    </div>
+    <div data-bind="css: commissionedDateCss, validationElement: panel.CommissionedDate">
+        <label data-bind="reshtml: 'Naati.Resources.Panel.resources.CommissionedDate'"></label>
+        <!-- ko component: { name: 'date-input', params: commissionedDateOptions } -->
+        <!-- /ko -->
+    </div>
+</div>
+<div class="row">
+    <div data-bind="css: noteCss, validationElement: panel.Note">
+        <label data-bind="reshtml: 'Naati.Resources.Shared.resources.Note'"></label>
+        <!-- ko component: { name: 'text-input', params: noteOptions } -->
+        <!-- /ko -->
+    </div>
+    <div data-bind="css: visibleInEportalCss">
+        <label data-bind="restext: 'Naati.Resources.Panel.resources.VisibleInEportal'"></label>
+        <div class="m-t-xs" data-bind="validationOptions: { insertMessages: false }">
+            <label class="i-switch i-switch-md bg-info">
+                <input type="checkbox" data-bind="checked: panel.VisibleInEportal" />
+                <i></i>
+            </label>
+        </div>
+    </div>
+</div>

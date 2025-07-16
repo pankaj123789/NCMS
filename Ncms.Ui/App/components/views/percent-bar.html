@@ -1,0 +1,13 @@
+﻿<div class="row">
+    <div class="col-xs-3 text-right">
+        <span class="font-thin" data-bind="restext: label"></span>
+    </div>
+    <div class="col-xs-7">
+        <div class="progress progress-xs m-t-sm m-b-none bg-light">
+            <div class="progress-bar animated slideInLeft" data-bind="tooltip, attr: { 'data-original-title': percent, style: style }, css: barCss"></div>
+        </div>
+    </div>
+    <div class="col-xs-2">
+        <span data-bind="textCurrency: value, css: textCss"></span>
+    </div>
+</div>

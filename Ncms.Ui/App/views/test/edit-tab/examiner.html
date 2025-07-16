@@ -1,0 +1,57 @@
+<div class="panel panel-default">
+    <!-- ko if: dataTableLoaded -->
+    <div class="table-responsive">
+        <table data-bind="datatable: dataTable(), attr: { id: dataTable().id }" class="table table-striped b-t b-b" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th data-bind="reshtml: 'Naati.Resources.Test.resources.Examiner'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.NaatiNo'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Test.resources.DateAllocated'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Sent'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Test.resources.ResultReceived'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Test.resources.PayrollStatus'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Test.resources.ProductSpecificationCodeLabel'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Test.resources.Cost'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Test.resources.ExaminerType'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Test.resources.PaperLost'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Test.resources.ExaminerPaperReceivedDate'"></th>
+                    <th data-bind="css: { hide: addMode() }"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: { data: dataTable().source, as: 'e' }">
+                <tr>
+                    <td data-bind="text: $root.getPersonName(e)"></td>
+                    <td data-bind="text: e.Examiner.NaatiNumber"></td>
+                    <td data-bind="text: $parent.formatDate(e.DateAllocated)"></td>
+                    <td data-bind="text: $parent.formatDate(e.ExaminerSentDate)"></td>
+                    <td data-bind="text: $parent.formatDate(e.ExaminerReceivedDate)"></td>
+                    <td data-bind="text: e.PayRollStatus"></td>
+                    <td data-bind="text: e.ProductSpecificationCode"></td>
+                    <td data-bind="text: e.ExaminerCost"></td>
+                    <td data-bind="text: $root.getExaminerTypeText(e.ExaminerTypeName)"></td>
+                    <td class="text-center">
+                        <i class="fa" data-bind="check: e.ExaminerPaperLost"></i>
+                    </td>
+                    <td data-bind="text: $parent.formatDate(e.ExaminerPaperReceivedDate)"></td>
+                    <td class="text-center" style="width: 150px;" data-bind="css: { hide: $parent.addMode() }">
+                        <div class="btn-group">
+                            <!--ko if: $parent.canEditExaminer-->
+                            <a href="#" class="btn btn-default btn-xs" data-bind="disable: $root.disable, click: function() { $parent.edit(e); }, tooltip: { container: '.modal-body:visible' }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                            <!--/ko-->
+                            <!--ko if: $root.canRemoveExaminer-->
+                            <!--ko if: !e.ExaminerReceivedDate-->
+                            <a href="#" class="btn btn-danger btn-xs" data-bind="disable: $root.disable, click: function() { $parent.remove(e); }, tooltip: { container: '.modal-body:visible' }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                            <!--/ko-->
+                            <!--/ko-->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- /ko -->
+</div>

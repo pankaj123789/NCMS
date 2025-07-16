@@ -1,0 +1,27 @@
+﻿<div>
+    <!--ko component: { name: 'table-component', params: tableDefinition }--><!--/ko-->
+
+    <script id="person-qrcodes-header-template" type="text/html">
+        <th class="sortable w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.PractitionerVerificationUrl'"></th>
+        <th class="sortable w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.GeneratedDate'"></th>
+        <th class="sortable w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.Status'"></th>
+        <th class="sortable w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.ModifiedDate'"></th>
+        <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.Deactivate'"></th>
+    </script>
+    <script id="person-qrcodes-row-template" type="text/html">
+        <tr>
+            <td>
+                <a href="#" target="_blank" class="text-info" data-bind="text: PractitionerVerificationUrl, attr: { href: PractitionerVerificationUrl }"></a>
+            </td>
+            <td data-bind="text: GeneratedDate"></td>
+            <td data-bind="text: Status"></td>
+            <td data-bind="text: ModifiedDate"></td>
+            <td class="w-xs">
+                <label class="pull-left i-switch m-t-n-xxs m-r-xs">
+                    <input type="checkbox" data-bind="checked: Checked,click: $root.toggleQrCode, enableWithPermission:'Person.Configure'">
+                    <i></i>
+                </label>
+            </td>
+        </tr>
+    </script>
+</div>

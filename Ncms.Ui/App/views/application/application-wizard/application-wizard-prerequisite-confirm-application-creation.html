@@ -1,0 +1,22 @@
+﻿<div>
+    <!-- ko ifnot: hasValidationError-->
+    <div class="alert alert-info" data-bind="reshtml: 'Naati.Resources.Application.resources.NoIncompleteMandatories'"></div>
+    <!-- /ko -->
+    <!-- ko if: hasValidationError -->
+    <div class="form-control-static">
+        <label class="checkbox-inline i-checks">
+            <span data-bind="reshtml: 'Naati.Resources.Application.resources.IncompleteMandatoriesFound'"></span>
+            <br />
+            <input type="checkbox" data-bind="checked: checked"><i></i>
+            <span class="padder-md" data-bind="reshtml: 'Naati.Resources.Application.resources.ProceedWithApplicationCreation'"></span>
+            <br />
+            <!-- ko if: createApplications-->
+            <span class="text-warning-dker" data-bind="reshtml: 'Naati.Resources.Application.resources.IncompleteMandatoriesCreateAsDraft'"></span>
+            <!-- /ko -->
+            <!-- ko ifnot: createApplications-->
+            <span class="text-warning-dker" data-bind="reshtml: 'Naati.Resources.Application.resources.IncompleteMandatoriesNoCreation'"></span>
+            <!-- /ko -->
+        </label>
+    </div>
+    <!-- /ko -->
+</div>

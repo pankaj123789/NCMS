@@ -1,0 +1,208 @@
+﻿@using System.Configuration
+@using System.Globalization
+@model MyNaati.Ui.ViewModels.CredentialApplication.MyTestViewModelList
+@using Recaptcha
+
+@{
+    ViewBag.Title = "My Tests";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+        new Tuple<string, string>("My Tests", null)
+    };
+}
+
+
+@helper RenderField(string value, string width, string label = null, bool isBold = false)
+{
+    <div class="col-md-@width col-xs-12">
+        <div class="center" style="padding-left: 0; padding-right: 0;">
+
+            <label>@label</label>
+            @if (isBold)
+            {
+                <h4 class="form-control-static" style="margin-top: 0">@value</h4>
+            }
+            else
+            {
+                if (label == "Status")
+                {
+                    <p><span class="badge" style="background-color: #1B81AF;">@value</span></p>
+                }
+                else
+                {
+                    <p><span class="form-control-static">@value</span></p>
+                }
+            }
+        </div>
+    </div>
+}
+
+@helper RenderTestOptions(int credentialRequestId, int applicationId, string status, bool canOpenDetails, bool canSelectTestSession)
+{
+    <div class="col-md-2 col-xs-12">
+        <div class="center" style="float: right">
+
+
+            @if (canOpenDetails)
+            {
+                <a href="@Url.Action("ManageTest", "Applications", new {credentialRequestId})" class="btn btn-primary" style="margin-top: 20px;" type="button">Manage</a>
+            }
+            else if (canSelectTestSession)
+            {
+                <button type="button" onclick="getSessions(@(credentialRequestId),@(applicationId), @(ConfigurationManager.AppSettings["kosettings:skipRecaptcha"].AsBool()))" class="btn btn-primary" style="margin-top: 20px;">Select Test Session</button>
+            }
+        </div>
+    </div>
+}
+
+@helper RenderRefundOptions(int credentialRequestId, int credentialApplicationId, bool canRequestRefund)
+{
+    <div class="col-md-2 col-xs-12">
+        <div class="center" style="float: right">
+
+            @if (canRequestRefund)
+            {
+                <button onclick="checkPayPalRefundDate(@(credentialRequestId), '@Url.Action("ValidatePayPalRefund", "Applications", new { credentialRequestId })', '@Url.Action("RefundDetails", "Applications", new { credentialRequestId, credentialApplicationId })')" 
+                        class="btn btn-primary" style="margin-top: 20px;" type="button">Request Refund</button>
+            }
+
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-lg-12" style="padding-left: 30px;">
+        <h2 class="text-primary">@ViewBag.Title</h2>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="validation-summary-errors">
+        @Model.ErrorMessage
+    </div>
+}
+
+<div class="row">
+    <div class="col-lg-12" style="padding-left: 30px;">
+        @if (Model.MyTestList != null && Model.MyTestList.Any())
+        {
+            foreach (var item in Model.MyTestList)
+            {
+                <div class="row">
+                    <div class="col-lg-12" style="padding-top: 10px;">
+                        <div class="panel panel-default">
+
+                            <div class="row">
+                                <div class="panel-body">
+                                    @RenderField(item.ApplicationTypeDisplayName, "4", "Application", true)
+                                    @RenderField(item.CredentialTypeDisplayName, "4", "Credential Type", true)
+                                    @RenderField(item.SkillDisplayName, "2", "Skill", true)
+                                    @RenderTestOptions(item.CredentialRequestId, item.CredentialApplicationId, item.Status, item.CanOpenDetails, item.CanSelectTestSession)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="panel-body">
+                                    @RenderField(item.TestDate.HasValue ? item.TestDate.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture) : string.Empty, "4", "Test Date")
+                                    @RenderField(item.VenueName, "4", "Venue")
+                                    @RenderField(item.Status, "2", "Status")
+                                    @RenderRefundOptions(item.CredentialRequestId, item.CredentialApplicationId, item.CanRequestRefund)
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h4>No tests</h4>
+        }
+    </div>
+    <div id="recaptcha"></div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.manageTesttooltip').tooltip();
+
+        });
+
+    </script>
+    <script>
+        function submitForm(token) {
+
+            var form = '<form action="AvailableTestSessions" method="POST" id="recaptchaForm">' +
+                '<input type="hidden" name="g-recaptcha-response" value="' + token + '">' +
+                '<input type="hidden" name="CredentialRequestId" value="' + window.credentialRequestId + '">' +
+                '<input type="hidden" name="CredentialApplicationId" value="' + window.credentialApplicationId + '">' +
+                '<input type="hidden" name="ErrorMessage" value="">' +
+                '</form>';
+            $(form).appendTo('body').submit();
+        }
+
+        function recaptchaCallback(token) {
+
+            submitForm(token);
+        }
+
+        $(document).ready(function () {
+
+            var interval = setInterval(function () {
+                try {
+
+                    window.grecaptcha.render(
+                        'recaptcha',
+                        {
+                            sitekey: "6LcAPjMUAAAAAO9MGOKhFfw6hEwmK_OjO8G_pH_z",
+                            size: "invisible",
+                            callback: recaptchaCallback
+                        });
+                    clearInterval(interval);
+                }
+                catch (err) { }
+            }, 500);
+
+        });
+
+
+
+        function getSessions(credentialRequestId, credentialApplicationId, skipRecaptcha) {
+            window.credentialRequestId = credentialRequestId;
+            window.credentialApplicationId = credentialApplicationId;
+            if (skipRecaptcha) {
+                submitForm("");
+            }
+            else {
+                window.grecaptcha.execute();
+            }
+
+        };
+
+        function checkPayPalRefundDate(credentialRequestId, validateUrl, redirectUrl) {
+            $.ajax({
+                url: validateUrl,
+                type: "GET",
+                dataType: "json",
+                data: { credentialRequestId: credentialRequestId },
+                success: function (response) {
+                    if (response == false) {
+                        toastr.error("The PayPal payment has exceeded 180 days. PayPal's policy does not allow refund to proceed. Please contact finance@naati.com.au.");
+                    }
+                    else {
+                        window.location.href = redirectUrl;
+                    }
+                },
+                error: function (response) {
+                    toastr.error("An error occurred while processing your request.");
+                }
+            });
+        }
+    </script>
+}

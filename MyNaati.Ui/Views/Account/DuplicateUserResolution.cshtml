@@ -1,0 +1,99 @@
+﻿@model MyNaati.Ui.Models.DuplicateUserResolutionModel
+@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Duplicate People Found</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <p>Please select a person from the table below to associated with the user registration request</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="bg-primary">
+                <tr>
+                    <th></th>
+                    <th>Customer Number</th>
+                    <th>Name</th>
+                    <th>Date of Birth</th>
+                    <th>Email Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var person in Model.DuplicateUserList.Where(x => !x.IsEportalActive))
+                {
+                    <tr>
+                        <td>
+                            <input type="radio" id="option" name="radioGroup" value="@person.NaatiNumber" />
+                        </td>
+                        <td>
+                            @person.NaatiNumber
+                        </td>
+                        <td>
+                            @person.GivenName @person.FamilyName
+                        </td>
+                        <td>
+                            @person.DateOfBirth
+                        </td>
+                        <td>
+                            @person.Email
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@if (Model.DuplicateUserList.Any(x => x.IsEportalActive))
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                The people listed in the table below are a match based on the details entered for the registered
+                user, however they are <strong>already associated with an active ePortal account</strong>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="bg-primary">
+                        <tr>
+                            <th>Customer Number</th>
+                            <th>Name</th>
+                            <th>Date of Birth</th>
+                            <th>Email Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var person in Model.DuplicateUserList.Where(x => x.IsEportalActive))
+                        {
+                            <tr>
+                                <td>
+                                    @person.NaatiNumber
+                                </td>
+                                <td>
+                                    @person.GivenName @person.FamilyName
+                                </td>
+                                <td>
+                                    @person.DateOfBirth
+                                </td>
+                                <td>
+                                    @person.Email
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

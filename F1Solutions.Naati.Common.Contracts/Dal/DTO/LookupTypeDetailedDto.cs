@@ -1,0 +1,6 @@
+namespace F1Solutions.Naati.Common.Contracts.Dal.DTO
+{
+    public class LookupTypeDetailedDto : LookupTypeDto
+    {
+    }
+}

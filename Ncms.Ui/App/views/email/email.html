@@ -1,0 +1,72 @@
+<script type="text/html" id="emailTemplate">
+    <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog"  data-bind="attr: { id: modalId }">
+        <div class="modal-dialog" role="document" style="width: 1000px">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.EmailMessageTitle'"></h4>
+                </div>
+                <div class="modal-body">                    
+                    <div class="panel panel-default panel-screen">
+                        <div class="form">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.From'"></label>
+                                    &nbsp;&nbsp;<p class="form-control-static m-t-n-sm display-inline" data-bind="text: emailModel.From"></p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.To'"></label>
+                                    &nbsp;&nbsp;<p class="form-control-static m-t-n-sm display-inline" data-bind="text:emailModel.RecipientEmail"></p>
+                                </div>                                
+                            </div>
+                            <div class="row">                                
+                                <div class="form-group col-md-6">
+                                    <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.Subject'"></label>
+                                    &nbsp;&nbsp;<p class="form-control-static m-t-n-sm display-inline" data-bind="text: emailModel.Subject"></p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.CreatedDate'"></label>
+                                    &nbsp;&nbsp;<p class="form-control-static m-t-n-sm display-inline" data-bind="text: emailModel.CreatedDate"></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.EmailContent'"></label>
+                                <p class="form-control-static m-t-n-sm">
+                                    <iframe class="m-b-none w-full" frameborder="0" data-bind="attr: { id: emailContentId }, style: { height: frameHeight }"></iframe>
+                                </p>
+                            </div>
+                        </div>
+                        <table class="table table-primary table-bordered table-striped" data-bind="datatable: attachmentsTableDefinition">
+                            <thead>
+                                <tr>
+                                    <th data-bind="reshtml: 'Naati.Resources.Document.resources.FileName'"></th>
+                                    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Document.resources.DocumentType'"></th>
+                                    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.FileSize'"></th>
+                                    <th class="w-xs"></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: emailModel.Attachments">
+                                <tr>
+                                    <td data-bind="text: FileName"></td>
+                                    <td data-bind="text: DocumentType"></td>
+                                    <td data-bind="bytesToSize: FileSize"></td>
+                                    <td class="text-right">
+                                        <a href="#" class="btn btn-default btn-sm" data-bind="downloadFile: { url: DownloadUrl }">
+                                            <span class="fa fa-download"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                  
+                </div>
+                <div class="modal-footer">                 
+                    <button type="button" class="btn btn-success btn-default" data-dismiss="modal">
+                        <i class="fa fa-check"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Ok'"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

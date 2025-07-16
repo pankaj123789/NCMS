@@ -1,0 +1,119 @@
+﻿@using MyNaati.Ui.Security
+@model MyNaati.Ui.Models.ValidateExaminerModel
+@{
+    ViewBag.Title = "Validate Examiner";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Validate Examiner", null)
+    };
+
+    var validationSummary = Html.ValidationSummary();
+}
+@section Scripts
+{
+    @if (!User.IsInRole(SystemRoles.AUTHENTICATED_EXAMINER))
+    {
+        <script type="text/javascript">
+            $(function () {
+                $('[data-validate-examiner-action]').click(function () {
+                    var $this = $(this);
+                    $('#action').val($this.data('validateExaminerAction'));
+                    $this.closest('form').submit();
+                });
+            });
+        </script>
+    }
+}
+<div class="col-lg-12">
+    @if (TempData["ChangePasswordSuccess"] != null)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <p>Your password has been changed.</p>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">Logon to <span style="text-transform: none">myNAATI</span> Examiner Portal</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>A security code has been sent to your registered email address.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @if (!User.IsInRole(SystemRoles.AUTHENTICATED_EXAMINER))
+            {
+                using (Html.BeginForm())
+                {
+                    <div class="form-horizontal">
+                        @if (validationSummary != null)
+                        {
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    @validationSummary
+                                </div>
+                            </div>
+                        }
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.SecurityCode, new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-2">
+                                @Html.TextBoxFor(m => m.SecurityCode, new { @class = "form-control", maxlength = 6 })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button class="btn btn-primary" type="button" data-validate-examiner-action="validate">Validate</button>
+                                <button class="btn btn-success" type="button" data-validate-examiner-action="resend">Resend security code</button>
+                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmModal">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.HiddenFor(m => m.Action, new { id = "action" })
+
+
+                    <div id="confirmModal" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-primary">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">Continue</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+											<p>
+												Access to Examiner Tools is available only to validated examiners.
+												<br />
+												<br />
+												Do you want to continue to ePortal without access to the Examiner Tools section?
+											</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-validate-examiner-action="continue">Confirm</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            }
+            else
+            {
+                <p>Your registration has been validated.</p>
+            }
+        </div>
+    </div>
+</div>

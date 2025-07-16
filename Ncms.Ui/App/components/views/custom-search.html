@@ -1,0 +1,137 @@
+﻿<div class="col">
+    <div class="vbox">
+        <div class="bg-light lter b-b wrapper-md">
+            <h1 class="m-n font-thin h3">
+                <span data-bind="html: title"></span>
+                <!-- ko foreach: { data: additionalButtons, as: 'button' } -->
+                <!--ko if: button.downloadFile-->
+                <button type="button" data-bind="css: button.class, click: button.click, disable: button.disable, downloadFile: button.downloadFile"><span data-bind="css: button.icon"></span>&nbsp;<span data-bind="reshtml: button.resourceName"></span></button>
+                <!--/ko-->
+                <!--ko ifnot: button.downloadFile-->
+                <!--ko if: button.showWithPermission-->
+                <button type="button" data-bind="css: button.class, click: button.click, showWithPermission:button.showWithPermission, disable:button.disable"><span data-bind="css: button.icon"></span>&nbsp;<span data-bind="reshtml: button.resourceName"></span></button>
+                <!-- /ko -->
+                <!--ko if: button.enableWithPermission-->
+                <button type="button" data-bind="css: button.class, click: button.click, enableWithPermission:button.enableWithPermission, disable:button.disable"><span data-bind="css: button.icon"></span>&nbsp;<span data-bind="reshtml: button.resourceName"></span></button>
+                <!-- /ko -->
+                <!--ko ifnot: button.showWithPermission || button.enableWithPermission-->
+                <button type="button" data-bind="css: button.class, click: button.click, disable: button.disable"><span data-bind="css: button.icon"></span>&nbsp;<span data-bind="reshtml: button.resourceName"></span></button>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+                <!--ko if: idSearchOptions-->
+                <div class="form-group pull-right">
+                    <div class="input-group">
+                        <!--ko if: idSearchOptions.prefix-->
+                        <span class="input-group-addon rounded no-border dk" data-bind="html: idSearchOptions.prefix"></span>
+                        <!--/ko-->
+                        <input type="number" data-bind="event: { keypress: checkEnterPressed }, resattr: { placeholder: 'Naati.Resources.Shared.resources.IDSearch' }, value: idSearchValue, valueUpdate: 'input'" class="form-control bg-white input-sm no-border rounded padder" autocomplete="off">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-sm bg-white rounded" data-bind="click: idSearchClick"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <!--/ko-->
+            </h1>
+        </div>
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner">
+                    <div class="wrapper-md">
+                        <div class="panel hbox hbox-auto-xs no-border">
+                            <div class="col wrapper">
+                                <div data-bind="visible: showOutOfDateAlert" class="alert alert-warning" role="alert"><span data-bind="reshtml:'Naati.Resources.Test.resources.TestResultsOutOfDateMessage'"></span></div>
+                                <form data-bind="submit: find">
+                                    <!-- ko if: currentFilters().length > 0 -->
+                                    <div class="wrapper-sm">
+                                        <div class="row test-filters">
+                                            <!-- ko foreach: { data: currentFilters, as: 'filter' } -->
+                                            <!-- ko component: { name: 'filter-component', params: filter } -->
+                                            <!-- /ko -->
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                    <!-- ko if: currentFilters().length == 0 && savedSearches().length == 0 -->
+                                    <div class="alert alert-warning print-hide" data-bind="reshtml: 'Naati.Resources.Test.resources.PleaseSelectAFilter'">
+                                    </div>
+                                    <!-- /ko -->
+                                    <!-- ko if: currentFilters().length == 0 && userSearches().length > 0 -->
+                                    <div class="panel panel-warning print-hide">
+                                        <!-- Default panel contents -->
+                                        <div class="panel-heading" data-bind="reshtml: 'Naati.Resources.Test.resources.LoadSearchOrSelectFilter'"></div>
+                                        <!-- List group -->
+                                        <div class="list-group list-group-xs">
+                                            <!--ko foreach: { data: userSearches, as: 'search' }-->
+                                            <a href="" class="list-group-item clearfix" data-bind="click: function() { $parent.tryLoadSearch(search); }">
+                                                <button class="btn btn-danger pull-right" data-bind="click: function(e) { $parent.tryRemoveSearch(search); }, clickBubble: false"><i class="glyphicon glyphicon-trash"></i></button>
+                                                <span class="clear">
+                                                    <strong data-bind="text: search.SearchName"></strong>
+                                                    <small class="text-muted" data-bind="text: ' - ' + moment(search.ModifiedDate).format('L')"></small>
+                                                    <span class="clear">
+                                                        <!--ko foreach: Filters-->
+                                                        <span class="label bg-light inline" data-bind="text: $data"></span>
+                                                        <!--/ko-->
+                                                    </span>
+                                                </span>
+                                            </a>
+                                            <!--/ko-->
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                    <div class="clearfix"></div>
+                                    <div data-bind="if: showButtons()" class="print-hide">
+                                        <!-- ko if: userCanSearch() -->
+                                        <button type="button" class="btn btn-primary" data-bind="click: find"><span class="glyphicon glyphicon-search"></span> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Find'"></span></button>
+                                        <!-- /ko -->
+                                        <!-- ko if: currentFilters().length > 0 -->
+                                        <button type="button" class="btn btn-danger" data-bind="click: clear"><span class="glyphicon glyphicon-remove"></span> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Clear'"></span></button>
+                                        <!-- /ko -->
+                                        <!-- ko if: userCanSaveSearch() -->
+                                        <button type="button" class="btn btn-default" data-bind="click: trySaveSearch"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span></button>
+                                        <!-- /ko -->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div data-bind="template: resultTemplate"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col w-md bg-white-only b-l bg-auto no-border-xs print-hide">
+    <div class="vbox">
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner">
+                    <div class="wrapper-sm">
+                        <div data-bind="component: availableFiltersComponent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="saveSearchModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.Test.resources.SaveSearch'"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form data-bind="submit: saveSearchSubmit">
+                            <div class="form-group" data-bind="validationElement: newSearchName">
+                                <label data-bind="reshtml: 'Naati.Resources.Test.resources.Name'"></label>
+                                <input type="text" class="form-control" data-bind="value: newSearchName, resattr: { placeholder: 'Naati.Resources.Test.resources.Name' }">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bind="click: saveSearch"><span class="glyphicon glyphicon-floppy-disk"></span> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

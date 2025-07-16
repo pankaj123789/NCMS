@@ -1,0 +1,28 @@
+﻿<div>
+    <!-- ko ifnot: hasValidationError-->
+    <div class="alert alert-info" data-bind="reshtml: 'Naati.Resources.Application.resources.MandatoryDocumentsSatisfied'"></div>
+    <!-- /ko -->
+    <!-- ko if: hasValidationError-->
+    <div>
+        <span>Unable to find below document types from this application for new application creation and submission.</span>
+    </div>
+    <div class="m-t-n-md">
+        <table class="table table-primary table-bordered" data-bind="datatable: tableDefinition">
+            <thead>
+                <tr>
+                    <th class="w-xxl" data-bind="reshtml: 'Naati.Resources.Application.resources.PrerequisiteCredential'"></th>
+                    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Application.resources.ApplicationType'"></th>
+                    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Application.resources.MandatoryDocumentTypes'"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: missingMandatoryDocuments()">
+                <tr>
+                    <td data-bind="text: PrerequisiteCredential"></td>
+                    <td data-bind="text: ApplicationType"></td>
+                    <td data-bind="text: MandatoryDocumentType"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- /ko -->
+</div>

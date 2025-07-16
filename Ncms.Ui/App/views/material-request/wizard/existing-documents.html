@@ -1,0 +1,52 @@
+﻿<div>
+    <!--ko foreach: { data: sections, as: 's' }-->
+    <label class="control-label" data-bind="html: s.Name"></label>
+    <!--ko component: { name: 'table-component',  params: s.tableDefinition }--><!--/ko-->
+    <!--/ko-->
+    <!--ko ifnot: sections().length-->
+        <p data-bind="reshtml:'Naati.Resources.MaterialRequest.resources.DocumentsNotAvailable'"></p>
+    <!--/ko-->
+        <script id="documents-header-template" type="text/html">
+            <th class="w-xxs">&nbsp;</th>
+            <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Shared.resources.DocumentType'"></th>
+            <th class="w-md" data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></th>
+            <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Document.resources.AvailableForExaminers'"></th>
+            <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Document.resources.MergeDocument'"></th>
+            <th class="w-xxs" data-bind="reshtml: 'Naati.Resources.Shared.resources.Size'"></th>
+            <th class="w-xxs" data-bind="reshtml: 'Naati.Resources.Shared.resources.FileType'"></th>
+            <th class="w-xxs" data-bind="reshtml: 'Naati.Resources.Shared.resources.UploadedBy'"></th>
+            <th class="w-xs">&nbsp;</th>
+        </script>
+    <script id="documents-row-template" type="text/html">
+        <tr>
+            <td class="text-center"></td>
+            <td data-bind="text:DocumentTypeDisplayName"></td>
+
+            <td>
+                <input type="text" maxlength="255" class="w-full" data-bind="value: DisplayName, enable: Selected, click: function() { event.preventDefault(); return false; }, clickBubble: false" />
+            </td>
+            <td>
+                <label class="i-switch m-t-xs m-r">
+                    <input type="checkbox" data-bind="checked: ExaminersAvailable">
+                    <i></i>
+                </label>
+             
+            </td>
+            <td>
+                <label class="i-switch m-t-xs m-r">
+                    <input type="checkbox" data-bind="checked: MergeDocument, enable:$root.enableMergeOption">
+                    <i></i>
+                </label>
+             
+            </td>
+            <td data-bind="bytesToSize:Size"></td>
+            <td data-bind="text:FileType"></td>
+            <td data-bind="text:UploadedBy"></td>
+            <td class="text-right">
+                <a href="#" class="btn btn-default btn-xs" data-bind="downloadFile: { url: function() { event.stopPropagation(); return  $root.download($data); } }, resattr: { title: 'Naati.Resources.Shared.resources.Download' }">
+                    <span class="glyphicon glyphicon-download-alt"></span>
+                </a>
+            </td>
+        </tr>
+    </script>
+</div>

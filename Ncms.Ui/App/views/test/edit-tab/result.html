@@ -1,0 +1,236 @@
+<div data-bind="attr: { id: marksTabId }">
+    <div class="panel panel-default wrapper-xs">
+        <div class="form-inline">
+            <div class="form-group wrapper-sm" data-bind="validationElement: dueDateOptions.value">
+                <label class="m-r-xs" data-bind="reshtml: 'Naati.Resources.Test.resources.ResultDue'"></label>
+                <div class="form-control-static">
+                    <!-- ko component: { name: 'date-input', params: dueDateOptions } -->
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!--ko if: isReview()-->
+            <div class="form-group wrapper-sm" data-bind="validationElement: includePreviousMarks">
+                <label data-bind="reshtml: 'Naati.Resources.Test.resources.IncludePreviousMark'"></label>
+                <div class="form-control">
+                    <label class="i-switch m-t-s m-r">
+                        <input type="checkbox" data-bind="disable: $root.disableFields, checked: includePreviousMarks">
+                        <i></i>
+                    </label>
+                </div>
+            </div>
+            <!--/ko-->
+            <div class="form-group wrapper-sm" data-bind="validationElement: allowIssue, showWithPermission: 'ExaminerMarks.Update'">
+                <label data-bind="reshtml: 'Naati.Resources.Test.resources.IssueResult'"></label>
+                <div class="form-control">
+                    <label class="i-switch m-t-s m-r">
+                        <input type="checkbox" data-bind="disable: $root.disableFields, checked: allowIssue">
+                        <i></i>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="no-b-margin">
+        <div class="table-responsive">
+            <table id="resultTable" class="table table-primary table-striped table-bordered table-hover b-t b-b">
+                <thead>
+                    <tr>
+                        <th class="w-xxs text-center" data-bind="reshtml: 'Naati.Resources.Shared.resources.Included', attr: { rowspan: isRubric() ? 1 : 2 }"></th>
+                        <th class="text-center" data-bind="reshtml: 'Naati.Resources.Shared.resources.Examiner', attr: { rowspan: isRubric() ? 1 : 2 }"></th>
+                        <th class="w-sm text-center" data-bind="reshtml: 'Naati.Resources.Test.resources.myNAATIDateSubmitted', attr: { rowspan: isRubric() ? 1 : 2 }"></th>
+                        <!--ko foreach: specification.Components-->
+                        <th class="text-center" data-bind="attr: { title: Name }, tooltip: { container: 'body', trigger: 'hover' }">
+                            <span data-bind="text: TypeLabel"></span><span data-bind="text: Label"></span>
+                        </th>
+                        <!--/ko-->
+                        <!--ko if: !isRubric()-->
+                        <th class="w-sm text-center" data-bind="reshtml: 'Naati.Resources.Test.resources.Total'"></th>
+                        <th class="text-center" data-bind="reshtml: 'Naati.Resources.Test.resources.ObservationsOnPerformance', attr: { rowspan: isRubric() ? 1 : 2 }"></th>
+                        <th class="text-center" data-bind="reshtml: 'Naati.Resources.Test.resources.Comments', attr: { rowspan: isRubric() ? 1 : 2 }"></th>
+                        <!--/ko-->
+                        <!--ko if: showComputedResult()-->
+                        <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Test.resources.ComputedResult'"></th>
+                        <!--/ko-->
+                        <th class="w-xs" data-bind="attr: { rowspan: isRubric() ? 1 : 2 }"></th>
+                    </tr>
+                <!--ko if: !isRubric()-->
+                <tr>
+                    <!--ko foreach: specification.Components-->
+                    <th class="text-center w-sm">
+                        <span data-bind="text: PassMark"></span>
+                        <span>/</span>
+                        <span data-bind="text: TotalMarks"></span>
+                    </th>
+                    <!--/ko-->
+                    <th class="text-center w-sm">
+                        <span data-bind="text: $root.specification.OverallPassMark"></span>
+                        <span>/</span>
+                        <span data-bind="text: $root.totalMarks()"></span>
+                    </th>
+                </tr>
+                <!--/ko-->
+                </thead>
+                <tbody>
+                <!--ko foreach: { data: ExaminerFromTestResultIDSorted, as: 'e' }-->
+                    <tr>
+                        <td class="text-center"><input type="checkbox" data-bind="value: e.JobExaminerId, checked: $root.selectedResults, enable: $root.isSelectableExaminer(e.JobExaminerId)" /></td>
+                        <td data-bind="text: e.Examiner.PersonName"></td>
+                        <td data-bind="textDate: $root.getExaminerMarking(e.JobExaminerId).SubmittedDate"></td>
+                        <!--ko foreach: { data: $root.specification.Components, as: 'r' }-->
+                        <td data-bind="css: { 'text-center': !$root.isRubric() }">
+                            <!--ko if: !$root.isRubric()  && r.IsInOriginal -->
+                            <span data-bind="text: r.OriginalResult()"></span>
+                            <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Test.resources.Original' }">O</span>
+                            <br />
+                            <!--/ko-->
+                            <!--ko if: $root.isRubric() && r.isSupplementary  -->
+                            <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Test.resources.SupplementaryResult' }">S</span>
+                            <!--/ko-->
+                            <!--ko if: $root.isRubric() && r.isReadOnly -->
+                            <span data-bind="text: r.OriginalResult()"></span>
+                            <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Test.resources.NotApplicable' }">N/A</span>
+                            <br />
+                            <!--/ko-->
+                            <!--ko if: $root.isRubric()-->
+                            <div data-bind="html: $root.getResult(r, e)"></div>
+                            <!--/ko-->
+                            <!--ko ifnot: $root.isRubric()-->
+                            <span data-bind="html: $root.getMark(r.ComponentNumber(), e.JobExaminerId).Mark"></span>
+                            <!--/ko-->
+                        </td>
+                        <!--/ko-->
+                        <!--ko if: !$root.isRubric()-->
+                        <td class="text-center" data-bind="text: $root.getSumMarksForExaminer(e.JobExaminerId)"></td>
+                        <td data-bind="text: $root.getExaminerMarking(e.JobExaminerId).ReasonsForPoorPerformance"></td>
+                        <td data-bind="text: $root.getExaminerMarking(e.JobExaminerId).Comments"></td>
+                        <!--/ko-->
+                        <!--ko if: $root.showComputedResult()-->
+                        <td data-bind="css: { 'text-success': $root.examinerComputedEligibleForPass(e), 'text-danger': !$root.examinerComputedEligibleForPass(e) }, text: $root.getExaminerComputedResultText(e)"></td>
+                        <!--/ko-->
+
+                        <td class="text-center">
+                            <button class="btn btn-xs btn-default" data-bind="disable: $root.disableEditMarks, click: function() { $root.editMarks(e); }, tooltip, resattr: { title: 'Naati.Resources.Test.resources.EditMarks' }">
+                                <i class="fa fa-edit"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-default" data-bind="visible: $root.showComputedResult(), disable:$root.disableCalculateMarks(e), click: function() { $root.computeResults(e); }, tooltip, resattr: { title: 'Naati.Resources.Test.resources.CalculateMarks' }">
+                                <i class="fa fa-calculator"></i>
+                            </button>
+                        </td>
+                    </tr>
+                <!--/ko-->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="text-center" data-bind="reshtml: 'Naati.Resources.Test.resources.FinalResult'"></th>
+                        <th class="form-horizontal" colspan="2">
+                            <!--ko if: !isRubric()-->
+                            <div class="row">
+                                <label class="col-xs-7 control-label" data-bind="reshtml: 'Naati.Resources.Test.resources.MarksOverridden'"></label>
+                                <div class="col-xs-4">
+                                    <label class="i-switch m-t-xs m-r" data-bind="css: { disabled: $root.disableOverrideMarks }, tooltip, resattr: { title: $root.overrideMarksToolTip() }">
+                                        <input type="checkbox" data-bind="disable: $root.disableOverrideMarks, click: confirmAllowCalculate, checked: allowResultOverride">
+                                        <i></i>
+                                    </label>
+                                </div>
+                            </div>
+                            <!--/ko-->
+                        </th>
+                        <!--ko if: isRubric()-->
+                        <!--ko foreach: { data: $root.specification.Components, as: 'r' }-->
+                        <th>
+                            <!--ko if: r.isSupplementary -->
+                            <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Test.resources.SupplementaryResult' }">S</span>
+                            <!--/ko-->
+                            <!--ko if: r.isReadOnly -->
+                            <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Test.resources.OriginalResult' }">O</span>
+                            <!--/ko-->
+                            <div data-bind="html: r.RubricResult"></div>
+                        </th>
+
+                        <!--/ko-->
+                        <!--/ko-->
+                        <!--ko if: !isRubric()-->
+                        <!--ko foreach: specification.Components-->
+                        <th class="text-center" data-bind="text: $root.getComponentResult($data).Mark"></th>
+                        <!--/ko-->
+                        <th class="text-center" data-bind="text: $root.getSumMarks()"></th>
+                        <th colspan="2"></th>
+                        <!--/ko-->
+                        <!--ko if: $root.showComputedResult()-->
+                        <td></td>
+                        <!--/ko-->
+
+                        <th class="text-center">
+                            <button class="btn btn-xs btn-default" data-bind="disable: isRubric() ? disableEditMarks() : disableEditResult(), click: function() { $root.editMarks(); }, tooltip, resattr: { title: 'Naati.Resources.Test.resources.EditFinalMarks' }">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-xs btn-default" data-bind="visible: showComputedFinalResult, disable: $root.disableComputeFinalRubric, click: function() { $root.computeFinalRubric(); }, tooltip, resattr: { title: 'Naati.Resources.Test.resources.CalculateMarks' }">
+                                <i class="fa fa-calculator"></i>
+                            </button>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="hbox hbox-auto-xs">
+        <div class="col wrapper">
+            <h4 data-bind="reshtml: 'Naati.Resources.Test.resources.Result'"></h4>
+            <form>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label data-bind="reshtml: 'Naati.Resources.Test.resources.ResultChecked'"></label>
+                        <div class="form-control">
+                            <label class="i-switch m-t-xs m-r">
+                                <input type="checkbox" data-bind="checked: ResultChecked, disable: disableResultChecked">
+                                <i></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="css: { 'col-md-6' : testResult.ResultChecked(), 'col-md-3' : !testResult.ResultChecked() }, validationElement: testResult.ResultTypeId">
+                        <label data-bind="reshtml: 'Naati.Resources.Test.resources.OverallResult'"></label>
+                        <select class="form-control" data-bind="enable: testResult.ResultChecked() && !disableFields(), value: testResult.ResultTypeId, options: resultTypeIdOptions, optionsValue: 'Id', optionsText: 'DisplayName', optionsAfterRender:resultTypeOptionsAfterRender, valueAllowUnset: true"></select>
+                    </div>
+                    <div class="form-group col-md-3" data-bind="visible: testResult.ResultChecked, validationElement: testResult.FormattedProcessedDate">
+                        <label data-bind="reshtml: 'Naati.Resources.Test.resources.ProcessedDate'"></label>
+                        <!-- ko component: { name: 'date-input', params: processedDateOptions } -->
+                        <!-- /ko -->
+                    </div>
+                    <div class="col-md-offset-3 col-md-6">
+                        <!--ko if: showFailOptions()-->
+                        <div class="row">
+                            <!--ko if: showSupplementaryCheck()-->
+                            <div class="form-group col-md-6" data-bind="validationOptions: { insertMessages: false }">
+                                <label class="checkbox-inline i-checks i-checks-default success">
+                                    <input type="checkbox" data-bind="checked: testResult.EligibleForSupplementary, disable: disableEligibleForSupplementary()"><i></i>
+                                    <span class="padder-md" data-bind="restext: 'Naati.Resources.Test.resources.EligibleForSupplementary'"></span>
+                                </label>
+                            </div>
+                            <!-- /ko -->
+                            <!--ko if: showEligibleForConcededPassCheck()-->
+                            <div class="form-group col-md-6" data-bind="validationOptions: { insertMessages: false }">
+                                <label class="checkbox-inline i-checks i-checks-default success">
+                                    <input type="checkbox" data-bind="checked: testResult.EligibleForConcededPass, disable: disableEligibleForConcededPass()"><i></i>
+                                    <span class="padder-md" data-bind="restext: 'Naati.Resources.Test.resources.EligibleForConcededPass'"></span>
+                                </label>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                        <!-- /ko -->
+                    </div>
+
+                   
+                </div>
+                <!--ko if: !isRubric()-->
+                <div class="row">
+                    <div class="form-group col-md-12" data-bind="validationElement: testResult.CommentsGeneral">
+                        <label data-bind="reshtml: 'Naati.Resources.Test.resources.Comments'"></label>
+                        <textarea rows="5" class="form-control" data-bind="value: testResult.CommentsGeneral, disable: disableFields"></textarea>
+                    </div>
+                </div>
+                <!--/ko-->
+            </form>
+        </div>
+    </div>
+</div>

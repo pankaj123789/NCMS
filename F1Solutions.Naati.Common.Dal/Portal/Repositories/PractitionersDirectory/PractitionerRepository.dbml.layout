@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14.5, 11.75" name="PractitionerRepository">
+  <DataContextMoniker Name="/PractitionerRepositoryDataContext" />
+  <nestedChildShapes>
+    <classShape Id="9833d9e6-b4b8-49a8-b0da-f4661d0ec783" absoluteBounds="0.5, 2.375, 2.875, 1.9631982421875">
+      <DataClassMoniker Name="/PractitionerRepositoryDataContext/tluAccreditationLevel" />
+      <nestedChildShapes>
+        <elementListCompartment Id="400aed67-d163-4832-bf1f-7e4ac9ac6d89" absoluteBounds="0.515, 2.835, 2.8449999999999998, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5a3fc710-b35c-48c8-8d7b-f5185754e98d" absoluteBounds="0.5, 4.75, 2.5, 1.9631982421875">
+      <DataClassMoniker Name="/PractitionerRepositoryDataContext/tluAccreditationDescription" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a73a2063-2bde-4a36-a5a2-ef79c3b78969" absoluteBounds="0.515, 5.21, 2.4699999999999998, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1a0f1542-246f-4ffa-bb5e-5d979b0d6934" absoluteBounds="3.25, 5.875, 2, 5.6169254557291648">
+      <DataClassMoniker Name="/PractitionerRepositoryDataContext/vwPractitioner" />
+      <nestedChildShapes>
+        <elementListCompartment Id="58dbac08-d05c-4149-b678-42e43124c064" absoluteBounds="3.2649999999999997, 6.335, 1.9700000000000002, 5.0569254557291661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cfff0d02-f973-4e5d-8190-4744c4c596c4" absoluteBounds="7.375, 5.375, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/PractitionerRepositoryDataContext/vwPractitionerContactDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5f58700f-5407-46e3-8cef-190e86ad025e" absoluteBounds="7.3900000000000006, 5.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="23f4f3a5-531a-4a6b-a1ae-a4ae0716af6d" absoluteBounds="5.375, 0.625, 2, 5.0400211588541657">
+      <DataClassMoniker Name="/PractitionerRepositoryDataContext/tblApplication" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3f90104d-393b-4dcd-be30-1991d02a1d8f" absoluteBounds="5.39, 1.085, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.375 : 3.91270182291667); (5.375 : 3.91270182291667)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PractitionerRepositoryDataContext/tluAccreditationLevel/tluAccreditationLevel_tblApplication" />
+      <nodes>
+        <classShapeMoniker Id="9833d9e6-b4b8-49a8-b0da-f4661d0ec783" />
+        <classShapeMoniker Id="23f4f3a5-531a-4a6b-a1ae-a4ae0716af6d" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="3b937ea2-8921-45d2-ae8f-ade7a6dc85c8" absoluteBounds="9.5, 0.875, 2, 1.9631982421875">
+      <DataClassMoniker Name="/PractitionerRepositoryDataContext/tblLanguageExperience" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7d2ecbda-6da9-4e70-90e1-1e88c487c8a3" absoluteBounds="9.515, 1.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9.5 : 1.85659912109375); (7.375 : 1.85659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PractitionerRepositoryDataContext/tblLanguageExperience/tblLanguageExperience_tblApplication" />
+      <nodes>
+        <classShapeMoniker Id="3b937ea2-8921-45d2-ae8f-ade7a6dc85c8" />
+        <classShapeMoniker Id="23f4f3a5-531a-4a6b-a1ae-a4ae0716af6d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9.5 : 1.30329956054688); (7.375 : 1.30329956054688)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PractitionerRepositoryDataContext/tblLanguageExperience/tblLanguageExperience_tblApplication1" />
+      <nodes>
+        <classShapeMoniker Id="3b937ea2-8921-45d2-ae8f-ade7a6dc85c8" />
+        <classShapeMoniker Id="23f4f3a5-531a-4a6b-a1ae-a4ae0716af6d" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="073b35af-0b69-4914-bd61-bb4ba8935e8f" absoluteBounds="3, 0.5, 2, 2.9247054036458331">
+      <DataClassMoniker Name="/PractitionerRepositoryDataContext/tblAccreditationResult" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a75cba1b-b06d-441f-973d-20f7aa51a660" absoluteBounds="3.015, 0.96, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.375 : 2.02485270182292); (5 : 2.02485270182292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PractitionerRepositoryDataContext/tblApplication/tblApplication_tblAccreditationResult" />
+      <nodes>
+        <classShapeMoniker Id="23f4f3a5-531a-4a6b-a1ae-a4ae0716af6d" />
+        <classShapeMoniker Id="073b35af-0b69-4914-bd61-bb4ba8935e8f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.375 : 4.15670253255208); (4.2187525 : 4.15670253255208); (4.2187525 : 3.42470540364583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PractitionerRepositoryDataContext/tluAccreditationLevel/tluAccreditationLevel_tblAccreditationResult" />
+      <nodes>
+        <classShapeMoniker Id="9833d9e6-b4b8-49a8-b0da-f4661d0ec783" />
+        <classShapeMoniker Id="073b35af-0b69-4914-bd61-bb4ba8935e8f" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="a6d7f4cc-a2bf-4b0a-a6b4-112d0d00ec2e" absoluteBounds="12.25, 3.625, 2, 3.5016097005208326">
+      <DataClassMoniker Name="/PractitionerRepositoryDataContext/vwPractitionerAddressDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1a397e30-48c6-417d-b088-6ab2a06196aa" absoluteBounds="12.265, 4.085, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

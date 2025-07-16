@@ -1,0 +1,134 @@
+<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: title"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="panel wrapper text-sm">
+                        <div class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Shared.resources.NAATINumber'"></label>
+                                    <p class="form-control-static text-info">
+                                        <a href="#" target="_blank" data-bind="text: naatiNumber, attr: { href: '#person/' + naatiNumber() }"></a>
+                                    </p>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></label>
+                                    <p class="form-control-static" data-bind="text: personName"></p>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Shared.resources.Role'"></label>
+                                    <p class="form-control-static" data-bind="text: roleName"></p>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Shared.resources.StartDate'"></label>
+                                    <div class="col-md-6 no-padder">
+                                        <!-- ko component: { name: 'date-input', params: startDateOptions } -->
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Shared.resources.EndDate'"></label>
+                                    <div class="col-md-6 no-padder">
+                                        <!-- ko component: { name: 'date-input', params: endDateOptions } -->
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ko ifnot: credentialTypeOptions.disable() -->
+                            <div class="row">
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.MarkingCredentialTypes'"></label>
+                                    <div class="col-md-6 no-padder">
+                                        <!-- ko component: { name: 'select-component', params: credentialTypeOptions } -->
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.MaterialCredentialTypes'"></label>
+                                    <div class="col-md-6 no-padder">
+                                        <!-- ko component: { name: 'select-component', params: materialCredentialTypeOptions } -->
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.CoordinatorCredentialTypes'"></label>
+                                    <div class="col-md-6 no-padder">
+                                        <!-- ko component: { name: 'select-component', params: coordinatorCredentialTypeOptions } -->
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- ko component: { name: 'tab-component', params: tabOptions } -->
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="click: save, enable: canSave">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <a data-bind="click:close" class="btn btn-default">
+                <i class="fa fa-times"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<script id="examiner-requests-template" type="text/template">
+    <!-- ko component: markingRequestsTableComponent -->
+    <!-- /ko -->
+</script>
+<script id="unavailability-header-template" type="text/html">
+    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.StartDate'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.EndDate'"></th>
+</script>
+<script id="unavailability-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: StartDate"></td>
+        <td data-bind="text: EndDate"></td>
+    </tr>
+</script>
+<script id="marking-requests-header-template" type="text/html">
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Test.resources.TestDate'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Test.resources.DateDue'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Test.resources.AttendanceId'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Shared.resources.NaatiNo'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Type'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Skill'"></th>
+    <th class="w-xxs text-center" data-bind="reshtml: 'Naati.Resources.Shared.resources.Status'"></th>
+</script>
+<script id="marking-requests-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: TestDate"></td>
+        <td data-bind="text: DueDate"></td>
+        <td class="text-info"><a href="#" target="_blank" data-bind="text: AttendanceId, attr: { href: '#/test/' + AttendanceId }"></a></td>
+        <td class="text-info"><a href="#" target="_blank" data-bind="text: NaatiNumber, attr: { href: '#/person/' + NaatiNumber }"></a></td>
+        <td data-bind="text: ApplicantName"></td>
+        <td data-bind="text: Type"></td>
+        <td data-bind="text: Language"></td>
+        <td class="text-center">
+            <span class="label text-base m-t-n-xs m-l-sm" data-bind="text: Status, css: 'label-' + $root.getExaminerCss(Status)"></span>
+        </td>
+    </tr>
+</script>
+<script id="unavailability-template" type="text/template">
+    <p data-bind="reshtml: 'Naati.Resources.Panel.resources.UnavailabilityHelpText'"></p>
+    <!-- ko component: unavailabilityTableComponent -->
+    <!-- /ko -->
+</script>

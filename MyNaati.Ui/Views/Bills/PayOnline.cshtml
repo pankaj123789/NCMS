@@ -1,0 +1,346 @@
+﻿@using MyNaati.Ui.Common
+@model MyNaati.Ui.ViewModels.Bills.PaymentDetailsModel
+
+@{
+    ViewBag.Title = "Pay Online";
+    Layout = "~/Views/Shared/MasterPages/_PayOnlineLayout.cshtml";
+
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+        new Tuple<string, string>("Bills", Url.Action("index", "Bills")),
+        new Tuple<string, string>("Payment Details", null)
+    };
+    var validationSummary = Html.ValidationSummary() != null ? Html.ValidationSummary().ToString() : string.Empty;
+}
+
+<div id="payOnline" class="col-lg-12">
+
+    <div class="row payment-tiltle">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title - @Model.InvoiceNumber</h2>
+        </div>
+    </div>
+    @if (!string.IsNullOrEmpty(validationSummary))
+    {
+        <div class="row">
+            <div id="payOnlineValidation" class="col-lg-12">
+                @Html.ValidationSummary()
+            </div>
+        </div>
+    }
+    <div class="row padding-top-lg">
+        <div class="col-lg-12">
+
+            @Html.HiddenFor(m => m.InvoiceNumber)
+            @Html.HiddenFor(m => m.InvoiceId)
+            @Html.HiddenFor(m => m.BillType)
+            @Html.HiddenFor(m => m.InvoiceAmount)
+            @Html.HiddenFor(m => m.Payments)
+            @Html.HiddenFor(m => m.AmountDue)
+            @Html.HiddenFor(m => m.OnlineOfficeAbbr)
+            @Html.HiddenFor(m => m.EFTMachineTerminal)
+            @Html.HiddenFor(m => m.NaatiNumber)
+
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <div style="position: relative; margin-left: 15px;">
+
+                        <div class="text-center panel panel-primary" style="display: inline-block">
+                            <div class="panel-heading">Invoice Amount</div>
+                            <div class="fa-1x">
+                                <span class="align-middle">$@Model.InvoiceAmount</span>
+                            </div>
+                        </div>
+
+                        <div class="text-center panel panel-primary marginleft" style="display: inline-block">
+                            <div class="panel-heading">Amount Paid</div>
+                            <div class="fa-1x">
+                                <span class="align-middle">$@Model.Payments</span>
+                            </div>
+                        </div>
+
+                        <div class="text-center panel panel-primary marginleft" style="display: inline-block">
+                            <div class="panel-heading">Amount Due</div>
+                            <div class="fa-1x">
+                                <span class="align-middle">$@Model.AmountDue</span>
+                            </div>
+                        </div>
+
+                        <span class="download-invoice">
+                            <a id="downloadInvoice" class="buttonDownload cursor-pointer">Download Invoice</a>
+                        </span>
+
+                        <span class="privacy-policy">
+                            <a href="@Url.ExternalUrlFromConfig("PrivacyPolicy")" target="_blank">Privacy Policy</a>
+                        </span>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.AmountPay, new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(x => x.AmountPay, new { @class = "form-control", type = "tel", minlength = 1, maxlength = 6 })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        <label class="control-label col-sm-2">Supported card types</label>
+                        <div class="col-sm-10">
+                            @if (Model.AllowPaymentByMasterCard)
+                            {
+                                <label class="padding-right-20">
+                                    <label for="PaymentDetailsModel_Type_2">
+                                        <img src="@Url.Content("~/Content/Images/mastercard-5032.png")" alt="MasterCard Icon" title="Master Card" style="max-width: 50px; margin-top: -5px; cursor: pointer;" />
+                                    </label>
+                                </label>
+                            }
+                            @if (Model.AllowPaymentByVisa)
+                            {
+                                <label class="padding-right-20">
+                                    <label for="PaymentDetailsModel_Type_1">
+                                        <img src="@Url.Content("~/Content/Images/VISA-logo10062.png")" alt="Visa Icon" title="Visa" style="max-width: 50px; margin-top: 0px; cursor: pointer;" />
+                                    </label>
+                                </label>
+                            }
+                            @if (Model.AllowPaymentByAmex)
+                            {
+                                <label class="padding-right-20">
+                                    <label for="PaymentDetailsModel_Type_3">
+                                        <img src="@Url.Content("~/Content/Images/american-express-10063.jpg")" alt="American Express Icon" title="American Express" style="max-width: 50px; margin-top: -4px; cursor: pointer;" />
+                                    </label>
+                                </label>
+                            }
+                            @if (Model.AllowPaymentByDinersClub)
+                            {
+                                <label class="padding-right-20">
+                                    <label for="PaymentDetailsModel_Type_4">
+                                        <img src="@Url.Content("~/Content/Images/dci_logo_2_color.jpg")" alt="Diners Club Icon" title="Diners Club" style="max-width: 115px; margin-top: -5px; cursor: pointer;" />
+                                    </label>
+                                </label>
+                            }
+                            @if (Model.AllowPaymentByJcb)
+                            {
+                                <label class="padding-right-20">
+                                    <label for="PaymentDetailsModel_Type_5">
+                                        <img src="@Url.Content("~/Content/Images/jcb_logo.png")" alt="JCB Icon" title="JCB" style="max-width: 115px; margin-top: -5px; cursor: pointer;" />
+                                    </label>
+                                </label>
+                            }
+                        </div>
+                    </div>*@
+                <div id="securepay-ui-container" class="m-t-md">
+                    @Html.HiddenFor(model => model.CreditCardToken)
+                    @Html.HiddenFor(model => model.LastDigits)
+                </div>
+                @*<div class="form-group">
+                        @Html.LabelFor(x => x.CardNumber, new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(x => x.CardNumber, new { @class = "form-control", type = "number", minlength = 13, maxlength = 16, autocomplete = "off" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.NameOnCard, new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(x => x.NameOnCard, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.ExpiryMonth, new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-3">
+                            <div class="row">
+                                <div class="col-xs-5 col-sm-6">
+                                    @Html.DropDownListFor(x => x.ExpiryMonth, Model.ExpiryMonths, new { @class = "form-control" })
+                                </div>
+                                <div class="col-xs-5 col-sm-6">
+                                    @Html.DropDownListFor(x => x.ExpiryYear, Model.ExpiryYears, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.CVV, new { @class = "control-label col-sm-2" })
+                        <div class="col-sm-3">
+                            @Html.TextBoxFor(x => x.CVV, new { @class = "form-control", type = "number", minlength = 3, maxlength = 3 })
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="form-control-static">The CSC is the last 3 digits of the number on the back of your credit card</p>
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="paddingTop20">
+
+                            @if (Model.IsPaidWithError)
+                            {
+                                <input id="btnPayNow" class="btn btn-primary" type="submit" value="Pay now" disabled="disabled">
+                            }
+                            else
+                            {
+                                <input id="btnPayNow" class="btn btn-primary" type="submit" value="Pay now">
+                            }
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div id="processingPaymentModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h4 class="modal-title">Processing Payment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Your payment is being processed. Please wait.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+
+            var embeddedSecurePayUI;
+
+            var creditCardToken = $('#CreditCardToken');
+            var LastDigits = $('#LastDigits');
+
+            var loadCardTypes = new Promise(function (resolve, reject) {
+                var urlCardTypes = '@Url.Action("AvailableCreditCards", "CredentialApplication")';
+                $.ajax({
+                    type: 'GET',
+                    cache: true,
+                    url: urlCardTypes,
+                    success: function (data) {
+                        resolve(data);
+                    },
+                    error: function () {
+                        reject('Something went wrong');
+                    }
+                });
+            });
+
+            var loadPaymentGatewayConfig = new Promise(function (resolve, reject) {
+                var urlPyamentConfig = '@Url.Action("GetPaymentConfiguration", "CredentialApplication")';
+                $.ajax({
+                    type: 'GET',
+                    cache: true,
+                    url: urlPyamentConfig,
+                    success: function (data) {
+                        resolve(data);
+                    },
+                    error: function () {
+                        reject('Something went wrong');
+                    }
+                });
+            });
+
+            loadPaymentForm();
+
+            function loadPaymentForm() {
+                Promise.allSettled([loadCardTypes, loadPaymentGatewayConfig])
+                    .then(result => {
+                        var paymentConfig = result[1].value;
+                        var allowedTypes = result[0].value;
+
+                        var clientId = paymentConfig.PaymentGatewayClientId;
+                        var merchantCode = paymentConfig.PaymentGatewayMerchantCode;
+
+                        embeddedSecurePayUI = new securePayUI.init({
+                            containerId: 'securepay-ui-container',
+                            scriptId: 'securepay-ui-js',
+                            clientId: clientId,
+                            merchantCode: merchantCode,
+                            card: { // card specific config and callbacks
+                                allowedCardTypes: allowedTypes,
+                                showCardIcons: true,
+                                onTokeniseSuccess: function (tokenisedCard) {
+                                    // card was successfully tokenised
+                                    creditCardToken.val(tokenisedCard.token);
+                                    LastDigits.val(tokenisedCard.last4);
+                                    creditCardTokenised();
+                                },
+                                onTokeniseError: function (error) {
+                                    // card was NOT successfully tokenised
+                                    $("#payOnlineValidation").val('Payment verification failed');
+                                    $("#loadingicon").hide();
+                                }
+                            },
+                            onLoadComplete: function () {
+                                // the SecurePay UI Component has successfully loaded and is ready to be interacted with
+                                $(".securepay-ui-iframe").css("border-width", "0px");
+                            }
+                        });
+                    })
+                    .catch(error => $("#payOnlineValidation").val(error));
+            }
+
+            function creditCardTokenised() {
+                $("#loadingicon").hide();
+
+                $btnPayNow.prop('disabled', true);
+                $processingPaymentModal.modal('show');
+                $('form').submit();
+            }
+
+            $("#loadingicon").hide();
+
+            $('#downloadInvoice').click(function () {
+
+                var downloadUrl = '@Url.Action("DownloadInvoicePdf", "Bills", new { number = Model.InvoiceNumber, invoiceId = Model.InvoiceId, type = Model.BillType, location = "Wiise" })';
+                downloadUrl = downloadUrl.replace(/&amp;/g, '&');
+
+                $(this).text('Downloading.....');
+                $('.buttonDownload').css('background-color', '#333');
+                $('.buttonDownload').addClass('changed');
+
+                $('#downloadFrame').remove();
+                $('body').append('<div class="holds-the-iframe"><iframe id="downloadFrame" style="display:none"></iframe></div>');
+                $('#downloadFrame').attr('src', downloadUrl);
+
+                setTimeout(function () {
+                        $('#downloadInvoice').text('Download Invoice');
+                        $('.buttonDownload').css('background-color', '');
+                        $('.buttonDownload').removeClass('changed');
+                }, 3000);
+
+            });
+
+            $('.clickableRadioButtonIcon').click(function (e) {
+                var clickedLabelFor = $('#' + e.target.parentElement.htmlFor)[0];
+                clickedLabelFor.checked = true;
+            });
+
+
+            var $btnPayNow = $('#btnPayNow');
+            var $processingPaymentModal = $('#processingPaymentModal');
+
+            $btnPayNow.click(function (e) {
+                if (embeddedSecurePayUI) {
+                    e.preventDefault();
+                    $("#loadingicon").show();
+                    embeddedSecurePayUI.tokenise();
+                }
+            });
+
+        });
+    </script>
+}

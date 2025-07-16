@@ -1,0 +1,25 @@
+<div id="createSkillModal" class="modal fade" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content bg-light">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.Skill.resources.NewSkill'"></h4>
+			</div>
+			<div class="modal-body">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<!-- ko compose: skillDetailsOptions --><!-- /ko -->
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-success" data-bind="click: save, enable: canSave">
+					<i class="fa fa-check"></i>
+					<span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+				</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,20 @@
+Virtual User Script started at : 2021-01-22 09:07:20
+TruClient Replay (build 0324) for LoadRunner 12.63.0, build 0399. OS: Windows 2012 R2, Browser: TruClient Browser 58.0.2.0, initialized on 2021/01/22 at 09:07:18 (1611266838.413s)
+Running Vuser...
+Starting iteration 1.
+Notify: Transaction "Apply_S_01_Home" started.
+t=00003712ms: Step 1: Navigate to "https://nhmrcomnistarpe...lutions.com.au/" started    [MsgId: MMSG-205180]
+t=00005346ms: Step 1: Navigate to https://nhmrcomnistarper...olutions.com.au/ successfully completed with End Event "Document Loaded"    [MsgId: MMSG-205180]
+Notify: Transaction "Apply_S_01_Home" ended with a "Pass" status (Duration: 1.6290 Wasted Time: 0.2790).
+t=00005849ms: Step 2: Click on User name textbox started    [MsgId: MMSG-205180]
+t=00006089ms: Step 2: Click on User name textbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00006592ms: Step 3: Type TC.getParam("UserID") in User name textbox started    [MsgId: MMSG-205180]
+t=00006603ms: Warning -205179: The TC.getParam API is deprecated because it is synchronous. Use the asynchronous "Generic API" step instead.    [MsgId: MWAR-205179]
+t=00007164ms: Step 3: Type ciaran.ochoa.5681@testdata.email in User name textbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00007667ms: Step 6: Type ****************... in Password passwordbox started    [MsgId: MMSG-205180]
+t=00008022ms: Step 6: Type *********** in Password passwordbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+Notify: Transaction "Apply_S_02_Login" started.
+t=00008525ms: Step 7: Click on Log in button started    [MsgId: MMSG-205180]
+Notify: Transaction "Apply_S_02_Login" ended with a "Stop" status (Duration: 0.3565).
+Ending Vuser...
+Vuser Terminated.

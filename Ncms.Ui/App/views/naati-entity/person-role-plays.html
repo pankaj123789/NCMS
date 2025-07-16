@@ -1,0 +1,25 @@
+<div>
+	<!--ko component: { name: 'table-component', params: tableDefinition }--><!--/ko-->
+	<script id="person-role-plays-header-template" type="text/html">
+		<th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestSessionId'"></th>
+		<th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestSessionName'"></th>
+		<th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestSessionDate'"></th>
+		<th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestSessionLocation'"></th>
+		<th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.RehearsalDate'"></th>
+		<th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.RolePlayInformation'"></th>
+		<th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.RolePlayStatus'"></th>
+	</script>
+    <script id="person-role-plays-row-template" type="text/html">
+        <tr>
+            <td>
+                <a href="#" class="text-info" data-bind="text: TestSessionId, attr: { href: '#test-session/' + TestSessionId() }, clickBubble: false"></a>
+            </td>
+            <td data-bind="text: TestSessionName"></td>
+            <td data-bind="text: TestSessionDate"></td>
+            <td data-bind="text: TestSessionLocation"></td>
+            <td data-bind="text: RehearsalDate"></td>
+            <td data-bind="text: RolePlayInformation" style="white-space: pre-wrap"></td>
+            <td data-bind="text: RolePlayerStatusDisplayName"></td>
+        </tr>
+	</script>
+</div>

@@ -1,0 +1,43 @@
+﻿<div class="streamline b-l b-info m-b">
+    <!--ko foreach: { data: items, as: 'item' }-->
+    <!--ko collapser: item.expanded-->
+    <div class="bg-info wrapper-sm m-l-n m-r-n m-b r r-2x cursor-pointer" data-bind="collapserHeader">
+        <div class="row m-t-none m-b-none">
+            <div class="col-lg-2">
+                <i class="fa" data-bind="css: { 'fa-open': !$expanded(), 'fa-close': $expanded }"></i>
+                <label class="checkbox-inline i-checks">
+                    <input type="checkbox" data-bind="nullableChecked: item.Approved"><i></i>
+                </label>
+                <a href="#" class="text-info" data-bind="attr: { href: '#/material-Request/' + item.MaterialRequestId() + '?tab=materialParticipants' }, text: 'MR' + item.MaterialRequestId(), clickBubble: false, click: function() { event.stopPropagation(); return true; }" target="_blank"></a>
+            </div>
+            <div class="col-lg-3">
+                <span data-bind="text: item.Skill"></span>
+            </div>
+            <div class="col-lg-1">
+                <span data-bind="text: item.TotalHours"></span>
+                <span data-bind="restext: 'Naati.Resources.Shared.resources.Hours'"></span>
+            </div>
+            <div class="col-lg-2">
+                <span data-bind="textCurrency: item.CostPerHour"></span>
+                <span data-bind="restext: 'Naati.Resources.MaterialRequest.resources.PerHour'"></span>
+            </div>
+            <div class="col-lg-1">
+                <span data-bind="textCurrency: item.Amount"></span>
+            </div>
+            <div class="col-lg-2">
+                <span data-bind="text: item.SpecificationCode"></span>
+            </div>
+            <div class="col-lg-1 text-right">
+                <span data-bind="text: item.GlCode"></span>
+            </div>
+        </div>
+    </div>
+    <div data-bind="collapserContent">
+        <div class="m-l-sm m-t-n-sm m-b-sm">
+            <!--ko compose: groupingCompose -->
+            <!--/ko-->
+        </div>
+    </div>
+    <!--/ko-->
+    <!--/ko-->
+</div>

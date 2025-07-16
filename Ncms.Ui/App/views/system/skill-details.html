@@ -1,0 +1,26 @@
+﻿<div class="form">
+    <div class="form-group" data-bind="validationElement: skill.SkillTypeId">
+        <label data-bind="reshtml: 'Naati.Resources.Skill.resources.SkillType'"></label>
+        <!-- ko component: { name: 'select-component', params: skillTypeOptions } --><!-- /ko -->
+    </div>
+    <div class="form-group" data-bind="validationElement: skill.DirectionTypeId">
+        <label data-bind="reshtml: 'Naati.Resources.Skill.resources.Direction'"></label>
+        <!-- ko component: { name: 'select-component', params: directionOptions } --><!-- /ko -->
+    </div>
+    <div class="form-group" data-bind="validationElement: skill.Language1Id">
+        <label data-bind="reshtml: 'Naati.Resources.Skill.resources.Language1'"></label>
+        <!-- ko component: { name: 'select-component', params: language1Options } --><!-- /ko -->
+    </div>
+    <div class="form-group" data-bind="validationElement: skill.Language2Id">
+        <label data-bind="reshtml: 'Naati.Resources.Skill.resources.Language2'"></label>
+        <!-- ko component: { name: 'select-component', params: language2Options } --><!-- /ko -->
+    </div>
+    <div class="form-group" data-bind="validationElement: skill.CredentialApplicationTypeId">
+        <label data-bind="reshtml: 'Naati.Resources.Skill.resources.ApplicationTypes'"></label>
+        <!-- ko component: { name: 'select-component', params: credentialApplicationTypeOptions } --><!-- /ko -->
+    </div>
+    <div class="form-group" data-bind="validationElement: skill.Note">
+        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Skill.resources.Note'"></label>
+        <textarea class="form-control" rows="5" data-bind="value: skill.Note, valueUpdate: 'input'" />
+    </div>
+</div>

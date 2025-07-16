@@ -1,0 +1,91 @@
+﻿<header id="header" class="app-header navbar" role="menu" data-bind="css: { hide: hideHeader }">
+    <div ui-butterbar class="butterbar hide"><span class="bar"></span></div>
+    <div class="navbar-header bg-dark">
+        <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
+            <i class="glyphicon glyphicon-cog"></i>
+        </button>
+        <button class="pull-right visible-xs" ui-toggle-class="off-screen" target=".app-aside" ui-scroll="app">
+            <i class="glyphicon glyphicon-align-justify"></i>
+        </button>
+        <!-- brand -->
+        <a href="#home" class="navbar-brand text-lt w-full" data-bind="resattr: { title: 'Naati.Resources.Shared.resources.Home' }">
+            <img alt="NAATI Logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAACgCAMAAACSVLaNAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMAUExURQAAALrUz8Xa1tDh3trn5eTt7O3z8vf5+f///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANj8lf0AAAEAdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBT9wclAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGHRFWHRTb2Z0d2FyZQBwYWludC5uZXQgNC4wLjb8jGPfAAAJqklEQVR4Xu2c23IjKwxFjx3Hmf//4TkgbbolkITAHVdNldfDmFvTy7S42Mnkv7//IB/pd/GRfhcf6XfxkX4XH+l3cb30g0HuV7hO+v79Z+T7C7WXco301w8kLX4uF79A+gtyEd9oS7z8Jl6VvkdjrLjjisLjB4lNXpN+QCiHGO4f+R6WeUV6TbnyxJV07f4Csy+9rlw5R7tkdrV3pfeUK0dc1NmwFySb0nz/PY5ZWBf2rSm5Jf3ku2/T1jzajs44T7MhnVmXJ7TxvVPuhlyadelXh5lBZ2yttp4Ey9J0lwvAFGTr9h6SLEpfEBoNBDasl5aRNWnrILcNggJ9roTIknT6nJFDWy8sfivS3PmFwBpjkbdekOauLwVxjVx6Oual0fG18Py7IZe1Tkuj26vhzo8JztkZWWl0ej3c/THFOTshKY0ufwEcPZDLzcacNHqc8P14PMo54l5eFvZ6noxHgGSsU9Kz9fnpfFR9pBZ2botM6tSXkQ73wedkAw6/XSB4bLGdF+afZxLSwXkjt/feJt78ts9G06NqQhpdDayc3s9xtOA2yBQ47zOXRkc9yx9Kg+Hmvs4Gs8k4lbYDeukk2fCXFKo+9sXpiMykRU8nzmIxxxttlkSmQnmXmTQ6kchh+MofzRhHm+pE4MfdTqTH4BDdlVVh1dn7wmQY6jBAJtLo4uSMDFoJkV7CHGyqkUFPBQ6xdN//ObA8YMgsYg02r83IVKIFNZTuV9djL0HF8hcWDb5cwsOBDEEFNqE0Lm8c6xwewMpn0Y4xRKhYTqFgukTS3UCj9Oh5fRIKhhnOI4IMQQUmkTQuZg5F5HcDutGfaMb48Acl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" />
+            <span class="menu-title hidden-folded m-l-lg m-r-xxl" data-bind="text: productName"></span>
+        </a>
+        <!-- / brand -->
+    </div>
+    <!-- navbar collapse -->
+    <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only">
+        <div class="row">
+            <div class="col-sm-6">
+                <!-- buttons -->
+                <div class="nav navbar-nav hidden-xs">
+                    <a href="#" class="btn no-shadow navbar-btn" ui-toggle-class="app-aside-folded" target=".app">
+                        <i class="fas fa-outdent fa-fw text"></i>
+                        <i class="fas fa-indent fa-fw text-active"></i>
+                    </a>
+                </div>
+                <!-- / buttons -->
+                <!-- search form -->
+                <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" data-target=".navbar-collapse" role="search" data-bind="submit: search">
+                    <div class="form-group">
+                        <!--ko component: { name: 'quick-search' }-->
+                        <!--/ko-->
+                    </div>
+
+                </form>
+                <!-- / search form -->
+            </div>
+            <div class="col-sm-6">
+                <!-- nabar right -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li data-bind="if: environment"><a href="/#system/info"><span class="font-weight-bold text-danger text-sm-m" data-bind="text:environment"></span></a></li>
+                    <li data-bind="if: databaseName"><a href="/#system/info"><i class="fa fa-lg fa-database"></i>&nbsp;<!--ko text:databaseName--><!--/ko--></a></li>
+                    <li><a href="#"><i class="fa fa-lg fa-user"></i>&nbsp;<!--ko text:user().Name--><!--/ko--></a></li>
+                    <li role="presentation" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-lg fa-bell">
+                                <!--ko if: notificationsBadge-->
+                                <span class="badge bg-danger">&nbsp;</span>
+                                <!--/ko-->
+                            </i>
+                        </a>
+                        <!--ko if: notifications().length-->
+                        <ul class="dropdown-menu w-xxl list-wrap">
+                            <!--ko foreach: { data: notifications, as: 'n' }-->
+                            <li>
+                                <a href="#" data-bind="click: $root.notificationClick">
+                                    <p data-bind="text: n.Text"></p>
+                                    <small class="text-muted">
+                                        <i class="fa fa-clock"></i>
+                                        <span data-bind="textDate: { value: n.CreatedDate, outputFormat: 'DD/MM/YYYY HH:mm' }"></span>
+                                    </small>
+                                    <div class="label label-warning pull-right" data-bind="click: $root.notificationDeleteClick">
+                                        <span data-bind="reshtml:'Naati.Resources.Shared.resources.Delete'"></span>                                      
+                                    </div>
+                                </a>
+                            </li>
+                            <!--ko if: $index() + 1 != $root.notifications().length-->
+                            <li role="separator" class="divider"></li>
+                            <!--/ko-->
+                            <!--/ko-->
+                        </ul>
+                        <!--/ko-->
+                    </li>
+                    <li><a href="/logout"><i class="fa fa-lg fa-sign-out-alt"></i>&nbsp;Log out</a></li>
+                </ul>
+                <!-- / navbar right -->
+            </div>
+        </div>
+    </div>
+    <!-- / navbar collapse -->
+</header>
+<div data-bind="ifnot: hideMenu">
+    <div data-bind="compose: { model: 'views/navigation/menu', view: 'views/navigation/menu', active:true }"></div>
+</div>
+<div id="content" class="app-content" role="main" data-bind="css: { 'app-top-zero': hideHeader, 'app-left-zero': hideMenu }">
+    <div class="app-content-body app-content-full">
+        <div class="hbox hbox-auto" data-bind="router: { cacheViews: true, alwaysAttachView:true }">
+        </div>
+    </div>
+</div>

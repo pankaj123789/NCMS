@@ -1,0 +1,64 @@
+﻿<div>
+    <div class="panel wrapper-sm">
+        <div class="m-b-sm h4 font-thin">
+            <span data-bind="text: application.ApplicationTypeName"></span>
+            <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Application'"></span>
+        </div>
+        <div class="panel-body pull-in b-t b-light">
+            <p class="form-control-static">
+                <span data-bind="reshtml: 'Naati.Resources.Application.resources.OwnedBy'"></span>
+                <strong data-bind="text: application.ApplicationOwner"></strong>
+            </p>
+            <p class="form-control-static">
+                <span data-bind="reshtml: 'Naati.Resources.Application.resources.Status'"></span>
+                <strong data-bind="text: application.ApplicationStatus"></strong>
+            </p>
+            <!--ko ifnot: credentialRequest.Id-->
+            <p class="form-control-static">
+                <span data-bind="reshtml: 'Naati.Resources.Application.resources.StatusChanged'"></span>
+                <strong data-bind="textDate: { value: application.StatusModified, outputFormat: CONST.settings.shortDateTimeDisplayFormat }"></strong>
+            </p>
+            <p class="form-control-static">
+                <span data-bind="reshtml: 'Naati.Resources.Application.resources.StatusChangedBy'"></span>
+                <strong data-bind="text: application.StatusModifiedBy"></strong>
+            </p>
+            <!--/ko-->
+        </div>
+    </div>
+    <!--ko if: credentialRequest.Id -->
+    <div class="panel wrapper-sm">
+        <div class="m-b-sm h4 font-thin" data-bind="text: credentialRequest.CredentialName"></div>
+        <div class="panel-body pull-in b-t b-light">
+            <p class="form-control-static">
+                <strong data-bind="text: credentialRequest.Direction"></strong>
+            </p>
+            <p class="form-control-static">
+                <span data-bind="reshtml: 'Naati.Resources.Application.resources.StatusChanged'"></span>
+                <strong class="form-control-static" data-bind="textDate: { value: credentialRequest.StatusChangeDate, outputFormat: CONST.settings.shortDateTimeDisplayFormat }"></strong>
+            </p>
+            <p class="form-control-static">
+                <span data-bind="reshtml: 'Naati.Resources.Application.resources.StatusChangedBy'"></span>
+                <strong class="form-control-static" data-bind="text: credentialRequest.ModifiedBy"></strong>
+            </p>
+        </div>
+    </div>
+    <!--/ko-->
+    <div class="panel wrapper-sm">
+        <div class="m-b-sm h4 font-thin">
+            <span data-bind="text: application.ApplicantGivenName"></span>
+            <span data-bind="text: application.ApplicantFamilyName"></span>
+        </div>
+        <div class="panel-body pull-in b-t b-light">
+            <p class="form-control-static">
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.NaatiNo'"></span>
+                <strong data-bind="text: application.NaatiNumber"></strong>
+            </p>
+            <!--ko if: application.ApplicantPrimaryEmail-->
+            <p class="form-control-static">
+                <span class="fa fa-envelope-o"></span>
+                <a href="#" class="text-info" data-bind="text: application.ApplicantPrimaryEmail, attr: { href: 'mailto: ' + application.ApplicantPrimaryEmail() }"></a>
+            </p>
+            <!--/ko-->
+        </div>
+    </div>
+</div>

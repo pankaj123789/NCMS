@@ -1,0 +1,298 @@
+﻿@{
+    Layout = "";
+}
+<html>
+<head>
+    <link href="@Url.Content("~/Content/helpStyle.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="HelpContent">
+        <h1 class="first">
+            <a name="WhatIsNAATIOnline">What is myNAATI?</a></h1>
+        <p>
+            The National Accreditation Authority for Translators and Interpreters (NAATI) is the sole accreditation body for translators and interpreters within Australia.
+        </p>
+        <p>
+            myNAATI allows members of the public to search for a translator or interpreter and makes it easy for NAATI members to maintain their details, purchase products and apply for accreditation. 
+        </p>
+        <h1>
+            <a name="AccessNAATI">Accessing myNAATI</a></h1>
+        <p>
+            A Public user can access the online directory to search for a translator or interpreter.</p>
+        <ol>
+            <li>Click Find a Practitioner<br />
+            <em>or</em><br />
+            Select the Online directory Menu</li>
+            <img src="@Url.Content("~/Content/Images/Help/OnlineDirectory.png")" alt="Online Directory" />
+        </ol>
+        <p>
+            NAATI members can logon to myNAATI or register for myNAATI.</p>
+        <h2>
+            <a name="FindPractitioner">Find a Practitioner</a></h2>
+        <p>
+            The <strong>Find a Practitioner</strong> option allows you to find a practitioner using the find a practitioner wizard. 
+        </p>
+        <ol>
+            <li>Select Find a Practitioner<br />
+            <img src="@Url.Content("~/Content/Images/Help/PractitionersDirectoryLinks.png")" alt="Practitioners Directory Links" /></li>
+            <li>Select either Translator or Interpreter<br />
+            <img src="@Url.Content("~/Content/Images/Help/OnlineDirectoryScreen.png")" alt="Practitioners Directory Links" /></li>
+            <li>Click <strong>Next</strong> to move to the next screen of the wizard</li>
+            <li>Use the <strong>Previous</strong> and <strong>Next</strong> buttons to move through
+                each step of the wizard</li>
+            <li>Click Search to display a list of practitioners that meet the set criteria
+            <p>
+                <em>The Search results screen is displayed</em>
+            </p>
+            <img src="@Url.Content("~/Content/Images/Help/SearchResults.png")" alt="Search Results" /></li>
+            <li>To search again, click the <strong>Search Again</strong> command on the Search results
+                page. The system displays the search criteria for the search just performed.</li>
+        </ol>
+        <p>
+            The search results can be sorted by name and skill in ascending or descending order.
+        </p>
+        <ol>
+            <li>Click the column heading to display the search results in ascending order.</li>
+            <li>Click the column heading again to sort the results in descending order.</li>
+        </ol>
+        <p>
+            To move between pages use the buttons on the navigation panel at the bottom of the
+            search results screen.</p>
+        <h2>
+            <a name="AdvancedSearch">Advanced Search</a></h2>
+        <p>
+            To search using advanced criteria:</p>
+        <ol>
+            <li>Select the Advanced Search link on the Home page</li>
+            <li>Select an option from the dropdown list or enter the search criteria into the text
+                box<br/>
+            <img src="@Url.Content("~/Content/Images/Help/OnlineDirectoryAdvancedSearch.png")" alt="Advanced Search Screen" /></li>
+            <li>Click <strong>Search</strong>
+            <p><em>The Search Results screen is displayed</em></p></li>
+        </ol>
+        <h2>
+            <a name="ViewPractitionerDetails">View details</a></h2>
+        <p>
+            To view a practitioners contact details:</p>
+        <ol>
+            <li>Click the name of the practitioner in the search results screen<br />
+                <img src="@Url.Content("~/Content/Images/Help/ViewPractitioner.png")" alt="View Practitioners Details" /></li>
+        </ol>
+        <p>
+            To close the Practitioner Contact Details screen, click <strong>OK</strong>.</p>
+
+        <h1>
+            <a name="LogIn">Log In</a></h1>
+        <p>
+            To purchase products, update your personal details or online directory listing, 
+            NAATI members can login using their Customer Number and the password sent to when 
+            registering with myNAATI.</p>
+        <ol>
+            <li>Enter your Customer Number and password<br />
+                <img src="@Url.Content("~/Content/Images/Help/LogInscreen.png")" alt="Login Screen" />
+            </li>
+            <li>Click <strong>Log On</strong><br/>
+            <em>or</em><br/>
+            Press <strong>Enter</strong></li>
+        </ol>
+        <p>
+            If you enter the wrong Customer Number or password, you will be prompted to try again, 
+            recover your password or register with myNAATI.</p>
+        <h1>
+            <a name="Register">Register with myNAATI </a>
+        </h1>
+        <p>
+            A NAATI member can register with myNAATI.</p>
+        <ol>
+            <li>Click Become one now!<br />
+                <img src="@Url.Content("~/Content/Images/Help/NaatiOnlineRegistration.png")" alt="Register with myNAATI" /><br />
+                <p><em>The myNAATI Registration screen is displayed</em></p>
+            </li>
+            <li>Enter your Customer Number, email address, confirmation email address and the text from the CAPTCHA image</li>
+            <li>Click <strong>Submit</strong> to register for myNAATI
+                <p>
+                    <em>Your login details will be sent to the email address you provided.</em></p>
+            </li>
+        </ol>
+        <p>
+            If the Customer Number and the email you enter do not match those recorded in NAATI’s
+            internal system (SAM), you will be prompted to enter and submit your personal details
+            with NAATI. You will be notified when the request is processed.</p>
+        <div class="top_level_image">
+            <img src="@Url.Content("~/Content/Images/Help/VerifyDetails.png")" alt="User not recognised screen" />
+        </div>
+        <h2>
+            <a name="RecoverPassword">Recover your password</a></h2>
+        <p>
+            To reset a forgotten password you must know your NAATI Number and the email address
+            registered with myNAATI.</p>
+        <ol>
+            <li>Click Forgot your password? You can recover it <a href='@Url.Action("ResetPassword", "Account")' target="_blank">here</a><br />
+                <img src="@Url.Content("~/Content/Images/Help/resetpassword.png")" alt="Recover a forgotten password" /></li>
+            <li>Enter your Customer Number, email address and the text from the CAPTCHA image</li>
+            <li>Click <strong>Reset Password</strong> </li>
+        </ol>
+        <p>
+            The system generates a new password and sends an email with the new password to
+            your email.
+        </p>
+        <p>
+            <strong>Note:</strong> You will be prompted to change your password when you log into myNAATI.
+        </p>
+        <h2>
+            <a name="ChangePassword">Change your password</a></h2>
+        <p>
+            To change your myNAATI password:</p>
+        <ol>
+            <li>Select the Change Password menu<br />
+            <img src="@Url.Content("~/Content/Images/Help/ChangePassword.png")" alt="Change Password" /></li>
+            <li>Enter your current password, a new password and confirm the new password</li>
+            <li>Click <strong>Change Password</strong></li>
+        </ol>
+        <p>
+            The system saves the new password and confirms that the password has been changed.</p>
+        <p>
+            <strong>Note:</strong> A password must contain a minimum of 8 characters and include at least one
+            letter and one number (0-9).</p>
+        <h1>
+            <a name="PractitionersDirectory">Practitioners Directory</a></h1>
+        <p>
+            The Practitioners Directory options allows you to find a practitioner using basic search criteria, 
+            find a practitioner using advanced search criteria, and manage your own listing in the practitioners directory.
+        </p>
+        <ol>
+            <li>Select the required option from the Home page<br />
+                <img src="@Url.Content("~/Content/Images/Help/PractitionersDirectorylinks.png")" alt="Practitioners Directory Links" /><br />
+                <em>or</em><br />
+                Select an option from the Practitioners Directory Menu<br />
+                <img src="@Url.Content("~/Content/Images/Help/PractitionersDirectoryMenu.png")" alt="Practitioners Directory Menu" />
+            </li>
+        </ol>
+        <h2>
+            <a name="MyPractitionerListing">My Listing</a></h2>
+        <p>
+            Select this option to update your listing details or, if you are not listed in the NAATI Practitioners Directory, 
+            list your name and credentials using myNAATI to pay via credit card.
+        </p>
+        <p>
+        To list your details in the directory:
+        </p>
+        <ol>
+            <li>Select Practitioners Directory &gt; My Listing</li>
+            <li>Click the Review your personal details link to update your details</li>
+            <li>Return to the Practitioners Directory &gt; My Listing screen</li>
+            <li>Click <strong>List Now</strong><br />
+                <em>The List in Practitioner Directory wizard is displayed</em></li>
+            <li>Use the <strong>Cancel</strong>, <strong>Previous</strong> and <strong>Next</strong> buttons to move through the wizard</li>
+            <li>Click <strong>Confirm</strong> to confirm the payment and listing</li>
+        </ol>
+        <h2>
+            <a name="UpdatePractitionerListing">To update your listing</a></h2>
+        <ol>
+            <li>Select Practitioners Directory &gt; My Listing</li>
+            <li>Select Update your personal details link to modify your contact details <em>or</em>
+                click <strong>Change My Listing</strong> to modify the contact details, work areas and credentials to be listed in the Practitioners Directory<br />
+                <img src="@Url.Content("~/Content/Images/Help/UpdateMyListing.png")" alt="List Now" /><br />
+                <em>The Change My Listing wizard is displayed</em>
+            </li>
+            <li>Use the <strong>Cancel</strong>, <strong>Previous</strong> and <strong>Next</strong>
+                buttons to move through the wizard</li>
+            <li>Click <strong>Confirm</strong> to confirm changes to your listing</li>
+        </ol>
+        <h1>
+            <a name="ApplyForCredentials">Apply for Credentials</a></h1>
+        <p>
+            myNAATI steps you through the process of completing an application for credentials.  
+            At the conclusion of the process you can print the largely completed forms for submission 
+            to NAATI along with supporting documentation.  To complete the application forms online:
+        </p>
+        <ol>
+            <li>Select Applications and review the information provided on the screen</li>
+            <li>Select <strong>By Testing</strong> or <strong>By Australian Course</strong></li>
+            <li>Review the eligibility, application and cost information provided</li>
+            <li>Click <strong>Apply Now</strong></li>
+            <li>Complete the information requested on each page<br />
+                <img src="@Url.Content("~/Content/Images/Help/ApplyCourseDetails.png")" alt="Apply for Credentials by Australian Course Course Details step" />
+            </li>
+            <li>Use the <strong>Cancel</strong>, <strong>Previous</strong> and <strong>Next</strong>
+                buttons to move through the wizard or click on a completed step to review your entries</li>
+            <li>Click on the <strong>Add Request</strong> or <strong>Add Test</strong> buttons to request as many credentials as required</li>
+            <li>To save changes made to a previously completed screen, e.g. Residency Status, click the <strong>Next</strong> button<br />
+                <img src="@Url.Content("~/Content/Images/Help/ApplyDownloadForm.png")" alt="Apply for Credentials by Australian Course Download Form step" />
+            </li>
+            <li>Click <strong>Download Form</strong> to view the application form in a separate window<br />
+                <p><em>A unique reference number is allocated to the application</em></p>
+            </li>
+            <li>Click <strong>Print</strong> to print your copy of the application</li>
+            <li>Click <strong>Done</strong> to return to the main menu</li>
+            <li>Follow the instructions on the printed application form to complete your application for credentials</li>
+        </ol>
+        <h1>
+            <a name="PurchaseProducts">Purchase Products</a></h1>
+        <p>
+            A registered user can order products for post accreditation practice through myNAATI. 
+            Orders can be placed using the myNAATI order wizard or by partially completing the 
+            order online, printing the order form and posting the completed order form by mail.</p>
+        <div class="top_level_image">
+            <img src="@Url.Content("~/Content/Images/Help/PurchaseNAATIProducts.png")" alt="Purchase NAATI Products" />
+        </div>
+        <p>
+            To order a Post Credential Product:</p>
+        <ol>
+            <li>Log in to myNAATI</li>
+            <li>Select the Products menu<br />
+                <em>or</em><br />
+                Click <strong>Get Started</strong> on the Welcome to myNAATI Page<br />
+                <p>
+                    <em>The Post Accreditation screen is displayed. </em>
+                </p>
+                <p>
+                    This page briefly describes each of the products. Click Frequently Asked Questions for 
+                    details of the terms and conditions such as types of payment accepted and creating an order form. 
+                </p>
+            </li>
+            <li>Use the <strong>Cancel</strong>, <strong>Previous</strong> and <strong>Next</strong>
+                buttons to move through the wizard or click on a completed step to review your entries.
+                To save changes made to a previously completed screen, e.g. quantities ordered,
+                click the <strong>Next</strong> button.</li>
+            <li>Click <strong>Confirm</strong> to confirm the order<br />
+                <p><em>A unique reference number is allocated to the order</em></p>
+            </li>
+            <li>Click <strong>Print</strong> to print your copy of the order</li>
+            <li>Click <strong>OK</strong> to return to the main menu</li>
+        </ol>
+        <p>
+            <strong>Note:</strong> To order ID Cards online NAATI requires an up-to-date passport
+            photo. If required, you will be prompted to download the form and send the completed
+            form to NAATI with two witnessed passport photos.</p>
+        <h1>
+            <a name="MaintainPersonalDetails">Maintain Details</a>
+        </h1>
+        <p>
+            A registered user can view or maintain their addresses, phone numbers, email address and web site.
+        </p>
+        <h2>
+            <a name="ViewDetails">View Personal details</a></h2>
+        <ol>
+            <li>Select the My Details menu or My Details &gt; Get Started on the Home page<br />
+                <p><em>Your address details are automatically displayed. Use the menu on the left to display your listed phone numbers, 
+                email address(es) and web site details.</em></p>
+            </li>
+        </ol>
+        <h2>
+            <a name="UpdateDetails">Update your details</a>
+        </h2>
+        <ol>
+            <li>Select the required menu e.g. Phone<br />
+                <img src="@Url.Content("~/Content/Images/Help/UpdatePersonalDetails.png")" alt="Update Personal Details" />
+            </li>
+            <li>To modify a record, click the <strong>Edit</strong> link; to delete a record, click
+                the <strong>Delete</strong> link; or to add a new record, click the <strong>Add</strong>
+                link<br />
+                <img src="@Url.Content("~/Content/Images/Help/CreateNewPersonalRecord.png")" alt="Add a record to your personal details" />
+            </li>
+            <li>Click <strong>Save</strong> to save your changes</li>
+        </ol>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+﻿<div class="modal fade" tabindex="-1" role="dialog" data-bind="attr: { id: modalId }">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.Person.resources.ExtendCertifications'"></h4>
+            </div>
+            <div class="modal-body m-l-n-sm m-r-n-sm">
+                <div class="hbox">
+                    <div class="col wrapper b-r b-light">
+                        <h4 class="font-thin m-t-none m-b-md text-muted" data-bind="reshtml: 'Naati.Resources.Person.resources.Periods'"></h4>
+                        <div class="m-b">
+                            <!--ko foreach: { data: periods, as: 'p' }-->
+                            <div class="wrapper-sm" data-bind="css: { 'bg-primary pos-rlt m-r': p.Id === $root.period.Id() }">
+                                <!--ko if: p.Id === $root.period.Id()-->
+                                <i class="arrow right arrow-primary"></i>
+                                <!--/ko-->
+                                <a href="#" data-bind="click: $root.selectPeriod">
+                                    <span data-bind="text: p.Id"></span>:
+                                    <span data-bind="textDate: p.StartDate"></span>
+                                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.To'"></span>
+                                    <span data-bind="textDate: p.EndDate"></span> -
+                                    <span data-bind="text: $root.status(p.StartDate, p.EndDate)"></span>
+                                </a>
+                            </div>
+                            <!--/ko-->
+                        </div>
+                    </div>
+                    <div class="col wrapper">
+                        <!--ko ifnot: period.Id-->
+                        <h4 class="font-thin m-t-none m-b-md text-muted text-center" data-bind="reshtml: 'Naati.Resources.Person.resources.SelectAPeriod'"></h4>
+                        <!--/ko-->
+                        <div class="animated fadeIn" data-bind="css: { hide: !period.Id() }">
+                            <h4 class="font-thin m-t-none m-b-md text-muted" data-bind="reshtml: 'Naati.Resources.Shared.resources.Details'"></h4>
+                            <div class="form">
+                                <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Person.resources.StartDate'"></label>
+                                        <p class="form-control-static" data-bind="textDate: period.StartDate"></p>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Person.resources.EndDate'"></label>
+                                        <p class="form-control-static" data-bind="textDate: period.EndDate"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Person.resources.OriginalEndDate'"></label>
+                                        <p class="form-control-static" data-bind="textDate: period.OriginalEndDate"></p>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Person.resources.Status'"></label>
+                                        <p class="form-control-static" data-bind="text: period.Status"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12" data-bind="validationElement: period.NewEndDate">
+                                        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Person.resources.NewEndDate'"></label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control input-lg text-center" data-bind="datepicker: { value: period.NewEndDate }" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                        <span class="help-block" data-bind="validationMessage: period.NewEndDate"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-xs-12" data-bind="validationElement: period.Notes">
+                                        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Person.resources.Notes'"></label>
+                                        <textarea class="form-control" rows="6" data-bind="value: period.Notes"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-bind="click: save">
+                    <span class="fa fa-check"></span>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Ok'"></span>
+                </button>
+                <button class="btn btn-default" data-dismiss="modal">
+                    <span class="fa fa-ban"></span>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "";
+}
+<html>
+    <head>
+        <title>myNAATI Help</title>
+    </head>
+        <frameset cols="210px, *">
+            <FRAME SRC='@Url.Action("HelpMenu")' name="Menu"/>
+            <FRAME SRC='@Url.Action("ComingSoon")' name="Content"/>
+            <NOFRAMES>
+                ???
+            </NOFRAMES>
+        </frameset>
+</html>

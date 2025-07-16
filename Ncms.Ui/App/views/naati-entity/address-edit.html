@@ -1,0 +1,137 @@
+﻿<div id="personAddressEdit" class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: windowTitle"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="wrapper-md">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.ValidateInGoogle'"></label>
+                            <div class="col-xs-2" data-bind="validationOptions: { insertMessages: false }">
+                                <label class="i-switch i-switch-md bg-info">
+                                    <input type="checkbox" data-bind="checked: address.ValidateInExternalTool" />
+                                    <i></i>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" data-bind="visible: !address.ValidateInExternalTool()">
+                            <label class="col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.Overseas'"></label>
+                            <div class="col-xs-2">
+                                <label class="i-switch i-switch-md bg-info">
+                                    <input type="checkbox" data-bind="checked: overseas" />
+                                    <i></i>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" data-bind="validationElement: address.StreetDetails">
+                            <div data-bind="visible: address.ValidateInExternalTool">
+                                <label class="col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.EnterAddress'"></label>
+                                <div class="col-xs-9">
+                                    <input id="addressInput" address-search-minlength="3" type="text" class="form-control" data-bind="value: addressText" />
+                                </div>
+                            </div>
+
+                            <div data-bind="visible: !address.ValidateInExternalTool()">
+                                <div>
+                                    <!--ko if: overseas-->
+                                    <label class="col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.EnterAddress'"></label>
+                                    <!--/ko-->
+                                    <!--ko ifnot: overseas-->
+                                    <label class="col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.Street'"></label>
+                                    <!--/ko-->
+                                    <div class="col-xs-9">
+                                        <input type="text" class="form-control" data-bind="value: address.StreetDetails" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-bind="visible: !address.ValidateInExternalTool()">
+                            <div class="form-group" data-bind="visible: !overseas(), validationElement: address.PostcodeId">
+                                <label class="col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.Suburb'"></label>
+                                <div class="col-xs-9">
+                                    <input type="text" class="form-control" data-bind="textInput: suburb" list="suburbSelect" />
+                                    <datalist id="suburbSelect"></datalist>
+                                    <span class="help-block" data-bind="validationMessage: address.PostcodeId"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group" data-bind="visible: overseas(), validationElement: address.CountryId ">
+                                <label class="col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.Country'"></label>
+                                <div class="col-xs-9">
+                                    <!-- ko component: { name: 'entity-select', params: countryOptions } -->
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.PrimaryAddress'"></label>
+                            <div class="col-xs-2" data-bind="validationOptions: { insertMessages: false }">
+                                <label class="i-switch i-switch-md bg-info">
+                                    <input type="checkbox" data-bind="checked: address.PrimaryContact, disable: disablePrimaryContact" />
+                                    <i></i>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!--ko ifnot: IsOrganisation()-->
+                        <div class="form-group" data-bind="validationElement: address.OdAddressVisibilityTypeId">
+                            <label class="col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.IncludeInPd'"></label>
+                            <div class="col-xs-9">
+                                <!-- ko component: { name: 'select-component', params: OdAddressVisibilityTypesParams } --><!-- /ko -->
+                            </div>
+                        </div>
+                        <!--/ko-->
+
+                        <!--ko if: address.IsExaminer-->
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.ExaminerCorrespondence'"></label>
+                            <div class="col-xs-2" data-bind="validationOptions: { insertMessages: false }">
+                                <label class="i-switch i-switch-md bg-info">
+                                    <input type="checkbox" data-bind="checked: address.ExaminerCorrespondence" />
+
+                                    <i></i>
+                                </label>
+                            </div>
+                        </div>
+                        <!--/ko-->
+
+                        <div class="form-group" data-bind="validationElement: address.Note">
+                            <label class="col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.AddressNote'" style="height: 50px"></label>
+                            <div class="col-xs-9">
+                                <textarea class="form-control" data-bind="value: address.Note, valueUpdate: 'input'"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div>
+                    <div class="form-group" id="selectedAddress">
+                        <img id="map" class="map margin-left-xs" data-bind="attr: { src: mapSource, title: mapTitle }, visible: address.ValidateInExternalTool" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="enable: canSave, click: save">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" data-bind="click: tryClose">
+                <i class="fa fa-ban"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿[
+  {
+    "outputFile": "Content/Validation.css",
+    "inputFile": "Content/Validation.less"
+  },
+  {
+    "outputFile": "Content/Variables.css",
+    "inputFile": "Content/Variables.less"
+  },
+  {
+    "outputFile": "Scripts/AdminLTE/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css",
+    "inputFile": "Scripts/AdminLTE/plugins/datatables/extensions/Buttons/css/buttons.dataTables.scss"
+  },
+  {
+    "outputFile": "Content/additional.css",
+    "inputFile": "Content/additional.less"
+  },
+  {
+    "outputFile": "Content/Responsive.css",
+    "inputFile": "Content/Responsive.less"
+  },
+  {
+    "outputFile": "Content/Site.css",
+    "inputFile": "Content/Site.less"
+  }
+]

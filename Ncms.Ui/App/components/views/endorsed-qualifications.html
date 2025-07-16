@@ -1,0 +1,26 @@
+﻿<div class="row bottom-margin">
+    <div class="form-group col-lg-4">
+        <label data-bind="reshtml: 'Naati.Resources.Application.resources.Institution'"></label>
+        <!-- ko component: { name: 'select-component', params: institution } --><!-- /ko -->
+    </div>
+    <div class="form-group col-lg-4">
+        <label data-bind="reshtml: 'Naati.Resources.Application.resources.Location'"></label>
+        <!-- ko component: { name: 'select-component', params: location } --><!-- /ko -->
+    </div>
+    <div class="form-group col-lg-4">
+        <label data-bind="reshtml: 'Naati.Resources.Application.resources.Qualification'"></label>
+        <!-- ko component: { name: 'select-component', params: qualification } --><!-- /ko -->
+    </div>
+</div>
+<div class="row bottom-margin">
+    <div class="form-group col-md-4">
+        <label data-bind="reshtml: 'Naati.Resources.Application.resources.EndorsementPeriod'"></label>
+        <!-- ko component: { name: 'date-range', params: endorsementPeriod } --><!-- /ko -->
+    </div>
+
+    <div class="form-group col-lg-4 hidden">
+        <label>Endorsement Qualification Id</label>
+        <!-- ko component: { name: 'select-component', params: endorsedQualificationIds } --><!-- /ko -->
+    </div>
+
+</div>

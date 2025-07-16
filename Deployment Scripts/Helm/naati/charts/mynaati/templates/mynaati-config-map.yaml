@@ -1,0 +1,99 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ include "mynaati.fullname" . }}
+data:
+  # Configuration values can be set as key-value properties
+  "CertificationApiLimit": "3"
+  "aspnet_MaxJsonDeserializerMembers": "160000"
+  "owin_AutomaticAppStartup": "false"
+  "ClientValidationEnabled": "false"
+  "UnobtrusiveJavaScriptEnabled": "true"
+  "GoogleAnalyticsEnabled": "true"
+  "webpages_Enabled": "false"
+  "webpages_Version": "3.0.0.0"
+  "ExternalUrl_Applications_URL": {{ .Values.configMap.data.ExternalUrl_Applications_URL | quote }}
+  "ExternalUrl_NAATI_URL": "https://www.naati.com.au"
+  "ExternalUrl_NAATI": "https://www.naati.com.au/resources/faq/"
+  "ExternalUrl_FAQ": "https://www.naati.com.au/resources/faq/"
+  "ExternalUrl_PrivacyPolicy": "https://www.naati.com.au/policies/privacy/"
+  "ExternalUrl_RefundPolicy": "https://www.naati.com.au/about/our-policies/"
+  "ExternalUrl_ShippingPolicy": "https://www.naati.com.au/about/our-policies/"
+  "ExternalUrl_TermsAndConditions": "https://www.naati.com.au/policies/terms-and-conditions"
+  "ExternalUrl_ContactUs": "https://www.naati.com.au/get-in-touch/get-in-touch/"
+  "ExternalUrl_Witness": "https://www.naati.com.au/about/our-policies/"
+  "ExternalUrl_AccreditationLevels": "https://www.naati.com.au/media/1109/outline_naati_credentials.pdf"
+  "ExternalUrl_AccreditationMethodList": "https://www.naati.com.au/information/accreditation/"
+  "ExternalUrl_AccreditationByCourseInformationBooklet": "https://www.naati.com.au/media/1286/accreditation_by_aus_approved_course_information_booklet.pdf"
+  "ExternalUrl_AccreditationByTestingInformationBooklet": "https://www.naati.com.au/media/1365/accreditation_by_testing_information_booklet.pdf"
+  "ExternalUrl_ApprovedCourseInformation": "https://www.naati.com.au/information/approved-courses/"
+  "ExternalUrl_AccreditationByTestingLanguages": "https://www.naati.com.au/media/1137/languages_with_accreditation_testing.pdf"
+  "ExternalUrl_ExpressionOfInterestInformation": "https://www.naati.com.au/information/accreditation/"
+  "ExternalUrl_FormsAndFees": "https://www.naati.com.au/media/1079/naati_forms_and_fees.pdf"
+  "ExternalUrl_RevalidationProducts": "https://www.naati.com.au/media/1409/revalidation_information_booklet.pdf"
+  "ActiveReportsLicense": "PERhdGFEeW5hbWljc0xpY2Vuc2UgbmFtZT0iRjEgU29sdXRpb25zIiBlbWFpbD0iZ3VzQGYxc29sdXRpb25zLmNvbS5hdSIgc2VyaWFsPSJERC1BUk4tNjAtRDAxMDczNiIgaG9zdGVkPSJPRE5MTlRJeVV3PT0iPjxMaWNlbnNlS2V5PnptMytRRjZ1TjV2djF6UkxOU1ppMlgram1NcFRabEg5YzhBSWQxUTAwMUo4T2p3WDRYVHJwL3pCY1luS3l4QjRZR2gwMC83YjRHY0lCRThRWnd0emlmWjZxTUQ4Z2JJODwvTGljZW5zZUtleT48U2lnbmF0dXJlIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwLzA5L3htbGRzaWcjIj48U2lnbmVkSW5mbz48Q2Fub25pY2FsaXphdGlvbk1ldGhvZCBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnL1RSLzIwMDEvUkVDLXhtbC1jMTRuLTIwMDEwMzE1IiAvPjxTaWduYXR1cmVNZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwLzA5L3htbGRzaWcjcnNhLXNoYTEiIC8+PFJlZmVyZW5jZSBVUkk9IiI+PFRyYW5zZm9ybXM+PFRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNlbnZlbG9wZWQtc2lnbmF0dXJlIiAvPjwvVHJhbnNmb3Jtcz48RGlnZXN0TWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3NoYTEiIC8+PERpZ2VzdFZhbHVlPm5XN3dTdW9IcndIZjczeGdhN3ZGVlFKYWVuZz08L0RpZ2VzdFZhbHVlPjwvUmVmZXJlbmNlPjwvU2lnbmVkSW5mbz48U2lnbmF0dXJlVmFsdWU+alEwRHVGQW9HNjA4ZzdSRkRmV3ZtSFplUnFra1Ric2JwY3daUXR1d2VrdHhheVFIdGFRMGt4VXlML08vdEwrNDY2aDFncm9SVTVvc255bTdMeGpoL0E9PTwvU2lnbmF0dXJlVmFsdWU+PC9TaWduYXR1cmU+PC9EYXRhRHluYW1pY3NMaWNlbnNlPg=="
+  "DownloadApplicationForCredentialByTestingPDFName": "Application for Credentials by Testing Form.pdf"
+  "DownloadApplicationForCredentialByCoursePDFName": "Application for Credentials by Australian Course Form.pdf"
+  "DownloadApplicationForAssessmentPDFName": "Application Assessment Educational Quals Skilled Employment.pdf"
+  "BypassExaminerAuthentication": {{ .Values.configMap.data.BypassExaminerAuthentication | quote }}
+  "ExcludedNamesList": ""
+  "NcmsUrl": {{ .Values.configMap.data.NcmsUrl | quote }}
+  "tempFilePath": "c:\\tempStorage\\TemporaryFiles"
+  "applicationData": "c:\\storage\\ContainerData\\MyNaati"
+  "IncludedFileExtensionsList": "bmp,csv,doc,docx,gif,jpg,jpeg,pdf,png,pps,ppt,pptx,ppsx,rtf,tiff,txt,xls,xlsx,xml,zip,mp3,wma,wav,aiff,webm,mkv,flv,avi,mov,qt,wmv,rm,rmvb,mp4,m4p,m4v,mpg,mp2,mpeg,mpv,mpe,m2v,asf,divx,msg,m4a,m4b"
+  "kosettings_allowEmailPaste": {{ .Values.configMap.data.kosettings_allowEmailPaste | quote }}
+  "kosettings_skipRecaptcha": {{ .Values.configMap.data.kosettings_skipRecaptcha | quote }}
+  "EmailChangeValidHours": "24"
+  "logging_SeqUrl": "https://seq.f1solutions.com.au"
+  "logging_SeqLogBufferFileBase": "seqBuffer"
+  "logging_LogFile": "app.log"
+  "logging_DiagnosticsLogFile": "loggingDiagnostics.log"
+  "EnvironmentType": {{ .Values.configMap.data.EnvironmentType | quote }} 
+  "EnvironmentName": {{ .Values.configMap.data.EnvironmentName | quote }} 
+  "DebugMode": {{ .Values.configMap.data.DebugMode | quote }} 
+  "EnableSwagger": {{ .Values.configMap.data.EnableSwagger | quote }} 
+  "logging_MinimumLevel": {{ .Values.configMap.data.logging_MinimumLevel | quote }}
+  "fileSystemFileStorageServiceBasePath": "c:\\storage\\FileStorage"
+  "StorageUriTemplate" : "https://{0}.file.core.windows.net/{1}/{2}"
+  "StorageAccountTemplate" : "DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1};EndpointSuffix=core.windows.net"
+  "GraphResourceId": "https://graph.microsoft.com/"
+  "GraphApiBaseUrl": "https://graph.microsoft.com/v1.0"
+  "GraphTokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+  "SearchResultLimit": "500"
+  "SecurePay_PaymentUrl": {{ .Values.configMap.data.SecurePay_PaymentUrl | quote }} 
+  "SecretPrefix": {{ .Values.configMap.data.SecretPrefix | quote }} 
+  "PDSearchResults_MinimumCacheRefreshInterval": "30"
+  "DesiredTimeZone": "AUS Eastern Standard Time"
+  "HttpsConfigured": "true"
+  "SASDemoFile": " "
+  "MyNaatiPodUrl": "http://"
+  "MaxPublicApiResults": "200"
+  "DefaultAppLocalUrl": "hhttp://127.0.0.1/MyNaati.Web"
+  "secrets_Source": "AzureKeyVault" 
+  "AuthenticationFormsTimeout": "15"
+  "MaxUserRefreshDelaySeconds": "15"
+  "Culture": "en-AU"
+  "EncodeAttributeExpressions": "(/&gt;[\\s\\S\\r\\n]*&lt;script&gt;[\\s\\S\\r\\n]*&lt;/script&gt;),(&lt;script&gt;[\\s\\S\\r\\n]*&lt;/script&gt;),(&lt;script&gt;),(&lt;/script&gt;)"
+  "UiCulture": "en-AU"
+  "OnlineDirectoryUrl": {{ .Values.configMap.data.OnlineDirectoryUrl | quote }} 
+  "OnlineHelpUrl": {{ .Values.configMap.data.OnlineHelpUrl | quote }} 
+  "AccountingOperationsReportEmailsTo": {{ .Values.configMap.data.AccountingOperationsReportEmailsTo | quote}}
+  "EmailBatchingReportEmailsTo": {{ .Values.configMap.data.EmailBatchingReportEmailsTo | quote }}
+  "AccountingOperationsLogEmailsTo": {{ .Values.configMap.data.AccountingOperationsLogEmailsTo | quote }}
+  "EmailBatchingLogEmailsTo": {{ .Values.configMap.data.EmailBatchingLogEmailsTo | quote }}
+  "AccountingOperationsReportEmailsFrom": {{ .Values.configMap.data.AccountingOperationsReportEmailsFrom | quote }}
+  "SecurePayResource": {{ .Values.configMap.data.SecurePayResource | quote }}
+  "SecurePayTokenUrl": {{ .Values.configMap.data.SecurePayTokenUrl | quote }}
+  "SecurePayRedirectUri": "" 
+  "SecurePayScope": "https://api.payments.auspost.com.au/payhive/payments/read https://api.payments.auspost.com.au/payhive/payments/write"
+  "SecurePayJavascriptSDKUrl":  {{ .Values.configMap.data.SecurePayJavascriptSDKUrl | quote }}
+  "PayPalMode": {{ .Values.configMap.data.PayPalMode | quote }}
+  "PayPalConnectionTimeout": {{ .Values.configMap.data.PayPalConnectionTimeout | quote }}
+  "PayPalRequestRetries": {{ .Values.configMap.data.PayPalRequestRetries | quote }}
+  "WiiseBaseUrl": {{ .Values.configMap.data.WiiseBaseUrl | quote }}
+  "WiiseResource": "https://api.businesscentral.dynamics.com"
+  "WiiseResponseRedirect": "~/#system/setup/WiiseAuthSuccess"
+  "WiiseTokenUrl": "https://login.windows.net/41bb5789-7441-4051-b270-c49376cfab28/oauth2/token?resource=https://api.businesscentral.dynamics.com"
+  "WiiseAuthRedirectUri": {{ .Values.configMap.data.WiiseAuthRedirectUri | quote }}
+  "WiiseRandomErrorsEnabled": "false"
+  "QrCodeAccessUrl": {{ .Values.configMap.data.QrCodeAccessUrl | quote }}

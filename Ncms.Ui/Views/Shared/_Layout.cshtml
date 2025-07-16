@@ -1,0 +1,82 @@
+﻿@using Ncms.Ui.Helpers
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>@ViewBag.Title@(ViewBag.Title != null ? " | " : String.Empty)NCMS</title>
+
+    <!--jQuery-->
+    <link rel="stylesheet" href="~/Content/themes/base/jquery-ui.css" />
+
+    <!--bootstrap-->
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap-multiselect.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap-datepicker.css" />
+    <link rel="stylesheet" href="~/Content/jquery.ui.theme.css" />
+    <link rel="stylesheet" href="~/Content/clockpicker.css" />
+    <link rel="stylesheet" href="~/Content/dashboard.css" />
+
+    <!--template-->
+    <link rel="stylesheet" href="~/Template/libs/assets/animate.css/animate.css" />
+    <link rel="stylesheet" href="~/Template/libs/assets/font-awesome/css/all.min.css" />
+    <link rel="stylesheet" href="~/Template/libs/assets/simple-line-icons/css/simple-line-icons.css" />
+    <link rel="stylesheet" href="~/Template/css/font.css" />
+    <link rel="stylesheet" href="~/Template/css/app.css" />
+
+    <!--site-->
+    <link rel="stylesheet" href="~/Content/toastr.css" />
+    <link rel="stylesheet" href="~/Content/site.css" />
+    <link rel="stylesheet" href="~/Content/additional.css" />
+
+    <!--plugins-->
+    <link rel="stylesheet" href="~/Template/libs/jquery/plugins/integration/bootstrap/3/dataTables.bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/DataTables/css/select.dataTables.min.css" />
+    <link rel="stylesheet" href="~/Content/DataTables/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" href="~/Content/jquery.fileupload.css" />
+    <link rel="stylesheet" href="~/Content/fullcalendar.css" />
+    <link rel="stylesheet" href="~/Content/OverlayScrollbars.css" />
+</head>
+
+<body class="@ViewBag.BodyCss">
+    @RenderBody()
+    @{
+        var version = ViewHelper.GetVersionInfo();
+        var mainScript = "~/App/main.dist.js";
+    }
+    <script type="text/javascript">
+		var samVersion = '@version';
+		window.baseUrl = '@Url.Content("~/")';
+    </script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/plugins")
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/template")
+    <script src="~/Template/libs/jquery/ckeditor/ckeditor.js"></script>
+    @*<script src="~/signalr/hubs"></script>*@
+
+    @*  This assumes that if debug is not enabled, there will be a built main.dist.js file.
+        HttpContext.Current.IsDebuggingEnabled returns the value of the debug attribute
+        on the system.web.compilation element in the current request's Web.config file.  *@
+    @if (HttpContext.Current.IsDebuggingEnabled)
+    {
+        mainScript = "~/App/main.js";
+        @Scripts.Render("~/bundles/debug")
+    }
+    <script src="~/Scripts/require.js" data-main="@Url.Content(mainScript)?v=@version"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRmBZUnlm7MMoIwCVT1uOxx611lfXdSY&libraries=places&language=en"></script>
+</body>
+</html>

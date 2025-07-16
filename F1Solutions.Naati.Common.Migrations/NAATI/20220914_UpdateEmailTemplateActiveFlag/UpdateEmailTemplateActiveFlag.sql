@@ -1,0 +1,1 @@
+update tblEmailTemplate set Active = 0 where EmailTemplateId in (50, 74, 75, 97, 98, 100, 101, 129, 136, 137, 138, 244, 246, 248, 252, 255, 258)

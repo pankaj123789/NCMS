@@ -1,0 +1,43 @@
+﻿<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3" data-bind="html: title"></h1>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="panel wrapper">
+                        <div class="form-horizontal">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label data-bind="reshtml: 'Naati.Resources.TestSession.resources.ApplicationId'"></label>
+                                    <div data-bind="validationElement: serverModel.ApplicationId">
+                                        <input type="text" class="form-control" data-bind="value: serverModel.ApplicationId" />
+                                    </div>
+                                    <label data-bind="reshtml: 'Naati.Resources.Finance.resources.InvoiceNo'"></label>
+                                    <div data-bind="validationElement: serverModel.InvoiceNo">
+                                        <input placeholder="eg I1234567" type="text" class="form-control" data-bind="value: serverModel.InvoiceNo" />
+                                    </div>
+                                    <label data-bind="reshtml: 'Naati.Resources.Finance.resources.InvoiceId'"></label>
+                                    <div data-bind="validationElement: serverModel.InvoiceId">
+                                        <input placeholder="eg E8270DAA-CDE3-ED11-884A-002248957329"  type="text" class="form-control" data-bind="value: serverModel.InvoiceId" />
+                                    </div>
+                                    <label data-bind="reshtml: 'Naati.Resources.Finance.resources.PaymentId'"></label>
+                                    <div data-bind="validationElement: serverModel.PaymentId">
+                                        <input placeholder="eg ACT-EFTPOS-00558726 - 754420" type="text" class="form-control" data-bind="value: serverModel.PaymentId" />
+                                    </div>
+                                    <br />
+                                    <div style="text-align:right">
+                                        <button type="button" class="btn btn-success" data-bind="click: progressInvoice">
+                                            <span data-bind="restext: 'Naati.Resources.Finance.resources.ProgressInvoice'"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

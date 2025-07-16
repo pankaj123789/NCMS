@@ -1,0 +1,20 @@
+﻿<div>
+    <!--ko component: { name: 'table-component', params: tableDefinition }--><!--/ko-->
+
+    <script id="person-exemptions-header-template" type="text/html">
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialType'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.Skill'"></th>
+        <th class="sortable w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.ExemptionDate'"></th>
+        <th class="sortable w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.TerminationDate'"></th>
+        <th class="sortable w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.ExemptedBy'"></th>
+    </script>
+    <script id="person-exemptions-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: CredentialType"></td>
+            <td data-bind="text: Skill"></td>
+            <td data-bind="text: ExemptDate"></td>
+            <td data-bind="text: TerminationDate"></td>
+            <td data-bind="text: ExemptBy"></td>
+        </tr>
+    </script>
+</div>

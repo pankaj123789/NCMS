@@ -1,0 +1,105 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="Content/bootstrap-fileinput/css/fileinput.css" rel="stylesheet" />
+
+    <link href="Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+    <link href="Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="Content/DataTables/css/buttons.dataTables.css" rel="stylesheet" />
+    <link href="Content/DataTables/css/buttons.bootstrap.css" rel="stylesheet" />
+    <link href="Content/DataTables/css/responsive.dataTables.css" rel="stylesheet" />
+
+    <link href="Content/chosen.css" rel="stylesheet" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/font-awesome.css" rel="stylesheet" />
+    <link href="Content/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="Content/animate.css" rel="stylesheet" />
+    <link href="Content/bootstrap-toggle.css" rel="stylesheet" />
+    <link href="Content/toastr.css" rel="stylesheet" />
+    <link href="Content/Overrides.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery-2.0.0.js"></script>
+    <script src="Scripts/jquery-ui-1.10.2.js"></script>
+    <script src="Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="Scripts/jquery.validate.js"></script>
+    <script src="Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/handlebars-v4.0.5.js"></script>
+    <script src="Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="Scripts/DataTables/dataTables.bootstrap.js"></script>
+    <script src="Scripts/DataTables/dataTables.buttons.js"></script>
+    <script src="Scripts/DataTables/dataTables.responsive.js"></script>
+    <script src="Scripts/DataTables/buttons.bootstrap.js"></script>
+    <script src="Scripts/DataTables/responsive.bootstrap.js"></script>
+    <script src="Scripts/DataTables/datetime.js"></script>
+    <script src="Scripts/autosize.js"></script>
+    <script src="Scripts/chosen.jquery.js"></script>
+    <script src="Scripts/plugins/piexif.min.js"></script>
+    <script src="Scripts/plugins/sortable.min.js"></script>
+    <script src="Scripts/plugins/purify.min.js"></script>
+    <script src="Scripts/bootstrap-toggle.js"></script>
+    <script src="Scripts/toastr.js"></script>
+    <script src="Scripts/fileinput.js"></script>
+    <script src="Scripts/Chart.js"></script>
+    <script src="Scripts/jquery.fileDownload.js"></script>
+    <script src="Scripts/Chart.titleInside.js"></script>
+
+
+    <script type="text/javascript">
+        $(function() {
+            $('form.form-horizontal').on('submit', function () {
+                var $this = $(this);
+                $this.find('button').prop('disabled', 'disabled');
+                $this.find('input').prop('readOnly', 'true');
+                $this.find('a').addClass('disabled').on('click', function (e) {
+                    e.preventDefault();
+                    return false;
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div class="container-fluid">
+
+
+        <div class="login-screen row">
+            <div class="col-lg-12 primary-overlay-container">
+                <div class="primary-overlay text-center">
+                    <div>
+                        <img class="logo v-offset-xs-5" src="Content/Images/NAATIAltLogo.png" alt="Naati Logo" />
+                    </div>
+                    <div class="w-xxl center-block">
+                        <h1>Oops</h1>
+                    </div>
+                    <div class="w-xxl center-block">
+                        <h3>Sorry! Something went wrong. We will look into that.</h3>
+                        <h4>Please try again or contact <a class="text-white" href="mailto://info@naati.com.au">info@naati.com.au</a></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-25701862-1']);
+     _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+﻿@model MyNaati.Ui.ViewModels.Stamp.StampProductListViewModel
+@{
+    ViewBag.Title = "Stamps";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Products", Url.Action("index", "Product")),
+        new Tuple<string, string>("Stamps", string.Empty)
+    };
+
+    IFormatProvider formatProvider = new System.Globalization.CultureInfo("en-US");
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">What Translator Stamps Can I Order?</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @if (Model.AvailableProducts.Any())
+            {
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>You can order any of the stamps listed below. If you would like a stamp in both directions that is not available in the list below, please contact NAATI.</p>
+                    </div>
+                </div>
+                Html.RenderPartial("_AvailableProductListPartial", Model.AvailableProducts);
+            }
+            else
+            {
+                <p>
+                    You have no credentials for which a stamp may be purchased.
+                </p>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-primary">How Much Does It Cost?</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Prices include postage and handling fees for standard delivery.  All fees are listed in Australian currency ($AUD).</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="bg-primary">
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Australia ($AUD including GST)</th>
+                            <th>Other Countries ($AUD)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var fee in Model.Fees)
+                        {
+                            <tr>
+                                <td>@fee.Type</td>
+                                <td>@fee.Description</td>
+                                <td class="currency">@fee.Price.ToString("C", formatProvider)</td>
+                                <td class="currency">@fee.OverseasPrice.ToString("C", formatProvider)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @if (Model.AvailableProducts.Any())
+            {
+                <a class="btn btn-primary" href="@Url.Action("StartWizard", "Stamp")">Order Now</a>
+            }
+        </div>
+    </div>
+</div>

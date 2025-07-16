@@ -1,0 +1,37 @@
+﻿<div class="hbox">
+
+    <!--ko compose: createInstitutionOptions--><!--/ko-->
+    <div class="hbox" data-bind="component: {
+    name: 'search-component',
+    params: { title: title, filters: filters, searchType: searchType, searchTerm: searchTerm, searchCallback: searchCallback, tableDefinition: tableDefinition, additionalButtons: additionalButtons }
+    }">
+    </div>
+
+
+    <script id="organisation-header-template" type="text/html">
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Institution.resources.NaatiNumber'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Institution.resources.Name'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Institution.resources.PrimaryContactNo'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Institution.resources.PrimaryEmail'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Institution.resources.NoOfContacts'"></th>
+        <th>&nbsp;</th>
+    </script>
+    <script id="organisation-row-template" type="text/html">
+        <tr>
+            <td>
+                <a href="#" class="text-info" data-bind="text: NaatiNumber, attr: { href: '#organisation/' + NaatiNumber }"></a>
+            </td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: $root.formatPhone(PrimaryContactNo)"></td>
+            <td data-bind="text: PrimaryEmail"></td>
+            <td data-bind="text: NoOfContacts"></td>
+            <td class="text-center w-xs">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#organisation/' + NaatiNumber }, clickBubble: false, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </script>
+</div>

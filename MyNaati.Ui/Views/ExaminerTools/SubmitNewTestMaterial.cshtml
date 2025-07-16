@@ -1,0 +1,370 @@
+﻿@model MyNaati.Ui.ViewModels.ExaminerTools.ManageTestsModel
+@{
+    ViewBag.Title = "Submit New Test Material";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Examiner Tools", Url.Action("Index")),
+        new Tuple<string, string>("Test Materials", null)
+    };
+}
+@section Head
+{
+    @Styles.Render("~/Bundles/Styles/FileUpload")
+}
+@section Scripts
+{
+    @Scripts.Render("~/Bundles/Scripts/FileUpload")
+    <script type="text/javascript">
+        var testMaterials = function () {
+            var $editModal = $('#editModal');
+            var $submitModal = $('#confirmSubmitModal');
+            var $deleteModal = $('#deleteMaterialModal');
+            var materialsUrl = '@Url.Action("Materials", new { id = "MaterialId" })';
+
+            function reloadTestMaterialDataTable() {
+                $('#testMaterialTable').DataTable().ajax.reload();
+            }
+
+            function reloadMaterialFileDataTable() {
+                $('#materialFileTable').DataTable().ajax.url(materialsUrl.replace('MaterialId', $editModal.data('id'))).load();
+            }
+
+            return {
+                reloadTestMaterialDataTable: reloadTestMaterialDataTable,
+                reloadMaterialFileDataTable: reloadMaterialFileDataTable,
+                editTestMaterial : function (id) {
+                    $editModal.data('id', id);
+                    $editModal.modal('show');
+
+                    reloadMaterialFileDataTable();
+                },
+                downloadTestMaterial : function (id) {
+                    var $downloadForm = $('#downloadForm');
+                    var action = '@Url.Action("DownloadTestMaterials", "ExaminerTools", new { id = "DocumentId" })'.replace('DocumentId', id);
+
+                    $downloadForm.attr('action', action);
+                    $downloadForm.submit();
+                },
+                submitTestMaterial: function (id) {
+                    $submitModal.data('id', id);
+                    $submitModal.modal('show');
+                },
+                downloadMaterialFile: function (id) {
+                    var $downloadForm = $('#downloadForm');
+                    var action = '@Url.Action("DownloadMaterialFile", "ExaminerTools", new { id = "DocumentId" })'.replace('DocumentId', id);
+
+                    $downloadForm.attr('action', action);
+                    $downloadForm.submit();
+                },
+                deleteMaterialFile: function (id) {
+                    $deleteModal.data('id', id);
+                    $deleteModal.modal('show');
+                }
+            };
+        }();
+
+        $(document).ready(function () {
+            var $testMaterialTable = $('#testMaterialTable');
+
+            $testMaterialTable.DataTable({
+                ajax: {
+                    url: '@Url.Action("TestMaterials")',
+                    type: 'POST'
+                },
+                columns: [
+                    { data: 'JobID' },
+                    { data: 'Language' },
+                    { data: 'Category' },
+                    { data: 'Direction' },
+                    { data: 'Level' },
+                    { data: 'DueDate' },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            var html =
+                                '<div class="btn-group pull-right">' +
+                                    '<button class="btn btn-primary" type="button" data-action="edit" data-id="' + row.TestMaterialID + '">Edit</button>';
+
+                            if (row.Materials.length > 0) {
+                                html +=
+                                    '<button class="btn btn-success" type="button" data-action="download" data-id="' + row.TestMaterialID + '">Download Test Materials</button>' +
+                                    '<button class="btn btn-danger" type="button" data-action="submit" data-id="' + row.JobExaminerID + '">Submit</button>';
+                            }
+
+                            html += '</div>';
+
+                            return html;
+                        }
+                    }
+                ],
+                dom: "<'row v-offset-xs-1'<'col-sm-12'<'table-responsive't>>>",
+                info: false,
+                language: {
+                    processing: $('#loadingOverlayTemplate').html(),
+                    zeroRecords: 'No Test Materials'
+                },
+                ordering: false,
+                paging: false,
+                processing: true,
+                searching: false,
+                serverSide: true
+            });
+
+            $testMaterialTable.on('draw.dt', function () {
+                $(this).find('tbody tr').on('click', '.btn', function () {
+                    var $this = $(this);
+                    var action = $this.data('action');
+                    var id = $this.data('id');
+
+                    testMaterials[action + 'TestMaterial'](id);
+                });
+            });
+
+            Dropzone.options.fileAttachments = {
+                maxFilesize: 2048,
+                url: '@Url.Action("SubmitNewTestMaterialFile")',
+                thumbnailWidth: 80,
+                thumbnailHeight: 80,
+                previewTemplate: $('#dropzonePreviewTemplate').html(),
+                previewsContainer: '#previews',
+                params: {
+                    id: null
+                },
+                init: function () {
+                    this.on('processing', function () {
+                        this.options.params.id = $('#editModal').data('id');
+                    });
+
+                    this.on('totaluploadprogress', function (progress) {
+                        if (progress >= 100) {
+                            setTimeout(function () {
+                                $('#previews .dz-complete').remove();
+                                testMaterials.reloadMaterialFileDataTable();
+                            }, 1000);
+                        }
+                    });
+                }
+            };
+
+            var $materialFileTable = $('#materialFileTable');
+
+            $materialFileTable.DataTable({
+                ajax: {
+                    url: '',
+                    type: 'POST'
+                },
+                columns: [
+                    { data: 'Title' },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            var html =
+                                '<div class="btn-group pull-right">' +
+                                    '<button class="btn btn-success" type="button" data-action="download" data-id="' + row.MaterialId + '">Download</button>' +
+                                    '<button class="btn btn-danger" type="button" data-action="delete" data-id="' + row.MaterialId + '">Delete</button>' +
+                                '</div>';
+
+                            return html;
+                        }
+                    }
+                ],
+                deferLoading: 0,
+                dom: "<'row v-offset-xs-1'<'col-sm-12'<'table-responsive't>>>",
+                info: false,
+                language: {
+                    processing: $('#loadingOverlayTemplate').html(),
+                    zeroRecords: 'No Materials'
+                },
+                ordering: false,
+                paging: false,
+                processing: true,
+                searching: false,
+                serverSide: true
+            });
+
+            $materialFileTable.on('draw.dt', function () {
+                $(this).find('tbody tr').on('click', '.btn', function () {
+                    var $this = $(this);
+                    var action = $this.data('action');
+                    var id = $this.data('id');
+
+                    testMaterials[action + 'MaterialFile'](id);
+                });
+            });
+
+            $materialFileTable.on('xhr.dt', function (event, options, data, xhr) {
+                if (xhr.status === 200) {
+                    testMaterials.reloadTestMaterialDataTable();
+                }
+            });
+
+            $('#confirmSubmit').click(function () {
+                var $confirmModal = $('#confirmSubmitModal');
+
+                $.ajax({
+                    type: 'POST',
+                    cache: false,
+                    data: { id: $confirmModal.data('id') },
+                    url: '@Url.Action("SubmitNewTestMaterial", "ExaminerTools")',
+                    success: function () {
+                        testMaterials.reloadTestMaterialDataTable();
+                        $confirmModal.modal('hide');
+                    }
+                });
+            });
+
+            $('#confirmDelete').click(function () {
+                var url = '@Url.Action("DeleteMaterialFile", "ExaminerTools", new { id = "DocumentId" })'.replace('DocumentId', $('#deleteMaterialModal').data('id'));
+
+                $.ajax({
+                    type: 'GET',
+                    cache: false,
+                    url: url,
+                    success: function () {
+                        testMaterials.reloadMaterialFileDataTable();
+                        $('#deleteMaterialModal').modal('hide');
+                    }
+                });
+            });
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Select the Edit button to enter and submit the test material.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="testMaterialTable" class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>Job Id</th>
+                        <th>Language</th>
+                        <th>Category</th>
+                        <th>Direction</th>
+                        <th>Level</th>
+                        <th>Due Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="confirmSubmitModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Submit Test Material</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Are you sure that you want to submit the test material?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmSubmit" type="button" class="btn btn-primary">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="editModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit Test Material</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="fileAttachments" class="dropzone">
+                            <div class="dz-message">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <i class="fa fa-upload fa-5x text-primary" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="row v-offset-xs-3">
+                                    <div class="col-lg-12">
+                                        <p><strong>Choose a file</strong> or drag it here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="previews" class="table table-striped files">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table id="materialFileTable" class="table table-bordered">
+                            <thead class="bg-primary">
+                            <tr>
+                                <th>Title</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteMaterialModal" class="modal modal-layer2 fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete Material</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Are you sure you want to delete the attachment?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmDelete" type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<form id="downloadForm" method="post"></form>
+<script id="dropzonePreviewTemplate" type="text/html">
+    <div class="row v-offset-xs-3">
+        <div class="col-sm-2">
+            <span class="preview"><img data-dz-thumbnail /></span>
+        </div>
+        <div class="col-sm-4">
+            <p class="name" data-dz-name></p>
+            <strong class="error text-danger" data-dz-errormessage></strong>
+        </div>
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="size" data-dz-size></p>
+                </div>
+                <div class="col-sm-7">
+                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                        <div class="progress-bar progress-bar-success" style="width:0;" data-dz-uploadprogress></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

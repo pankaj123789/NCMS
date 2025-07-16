@@ -1,0 +1,78 @@
+﻿<div>
+
+    <div class="row">
+        <div class="col-lg-12" style="padding-left: 30px;">
+            <h2 class="text-primary">My Invoices</h2>
+        </div>
+    </div>
+
+    <!--ko component: loaderOptions--><!--/ko-->
+    <!--ko if: loaded-->
+    <!--ko if:source().length-->
+    <div class="row padding-top-lg">
+         <div class="col-lg-3 text-center m-t-lg">
+            <div class="line pull-in"></div>
+            <div class="text-xs padding-top-xs">
+            </div>
+        </div>       <div class="col-md-3 col-md-offset-3 text-center wrapper-sm font-thin">
+            <div class="h1 text-info">
+                <span data-bind="textCurrency: totalAmount"></span>
+            </div>
+            <span class="text-xs text-info">Total</span>
+        </div>
+
+    </div>
+
+    <div class="padding-top-lg">
+        <!--ko component: { name: 'table-component', params: tableDefinition }-->
+        <!--/ko-->
+    </div>
+    <!--/ko-->
+    <!--ko if:unHandledException()-->
+    <h3 style="color: red" data-bind="text: unHandledExceptionMessage"></h3>
+    <!--/ko-->
+    <!--ko ifnot:source().length-->
+    <!--ko ifnot:unHandledException()-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <h4>No invoices</h4>
+            </div>
+        </div>
+    </div>
+    <!--/ko-->
+    <!--/ko-->
+    <!--/ko-->
+</div>
+
+<script id="invoicecredit-header-template" type="text/html">
+    <th class="center" style="width: 16%">Created Date</th>
+    <th class="center" style="width: 16%">Invoice No.</th>
+    <th class="center" style="width: 20%">Type</th>
+    <th class="center" style="width: 16%">Invoice Amount</th>
+    <th class="center" style="width: 16%">Balance</th>
+    <th class="center" style="width: 18%">Invoice Reference</th>
+    <th class="w-xs" style="width: 5%">Make Payment</th>
+    <th class="w-xs" style="width: 15%"></th>
+</script>
+<script id="invoicecredit-row-template" type="text/html">
+    <tr>
+        <td class="center" data-bind="text: Date"></td>
+        <td class="center" data-bind="attr: { 'data-order': InvoiceNumber }, text: InvoiceNumber"></td>
+        <td class="center" data-bind="text: CredentialApplicationTypeDisplayName, attr: { 'data-order': CredentialApplicationTypeDisplayName }"></td>
+        <td class="center" data-bind="textCurrency: { value: AmountDue, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': AmountDue }"></td>
+        <td class="center" data-bind="textCurrency: { value: Balance, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Balance }, css: { 'text-danger': Balance > 0, 'text-info': Balance < 0 }"></td>
+        <td class="center" data-bind="text: InvoiceNumber, attr: { 'data-order': InvoiceNumber }"></td>
+        <td class="w-xs text-center">
+            <div class="btn-group" style="float: right">
+
+                <!--ko if:hasBalanceToPay-->
+                <a href="#" class="btn btn-default btn-xs cursor-pointer" data-bind="tooltip: { trigger: 'hover' }, attr: { href: payOnline, title: 'Pay' }">
+                    <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                </a>
+                <!--/ko-->
+            </div>
+        </td>
+
+    </tr>
+</script>

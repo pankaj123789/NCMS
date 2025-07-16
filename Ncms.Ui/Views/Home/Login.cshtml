@@ -1,0 +1,122 @@
+﻿@model Ncms.Ui.Models.LoginModel
+@{
+    /**/
+
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>@ViewBag.Title@(ViewBag.Title != null ? " | " : String.Empty)NCMS</title>
+
+	<!--jQuery-->
+	<link rel="stylesheet" href="~/Content/themes/base/jquery-ui.css" />
+
+	<!--bootstrap-->
+	<link rel="stylesheet" href="~/Content/bootstrap.css" />
+	<link rel="stylesheet" href="~/Content/bootstrap-multiselect.css" />
+	<link rel="stylesheet" href="~/Content/bootstrap-datepicker.css" />
+	<link rel="stylesheet" href="~/Content/jquery.ui.theme.css" />
+	<link rel="stylesheet" href="~/Content/clockpicker.css" />
+	<link rel="stylesheet" href="~/Content/dashboard.css" />
+
+	<!--template-->
+	<link rel="stylesheet" href="~/Template/libs/assets/animate.css/animate.css" />
+	<link rel="stylesheet" href="~/Template/libs/assets/font-awesome/css/all.min.css" />
+	<link rel="stylesheet" href="~/Template/libs/assets/simple-line-icons/css/simple-line-icons.css" />
+	<link rel="stylesheet" href="~/Template/css/font.css" />
+	<link rel="stylesheet" href="~/Template/css/app.css" />
+
+	<!--site-->
+	<link rel="stylesheet" href="~/Content/toastr.css" />
+	<link rel="stylesheet" href="~/Content/site.css" />
+	<link rel="stylesheet" href="~/Content/additional.css" />
+
+	<!--plugins-->
+	<link rel="stylesheet" href="~/Template/libs/jquery/plugins/integration/bootstrap/3/dataTables.bootstrap.css" />
+	<link rel="stylesheet" href="~/Content/DataTables/css/select.dataTables.min.css" />
+	<link rel="stylesheet" href="~/Content/DataTables/css/buttons.dataTables.min.css" />
+	<link rel="stylesheet" href="~/Content/jquery.fileupload.css" />
+	<link rel="stylesheet" href="~/Content/fullcalendar.css" />
+</head>
+
+<body class="login-page">
+    <div class="container w-xxl w-auto-xs">
+        <div class="logo">
+        </div>
+        <div class="m-b-lg">
+            <div class="wrapper text-center">
+                <strong>Welcome to NCMS</strong>
+            </div>
+
+            @Html.ValidationSummary(null, new { @class = "wrapper text-danger" })
+
+            <a href="@Url.Action("Signin", "Home")?@(Request.QueryString)" class="btn btn-lg btn-success btn-block"><span class="fab fa-windows"></span>&nbsp;Log in with Windows Account</a>
+
+            <div class="wrapper-sm m-t-sm">
+                <div class="b-t b-gray">
+                    <span class="m-t-n-sm w-xxs text-center center-block bg-light">OR</span>
+                </div>
+            </div>
+
+            <form id="forms" name="forms" action="@Url.Action("LoginPost", "Home")?@(Request.QueryString)" class="form-validation" method="post">
+                <div class="list-group list-group-sm">
+                    <div class="list-group-item">
+                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control no-border", placeholder = "Username" })
+                    </div>
+                    <div class="list-group-item">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control no-border", placeholder = "Password" })
+                    </div>
+                </div>
+                <button name="forms" type="submit" class="btn btn-lg btn-success btn-block" disabled>Log in with Username and Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/plugins")
+    <script type="text/javascript">
+        $(function () {
+            var $form = $('#forms');
+            var $formsButton = $form.find('button');
+            var $inputs = $form.find('input');
+            var submitted = false;
+
+            $form.on('submit', function () {
+                $formsButton.prop('disabled', true);
+                $inputs.prop('readonly', true);
+                submitted = true;
+            });
+
+            $inputs.keyup(function () {
+                if (submitted) {
+                    return;
+                }
+
+                var valid = true;
+                for (var i = 0; i < $inputs.length; i++) {
+                    if (!$($inputs[i]).val()) {
+                        valid = false;
+                        break;
+                    }
+                }
+                $($formsButton).prop('disabled', valid ? null : 'disable');
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/template")
+    <script src="~/Template/libs/jquery/ckeditor/ckeditor.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRmBZUnlm7MMoIwCVT1uOxx611lfXdSY&libraries=places&language=en"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+﻿<error errorId="f8f6da83-e9eb-4825-aedd-133e6510f3de" host="LAPPYX86" type="System.Net.WebException" message="The operation has timed out" source="System" detail="System.TimeoutException: The request channel timed out while waiting for a reply after 00:00:56.7998169. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout. ---&gt; System.TimeoutException: The HTTP request to 'http://localhost/ePortal.SAMIntegration.ServiceHost/PractitionerDirectoryService.svc' has exceeded the allotted timeout of 00:00:56.8200000. The time allotted to this operation may have been a portion of a longer timeout. ---&gt; System.Net.WebException: The operation has timed out&#xD;&#xA;   at System.Net.HttpWebRequest.GetResponse()&#xD;&#xA;   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)&#xD;&#xA;   --- End of inner exception stack trace ---&#xD;&#xA;   at System.ServiceModel.Channels.HttpChannelUtilities.ProcessGetResponseWebException(WebException webException, HttpWebRequest request, HttpAbortReason abortReason)&#xD;&#xA;   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)&#xD;&#xA;   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)&#xD;&#xA;   --- End of inner exception stack trace ---&#xD;&#xA;&#xD;&#xA;Server stack trace: &#xD;&#xA;   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)&#xD;&#xA;   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)&#xD;&#xA;   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)&#xD;&#xA;   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)&#xD;&#xA;   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)&#xD;&#xA;&#xD;&#xA;Exception rethrown at [0]: &#xD;&#xA;   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)&#xD;&#xA;   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData&amp; msgData, Int32 type)&#xD;&#xA;   at F1Solutions.NAATI.ePortal.SAMIntegration.ServiceContracts.PractitionerDirectory.IPractitionerDirectoryService.GetCurrentListing(PractitionerDirectoryGetCurrentListingRequest request)&#xD;&#xA;   at F1Solutions.NAATI.ePortal.Web.ServiceProxies.PractitionerDirectoryServiceProxy.GetCurrentListing(PractitionerDirectoryGetCurrentListingRequest request) in D:\TFSC_Chris\NAATI System for Accreditation Management\ePortal\ePortal.Web\ServiceProxies\PractitionerDirectoryServiceProxy.cs:line 29&#xD;&#xA;   at F1Solutions.NAATI.ePortal.Web.Controllers.HomeController.Welcome() in D:\TFSC_Chris\NAATI System for Accreditation Management\ePortal\ePortal.Web\Controllers\HomeController.cs:line 66&#xD;&#xA;   at F1Solutions.NAATI.ePortal.Web.Controllers.HomeController.Index() in D:\TFSC_Chris\NAATI System for Accreditation Management\ePortal\ePortal.Web\Controllers\HomeController.cs:line 30&#xD;&#xA;   at lambda_method(Closure , ControllerBase , Object[] )&#xD;&#xA;   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)&#xD;&#xA;   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;InvokeActionMethodWithFilters&gt;b__12()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass15.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14()&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)&#xD;&#xA;   at System.Web.Mvc.Controller.ExecuteCore()&#xD;&#xA;   at System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClass6.&lt;&gt;c__DisplayClassb.&lt;BeginProcessRequest&gt;b__5()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c__DisplayClasse.&lt;EndProcessRequest&gt;b__d()&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.&lt;GetCallInAppTrustThunk&gt;b__0(Action f)&#xD;&#xA;   at System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="10" time="2011-08-04T00:14:23.5330802Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_CHARSET:ISO-8859-1,utf-8;q=0.7,*;q=0.3&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip,deflate,sdch&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-US,en;q=0.8&#xD;&#xA;HTTP_COOKIE:ASP.NET_SessionId=zaztcaq5qeolq3k1ndumvzqk; .ASPXAUTH=8F0D16296DF7B96964C060D3CF964314CE5B2BB7DCE766C06317D8B056F5506A3D5079765003B76D9B46D2D239A82841507742D8CA85D419A531B25C379FD87CE9F424918FB61B3F825A2F36126FD167EF45220C45D57A8CA84706D7142A3C2406C5222EC5011EAFCE2AB528DE89ED773EDDA034CB8AC1AF65EBA5D25CC7BCB6; .ASPXROLES=Rpt_q3O7j67OmY5kexgIEpegg5U5CEqwXruhwBoGY2TfnQ3O5DnQqqs6Fi1vocSIAx8wHz_8qGUtzt71mJJ5eF24O6DT11NTAZ0CMrMXlo9CsUbu7iQF5Hht9L0FIMhOUikJjJrc79af90oxLbigq0w5kiqXxJB25LQkmykh1OxgoS0knd6HuDQCj4GCoh8H8oyjcExYMAXmU7hrGBppkAPnfbX-7n4x1NRUTwtvlzk1Shi3H3QvrQv4qt58D_jmUck5FkJ9mMxtDBDiQGmZ1S2iW_4EwhAzDTgOLWZR_KQDcKUOdtIt2J1yqxmBzTrUQopuQopZftNX1gqas0kMW2svnUMeJBX7D3pW0wkcHLQLD3zKpT3TWSvRTrb99367DOROEAI2enzR44iZpeW61q-kCD68d3HgIfALZAaNbm0I8dv_Yraviej7x5BQGxi0XFe3uEpdhr-4HRSMXDrGOs6EzsdAfsSGS7t9J3cprpmlOwp8m6gb2P9VofAVdFTjbr59NBfuNnCrym0gx8-NElK0U4zcWYVu_gd_Q756R5c1&#xD;&#xA;HTTP_HOST:localhost&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.107 Safari/535.1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3&#xD;&#xA;Accept-Encoding: gzip,deflate,sdch&#xD;&#xA;Accept-Language: en-US,en;q=0.8&#xD;&#xA;Cookie: ASP.NET_SessionId=zaztcaq5qeolq3k1ndumvzqk; .ASPXAUTH=8F0D16296DF7B96964C060D3CF964314CE5B2BB7DCE766C06317D8B056F5506A3D5079765003B76D9B46D2D239A82841507742D8CA85D419A531B25C379FD87CE9F424918FB61B3F825A2F36126FD167EF45220C45D57A8CA84706D7142A3C2406C5222EC5011EAFCE2AB528DE89ED773EDDA034CB8AC1AF65EBA5D25CC7BCB6; .ASPXROLES=Rpt_q3O7j67OmY5kexgIEpegg5U5CEqwXruhwBoGY2TfnQ3O5DnQqqs6Fi1vocSIAx8wHz_8qGUtzt71mJJ5eF24O6DT11NTAZ0CMrMXlo9CsUbu7iQF5Hht9L0FIMhOUikJjJrc79af90oxLbigq0w5kiqXxJB25LQkmykh1OxgoS0knd6HuDQCj4GCoh8H8oyjcExYMAXmU7hrGBppkAPnfbX-7n4x1NRUTwtvlzk1Shi3H3QvrQv4qt58D_jmUck5FkJ9mMxtDBDiQGmZ1S2iW_4EwhAzDTgOLWZR_KQDcKUOdtIt2J1yqxmBzTrUQopuQopZftNX1gqas0kMW2svnUMeJBX7D3pW0wkcHLQLD3zKpT3TWSvRTrb99367DOROEAI2enzR44iZpeW61q-kCD68d3HgIfALZAaNbm0I8dv_Yraviej7x5BQGxi0XFe3uEpdhr-4HRSMXDrGOs6EzsdAfsSGS7t9J3cprpmlOwp8m6gb2P9VofAVdFTjbr59NBfuNnCrym0gx8-NElK0U4zcWYVu_gd_Q756R5c1&#xD;&#xA;Host: localhost&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.107 Safari/535.1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/1/ROOT/ePortal.Web" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="D:\TFSC_Chris\NAATI System for Accreditation Management\ePortal\ePortal.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Forms" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="10" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="10" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="10" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="1" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/1" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/ePortal.Web/" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="D:\TFSC_Chris\NAATI System for Accreditation Management\ePortal\ePortal.Web\" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="55265" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/ePortal.Web/" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="80" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/7.5" />
+    </item>
+    <item name="URL">
+      <value string="/ePortal.Web/" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_CHARSET">
+      <value string="ISO-8859-1,utf-8;q=0.7,*;q=0.3" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip,deflate,sdch" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-US,en;q=0.8" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="ASP.NET_SessionId=zaztcaq5qeolq3k1ndumvzqk; .ASPXAUTH=8F0D16296DF7B96964C060D3CF964314CE5B2BB7DCE766C06317D8B056F5506A3D5079765003B76D9B46D2D239A82841507742D8CA85D419A531B25C379FD87CE9F424918FB61B3F825A2F36126FD167EF45220C45D57A8CA84706D7142A3C2406C5222EC5011EAFCE2AB528DE89ED773EDDA034CB8AC1AF65EBA5D25CC7BCB6; .ASPXROLES=Rpt_q3O7j67OmY5kexgIEpegg5U5CEqwXruhwBoGY2TfnQ3O5DnQqqs6Fi1vocSIAx8wHz_8qGUtzt71mJJ5eF24O6DT11NTAZ0CMrMXlo9CsUbu7iQF5Hht9L0FIMhOUikJjJrc79af90oxLbigq0w5kiqXxJB25LQkmykh1OxgoS0knd6HuDQCj4GCoh8H8oyjcExYMAXmU7hrGBppkAPnfbX-7n4x1NRUTwtvlzk1Shi3H3QvrQv4qt58D_jmUck5FkJ9mMxtDBDiQGmZ1S2iW_4EwhAzDTgOLWZR_KQDcKUOdtIt2J1yqxmBzTrUQopuQopZftNX1gqas0kMW2svnUMeJBX7D3pW0wkcHLQLD3zKpT3TWSvRTrb99367DOROEAI2enzR44iZpeW61q-kCD68d3HgIfALZAaNbm0I8dv_Yraviej7x5BQGxi0XFe3uEpdhr-4HRSMXDrGOs6EzsdAfsSGS7t9J3cprpmlOwp8m6gb2P9VofAVdFTjbr59NBfuNnCrym0gx8-NElK0U4zcWYVu_gd_Q756R5c1" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/13.0.782.107 Safari/535.1" />
+    </item>
+  </serverVariables>
+  <cookies>
+    <item name="ASP.NET_SessionId">
+      <value string="zaztcaq5qeolq3k1ndumvzqk" />
+    </item>
+    <item name=".ASPXAUTH">
+      <value string="8F0D16296DF7B96964C060D3CF964314CE5B2BB7DCE766C06317D8B056F5506A3D5079765003B76D9B46D2D239A82841507742D8CA85D419A531B25C379FD87CE9F424918FB61B3F825A2F36126FD167EF45220C45D57A8CA84706D7142A3C2406C5222EC5011EAFCE2AB528DE89ED773EDDA034CB8AC1AF65EBA5D25CC7BCB6" />
+    </item>
+    <item name=".ASPXROLES">
+      <value string="Rpt_q3O7j67OmY5kexgIEpegg5U5CEqwXruhwBoGY2TfnQ3O5DnQqqs6Fi1vocSIAx8wHz_8qGUtzt71mJJ5eF24O6DT11NTAZ0CMrMXlo9CsUbu7iQF5Hht9L0FIMhOUikJjJrc79af90oxLbigq0w5kiqXxJB25LQkmykh1OxgoS0knd6HuDQCj4GCoh8H8oyjcExYMAXmU7hrGBppkAPnfbX-7n4x1NRUTwtvlzk1Shi3H3QvrQv4qt58D_jmUck5FkJ9mMxtDBDiQGmZ1S2iW_4EwhAzDTgOLWZR_KQDcKUOdtIt2J1yqxmBzTrUQopuQopZftNX1gqas0kMW2svnUMeJBX7D3pW0wkcHLQLD3zKpT3TWSvRTrb99367DOROEAI2enzR44iZpeW61q-kCD68d3HgIfALZAaNbm0I8dv_Yraviej7x5BQGxi0XFe3uEpdhr-4HRSMXDrGOs6EzsdAfsSGS7t9J3cprpmlOwp8m6gb2P9VofAVdFTjbr59NBfuNnCrym0gx8-NElK0U4zcWYVu_gd_Q756R5c1" />
+    </item>
+  </cookies>
+</error>

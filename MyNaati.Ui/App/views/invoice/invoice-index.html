@@ -1,0 +1,91 @@
+﻿<div>
+
+    <div class="row">
+        <div class="col-lg-12" style="padding-left: 30px;">
+            <h2 class="text-primary">My Transactions</h2>
+        </div>
+    </div>
+
+    <!--ko component: loaderOptions--><!--/ko-->
+    <!--ko if: loaded-->
+    <!--ko if:source().length-->
+    <div class="row padding-top-lg">
+        <div class="col-md-3 col-md-offset-3 text-center wrapper-sm font-thin">
+            <div class="h1 text-info">
+                <span data-bind="textCurrency: totalAmount"></span>
+            </div>
+            <span class="text-xs text-info">Total</span>
+            <div class="h3 m-t text-success">
+                <span data-bind="textCurrency: totalPayments"></span>
+            </div>
+            <span class="text-xs text-success">Payment Total</span>
+            <div class="h3 m-t text-danger">
+                <span data-bind="textCurrency: totalBalance"></span>
+            </div>
+            <span class="text-xs text-danger">Balance</span>
+        </div>
+        <div class="col-lg-3 text-center m-t-lg">
+            <div data-bind="sparkline: { values: sparklineValues, options: sparklineOptions }" class="sparkline inline"></div>
+            <div class="line pull-in"></div>
+            <div class="text-xs padding-top-xs">
+                <i class="fa fa-circle text-success"></i>
+                <span>Payment Total</span>
+                <i class="fa fa-circle text-danger m-l"></i>
+                <span>Balance</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="padding-top-lg">
+        <!--ko component: { name: 'table-component', params: tableDefinition }-->
+        <!--/ko-->
+    </div>
+    <!--/ko-->
+    <!--ko if:unHandledException()-->
+    <h3 style="color: red" data-bind="text: unHandledExceptionMessage"></h3>
+    <!--/ko-->
+    <!--ko ifnot:source().length-->
+    <!--ko ifnot:unHandledException()-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <h4>No bills</h4>
+            </div>
+        </div>
+    </div>
+    <!--/ko-->
+    <!--/ko-->
+    <!--/ko-->
+</div>
+
+<script id="invoicecredit-header-template" type="text/html">
+    <th class="center" style="width: 12%">Created Date</th>
+    <th class="center" style="width: 12%">Invoice No.</th>
+    <th class="center" style="width: 12%">Type</th>
+    <th class="center" style="width: 12%">Invoice Amount</th>
+    <th class="center" style="width: 12%">Payments</th>
+    <th class="center" style="width: 12%">Balance</th>
+    <th class="center" style="width: 18%">Invoice Reference</th>
+    <th class="w-xs" style="width: 5%"></th>
+</script>
+<script id="invoicecredit-row-template" type="text/html">
+    <tr>
+        <td class="center" data-bind="text: Date"></td>
+        <td class="center" data-bind="attr: { 'data-order': InvoiceNumber }, text: InvoiceNumber"></td>
+        <td class="center" data-bind="text: TypeName, attr: { 'data-order': TypeName }"></td>
+        <td class="center" data-bind="textCurrency: { value: Total, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Total }"></td>
+        <td class="center" data-bind="textCurrency: { value: Payment, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Payment }"></td>
+        <td class="center" data-bind="textCurrency: { value: Balance, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Balance }, css: { 'text-danger': Balance > 0, 'text-info': Balance < 0 }"></td>
+        <td class="center" data-bind="text: WiiseReference, attr: { 'data-order': WiiseReference }"></td>
+        <td class="w-xs text-center">
+            <div class="btn-group">
+                <!--ko if: downloadUrl-->
+                <a href="#" class="btn btn-default btn-xs cursor-pointer" data-bind="attr: { title: 'Download Invoice' }, tooltip: { trigger: 'hover' }, downloadFile: { url: downloadUrl }">
+                    <span class="fa fa-download"></span>
+                </a>
+                <!--/ko-->
+            </div>
+        </td>
+
+    </tr>
+</script>

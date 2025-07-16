@@ -1,0 +1,71 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ include "ncms.fullname" . }}
+data:
+  # Configuration values can be set as key-value properties 
+  "sam_SearchResultLimit": "500"
+  "sam_defaultAssetFileName": "[TestAttendanceId] - [Skill] [Date] [UniqueID] - [DocumentType]"
+  "tempFilePath": "c:\\tempStorage\\TemporaryFiles"
+  "applicationData": "c:\\storage\\ContainerData\\Ncms"
+  "sam_IncludedFileExtensionsList": "bmp,csv,doc,docx,gif,jpg,jpeg,pdf,png,pps,ppt,pptx,ppsx,rtf,tiff,txt,xls,xlsx,xml,zip,mp3,wma,wav,aiff,webm,mkv,flv,avi,mov,qt,wmv,rm,rmvb,mp4,m4p,m4v,mpg,mp2,mpeg,mpv,mpe,m2v,asf,divx,msg,m4a,m4b"
+  "AadResponseRedirect": "~/#system/setup/AzureAuthSuccess"
+  "AadAuthScope": "openid offline_access https://graph.microsoft.com/mail.read https://graph.microsoft.com/mail.read.shared https://graph.microsoft.com/user.read" 
+  "AccountingOperationsReportEmailsTo": {{ .Values.configMap.data.AccountingOperationsReportEmailsTo | quote}}
+  "EmailBatchingReportEmailsTo": {{ .Values.configMap.data.EmailBatchingReportEmailsTo | quote }}
+  "AccountingOperationsLogEmailsTo": {{ .Values.configMap.data.AccountingOperationsLogEmailsTo | quote }}
+  "EmailBatchingLogEmailsTo": {{ .Values.configMap.data.EmailBatchingLogEmailsTo | quote }}
+  "AccountingOperationsReportEmailsFrom": {{ .Values.configMap.data.AccountingOperationsReportEmailsFrom | quote }}
+  "logging_SeqUrl": "https://seq.f1solutions.com.au"
+  "logging_SeqLogBufferFileBase": "seqBuffer"
+  "logging_LogFile": "app.log"
+  "logging_DiagnosticsLogFile": ""
+  "EnvironmentType": {{ .Values.configMap.data.EnvironmentType | quote }} 
+  "EnvironmentName": {{ .Values.configMap.data.EnvironmentName | quote }} 
+  "ShowAllMenuItems": {{ .Values.configMap.data.ShowAllMenuItems | quote }} 
+  "DebugMode": {{ .Values.configMap.data.DebugMode | quote }} 
+  "GoogleApiKeyFrontend": "AIzaSyCwRmBZUnlm7MMoIwCVT1uOxx611lfXdSY"
+  "GoogleApiKeyBackend" : "AIzaSyAJc5073jvLjNocIp7vKspioObmLSLmdNs"
+  "fileSystemFileStorageServiceBasePath": "c:\\storage\\FileStorage"
+  "StorageUriTemplate" : "https://{0}.file.core.windows.net/{1}/{2}"
+  "StorageAccountTemplate" : "DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1};EndpointSuffix=core.windows.net"
+  "GraphResourceId": "https://graph.microsoft.com/"
+  "GraphApiBaseUrl": "https://graph.microsoft.com/v1.0"
+  "GraphTokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+  "AadAuthRedirectUri": {{ .Values.configMap.data.AadAuthRedirectUri | quote }}
+  "SearchResultLimit": "500"
+  "SecurePay_PaymentUrl": {{ .Values.configMap.data.SecurePay_PaymentUrl | quote }} 
+  "logging_MinimumLevel": {{ .Values.configMap.data.logging_MinimumLevel | quote }}
+  "AzureAppAuthority": "https://login.microsoftonline.com/{0}/v2.0"
+  "AzureAppRedirectUri":  {{ .Values.configMap.data.AzureAppRedirectUri | quote }}
+  "MyNaatiUrl":  {{ .Values.configMap.data.MyNaatiUrl | quote }}
+  "SecretPrefix":  {{ .Values.configMap.data.SecretPrefix | quote }}
+  "ScriptsTimeoutSeconds":  {{ .Values.configMap.data.ScriptsTimeoutSeconds | quote }}
+  "DesiredTimeZone": "AUS Eastern Standard Time"
+  "HttpsConfigured": "true"
+  "NcmsPodUrl": "http://"
+  "DefaultAppLocalUrl": "hhttp://127.0.0.1/"
+  "SASDemoFile": " "
+  "secrets_Source": "AzureKeyVault"  
+  "AuthenticationFormsTimeout": "15"
+  "ReportingJobName": {{ .Values.configMap.data.ReportingJobName | quote }}
+  "ReportingJobDatabaseName": "msdb"
+  "MaxUserRefreshDelaySeconds": "15"
+  "EncodeAttributeExpressions": "(/&gt;[\\s\\S\\r\\n]*&lt;script&gt;[\\s\\S\\r\\n]*&lt;/script&gt;),(&lt;script&gt;[\\s\\S\\r\\n]*&lt;/script&gt;),(&lt;script&gt;),(&lt;/script&gt;)"
+  "Culture": "en-AU"
+  "UiCulture": "en-AU"
+  "SecurePayResource": {{ .Values.configMap.data.SecurePayResource | quote }}
+  "SecurePayTokenUrl": {{ .Values.configMap.data.SecurePayTokenUrl | quote }}
+  "SecurePayRedirectUri": "" 
+  "SecurePayScope": "https://api.payments.auspost.com.au/payhive/payments/read https://api.payments.auspost.com.au/payhive/payments/write"
+  "PayPalMode": {{ .Values.configMap.data.PayPalMode | quote }}
+  "PayPalConnectionTimeout": {{ .Values.configMap.data.PayPalConnectionTimeout | quote }}
+  "PayPalRequestRetries": {{ .Values.configMap.data.PayPalRequestRetries | quote }}
+  "WiiseBaseUrl": {{ .Values.configMap.data.WiiseBaseUrl | quote }}
+  "WiiseResource": "https://api.businesscentral.dynamics.com"
+  "WiiseResponseRedirect": "~/#system/setup/WiiseAuthSuccess"
+  "WiiseTokenUrl": "https://login.windows.net/41bb5789-7441-4051-b270-c49376cfab28/oauth2/token?resource=https://api.businesscentral.dynamics.com"
+  "WiiseAuthRedirectUri": {{ .Values.configMap.data.WiiseAuthRedirectUri | quote }}
+  "WiiseRandomErrorsEnabled": "false"
+  "TestSittingsWithoutMaterialReminderEmailAddresses": {{ .Values.configMap.data.TestSittingsWithoutMaterialReminderEmailAddresses | quote }}
+  "QrCodeAccessUrl": {{ .Values.configMap.data.QrCodeAccessUrl | quote }}

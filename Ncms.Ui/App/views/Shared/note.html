@@ -1,0 +1,65 @@
+<div data-bind="compose: { model: noteDocumentInstance, view: 'views/shared/note-document' }"></div>
+<div class="wrapper">
+    <form data-bind="submit: postNote" autocomplete="off">
+        <div class="no-padder form-control input-group" data-bind="validationElement: note.Note, validationOptions: { insertMessages: false }">
+            <input type="text" class="form-control input-lg" data-bind="value: note.Note, visible: canAddEdit()" />
+            <span class="input-group-btn">
+                <button class="btn btn-success btn-lg" type="button" data-bind="click: postNote, html: postNoteText(), visible: canAddEdit()"></button>
+                <button class="btn btn-danger btn-lg" type="button" data-bind="click: cancelNote, reshtml: 'Naati.Resources.Shared.resources.Cancel', visible: note.NoteId"></button>
+            </span>
+        </div>
+        <span class="text-danger help-block" data-bind="validationMessage: note.Note"></span>
+    </form>
+    <table class="table table-striped table-hover m-t-lg w-full">
+        <tbody data-bind="foreach: { data: notes, as: 'note' }">
+        <tr>
+            <td>
+                <!--ko if: note.showMore-->
+                        <a href="#" data-bind="click:note.expandCollapse">
+                            <i data-bind="css:{'fa':true, 'fa-minus-circle':note.expanded(), 'fa-plus-circle':!note.expanded() }"></i>
+                            <em data-bind="html: note.text(), css:{'font-bold':note.Highlight}"></em>
+                            <em data-bind="text: '...', visible:!note.expanded(), css:{'font-bold':note.Highlight}"></em>
+                        </a>
+                    <!--/ko-->  
+                    <!--ko ifnot: note.showMore-->
+                        <em data-bind="html: note.text(), css:{'font-bold':note.Highlight}"></em>
+                    <!--/ko-->
+            </td>
+            <td class="text-right w-xl">
+                <em>
+                    <span data-bind="reshtml: note.ModifiedDate ? 'Naati.Resources.Shared.resources.ModifiedOn' : 'Naati.Resources.Shared.resources.CreatedOn'"></span>
+                    <span class="cursor-pointer text-danger" data-bind="tooltip, attr: { title: moment(note.Date).format(CONST.settings.shortDateTimeDisplayFormat) }, text: $root.humanizeDate(note.Date)"></span>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.By'"></span>
+                    <span class="text-danger" data-bind="text: note.User"></span>
+                </em>
+            </td>
+            <td class="text-right w-sm">
+                <!--ko ifnot: note.ReadOnly-->
+                <div class="btn-group">
+                    
+                    <!--ko if: $root.allowAttachments-->
+                        <button class="btn btn-default btn-xs" data-bind="click: function() { $root.addDocument(this); }">
+                            <span class="glyphicon glyphicon-paperclip"></span>
+                        </button>
+                    <!--/ko-->
+
+                    <button class="btn btn-default btn-xs" data-bind="click: function() { $root.editNote(this); }, enable: canEdit">
+                        <span class="fa fa-pencil-alt"></span>
+                    </button>
+                    <button class="btn btn-danger btn-xs" data-bind="click: function() { $root.tryDeleteNote(this); }, enable: canDelete">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </div>
+                <!--/ko-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--ko if: enableShowAllNotes -->
+    <label class="checkbox-inline i-checks">
+        <input type="checkbox" data-bind="checked: showAll"><i></i>
+        <span class="padder-md" data-bind="restext: 'Naati.Resources.NaatiEntity.resources.ShowAllNotes', tooltip: { trigger: 'hover', container: 'body' }, resattr: { title: 'Naati.Resources.NaatiEntity.resources.ShowAllNotesTooltip' }"></span>
+    </label>
+    <!--/ko-->
+</div>

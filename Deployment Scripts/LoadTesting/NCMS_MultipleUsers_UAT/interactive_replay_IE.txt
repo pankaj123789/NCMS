@@ -1,0 +1,76 @@
+Virtual User Script started at : 2020-09-23 08:50:16
+TruClient Replay (build 0324) for LoadRunner 12.63.0, build 0399. OS: Windows 2012 R2, Browser: IE 11.0.19377.9600, initialized on 2020/09/23 at 08:50:15 (1600815015.678s)
+Running Vuser...
+Starting iteration 1.
+Notify: Transaction "Apply_S_01_Home" started.
+t=00002160ms: Step 1: Navigate to "https://nhmrcomnistarpe...lutions.com.au/" started    [MsgId: MMSG-205180]
+t=00003863ms: Step 1: Navigate to https://nhmrcomnistarper...olutions.com.au/ successfully completed with End Event "Document Loaded"    [MsgId: MMSG-205180]
+Notify: Transaction "Apply_S_01_Home" ended with a "Pass" status (Duration: 1.7530 Wasted Time: 0.2070).
+t=00004407ms: Step 2: Click on User name textbox started    [MsgId: MMSG-205180]
+t=00004722ms: Step 2: Click on User name textbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00005267ms: Step 3: Type TC.getParam("UserID") in User name textbox started    [MsgId: MMSG-205180]
+t=00005277ms: Warning -205179: The TC.getParam API is deprecated because it is synchronous. Use the asynchronous "Generic API" step instead.    [MsgId: MWAR-205179]
+t=00006161ms: Step 3: Type Performance.Test1@testdataservices.com.au in User name textbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00006705ms: Step 4: Click on Password passwordbox started    [MsgId: MMSG-205180]
+t=00007004ms: Step 4: Click on Password passwordbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00007548ms: Step 5: Click on Password passwordbox started    [MsgId: MMSG-205180]
+t=00007864ms: Step 5: Click on Password passwordbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00008411ms: Step 6: Type ************** in Password passwordbox started    [MsgId: MMSG-205180]
+t=00008857ms: Step 6: Type ************ in Password passwordbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+Notify: Transaction "Apply_S_02_Login" started.
+t=00009409ms: Step 7: Click on Log in button started    [MsgId: MMSG-205180]
+t=00010896ms: Step 7: Click on Log in button successfully completed with End Event "Document Loaded"    [MsgId: MMSG-205180]
+Notify: Transaction "Apply_S_02_Login" ended with a "Pass" status (Duration: 1.5260 Wasted Time: 0.2060).
+t=00010941ms: Step 8: If Agree button exists started    [MsgId: MMSG-205180]
+t=00011724ms: Step 8.1: Click on Agree button started    [MsgId: MMSG-205180]
+t=00012051ms: Step 8.1: Click on Agree button successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00012325ms: Step 8: If Agree button exists successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00012367ms: Step 12: Wait 3 seconds started    [MsgId: MMSG-205180]
+t=00015594ms: Step 12: Wait 3 seconds successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+Notify: Transaction "Apply_S_03_ClickNewApplication" started.
+t=00016148ms: Step 13: Click on Apply now button started    [MsgId: MMSG-205180]
+t=00025517ms: Step 13: Click on Apply now button successfully completed with End Event "Object Exists"    [MsgId: MMSG-205180]
+Notify: Transaction "Apply_S_03_ClickNewApplication" ended with a "Pass" status (Duration: 9.4160 Wasted Time: 0.4050).
+t=00026067ms: Step 16: Click on Application title textbox started    [MsgId: MMSG-205180]
+t=00026596ms: Step 16: Click on Application title textbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00027145ms: Step 17: Type "Load Test Application "...C.getParam("AI") in Application title textbox started    [MsgId: MMSG-205180]
+t=00028994ms: Step 17: Type Load Test Application 20...ity of Newcastle in Application title textbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+Notify: Transaction "Apply_S_04_NewApplicationName" started.
+t=00029538ms: Step 19: Click on Done button started    [MsgId: MMSG-205180]
+t=00045113ms: Step 19: Click on Done button successfully completed with End Event "Object Exists"    [MsgId: MMSG-205180]
+Notify: Transaction "Apply_S_04_NewApplicationName" ended with a "Pass" status (Duration: 15.6150 Wasted Time: 0.4140).
+t=00045661ms: Step 21: Click on Administering institution... textbox started    [MsgId: MMSG-205180]
+t=00046031ms: Step 21: Click on Administering institution... textbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00046584ms: Step 22: Type TC.getParam("AI") in Administering institution... textbox started    [MsgId: MMSG-205180]
+t=00047313ms: Step 22: Type The University of Newcastle in Administering institution... textbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00047865ms: Step 23: Select TC.getParam("AI") from Administering institution... autocomplete started    [MsgId: MMSG-205180]
+t=00048994ms: Step 23: Select TC.getParam("AI") from Administering institution... autocomplete successfully completed with End Event "Step network completed"    [MsgId: MMSG-205180]
+t=00049556ms: Step 24: Select 1 from Grant duration   in years... listbox started    [MsgId: MMSG-205180]
+t=00050235ms: Step 24: Select 1 from Grant duration   in years... listbox successfully completed with End Event "Step network completed"    [MsgId: MMSG-205180]
+t=00050788ms: Step 25: Click on 2 No label started    [MsgId: MMSG-205180]
+t=00051681ms: Step 25: Click on 2 No label successfully completed with End Event "Step network completed"    [MsgId: MMSG-205180]
+t=00052228ms: Step 26: Type project synopsis text in Application DetailsParticipating... textbox started    [MsgId: MMSG-205180]
+t=00053188ms: Step 26: Type project synopsis text in Application DetailsParticipating... textbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00053739ms: Step 27: Click on Application DetailsParticipating... textbox started    [MsgId: MMSG-205180]
+t=00054314ms: Step 27: Click on Application DetailsParticipating... textbox successfully completed with End Event "Step network completed"    [MsgId: MMSG-205180]
+t=00054874ms: Step 28: Type plain English summary text in Application DetailsParticipating... textbox started    [MsgId: MMSG-205180]
+t=00055885ms: Step 28: Type plain English summary text in Application DetailsParticipating... textbox successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00932150ms: Step 29: Wait 1 seconds started    [MsgId: MMSG-205180]
+t=00933440ms: Step 29: Wait 1 seconds successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00933504ms: Step 33: Wait 3 seconds started    [MsgId: MMSG-205180]
+t=00936782ms: Step 33: Wait 3 seconds successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00937339ms: Step 34: Click on 2 Yes label started    [MsgId: MMSG-205180]
+t=00937970ms: Step 34: Click on 2 Yes label successfully completed with End Event "Step network completed"    [MsgId: MMSG-205180]
+t=00938024ms: Step 35: Wait 3 seconds started    [MsgId: MMSG-205180]
+t=00941300ms: Step 35: Wait 3 seconds successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00941852ms: Step 36: Click on 5 Yes label started    [MsgId: MMSG-205180]
+t=00942321ms: Step 36: Click on 5 Yes label successfully completed with End Event "Step network completed"    [MsgId: MMSG-205180]
+t=00942366ms: Step 37: Wait 3 seconds started    [MsgId: MMSG-205180]
+t=00945643ms: Step 37: Wait 3 seconds successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+t=00946195ms: Step 38: Click on 8 Yes label started    [MsgId: MMSG-205180]
+t=00947115ms: Step 38: Click on 8 Yes label successfully completed with End Event "Step network completed"    [MsgId: MMSG-205180]
+t=00947663ms: Step 40: Scroll browser window to 100px / 3000px started    [MsgId: MMSG-205180]
+t=00947971ms: Step 40: Scroll browser window to 100px / 3000px successfully completed with End Event "Action completed"    [MsgId: MMSG-205180]
+Ending Vuser...
+t=01008420ms: Step 44: Click on 2 Yes label was stopped    [MsgId: MMSG-205180]
+Vuser Terminated.

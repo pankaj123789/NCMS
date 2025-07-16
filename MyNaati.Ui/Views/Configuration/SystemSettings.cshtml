@@ -1,0 +1,136 @@
+﻿@*@model F1Solutions.NAATI.ePortal.Web.ViewModels.Configuration.ConfigurationModel
+@{
+    ViewBag.Title = "System Settings";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("System Settings", null)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var messageTableSelector = '#messageTable';
+        var rbShowVerifyCredentialsYesSelector = '#rbShowVerifyCredentialsYes';
+        var rbShowVerifyCredentialsNoSelector = '#rbShowVerifyCredentialsNo';
+
+        $(document).ready(function () {
+            $(rbShowVerifyCredentialsYesSelector).click(function () {
+                $(messageTableSelector).hide();
+            });
+            $(rbShowVerifyCredentialsNoSelector).click(function () {
+                $(messageTableSelector).hide();
+            });
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.ValidationSummary("", new { id = "valSum" })
+        </div>
+    </div>
+    @if (Model.ChangesSaved)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-success" role="alert">
+                    <p>System settings have been changed.</p>
+                </div>
+            </div>
+        </div>
+    }
+    @using (Html.BeginForm("ApplySettings", "Configuration", FormMethod.Get, new { id = "settingForm" }))
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Verify practitioner's credentials</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>This option will allow you to show or hide the Online Verification Application in the ePortal homepage.</p>
+                <div class="radio">
+                    <label>
+                        @Html.RadioButtonFor(m => m.ShowVerifyCredentials, true, new { id = "rbShowVerifyCredentialsYes" })
+                        @Html.Label("rbShowVerifyCredentialsYes", "Show Application")
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        @Html.RadioButtonFor(m => m.ShowVerifyCredentials, false, new { id = "rbShowVerifyCredentialsNo" })
+                        @Html.Label("rbShowVerifyCredentialsNo", "Hide Application")
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Display photo in profile</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>This option will allow you to show or hide the photo in the Online Verification Application practitioner's profiles.</p>
+                <div class="radio">
+                    <label>
+                        @Html.RadioButtonFor(m => m.ShowPhoto, true, new { id = "rbShowPhotoYes" })
+                        @Html.Label("rbShowPhotoYes", "Show")
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        @Html.RadioButtonFor(m => m.ShowPhoto, false, new { id = "rbShowPhotoNo" })
+                        @Html.Label("rbShowPhotoNo", "Hide")
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Credential availability delay</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>This option will allow you to determine a delay before credential results are made available via the ePortal.</p>
+                <p> Delay credential availability by @Html.TextBoxFor(m => m.DaysToDelayAccreditation) days</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>PD Listing Payment</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>This option will allow you to enable or disable payment for PD Listing.</p>
+                <div class="radio">
+                    <label>
+                        @Html.RadioButtonFor(m => m.PaymentRequiredForPDListing, true, new {id = "rbPaymentRequiredForPDListingYes"})
+                        @Html.Label("rbPaymentRequiredForPDListingYes", "Require payment")
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        @Html.RadioButtonFor(m => m.PaymentRequiredForPDListing, false, new {id = "rbPaymentRequiredForPDListingNo"})
+                        @Html.Label("rbPaymentRequiredForPDListingNo", "Do not require payment (listing is free)")
+                    </label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12">
+                <button class="btn btn-warning" type="submit" name="submitButton" value="RestoreDefaults">Restore Defaults</button>
+                <button class="btn btn-primary" type="submit" name="submitButton" value="ApplySettings">Apply settings</button>
+            </div>
+        </div>
+    }
+</div>*@
+

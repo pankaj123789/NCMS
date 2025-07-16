@@ -1,0 +1,33 @@
+namespace F1Solutions.Naati.Common.Contracts.Dal.Enum
+{
+    public enum TestFilterType
+    {
+        NaatiNumberIntList,
+        CredentialRequestTypeIntList,
+        LanguageIntList,
+        ApplicationTypeIntList,
+        TestOfficeIntList,
+        TestLocationIntList,
+        AttendanceIdIntList,
+        TestDateFromString,
+        TestDateToString,
+        TestStatusTypeIntList,
+        ExaminerStatusTypeIntList,
+        AllMarksReceivedBoolean,
+        JobExminerMembershipIdIntList,
+        JobExaminerStatusIntList,
+        JobExaminerSubmittedFromString,
+        JobExaminerSubmittedToString,
+        JobExaminerDueByFromString,
+        JobExaminerDueByToString,
+        SupplementaryBoolean,
+        AllowPaidReviewBoolean,
+        AllowSupplementaryTestBoolean,
+        CredentialRequestIdIntList,
+        AllowConcededPassBoolean,
+        HasDowngradePathBoolean,
+        PendingToAssignPaidReviewersBoolean,
+        ReadyToIssueResultsBoolean,
+        AllowIssueBoolean
+    }
+}

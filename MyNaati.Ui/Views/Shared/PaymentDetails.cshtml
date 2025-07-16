@@ -1,0 +1,17 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.BasePurchaseWizardModel
+@{    
+    ViewBag.Title = "Place an Order";
+    ViewBag.Subtitle = "Payment Details";
+    Layout = "~/Views/Shared/MasterPages/_ProductWizardLayout.cshtml";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+        });      
+    </script>
+}
+@{ Html.RenderPartial("_PaymentDetailsEditPartial", Model); }

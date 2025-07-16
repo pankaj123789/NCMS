@@ -1,0 +1,200 @@
+<div class="vbox panel-screen panel-details">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black">
+                    <span data-bind="reshtml: 'Naati.Resources.Panel.resources.EditPanel'"></span>
+                    <button class="btn btn-success" data-bind="click: createNewTestMaterial, enable:canCreateTestMaterial, enableWithPermission:'TestMaterial.Create'">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Shared.resources.NewTestMaterial'"></span>
+                    </button>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="panel wrapper">
+                        <form data-bind="if: bindDetails()">
+                            <!-- ko compose: { model: panelDetailsInstance, view: 'views/panels/details.html' } -->
+                            <!-- /ko -->
+                        </form>
+                    </div>
+                    <!-- ko component: { name: 'tab-component', params: tabComponentOptions } --><!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <!--ko if: hasExaminersAllocated-->
+            <button class="btn btn-danger" data-bind="click: showCantDeleteMessage">
+                <span class="glyphicon glyphicon-trash"></span>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Delete'"></span>
+            </button>
+            <!--/ko-->
+            <!--ko ifnot: hasExaminersAllocated-->
+            <button class="btn btn-danger" data-bind="click: tryDelete,enableWithPermission:'Panel.Delete'">
+                <span class="glyphicon glyphicon-trash"></span>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Delete'"></span>
+            </button>
+            <!--/ko-->
+            <button class="btn btn-success" data-bind="click: save, enableWithPermission:'Panel.Update'">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <a href="#panels" class="btn btn-default" data-bind="click: cancel">
+                <i class="fa fa-times"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+</div>
+<div id="reappointMembersModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content bg-light">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.Panel.resources.ReappointMembers'"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-lg-12" data-bind="validationElement: reappointDates.startDate">
+                        <label data-bind="reshtml: 'Naati.Resources.Shared.resources.StartDate'"></label>
+                        <!-- ko component: { name: 'date-input', params: reappointStartDateOptions } -->
+                        <!-- /ko -->
+                    </div>
+                    <div class="form-group col-lg-12" data-bind="validationElement: reappointDates.endDate">
+                        <label data-bind="reshtml: 'Naati.Resources.Shared.resources.EndDate'"></label>
+                        <!-- ko component: { name: 'date-input', params: reappointEndDateOptions } -->
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-bind="click: reappointPanelMembers">
+                    <i class="fa fa-check"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div data-bind="compose: { model: memberDetailsInstance, view: 'views/panels/memberDetails.html' }"></div>
+<script id="panel-tab-members" type="text/html">
+    <!-- ko component: membersTableComponent -->
+    <!-- /ko -->
+</script>
+<script id="panel-tab-notes" type="text/html">
+    <!-- ko compose: { model: noteInstance, view: 'views/shared/note.html' } -->
+    <!-- /ko -->
+</script>
+<script id="panel-tab-testMaterialRequests" type="text/html">
+    <!--ko component: materialRequestsTableComponent-->
+    <!--/ko-->
+</script>
+<script id="panel-member-header-template" type="text/html">
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Shared.resources.NaatiNo'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></th>
+    <th>
+        <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Role'"></span>
+    </th>
+    <th data-bind="reshtml: 'Naati.Resources.Application.resources.MarkingCredentialTypes'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Application.resources.MaterialCredentialTypes'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Application.resources.CoordinatorCredentialTypes'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Shared.resources.StartDate'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Shared.resources.EndDate'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Email'"></th>
+    <th class="w-sm"></th>
+    <th class="hidden"></th>
+</script>
+<script id="panel-member-row-template" type="text/html">
+    <tr>
+        <td><a href="#" class="text-info" target="_blank" data-bind="text: NaatiNumber, attr: { href: '#person/' + NaatiNumber }"></a></td>
+        <td data-bind="text: PersonName"></td>
+        <td data-bind="text: PanelRole"></td>
+        <td style="width: 12%" data-bind="text: CredentialTypes"></td>
+        <td style="width: 12%" data-bind="text: MaterialCredentialTypes"></td>
+        <td style="width: 12%" data-bind="text: CoordinatorCredentialTypes"></td>
+        <td data-bind="text: StartDate"></td>
+        <td data-bind="text: EndDate"></td>
+        <td><a href="#" class="text-info" data-bind="text: Email, attr: { href: 'mailto:' + Email }"></a></td>
+        <td class="w-sm text-right">
+            <div class="btn-group">
+                <a href="#" class="btn btn-default btn-xs" data-bind="enableWithPermission:'PanelMember.Read', tooltip: { container: '#members' }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }, attr: { href: '#panel/' + $parents[1].panelId() + '/membership/' + PanelMembershipId}">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                <a href="#" class="btn btn-danger btn-xs" data-bind="enableWithPermission:'PanelMember.Delete', click: function() { $parents[1].tryRemoveMember(this); }, tooltip: { container: '#members' }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+                <!-- ko if: IsExaminerRole -->
+                <!-- ko if: HasMaterialRequests -->
+                <a href="#" class="btn btn-default btn-xs" data-bind="click: function() { $parents[1].viewMaterialRequests(this); }, tooltip: { container: '#members' }, resattr: { title: 'Naati.Resources.Panel.resources.ExaminerMaterials' }">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+                <!-- /ko -->
+                <!-- /ko -->
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <span>
+                    <span style="padding-left: 16px;" data-bind="visible: !displaynone"></span>
+                    <span style="padding-left: 16px;" data-bind="visible: !UnAvailableExaminers.length > 0"></span>
+                    <span class="text-left">
+                        <!-- ko if: IsExaminerRole -->
+                        <i class="fa fa-list-ul" data-popover="markingrequest" data-bind="event: { mouseover: ShowPopover }, visible: displaynone"></i>
+                        <!-- /ko -->
+                    </span>
+                    &nbsp;
+                    <span class="text-right">
+                        <i class="fa fa-calendar" data-popover="examinerunavailable" data-bind="event: { mouseover: ShowPopover }, visible: UnAvailableExaminers.length > 0"></i>
+                    </span>
+                </span>
+            </div>
+        </td>
+        <td class="hidden" data-bind="text: PanelMembershipId"></td>
+    </tr>
+</script>
+<script id="material-requests-header-template" type="text/html">
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.CreatedDate'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.TestMaterialID'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.SourceTestMaterialID'"></th>
+    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.CredentialType'"></th>
+    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.TestTaskType'"></th>
+    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.SkillLanguage'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Round'"></th>
+    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.RoundStatus'"></th>
+    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Coordinator'"></th>
+    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.RequestStatus'"></th>
+    <th class="w-xs"></th>
+</script>
+<script id="material-requests-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: CreatedDate"></td>
+        <td data-bind="text: OutputMaterialId"></td>
+        <td data-bind="text: SourceMaterialId"></td>
+        <td data-bind="text: CredentialType"></td>
+        <td data-bind="text: TestTaskType"></td>
+        <td data-bind="text: Language"></td>
+        <td data-bind="text: Round"></td>
+        <td>
+            <span class="label text-base m-t-xs" data-bind="text:RoundStatus, css: 'label-' + RoundStatusClass"></span>
+        </td>
+        <td data-bind="text: Coordinator"></td>
+        <td>
+            <span class="label text-base m-t-xs" data-bind="text:RequestStatus, css: 'label-' + RequestStatusClass"></span>
+        </td>
+        <td class="text-right">
+            <button class="btn btn-default btn-xs" data-bind="click: $root.editMaterialRequest, enableWithPermission:'MaterialRequest.Read'">
+                <i class="glyphicon glyphicon-pencil"></i>
+            </button>
+        </td>
+    </tr>
+</script>

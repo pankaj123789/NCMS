@@ -1,0 +1,227 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Application for Practitioner Listing</title>
+    <link href="@Url.Content("~/Content/Reports.css")" rel="stylesheet" type="text/css" media="print, screen" />
+    <style type="text/css">
+        #body { page-break-before:always; }
+    </style>
+</head>
+<body>
+    <div id="report">
+        <div id="header">
+            <div id="title">
+                <img src="@Url.Content("~/Content/Images/NaatiLogo.png")" alt="NAATI Logo" id="logo" />
+                <div class="container">
+                    <div>
+                        <h1>Application for<br />Practitioner Listing</h1>
+                    </div>
+                </div>
+            </div>
+            <p class="clear">
+                To take full <strong>advantage of the @Model.ListingFinancialYear directory which commences @Html.DisplayFor(m => m.ListingStartDate) and will expire @Html.DisplayFor(m => m.ListingEndDate)</strong> complete and return this form <strong>including your payment of AUD @Html.DisplayFor(m => m.OrderTotalModel.TotalPrice)</strong> to: <br />
+                <strong>NAATI PO Box 223 DEAKIN WEST ACT 2600 AUSTRALIA</strong><br />
+                <span class="very-strong">Please check your details and amend if necessary.</span><br />
+                <span class="very-strong">Please ensure all sections of this form are filled out correctly.</span>                
+            </p>
+
+            <p class="please-note">
+                <strong>Please note:</strong> If you do not tick the contact details you want listed they <span class="very-strong">WILL NOT</span> appear in the Directory.
+                <span class="very-strong">Please make sure you have ticked everything you want NAATI to include in the Directory.</span>
+                Your name, state, suburb and postcode are automatically entered but <span class="very-strong">YOU MUST</span> tick at least one contact detail.  If you do not, NAATI reserves the right to select a contact.
+            </p>
+            <h3>Customer Number: @Model.NaatiNumber</h3>
+            <h3>Name: @Model.Name</h3>
+            <h3>Reference Number: @Model.ReferenceNumber</h3>                        
+        </div>
+
+        <div id="body">
+        
+            <div class="part">
+            
+                <table class="wide">
+                    <tr class="header">
+                        <th class="part">Part 1</th>
+                        <th>Personal Details</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Customer number: @Model.NaatiNumber</th>
+                    </tr>
+                </table>
+                <table class="wide">
+                    <tr>
+                        <th class="center" style="width: 50px">&nbsp;</th>
+                        <th colspan="2" style="width: 50%">Current Contact Details</th>                       
+                        <th style="width: 40%">Changed Contact Details <em>(please print)</em></th>
+                    </tr>
+                    <tr>
+                        <td rowspan="4">&nbsp;</td>
+                        <td style="width: 10%">Title:</td>
+                        <td>@Model.PersonTitle</td>
+                        <td rowspan="4"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%">Given name:</td>
+                        <td>@Html.DisplayFor(n => n.GivenName)</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 10%" rowspan="2">Family name:</td>
+                        <td rowspan="2">@Html.DisplayFor(n => n.Surname)</td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td class="center">Please tick @FormBoxHelper.TickedBox(Url) to include in the Directory.</td>
+                        <td colspan="2">&nbsp;</td>
+                        <td class="center-top"><em>Please attach certified legal evidence of name change.</em></td>
+                    </tr>                                     
+                    @for (int i = 0; i < Model.Addresses.Count; i++)
+                    {
+                    <tr>
+                        <td class="center">
+                            @FormBoxHelper.TickBoxFor(Model.Addresses[i].InDirectory, Url)
+                            @if (i == 0) {
+                                <br />
+                                <em>State, suburb and postcode are automatically listed.</em>
+                            }
+                        </td>
+                        <td colspan="2">Address: @Model.Addresses[i].Address</td>
+                        <td>&nbsp;</td>
+                    </tr>   
+                    }
+
+                    @foreach (var con in Model.Phones)
+                    {
+                    <tr>
+                        <td class="center">@FormBoxHelper.TickBoxFor(con.InDirectory, Url)</td>
+                        @*<td colspan="2">Phone (@con.Type): @con.Contact</td>*@
+                        <td>&nbsp;</td>                        
+                    </tr>
+                    }
+                    @foreach (var con in Model.Emails)
+                    {
+                    <tr>
+                        <td class="center">@FormBoxHelper.TickBoxFor(con.InDirectory, Url)</td>
+                        @*<td colspan="2">Email (@con.Type): @con.Contact</td>*@
+                        <td>&nbsp;</td>                        
+                    </tr>
+                    }
+                    @if (Model.Website != null)
+                    {
+                    <tr>
+                        <td class="center">@FormBoxHelper.TickBoxFor(Model.Website.InDirectory, Url)</td>
+                        <td colspan="2">Website: @Model.Website.Contact</td>
+                        <td>&nbsp;</td>                        
+                    </tr>
+                    }                    
+                </table>
+            
+            </div>
+
+            @* Part 2 - Work Areas *@
+            <div style ="page-break-before: always">
+            @{ Html.RenderPartial("_FormWorkAreaPartial", Model); }
+            </div>
+
+            <div class="part">
+            
+                <table class="wide">
+                    <tr class="header">
+                        <th class="part">Part 3</th>
+                        <th>Accreditation Details</th>
+                    </tr>
+                
+                </table>
+                <table class="wide">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>Skill</td>
+                        <td>Level</td>
+                        <td>Direction</td>
+                        <td>Expiry</td>
+                    </tr>                                        
+                    @foreach (var cred in Model.Credentials)
+                    {
+                    <tr>
+                        <td>@FormBoxHelper.TickBoxFor(cred.InDirectory, Url)</td>
+                        <td>@Html.DisplayFor(c => cred.Skill)</td>
+                        <td>@Html.DisplayFor(c => cred.Level)</td>
+                        <td>@Html.DisplayFor(c => cred.Direction)</td>
+                        <td>@Html.DisplayFor(c => cred.Expiry)</td>
+                    </tr>
+                    }
+                    
+                </table>
+
+            </div>
+
+            <div class="part">
+            
+                <table class="wide">
+                    <tr class="header">
+                        <th class="part">Part 4</th>
+                        <th>Declaration</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">(Please ensure that the declaration is signed and dated, otherwise NAATI is unable to process your application)</td>
+                    </tr>                    
+                    <tr>
+                        <td colspan="2">
+                            @{ Html.RenderPartial("_PDDeclarationPartial", Model); }
+
+                            <span class="signature">Signature:</span><span class="centred"><span class="box-container">Date </span>@FormBoxHelper.DateBox()</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="part" style="page-break-before: always">
+                <table class="wide">
+                    <tr class="header">
+                        <th class="part">Part 5</th>
+                        <th>Payment Details</th>
+                    </tr>
+                </table>
+                @{ Html.RenderPartial("_ProductReportPaymentDetailsPartial", Model); }
+            </div>
+
+            @{ Html.RenderPartial("_ProductReportNoteAboutMandatoryFieldsPartial"); }
+
+            <div class="part">
+                <div style="border: 1px solid #000">
+                    <table class="wide">
+                        <tr>
+                            <th colspan="2">OFFICE USE ONLY</th>
+                        </tr>
+                        <tr>
+                            <td>Candidate Details Checked by:</td>
+                            <td>Date:</td>
+                        </tr>                    
+                    </table>
+                    <table class="wide">
+                        <tr>
+                            <td rowspan="2">Receipted by:<br />&nbsp;</td>
+                            <td rowspan="2">Date:&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;</td>
+                            <td rowspan="2">Transaction number:<br />&nbsp;</td>
+                            <td rowspan="2">Invoice/Receipt number:<br />&nbsp;</td>
+                            <td rowspan="2">Transaction amount:<br />&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="footer">
+                @{Html.RenderPartial("_OrderFormFooterPartial");}
+            </div>                       
+        </div>
+    </div>
+</body>
+</html>

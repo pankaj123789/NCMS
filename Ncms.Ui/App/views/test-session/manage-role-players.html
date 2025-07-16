@@ -1,0 +1,127 @@
+﻿<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div style="display: inline-block;">
+                    <h1 class="m-n font-thin h3 text-black" data-bind="text: title"></h1>
+                </div>
+                <p class="form-control-static" data-bind="text: subtitle"></p>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <!--ko if: skills() && skills().length-->
+                    <!--ko if: skills().length > 1 -->
+                    <!--ko foreach: { data: skills, as: 's' }-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading cursor-pointer" data-bind="click: $root.collapser.toggleCollapse">
+                            <span class="fa" data-bind="css: { 'fa-chevron-down': $root.collapser.isOpened(s), 'fa-chevron-right': !$root.collapser.isOpened(s) }"></span>
+                            <span data-bind="text: s.SkillDisplayName"></span>
+                        </div>
+
+                        <!--ko foreach: { data: s.Languages, as: 'l' }-->
+                        <div class="panel-body animated fadeIn" data-bind="css: { 'hidden': !$root.collapser.isOpened(s) }">
+                            <div class="panel-heading cursor-pointer" data-bind="click: s.collapser.toggleCollapse">
+                                <span class="fa" data-bind="css: { 'fa-chevron-down': s.collapser.isOpened(l), 'fa-chevron-right': !s.collapser.isOpened(l) }"></span>
+                                <span data-bind="text: l.DisplayName"></span>
+                            </div>
+                            <div class="panel-body animated fadeIn" data-bind="css: { 'hidden': !s.collapser.isOpened(l) }">
+                                <div data-bind="component: { name: 'table-component', params: l.tableDefinition }"></div>
+                            </div>
+                        </div>
+                        <!--/ko-->
+
+                    </div>
+                    <!--/ko-->
+                    <!--/ko-->
+                    <!--ko if: skills().length == 1 -->
+                    <!--ko foreach: { data: skills, as: 's' }-->
+                    <!--ko foreach: { data: s.Languages, as: 'l' }-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading cursor-pointer" data-bind="click: s.collapser.toggleCollapse">
+                            <span class="fa" data-bind="css: { 'fa-chevron-down': s.collapser.isOpened(l), 'fa-chevron-right': !s.collapser.isOpened(l) }"></span>
+                            <span data-bind="text: l.DisplayName"></span>
+                        </div>
+                        <div class="panel-body animated fadeIn" data-bind="css: { 'hidden': !s.collapser.isOpened(l) }">
+                            <div data-bind="component: { name: 'table-component', params: l.tableDefinition }"></div>
+                        </div>
+                    </div>
+                    <!--/ko-->
+                    <!--/ko-->
+                    <!--/ko-->
+                    <!--/ko-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm text-right">
+        <button class="btn btn-default" data-bind="click: back, clickBubble: false"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+        <button class="btn btn-success" data-bind="click: save, clickBubble: false, enable: canSave"><i class="fa fa-check"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span></button>
+    </div>
+
+    <script id="manageroleplayers-header-template" type="text/html">
+        <th class="w-xs sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.CustomerNo'"></th>
+        <th class="w-sm sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></th>
+        <th class="w-xxs sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Rating'"></th>
+        <th class="w-sm sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.LastSession', resattr: { title: 'Naati.Resources.TestSession.resources.LastAttendedSession' }, tooltip: { container: 'body' }"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestTask'"></th>
+        <th></th>
+        <th class="w-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Status'"></th>
+    </script>
+    <script id="manageroleplayers-row-template" type="text/html">
+        <tr>
+            <td><a href="#" class="text-info" target="_blank" data-bind="text: CustomerNo, attr: { href: '#/person/' + CustomerNo }"></a></td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: Rating"></td>
+            <td data-bind="text: LastAttendedTestSessionDateTime"></td>
+            <td>
+                <ul class="m-l-n-md" data-bind="foreach: Details">
+                    <li>
+                        <span data-bind="text: TaskName"></span>
+                        (<span data-bind="text: RolePlayerRoleType"></span>, <span data-bind="text: Skill"></span>)
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <div class="m-b-xs">
+                    <!--ko if: NotMatchTestLocationTooltip-->
+                    <!--ko if: MatchTestLocation-->
+                    <span class="label label-success cursor-pointer" data-bind="text: MatchTestLocation.DisplayName, popover: { trigger: 'hover', html: true, content: NotMatchTestLocationTooltip, placement: 'left' }"></span>
+                    <!--/ko-->
+                    <!--ko ifnot: MatchTestLocation-->
+                    <span class="label label-danger cursor-pointer" data-bind="popover: { trigger: 'hover', html: true, content: NotMatchTestLocationTooltip, placement: 'left' }, reshtml: 'Naati.Resources.TestSession.resources.OtherLocations'"></span>
+                    <!--/ko-->
+                    <!--/ko-->
+                    <!--ko ifnot: NotMatchTestLocationTooltip-->
+                    <!--ko if: MatchTestLocation-->
+                    <span class="label label-success" data-bind="text: MatchTestLocation.DisplayName"></span>
+                    <!--/ko-->
+                    <!--/ko-->
+                    <span class="label" data-bind="attr: { title: GenderDescription }, css: { 'label-info': Gender == 'M', 'label-pink': Gender == 'F', 'label-default': Gender != 'F' && Gender != 'M' }, tooltip">
+                        <span>Age</span>
+                        <span data-bind="text: Age"></span>
+                    </span>
+                </div>
+                <div class="m-b-xs">
+                    <!--ko if: Senior-->
+                    <span class="label label-primary">Senior</span>
+                    <!--/ko-->
+                    <span class="m-t-xs fa" data-bind="css: { 'fa-calendar-check text-success': Available, 'fa-calendar-times text-danger': !Available }, tooltip, resattr: { title: Available ? 'Naati.Resources.TestSession.resources.Available' : 'Naati.Resources.TestSession.resources.NotAvailable' }"></span>
+                    <!--ko if: HasCapacity-->
+                    <span class="m-t-xs m-l-xs fas fa-thermometer-quarter text-success" data-bind="tooltip, resattr: { title: 'Naati.Resources.TestSession.resources.CapacityAvailable' }"></span>
+                    <!--/ko-->
+                    <!--ko ifnot: HasCapacity-->
+                    <span class="m-t-xs m-l-xs fas fa-temperature-high text-danger" data-bind="tooltip, resattr: { title: 'Naati.Resources.TestSession.resources.ReachedMaximumCapacity' }"></span>
+                    <!--/ko-->
+                </div>
+            </td>
+            <td>
+                <!-- ko component: { name: 'select-component', params: stateOptions } -->
+                <!-- /ko -->
+            </td>
+        </tr>
+    </script>
+</div>

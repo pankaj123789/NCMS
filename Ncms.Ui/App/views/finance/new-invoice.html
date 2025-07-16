@@ -1,0 +1,106 @@
+﻿<div class="col">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3" data-bind="html: title"></h1>
+    </div>
+    <div class="wrapper-md">
+        <div data-bind="compose: { model: invoiceCreationResultInstance, view: 'views/finance/new-invoice-parts/invoice-creation-result' }"></div>
+        <div data-bind="compose: { model: addDetailInstance, view: 'views/finance/new-invoice-parts/add-invoice-detail' }"></div>
+        <div class="panel hbox hbox-auto-xs no-border">
+            <div class="panel-body">
+                <div class="form">
+                    <div class="row">
+                        <div class="form-group col-xs-4" data-bind="validationElement: invoice.EntityId">
+                            <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.InvoiceTo'"></label>
+                            <!-- ko component: { name: 'auto-text-input', params: invoiceToOptions } --><!-- /ko -->
+                            <span class="help-block" data-bind="validationMessage: invoice.EntityId"></span>
+                        </div>
+                        <div class="form-group col-xs-4" data-bind="validationElement: invoice.Office">
+                            <label class="control-label m-r-sm" data-bind="restext: 'Naati.Resources.Finance.resources.Office'"></label>
+                            <!-- ko component: { name: 'select-component', params: officeOptions } --><!-- /ko -->
+                        </div>
+                        <div class="form-group col-xs-4" data-bind="validationElement: invoice.DueDate">
+                            <label class="control-label m-r-sm" data-bind="restext: 'Naati.Resources.Finance.resources.DueDate'"></label>
+                            <!-- ko component: { name: 'date-input', params: dueDateOptions } --><!-- /ko -->
+                            <span class="help-block" data-bind="validationMessage: invoice.DueDate"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-4" data-bind="validationElement: invoice.ReferenceText">
+                            <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.ReferenceText'"></label>
+                            <input type="text" class="form-control" data-bind="value: invoice.ReferenceText, valueUpdate: 'input'" />
+                        </div>
+                        <div class="form-group col-xs-4" data-bind="validationElement: invoice.BrandingThemeId">
+                            <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.Branding'"></label>
+                            <!-- ko component: { name: 'select-component', params: brandingOptions } --><!-- /ko -->
+                        </div>
+                        <div class="form-group col-xs-4" data-bind="validationElement: invoice.Reference">
+                            <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.InvoiceReference'"></label>
+                            <p class="form-control-static" data-bind="text: invoice.Reference"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--ko component: { name: 'table-component', params: tableDefinition }-->
+        <!--/ko-->
+        <div class="panel hbox hbox-auto-xs no-border">
+            <div class="panel-body">
+                <button class="btn btn-success" data-bind="click: createAndMakePayment">
+                    <i class="fa fa-money-bill-alt"></i>
+                    <span data-bind="restext: 'Naati.Resources.Finance.resources.CreateAndMakePayment'"></span>
+                </button>
+                <button class="btn btn-primary" data-bind="click: createWithoutPayment">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    <span data-bind="restext: 'Naati.Resources.Finance.resources.CreateWithoutPayment'"></span>
+                </button>
+                <button class="btn btn-danger" data-bind="click: clear">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.Clear'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="new-invoice-details-header-template" type="text/html">
+    <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Code'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Description'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Finance.resources.GLCode'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Finance.resources.ExGst'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Gst'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Total'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Finance.resources.NAATINumber'"></th>
+    <th class="w-xs"></th>
+</script>
+<script id="new-invoice-details-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: Code, attr: { 'data-order': Code }"></td>
+        <td data-bind="text: Description, attr: { 'data-order': Description }"></td>
+        <td data-bind="text: GLCode, attr: { 'data-order': GLCode }"></td>
+        <td data-bind="textCurrency: ExGstCostPerUnit, attr: { 'data-order': ExGstCostPerUnit }"></td>
+        <td data-bind="textCurrency: Gst, attr: { 'data-order': Gst }"></td>
+        <td data-bind="textCurrency: Total, attr: { 'data-order': Total }"></td>
+        <td data-bind="attr: { 'data-order': NaatiNumber }"><a href="#" class="text-info" data-bind="attr: { href: '#/person/' + NaatiNumber + '? tab=transactions' }, text: NaatiNumber"></a></td>
+        <td class="text-center">
+            <div class="btn-group">
+                <a href="#" class="btn btn-default btn-xs" data-bind="click: $root.edit">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                <a href="#" class="btn btn-danger btn-xs" data-bind="click: $root.remove">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </div>
+        </td>
+    </tr>
+</script>
+<script id="invoiceto-template" type="text/html">
+    <div class="row wrapper suggestion-row">
+        <div class="col-md-2">
+            <strong data-bind="text: TypeName"></strong>
+        </div>
+        <div class="col-md-8 b-l b-light">
+            <span data-bind="text: NaatiNumber"></span>
+            <span> - </span>
+            <span data-bind="text: Name"></span>
+        </div>
+    </div>
+</script>

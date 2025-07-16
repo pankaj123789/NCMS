@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Welcome";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+        new Tuple<string, string>("My Account", Url.Action("Index", "Account")),
+        new Tuple<string, string>("Multi Factor Authentication", string.Empty)
+    };
+}
+
+@model MyNaati.Ui.ViewModels.Account.MfaModel
+
+
+<!DOCTYPE html>
+
+
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">MULTI-FACTOR AUTHENTICATION</h2>
+            @if (Model.mfaAlreadyConfigured)
+            {
+                <p>Your myNAATI account is now setup with MFA. Click 'Turn off MFA' to turn off Multi-Factor Authentication for your myNAATI account.</p>
+                <div>
+                    <a href="@Url.Action("TurnOffMfa",new { naatinumber = Model.naatiNumber })" class="btn btn-primary">TURN OFF MFA</a>
+                </div>
+            }
+            else
+            {
+            <p>You can set up multi-factor authentication (MFA) for your myNAATI account to keep your account and personal information secure. It is not compulsory to set up MFA, however NAATI strongly recommends it.</p>
+            <p>MFA will be a requirement to use some future myNAATI features which are currently in development, such as digital translator stamps and interpreter identification.</p>
+            <p>If you need an authenticator app we recommend <a href="https://googleauthenticator.net/" target="_blank">Google Authenticator</a> or <a href="https://www.microsoft.com/en-us/security/mobile-authenticator-app" target="_blank">Microsoft Authenticator</a></p>
+                <div>
+                    <a href="@Url.Action("SetupMfa")" class="btn btn-primary">SETUP MFA</a>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿@using MyNaati.Ui.Controllers
+@model MyNaati.Ui.Models.HomeModel
+@{
+    ViewBag.Title = "Welcome";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("My Account", null)
+    };
+}
+@{ Html.RenderPartial("_MenuLinksPartial", AccountController.Menus()); }

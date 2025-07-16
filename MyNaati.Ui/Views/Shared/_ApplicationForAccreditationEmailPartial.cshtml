@@ -1,0 +1,28 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.Shared.ApplicationForAccreditation.EmailListModel
+@if (Model.CurrentEmails.Any())
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="bg-primary">
+                <tr>
+                    <th>Email Address</th>
+                    <th>Preferred</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var email in Model.CurrentEmails)
+                {
+                    <tr>
+                        <td>@email.Email</td>
+                        <td>@((email.IsPreferred ? "<i class=\"fa fa-check preferred\"></i>" : string.Empty).ToMvcHtmlString())</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>You have no email addresses listed in your profile. You can supply this information in @Html.ActionLink("My Details", "Email", "PersonalDetails")</p>
+}

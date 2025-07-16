@@ -1,0 +1,68 @@
+﻿<div>
+    <!-- ko foreach: { data: systemValueConfigs, as: 's' } -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">
+                <span data-bind="restext: 'Naati.Resources.SystemResources.resources.Change' + s.ConfigName + 'SystemValues'"></span>
+            </h2>
+        </div>
+        <div class="panel-body">
+            <!-- ko if: $parent.systemValuesReady -->
+            <!-- ko foreach: {data: $data, as: 'c' } -->
+            <!-- ko foreach: {data: c.SystemValues, as: 'v' } -->
+            <!-- ko if: v.DataType == "string"-->
+            <div class="row JustifyLeft">
+                <div class="form-control-static col-md-4">
+                    <label class="control-label" data-bind="restext: 'Naati.Resources.SystemResources.resources.' + v.Key + 'Label'"></label>
+                </div>
+                <div class="form-group col-md-6">
+                    <textarea class="form-control" rows="1" data-bind="value: v.Value, valueUpdate: 'input'"></textarea>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: v.DataType == "int"-->
+            <div class="row JustifyLeft">
+                <div class="form-control-static col-md-4">
+                    <label class="control-label" data-bind="restext: 'Naati.Resources.SystemResources.resources.' + v.Key + 'Label'"></label>
+                </div>
+                <div class="form-group col-md-6">
+                    <textarea class="form-control" rows="1" data-bind="value: v.Value, valueUpdate: 'input'"></textarea>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: v.DataType == "bool"-->
+            <div class="row JustifyLeft">
+                <div class="form-control-static col-md-4">
+                    <label class="control-label" data-bind="restext: 'Naati.Resources.SystemResources.resources.' + v.Key + 'Label'"></label>
+                </div>
+                <div class="form-control-static col-md-6">
+                    <label class="control-label checkbox-inline i-checks">
+                        <input class="form-control" type="checkbox" data-bind="checked: v.Value"><i></i>
+                    </label>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: c.validationError -->
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="alert alert-danger print-hide">
+                        <!--ko foreach: { data: c.validationErrors, as: 'e' }-->
+                        <span data-bind="text: e.Message"></span>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-primary" data-bind="click: $parent.save.bind($data.SystemValues)">
+                <i class="fa fa-check"></i>
+                <span>Save</span>
+            </button>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>

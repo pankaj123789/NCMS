@@ -1,0 +1,94 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.IdCard.WizardModel
+@{
+    ViewBag.Title = "Place an Order";
+    ViewBag.Subtitle = "ID Cards";
+    Layout = "~/Views/Shared/MasterPages/_ProductWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Products", Url.Action("index", "Product")),
+        new Tuple<string, string>("ID Cards", string.Empty)
+    };
+
+    var disableAccreditationOptions = !Model.SelectOrderModel.Accreditations.Any();
+    var disableRecognitionOptions = !Model.SelectOrderModel.Recognitions.Any();
+    var disableBoth = disableAccreditationOptions || disableRecognitionOptions;
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(nextButtons).show();
+        });
+    </script>
+}
+@functions
+{
+    private static MvcHtmlString DisabledHtml(bool disabled)
+    {
+        return (disabled ? "class=\"disabled\"" : string.Empty).ToMvcHtmlString();
+    }
+
+    private static object DisabledAttribute(string id, bool disabled)
+    {
+        return disabled ? new { id, disabled = "disabled" } : (object)new { id };
+    }
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>Each ID card is valid for a maximum of 3 years, and contains the expiry date of all your credentials.</p>
+        <p>Select the type of ID card you require. Note: a fee is charged for each ID card.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(m => m.SelectOrderModel.OrderOption, "1", DisabledAttribute("rbSingle", disableBoth))
+                <span @DisabledHtml(disableBoth)>One card with both accreditations and recognitions</span>
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(m => m.SelectOrderModel.OrderOption, "2", DisabledAttribute("rbBoth", disableBoth))
+                <span @DisabledHtml(disableBoth)>Two cards - one with accreditations and another with recognitions</span>
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(m => m.SelectOrderModel.OrderOption, "3", DisabledAttribute("rbAccreditations", disableAccreditationOptions))
+                <span @DisabledHtml(disableAccreditationOptions)>One card with accreditations</span>
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(m => m.SelectOrderModel.OrderOption, "4", DisabledAttribute("rbRecognitions", disableRecognitionOptions))
+                <span @DisabledHtml(disableRecognitionOptions)>One card with recognitions</span>
+            </label>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <p>Note: Where you have multiple accreditations in the same Skill, Language and Direction, only the highest level accreditation will be shown on your card</p>
+    </div>
+</div>
+@if (Model.SelectOrderModel.Accreditations.Any())
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h4 class="text-primary">Accreditations</h4>
+        </div>
+    </div>
+    Html.RenderPartial("_AvailableProductListPartial", Model.SelectOrderModel.Accreditations);
+}
+@if (Model.SelectOrderModel.Recognitions.Any())
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h4 class="text-primary">Recognitions</h4>
+        </div>
+    </div>
+    Html.RenderPartial("_AvailableProductListPartial", Model.SelectOrderModel.Recognitions);
+}

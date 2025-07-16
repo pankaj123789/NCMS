@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CC15921F-F11D-4BEE-BCC0-C449997102A3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>F1Solutions.Naati.Common.Dal</RootNamespace>
+    <AssemblyName>F1Solutions.Naati.Common.Dal</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\F1Solutions.NAATI.SAM.WebService.ExposedServices.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\F1Solutions.NAATI.SAM.WebService.ExposedServices.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Cronos, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cronos.0.7.0\lib\net45\Cronos.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v20.2, Version=20.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v20.2, Version=20.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="JsonSubTypes, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JsonSubTypes.1.5.2\lib\net47\JsonSubTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="KellermanSoftware.Compare-NET-Objects, Version=4.57.0.0, Culture=neutral, PublicKeyToken=d970ace04cc85217, processorArchitecture=MSIL">
+      <HintPath>..\packages\CompareNETObjects.4.57.0\lib\net46\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Graph, Version=1.17.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.1.17.0\lib\net45\Microsoft.Graph.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Graph.Core, Version=1.17.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.Core.1.17.0\lib\net45\Microsoft.Graph.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=5.1.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.5.1.3\lib\net461\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq.EagerFetching, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.EagerFetching.2.2.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiPublicPractitionerSearchTransformer.cs" />
+    <Compile Include="AuditLogQueryService.cs" />
+    <Compile Include="AutoMappingProfiles\CredentialApplicationStatusTypeProfile.cs" />
+    <Compile Include="AutoMappingProfiles\EmailProfile.cs" />
+    <Compile Include="AutoMappingProfiles\DocumentTypeProfile.cs" />
+    <Compile Include="AutoMappingProfiles\CredentialApplicationTypeProfile.cs" />
+    <Compile Include="AutoMappingProfiles\CredentialWorkflowProfile.cs" />
+    <Compile Include="AutoMappingProfiles\CredentialProfile.cs" />
+    <Compile Include="AutoMappingProfiles\EntityProfile.cs" />
+    <Compile Include="AutoMappingProfiles\UserProfile.cs" />
+    <Compile Include="AutoMappingProfiles\TestResultProfile.cs" />
+    <Compile Include="AutoMappingProfiles\ProfessionalDevelopmentProfile.cs" />
+    <Compile Include="AutoMappingProfiles\ProductSpecificationProfile.cs" />
+    <Compile Include="AutoMappingProfiles\ExaminerProfile.cs" />
+    <Compile Include="AutoMappingProfiles\EndorsedQualificationProfile.cs" />
+    <Compile Include="AutoMappingProfiles\LegacyAccreditationProfile.cs" />
+    <Compile Include="AutoMappingProfiles\JobProfile.cs" />
+    <Compile Include="AutoMappingProfiles\SystemValueProfile.cs" />
+    <Compile Include="AutoMappingProfiles\TestSessionProfile.cs" />
+    <Compile Include="AutoMappingProfiles\WiiseProfile.cs" />
+    <Compile Include="AutoMappingProfiles\SkillProfile.cs" />
+    <Compile Include="AutoMappingProfiles\CredentialApplicationFieldProfile.cs" />
+    <Compile Include="AutoMappingProfiles\TestComponentProfile.cs" />
+    <Compile Include="AutoMappingProfiles\RubricProfile.cs" />
+    <Compile Include="AutoMappingProfiles\TestSittingProfile.cs" />
+    <Compile Include="AutoMappingProfiles\CredentialApplicationFormProfile.cs" />
+    <Compile Include="AutoMappingProfiles\CertificationPeriodProfile.cs" />
+    <Compile Include="BackOffice\CacheQuery\LookupTypeCacheQueryService.cs" />
+    <Compile Include="BackOffice\CacheQuery\NcmsUserRefreshCacheQueryService.cs" />
+    <Compile Include="CacheQuery\BaseCacheQueryService.cs" />
+    <Compile Include="CacheQuery\BaseLazyCacheQueryService.cs" />
+    <Compile Include="BackOffice\CacheQuery\NcmsCookieCacheQueryService.cs" />
+    <Compile Include="CacheQuery\BaseUsersToRefreshCacheQueryService.cs" />
+    <Compile Include="CredentialPrerequisiteQueryService.cs" />
+    <Compile Include="CredentialQrCodeDalService.cs" />
+    <Compile Include="CredentialQueryService.cs" />
+    <Compile Include="Extensions\CompareExtension.cs" />
+    <Compile Include="Extensions\InsertDomainExtensions.cs" />
+    <Compile Include="Extensions\ToModelsExtensions.cs" />
+    <Compile Include="Extensions\UpdateDomainExtensions.cs" />
+    <Compile Include="FileDeletion\FileDeletionDalService.cs" />
+    <Compile Include="Finance\CreateApplicationRefundPaymentCompletionOperation.cs" />
+    <Compile Include="Finance\CreateApplicationRefundCompletionOperation.cs" />
+    <Compile Include="Finance\PayPal\IPayPalService.cs" />
+    <Compile Include="Finance\PayPal\PayPalService.cs" />
+    <Compile Include="Finance\SecurePayAuthorisationService.cs" />
+    <Compile Include="Finance\Wiise\WiiseExceptionHelper.cs" />
+    <Compile Include="Finance\Wiise\WiiseHttpExceptionResult.cs" />
+    <Compile Include="Finance\Wiise\WiisePaymentCreationOperation.cs" />
+    <Compile Include="Finance\Wiise\IWiiseAuthorisationService.cs" />
+    <Compile Include="Finance\Wiise\IWiiseIntegrationService.cs" />
+    <Compile Include="Finance\Wiise\IWiiseTokenProvider.cs" />
+    <Compile Include="Finance\Wiise\WiiseAuthorisationService.cs" />
+    <Compile Include="Finance\Wiise\WiiseContactCreationOperation.cs" />
+    <Compile Include="Finance\Wiise\WiiseExecutor.cs" />
+    <Compile Include="Finance\Wiise\WiiseExtensions.cs" />
+    <Compile Include="Finance\Wiise\WiiseIntegrationService.cs" />
+    <Compile Include="Finance\Wiise\WiiseInvoiceCreationOperation.cs" />
+    <Compile Include="Finance\Wiise\WiiseOperation.cs" />
+    <Compile Include="Finance\Wiise\WiiseOperationRequest.cs" />
+    <Compile Include="Finance\Wiise\WiiseToken.cs" />
+    <Compile Include="Finance\Wiise\WiiseInvoiceReference.cs" />
+    <Compile Include="Finance\Wiise\WiiseReference.cs" />
+    <Compile Include="Finance\Wiise\WiiseCreditNoteCreationOperation.cs" />
+    <Compile Include="Finance\Wiise\WiisePaymentReference.cs" />
+    <Compile Include="MaterialRequestQueryService.cs" />
+    <Compile Include="CacheQuery\BaseCookieCacheQueryService.cs" />
+    <Compile Include="NotificationQueryService.cs" />
+    <Compile Include="PersonEmailVerificationCodeDalService.cs" />
+    <Compile Include="Portal\CacheQuery\MyNaatiUserRefreshCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\CountriesCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\CredentialLanguage2CacheQueryService.cs" />
+    <Compile Include="CacheQuery\SecretsCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\DisplayBillsCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\DisplayRolePlayerCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\MyNaatiCookieCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\OdAddressVisibilityTypesCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\PersonTitlesCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\SystemValuesCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\PostcodesCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\TestLocationsCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\LanguagesCacheQueryService.cs" />
+    <Compile Include="Portal\CacheQuery\CredentialLanguage1CacheQueryService.cs" />
+    <Compile Include="Portal\Repositories\AccreditationResultRepository.cs" />
+    <Compile Include="Portal\Repositories\AddressRepository.cs" />
+    <Compile Include="Portal\Repositories\ApiAccessRepository.cs" />
+    <Compile Include="Portal\Repositories\AutoPersistenceModelGenerator.cs" />
+    <Compile Include="Portal\Repositories\ConfigurationRepository.cs" />
+    <Compile Include="Portal\Repositories\CountryRepository.cs" />
+    <Compile Include="Portal\Repositories\CredentialRepository.cs" />
+    <Compile Include="Portal\Repositories\DownloadRepository.cs" />
+    <Compile Include="Portal\Repositories\EFTMachineRepository.cs" />
+    <Compile Include="Portal\Repositories\EmailChangeRepository.cs" />
+    <Compile Include="Portal\Repositories\EmailRepository.cs" />
+    <Compile Include="Portal\Repositories\EPortalSamUserRepository.cs" />
+    <Compile Include="Portal\Repositories\ExaminerRepository.cs" />
+    <Compile Include="Portal\Repositories\FileRepository.cs" />
+    <Compile Include="Portal\Repositories\LanguageRepository.cs" />
+    <Compile Include="Portal\Repositories\NaatiEntityRepository.cs" />
+    <Compile Include="Portal\Repositories\OfficeRepository.cs" />
+    <Compile Include="Portal\Repositories\OrderItemRepository.cs" />
+    <Compile Include="Portal\Repositories\OrderRepository.cs" />
+    <Compile Include="Portal\Repositories\PasswordHistoryRepository.cs" />
+    <Compile Include="Portal\Repositories\PersonImageRepository.cs" />
+    <Compile Include="Portal\Repositories\PersonRepository.cs" />
+    <Compile Include="Portal\Repositories\PhoneRepository.cs" />
+    <Compile Include="Portal\Repositories\PostcodeRepository.cs" />
+    <Compile Include="Portal\Repositories\PractitionersDirectory\IPractitionersRepository.cs" />
+    <Compile Include="Portal\Repositories\PractitionersDirectory\LinqPractitionerRepository.cs" />
+    <Compile Include="Portal\Repositories\PractitionersDirectory\PractitionerRepository.cs" />
+    <Compile Include="Portal\Repositories\PractitionersDirectory\PractitionerRepository.designer.cs">
+      <DependentUpon>PractitionerRepository.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Portal\Repositories\PractitionersDirectory\PractitionerSearchRepository.cs" />
+    <Compile Include="Portal\Repositories\ProductSpecificationRepository.cs" />
+    <Compile Include="Portal\Repositories\RegistrationRequestRepository.cs" />
+    <Compile Include="Portal\Repositories\SamKeyRepository.cs" />
+    <Compile Include="Portal\Repositories\SamLinqRepository.designer.cs" />
+    <Compile Include="Portal\Repositories\StateRepository.cs" />
+    <Compile Include="Portal\Repositories\SubmitTestDraftComponentRepository.cs" />
+    <Compile Include="Portal\Repositories\SubmitTestDraftRepository.cs" />
+    <Compile Include="Portal\Repositories\SystemValueRepository.cs" />
+    <Compile Include="Portal\Repositories\TestLocationRepository.cs" />
+    <Compile Include="Portal\Repositories\UserRepository.cs" />
+    <Compile Include="Portal\Repository.cs" />
+    <Compile Include="Portal\SecuredRepository.cs" />
+    <Compile Include="Portal\SystemValuesTranslator.cs" />
+    <Compile Include="Portal\Validator.cs" />
+    <Compile Include="CredentialPrerequisiteDalService.cs" />
+    <Compile Include="QueryHelper\CredentialQueryHelper.cs" />
+    <Compile Include="QueryHelper\EmailTemplateQueryHelper.cs" />
+    <Compile Include="Finance\CreateApplicationPaymentCompletionOperation.cs" />
+    <Compile Include="Finance\CreatePaymentCompletionOperation.cs" />
+    <Compile Include="GroupConjunction.cs" />
+    <Compile Include="CustomAuthPolicy.cs" />
+    <Compile Include="ExaminerTestMaterialDtoTransformer.cs" />
+    <Compile Include="QueryHelper\EmailMessageQueryHelper.cs" />
+    <Compile Include="QueryHelper\EndorsedQualificationQueryHelper.cs" />
+    <Compile Include="QueryHelper\MaterialRequestQueryHelper.cs" />
+    <Compile Include="QueryHelper\ApiPractitionerQueryHelper.cs" />
+    <Compile Include="QueryHelper\TestSessionAvailabiltyQueryHelper.cs" />
+    <Compile Include="QueryHelper\TestSessionRolePlayerQueryHelper.cs" />
+    <Compile Include="QueryHelper\VenueQueryHelper.cs" />
+    <Compile Include="QueryHelper\SkillQueryHelper.cs" />
+    <Compile Include="LogbookQueryService.cs" />
+    <Compile Include="EmailMessageQueryService.cs" />
+    <Compile Include="ApplicationQueryService.cs" />
+    <Compile Include="QueryHelper\ApplicationQueryHelper.cs" />
+    <Compile Include="ApplicationSearchTransformer.cs" />
+    <Compile Include="AssetQueryService.cs" />
+    <Compile Include="DataRowResultTransformer.cs" />
+    <Compile Include="ExaminerQueryService.cs" />
+    <Compile Include="Finance\CreateInvoiceCompletionOperation.cs" />
+    <Compile Include="Finance\CreateApplicationInvoiceCompletionOperation.cs" />
+    <Compile Include="Finance\ManualCreateInvoiceCompletionOperation.cs" />
+    <Compile Include="Finance\ExternalAccountingOperationResult.cs" />
+    <Compile Include="ContactPersonQueryService.cs" />
+    <Compile Include="Office365\IAzureAuthorisationService.cs" />
+    <Compile Include="Office365\AzureAuthorisationService.cs" />
+    <Compile Include="Office365\Office365IntegrationService.cs" />
+    <Compile Include="PayrollQueryService.cs" />
+    <Compile Include="QueryHelper\InstituteQueryHelper.cs" />
+    <Compile Include="QueryHelper\PersonQueryHelper.cs" />
+    <Compile Include="InstituteSearchTransformer.cs" />
+    <Compile Include="PersonSearchTransformer.cs" />
+    <Compile Include="QueryHelper\PractitionerQueryHelper.cs" />
+    <Compile Include="PractitionerQueryService.cs" />
+    <Compile Include="PractitionerSearchTransformer.cs" />
+    <Compile Include="QueryHelper\QuerySearchHelper.cs" />
+    <Compile Include="ReportingQueryService.cs" />
+    <Compile Include="StringListExpression.cs" />
+    <Compile Include="SystemQueryService.cs" />
+    <Compile Include="TestMaterialApplicantDtoTransformer.cs" />
+    <Compile Include="QueryHelper\TestMaterialQueryHelper.cs" />
+    <Compile Include="TestMaterialQueryService.cs" />
+    <Compile Include="QueryHelper\TestQueryHelper.cs" />
+    <Compile Include="EmailTemplateQueryService.cs" />
+    <Compile Include="QueryHelper\LanguageQueryHelper.cs" />
+    <Compile Include="TestSpecificationQueryService.cs" />
+    <Compile Include="TestQueryService.cs" />
+    <Compile Include="PersonQueryService.cs" />
+    <Compile Include="LanguageQueryService.cs" />
+    <Compile Include="ExaminerToolsService.cs" />
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="FileSystemFileStorageService.cs" />
+    <Compile Include="InstitutionQueryService.cs" />
+    <Compile Include="NoteQueryService.cs" />
+    <Compile Include="PanelQueryService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestResultQueryService.cs" />
+    <Compile Include="QueryHelper\TestSessionQueryHelper.cs" />
+    <Compile Include="TestSessionQueryService.cs" />
+    <Compile Include="BackOffice\CacheQuery\NcmsUserPermissionCacheQueryService.cs" />
+    <Compile Include="BackOffice\CacheQuery\NcmsUserCacheQueryService.cs" />
+    <Compile Include="TestSpecificationsQueryService.cs" />
+    <Compile Include="TokenAuthorisationService.cs" />
+    <Compile Include="UserQueryService.cs" />
+    <Compile Include="UtilityQueryService.cs" />
+    <Compile Include="AccountingFinanceService.cs" />
+    <Compile Include="Finance\AccountingProcessingService.cs" />
+    <Compile Include="Finance\ExternalAccountingQueueService.cs" />
+    <Compile Include="VenueQueryService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\F1Solutions.Global.Common\F1Solutions.Global.Common.csproj">
+      <Project>{f41c4166-5b4d-4721-97bc-125f3cf0204a}</Project>
+      <Name>F1Solutions.Global.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Contracts\F1Solutions.Naati.Common.Contracts.csproj">
+      <Project>{F965E658-187F-4E88-AA05-4C2B4812C5B6}</Project>
+      <Name>F1Solutions.Naati.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Dal.Domain\F1Solutions.Naati.Common.Dal.Domain.csproj">
+      <Project>{128BDBBB-CE32-48A8-B07C-D1BE04B1F488}</Project>
+      <Name>F1Solutions.Naati.Common.Dal.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Dal.NHibernate\F1Solutions.Naati.Common.Dal.NHibernate.csproj">
+      <Project>{50C2AB12-2B81-4984-AD06-0D228B58272C}</Project>
+      <Name>F1Solutions.Naati.Common.Dal.NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Resources\Naati.Resources.csproj">
+      <Project>{7c8ceb61-f41b-4951-a2d5-7286874765f7}</Project>
+      <Name>Naati.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.NAATI.Common.Wiise\F1Solutions.Naati.Common.Wiise.csproj">
+      <Project>{00d21610-a7a2-4e9e-b720-94aea281d4f7}</Project>
+      <Name>F1Solutions.Naati.Common.Wiise</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyNaati.Contracts\MyNaati.Contracts.csproj">
+      <Project>{3B282190-56F0-494B-B94B-FA76EFFFB895}</Project>
+      <Name>MyNaati.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ncms.Contracts\Ncms.Contracts.csproj">
+      <Project>{B684501E-4F34-45EF-A6BC-2C00088BA2A2}</Project>
+      <Name>Ncms.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Portal\Repositories\PractitionersDirectory\PractitionerRepository.dbml" />
+    <None Include="Portal\Repositories\PractitionersDirectory\PractitionerRepository.dbml.layout" />
+    <None Include="Portal\Repositories\SamLinqRepository.dbml" />
+    <None Include="Portal\Repositories\SamLinqRepository.dbml.layout" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ServiceInterceptor\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

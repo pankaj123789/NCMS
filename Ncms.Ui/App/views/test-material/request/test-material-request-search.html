@@ -1,0 +1,54 @@
+<div class="hbox">
+    <div class="hbox" data-bind="component: {
+    name: 'search-component',
+    params: {
+         title: title,
+         filters: filters,
+         searchType: searchType,
+         searchTerm: searchTerm,
+         searchCallback: searchCallback,
+         tableDefinition: tableDefinition,
+         idSearchOptions: idSearchOptions,
+         additionalButtons: additionalButtons
+    }
+}">
+    </div>
+    <script id="test-material-request-header-template" type="text/html">
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.ID'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.CreatedDate'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Title'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestTaskType'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Language'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Round'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.RoundStatus'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Coordinator'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.DueDate'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.RequestStatus'"></th>
+        <th>&nbsp;</th>
+    </script>
+    <script id="test-material-request-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: '#' + OutputMaterialId"></td>
+            <td data-bind="text: CreatedDate"></td>
+            <td data-bind="text: RequestTitle"></td>
+            <td data-bind="text: TestTaskType"></td>
+            <td data-bind="text: Language"></td>
+            <td data-bind="text: Round"></td>
+            <td>
+                <span class="label text-base m-t-xs" data-bind="text:RoundStatus, css: 'label-' + RoundBadgeColor"></span>
+            </td>
+            <td data-bind="text: Coordinator"></td>
+            <td data-bind="text: DueDate"></td>
+            <td>
+                <span class="label text-base m-t-xs" data-bind="text:RequestStatus, css: 'label-' + RequestBadgeColor"></span>
+            </td>
+            <td class="text-center w-xs">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#material-request/' + Id }, clickBubble: false, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </script>
+</div>

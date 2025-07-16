@@ -1,0 +1,16 @@
+﻿<div class="form">
+    <!--ko if: ShowPublicNote-->
+    <div class="form-group" data-bind="validationElement: PublicNote">
+        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.PublicNotes'"></label>
+        <textarea class="form-control" rows="5" data-bind="value: PublicNote, enable: Enable"></textarea>
+        <span class="help-block" data-bind="text:PublicNotesHelpText"></span>
+    </div>
+    <!--/ko-->
+    <!--ko if: ShowPrivateNote-->
+    <div class="form-group" data-bind="validationElement: PrivateNote">
+        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.PrivateNotes'"></label>
+        <textarea class="form-control" rows="5" data-bind="value: PrivateNote, enable: Enable"></textarea>
+        <span class="help-block" data-bind="reshtml: 'Naati.Resources.Application.resources.PrivateNotesHelp'"></span>
+    </div>
+    <!--/ko-->
+</div>

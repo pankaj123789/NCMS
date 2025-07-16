@@ -1,0 +1,186 @@
+﻿@model MyNaati.Ui.ViewModels.ExaminerTools.MarkingPaymentStatusModel
+@{
+    ViewBag.Title = "My Marking Payments";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Examiner Tools", Url.Action("Index")),
+        new Tuple<string, string>("My Marking Payments", null)
+    };
+
+    var submittedFrom = Model.SubmittedFrom.HasValue ? Model.SubmittedFrom.Value.ToString("yyyy-MM-dd") : string.Empty;
+    var submittedTo = Model.SubmittedTo.HasValue ? Model.SubmittedTo.Value.ToString("yyyy-MM-dd") : string.Empty;
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("[data-toggle=tooltip]").tooltip();
+
+            var $chosen = $('.chosen');
+
+            $chosen.chosen();
+            $chosen.removeClass('invisible');
+            $chosen.height('auto');
+
+            var dataTable = $('#resultsTable').DataTable({
+                ajax: function (data, callback, settings) {
+                    var url = '@Url.Action("MarkingPaymentStatus", "ExaminerTools")';
+
+                    var formFieldIds = [
+                            'AttendanceID',
+                            'PayrollStatus',
+                            'SubmittedFrom',
+                            'SubmittedTo'
+                    ];
+                    var extendedData = {};
+
+                    for (var i = 0; i < formFieldIds.length; i++) {
+                        var formFieldId = formFieldIds[i];
+                        var $formField = $('#' + formFieldId);
+
+                        if ($formField.val()) {
+                            extendedData[formFieldId] = $formField.val();
+                        }
+                    }
+
+                    $.post(url, $.extend({}, data, extendedData)).then(function (result) {
+                        var $errors = $('.validation-summary-errors');
+                        $errors.empty();
+
+                        if (result.IsError) {
+                            $errors.show();
+                            $errors.append('<ul></ul>');
+                            $.each(result.Errors, function (index, value) {
+                                $errors.find('ul').append('<li>' + value + '</li>');
+                            });
+                        }
+
+                        callback(result);
+                    });
+                },
+                columns: [
+                    { data: 'SubmittedDate' },
+                    {
+                        render: function (data, type, row, meta) {
+                            var content = '<span>' + row.TestAttendanceId + '</span>';
+                            if (row.Supplementary) {
+                                content += '&nbsp;&nbsp;<span data-toggle="tooltip" class="cursor-pointer label badge bg-black-opacity" title="Supplementary Test">S</span>';
+                            }
+                            return content;
+                        }
+                    },
+                    { data: 'PayrollStatus' },
+                    { data: 'InvoiceNo' },
+                    { data: 'ProcessedDate' },
+                    { data: 'AmountPaid' },
+                    { data: 'InvoiceTotal' },
+                    { data: 'Language' },
+                    { data: 'TestType' }
+                ],
+                drawCallback: function () {
+                    $("[data-toggle=tooltip]").tooltip();
+                },
+                deferLoading: 0,
+                dom: "<'row v-offset-xs-1'<'col-sm-12'<'table-responsive't>>>" +
+                    "r",
+                info: false,
+                language: {
+                    processing: $('#loadingOverlayTemplate').html(),
+                    zeroRecords: 'No Results'
+                },
+                ordering: false,
+                paging: false,
+                processing: true,
+                searching: false,
+                serverSide: true
+            });
+
+            $('#searchForm').submit(function () {
+                dataTable.ajax.reload();
+                return false;
+            });
+
+            dataTable.ajax.reload();
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="validation-summary-errors" style="display: none;">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-offset-1 col-sm-10">
+            @using (Html.BeginForm("MarkingPaymentStatus", "ExaminerTools", FormMethod.Post, new { id = "searchForm", @class = "form-horizontal" }))
+            {
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SubmittedFrom, "Submitted", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => submittedFrom, new { id = "SubmittedFrom", @class = "form-control", type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SubmittedTo, "To", new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => submittedTo, new { id = "SubmittedTo", @class = "form-control", type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.AttendanceID, "Attendance ID", new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(x => x.AttendanceID, new { @class = "form-control", style = "height: 34px;", type = "number" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.PayrollStatus, "Payroll Status", new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(x => x.PayrollStatus, Model.Statuses, new { multiple = "multiple", @class = "form-control chosen invisible", style = "height: 34px;" })
+                    </div>
+                </div>
+                <div class="row v-offset-xs-2">
+                    <div class="col-sm-12">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row v-offset-xs-3">
+        <div class="col-lg-12">
+            <table id="resultsTable" class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th data-container="body" title="The date the marks were submitted via myNAATI." data-toggle="tooltip">Submitted Date</th>
+                        <th data-container="body" title="The ID used for correspondence regarding a particular test marking.  The document icon indicates that the papers have been received by NAATI." data-toggle="tooltip">Attendance ID</th>
+                        <th style="width: 18%" data-container="body" title="The payroll status of the marking." data-toggle="tooltip">Status</th>
+                        <th data-container="body" title="The invoice which contained the payment for this marking." data-toggle="tooltip">Invoice No</th>
+                        <th data-container="body" title="The date that NAATI processed the payment for this test." data-toggle="tooltip">Processed Date *</th>
+                        <th data-container="body" title="The payment for this marking." data-toggle="tooltip">Amount Paid (ex GST)</th>
+                        <th data-container="body" title="The total payment in the invoice." data-toggle="tooltip">Invoice Total (ex GST)</th>
+                        <th data-container="body" title="The language of the marking." data-toggle="tooltip">Skill</th>
+                        <th data-container="body" title="The Level, Category and Direction for this marking." data-toggle="tooltip">Credential Type</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th colspan="9">* Note that there may be a delay between the Processed Date and when the funds will be available in your bank account.</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

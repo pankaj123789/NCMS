@@ -1,0 +1,141 @@
+﻿<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3" data-bind="html: title"></h1>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="panel wrapper">
+                        <div class="form-horizontal">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label data-bind="reshtml: 'Naati.Resources.TestSession.resources.ApplicationId'"></label>
+                                    <div data-bind="validationElement: serverModel.ApplicationId">
+                                        <input type="text" class="form-control" data-bind="value: serverModel.ApplicationId" />
+                                    </div>
+                                    <br />
+                                    <div style="text-align:right">
+                                        <button type="button" class="btn btn-success" data-bind="click: getCredentialRequest">
+                                            <span data-bind="restext: 'Naati.Resources.TestSession.resources.GetCredentialRequest'"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ko if: showNoCredentialRequestsAlert -->
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-3">
+
+                                    <div class="col-sm alert alert-warning print-hide" data-bind="reshtml: 'Naati.Resources.TestSession.resources.NoCredentialRequestsFound'">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: showCredentialRequests -->
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div data-bind="validationElement: serverModel.CredentialRequestId">
+                                        <label data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialRequests'"></label>
+                                        <div>
+                                            <!-- ko component: { name: 'select-component', params: credentialRequestOptions } --><!-- /ko -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                </br>
+                                <div class="col-sm-3">
+                                    <div data-bind="validationElement: serverModel.TestSessionId">
+                                        <label data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestSessionId'"></label>
+                                        <input type="text" class="form-control" data-bind="value: serverModel.TestSessionId" />
+                                        <br />
+                                        <button style="float:right" type="button" class="btn btn-success" data-bind="click: getTestSession">
+                                            <span data-bind="restext: 'Naati.Resources.TestSession.resources.ShowDetails'"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <!-- ko if: showPastDateAlert -->
+                                    <div class="col-sm alert alert-warning print-hide" data-bind="reshtml: 'Naati.Resources.TestSession.resources.NeedPastTestDate'">
+                                    </div>
+                                    <!-- /ko -->
+
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: showDetails -->
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label class="control-label pull-left m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.CandidateName'"></label>
+                                    <p class="form-control-static" data-bind="text: candidateName"></p>
+
+                                    <label class="control-label pull-left m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.NaatiNumber'"></label>
+                                    <p class="form-control-static" data-bind="text: application.NaatiNumber"></p>
+
+                                    <label class="control-label pull-left m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.ApplicationId'"></label>
+                                    <p class="form-control-static" data-bind="text: application.ApplicationId"></p>
+
+                                    <label class="control-label pull-left m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.CredentialRequest'"></label>
+                                    <p class="form-control-static" data-bind="text: credentialrequest"></p>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h5 class="font-weight-bold" data-bind="reshtml: 'Naati.Resources.TestSession.resources.AssignedToTestSession'"></h5>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label class="control-label pull-left m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestSessionId'"></label>
+                                    <p class="form-control-static" data-bind="text: testSession.Id"></p>
+
+                                    <label class="control-label pull-left m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.SessionName'"></label>
+                                    <p class="form-control-static" data-bind="text: testSession.Name"></p>
+
+                                    <label class="control-label pull-left m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestDate'"></label>
+                                    <p class="form-control-static" data-bind="text: testSession.TestDate"></p>
+
+                                    <label class="control-label pull-left m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.CredentialType'"></label>
+                                    <p class="form-control-static" data-bind="text: testSession.CredentialTypeInternalName"></p>
+
+                                    <label class="control-label pull-left m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestLocation'"></label>
+                                    <p class="form-control-static" data-bind="text: testSession.VenueName"></p>
+
+                                    <label class="control-label pull-left m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Venue'"></label>
+                                    <p class="form-control-static" data-bind="text: testSession.VenueAddress"></p>
+
+                                    <label class="control-label pull-left m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Skills'"></label>
+                                    <p class="form-control-static" data-bind="text: testSession.Skills"></p>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-control-static">
+                                        <label class="checkbox-inline i-checks">
+                                            <input type="checkbox" data-bind="checked: agreeForCondition"><i></i>
+                                            <span class="padder-md" data-bind="restext: 'Naati.Resources.TestSession.resources.AggreeToCondition'"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <button style="float:right" type="button" class="btn btn-success" data-bind="click: apply, enable: agreeForCondition">
+                                        <span data-bind="restext: 'Naati.Resources.TestSession.resources.Apply'"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!--/ko-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

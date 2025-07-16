@@ -1,0 +1,96 @@
+﻿@using MyNaati.Ui.Common
+@model MyNaati.Ui.ViewModels.IdCard.IdCardListViewModel
+
+@{
+    ViewBag.Title = "ID Cards";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Products", Url.Action("index", "Product")),
+        new Tuple<string, string>("ID Cards", string.Empty)
+    };
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">What ID Cards Can I Order?</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @if (Model.IdCards.Any())
+            {
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>
+                            You can order any of the ID cards listed below. ID cards show the date at which each credential expires if you are part of the
+                            <a href="@Url.ExternalUrlFromConfig("RevalidationInformation")" target="_blank">revalidation system</a>.
+                        </p>
+                        <p>
+                            If NAATI does not already have an identification photograph less than 12 months old, myNAATI will guide you through the order process.
+                            You will then be required to download a completed order form to mail along with two
+                            <a href="@Url.ExternalUrlFromConfig("PhotoRequirements")" target="_blank">Australian passport sized</a> photographs.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="bg-primary">
+                                    <tr>
+                                        <th>Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var idCard in Model.IdCards)
+                                    {
+                                        <tr>
+                                            <td>@idCard.Type</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>You have no credentials for which an ID card may be purchased.</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-primary">How Much Does It Cost?</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Fees include postage and handling fees for standard delivery.  All fees and charges are listed in Australian currency ($AUD).</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @{ Html.RenderPartial("_ProductFeeListPartial", Model.Fees); }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Note: if special delivery is required, contact NAATI for prices.</p>
+        </div>
+    </div>
+    @if (Model.IdCards.Any())
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <a class="btn btn-primary" href="@Url.Action("StartWizard", "IdCard")">Order Now</a>
+            </div>
+        </div>
+    }
+</div>

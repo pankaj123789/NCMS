@@ -1,0 +1,15 @@
+﻿<div>
+    <div class="pull-right m-b-n-xxl">
+        <a href="#" class="btn btn-default" data-bind="clickBubble: false, click: refresh, tooltip: { trigger: 'hover' }, resattr: { title: 'Naati.Resources.Shared.resources.Refresh' }">
+            <i data-bind="css: refreshCss"></i>
+        </a>
+    </div>
+    <!-- ko component: { name: 'tab-component', params: tabOptions } -->
+    <!-- /ko -->
+    <label class="checkbox-inline i-checks">
+        <input type="checkbox" data-bind="checked: showOld"><i></i>
+        <span class="padder-md" data-bind="restext: 'Naati.Resources.NaatiEntity.resources.ShowOld'"></span>
+    </label>
+    <!-- ko component: { name: 'audit-log', params: auditLogOptions } -->
+    <!-- /ko -->
+</div>

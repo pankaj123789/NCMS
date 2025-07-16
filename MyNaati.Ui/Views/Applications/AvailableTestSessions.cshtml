@@ -1,0 +1,592 @@
+﻿@using System.Configuration
+@using System.Threading
+@using MyNaati.Ui.Helpers
+@using MyNaati.Ui.ViewModels.CredentialApplication
+@model MyNaati.Ui.ViewModels.CredentialApplication.AvailableTestSessionViewModelList
+
+@{
+    ViewBag.Title = "Available Test Sessions";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+        new Tuple<string, string>("My Tests", Url.Action("MyTests")),
+        new Tuple<string, string>("Available Test Sessions", null)
+
+    };
+    var allocatedTestSession = Model.AllocatedTestSession;
+    var hasAllocatedTestSession = false;
+    var availableTestSessions = Model.AvailableTestSessionList
+        .OrderBy(x => DateTime.Parse(x.TestDate))
+        .ToList();
+
+    if (allocatedTestSession != null)
+    {
+        hasAllocatedTestSession = true;
+    }
+
+    var inPreferredLocation = availableTestSessions.Where(a => a.IsPreferedLocation);
+    var inOtherLocations = availableTestSessions.Where(a => !a.IsPreferedLocation).OrderBy(a => a.TestLocation);
+}
+
+@foreach (var item in Model.AvailableTestSessionList)
+{
+    var geoLatitudeId = "geoLatitude" + Model.Index;
+    var geoLongitudeId = "geoLongitude" + Model.Index;
+
+    var latitudeValue = item.Latitude;
+    var longitudeValue = item.Longitude;
+
+    <input id="@geoLatitudeId" name="@geoLatitudeId" type="hidden" value="@latitudeValue" />
+    <input id="@geoLongitudeId" name="@geoLongitudeId" type="hidden" value="@longitudeValue" />
+
+    Model.Index++;
+}
+
+@Html.Hidden("AvailableTestSessionCount", Model.AvailableTestSessionList.Count, new { id = "mAvailableTestSessionCount" })
+
+
+@helper RenderPanelBody(AvailableTestSessionViewModel item, bool otherLocation)
+{
+    var allocatedTestSessionBorderClass = item.HasAllocatedTestSession ? "allocatedTestSession-border" : string.Empty;
+    var allocatedTestSessionBackgroundClass = item.HasAllocatedTestSession ? "allocatedTestSession-background" : string.Empty;
+    var btnText = item.HasAllocatedTestSession ? "Change or Reject this Test Session" : "Select this Test Session";
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default @allocatedTestSessionBorderClass">
+                <div class="panel-body @allocatedTestSessionBackgroundClass">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="panel-body">
+
+                                <div class="col-md-3 col-xs-12">
+                                    <label>Test Session ID</label>
+                                    <p class="form-control-static">@item.TestSessionId</p>
+                                </div>
+                                <div class="col-md-3 col-xs-12">
+                                    <label>Test Date</label>
+                                    <p class="form-control-static">@item.TestDate.ToString()</p>
+                                </div>
+                                <div class="col-md-3 col-xs-12">
+                                    <label>Test Start</label>
+                                    <p class="form-control-static">@item.TestStart</p>
+                                </div>
+                                <div class="col-md-3 col-xs-12">
+
+                                    <div class="form-group">
+                                        @if (!item.HasAllocatedTestSession)
+                                        {
+                                            <form id="@string.Format("selectSessionForm{0}", item.Id)" action="@(item.TestFeePaid ? Url.Action("AcceptTestSession", "Applications"): Url.Action("SelectTestSession", "Applications"))" method="post">
+                                                <input type="hidden" name="TestSessionId" value="@item.Id">
+                                                <input type="hidden" name="CredentialRequestId" value="@item.CredentialRequestId">
+                                                <input type="hidden" name="CredentialApplicationId" value="@item.CredentialApplicationId">
+                                                <input type="hidden" name="g-recaptcha-response" />
+
+                                                @if (otherLocation)
+                                                {
+                                                    if (item.TestFeePaid)
+                                                    {
+                                                        <button class="btn btn-primary" data-ajax-mode="true" data-form-id="#@string.Format("selectSessionForm{0}", item.Id)" data-test-location="@item.TestLocation" data-session-id="@item.TestSessionId" data-test-date="@item.TestDate" type="button" data-toggle="modal" data-target="#detailModal" data-backdrop="static" data-keyboard="false" data-modal-type="Accept" data-modal-detail="TestSession">Select this Test Session</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button class="btn btn-primary" data-form-id="#@string.Format("selectSessionForm{0}", item.Id)" data-test-location="@item.TestLocation" data-session-id="@item.TestSessionId" data-test-date="@item.TestDate" type="button" data-toggle="modal" data-target="#detailModal" data-backdrop="static" data-keyboard="false" data-modal-type="Accept" data-modal-detail="TestSession">Select this Test Session</button>
+                                                    }
+
+                                                }
+                                                else
+                                                {
+                                                    if (item.TestFeePaid)
+                                                    {
+                                                        <button class="btn btn-primary" data-ajax-mode="true" data-form-id="#@string.Format("selectSessionForm{0}", item.Id)" data-session-id="@item.TestSessionId" data-test-date="@item.TestDate" type="button" data-toggle="modal" data-target="#detailModal" data-backdrop="static" data-keyboard="false" data-modal-type="Accept" data-modal-detail="TestSession">Select this Test Session</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button id="selectSessionButton" class="btn btn-primary" type="submit" name="selectSession" data-form-id="#@string.Format("selectSessionForm{0}", item.Id)">Select this Test Session</button>
+                                                    }
+                                                }
+
+                                            </form>
+
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-primary" data-test-location="@item.TestLocation" data-session-id="@item.TestSessionId" data-test-date="@item.TestDate" data-url="@Url.Action("RejectTestSession", "Applications", new { credentialRequestId= item.CredentialRequestId, credentialApplicationId =item.CredentialApplicationId})" type="button" data-toggle="modal" data-target="#detailModal" data-backdrop="static" data-keyboard="false" data-modal-type="Reject" data-modal-detail="TestSession">Reject this Test Session</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="panel-body">
+                                <div class="col-md-3 col-xs-12">
+                                    <label>Expected Completion</label>
+                                    <p class="form-control-static">@item.ExpectedCompletion</p>
+                                </div>
+                                <div class="col-md-3 col-xs-12">
+                                    <label>Availability</label>
+                                    <p class="form-control-static">
+                                        <div class="availability">
+                                            <div class="label label-@item.AvailabilityClass">@item.Availability</div>
+                                        </div>
+                                    </p>
+                                </div>
+                                <div class="col-md-3 col-xs-12">
+                                    <label>Venue Name</label>
+                                    <p class="form-control-static">@item.VenueName</p>
+                                </div>
+
+                                <div class="col-md-3 col-xs-12">
+                                    <label>Venue Address</label>
+                                    <p class="form-control-static">
+                                        <a target="_blank" href="https://www.google.com.au/maps/place/@item.VenueAddress.Replace("/", "%2F")" title="@item.VenueAddress">
+                                            <span>@item.VenueAddress</span>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <div id="recaptcha"></div>
+    </div>
+}
+
+@if (hasAllocatedTestSession)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">Selected Test Session</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            @RenderPanelBody(allocatedTestSession, false)
+        </div>
+    </div>
+}
+@if (availableTestSessions.Any())
+{
+    if (inPreferredLocation.Any())
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="text-primary">Available Test Sessions in Preferred Location</h2>
+                @foreach (var item in inPreferredLocation)
+                {
+                    @RenderPanelBody(item, false)
+                }
+            </div>
+        </div>
+    }
+
+    if (inOtherLocations.Any())
+    {
+        <div class="row">
+            <div class="col-lg-12 m-t">
+                <div class="b-t b-primary m-b"></div>
+                <h2 class="text-primary">Available Test Sessions in Other Locations (Interstate locations)</h2>
+            </div>
+        </div>
+        var i = 1;
+        var locations = inOtherLocations.GroupBy(o => o.TestLocation);
+        <ul class="nav nav-pills nav-outline" role="tablist">
+            @foreach (var l in locations)
+            {
+                <li role="presentation">
+                    <a href="#location@(i)" aria-controls="location@(i)" role="tab" data-toggle="tab">
+                        <i class="glyphicon glyphicon-map-marker"></i>
+                        @(l.Key)
+                    </a>
+                </li>
+                i++;
+            }
+        </ul>
+        <div class="tab-content">
+            @{
+                i = 1;
+            }
+            @foreach (var l in locations)
+            {
+                <div role="tabpanel" class="tab-pane" id="location@(i)">
+                    @foreach (var item in l)
+                    {
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @RenderPanelBody(item, true)
+                            </div>
+                        </div>
+                    }
+                </div>
+                i++;
+            }
+        </div>
+    }
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">No other available test sessions</h2>
+        </div>
+    </div>
+}
+@functions
+{
+    public enum ModalType
+    {
+        Accept,
+        Reject,
+        RejectSuccessful,
+        AcceptSuccessful,
+    }
+}
+
+@helper ModalBody(MvcHtmlString modalBodyHtml)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="manageTestError" class="validation-summary-errors" style="display: block;">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            @modalBodyHtml
+        </div>
+    </div>
+}
+
+@helper ConfirmModel(ModalType modalType, AvailableTestSessionViewModel allocatedTestSession)
+{
+
+
+    if (modalType == ModalType.Accept)
+    {
+        if (allocatedTestSession != null)
+        {
+            <p class="alert" role="alert">
+                Are you sure you want to select this test date?<br /><br /> Please note that this will remove you from @allocatedTestSession.TestSessionId @allocatedTestSession.TestDate and add you to [[testSession]] [[testDate]]. [[additionalInfo]]
+            </p>
+        }
+        else
+        {
+            <p class="alert" role="alert">
+                Are you sure you want to select this test date? [[additionalInfo]]
+            </p>
+        }
+
+    }
+    else if (modalType == ModalType.Reject)
+    {
+
+        <p class="alert" role="alert">
+            Are you sure you want to reject this test date?<br /><br />Once you reject the test date you will need to select a new test session or request a refund.
+        </p>
+    }
+
+}
+
+
+<div id="detailModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="">OK</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+
+    <script id="confirmAccept" type="text/html">
+        @ModalBody(ConfirmModel(ModalType.Accept, allocatedTestSession).ToMvcHtmlString())
+    </script>
+    <script id="confirmReject" type="text/html">
+        @ModalBody(ConfirmModel(ModalType.Reject, allocatedTestSession).ToMvcHtmlString())
+    </script>
+
+    <script>
+        $(function () {
+            var $modal = $('#detailModal');
+            var $okButton = $modal.find('.modal-footer .btn-primary');
+            var $cancelButton = $modal.find('.modal-footer .btn-danger');
+            var $target = null;
+            var $button = null;
+
+            function submitForm(token) {
+                    var actionButtons = $('#detailModal .modal-footer button');
+                    actionButtons.attr('disabled', true);
+                    var actionButtonsText = actionButtons.filter('.btn-primary').text();
+
+                    actionButtons.filter('.btn-primary').text('Processing...');
+
+                    function reactivateButtons() {
+                        actionButtons.attr('disabled', false);
+                        actionButtons.filter('.btn-primary').text(actionButtonsText);
+                    }
+
+                    function setExitMessage(message, isReject, token) {
+
+                        $cancelButton.attr('disabled', false);
+                        $okButton.hide();
+                        $cancelButton.text('Close');
+                        $modal.find('.modal-body').html(message);
+
+                        if (isReject) {
+                            $modal.on('hidden.bs.modal', function () {
+                                var form = '<form action="@Url.Action("AvailableTestSessions", "Applications")" method="POST" id="recaptchaForm">' +
+                                    '<input type="hidden" name="g-recaptcha-response" value="' + token + '">' +
+                                    '<input type="hidden" name="CredentialRequestId" value="@Model.CredentialRequestId">' +
+                                    '<input type="hidden" name="CredentialApplicationId" value="@Model.CredentialApplicationId">' +
+                                    '<input type="hidden" name="ErrorMessage" value="">' +
+                                    '</form>';
+
+                                $(form).appendTo('body').submit();
+                            });
+                        } else if (message.includes("We're sorry, that session has reached capacity and is no longer available")) {
+                            $modal.on('hidden.bs.modal', function () { window.location.reload(); });
+                        } else {
+                            $modal.on('hidden.bs.modal', function () { window.location.href = "@Url.Action("MyTests", "Applications")"; });
+                        }
+
+                    }
+                    var formId = $button.data('form-id');
+                    var form = $(formId);
+                    var fomrUrl = form.length ? form.attr('action') : $button.data('url') ;
+                    var ajaxType = form.length ? 'POST' : 'GET';
+
+                    form.find('[name="g-recaptcha-response"]').val(token);
+                    var ajaxData = form.length && $button.data('ajax-mode') ? form.serialize() : undefined;
+
+                    if (form.length && !$button.data('ajax-mode')) {
+                        form.submit();
+                        return 0;
+                    }
+
+                    $.ajax({
+                        url: fomrUrl,
+                        type: ajaxType,
+                        data: ajaxData,
+                        success: function (result) {
+                            if (result === '') {
+
+                                var message = '<p>You are now assigned to sit your test on the selected date. You will receive a confirmation email with further instructions.</p>';
+                                if (actionButtonsText === "Reject") {
+
+                                    message = '<p>You have rejected the test date. You will receive a confirmation email with further instructions.</p>';
+                                }
+                                setExitMessage(message, actionButtonsText === "Reject", token);
+
+                            } else {
+                                setExitMessage(result.data, false, token);
+                            }
+                        },
+                        error: function () {
+                            reactivateButtons();
+                            var $errors = $('.validation-summary-errors');
+                            $errors.empty();
+                            $errors.append('<li>A communications error was encountered. Please try again.</li>');
+                        }
+                    });
+                }
+
+            function setupModal(event) {
+                $target = $(event.relatedTarget);
+                var modalType = $target.data('modal-type');
+
+                var id = 'confirm' + modalType;
+
+                $modal.find('.modal-title').text(modalType);
+                var testLocation = $target.data('test-location');
+                var testDate = $target.data('test-date');
+                var sessionId = $target.data('session-id');
+                var formId = $target.data('form-id');
+                var htmlBody = $('#' + id).html().replace('[[testSession]]', sessionId)
+                    .replace('[[testDate]]', testDate)
+                    .replace('[[additionalInfo]]', testLocation ? 'Please note that this test session is not in your preferred location.' : '');
+
+                $modal.find('.modal-body').html(htmlBody);
+
+                $okButton.prop('disabled', false);
+                if (formId) {
+                    $okButton.data('form-id', formId);
+                }
+
+                $okButton.text(modalType);
+                $okButton.data('url', $target.data('url'));
+                $okButton.data('ajax-mode', $target.data('ajax-mode'));
+                $target.prop('disabled', true);
+                $okButton.show();
+
+                $cancelButton.prop('disabled', false);
+                $cancelButton.show();
+                $modal.data('modalType', modalType);
+                $modal.modal('show');
+
+            }
+
+            $modal.on('hidden.bs.modal', function () {
+                $target.prop('disabled', false);
+            });
+
+            $modal.on('show.bs.modal',
+                function (event) {
+                    $('.validation-summary-errors').empty();
+                    if (event.relatedTarget) {
+                        setupModal(event);
+                    }
+                });
+
+            $okButton.on('click',
+                function (evt) {
+                    evt.preventDefault();
+                    $button = $(this);
+@if (ConfigurationManager.AppSettings["kosettings:skipRecaptcha"].AsBool())
+{
+    @:submitForm("");
+}
+else
+{
+    @:window.grecaptcha.execute();
+}
+                });
+
+        function recaptchaCallback(token) {
+            submitForm(token);
+        }
+
+        $(document).ready(function () {
+            var interval = setInterval(function () {
+                try {
+                    window.grecaptcha.render(
+                        'recaptcha',
+                        {
+                            sitekey: "6LcAPjMUAAAAAO9MGOKhFfw6hEwmK_OjO8G_pH_z",
+                            size: "invisible",
+                            callback: recaptchaCallback
+                        });
+                    clearInterval(interval);
+                }
+                catch (err) { }
+            }, 500);
+
+        });
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            var map;
+            var markers = [];
+
+            //setTimeout(function () {
+            //    for (var i = 0; i < parseInt($('#mAvailableTestSessionCount').val()) ; i++) {
+
+            //        var mapCanvasId = 'mapCanvasAddress-' + i.toString();
+
+            //        latitude = $('#geoLatitude' + i.toString()).val();
+            //        longitude = $('#geoLongitude' + i.toString()).val();
+
+            //        initializeGoogleMaps(mapCanvasId, {
+            //            position: new google.maps.LatLng(latitude, longitude),
+            //            title: 'NAATI National Office'
+            //        });
+            //    }
+
+            //}, 500);
+
+            @if (hasAllocatedTestSession)
+            {
+                    <text>
+
+            setTimeout(function () {
+                var mapCanvasId = 'mapCanvasAddress-' + '@allocatedTestSession.TestSessionId';
+
+                var latitude = "@(allocatedTestSession.Latitude ?? 0)".replace(',', '.');
+                var longitude = "@(allocatedTestSession.Longitude ?? 0)".replace(',', '.');
+
+                initializeGoogleMaps(mapCanvasId, {
+                    position: new google.maps.LatLng(latitude, longitude),
+                    title: 'NAATI National Office'
+                });
+
+            }, 200);
+
+
+            </text>
+            }
+
+            @foreach (var item in availableTestSessions)
+            {
+                <text>
+
+            setTimeout(function () {
+                var mapCanvasId = 'mapCanvasAddress-' + '@item.TestSessionId';
+
+                var latitude = "@(item.Latitude ?? 0)".replace(',', '.');
+                var longitude = "@(item.Longitude ?? 0)".replace(',', '.');
+
+                initializeGoogleMaps(mapCanvasId, {
+                    position: new google.maps.LatLng(latitude, longitude),
+                    title: 'NAATI National Office'
+                });
+
+            }, 200);
+
+
+            </text>
+            }
+
+
+            function initializeGoogleMaps(mapCanvasElementName, location) {
+                if ($('#' + mapCanvasElementName)[0]) {
+                    location = location || {
+                        position: new google.maps.LatLng(-35.321984, 149.093084),
+                        title: 'NAATI National Office'
+                    };
+
+                    map = new google.maps.Map($('#' + mapCanvasElementName)[0], {
+                        center: location.position,
+                        zoom: 12,
+                        scaleControl: true,
+                        zoomControl: true,
+                        panControl: true,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    });
+
+                    markers.push(new google.maps.Marker($.extend(location, {
+                        map: map,
+                        zIndex: 255
+                    })));
+
+                    google.maps.visualRefresh = true;
+                }
+            }
+
+        });
+
+    </script>
+
+}
+

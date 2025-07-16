@@ -1,0 +1,39 @@
+﻿<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3" data-bind="html: title"></h1>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="panel wrapper">
+                        <div class="form-horizontal">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label data-bind="reshtml: 'Naati.Resources.TestSession.resources.ApplicationId'"></label>
+                                    <div data-bind="validationElement: serverModel.ApplicationId">
+                                        <input type="text" class="form-control" data-bind="value: serverModel.ApplicationId" />
+                                    </div>
+                                    <label data-bind="reshtml: 'Naati.Resources.Finance.resources.CreditNoteNo'"></label>
+                                    <div data-bind="validationElement: serverModel.CreditNoteNo">
+                                        <input placeholder="eg CR007608" type="text" class="form-control" data-bind="value: serverModel.CreditNoteNo" />
+                                    </div>
+                                    <label data-bind="reshtml: 'Naati.Resources.Finance.resources.PaymentReference'"></label>
+                                    <div data-bind="validationElement: serverModel.PaymentReference">
+                                        <input placeholder="eg 1XC47727SB267725W" type="text" class="form-control" data-bind="value: serverModel.PaymentReference" />
+                                    </div>
+                                    <br />
+                                    <div style="text-align:right">
+                                        <button type="button" class="btn btn-success" data-bind="click: progressCreditNote">
+                                            <span data-bind="restext: 'Naati.Resources.Finance.resources.ProgressCreditNote'"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

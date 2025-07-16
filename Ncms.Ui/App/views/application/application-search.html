@@ -1,0 +1,73 @@
+<div class="hbox">
+    <div class="hbox" data-bind="component: {
+    name: 'search-component',
+    params: { 
+         title: title, 
+         filters: filters, 
+         searchType: searchType, 
+         searchTerm: searchTerm, 
+         searchCallback: searchCallback, 
+         tableDefinition: tableDefinition, 
+         additionalButtons: additionalButtons,
+         idSearchOptions: idSearchOptions
+    }
+}">
+    </div>
+    <script id="application-header-template" type="text/html">
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Reference'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Type'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Status'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.StatusDate'"></th>   
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.NaatiNo'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.Name'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.ContactNumber'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Owner'"></th>
+        <th>&nbsp;</th>
+    </script>
+    <script id="application-row-template" type="text/html">
+        <tr>
+            <td>
+                <a href="#" data-bind="click: $root.showDetails, clickBubble: false"><i class="fa fa-chevron-right"></i></a>
+                <a href="#" class="text-info" data-bind="text: ApplicationReference, attr: { href: '#application/' + Id }"></a>
+            </td>
+            <td data-bind="text: ApplicationType"></td>
+            <td data-bind="text: ApplicationStatus"></td>
+            <td data-bind="text: StatusChangeDate"></td>
+            <td>
+                <a href="#" target="_blank" class="text-info" data-bind="text: NaatiNumber, attr: { href: '#person/' + NaatiNumber }"></a>
+            </td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: $root.formatNumber(PrimaryContactNumber)"></td>
+            <td data-bind="text: ApplicationOwner"></td>
+            <td class="text-center w-xs">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#application/' + Id }, clickBubble: false, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </script>
+    <script id="application-search-detail-template" type="text/html">
+        <table class="table table-bordered table-striped b-t b-b w-full" data-bind="datatable: tableDefinition">
+            <thead>
+            <tr>
+                <th data-bind="reshtml: 'Naati.Resources.Application.resources.Category'"></th>
+                <th data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialName'"></th>                   
+                <th data-bind="reshtml: 'Naati.Resources.Application.resources.Direction'"></th>
+                <th data-bind="reshtml: 'Naati.Resources.Application.resources.Status'"></th>
+                <th data-bind="reshtml: 'Naati.Resources.Application.resources.StatusDate'"></th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: data">
+            <tr>
+                <td data-bind="text: Category"></td>
+                <td data-bind="text: CredentialName"></td>             
+                <td data-bind="text: Direction"></td>
+                <td data-bind="text: Status"></td>
+                <td data-bind="textDate: StatusChangeDate"></td>
+            </tr>
+            </tbody>
+        </table>
+    </script>
+</div>

@@ -1,0 +1,8 @@
+﻿<div class="row">
+    <!--ko foreach: { data: componentOptions, as: 'filter' }-->
+    <div data-bind="css: 'form-group ' + filter.filterClass">
+        <label data-bind="reshtml: filter.name"></label>
+        <!-- ko component: { name: filter.component, params: filter.componentOptions } --><!-- /ko -->
+    </div>
+    <!-- /ko -->
+</div>

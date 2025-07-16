@@ -1,0 +1,35 @@
+﻿@model string
+@helper GetWidth(dynamic width, string defaultValue)
+{
+    if (width == null || width.ToString() == string.Empty)
+    {
+    @defaultValue
+    }
+    else if (width.ToString().EndsWith("%"))
+    {
+    @width
+    }
+    else
+    {
+    @(width + "px")
+    }
+}
+<div class="editorSet">
+    <div class="editorLabel" style="width:@GetWidth(ViewData["LabelWidth"], "100px");">
+        @Html.LabelFor(e => Model, @ViewData.ModelMetadata.DisplayName + ":")
+    </div>
+    @*TODO-RUSH: This method of varying the field width may cause validation asterisks to get pushed down a line*@
+    <div class="editorValue variableWidthField" style="width:@GetWidth(ViewData["FieldWidth"], "160px")">
+        @if (ViewData["IsPassword"] != null && (bool)ViewData["IsPassword"] == true)
+        {
+            @Html.PasswordFor(e => Model)
+        }
+        else
+        {
+            @Html.TextBoxFor(e => Model, ViewData)
+        }
+        @Html.ValidationMessageFor(e => Model, "*")
+        @if (ViewData["Note"] != null)
+        { <br />@ViewData["Note"] }
+    </div>
+</div>

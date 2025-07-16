@@ -1,0 +1,182 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.IdCard.WizardModel
+
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Application for NAATI ID Card</title>
+    <link href="@Url.Content("~/Content/Reports.css")" rel="stylesheet" type="text/css" media="print, screen" />
+    <style type="text/css">
+        #photohere { float:right;text-align:center;margin-top:15px; }
+        
+        div.declarationLine
+        {
+            clear:both;
+            margin: 5px 0px 5px 0px;
+        }
+        
+        div.declarationLine div
+        {
+            float:left;
+        }
+    </style>
+</head>
+<body>
+    <div id="report">
+        <!-- HEADER -->
+        <div id="header">
+            <div id="title">
+                <img src="@Url.Content("~/Content/Images/NaatiLogo.png")" alt="NAATI Logo" id="logo" />
+                <div class="container">
+                    <div>
+                        <h1>Application for<br />NAATI ID Card</h1>
+                        <p>All ID Cards will record the date at which your Accreditation(s) and/or Recognition(s) expire if part of the revalidation system.</p>
+                    </div>
+                </div>
+            </div>
+            <p class="clear">Please complete all parts of this form and send it to: <br />
+            <strong style="padding-left:140px">NAATI PO Box 223 DEAKIN WEST ACT 2600 AUSTRALIA</strong></p>
+        </div>
+
+        @{ Html.RenderPartial("_ProductReportPersonalDetailsPartial", Model); }
+
+        <div class="part">
+            <table class="wide">
+                <tr class="header">
+                    <th class="part">Part 1</th>
+                    <th>Type of ID Card and Fees</th>
+                </tr>
+            </table>
+            @{ Html.RenderPartial("_ProductReportOrderItemsPartial", Model); }
+        </div>
+
+        <div class="part">
+            <table class="wide">
+                <tr class="header">
+                    <th class="part">Part 2</th>
+                    <th>Payment Details</th>
+                </tr>
+            </table>
+            @{ Html.RenderPartial("_ProductReportPaymentDetailsPartial", Model); }
+        </div>
+
+        @{ Html.RenderPartial("_ProductReportNoteAboutMandatoryFieldsPartial"); }
+
+        <div class="part" style="page-break-before:always">
+            <table class="wide">
+                <tr class="header">
+                    <th class="part">Part 3</th>
+                    <th>Witness Declaration</th>
+                </tr>
+            </table>
+            <div class="box">
+                <div id="photohere">
+                    <img src="@Url.Content("~/Content/Images/PhotoHere.png")" alt="Height of head must be between 32mm and 36mm." />
+                    <br />
+                    <strong>ATTACH PHOTOS HERE</strong>
+                    <br />
+                    DO NOT STAPLE
+                </div>
+                <div>
+                    <p>
+                        The APPLICANT must attach two recent and identical passport size photos of
+                        themselves, endorsed and signed by a witness. The WITNESS must endorse
+                        the back of the photographs and complete the declaration below.
+                    </p>
+                </div>
+                <div>
+                    <p><strong>Photo Criteria:</strong></p>
+                    <ul>
+                        <li>Two recent and identical photos 3.5 cm wide by 4.5 cm high (passport size), and in colour.</li>
+                        <li>Photos must be high quality. Low quality printed images will not be accepted.</li>
+                        <li>The witness must endorse the back of the photo by writing "This is a true photo of", the applicants name and signing.</li>
+                        <li>Photos must show head and top of shoulders close up.</li>
+                        <li>Photos must not obscure facial features with sunglasses, scarves or traditional headgear.</li>
+                        <li>Photos must be no more than 6 months old.</li>
+                        <li>Attach the photos with removable adhesive tape or staple a small envelope and insert the photos.</li>
+                    </ul>
+                </div>
+                <hr />
+                <div>
+                    <p>
+                        <strong>Who can be a Witness -</strong> The witness must be 18 years of age or over, must <strong>not</strong> be related to the 
+                        applicant by birth or marriage, and must <strong>not</strong> be in a de facto relationship with the applicant. The witness must be currently
+                        employed in one of the following professional or occupational groups:
+                    </p>
+                    <ul>
+                        <li>Members of the legal profession (solicitors, judges, magistrates)</li>
+                        <li>Full-time teachers (with a minimum of 5 years employment at a school or tertiary institution)</li>
+                        <li>Public Service Employee (State or Commonwealth with a minimum of 5 years service)</li>
+                        <li>NAATI Employee who sights two pieces of photo ID (passport and driver's license)</li>
+                        <li>Accountants</li>
+                        <li>Bank Managers</li>
+                        <li>Chartered Professional Engineers</li>
+                        <li>Clerks of Courts</li>
+                        <li>Dentists</li>
+                        <li>Justice of the Peace (JP)</li>
+                        <li>Pharmacists</li>
+                        <li>Registered Nurse, Medical Practitioner or Veterinary Surgeon</li>
+                        <li>Police Officers (with a minimum of 5 years continuous service)</li>
+                    </ul>
+                </div>
+                </div>
+                <div class="part" style="page-break-before:always">
+                <table class="wide">
+                    <tr class="highlight">
+                        <th>Witness to complete and sign this part of the form</th>
+                    </tr>
+                </table>
+                <div class="declarationLine">
+                    <div>I,&nbsp;</div>
+                    <div>
+                        _______________________________________________________<br />
+                        <span class="comment">(please print your name),</span>
+                    </div>
+                </div>
+                <div class="declarationLine">
+                    <div>have worked for ___________ years at&nbsp;</div>
+                    <div>
+                        ___________________________________<br />
+                        <span class="comment">(print company name)</span>
+                    </div>
+                </div>
+                <div class="declarationLine">
+                    <div>As&nbsp;</div>
+                    <div>
+                        ____________________________________________<br />
+                        <span class="comment">(print job title)</span>
+                    </div>
+                </div>
+                <div class="declarationLine">
+                    <div>I declare that these photos are a true representation of&nbsp;</div>
+                    <div>
+                        _____________________________<br />
+                        <span class="comment">(print applicant's name)</span>
+                    </div>
+                </div>
+                <div class="declarationLine">
+                    You can contact me by phone on ___________________________________ or by email
+                </div>
+                <div class="declarationLine" style="margin-bottom: 20px">
+                    at _____________________________________________________________
+                </div>
+                <div style="display:inline-block; width:100%">
+                    <p><span class="signature">Signature of Applicant: </span><span class="box-container">Date </span>@FormBoxHelper.DateBox()</p>
+                    <p><span class="signature">Signature of Witness: </span><span class="box-container">Date </span>@FormBoxHelper.DateBox()</p>
+                </div>
+            </div>
+        </div>
+        <br />    
+        @{Html.RenderPartial("_ProductReportOfficeUseOnlyPartial");}
+
+    </div>
+    <br />
+    <div id="footer">
+        @{Html.RenderPartial("_OrderFormFooterPartial");}
+    </div>
+
+</body>
+</html>

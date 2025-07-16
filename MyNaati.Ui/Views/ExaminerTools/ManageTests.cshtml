@@ -1,0 +1,90 @@
+﻿@using MyNaati.Ui.ViewModels.ExaminerTools
+@model MyNaati.Ui.ViewModels.ExaminerTools.ManageTestsModel
+@{
+    ViewBag.Title = "Manage My Tests";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Examiner Tools", Url.Action("Index")),
+        new Tuple<string, string>("Manage My Tests", null)
+    };
+}
+@helper TestField(string label, string value, int size)
+{
+    <div class="col-xs-@size">
+        <div class="form-group">
+            <label>@label</label>
+            <p class="form-control-static">@Html.Raw(value)</p>
+        </div>
+    </div>
+}
+@helper AttendanceIDField(TestModel test)
+{
+var field = String.Format("<span>{0}</span>", test.TestSittingId);
+if (test.Supplementary)
+{
+    field += "&nbsp;&nbsp;<span data-toggle='tooltip' class='cursor-pointer label badge bg-black-opacity' title='Supplementary Test'>S</span>";
+}
+if (!test.HasDefaultSpecification)
+{
+    field += "&nbsp;&nbsp;<span data-toggle='tooltip' class='cursor-pointer label badge bg-danger' title='This is a test with an older test specification. Please consult NAATI if you are not sure how this test should be marked.'> ! </span>";
+}
+    @TestField("Attendance ID", field, 2)
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("[data-toggle=tooltip]").tooltip();
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+    @if (Model.TestList.Any())
+    {
+        foreach (var test in Model.TestList.OrderBy(x => x.TestSittingId))
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("DownloadTestAssets", "ExaminerTools", new { id = test.TestSittingId }))
+                            {
+                                <div class="row">
+                                    @AttendanceIDField(test)
+                                    @TestField("Skill", test.SkillDisplayName, 2)
+                                    @TestField("Status", test.Status, 2)
+                                    @TestField("Credential Type", test.CredentialTypeExternalName, 4)
+                                    @TestField("Test Date", test.TestDate.ToString("d/MM/yyyy"), 1)
+                                    @TestField("Due Date", test.DueDate.HasValue ? test.DueDate.Value.ToString("d/MM/yyyy") : string.Empty, 1)
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        @if (test.HasAssets)
+                                        {
+                                            <button class="btn btn-success" type="submit">Download Test Assets</button>
+                                        }
+                                        <a class="btn btn-primary" href="@Url.Action("SubmitTestResults", "ExaminerTools", new {id = test.TestResultID }, null)">Manage Test Results</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>No tests to manage</h4>
+            </div>
+        </div>
+    }
+</div>

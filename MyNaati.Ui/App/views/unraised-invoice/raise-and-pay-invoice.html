@@ -1,0 +1,20 @@
+﻿<div>
+	<div class="m-b-md">
+		<ol class="breadcrumb">
+			<li>
+				<a href="#" data-bind="attr: { href: getHomeUrl() }">Home</a>
+			</li>
+			<li class="active" data-bind="html: title"></li>
+		</ol>
+		<hr />
+	</div>
+	<!--ko ifnot: submitted-->
+	<div>
+		<!--ko component: loaderOptions--><!--/ko-->
+		<!--ko component: { name: 'wizard', params: wizardOptions }--><!--/ko-->
+	</div>
+	<!--/ko-->
+	<!--ko if: submitted-->
+	<div class="wrapper" data-bind="html: submissionMessage"></div>
+	<!--/ko-->
+</div>

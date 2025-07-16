@@ -1,0 +1,24 @@
+﻿<div class="m-t-n-md">
+    <table class="table table-primary table-bordered table-striped" data-bind="datatable: tableDefinition">
+        <thead>
+            <tr>
+                <th data-bind="reshtml: 'Naati.Resources.Document.resources.FileName'"></th>
+                <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Document.resources.DocumentType'"></th>
+                <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.FileSize'"></th>
+                <th class="w-xs"></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: files">
+            <tr>
+                <td data-bind="text: FileName"></td>
+                <td data-bind="text: StoredFileTypeDisplayName"></td>
+                <td data-bind="bytesToSize: FileSize"></td>
+                <td class="text-right">
+                    <button class="btn btn-default btn-sm" data-bind="downloadFile: { url: DownloadUrl }, enable: $root.enable">
+                        <span class="fa fa-download"></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,43 @@
+<p>
+    <button type="button" class="btn btn-primary" data-bind="click: newContactPerson">
+        <span class="fa fa-plus"></span>
+        <span data-bind="restext: 'Naati.Resources.Institution.resources.NewContactPerson'"></span>
+    </button>
+</p>
+
+<div class="hbox" data-bind="component: {
+    name: 'table-component',
+    params: tableDefinition
+}"></div>
+<script id="contact-person-header-template" type="text/html">
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></th>
+    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Shared.resources.Email'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Shared.resources.Phone'"></th>
+    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Shared.resources.PostalAddress'"></th>
+    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Shared.resources.Description'"></th>
+    <th>&nbsp;</th>
+</script>
+<script id="contact-person-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: Name"></td>
+        <td data-bind="text: Email"></td>
+        <td data-bind="text: Phone"></td>
+        <td data-bind="text: PostalAddress"></td>
+        <td data-bind="text: Description"></td>
+        <td class="text-right w-xs">
+            <div class="btn-group">
+                <a href="#" class="btn btn-default btn-xs" data-bind="tooltip: { trigger: 'hover', container: 'body' }, click: $root.editContactPerson, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+            </div>
+            <div class="btn-group">
+                <a href="#" class="btn btn-danger btn-xs" data-bind="tooltip: { trigger: 'hover', container: 'body' }, click: $root.deleteContactPerson, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </div>
+        </td>
+    </tr>
+</script>
+
+
+

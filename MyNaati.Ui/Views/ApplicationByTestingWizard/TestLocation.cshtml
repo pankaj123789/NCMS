@@ -1,0 +1,102 @@
+﻿@using MyNaati.Ui.Common
+@model MyNaati.Ui.ViewModels.ApplicationByTestingWizard.TestLocationModel
+@{
+    ViewBag.Title = "Application for Accreditation by Testing";
+    ViewBag.Subtitle = "Test Location";
+    Layout = "~/Views/Shared/MasterPages/_ApplicationWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Testing", Url.Action("Index", "ApplicationByTestingWizard")),
+        new Tuple<string, string>("New Application", string.Empty)
+    };
+
+    var lastStateIndex = Model.LocationList.Count - 2;
+    var newZealandIndex = Model.LocationList.Count - 2;
+    var otherLocationIndex = Model.LocationList.Count - 1;
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var txtOtherLocationSelector = '#txtOtherLocation';
+        var rbOtherLocationSelector = '#rbOtherLocation';
+
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(nextButtons).show();
+            $('#rbAustralia input').change(function () { changedLocation(); });
+            $('#rbNewZealand input').change(function () { changedLocation(); });
+            $('#rbOtherLocationcontainer input').change(function () { changedLocation(); });
+
+            if ($(rbOtherLocationSelector)[0].checked == false) {
+                $(txtOtherLocationSelector).attr('disabled', 'disabled');
+            }
+        });
+
+
+        function changedLocation() {
+            $(txtOtherLocationSelector).val('');
+
+            if ($(rbOtherLocationSelector)[0].checked == true) {
+                $(txtOtherLocationSelector).removeAttr('disabled');
+            }
+            else {
+                $(txtOtherLocationSelector).attr('disabled', 'disabled');
+            }
+        }
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>Nominate your preferred testing location.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <label>Australia</label>
+    </div>
+    <div id="rbAustralia" class="col-lg-2">
+        <div class="row">
+            <div class="col-xs-offset-1 col-xs-11">
+                @for (int i = 1; i < lastStateIndex; ++i)
+                {
+                    string radioButtonId = "rbAustralia" + i;
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(m => m.Location, @Model.LocationList[i].Text, new { id = radioButtonId })
+                            @Html.Label(radioButtonId, Model.LocationList[i].Text)
+                        </label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="rbNewZealand" class="col-lg-12">
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(m => m.Location, @Model.LocationList[newZealandIndex].Text, new { id = "rbNewZealand" })
+                @Html.Label("rbNewZealand", Model.LocationList[newZealandIndex].Text)
+            </label>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="row">
+            <div id="rbOtherLocationcontainer" class="col-sm-3">
+                <div class="radio">
+                    <label>
+                        @Html.RadioButtonFor(m => m.Location, @Model.LocationList[otherLocationIndex].Text, new { id = "rbOtherLocation" })
+                        @Html.Label("rbOtherLocation", Model.LocationList[otherLocationIndex].Text)
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.OtherLocation, new { id = "txtOtherLocation", @class = "form-control v-offset-xs-1" })
+                <p>
+                    For more information, refer to the Accreditation by Testing <a href="@Url.ExternalUrlFromConfig("AccreditationByTestingInformationBooklet")" target="_blank">Information Booklet</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

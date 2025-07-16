@@ -1,0 +1,113 @@
+# Default values for naati.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+sharedResourcesName: "naati"
+ncms:
+  image:
+   repository: acrtest0002.azurecr.io/ncmsui
+  replicaCount: 2
+  nameOverride: ""
+  fullnameOverride: ""
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  sharedResourcesName: "naati"
+
+  service:
+   type: LoadBalancer
+   port: 80
+    # Internal ip of ncms
+   loadBalancerIP: 10.40.7.200
+
+  ingress:
+    hosts:
+      - host: chart-example.local
+  configMap:
+    data:
+      # Configuration values can be set as key-value properties 
+      "AccountingOperationsReportEmailsTo": "Test1@altf4solutions.com.au"
+      "EmailBatchingReportEmailsTo": "Test1@altf4solutions.com.au"
+      "AccountingOperationsLogEmailsTo": "Test1@altf4solutions.com.au"
+      "EmailBatchingLogEmailsTo": "Test1@altf4solutions.com.au"
+      "AccountingOperationsReportEmailsFrom": "Test.noreply@altf4solutions.onmicrosoft.com"
+      "TestSittingsWithoutMaterialReminderEmailAddresses": "NCMSTestTestSittingsWithoutMaterialReminder@altf4solutions.com.au"
+      "AzureAppRedirectUri": "https://ncmstest1.naati.com.au"
+      "AadAuthRedirectUri": "https://ncmstest1.naati.com.au/api/System/AadResponse"
+      "EnvironmentType": "Test"
+      "EnvironmentName": "TEST1_CLOUD"
+
+       # Internal ip of mynaati
+      "MyNaatiUrl": "http://10.40.7.201"
+      "SecurePay_PaymentUrl": "https://test.securepay.com.au/xmlapi/payment"
+      "ShowAllMenuItems" : "False"
+      "DebugMode" : "False"
+      "ReportingJobName": "NCMSReportingDatabaseTest1"
+      "logging_MinimumLevel": "Information"
+      "SecretPrefix" : "TEST1"
+      "SecurePayResource": "https://payments-stest.npe.auspost.zone"
+      "SecurePayTokenUrl": "https://welcome.api2.sandbox.auspost.com.au/oauth/token"
+      "PayPalMode": "sandbox" 
+      "PayPalConnectionTimeout": "360000" 
+      "PayPalRequestRetries": "1" 
+      "WiiseAuthRedirectUri": "https://ncmstest1.naati.com.au/api/System/WiiseResponse"
+      "WiiseBaseUrl": "https://api.businesscentral.dynamics.com/v2.0/41bb5789-7441-4051-b270-c49376cfab28/Sandbox12062025/api/v2.0/companies(fed3af4d-b48d-eb11-8ce5-000d3aca5a42)"
+      "QrCodeAccessUrl": "https://mynaatitest1.naati.com.au/VerifyPractitioner?QrCode={0}"
+
+mynaati:
+  image:
+   repository: acrtest0002.azurecr.io/mynaatiui
+  replicaCount: 2
+  nameOverride: ""
+  fullnameOverride: ""
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  sharedResourcesName: "naati" 
+  
+  service:
+   type: LoadBalancer
+   port: 80
+   # Internal ip of mynaati
+   loadBalancerIP: 10.40.7.201
+
+  ingress:
+    hosts:
+      - host: chart-example.local
+  configMap:
+    data:
+      # Configuration values can be set as key-value properties 
+      "ExternalUrl_Applications_URL": "https://my.naati.com.au/apply"
+      "BypassExaminerAuthentication": "true"
+      "kosettings_allowEmailPaste": "true"
+      "kosettings_skipRecaptcha": "false"
+      "EnvironmentType": "Test"
+      "EnvironmentName": "TEST1_CLOUD"
+      "SecretPrefix": "TEST1"
+      # Internal ip of Ncms
+      "NcmsUrl": "http://10.40.7.200"
+      "SecurePay_PaymentUrl": "https://test.securepay.com.au/xmlapi/payment"
+      "DebugMode" : "False"
+      "EnableSwagger" : "False"
+      "logging_MinimumLevel": "Information"
+      "AccountingOperationsReportEmailsTo": "Test1@altf4solutions.com.au"
+      "EmailBatchingReportEmailsTo": "Test1@altf4solutions.com.au"
+      "AccountingOperationsLogEmailsTo": "Test1@altf4solutions.com.au"
+      "EmailBatchingLogEmailsTo": "Test1@altf4solutions.com.au"
+      "AccountingOperationsReportEmailsFrom": "Test.noreply@altf4solutions.onmicrosoft.com"
+      "SecurePayResource": "https://payments-stest.npe.auspost.zone"
+      "SecurePayTokenUrl": "https://welcome.api2.sandbox.auspost.com.au/oauth/token"
+      "SecurePayJavascriptSDKUrl": "https://payments-stest.npe.auspost.zone/v3/ui/client/securepay-ui.min.js"
+      "PayPalMode": "sandbox" 
+      "PayPalConnectionTimeout": "360000" 
+      "PayPalRequestRetries": "1" 
+      "WiiseAuthRedirectUri": "https://ncmstest1.naati.com.au/api/System/WiiseResponse"
+      "WiiseBaseUrl": "https://api.businesscentral.dynamics.com/v2.0/41bb5789-7441-4051-b270-c49376cfab28/Sandbox12062025/api/v2.0/companies(fed3af4d-b48d-eb11-8ce5-000d3aca5a42)"
+      "QrCodeAccessUrl": "https://mynaatitest1.naati.com.au/VerifyPractitioner?QrCode={0}"
+      "GoogleApiKey": "AIzaSyCwRmBZUnlm7MMoIwCVT1uOxx611lfXdSY"

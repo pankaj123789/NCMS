@@ -1,0 +1,86 @@
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="addPaymentDetailModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-light">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Payment Line Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ui-front">
+                    <div class="panel panel-default m-b-none">
+                        <div class="panel-body form">
+                            <div class="row">
+                                <div class="form-group col-xs-8" data-bind="validationElement: payment.OfficeId">
+                                    <label class="control-label m-r-sm" data-bind="restext: 'Naati.Resources.Finance.resources.Office'"></label>
+                                    <!-- ko component: { name: 'select-component', params: officeOptions } --><!-- /ko -->
+                                </div>
+                                <div class="form-group col-sm-4" data-bind="validationElement: paymentAccount">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.PaymentAccount'"></label>
+                                    <p class="form-control-static" data-bind="text: paymentAccount"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-8" data-bind="validationElement: payment.PaymentType">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.PaymentType'"></label>
+                                    <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+                                        <!--ko foreach: paymentTypes-->
+                                        <label class="checkbox-inline i-checks">
+                                            <input type="radio" name="PaymentType" data-bind="checked: $root.payment.PaymentType, value: value"><i></i>
+                                            <span class="padder-md" data-bind="text: name"></span>
+                                        </label>
+                                        <!--/ko-->
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-4" data-bind="validationElement: payment.Amount">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.Amount'"></label>
+                                    <input ui-jq="TouchSpin" data-bind="jqueryui, value: payment.Amount, valueUpdate: 'input'" type="text" value="0" class="form-control w-xs" data-min='0' data-max='9999999' data-step="0.01" data-decimals="2" data-buttondown_class="hide" data-buttonup_class="hide" data-prefix="$">
+                                </div>
+                            </div>
+                            <div class="row animated fadeIn" data-bind="css: { hide: payment.PaymentType() !== CONST.paymentTypes.cheque }">
+                                <div class="form-group col-sm-4" data-bind="validationElement: payment.BankName">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.BankName'"></label>
+                                    <input type="text" class="form-control" data-bind="value: payment.BankName, valueUpdate: 'input'">
+                                </div>
+                                <div class="form-group col-sm-4" data-bind="validationElement: payment.ChequeNumber">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.ChequeNumber'"></label>
+                                    <input type="text" class="form-control" data-bind="value: payment.ChequeNumber, valueUpdate: 'input'">
+                                </div>
+                                <div class="form-group col-sm-4" data-bind="validationElement: payment.BSB">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.BSB'"></label>
+                                    <input ui-jq="TouchSpin" data-bind="jqueryui, value: payment.BSB, valueUpdate: 'input'" type="text" value="0" class="form-control w-xs" data-min='0' data-max='9999999' data-step="1" data-decimals="0" data-buttondown_class="hide" data-buttonup_class="hide">
+                                </div>
+                            </div>
+                            <div class="form-group animated fadeIn i-3" data-bind="css: { hide: payment.PaymentType() !== CONST.paymentTypes.eft && payment.PaymentType() !== CONST.paymentTypes.amex }, validationElement: payment.EftMachineId">
+                                <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.EftMachine'"></label>
+                                <!-- ko component: { name: 'select-component', params: eftMachineOptions } --><!-- /ko -->
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-4" data-bind="validationElement: payment.DatePaid">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.DatePaid'"></label>
+                                    <!-- ko component: { name: 'date-input', params: datePaidOptions } -->
+                                    <!-- /ko -->
+                                </div>
+                                <div class="form-group col-sm-4" data-bind="validationElement: payment.UserText">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.ReferenceText'"></label>
+                                    <input type="text" class="form-control" data-bind="value: payment.UserText, valueUpdate: 'input'">
+                                </div>
+                                <div class="form-group col-sm-4" data-bind="validationElement: payment.Reference">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.WiiseReference'"></label>
+                                    <p class="form-control-static" data-bind="text: payment.Reference"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-bind="click: save, enable: canSave">
+                    <i class="fa fa-check"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fa fa-ban"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

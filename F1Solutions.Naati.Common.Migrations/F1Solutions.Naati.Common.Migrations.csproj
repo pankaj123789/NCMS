@@ -1,0 +1,1956 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A425297B-E529-4805-A53E-07D300514321}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>F1Solutions.Naati.Common.Migrations</RootNamespace>
+    <AssemblyName>F1Solutions.Naati.Common.Migrations</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="F1Solutions.DatabaseUpdater.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Binaries\Migration\F1Solutions.DatabaseUpdater.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMigrator, Version=1.6.2.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Binaries\Migration\FluentMigrator.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentMigrator.Runner, Version=1.6.2.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Binaries\Migration\FluentMigrator.Runner.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.1.2\lib\net461\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=5.1.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.5.1.3\lib\net461\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq.EagerFetching, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.EagerFetching.2.2.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NAATIScripts\Data\ApplicationForms\PracticeTestApplicationFormBuilder.cs" />
+    <Compile Include="NAATIScripts\Data\Builder\BaseScriptBuilder.cs" />
+    <Compile Include="NAATIScripts\Data\Builder\IScriptBuilder.cs" />
+    <Compile Include="NAATIScripts\Data\EmailTemplates\ActionBuilder\TestSessionsActionBuilderHelper.cs" />
+    <Compile Include="NAATIScripts\Data\EmailTemplates\ActionBuilder\MaterialRequestRoundActionBuilderHelper.cs" />
+    <Compile Include="NAATIScripts\Data\EmailTemplates\ActionBuilder\MaterialRequestActionBuilderHelper.cs" />
+    <Compile Include="NAATIScripts\Data\EmailTemplates\ActionBuilder\RolePlayerActionBuilderHelper.cs" />
+    <Compile Include="NAATIScripts\Data\EmailTemplates\ActionBuilder\CredentialRequestActionBuilderHelper.cs" />
+    <Compile Include="NAATIScripts\Data\EmailTemplates\ActionBuilder\CredentialApplicationActionBuilderHelper.cs" />
+    <Compile Include="NAATIScripts\Data\EmailTemplates\EmailTemplateBuilderContracts.cs" />
+    <Compile Include="NAATIScripts\Data\EmailTemplates\EmailTemplateBuilderExtension.cs" />
+    <Compile Include="NAATIScripts\Data\EmailTemplates\EmailTemplates.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmailTemplates.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialApplicationFieldCategoryScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialApplicationRefundPolicyScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialPreRequisiteScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ExternalAccountingOperationTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\NotificationTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\PaymentmethodScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\RefundMethodTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\RefundPolicyParameterScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ResultTypeResultGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\StoredFileDeletePolicyDocumentTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\StoredFileDeletePolicyScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\StoredFileStatusTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\SystemEmailTemplateBuilderScriptGenerator.cs" />
+    <Compile Include="NAATI\20191115_ChangeImageAndNTextDataTypes\ChangeImageAndNTextDataTypes.cs" />
+    <Compile Include="NAATI\20191213_AddCredentialApplicationFieldCategory\AddCredentialApplicationFieldCategory.cs" />
+    <Compile Include="NAATI\20191213_SecurityRoleSystem\SecurityRoleSystem.cs" />
+    <Compile Include="NAATI\20191212_AddPodHistory\AddPodHistory.cs" />
+    <Compile Include="NAATI\20200115_AddAccreditationTemplates\AddAccreditationTemplates.cs" />
+    <Compile Include="NAATI\20200115_AddAccreditationTemplates\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20200115_SetModifiedByNaatiForTransitionEmails\SetModifiedByNaatiForTransitionEmails.cs" />
+    <Compile Include="NAATI\20200102_AddMinPayReviewOverallToStandardMarking\AddMinPayReviewOverallToStandardMarking.cs" />
+    <Compile Include="NAATI\20200225_AddIndigenousCertificationToSkills\AddIndigenousCertificationToSkills.cs" />
+    <Compile Include="NAATI\20200203_SetSecurityVerbAsLong\SetSecurityVerbAsLong.cs" />
+    <Compile Include="NAATI\20200324_AddAllowIssue\AddAllowIssue.cs" />
+    <Compile Include="NAATI\20200316_AddCookiesTable\AddCookiesTable.cs" />
+    <Compile Include="NAATI\20200424_AddAllowAvailabilityNoticeToTestSession\AddAllowAvailabilityNoticeToTestSession.cs" />
+    <Compile Include="NAATI\20200415_AddAllowAvailabilityNoticeToCredentialType\AddAllowAvailabilityNoticeToCredentialType.cs" />
+    <Compile Include="NAATI\20200422_AddCredentialApplicationRefundTable\AddCredentialApplicationRefundTable.cs" />
+    <Compile Include="NAATI\20200422_AddRefundMethodTypeTable\AddRefundMethodTypeTable.cs" />
+    <Compile Include="NAATI\20200507_ExternalAccountingOperationTypeColmunsSize\ExternalAccountingOperationTypeColmunsSize.cs" />
+    <Compile Include="NAATI\20200430_AddTransactionIdAndOrderNumberToCredentialWorkflowFee\AddTransactionIdAndOrderNumberToCredentialWorkflowFee.cs" />
+    <Compile Include="NAATI\20200430_AddTransactionIdAndOrderNumberToCredentialWorkflowFee\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20200504_AddCredentialApplicationRefundPolicyTable\AddCredentialApplicationRefundPolicyTable.cs" />
+    <Compile Include="NAATI\20200519_AlterGlCode\AlterGlCode.cs" />
+    <Compile Include="NAATI\20200519_AddPolicyIdToProductSpecAndWorkflowFee\AddPolicyIdToProductSpecAndWorkflowFee.cs" />
+    <Compile Include="NAATI\20200518_CreateNcmsNotificationTable\CreateNcmsNotificationTable.cs" />
+    <Compile Include="NAATI\20200526_AddTotalTaxToCredetialApplicationRefund\AddTotalTaxToCredetialApplicationRefund.cs" />
+    <Compile Include="NAATI\20200618_CreateEmailMessageIndex\CreateEmailMessageIndex.cs" />
+    <Compile Include="NAATI\20200618_CreateEmailMessageIndex\Sql.Designer.cs">
+      <DependentUpon>Sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20200602_AddRejectionDateToTestSitting\AddRejectionDateToTestSitting.cs" />
+    <Compile Include="NAATI\20200602_AddRefundPolicyParameterTable\AddRefundPolicyParameterTable.cs" />
+    <Compile Include="NAATI\20200602_AddRejectionDateToTestSitting\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20200624_AddCommentsToRefundTable\AddCommentsToRefundTable.cs" />
+    <Compile Include="NAATI\20200714_AddIsAutomatedToTestLocation\AddIsAutomatedToTestLocation.cs" />
+    <Compile Include="NAATI\20200717_AddOnlineState\AddOnlineState.cs" />
+    <Compile Include="NAATI\20210324_AddPaymentMethodTypeTable\AddPaymentMethodTypeTable.cs" />
+    <Compile Include="NAATI\20210326_AddAccountIdToGLCode\AddAccountIdToGLCode.cs" />
+    <Compile Include="NAATI\20210408_AlterTluState\AlterTluState.cs" />
+    <Compile Include="NAATI\20210422_AddPanelMemberShipMaterialCredentialType\AddPanelMemberShipMaterialCredentialType.cs" />
+    <Compile Include="NAATI\20210520_AddNewCandidatesOnlyToTestSitting\Class1.cs" />
+    <Compile Include="NAATI\20210517_AddPanelMemberShipCoordinatorCredentialType\AddPanelMemberShipCoordinatorMaterialType.cs" />
+    <Compile Include="NAATI\20210602_UpdateCredentialTypeTemplate\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20210602_UpdateCredentialTypeTemplate\UpdateCredentialTypeTemplate.cs" />
+    <Compile Include="NAATI\20210624_UpdateTestSpecificationTable\AddNewCandidatesOnlyToTestSitting.cs" />
+    <Compile Include="NAATI\20220701_UpdateTestSpecificationTable\AddMaterialReminderAndReminderDays.cs" />
+    <Compile Include="NAATI\20220707_AddEmailTemplateIdtotblEmailMessage\AddEmailTemplateIdtotblEmailMessage.cs" />
+    <Compile Include="NAATI\20220707_AddEmailTemplateIdtotblEmailMessage\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20220711_AddIsActiveToTestSession\AddIsActiveToTestSession.cs" />
+    <Compile Include="NAATI\20220713_AddNewSystemValueRolePlayerAvailableSetToFalse\AddNewSystemValueRolePlayerAvailableSetToFalse.cs" />
+    <Compile Include="NAATI\20220714_AddLogicToGetPersonStoredProcedure\AddLogicToGetPersonStoredProcedure.cs" />
+    <Compile Include="NAATI\20220714_AddLogicToGetPersonStoredProcedure\Sql.Designer.cs">
+      <DependentUpon>Sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20220718_AddTblCredentialPrerequisite\AddTblCredentailPrerequisite.cs" />
+    <Compile Include="NAATI\20220718_AddTblCredentialPrerequisite\Sql.Designer.cs">
+      <DependentUpon>Sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20220726_AddAutomaticIssuingExaminerFiledToTblTestResult\AddAutomaticIssuingExaminerFiledToTblTestResult.cs" />
+    <Compile Include="NAATI\20220726_AddAutomaticIssuingExaminerFiledToTblTestResult\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20220726_UpdateTblTestResultAutomaticIssuingExaminer\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20220726_UpdateTblTestResultAutomaticIssuingExaminer\UpdateTblTestResultAutomaticIssuingExaminer.cs" />
+    <Compile Include="NAATI\20220729_MfaFields\MfaFields.cs" />
+    <Compile Include="NAATI\20220805_ChangeCredentialPrerequisiteTable\ChangeCredentialPrerequisiteTable.cs" />
+    <Compile Include="NAATI\20220805_ChangeCredentialPrerequisiteTable\Sql.Designer.cs">
+      <DependentUpon>Sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20220808_TestMaterialReminderFields\AddMaterialReminderAndReminderDays.cs" />
+    <Compile Include="NAATI\20220809_ChangeTableCredentialPrerequisite\ChangeTableCredentialPrerequisite.cs" />
+    <Compile Include="NAATI\20220809_ChangeTableCredentialPrerequisite\Sql.Designer.cs">
+      <DependentUpon>Sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20220809_AddAutoCreatedFieldCredentialApplicationCredentialRequest\AddAutoCreatedFieldCredentialApplicationCredentialRequest.cs" />
+    <Compile Include="NAATI\20220809_AddAutoCreatedFieldCredentialApplicationCredentialRequest\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20220816_AddNewFieldToCrdentialPrerequisite\AddNewFieldToCrdentialPrerequisite.cs" />
+    <Compile Include="NAATI\20220816_AddNewFieldToCrdentialPrerequisite\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20220907_DropStoredProcedure\DropStoredProcedure.cs" />
+    <Compile Include="NAATI\20220907_DropStoredProcedure\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20220928_AddContraintStoredFileAndStatus\AddConstraintStoredFileAndStatus.cs" />
+    <Compile Include="NAATI\20220928_AddContraintStoredFileAndStatus\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20220928_CreateStoredFilePolicyTables\CreateStoredFilePolicyTables.cs" />
+    <Compile Include="NAATI\20220928_CreateStoredFilePolicyTables\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20220928_CreateStoredFileStatusTypeTable\CreateStoredFileStatusTypeTable.cs" />
+    <Compile Include="NAATI\20220928_CreateStoredFileStatusTypeTable\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20220928_SetStoredFileStatusAndChangeDate\SetStoredFileStatusAndChangeDate.cs" />
+    <Compile Include="NAATI\20220928_SetStoredFileStatusAndChangeDate\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20220914_UpdateEmailTemplateActiveFlag\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20220914_UpdateEmailTemplateActiveFlag\UpdateEmailTemplateActiveFlag.cs" />
+    <Compile Include="NAATI\20221012_UpdateStoredFileColumns\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20221012_UpdateStoredFileColumns\UpdateTblStoredFileColumns.cs" />
+    <Compile Include="NAATI\20221019_CreateNCIPersonImagePhotoDate\CreateNCIPersonImagePhotoDate.cs" />
+    <Compile Include="NAATI\20221019_CreateNCIPersonImagePhotoDate\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20221021_CreatIndexStoredFileDocumentTypeId\CreateIndexStoredFileDocumentTypeId.cs" />
+    <Compile Include="NAATI\20221021_CreatIndexStoredFileDocumentTypeId\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20221102_CredentialQrCodes\CredentialQrCodes.cs" />
+    <Compile Include="NAATI\20221102_CredentialQrCodes\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20221109_AddNoteToTblSkill\AddNoteToTblSkill.cs" />
+    <Compile Include="NAATI\20221109_AddNoteToTblSkill\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20221111_AddNoteToTblLanguage\AddNoteToTblLanguage.cs" />
+    <Compile Include="NAATI\20221111_AddNoteToTblLanguage\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20221128_ChangeStoredFileStatus4To3\ChangeStoredFileStatus4To3.cs" />
+    <Compile Include="NAATI\20221128_ChangeStoredFileStatus4To3\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20221128_DeleteStatus4FromStoredFileStatus\DeleteStatus4FromStoredFileStatus.cs" />
+    <Compile Include="NAATI\20221128_DeleteStatus4FromStoredFileStatus\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20221206_AddDefaultValueToStoredFileDeletePolicy\AddDefaultValueToStoredFileDeletePolicy.cs" />
+    <Compile Include="NAATI\20221206_AddDefaultValueToStoredFileDeletePolicy\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20221208_AddMorePracticeTestFields\AddMorePracticeTestSkills.cs" />
+    <Compile Include="NAATI\20221208_AddMorePracticeTestFields\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20221208_AddPracticeTestSkills\AddPracticeTestSkills.cs" />
+    <Compile Include="NAATI\20221208_AddPracticeTestSkills\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20221212_AddPracticeTestSkillApplicationTypes\AddPracticeTestSkillApplicationTypes.cs" />
+    <Compile Include="NAATI\20221212_AddPracticeTestSkillApplicationTypes\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20221209_AddCommentDateToRACR\AddCommentDateToRACR.cs" />
+    <Compile Include="NAATI\20221209_AddCommentDateToRACR\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20221209_SetCommentDateForExistingRecordsRACR\SetCommentDateForExistingRecordsRACR.cs" />
+    <Compile Include="NAATI\20221209_SetCommentDateForExistingRecordsRACR\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20221213_CreateCredentialPrerequisiteExemptionTable\CreateCredentialPrerequisiteExemptionTable.cs" />
+    <Compile Include="NAATI\20221213_CreateCredentialPrerequisiteExemptionTable\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20221216_PracticeTestApplicationTypes\PracticeTestApplicationTypes.cs" />
+    <Compile Include="NAATI\20221216_PracticeTestApplicationTypes\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20230103_AddFieldsToQrCode\AddFieldsToQrCode.cs" />
+    <Compile Include="NAATI\20230103_AddFieldsToQrCode\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20230110_AddIndexToCertificationPeriods\AddIndexToCertificationPeriod.cs" />
+    <Compile Include="NAATI\20230110_AddIndexToCertificationPeriods\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20230109_ChangeRejectWeeksToRejectHours\ChangeRejectWeeksToRejectHours.cs" />
+    <Compile Include="NAATI\20230109_ChangeRejectWeeksToRejectHours\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20230110_AddModifiedDateToQrCode\AddModifiedDateToQrCode.cs" />
+    <Compile Include="NAATI\20230110_AddModifiedDateToQrCode\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20230113_AddFeedbackToSubmitTestDraft\AddFeedbackToSubmitTestDraft.cs" />
+    <Compile Include="NAATI\20230113_AddFeedbackToSubmitTestDraft\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20230113_AddFeedBackToTestResults\AddFeedbackToTestResults.cs" />
+    <Compile Include="NAATI\202301231431_AddIndexesForTestMaterialWizard\AddIndexesForTestMaterialWizard.cs" />
+    <Compile Include="NAATI\202301231431_AddIndexesForTestMaterialWizard\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20230120_RemoveFeedbackFromTestResultAndAddToJobExaminer\RemoveFeedbackFromTestResultAndAddToJobExaminer.cs" />
+    <Compile Include="NAATI\20230120_RemoveFeedbackFromTestResultAndAddToJobExaminer\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20230125_RemoveSkillsForPracticeCPI\RemoveSkillsForPracticeCPI.cs" />
+    <Compile Include="NAATI\20230125_UpdateCpiToAllowCandidateBrief\UpdateCpiToAllowCandidateBrief.cs" />
+    <Compile Include="NAATI\20230130_AddNewSkillsForPracrticeTestCertifiedInterpreter\AddNewSkillsForPracticeTest.cs" />
+    <Compile Include="NAATI\20230130_AddNewSkillsForPracrticeTestCertifiedInterpreter\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20230130_AddSkillApplicationTypes\AddSkillApplicationTypes.cs" />
+    <Compile Include="NAATI\20230130_AddSkillApplicationTypes\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20230216_AddIndexesForGetPendingtestsToIssueResults\AddIndexesForGetPendingTestsToIssueResults.cs" />
+    <Compile Include="NAATI\20230216_AddIndexesForGetPendingtestsToIssueResults\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20230406_TFS216925\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20230406_TFS216925\TFS216925.cs" />
+    <Compile Include="NAATI\20230605_AddFieldsToPerson\AddFieldsToPerson.cs" />
+    <Compile Include="NAATI\20230608_AddEmailCodeToPerson\AddEmailCodeToPerson.cs" />
+    <Compile Include="NAATI\20231128_MaintainTestComponentType\MaintainTestComponentType.cs" />
+    <Compile Include="NAATI\20230901_MaintainTestComponentType\MaintainTestComponentType.cs" />
+    <Compile Include="Reports\20200320_AddDeceasedToPersonHistory\AddDeceasedToPersonHistory.cs" />
+    <Compile Include="Reports\20191203_AddJobExecutionEntity\AddJobExecutionEntity.cs" />
+    <Compile Include="Reports\20191201_AddSystemValueTable\AddSystemValueTable.cs" />
+    <Compile Include="Reports\20220818_AddAutoCreatedToApplicationHistoryCredentialRequestHistory\AddAutoCreatedToApplicationHistoryCredentialRequestHistory.cs" />
+    <Compile Include="Reports\20220818_AddAutoCreatedToApplicationHistoryCredentialRequestHistory\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\20221117_AddTestResultExaminerMarkingTables\AddTestResultExaminerMarkingTables.cs" />
+    <Compile Include="Reports\20221213_AddRMACIdToTestResultExaminerMarkingTbl\AddRMACIdToTestResultExaminerMarkingTbl.cs" />
+    <Compile Include="Reports\20221213_AddRMACIdToTestResultExaminerMarkingTbl\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\20221213_DropPKConstraintTestResultExaminerRubricMarkingHistory\DropPKConstraintTestResultExaminerRubricMarkingHistory.cs" />
+    <Compile Include="Reports\20221213_DropPKConstraintTestResultExaminerRubricMarkingHistory\sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\20230628_Add_Latest_Tables\AddLatestTables.cs" />
+    <Compile Include="Reports\20230628_Add_Latest_Tables\sql.Designer.cs">
+      <DependentUpon>sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\20230817_AddCredentialRequestsHistoryStatusIndex\AddCredentialRequestsHistoryStatusIndex.cs" />
+    <Compile Include="Updater\DatabaseMigrationService.cs" />
+    <Compile Include="Updater\INaatiMigrationRunner.cs" />
+    <Compile Include="Updater\INaatiMigrationTarget.cs" />
+    <Compile Include="Updater\NaatiMigratorAnnouncer.cs" />
+    <Compile Include="Updater\NaatiMigrationRunner.cs" />
+    <Compile Include="Updater\NaatiMigrationTarget.cs" />
+    <Compile Include="Updater\Program.cs" />
+    <Compile Include="Updater\ReportsMigrationTarget.cs" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\ActionBuilder\FindDuplicateCredentialApplicationAction.sql" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\ActionBuilder\README.txt" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclAllocateTestSessionCreditCardPayment.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclAllocateTestSessionDirectDebit.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclCreatePaidTestReviewCreditCardPaymentBeingProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclCreatePaidTestReviewSponsoredBeingProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclCreatePaidTestReviewInvoiceBeingProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclFailedTestResultReverted.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclFailEligibleForSupplementaryTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclInvalidatedTestRevertedEmailTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclIssuedCredentialReverted.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclIssueFailConcededPassOfferedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclNotifyTestSessionDetailsTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclPaidReviewInvoiceProcessedCreditCardReceivedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclPaidReviewInvoiceProcessedInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclPaidReviewInvoiceProcessedInvoiceSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclPaidReviewInvoiceProcessedNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclPaidReviewWithdrawnTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclPaidTestReviewPaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclPassedTestResultReverted.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclTestInvalidatedEmailTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclTestInvoicePaidAfterSelectSession.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclTestInvoiceProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclTestInvoiceProcessedCreditCardPayment.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationTestInvoicePaidAfterSelectTestSession.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationAllocateTestSessionCreditCard.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationAllocateTestSessionDirectDebit.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationAllocateTestSessionUntrustedSponsorApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCreatePaidTestReviewCreditCardPaymentBeingProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCreatePaidTestReviewSponsoredBeingProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCreatePaidTestReviewInvoiceBeingProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCreateSupplemementaryTestInvoiceBeingProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCreateSupplementaryTestSponsoredBeingProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationIssueFailAfterReviewConcededPassOfferedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationNotifyTestSessionDetailsTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationSendCandidateBrief.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationSupplementaryTestInvoiceProcessedTrustedSponsoredApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationSupplementaryTestPaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationTestInvoiceProcessedCreditCard.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationTestInvoiceProcessedDirectDebit.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationTestInvoiceProcessedSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\TestSessionAvailabilityNoticeTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaNotifyTestSessionDetailsTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\AutomatedEmailTemplateFooter.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Generic.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\MakeApplicationPaymentTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\MaterialRequestCollaboratorEmailTemplateFooter.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\MaterialRequestEmailTemplateFooter.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterCulturalAllocateTestSessionDirectCreditCard.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterCulturalAllocateTestSessionDirectDebit.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterculturalAllocateTestSessionUntrustedSponsorApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterculturalTestInvoicePaidAfterSelectTestSesession.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterCulturalTestInvoiceProcessedCreditCard.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterCulturalTestInvoiceProcessedDirectDebit.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsNotifyTestSessionDetailsTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousCertificationIssueFailAfterReviewEligibleForSupplementaryTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousCertificationIssueFailAfterReviewConcededPassOfferedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousCertificationIssueFailConcededPassOfferedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousCertificationIssueFailEligibleForSupplementaryTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousCertificationIssuePassAfterReviewTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousCertificationIssueFailAfterReviewTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousCertificationIssueFailTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousCertificationIssuePassTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousEthicsInterculturalIssueCredentialTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousEthicsIssueFailTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousEthicsIssuePassTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousCertificationCredentialIssuedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationIssueFailConcededPassOfferedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationPaidRevieInvoiceProcessedTrustedSponsoredApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationPendingAssessmentFailedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationIssueFailAfterReviewTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationIssueFailEligibleForSupplementaryTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationIssueFailAfterReviewEligibleForSupplementaryTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationIssuePassAfterReviewTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationPaidReviewInvoiceProcessedCreditCardReceivedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationPaidReviewInvoiceProcessedInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationPaidReviewInvoiceProcessedInvoiceSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationPaidReviewInvoiceProcessedNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationPaidReviewWithdrawnTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationPaidTestReviewPaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaApplicationInvoicePaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaApplicationRejectedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaApplicationSubmittedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaCreateTestPaidReviewTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaCredentialRequestCancelledTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaEmailTemplateFooter.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaFailPaidReviewTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaFinishCheckingInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaFinishCheckingInvoiceSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaFinishCheckingNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaInviteForTestingInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaInviteForTestingNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaIssueCredentialTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaIssuedPassResultTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaPassPaidReviewTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaReIssueCredentialTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaTestFailedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaTestInvoicePaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaTestSessionAcceptedMyNaatiTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaTestSessionAcceptedNcmsTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaTestSessionAllocatedAndAcceptedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaTestSessionAllocatedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaTestSessionRejectedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Cla\ClaWithdrawRequestTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\EmailTemplatePaymentOptions.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterculturalIssueCredentialTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousInterculturalIssueFailTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Indigenous\IndigenousInterculturalIssuePassTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Intercultural\InterculturalIssuePassTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsIssuePassTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Intercultural\InterculturalIssueFailTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsIssueFailTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationIssuePassTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationIssueFailTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclV2ApplicationSubmissionProcessedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclV2ApplicationInvoicePaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclV2ApplicationSubmittedWithCreditCardTemplate.html" />
+    <Compile Include="NaatiMigrationAttribute.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\AdvancedCertificationApplicationFormBuilder.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\Base\FormBuilderContracts.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\Base\FormBuilderExtensions.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\CclApplicationFormBuilder.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\CclUnavailableApplicationFormBuilder.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\Cclv1ApplicationFormBuilder.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\CertificationApplicationFormBuilder.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\ClaApplicationBuilderHelper.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\FormsScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\PractitionerApplicationFormBuilder.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\RecertificationApplicationFormBuilder.cs" />
+    <Compile Include="NAATIScripts\Data\ApplicationForms\SharedBuilders.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\BaseScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialTypeTestMaterialDomainScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\EmailSendStatusTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CountryScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialApplicationFieldOptionOptionScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialApplicationFieldOptionScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialApplicationFieldScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialApplicationTypeCategoryScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialApplicationTypeTestLocationScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialRequestAssociationTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialTypeDowngradePathScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialTypeTemplateScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\MaterialRequestRoundPanelMembershipTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\MaterialRequestRoundStatusTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\MaterialRequestStatusTypeScripGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\MaterialRequestTaskTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\SecurityNounScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\SecurityRuleScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\SecurityVerbScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\SystemActionEventTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\DocumentTypeRoleScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\EmailTemplateDetailTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\RolePlayerRoleTypeGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\RolePlayerStatusTypeGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\PanelRoleCategoryScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\PanelRoleScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\PanelTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\SecurityRoleScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\SkillTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\SystemValueScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialTypeCrossSkillScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ODAddressVisibilityTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\PointsLimitTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ProfessionalDevelopmentCategoryGroupScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ProfessionalDevelopmentCategoryRequirementScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ProfessionalDevelopmentCategoryScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ProfessionalDevelopmentRequirementScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ProfessionalDevelopmentSectionCategoryScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ProfessionalDevelopmentSectionScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\StateScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\TestComponentBaseTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialApplicationTypeDocumentTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialApplicationTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialRequestPathTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialStatusTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\DataTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\DocumentTypeCategoryScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialCategoryScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialRequestStatusTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialApplicationTypeCredentialTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialFeeProductScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialTypeUpgradePathScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\SystemActionTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\EmailTemplateScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ExaminerStatusTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\FeeTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\GlCodeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\LanguageGroupScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\LanguageScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ProductCategeoryScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ProductSpecificationScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\CredentialApplicationStatusTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\ProductTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\TestComponentResultTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\TestLocationScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\TestMaterialDomainScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\TestMaterialLinkTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\TestMaterialTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\TestResultEligibilityTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\SkillScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\DocumentTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\TestStatusTypeScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Data\ScriptGenerators\VenueScriptGenerator.cs" />
+    <Compile Include="NAATIScripts\Scripts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Scripts.resx</DependentUpon>
+    </Compile>
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\TestSessionReminderTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\PracticeTest\PracticeTestAllocateTestSessionApplicantWithSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\PracticeTest\PracticeTestSponsoredTestInvoiceProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\PracticeTest\PracticeTestAllocateTestSessionCreditCardTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\PracticeTest\PracticeTestInviteForTestingInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\PracticeTest\PracticeTestInvoiceProcessedApplicationInvoiceCreditCardTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\PracticeTest\PracticeTestIssueResultTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\RefundApprovedEmailTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\RefundRequestedEmailTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\RefundRejectedEmailTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\CreditNoteProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationReminderTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\AccreditationCredentialIssuedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\MaterialRequest\TestMaterialRequestAssignCoordinatorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\MaterialRequest\TestMaterialRequestSubmitForApprovalRequestorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\MaterialRequest\TestMaterialRequestSubmitForApprovalCoordinatorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\MaterialRequest\TestMaterialRequestApprovedCoordinatorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\MaterialRequest\TestMaterialRequestRejectedCoordinatorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\MaterialRequest\TestMaterialRequestRevertCoordinatorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\MaterialRequest\TestMaterialRequestCancelCoordinatorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\MaterialRequest\TestMaterialRequestRemovePanelCollaborator.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\MaterialRequest\TestMaterialRequestAssignPanelCollaborator.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\MaterialRequest\TestMaterialRequestUpdateRequestDetailsCoordinatorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\MaterialRequest\TestMaterialRequestUpdateDueDateTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\TestSessions\TestMaterialReminderEmailTemplate.html" />
+    <Content Include="NAATIScripts\StoredProcedures\SupplementaryMaterialsFilterTestComponentsThatPassed.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\CheckNewCredentialSiblingsCanProgressToEligibleForTesting.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\GetNewCredentialsThatCanProgressToEligibleForTesting.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\GetRemainingStoredFilesForDeletionCount.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\GetStoredFilesForFileDeletion.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\GetNewApplicationsThatCanProgressToEligibleForTesting.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\PrerequisiteApplicationsNullableApplications.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\PrerequisiteSummary.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\RebuildIndexes.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\PrerequisiteApplications.sql" />
+    <Content Include="NAATIScripts\Views\vwIssuedCredentialCredentialRequest.sql" />
+    <Content Include="NAATIScripts\Views\vwTestMaterialLastUsed.sql" />
+    <Compile Include="NAATI\20171127_AddELogbookTables\AddELogbookTables.cs" />
+    <Compile Include="NAATI\20171123_TrimValueInInstitutionName\TrimValueInInstitutionName.cs" />
+    <Compile Include="NAATI\20171123_AddVenueTable\AddVenueTable.cs" />
+    <Compile Include="NAATI\20171122_UpdateLegacyAccreditationTable\UpdateLegacyAccreditationTable.cs" />
+    <Compile Include="NAATI\20171115_AddLegacyAccreditationTable\AddLegacyAccreditationTable.cs" />
+    <Compile Include="NAATI\20171122_SponsorContactAsEmailField\SponsorContactAsEmailField.cs" />
+    <Compile Include="NAATI\20171121_AddCertificationPeriodTable\AddCertificationPeriodTable.cs" />
+    <Compile Include="NAATI\20171120_AddReportableColumToApplicationField\AddReportableColumToApplicationField.cs" />
+    <Compile Include="NAATI\20171018_AddEmailExaminerCorrespondence\AddEmailExaminerCorrespondence.cs" />
+    <Compile Include="NAATI\20170801_ClearData\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20170801_RemoveOldMigrations\RemoveOldMigrations.cs" />
+    <Compile Include="NAATI\20170912_AddEmailMessageAttachmentTable\AddEmailMessageAttachmentTable.cs" />
+    <Compile Include="NAATI\20170830_AddEmailMessageTable\AddEmailMessageTable.cs" />
+    <Compile Include="NAATI\20170802_CredentialApplication\CreateCredentialApplicationSchema.cs" />
+    <Compile Include="NAATI\20170720_PayRunImprovements\PayRunImprovements.cs" />
+    <Compile Include="NAATI\20170728_ImproveTestAttendanceAssetViewPerformance\ImproveTestAttendanceAssetViewPerformance.cs" />
+    <Compile Include="NAATI\20170728_ImproveTestAttendanceAssetViewPerformance\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20170821_ChangesToContacts\ChangesToContacts.cs" />
+    <Compile Include="NAATI\20170821_ChangesToContacts\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20170829_PersonChanges\PersonChanges.cs" />
+    <Compile Include="NAATI\20170801_ClearData\ClearData.cs" />
+    <Compile Include="NAATI\20170907_UpdateDocumentTypeTable\UpdateDocumentTypeTable.cs" />
+    <Compile Include="NAATI\20170912_LanguageSchemaChanges\LanguageSchemaChanges.cs" />
+    <Compile Include="NAATI\20170919_AddHighlightAndReadOnlyColumnsToNote\AddHighlightAndReadOnlyColumnsToNote.cs" />
+    <Compile Include="NAATI\20171018_AddSponsorContactToCredentailApp\AddSponsorContactToCredentailApp.cs" />
+    <Compile Include="NAATI\20171017_InitialDataPopulationNov\InitialDataPopulationNov.cs" />
+    <Compile Include="NAATI\20171016_AddColumnsForTestLocation\AddColumnsForTestLocation.cs" />
+    <Compile Include="NAATI\20171011_AddContactPersonTable\AddContactPersonTable.cs" />
+    <Compile Include="NAATI\20171006_AddFromAddressToEmailTable\AddFromAddressToEmailTable.cs" />
+    <Compile Include="NAATI\20170928_ChangeColumnTypeForModifiedDate\ChangeColumnTypeForModifiedDate.cs" />
+    <Compile Include="NAATI\20171003_ConfigureCountriesAndLanguages\ConfigureCountriesAndLanguages.cs" />
+    <Compile Include="NAATI\20171003_ConfigureCountriesAndLanguages\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20171003_ConfigureInitialData\ConfigureInitialDataForNcms1_0_0.cs" />
+    <Compile Include="NAATI\20171003_ConfigureInitialData\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20170928_AddCredentialApplicationFormTables\AddCredentialApplicationFormTables.cs" />
+    <Compile Include="NAATI\20171017_InitialDataPopulationNov\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20171026_AddColumnsToPerson\AddColumnsToPerson.cs" />
+    <Compile Include="NAATI\20171101_UpdatePersonNameTitle\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20171101_UpdatePersonNameTitle\UpdatePersonNameTitle.cs" />
+    <Compile Include="NAATI\20171030_AddUniqueConstraints\AddUniqueConstraints.cs" />
+    <Compile Include="NAATI\20171102_RenameCredentialRequestInProgressStatus\RenameCredentialRequestInProgressStatus.cs" />
+    <Compile Include="NAATI\20171108_UpdateEportalServiceUser\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20171108_UpdateEportalServiceUser\UpdateEportalServiceUser.cs" />
+    <Compile Include="NAATI\20171115_UpdateIsEportalActiveColumn\UpdateIsEportalActiveColumn.cs" />
+    <Compile Include="NAATI\20171127_ApplicationWorkflow\ApplicationWorkflow.cs" />
+    <Compile Include="NAATI\20171129_AddGroupColumnToQuestionLogic\AddGroupColumnToQuestionLogic.cs" />
+    <Compile Include="NAATI\20171129_AddNaatiNumberTableData\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20171129_InitialDataPopulationJan\InitialDataPopulationJan.cs" />
+    <Compile Include="NAATI\20171129_InitialDataPopulationJan\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20171129_AddNaatiNumberTableData\AddNaatiNumberTableData.cs" />
+    <Compile Include="NAATI\20191113_DeleteUnusedDomains\DeleteUnusedDomains.cs" />
+    <Compile Include="NAATI\20191015_AddPermissionsColumn\AddPermissionsColumn.cs" />
+    <Compile Include="NAATI\20180213_AddApiAccessTable\AddApiAccessTable.cs" />
+    <Compile Include="NAATI\20171211_AddFeeTables\AddFeeTables.cs" />
+    <Compile Include="NAATI\20171211_ProductTables\ProductTables.cs" />
+    <Compile Include="NAATI\20171206_MigrationLogboook\MigrationLogboook.cs" />
+    <Compile Include="NAATI\20171201_AddCertificationDescriptionUrlKey\AddCertificationDescriptionUrl.cs" />
+    <Compile Include="NAATI\20171130_IssueCredentialPeriods\IssueCredentialPeriods.cs" />
+    <Compile Include="NAATI\20171201_AddCertificationDescriptionUrlKey\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20171208_AddCredentialWorkflowFeeTable\AddCredentialWorkflowFeeTable.cs" />
+    <Compile Include="NAATI\20171218_ApplicationsOther\ApplicationsOther.cs" />
+    <Compile Include="NAATI\20171218_CredentialCategoryWorkPractice\CredentialCategoryWorkPractice.cs" />
+    <Compile Include="NAATI\20171218_LogbookStoredFileType\LogbookStoredFileType.cs" />
+    <Compile Include="NAATI\20171215_UpdateEntityType\UpdateEntityType.cs" />
+    <Compile Include="NAATI\20171218_AddCredentialRoleScreenPermission\AddCredentialRoleScreenPermission.cs" />
+    <Compile Include="NAATI\20171218_AddCredentialRoleScreenPermission\Sql.Designer.cs">
+      <DependentUpon>Sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="NAATI\20171219_ApplicationInvoices\ApplicationInvoices.cs" />
+    <Compile Include="NAATI\20171221_ModifyTblEventVenueAddTblTestSession\ModifyTblEventVenueAddTblTestSession.cs" />
+    <Compile Include="NAATI\20180212_AddExaminerPanelsToSystemValue\AddExaminerPanelsToSystemValue.cs" />
+    <Compile Include="NAATI\20180205_AddExaminerCorrespondenceColumn\AddExaminerCorrespondenceColumn.cs" />
+    <Compile Include="NAATI\20180125_TestMaterialMigration\TestMaterialMigration.cs" />
+    <Compile Include="NAATI\20180119_AddPublicNoteColumn\AddPublicNoteColumnToTestSessionTable.cs" />
+    <Compile Include="NAATI\20180124_AddRejectedToTestSessionCredentialRequest\AddRejectedToTestSession.cs" />
+    <Compile Include="NAATI\20180131_ClearAllExistingPanels\ClearAllExistingPanels.cs" />
+    <Compile Include="NAATI\20180131_ClearAllExistingPanels\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20180213_AddInactiveColumnToCredentialApplicationForm\AddInactiveColumnToCredentialApplicationForm.cs" />
+    <Compile Include="NAATI\20180214_ReplaceReferencesForTestTables\ReplaceReferencesForTestTables.cs" />
+    <Compile Include="NAATI\20180215_AddExaminerStatusLookoup\AddExaminerStatusLookoup.cs" />
+    <Compile Include="NAATI\20180219_AddTestSittingTestMaterailTable\AddTestSittingTestMaterial.cs" />
+    <Compile Include="NAATI\20180221_AddTestSpecificationMapping\AddTestSpecificationMapping.cs" />
+    <Compile Include="NAATI\20180221_RenameTestSessionCredentialRequestToTestSitting\RenameTestSessionCredentialRequestToTestSitting.cs" />
+    <Compile Include="NAATI\20180221_RenameTestSessionCredentialRequestToTestSitting\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20180309_SanitiseTestSpecTables\SanitiseTestSpecTables.cs" />
+    <Compile Include="NAATI\20180306_IncludeOptionalSkills\IncludeOptionsalSkills.cs" />
+    <Compile Include="NAATI\20180228_ChangeTypeForStreetDetailsColumn\ChangeTypeForStreetDetailsColumn.cs" />
+    <Compile Include="NAATI\20180222_IdentityColumnsForTestTables\IdentityColumnsForTestTables.cs" />
+    <Compile Include="NAATI\20180222_IdentityColumnsForTestTables\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20180305_AddPractitionerFlagToForms\AddPractitionerFlagToForms.cs" />
+    <Compile Include="NAATI\20180315_RemoveColsTestResultTable\RemoveColsTestResultTable.cs" />
+    <Compile Include="NAATI\20180323_ModifyCredentialLetterTemplates\ModifyCredentialLetterTemplates.cs" />
+    <Compile Include="NAATI\20180323_ModifyCredentialLetterTemplates\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20180328_InsertNewRole\InsertNewRole.cs" />
+    <Compile Include="NAATI\20180308_AddedCredentialStatusType\AddedCredentialStatusType.cs" />
+    <Compile Include="NAATI\20180323_AddTestSessionBookingSystemValue\AddTestSessionBookingSystemValue.cs" />
+    <Compile Include="NAATI\20180328_AddCredentialRequestType\AddCredentialRequestType.cs" />
+    <Compile Include="NAATI\20180329_AddCredentialTypeUpgradePathTable\AddCredentialTypeUpgradePathTable.cs" />
+    <Compile Include="NAATI\20180406_TestTasks\TestTasks.cs" />
+    <Compile Include="NAATI\20180329_AddDisplayOrderColumn\AddDisplayOrderColumn.cs" />
+    <Compile Include="NAATI\20180406_AddUserToTestProgramRole\AddUserToTestProgramRole.cs" />
+    <Compile Include="NAATI\20180409_AddCredentialSelectionControlUpgradesAndSameLevel\AddCredentialSelectionControlUpgradesAndSameLevel.cs" />
+    <Compile Include="NAATI\20180409_AddSupplmentartTestColumn\AddSupplementarytTestColumn.cs" />
+    <Compile Include="NAATI\20180410_Office365\Office365.cs" />
+    <Compile Include="NAATI\20180409_ModifyCredentialTypeTableColumn\ModifyCredentialTypeTableColumn.cs" />
+    <Compile Include="NAATI\20180413_TestTasksFixing\TestTasksFixing.cs" />
+    <Compile Include="NAATI\20180411_UpdatePdSearchUrl\UpdatePdSearchUrl.cs" />
+    <Compile Include="NAATI\20180420_MigrateLogBook\MigrateLogBook.cs" />
+    <Compile Include="NAATI\20180423_AddAllowSupplementaryColumn\AddAllowSupplmentaryColumn.cs" />
+    <Compile Include="NAATI\20180423_UpdateProductSpecification\UpdateProductSpecification.cs" />
+    <Compile Include="NAATI\20180424_TestTasksModifications\TestTasksModifications.cs" />
+    <Compile Include="NAATI\20180426_RemoveApplicationTypeFromTestSession\RemoveApplicationTypeFromTestSession.cs" />
+    <Compile Include="NAATI\20180425_TestTaskMigration\TestTaskMigration.cs" />
+    <Compile Include="NAATI\20180428_FixDuplicatedConstraint\FixDuplicatedConstraint.cs" />
+    <Compile Include="NAATI\20180919_AddLogbookRoleScreen\AddLogbookRoleScreen.cs" />
+    <Compile Include="NAATI\20180510_AddNewColumnTestSpecificationAttachment\AddNewColumnTestSpecificationAttachment.cs" />
+    <Compile Include="NAATI\20180509_AddRoleScreen\AddRoleScreen.cs" />
+    <Compile Include="NAATI\20180501_AddCredentialTypeCrossSkill\AddCredentialTypeCrossSkill.cs" />
+    <Compile Include="NAATI\20180508_AddNewInvoiceColumn\AddNewInvoiceColumn.cs" />
+    <Compile Include="NAATI\20180510_SyncTableDataForUserRole\SyncTableDataForUserRole.cs" />
+    <Compile Include="NAATI\20180521_AddAppKeyToSystemValue\AddAppKeyToSystemValue.cs" />
+    <Compile Include="NAATI\20180515_AddNewColumnForDocumentTypeTestMaterialAttachment\AddNewColumnForDocumentTypeTestMaterialAttachment.cs" />
+    <Compile Include="NAATI\20180516_AddHangFireFlag\AddHangFireFlag.cs" />
+    <Compile Include="NAATI\20180518_ExternalAccountingOperationBatchProcessColumn\ExternalAccountingOperationBatchProcessColumn.cs" />
+    <Compile Include="NAATI\20180523_AddDisplayBillToApplicationType\AddDisplayBillToApplicationType.cs" />
+    <Compile Include="NAATI\20180521_AddSystemValueKeysForHangFireConfig\AddSystemValueKeysForHangFireConfig.cs" />
+    <Compile Include="NAATI\20180525_NewCredentialWorkflowFeeColumns\NewCredentialWorkflowFeeColumns.cs" />
+    <Compile Include="NAATI\20180601_FixActionTypeNumber\FixAction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FixAction.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20180601_FixActionTypeNumber\FixActionTypeNumber.cs" />
+    <Compile Include="NAATI\20180601_UpdateSkillType\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20180601_UpdateSkillType\UpdateSkillType.cs" />
+    <Compile Include="NAATI\20180509_AddRubricConfigurationSchema\AddRubricConfigurationSchema.cs" />
+    <Compile Include="NAATI\20180615_ExaminerToolsDownloadColumn\AddExaminerToolsDownloadColumn.cs" />
+    <Compile Include="NAATI\20180621_ExtendTestComponentNamLength\ExtendTestComponentNamLength.cs" />
+    <Compile Include="NAATI\20180626_AddSystemUserFlagToUserTable\AddSystemUserFlagToUserTable.cs" />
+    <Compile Include="NAATI\20180625_AddMarkingResultTypeToRubric\AddMarkingResultTypeToRubric.cs" />
+    <Compile Include="NAATI\20180627_ModifiedCommentLengthForRubricResults\ModifiedCommentLengthForRubricResults.cs" />
+    <Compile Include="NAATI\20180702_EthicsInterculturalCertificateTemplate\EthicsInterculturalCertificateTemplate.cs" />
+    <Compile Include="NAATI\20180702_EthicsInterculturalCertificateTemplate\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20180702_AddTaskLabelColumnToTestComponent\AddTaskLabelColumnToTestComponent.cs" />
+    <Compile Include="NAATI\20180702_UpdateTaskLabelColumnToLabel\UpdateTaskLabelColumnToLabel.cs" />
+    <Compile Include="NAATI\20180706_AddCredentialTemplatesForRecognisedTranslatorIndigenous\AddCredentialTemplatesForRecognisedTranslatorIndigenous.cs" />
+    <Compile Include="NAATI\20180710_AddTableODAddressVisibilityType\AddTableODAddressVisibilityType.cs" />
+    <Compile Include="NAATI\20180726_AddComplaintPolicyUrlToSystemValue\AddComplaintPolicyUrlToSystemValue.cs" />
+    <Compile Include="NAATI\20180723_AddNewEmailTemplateRoleScreen\AddNewEmailTemplateRoleScreen.cs" />
+    <Compile Include="NAATI\20180718_AddPDCatalogueSystemValue\AddPDCatalogueSystemValue.cs" />
+    <Compile Include="NAATI\20180711_UpdateOdAddressVisibilityTypeField\UpdateOdAddressVisibilityTypeField.cs" />
+    <Compile Include="NAATI\20180711_AddProfessionalDevelopmentPointCalculation\AddProfessionalDevelopmentPointCalculation.cs" />
+    <Compile Include="NAATI\20180716_RemoveIncludePdColumnFromAddressTable\RemoveIncludePdColumnFromAddressTable.cs" />
+    <Compile Include="NAATI\20180730_ConvertTablesToIdentity\ConvertTablesToIdentity.cs" />
+    <Compile Include="NAATI\20180730_ConvertTablesToIdentity\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20180801_AddCredentialApplicationTypeCategory\AddCredentialApplicationTypeCategory.cs" />
+    <Compile Include="NAATI\20180809_ModifyCertificationPeriodRecertifyKey\ModifyCertificationPeriodRecertifyKey.cs" />
+    <Compile Include="NAATI\20180813_ModifyComplaintPolicyUrl\ModifyComplaintPolicyUrl.cs" />
+    <Compile Include="NAATI\20180910_ChangeLengthOfAttachment\ChangeLengthOfAttachment.cs" />
+    <Compile Include="NAATI\20180907_Recertification\Recertification.cs" />
+    <Compile Include="NAATI\20180911_AddWorkPracticeToFormsLogic\AddWorkPracticeToFormsLogic.cs" />
+    <Compile Include="NAATI\20180925_ClaLetterTemplate\AddAndCorrectDocumentTemplates.cs" />
+    <Compile Include="NAATI\20180925_ClaLetterTemplate\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20181009_ApplicationTypeAndTestLocationMap\ApplicationTypeAndTestLocationMap.cs" />
+    <Compile Include="NAATI\20181003_RemoveCLAEmailTemplate\RemoveCLAEmailTemplate.cs" />
+    <Compile Include="NAATI\20181010_AddTestSessionBookingRejectKey\AddTestSessionBookingRejectKey.cs" />
+    <Compile Include="NAATI\20181015_UpdatePostcode\UpdatePostcode.cs" />
+    <Compile Include="NAATI\20181022_AddAllowPaidReviewFlag\AddAllowPaidReviewFlag.cs" />
+    <Compile Include="NAATI\20181023_AddActionEventType\AddActionEventType.cs" />
+    <Compile Include="NAATI\201810301_SchemaChangeForConcededPass\SchemaChangeForConcededPass.cs" />
+    <Compile Include="NAATI\20181109_AddCredentialTypesToMemberShip\20181109_AddCredentialTypesToMemberShip.cs" />
+    <Compile Include="NAATI\20181116_ExtendBandDescription\ExtendBandDescription.cs" />
+    <Compile Include="NAATI\20181128_VenueCoordinates\VenueCoordinates.cs" />
+    <Compile Include="NAATI\20181121_AddMinCommentLengthColumns\AddMinCommentLengthColumns.cs" />
+    <Compile Include="NAATI\20181127_AddCredentialApplicationIdToCertificationPeriod\AddCredentialApplicationIdToCertificationPeriod.cs" />
+    <Compile Include="NAATI\20181211_TestSessionCapacity\TestSessionCapacity.cs" />
+    <Compile Include="NAATI\20181204_DatabaseCleanUp\DatabaseCleanUp.cs" />
+    <Compile Include="NAATI\20181204_DatabaseCleanUp\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20181206_IncreaseEmailTemplateNameColumnLength\IncreaseEmailTemplateNameColumnLength.cs" />
+    <Compile Include="NAATI\20181210_MigrateApplicationSubmission\MigrateApplicationSubmission.cs" />
+    <Compile Include="NAATI\20181214_UpdateTestSessionCapacity\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20181214_UpdateTestSessionCapacity\UpdateTestSessionCapacity.cs" />
+    <Compile Include="NAATI\20190102_RolePlayer\RolePlayer.cs" />
+    <Compile Include="NAATI\20181217_AddDocumentTypeRoleAndPanelRoleCategory\AddDocumentTypeRoleAndPanelRoleCategory.cs" />
+    <Compile Include="NAATI\20190107_AddFormUrlColumn\AddFormUrlColumn.cs" />
+    <Compile Include="NAATI\20190109_AddAllowMultipleColumn\AddAllowMultipleColumn.cs" />
+    <Compile Include="NAATI\20190114_RefactorEmailTemplates\RefactorEmailTemplates.cs" />
+    <Compile Include="NAATI\20190115_NonWindowsUser\AddNonWindowsUserSupport.cs" />
+    <Compile Include="NAATI\20190130_AddCredentialTypeFilterToForms\AddCredentialTypeFilterToForms.cs" />
+    <Compile Include="NAATI\20190307_SkillApplicationType\CreateSkillApplicationType.cs" />
+    <Compile Include="NAATI\20190301_CandidateBrief\CandidateBrief.cs" />
+    <Compile Include="NAATI\20190225_AddMatchDirectionColumn\AddMatchDirectionColumn.cs" />
+    <Compile Include="NAATI\20190228_RemoveRowVersionColumn\RemoveRowVersionColumn.cs" />
+    <Compile Include="NAATI\20190326_AdjustRubricData\AdjustRubricData.cs" />
+    <Compile Include="NAATI\20190326_RubricRules\RubricRules.cs" />
+    <Compile Include="NAATI\20190402_AddAutomaticIssuing\AddAutomaticIssuing.cs" />
+    <Compile Include="NAATI\20190417_AddEmailSendStatusType\AddEmailSendStatusType.cs" />
+    <Compile Include="NAATI\20190506_MigrateCclSkills\MigrateCclSkills.cs" />
+    <Compile Include="NAATI\20190516_AddDefaultTestSpecification\AddDefaultTestSpecification.cs" />
+    <Compile Include="NAATI\20190531_ChangeGenderToNullable\ChangeGenderToNullable.cs" />
+    <Compile Include="NAATI\20190614_AddEndorsedQualifications\AddEndorsedQualifications.cs" />
+    <Compile Include="NAATI\20190618_AddMaterialRequest\AddMaterialRequest.cs" />
+    <Compile Include="NAATI\20190619_AddAutoRecertification\AddAutoRecertification.cs" />
+    <Compile Include="NAATI\20190705_AddSessionBookingToCredentialType\AddSessionBookingToCredentialType.cs" />
+    <Compile Include="NAATI\20190709_UpdateApplicationFieldEndorsedQualification\UpdateApplicationFieldEndorsedQualification.cs" />
+    <Compile Include="NAATI\20190712_RefactorEmailMessageTable\RefactorEmailMessageTable.cs" />
+    <Compile Include="NAATI\20190809_AddSkillToCredentialFormQuestionLogic\AddSkillToCredentialFormQuestionLogic.cs" />
+    <Compile Include="NAATI\20190904_AddKnowledgeTestToPersonTable\AddKnowledgeTestToPersonTable.cs" />
+    <Compile Include="NAATI\20190911_ConfigureRubricCalculationForCSHI\ConfigureRubricCalculationForCSHI.cs" />
+    <Compile Include="NAATI\20190911_UpdateEmailTemplateForCSLIandCSHI\UpdateEmailTemplateForCSLIandCSHI.cs" />
+    <Compile Include="NAATI\20190820_RoleSecurityOverhaul\RoleSecurityOverhaul.cs" />
+    <Compile Include="NAATI\NaatiMigration.cs" />
+    <Compile Include="NAATI\20170728_AddFinanceCorrespondenceCategory\AddFinanceCorrespondenceCategory.cs" />
+    <Compile Include="NAATI\20170801_UpdateAutomatedPayruns\UpdateAutomatedPayruns.cs" />
+    <Compile Include="NAATI\20170804_IncreaseLengthOfAccountingReference\IncreaseLengthOfAccountingReference.cs" />
+    <Compile Include="NAATI\20170807_FixBadGLcodeReferences\FixBadGLcodeReferences.cs" />
+    <Compile Include="NAATI\20170807_FixBadGLcodeReferences\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="NAATI\20170817_StoredFile_ExternalFileIdUniCode\StoredFileExternalFileIdUniCode.cs" />
+    <Compile Include="ReportMigrationContainer.cs" />
+    <Compile Include="NAATIScriptRunner.cs" />
+    <Compile Include="ReportsScriptRunner.cs" />
+    <Compile Include="MigrationArguments.cs" />
+    <Compile Include="MigrationExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportsScripts\Scripts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Scripts.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\20160809_RenameColumnAccreditationLevel\RenameColumnAccreditationLevel.cs" />
+    <Compile Include="Reports\20160816_UpdatesForNewETL\AddModifiedAndDeletedDateColumns.cs" />
+    <Compile Include="Reports\20160816_UpdatesForNewETL\AddTablesToInternalSchema.cs" />
+    <Compile Include="Reports\20160830_AddPaymentsTable\AddPaymentsTable.cs" />
+    <Compile Include="Reports\20160816_UpdatesForNewETL\DropTableForeignKeyConstraints.cs" />
+    <Compile Include="Reports\20160816_UpdatesForNewETL\IncreaseColumnSizes.cs" />
+    <Compile Include="Reports\20160830_AddPaymentsTable\AlterPaymentTablesPrimaryKey.cs" />
+    <Compile Include="Reports\20160906_AlterInvoiceTable\AlterInvoiceTable.cs" />
+    <Compile Include="Reports\20160907_AdditionalChangesForETL\AddObsoletedDate.cs" />
+    <Compile Include="Reports\20160907_AdditionalChangesForETL\AddReportDatesTable.cs" />
+    <Compile Include="Reports\20160907_AdditionalChangesForETL\ChangeTableNamesAndSchema.cs" />
+    <Compile Include="Reports\20160907_AdditionalChangesForETL\AddObsoletedDateData.cs" />
+    <Compile Include="Reports\20160907_AdditionalChangesForETL\AddObsoletedDateIndex.cs" />
+    <Compile Include="Reports\20160920_ApplicationResultDate\AddApplicationResultDate.cs" />
+    <Compile Include="Reports\20160907_AdditionalChangesForETL\TableInfo.cs" />
+    <Compile Include="Reports\20161004_AddExpressionOfInterest\AddExpressionOfInterest.cs" />
+    <Compile Include="Reports\20161004_AddExpressionOfInterest\AddObsoletedIndex.cs" />
+    <Compile Include="Reports\20161020_AlterPersonHistory\AlterPersonHistory.cs" />
+    <Compile Include="Reports\20161020_AlterTestHistory\AlterTestHistory.cs" />
+    <Compile Include="Reports\20161020_RemoveAccreditationExpiry\RemoveAccreditationExpiry.cs" />
+    <Compile Include="Reports\20161021_AddMarkTable\AddMarkTable.cs" />
+    <Compile Include="Reports\20161021_AddPanelMembersTable\AddPanelMembersTable.cs" />
+    <Compile Include="Reports\20161021_AddPanelTable\AddPanelTable.cs" />
+    <Compile Include="Reports\20161024_MoveResultToApplication\MoveResultToApplication.cs" />
+    <Compile Include="Reports\20161026_AddPersonIdToPanelMembers\AddPersonIdToPanelMembers.cs" />
+    <Compile Include="Reports\20161101_AddFieldsToAccreditation\AddFieldsToAccreditation.cs" />
+    <Compile Include="Reports\20161108_FixMarkTable\FixMarkTable.cs" />
+    <Compile Include="Reports\20170216_AddPersonSuburb\AddPersonSuburb.cs" />
+    <Compile Include="Reports\20170216_AddTestResultTable\AddTestResultTable.cs" />
+    <Compile Include="Reports\20170217_ModifyMarkTable\ModifyMarkTable.cs" />
+    <Compile Include="Reports\20170222_AdditionalColumns\AdditionalColumns.cs" />
+    <Compile Include="Reports\20170324_NullableAccreditationResult\NullableAccreditationResult.cs" />
+    <Compile Include="Reports\20170411_FixFloatTruncation\FixFloatTruncation.cs" />
+    <Compile Include="Reports\20170508_AddPdRenewalToPersonTable\AddPdRenewalToPersonTabel.cs" />
+    <Compile Include="Reports\20170922_ReportingDbChangesRevision\ReportingDbChangesRevision.cs" />
+    <Compile Include="Reports\20170922_ReportingDbChangesRevision\Sql1.Designer.cs">
+      <DependentUpon>Sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\20170901_ReportingDbChanges\ReportingDbChanges.cs" />
+    <Compile Include="Reports\20170901_ReportingDbChanges\Sql1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\20171003_CleanReportingDatabase\CleanReportingDatabase.cs" />
+    <Compile Include="Reports\20171017_AddPreferredTestLocation\AddPreferredTestLocation.cs" />
+    <Compile Include="Reports\20171013_AddOrganisationTable\AddOrganisationTable.cs" />
+    <Compile Include="Reports\20171013_AddOrganisationTable\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\20171025_VariousFixes\VariousFixes.cs" />
+    <Compile Include="Reports\20171119_AddAddressFields\AddAddressFields.cs" />
+    <Compile Include="NAATI\20171116_NonEndorsedCountryQualification\NonEndorsedCountryQualification.cs" />
+    <Compile Include="Reports\20171026_AddColumnsToPerson\AddColumnsToPerson.cs" />
+    <Compile Include="Reports\20180206_AddTestSessions\AddTestSessions.cs" />
+    <Compile Include="Reports\20171120_AddApplicationCustomFieldsTable\AddApplicationCustomFieldsTable.cs" />
+    <Compile Include="Reports\20180206_AddTestSessions\Sql1.Designer.cs">
+      <DependentUpon>Sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\20180307_ChangeTypePrimaryEmail\ChangeTypePrimaryEmail.cs" />
+    <Compile Include="Reports\20180228_UpdateTests\Sql.Designer.cs">
+      <DependentUpon>Sql.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\20180228_UpdateTests\UpdateTests.cs" />
+    <Compile Include="Reports\20180307_VariousCorrections\VariousCorrections.cs" />
+    <Compile Include="Reports\20180618_TestSittingTestMaterial\TestSittingTestMaterial.cs" />
+    <Compile Include="Reports\20180613_RubricHistory\RubricHistory.cs" />
+    <Compile Include="Reports\20180314_RemovingTestMaterialFromTest\RemovingTestMaterialFromTest.cs" />
+    <Compile Include="Reports\20180619_ReportingDbTestTableChanges\ReportingDbTestTableChanges.cs" />
+    <Compile Include="Reports\20180814_UpdateTestAddColumn\UpdateTestAddColumn.cs" />
+    <Compile Include="Reports\20180814_UpdateTestResultRubricAddColumn\UpdateTestResultRubricAddColumn.cs" />
+    <Compile Include="Reports\20181003_AddProfDevAndWorkPracticeTable\AddProfDevAndWorkPracticeTable.cs" />
+    <Compile Include="Reports\20181216_TestSessionCapacity\TestSessionCapacity.cs" />
+    <Compile Include="Reports\20181205_AddLinkedCredentialRequests\AddLinkedCredentialRequests.cs" />
+    <Compile Include="Reports\20181205_AddEligibleFlagToTestResult\AddEligibleFlagToTestResult.cs" />
+    <Compile Include="Reports\20190130_AddMarksOverriddenToTestResult\AddMarksOverriddenToTestResult.cs" />
+    <Compile Include="Reports\20190130_AddRolePlayerFields\AddRolePlayerFields.cs" />
+    <Compile Include="Reports\20190130_AddTestSessionRolePlayerTable\AddTestSessionRolePlayerTable.cs" />
+    <Compile Include="Reports\20190130_AddTestSessionRolePlayerTable\Sql.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sql.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\20190213_AddTestSessionRolePlayerDetailTable\AddTestSessionRolePlayerDetailTable.cs" />
+    <Compile Include="Reports\20190214_AddPanelMembershipCredentialTypesTable\AddPanelMembershipCredentialTypesTable.cs" />
+    <Compile Include="Reports\20190508_AddPayRunTables\AddPayRunTables.cs" />
+    <Compile Include="Reports\20190820_AlterReportingTableColumns\AlterReportingTableColumns.cs" />
+    <Compile Include="Reports\20190820_AlterReportingTableColumns\AlterReportingTableColumns2.cs" />
+    <Compile Include="Reports\20190820_AlterReportingTableColumns\AlterReportingTableColumns3.cs" />
+    <Compile Include="Reports\20190904_AddKnowledgeTestToPersonTable\AddKnowledgeTestToPersonTable.cs" />
+    <Compile Include="Reports\20191105_AddEndorsedQualificationTable\AddEndorsedQualificationTable.cs" />
+    <Compile Include="Reports\20191202_UpdateAllReportingTableForCloudMigration\UpdateAllReportingTableForCloudMigration.cs" />
+    <Compile Include="Reports\20190813_AddTestMaterialRequestTable\AddTestMaterialRequestTable.cs" />
+    <Compile Include="Reports\20191111_UpdatePanelMembershipCredentialTypeTable\UpdatePanelMembershipCredentialTypeTable.cs" />
+    <Compile Include="Reports\20191115_AlterMaterialRequestPayrollHistory\AlterMaterialRequestPayrollHistory.cs" />
+    <Compile Include="Reports\DummyReportsMigration.cs" />
+    <Compile Include="ScriptRunner.cs" />
+    <Content Include="NAATI\20220809_AddAutoCreatedFieldCredentialApplicationCredentialRequest\AddAutoCreatedFieldCredentialApplicationCredentialRequest.sql" />
+    <Content Include="NAATI\20220907_DropStoredProcedure\DropStoredProcedure.sql" />
+    <Content Include="NAATI\20220928_AddContraintStoredFileAndStatus\AddConstraintStoredFileAndStatus.sql" />
+    <Content Include="NAATI\20220928_CreateStoredFilePolicyTables\CreateStoredFilePolicyTables.sql" />
+    <Content Include="NAATI\20220928_CreateStoredFileStatusTypeTable\CreateStoredFileStatusTypeTable.sql" />
+    <Content Include="NAATI\20220928_SetStoredFileStatusAndChangeDate\SetStoredFileStatusAndChangeDate.sql" />
+    <Content Include="NAATI\20220914_UpdateEmailTemplateActiveFlag\UpdateEmailTemplateActiveFlag.sql" />
+    <Content Include="NAATI\20221012_UpdateStoredFileColumns\UpdateTblStoredFileColumns.sql" />
+    <Content Include="NAATI\20221019_CreateNCIPersonImagePhotoDate\CreateNCItblPersonImagePhotoDate.sql" />
+    <Content Include="NAATI\20221021_CreatIndexStoredFileDocumentTypeId\CreateIndexStoredFileDocumentTypeId.sql" />
+    <Content Include="NAATI\20221102_CredentialQrCodes\CredentialQrCodes.sql" />
+    <Content Include="Reports\20230628_Add_Latest_Tables\AddLatestTables.sql" />
+    <None Include="NAATI\20221213_CreateCredentialPrerequisiteExemptionTable\CreateCredentialPrerequisiteExemptionTable.sql" />
+    <Content Include="NAATI\20221216_PracticeTestApplicationTypes\PracticeTestApplicationTypes.sql" />
+    <Content Include="NAATI\20230103_AddFieldsToQrCode\AddFieldsToQrCodes.sql" />
+    <Content Include="NAATI\20230110_AddIndexToCertificationPeriods\AddIndexToCertificationPeriod.sql" />
+    <Content Include="NAATI\20230109_ChangeRejectWeeksToRejectHours\ChangeRejectWeeksToRejectHours.sql" />
+    <Content Include="NAATI\20230110_AddModifiedDateToQrCode\AddModifiedDateToQrCode.sql" />
+    <Content Include="NAATI\20230113_AddFeedbackToSubmitTestDraft\AddFeedbackToSubmitTestDraft.sql" />
+    <Content Include="NAATI\202301231431_AddIndexesForTestMaterialWizard\AddIndexesForTestMaterialWizard.sql" />
+    <Content Include="NAATI\20230120_RemoveFeedbackFromTestResultAndAddToJobExaminer\RemoveFeedbackFromTestResultAndAddToJobExaminer.sql" />
+    <Content Include="NAATI\20230130_AddNewSkillsForPracrticeTestCertifiedInterpreter\AddNewSkillsForPracticeTests.sql" />
+    <Content Include="NAATI\20230130_AddSkillApplicationTypes\AddSkillApplicationTypes.sql" />
+    <Content Include="NAATI\20230216_AddIndexesForGetPendingtestsToIssueResults\AddIndexesForGetPendingTestsToIssueResultQuery.sql" />
+    <Content Include="NAATI\20230406_TFS216925\TFS216925.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_ApplicationCustomFIelds_Latest.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Application_Latest.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_CredentialRequests_Latest.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Mark_Latest.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_MarkRubric_Latest.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Test_Latest.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_TestResult_Latest.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_TestSessions_Latest.sql" />
+    <Content Include="Reports\20221213_AddRMACIdToTestResultExaminerMarkingTbl\AddRMACIdToTestResultExaminerMarkingTbl.sql" />
+    <Content Include="Reports\20221213_DropPKConstraintTestResultExaminerRubricMarkingHistory\DropPKConstraintTestResultExaminerRubricMarkingHistory.sql" />
+    <None Include="NAATI\20221208_AddPracticeTestSkills\AddpracticeTestSkills.sql" />
+    <None Include="NAATI\20221208_AddMorePracticeTestFields\AddMorepracticeTestSkills.sql" />
+    <None Include="NAATI\20221212_AddPracticeTestSkillApplicationTypes\AddPracticeTestSkillApplicationTypes.sql" />
+    <Content Include="NAATI\20221209_AddCommentDateToRACR\AddCommentDateToRACR.sql" />
+    <Content Include="NAATI\20221209_SetCommentDateForExistingRecordsRACR\SetCommentDateForExistingRecordsRACR.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_TestResultExaminerRubricMarkingHistory.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_TestResultExaminerStandardMarkingHistory.sql" />
+    <Content Include="NAATI\20221109_AddNoteToTblSkill\AddNoteToTblSkill.sql" />
+    <Content Include="NAATI\20221111_AddNoteToTblLanguage\AddNoteToTblLanguage.sql" />
+    <Content Include="NAATI\20221128_ChangeStoredFileStatus4To3\ChangeStoredFileStatus4To3.sql" />
+    <None Include="NAATI\20221128_DeleteStatus4FromStoredFileStatus\DeleteStatus4FromStoredFileStatus.sql" />
+    <None Include="NAATI\20221206_AddDefaultValueToStoredFileDeletePolicy\AddDefaultValueToStoredFileDeltePolicy.sql" />
+    <Content Include="Reports\20220818_AddAutoCreatedToApplicationHistoryCredentialRequestHistory\AddAutoCreatedToApplicationHistoryCredentialRequestHistory.sql" />
+    <None Include="NAATI\20220707_AddEmailTemplateIdtotblEmailMessage\Relationship_tblEmailMessage_tblEmailMessage_FKEmailTemplateId.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NAATIScripts\Data\EmailTemplates\EmailTemplates.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>EmailTemplates.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATIScripts\Scripts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Scripts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20170728_ImproveTestAttendanceAssetViewPerformance\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20170801_ClearData\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20170807_FixBadGLcodeReferences\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20170821_ChangesToContacts\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20171003_ConfigureCountriesAndLanguages\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20171003_ConfigureInitialData\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20171017_InitialDataPopulationNov\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20171101_UpdatePersonNameTitle\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20171108_UpdateEportalServiceUser\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20171129_AddNaatiNumberTableData\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20171129_InitialDataPopulationJan\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20171201_AddCertificationDescriptionUrlKey\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20171218_AddCredentialRoleScreenPermission\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20180131_ClearAllExistingPanels\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20180221_RenameTestSessionCredentialRequestToTestSitting\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20180222_IdentityColumnsForTestTables\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20180323_ModifyCredentialLetterTemplates\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20180601_FixActionTypeNumber\FixAction.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FixAction.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20180601_UpdateSkillType\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20180702_EthicsInterculturalCertificateTemplate\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20180730_ConvertTablesToIdentity\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20180925_ClaLetterTemplate\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20181204_DatabaseCleanUp\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20181214_UpdateTestSessionCapacity\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20200115_AddAccreditationTemplates\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20200430_AddTransactionIdAndOrderNumberToCredentialWorkflowFee\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20200618_CreateEmailMessageIndex\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20200602_AddRejectionDateToTestSitting\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20210602_UpdateCredentialTypeTemplate\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220707_AddEmailTemplateIdtotblEmailMessage\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220714_AddLogicToGetPersonStoredProcedure\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220718_AddTblCredentialPrerequisite\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220726_AddAutomaticIssuingExaminerFiledToTblTestResult\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220726_UpdateTblTestResultAutomaticIssuingExaminer\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220805_ChangeCredentialPrerequisiteTable\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220809_AddAutoCreatedFieldCredentialApplicationCredentialRequest\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220809_ChangeTableCredentialPrerequisite\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220816_AddNewFieldToCrdentialPrerequisite\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220907_DropStoredProcedure\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220928_AddContraintStoredFileAndStatus\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220928_CreateStoredFilePolicyTables\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220928_CreateStoredFileStatusTypeTable\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220928_SetStoredFileStatusAndChangeDate\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20220914_UpdateEmailTemplateActiveFlag\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221012_UpdateStoredFileColumns\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221019_CreateNCIPersonImagePhotoDate\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221021_CreatIndexStoredFileDocumentTypeId\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221102_CredentialQrCodes\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221109_AddNoteToTblSkill\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221111_AddNoteToTblLanguage\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221128_ChangeStoredFileStatus4To3\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221128_DeleteStatus4FromStoredFileStatus\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221206_AddDefaultValueToStoredFileDeletePolicy\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221208_AddMorePracticeTestFields\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221208_AddPracticeTestSkills\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221209_AddCommentDateToRACR\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221209_SetCommentDateForExistingRecordsRACR\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221213_CreateCredentialPrerequisiteExemptionTable\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221212_AddPracticeTestSkillApplicationTypes\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20221216_PracticeTestApplicationTypes\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20230103_AddFieldsToQrCode\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20230110_AddIndexToCertificationPeriods\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20230109_ChangeRejectWeeksToRejectHours\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20230110_AddModifiedDateToQrCode\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20230113_AddFeedbackToSubmitTestDraft\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20230120_RemoveFeedbackFromTestResultAndAddToJobExaminer\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\202301231431_AddIndexesForTestMaterialWizard\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20230130_AddNewSkillsForPracrticeTestCertifiedInterpreter\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20230130_AddSkillApplicationTypes\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20230216_AddIndexesForGetPendingtestsToIssueResults\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAATI\20230406_TFS216925\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsScripts\Scripts.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Scripts.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\20170922_ReportingDbChangesRevision\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\20170901_ReportingDbChanges\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\20171013_AddOrganisationTable\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\20180206_AddTestSessions\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\20180228_UpdateTests\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\20190130_AddTestSessionRolePlayerTable\Sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sql.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\20220818_AddAutoCreatedToApplicationHistoryCredentialRequestHistory\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\20221213_AddRMACIdToTestResultExaminerMarkingTbl\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\20221213_DropPKConstraintTestResultExaminerRubricMarkingHistory\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\20230628_Add_Latest_Tables\sql.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>sql.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclPaidRevieInvoiceProcessedTrustedSponsoredAppilcantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclFailPaidReviewTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclPassPaidReviewTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclReIssueCredentialTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclV2ApplicationSubmittedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclV2ApplicationCheckingFinishedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclV2TestSessionRejectedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclV2TestSessionAllocatedAndAcceptedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCancelTestInvitationTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCreateSupplementaryTestInvoiceSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCreateSupplementaryTestNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationWithdrawSupplementaryTestTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCreateSupplementaryTestInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationSupplementaryTestInvoicePaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\EmailTemplateCommonClosing.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclIssueCredentialTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclIssuedPassResultTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclTestFailedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclTestInvoicePaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclTestSessionAcceptedMyNaatiTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclTestSessionAcceptedNcmsTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclTestSessionAllocatedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclTestSessionRejectedMyNaatiTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclTestSessionRejectedNcmsTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclWithdrawRequestTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationApplicationRejectedAfterInvoiceTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationAssessmentInvoicePaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCredentialIssuedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationFinishCheckingInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationFinishCheckingInvoiceSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationFinishCheckingNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationInviteForTestingInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationInviteForTestingInvoiceSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationInviteForTestingNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationTestInvoicePaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationTestSessionAcceptedMyNaatiTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationTestSessionAcceptedNcmsTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationTestSessionAllocatedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationTestSessionRejectedMyNaatiTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationTestSessionRejectedNcmsTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationWithdrawRequestTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclEmailTemplateFooter.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\EmailTemplateHead.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\EmailTemplateFooter.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclInviteForTestingInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclInviteForTestingInvoiceSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclInviteForTestingNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicalCompetencyCancelTestInvitationTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterculturalTestSessionAcceptedMyNaatiTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterculturalTestSessionAcceptedNcmsTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterculturalTestSessionAllocatedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterculturalTestSessionRejectedMyNaatiTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterculturalTestSessionRejectedNcmsTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInviteForTestingInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInviteForTestingInvoiceSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInviteForTestingNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsTestInvoicePaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterculturalWithdrawRequestTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Intercultural\InterculturalCompetencyCancelTestInvitationTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Intercultural\InterculturalInviteForTestingInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Intercultural\InterculturalInviteForTestingInvoiceSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Intercultural\InterculturalInviteForTestingNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Intercultural\InterculturalTestInvoicePaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclV2PaidApplicationSubmissionProcessedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\NaatiOperationTeamEmailTemplateFooter.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationApplicationRejectedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationApplicationSubmittedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationAssessmentFailedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationAssessmentInvoicePaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationAssessmentPendingTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationCredentialIssuedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationCredentialRequestCancelledTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationFinishCheckingInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationFinishCheckingInvoiceSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationFinishCheckingNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Recertification\RecertificationPendingAssessmentFailedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\TransitionAccreditationApplicationRejectedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\TransitionAccreditationAssessmentInvoicePaidTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\TransitionAccreditationCredentialRequestCancelledTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\TransitionAccreditationAssessmentFailedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\TransitionAccreditationFinishCheckingInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\TransitionAccreditationFinishCheckingInvoiceSponsorTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\TransitionAccreditationFinishCheckingNoInvoiceApplicantTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\TransitionAccreditationPendingAssessmentFailedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\TransitionAccreditationAssessmentPendingTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\TransitionCredentialIssuedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Transition\TransitionAccreditationApplicationSubmittedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationApplicationSubmittedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationApplicationRejectedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCredentialRequestCancelledTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationAssessmentFailedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationAssessmentPendingTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationAssessmentPassedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclApplicationSubmittedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclApplicationRejectedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ccl\CclCredentialRequestCancelledTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsApplicationSubmittedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Intercultural\InterculturalApplicationSubmittedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\RolePlayer\RolePlayerTestSessionAllocationChangedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\RolePlayer\RolePlayerTestSessionChangedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\RolePlayer\RolePlayerRemovedTemplate.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\RolePlayer\RolePlayerTestSessionAllocatedTemplate.html" />
+    <Content Include="NAATIScripts\Functions\fnGetNextNaatiNumber.sql" />
+    <Content Include="NAATIScripts\Indexes\FT_Audit.sql" />
+    <Content Include="NAATIScripts\RemovedMigrations.txt" />
+    <Content Include="NAATIScripts\RemovedSystemValues.txt" />
+    <Content Include="NAATIScripts\StoredProcedures\DeletedApplications.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\GetSingleKey.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\LegacyAccreditationMerge.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\RegionSelect.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\AddressSelect.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\EmailSelect.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\PersonSelect.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\ReleaseJobToken.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\RequestJobToken.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\RevertTestResult.sql" />
+    <Content Include="NAATIScripts\Views\vwRolePlayerLastTestSession.sql" />
+    <Content Include="NAATIScripts\Views\vwSkillDisplayName.sql" />
+    <Content Include="NAATIScripts\Views\vwDistinctInstitutionName.sql" />
+    <Content Include="NAATIScripts\Views\vwPersonDistinct.sql" />
+    <Content Include="NAATIScripts\Views\vwDistinctPersonName.sql" />
+    <Content Include="NAATIScripts\Views\vwMaxPersonNameEffectiveDate.sql" />
+    <Content Include="NAATIScripts\Views\vwTestStatus.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\NH_EntityInsert.sql" />
+    <Content Include="NAATIScripts\Views\vwMarkingsForPayroll.sql" />
+    <Content Include="NAATIScripts\Views\vwTestSittingAsset.sql" />
+    <Content Include="NAATIScripts\Views\vwJobExaminerPayrollStatus.sql" />
+    <Content Include="NAATIScripts\StoredProcedures\PhoneSelect.sql" />
+    <Content Include="NAATI\20170728_ImproveTestAttendanceAssetViewPerformance\Indexes.sql" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Certification\CertificationCreateSupplementaryTestCreditCardPaymentBeingProcessed.html" />
+    <Content Include="NAATIScripts\Data\EmailTemplates\CredentialApplication\Ethics\EthicsInterculturalTestInvoiceProcessedSponsorTemplate.html" />
+    <None Include="app.config" />
+    <None Include="NAATI\20170801_ClearData\clearTables.sql" />
+    <Content Include="NAATI\20171003_ConfigureCountriesAndLanguages\ConfigureCountries.sql" />
+    <Content Include="NAATI\20171003_ConfigureCountriesAndLanguages\ConfigureLanguages.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\ClearExistingData.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblCredentialApplicationStatusType.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblCredentialApplicationType.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblCredentialApplicationTypeCredentialType.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblCredentialApplicationTypeDocumentType.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblCredentialCategory.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblCredentialRequestStatusType.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblCredentialType.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblDataType.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblDirectionType.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblEmailTemplate.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblSkill.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblSkillType.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFieldInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFormActionTypeInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFormAnswerOptionActionTypeInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFormAnswerOptionDocumentTypeInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFormAnswerOptionInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFormAnswerTypeInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFormInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFormQuestionAnswerOptionInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFormQuestionInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFormQuestionLogicInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFormQuestionTypeInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationFormSectionInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationStatusTypeInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationTypeCredentialTypeInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialApplicationTypeDocumentTypeInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\CredentialTypeTemplateInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\DataTypeInsert.sql" />
+    <Content Include="NAATI\20171017_InitialDataPopulationNov\DocumentTypeInsert.sql" />
+    <Content Include="NAATI\20171101_UpdatePersonNameTitle\UpdatePersonNameTitle.sql" />
+    <Content Include="NAATI\20171108_UpdateEportalServiceUser\UpdateEportalServiceUser.sql" />
+    <Content Include="NAATI\20171129_AddNaatiNumberTableData\AddNaatiNumber.sql" />
+    <Content Include="NAATI\20171129_InitialDataPopulationJan\CredentialApplicationFieldInsert.sql" />
+    <Content Include="NAATI\20171129_InitialDataPopulationJan\CredentialApplicationTypeCredentialTypeInsert.sql" />
+    <Content Include="NAATI\20171129_InitialDataPopulationJan\CredentialApplicationTypeDocumentTypeInsert.sql" />
+    <Content Include="NAATI\20171129_InitialDataPopulationJan\CredentialType.sql" />
+    <Content Include="NAATI\20171129_InitialDataPopulationJan\DataTypeInsert.sql" />
+    <Content Include="NAATI\20171129_InitialDataPopulationJan\DocumentTypeInsert.sql" />
+    <Content Include="NAATI\20171129_InitialDataPopulationJan\LanguageGroup.sql" />
+    <Content Include="NAATI\20171129_InitialDataPopulationJan\Languages.sql" />
+    <Content Include="NAATI\20171129_InitialDataPopulationJan\Skill.sql" />
+    <Content Include="NAATI\20171129_InitialDataPopulationJan\SkillType.sql" />
+    <Content Include="NAATI\20171201_AddCertificationDescriptionUrlKey\AddUrl.sql" />
+    <Content Include="NAATI\20171218_AddCredentialRoleScreenPermission\AddCredentialRoleScreenPermission.sql" />
+    <Content Include="NAATI\20180131_ClearAllExistingPanels\ClearAllPanels.sql" />
+    <Content Include="NAATI\20180221_RenameTestSessionCredentialRequestToTestSitting\RenameScript.sql" />
+    <Content Include="NAATI\20180222_IdentityColumnsForTestTables\IdentityColumnsForTestTables.sql" />
+    <Content Include="NAATI\20180323_ModifyCredentialLetterTemplates\ModifyCredentialLetterTemplates.sql" />
+    <Content Include="NAATI\20180601_FixActionTypeNumber\FixActionNumberQuery.sql" />
+    <Content Include="NAATI\20180601_UpdateSkillType\SkillType.sql" />
+    <Content Include="NAATI\20180702_EthicsInterculturalCertificateTemplate\EthicsInterculturalCertificateTemplate.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertAddressToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertCountryToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertEFTMachineToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertEmailToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertEntityToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertFailureReasonToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertInstitutionNameToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertInstitutionToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertLanguageToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertOfficeToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertPanelMembershipToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertPanelToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertPanelTypeToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertPersonImageToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertPersonNameToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertPersonToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertPhoneToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertPoscodeToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertResultTypeToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertRoleScreenToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertRoleToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertRoleTypeToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertStateToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertSuburbToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertTestComponentTypeToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertTestFailureReasonToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertTitleToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertUserRoleToIdentity.sql" />
+    <Content Include="NAATI\20180730_ConvertTablesToIdentity\ConvertUserToIdentity.sql" />
+    <Content Include="NAATI\20180925_ClaLetterTemplate\ClaLetterTemplate.sql" />
+    <Content Include="NAATI\20181204_DatabaseCleanUp\DropObsoleteDatabaseObjects.sql" />
+    <Content Include="NAATI\20181214_UpdateTestSessionCapacity\UpdateTestSessioCapacity.sql" />
+    <Content Include="NAATI\20200115_AddAccreditationTemplates\AddAccreditaionTemplatesScript.sql" />
+    <Content Include="NAATI\20200430_AddTransactionIdAndOrderNumberToCredentialWorkflowFee\AddTransactionIdAndOrderNumberToCredentialWorkflowFee.sql" />
+    <Content Include="NAATI\20200618_CreateEmailMessageIndex\CreateEmailMessageIndex.sql" />
+    <Content Include="NAATI\20200602_AddRejectionDateToTestSitting\AddRejectionDateToTestSitting.sql" />
+    <Content Include="NAATI\20210602_UpdateCredentialTypeTemplate\UpdateCredentialTypeTemplate.sql" />
+    <None Include="NAATI\20220714_AddLogicToGetPersonStoredProcedure\PersonSelect_SP.sql" />
+    <None Include="NAATI\20220718_AddTblCredentialPrerequisite\AddTblCredentialPrerequisite_SP.sql" />
+    <Content Include="NAATI\20220726_AddAutomaticIssuingExaminerFiledToTblTestResult\AddAutomaticIssuingExaminerFiledToTblTestResult.sql" />
+    <Content Include="NAATI\20220726_UpdateTblTestResultAutomaticIssuingExaminer\UpdateTblTestResultAutomaticIssuingExaminer.sql" />
+    <None Include="NAATI\20220805_ChangeCredentialPrerequisiteTable\ChangeCredentialPrerequisiteTable.sql" />
+    <Content Include="NAATI\20220809_ChangeTableCredentialPrerequisite\ChangeTableCredentialPrerequisite.sql" />
+    <Content Include="NAATI\20220816_AddNewFieldToCrdentialPrerequisite\AddNewFieldToCredentialPrerequisite.sql" />
+    <Content Include="ReportsScripts\Functions\GetSystemValue.sql" />
+    <Content Include="ReportsScripts\Functions\GetTestResultOverallMark.sql" />
+    <Content Include="ReportsScripts\Functions\GetExaminerOverallMark.sql" />
+    <Content Include="ReportsScripts\Functions\GetExaminerComponentMarks.sql" />
+    <Content Include="ReportsScripts\Functions\GetPhoneNumber.sql" />
+    <Content Include="ReportsScripts\Functions\GetDates.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\LogExecutionInfo.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\LogExecutionWarning.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\LogExecutionError.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Runner.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshop_EndorsedQualification.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Main.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshop_TestMaterial.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshop_ExaminerJob.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_PanelMembershipCredentialTypes.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_ProfessionalDevelopment.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_TestSessionRolePlayer.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_TestSessionRolePlayerDetails.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_MaterialRequestTaskHours.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_MaterialRequestPanelMember.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_MaterialRequestRound.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_MaterialRequest.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_TestSittingTestMaterial.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_MarkRubric.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_TestResultRubric.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_TestSessions.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_ApplicationCustomFIelds.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Organisation.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_OrganisationContacts.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Credentials.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_CredentialRequests.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_TestResult.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_PanelMembers.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Panel.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Mark.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Test.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Person.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_Application.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshot_WorkPractice.sql" />
+    <Content Include="ReportsScripts\StoredProcedures\ReportingSnapshop_MaterialRequestPayroll.sql" />
+    <Content Include="ReportsScripts\Views\EndorsedQualificationView.sql" />
+    <Content Include="ReportsScripts\Views\TestMaterialView.sql" />
+    <Content Include="ReportsScripts\Views\ExaminerJobView.sql" />
+    <Content Include="ReportsScripts\Views\MaterialRequestPayroll.sql" />
+    <Content Include="ReportsScripts\Views\PanelMembershipCredentialTypesView.sql" />
+    <Content Include="ReportsScripts\Views\ProfessionalDevelopment.sql" />
+    <Content Include="ReportsScripts\Views\TestSessionRolePlayerDetailsView.sql" />
+    <Content Include="ReportsScripts\Views\TestSessionRolePlayerView.sql" />
+    <Content Include="ReportsScripts\Views\MaterialRequest.sql" />
+    <Content Include="ReportsScripts\Views\MaterialRequestRound.sql" />
+    <Content Include="ReportsScripts\Views\MaterialRequestPanelMember.sql" />
+    <Content Include="ReportsScripts\Views\MaterialRequestTaskHours.sql" />
+    <Content Include="ReportsScripts\Views\WorkPractice.sql" />
+    <Content Include="ReportsScripts\Views\MarkRubricView.sql" />
+    <Content Include="ReportsScripts\Views\RubricTestComponentResultView.sql" />
+    <Content Include="ReportsScripts\Views\TestResultRubricView.sql" />
+    <Content Include="ReportsScripts\Views\TestSittingTestMaterialView.sql" />
+    <Content Include="ReportsScripts\Views\TestRubricComponentView.sql" />
+    <Content Include="ReportsScripts\Views\TestSessionsView.sql" />
+    <Content Include="ReportsScripts\Views\ApplicationCustomFieldsView.sql" />
+    <Content Include="ReportsScripts\Views\OrganisationContactsView.sql" />
+    <Content Include="ReportsScripts\Views\OrganisationView.sql" />
+    <Content Include="ReportsScripts\Views\CredentialsView.sql" />
+    <Content Include="ReportsScripts\Views\CredentialRequestsView.sql" />
+    <Content Include="ReportsScripts\Views\ApplicationView.sql" />
+    <Content Include="ReportsScripts\Views\TestResultView.sql" />
+    <Content Include="ReportsScripts\Views\PanelMembersView.sql" />
+    <Content Include="ReportsScripts\Views\PanelView.sql" />
+    <Content Include="ReportsScripts\Views\MarkView.sql" />
+    <Content Include="ReportsScripts\Views\TestView.sql" />
+    <Content Include="ReportsScripts\Views\PersonView.sql" />
+    <Content Include="NAATI\20171003_ConfigureInitialData\LoadtblCredentialApplicationField.sql" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Reports\20170830_DropCitizenCreateCountryOfCitizenship\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Naati\F1Solutions.Naati.Common.Contracts\F1Solutions.Naati.Common.Contracts.csproj">
+      <Project>{039e6de4-aeb9-4a6e-ac19-135239ddbde2}</Project>
+      <Name>F1Solutions.Naati.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Global.Common\F1Solutions.Global.Common.csproj">
+      <Project>{f41c4166-5b4d-4721-97bc-125f3cf0204a}</Project>
+      <Name>F1Solutions.Global.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Dal.NHibernate\F1Solutions.Naati.Common.Dal.NHibernate.csproj">
+      <Project>{50C2AB12-2B81-4984-AD06-0D228B58272C}</Project>
+      <Name>F1Solutions.Naati.Common.Dal.NHibernate</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

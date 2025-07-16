@@ -1,0 +1,11 @@
+﻿<div class="form">
+    <div class="form-group pull-left w-xs" data-bind="validationElement: materialRound.Round">
+        <label class="control-label" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Round'"></label>
+        <p class="form-control-static" data-bind="text: materialRound.Round" />
+    </div>
+    <div class="form-group pull-left w-sm" data-bind="validationElement: materialRound.DueDate">
+        <label class="control-label" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.DueDate'"></label>
+        <!-- ko component: { name: 'date-input', params: dueDateOptions } --><!--/ko-->
+    </div>
+
+</div>

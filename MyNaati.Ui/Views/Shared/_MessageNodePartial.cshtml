@@ -1,0 +1,12 @@
+﻿@model MyNaati.Contracts.Portal.MessageNode
+
+<p>@(Model.Message ?? "(no title)")</p>
+@if (Model.Children != null && Model.Children.Any())
+{
+    <ul>
+        @foreach (var child in Model.Children)
+        {
+            <li>@{Html.RenderPartial("_MessageNodePartial", child);}</li>
+        }    
+    </ul>
+}

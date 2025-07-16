@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "My Invoices";
+    Layout = "~/Views/Shared/MasterPages/_KnockoutLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("My Invoices", null)
+    };
+}
+<div id="applicationHost" data-app-root="views/unraised-invoice/unraised-invoice-index"></div>

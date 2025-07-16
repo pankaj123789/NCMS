@@ -1,0 +1,37 @@
+﻿@model int?
+
+<!--Note: The Selected property of the SelectListItems is ignored in favour of the passed model value-->
+
+@using System.Collections
+@using System.Web.Mvc;
+
+@{
+    bool hideLabel = (bool)(ViewData["HideLabel"] ?? false);
+    var list = (List<SelectListItem>)ViewData["List"];
+}
+
+<div class="editorSet">
+    @if (!hideLabel)
+    {
+        <div class="editorLabel">
+            @Html.LabelFor(e => Model, @ViewData.ModelMetadata.DisplayName + ":")
+        </div>
+    }
+    <div class="editorValue">
+        @foreach (var item in list)
+        {
+            var radioId = ViewData.TemplateInfo.GetFullHtmlFieldId(item.Value);
+            if (item.Value == Model.ToString())
+            {
+                @* Insertion done this weird way so the HTML comes out looking right, without stuf like &quot; inside tags *@
+                <input type="radio" id="@radioId" name="@ViewData.TemplateInfo.HtmlFieldPrefix" value="@item.Value" checked="checked" />
+            }
+            else
+            {
+                <input type="radio" id="@radioId" name="@ViewData.TemplateInfo.HtmlFieldPrefix" value="@item.Value" />
+            }
+            <label for="@radioId">@item.Text</label>
+            <br />
+        }
+    </div>
+</div>

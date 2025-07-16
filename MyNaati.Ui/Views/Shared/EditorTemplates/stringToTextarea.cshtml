@@ -1,0 +1,26 @@
+﻿@model string
+
+@{
+    const int defaultRows = 5;
+    const int defaultCols = 40;
+}
+
+<div class="editorSet">
+    @{
+        var labelWidth = (ViewData["LabelWidth"] != null && ViewData["LabelWidth"] != string.Empty) 
+            ? ViewData["LabelWidth"].ToString()+"px" 
+            : "100px";
+        var fieldWidth = (ViewData["FieldWidth"] != null && ViewData["FieldWidth"] != string.Empty)
+            ? ViewData["FieldWidth"].ToString() + "px"
+            : "300px";
+    }
+    <div class="editorLabel" style="width:@labelWidth;">
+        @Html.LabelFor(e => Model, @ViewData.ModelMetadata.DisplayName + ":")
+    </div>
+    <div class="editorValue variableWidthField" style="width:@fieldWidth;">
+        @Html.TextAreaFor(e => Model, new { rows = (ViewData["Rows"] ?? defaultRows), cols = (ViewData["Cols"] ?? defaultCols) })
+        @Html.ValidationMessageFor(e => Model, "*")
+        @if (ViewData["Note"] != null)
+        { <br />@ViewData["Note"] }
+    </div>
+</div>

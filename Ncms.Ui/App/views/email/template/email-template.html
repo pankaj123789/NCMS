@@ -1,0 +1,102 @@
+<div class="vbox">
+    <div class="row-row">
+        <div class="panel panel-default panel-screen">
+            <div class="panel-primary">
+                <div class="panel-heading">
+                    <h2 class="panel-title" data-bind="text: windowTitle"></h2>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-horizontal">
+
+                    <div class="form-group" data-bind="validationElement: emailModel.Name, validationOptions: { insertMessages: false }">
+                        <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.Person.resources.Name'"></label>
+                        <div class="col-xs-9 col-sm-4">
+                            <input type="text" class="form-control" data-bind="value: emailModel.Name" />
+                            <span class="help-block" data-bind="validationMessage: emailModel.Name"></span>
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: emailModel.FromAddress, validationOptions: { insertMessages: false }">
+                        <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.Shared.resources.From'"></label>
+                        <div class="col-xs-9 col-sm-4">
+                            <input type="text" class="form-control" data-bind="value: emailModel.FromAddress" />
+                            <span class="help-block" data-bind="validationMessage: emailModel.FromAddress"></span>
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: emailModel.Subject, validationOptions: { insertMessages: false }">
+                        <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.Application.resources.Subject'"></label>
+                        <div class="col-xs-9 col-sm-4">
+                            <input type="text" class="form-control" data-bind="value: emailModel.Subject" />
+                            <span class="help-block" data-bind="validationMessage: emailModel.Subject"></span>
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.Application.resources.Active'"></label>
+                        <!--<label class="m-t-xs m-l-md i-switch i-switch-md bg-info" data-bind="tooltip, resattr: { title: 'Naati.Resources.Application.resources.TooltipActive' }">-->
+                        <label class="m-t-xs m-l-md checkbox-inline i-checks" data-bind="tooltip, resattr: { title: 'Naati.Resources.Application.resources.TooltipActive' }">
+                            <input type="checkbox" data-bind="checked: emailModel.Active, enable: false">
+                            <i></i>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.Application.resources.Content'"></label>
+                        <div class="col-xs-11">
+                            <div data-bind="wysiwyg: wysiwygOptions"></div>
+                        </div>
+                    </div>
+					<div class="form-group">
+						<label class="col-xs-1 control-label">&nbsp;</label>
+						<div class="col-xs-11">
+							<button type="button" class="btn btn-success btn-default" data-bind="click: selectFile, showWithPermission: 'EmailTemplate.Upload'">
+								<i class="fa fa-upload"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Import'"></span>
+							</button>
+							<form method="post" enctype="multipart/form-data" class="hide" data-bind="attr: { id: formId }"></form>
+							<button type="button" class="btn btn-success btn-default" data-bind="click: exportFile, showWithPermission: 'EmailTemplate.Download'">
+								<i class="fa fa-download"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Export'"></span>
+							</button>
+						</div>
+					</div>
+                <br/>
+                <br/>
+                <table class="table table-primary table-bordered table-striped" data-bind="datatable: tableDefinition">
+                    <thead>
+                    <tr>
+                        <th class="w-xxs" data-bind="reshtml: 'Naati.Resources.Shared.resources.Id'"></th>
+                        <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Application.resources.ApplicationType'"></th>
+                        <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Shared.resources.WorkflowName'"></th>
+                        <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Application.resources.ActionEventName'"></th>
+                        <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Application.resources.TemplateActions'"></th>
+                        <th class="w-xxs" data-bind="reshtml: 'Naati.Resources.Application.resources.Active'"></th>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: emailModel.Workflows">
+                    <tr>
+                        <td data-bind="text: Id"></td>
+                        <td data-bind="text: ApplicationType"></td>
+                        <td data-bind="text: WorkflowDisplayName"></td>
+                        <td data-bind="text: EventType.DisplayName"></td>
+                        <td data-bind="text: TemplateDetails"></td>
+                        <td>
+                            <i class="fa" data-bind="check: Active"></i>
+                        </td>
+                      
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button type="button" class="btn btn-success btn-default" data-bind="enable: canSave, click: save ">
+                <i class="fa fa-check"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <button class="btn btn-danger" data-bind="click: tryClose">
+                <i class="fa fa-ban"></i>
+                <span data-bind="restext: 'Naati.Resources.Shared.resources.Cancel'"></span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+

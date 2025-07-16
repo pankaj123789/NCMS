@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{68C50F46-C6FF-4CA5-89D0-173F84FA4809}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>F1Solutions.Naati.Common.Bl</RootNamespace>
+    <AssemblyName>F1Solutions.Naati.Common.Bl</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Words, Version=18.8.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Words.18.8.0\lib\net40\Aspose.Words.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Console, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Console.1.4.2\lib\net45\Hangfire.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.7.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.7.8\lib\net46\Hangfire.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.6.0.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.6.0\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressParser\AddressParserHelper.cs" />
+    <Compile Include="BackgroundOperation\BaseBackgroundOperation.cs" />
+    <Compile Include="BackgroundOperation\BaseBackgroundOperationService.cs" />
+    <Compile Include="AutoMappingProfiles\PodHistoryProfile.cs" />
+    <Compile Include="AutoMappingProfiles\ProductSpecificationProfile.cs" />
+    <Compile Include="BackgroundTask\BackgroundTaskLogger.cs" />
+    <Compile Include="BackgroundTask\BaseBackgroundService.cs" />
+    <Compile Include="BackgroundTask\BaseBackgroundTask.cs" />
+    <Compile Include="Credentials\CredentialQrCodeService.cs" />
+    <Compile Include="Extensions\DateExtensions.cs" />
+    <Compile Include="Extensions\GraphicsExtension.cs" />
+    <Compile Include="FileCompressionHelper.cs" />
+    <Compile Include="DocumentTokenReplacerHelper.cs" />
+    <Compile Include="EnvironmentConfigurationHelper.cs" />
+    <Compile Include="Extensions\AppSettings.cs" />
+    <Compile Include="Extensions\ControllerExtensions.cs" />
+    <Compile Include="Message\IMessengerClient.cs" />
+    <Compile Include="Message\MessageHub.cs" />
+    <Compile Include="Message\Messenger.cs" />
+    <Compile Include="Payment\GatewayPaymentRequest.cs" />
+    <Compile Include="Payment\GatewayPaymentResponse.cs" />
+    <Compile Include="Payment\PaymentClient.cs" />
+    <Compile Include="Payment\GatewayTokenResponse.cs" />
+    <Compile Include="Payment\SecurePayAPIResponse.cs" />
+    <Compile Include="Refund\GeneralRefundPolicyService.cs" />
+    <Compile Include="Refund\CredentialApplicationRefundService.cs" />
+    <Compile Include="Refund\DefaultRefundPolicyService.cs" />
+    <Compile Include="Refund\RefundCalculator.cs" />
+    <Compile Include="Security\CertificateProvider.cs" />
+    <Compile Include="Services\LifecycleService.cs" />
+    <Compile Include="MaterialRequest\MaterialRequestDocumentHelper.cs" />
+    <Compile Include="MaterialRequest\MaterialRequestPayRollHelper.cs" />
+    <Compile Include="ProfessionalDevelopment\BasePointsCalculatorHelper.cs" />
+    <Compile Include="ProfessionalDevelopment\MyNaatiActivityPointsCalculatorHelper.cs" />
+    <Compile Include="ProfessionalDevelopment\MyNaatiCredentialPointsCalculatorHelper.cs" />
+    <Compile Include="ProfessionalDevelopment\NcmsActivityPointsCalculatorHelper.cs" />
+    <Compile Include="ProfessionalDevelopment\NcmsCredentialPointsCalculatorHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Security\HmacCalculatorHelper.cs" />
+    <Compile Include="Security\HmacDelegationHandler.cs" />
+    <Compile Include="Security\RecaptchaValidatorHelper.cs" />
+    <Compile Include="Security\ResultWithChallenge.cs" />
+    <Compile Include="Security\PrivateApiAuthenticationAttribute.cs" />
+    <Compile Include="Security\SecretsProvider.cs" />
+    <Compile Include="Services\ApplicationBusinessLogicService.cs" />
+    <Compile Include="Services\IntegrationService.cs" />
+    <Compile Include="Services\ServiceLocator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\F1Solutions.Global.Common\F1Solutions.Global.Common.csproj">
+      <Project>{f41c4166-5b4d-4721-97bc-125f3cf0204a}</Project>
+      <Name>F1Solutions.Global.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Contracts\F1Solutions.Naati.Common.Contracts.csproj">
+      <Project>{f965e658-187f-4e88-aa05-4c2b4812c5b6}</Project>
+      <Name>F1Solutions.Naati.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Dal.Domain\F1Solutions.Naati.Common.Dal.Domain.csproj">
+      <Project>{128BDBBB-CE32-48A8-B07C-D1BE04B1F488}</Project>
+      <Name>F1Solutions.Naati.Common.Dal.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Dal\F1Solutions.Naati.Common.Dal.csproj">
+      <Project>{CC15921F-F11D-4BEE-BCC0-C449997102A3}</Project>
+      <Name>F1Solutions.Naati.Common.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Resources\Naati.Resources.csproj">
+      <Project>{7c8ceb61-f41b-4951-a2d5-7286874765f7}</Project>
+      <Name>Naati.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyNaati.Contracts\MyNaati.Contracts.csproj">
+      <Project>{3B282190-56F0-494B-B94B-FA76EFFFB895}</Project>
+      <Name>MyNaati.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Payment\PayPal\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

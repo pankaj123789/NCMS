@@ -1,0 +1,58 @@
+﻿<div class="tab-container" data-bind="attr: { id: tabContainerId }, event: event, css: { 'tab-container-tabs': type == 'tabs', 'tab-container-pills': type == 'pills' }">
+    <!-- Nav tabs -->
+    <ul class="nav print-hide" data-bind="css: { 'nav-tabs': type == 'tabs', 'nav-pills': type == 'pills' }" role="tablist">
+        <!-- ko foreach: { data: tabsComputed, as: 'tab' } -->
+        <!-- ko if: visible -->
+        <!--ko if: tabTemplate-->
+        <!--ko template: { name: tabTemplate, data: $root }-->
+        <!--/ko-->
+        <!--/ko-->
+        <!--ko ifnot: tabTemplate-->
+        <li role="presentation" data-bind="css: { active: tab.active, disabled: tab.disabled(), invalid: !tab.valid() }, tooltip: { trigger: 'hover', container: 'body' }, attr: { title: tooltip }">
+            <a role="tab" data-bind="attr: { href: '#' + tab.id, 'aria-controls': tab.id, 'aria-expanded': tab.active, 'data-toggle': tab.disabled() ? '' : 'tab' }, click: tab.click">
+                <!-- ko if: icon -->
+                <i data-bind="css: icon"></i>
+                <!-- /ko -->
+                <!--ko if: tab.label-->
+                <span data-bind="html: tab.label"></span>
+                <!--/ko-->
+                <!--ko ifnot: tab.label-->
+                <span data-bind="reshtml: tab.name"></span>
+                <!--/ko-->
+                <!-- ko if: !valid() -->
+                <i class="m-l-xs fa fa-exclamation-circle" aria-hidden="true"></i>
+                <!-- /ko -->
+            </a>
+        </li>
+        <!--/ko-->
+        <!-- /ko -->
+        <!-- /ko -->
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <!-- ko foreach: tabsComputed -->
+        <!--ko if: type === 'many'-->
+        <!--ko template: { name: 'template-tab', foreach: tabs }-->
+        <!--/ko-->
+        <!--/ko-->
+        <!--ko ifnot: type === 'many'-->
+        <!--ko template: { name: 'template-tab' }-->
+        <!--/ko-->
+        <!--/ko-->
+        <!-- /ko -->
+    </div>
+</div>
+<script type="text/html" id="template-tab">
+    <!--ko if: visible-->
+    <div role="tabpanel" class="tab-pane active print-show" data-bind="css: { active: active }, attr: { id: id }">
+        <!-- ko if: type === 'compose' -->
+        <!-- ko compose: composition -->
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: type === 'template' -->
+        <!-- ko template: template -->
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+    <!-- /ko -->
+</script>

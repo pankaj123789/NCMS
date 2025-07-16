@@ -1,0 +1,22 @@
+﻿<div class="panel panel-default">
+    <!-- ko if: dataLoaded() -->
+    <div class="table-responsive">
+        <table data-bind="datatable: tableDefinition" class="table table-striped b-t b-b" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Test.resources.Examiner'"></th>
+                    <th class="w-xxs" data-bind="reshtml: 'Naati.Resources.Shared.resources.NaatiNo'"></th>
+                    <th class="w-xxl" data-bind="reshtml: 'Naati.Resources.Test.resources.Feedback'"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: { data: tableDefinition.source, as: 'f' }">
+                <tr>
+                    <td data-bind="text: f.ExaminerName"></td>
+                    <td data-bind="text: f.NaatiNumber"></td>
+                    <td data-bind="text: f.Feedback"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- /ko -->
+</div>

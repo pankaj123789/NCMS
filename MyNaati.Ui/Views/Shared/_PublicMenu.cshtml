@@ -1,0 +1,21 @@
+﻿@using MyNaati.Ui.Helpers
+@{
+    var isInWelcome = ViewContext.IsInController("Home") && ViewContext.IsInAction("Index");
+    var isInApplications = ViewContext.IsInController("ApplicationForAccreditation");
+    var isInPdSearch = ViewContext.IsInController("PDSearch");
+}
+<li @(isInWelcome ? "class=active" : string.Empty)>
+    <a href='@Url.Action("index", "Home")'>
+        <span>Home</span>
+    </a>
+</li>
+<li @(isInPdSearch ? "class=active" : string.Empty)>
+    <a href='@Url.Action("OnlineDirectory", "Home")'>
+        <span>Online Directory</span>
+    </a>
+</li>
+@*<li>
+    <a href='@Url.Action("OnlineHelp", "Home")'>
+        <span>Online Help</span>
+    </a>
+</li>*@

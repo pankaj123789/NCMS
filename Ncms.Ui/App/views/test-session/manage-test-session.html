@@ -1,0 +1,217 @@
+﻿<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: title"></h1>
+                <span style="float: right; margin-top: -20px; ">
+                    <a data-bind="attr:  { href: '#test-session/'+ testsession.TestSessionId() + '/manage-role-players' }, visible: showManageRolePLayers" class="btn btn-default">
+                        <i class="fa fa-cogs"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.TestSession.resources.ManageRolePlayers'"></span>
+                    </a>
+                    <a data-bind="attr:  { href: '#test-session/'+ testsession.TestSessionId() +'/view-role-players'}, visible: showViewRolePLayers" class="btn btn-default">
+                        <i class="fa fa-eye"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.TestSession.resources.ViewRolePlayers'"></span>
+                    </a>
+                    <a data-bind="attr:  { href: '#test-session/'+ testsession.TestSessionId() + '/allocate-role-players-wizard'}, visible: showAllocateRolePlayers" class="btn btn-default">
+                        <i class="fa fa-plus"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.TestSession.resources.AllocateRolePlayers'"></span>
+                    </a>
+                    <a data-bind="attr: { href: '#test-session-wizard/' + testsession.TestSessionId() }, enableWithPermission: 'TestSession.Update'" class="btn btn-default">
+                        <i class="glyphicon glyphicon-edit"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Edit'"></span>
+                    </a>
+                    <a data-bind="attr: { href: testSittingUrl}, enableWithPermission: 'TestSitting.Read'" class="btn btn-success">
+                        <i class="fa fa-check"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestSitting'"></span>
+                    </a>
+                </span>
+                <p class="form-control-static text-info">
+                    <a data-bind="attr: { href: testSessionAddressUrl, title: subtitle}" target="_blank"><span data-bind="text: subtitle"></span></a>
+                </p>
+                <div class="form-control-static">
+                    <p class="bold">
+                        <span data-bind="text: testsession.ActiveFlag()"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="panel wrapper text-sm">
+                        <div class="form-horizontal">
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-5 form-group m-b-xs">
+                                            <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestTime'"></label>
+                                            <p class="form-control-static line-text-align" data-bind="text: testDate"></p>
+                                        </div>
+                                        <div class="col-md-5 form-group m-b-xs">
+                                            <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.CredentialType'"></label>
+                                            <p class="form-control-static line-text-align" data-bind="text: credentialType"></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 form-group m-b-xs">
+                                            <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.ArrivalTime'"></label>
+                                            <p class="form-control-static line-text-align" data-bind="text: arrivalTime"></p>
+                                        </div>
+                                        <div class="col-md-4 form-group m-b-xs">
+                                            <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestSpecification'"></label>
+                                            <!--ko ifnot: isActiveTestSpecification()-->
+                                            <p class="form-control-static line-text-align text-danger" data-bind="text: testSpecification"></p>
+                                            <!--/ko-->
+                                            <!--ko if: isActiveTestSpecification()-->
+                                            <p class="form-control-static line-text-align" data-bind="text: testSpecification"></p>
+                                            <!--/ko-->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 form-group m-b-xs">
+                                            <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestEnd'"></label>
+                                            <p class="form-control-static line-text-align" data-bind="text: testEnd"></p>
+                                        </div>
+                                        <div class="col-md-5 form-group m-b-xs">
+                                            <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.VenueName'"></label>
+                                            <p class="form-control-static line-text-align" data-bind="text: venueName"></p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 form-group m-b-xs">
+                                            <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.NewCandidatesOnly'"></label>
+                                            <p class="form-control-static line-text-align" data-bind="text: newCandidatesOnly"></p>
+                                        </div>
+                                        <div class="col-md-5 form-group m-b-xs">
+
+                                        </div>
+                                    </div>
+                                </div>
+                      
+                                <div class="col-md-2 text-center" style="margin-left: -50px;">
+                                    <canvas data-bind="chart: chart"></canvas>
+                                    <label>Capacity</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="panel wrapper text-sm">
+                        <div class="form-horizontal">
+                            <div class="row">
+                                
+                                <div class="col-md-5 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm">
+                                        <div class="pull-left m-l-md m-t-xxs">
+                                            <a href="#" data-bind="click: function() { showTestSessionDetails(!showTestSessionDetails()); }">
+                                                <span class="fa" data-bind="css: { 'fa-chevron-down': !showTestSessionDetails(), 'fa-chevron-up': showTestSessionDetails() }"></span>
+                                            </a>
+                                        </div>
+                                        <span data-bind="reshtml: 'Naati.Resources.Shared.resources.SkillsOverview'"></span>
+                                    </label>
+                                   
+                                </div>
+                                <div class="col-md-7 form-group m-b-xs"></div>
+                            </div>
+                            <div class="animated fadeIn" style="margin-top: 5px;" data-bind="css: { 'hide': !showTestSessionDetails() }">
+                                <div class="row">
+                                    <div class="text-center" data-bind="style: { 'height': barChartHeight() }">
+                                        <canvas data-bind="chart: barChart, popover: barChartPopover" style="width:100%"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="hbox" data-bind="component: { name: 'table-component', params: tableDefinition}"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="click: save, enable: canSave">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <a href="#" class="btn btn-default" data-bind="click: back, clickBubble: false"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    
+    
+    <script id="testsession-applicant-header-template" type="text/html">
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.ApplicationReference'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Name'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.CustomerNo'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Email'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Phone'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Skill'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.AttendanceID'"></th>
+        <th class="sortable" style="text-align: center"><span data-bind="reshtml: 'Naati.Resources.TestSession.resources.Status'"></span></th>
+        <th>&nbsp;</th>
+    </script>
+    <script id="testsession-applicant-row-template" type="text/html">
+        <tr>
+            <td><a class="text-info" target="_blank" data-bind="text: ApplicationReference, attr: { href: '#/application/' + ApplicationId }"></a></td>
+            <td data-bind="text: Name"></td>
+            <td><a class="text-info" target="_blank" data-bind="text: CustomerNo, attr: { href: '#/person/' + CustomerNo }"></a></td>
+
+            <td> <a data-bind="attr: { href: 'mailto: ' + Email }, text: Email"></a> </td>
+
+            <td data-bind="text: $root.formatPhone(Phone)"></td>
+            <td>
+                <span data-bind="text: Skill" />
+                <!--ko if: CharacterTypeSimplified -->
+                <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.TestSpecification.resources.SimplifiedChinese' }">S</span>
+                <!--/ko-->
+                <!--ko if: CharacterTypeTraditional -->
+                <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.TestSpecification.resources.TraditionalChinese' }">T</span>
+                <!--/ko-->
+            </td>
+            <td>
+                <!--ko if: ShowAttendanceLink-->
+                <a class="text-info" target="_blank" data-bind="text: AttendanceId, attr: { href: '#/test/' + AttendanceId }"></a>
+                <!--/ko-->
+                <!--ko ifnot: ShowAttendanceLink-->
+                <span data-bind="text: AttendanceId"></span>
+                <!--/ko-->
+                <!--ko if: Supplementary -->
+                <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Shared.resources.SupplementaryTest' }">S</span>
+                <!--/ko-->
+                <!--ko ifnot: HasDefaultSpecification -->
+                <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Shared.resources.NotDefaultSpecification' }"> ! </span>
+                <!--/ko-->
+            </td>
+            <td style="text-align: center"><span class="label text-base m-t-n-xs m-l-sm" data-bind="text: Status, css: 'label-' + StatusCss"></span></td>
+            <td class="text-center w-xs">
+
+                <div class="pull-right dropdown">
+                    <button class="btn btn-sm btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="tooltip: { container: '#credentialRequests'  }, resattr: { title: 'Naati.Resources.Application.resources.TakeAction' }, click: $root.getActions">
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </button>
+                    <ul class="dropdown-menu" data-bind="foreach: { data: Actions, as: 'a' }">
+                        <li data-bind="css: { disabled: a.Disabled }">
+                            <a data-bind="text: a.Name, click: function() { $root.takeAction($parent, a); }"></a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </script>
+    <script id="barchart-tooltip-template" type="text/html">
+        <!--ko foreach: $data-->
+        <p>
+            <div class="wrapper-sm pull-left m-r-xs m-t-xxs" data-bind="style: { 'background-color': backgroundColor }"></div>
+            <span data-bind="text: label"></span>
+        </p>
+        <!--/ko-->
+    </script>
+</div>
+

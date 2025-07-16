@@ -1,0 +1,130 @@
+﻿@model MyNaati.Ui.ViewModels.Orders.PortalStatisticsModel
+@{
+    ViewBag.Title = "Portal Statistics";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Portal Statistics", null)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            var formSelector = '#searchForm';
+            var $statisticsTable = $('#statisticsTable');
+
+            $("#StartDate").val('@Model.StartDate.ToString("yyyy-MM-dd")');
+            $("#EndDate").val('@Model.EndDate.ToString("yyyy-MM-dd")');
+
+            var dataTable = $statisticsTable.DataTable({
+                ajax: {
+                    url: '@Url.Action("PortalStatistics", "Orders")',
+                    type: 'POST',
+                    data: function (data) {
+                        return $.extend({}, data, {
+                            StartDate: $('#StartDate').val(),
+                            EndDate: $('#EndDate').val()
+                        });
+                    }
+                },
+                columns: [
+                    {
+                        data: 'ProductService',
+                        orderable: true
+                    },
+                    {
+                        data: 'PaymentCount',
+                        orderable: true
+                    },
+                    {
+                        data: 'DownloadCount',
+                        orderable: true
+                    }
+                ],
+                dom: "<'row v-offset-xs-1'<'col-sm-12'<'table-responsive'tr>>>",
+                language: {
+                    processing: $('#loadingOverlayTemplate').html(),
+                    zeroRecords: 'No Statistics'
+                },
+                ordering: false,
+                paging: false,
+                processing: true,
+                searching: false,
+                serverSide: true
+            });
+
+            var $searchButton = $('#btnSearch');
+
+            $statisticsTable.on('draw.dt', function () {
+                $searchButton.prop('disabled', false);
+            });
+
+            $(formSelector).submit(function () {
+                $searchButton.prop('disabled', true);
+
+                dataTable.ajax.reload();
+
+                return false;
+            });
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>To view the processing statistics:</p>
+            <ul>
+                <li>Enter the period you wish to review:</li>
+                <li>Click the Go button below.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Statistics for period:</p>
+            @using (Html.BeginForm("PortalStatistics", "Orders", FormMethod.Post, new { id = "searchForm", @class = "form-horizontal" }))
+            {
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            @Html.Label("StartDate", "From", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                <input id="StartDate" class="form-control" type="date" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            @Html.Label("EndDate", "To", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                <input id="EndDate" class="form-control" type="date" name="EndDate" value="@Model.EndDate.ToString("yyyy-MM-dd")" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <button id="btnSearch" class="btn btn-primary" type="submit">Go</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="statisticsTable" class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>Processing Statistics</th>
+                        <th>Online Payments</th>
+                        <th>Forms Downloaded</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>

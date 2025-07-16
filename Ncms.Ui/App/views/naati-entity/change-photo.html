@@ -1,0 +1,48 @@
+﻿<div class="modal fade modal-fullscreen" tabindex="-1" role="dialog" data-bind="attr: { id: newPhotoModalId }">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.NaatiEntity.resources.Photo'"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="hbox">
+                    <!--ko if: person.HasPhoto() && showPhoto()-->
+                    <div class="col photo-upload wrapper-sm">
+                        <span></span><img data-bind="attr: { src: photoUrl }" />
+                    </div>
+                    <!--/ko-->
+                    <div class="col photo-upload cursor-pointer wrapper-sm b-dashed" data-bind="attr: { id: dropZoneId }, click: selectPhoto">
+                        <div href="#" class="h2" data-bind="reshtml: 'Naati.Resources.NaatiEntity.resources.ClickToPreview'"></div>
+                        <span></span><img />
+                    </div>
+                    <form method="post" enctype="multipart/form-data" class="hide" data-bind="attr: { id: formId }">
+                        <input type="hidden" name="NaatiNumber" data-bind="value: person.NaatiNumber" />
+                        <input type="hidden" name="file" />
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--ko if: isLoading-->
+                <div class="progress-container">
+                    <div class="progress progress-sm m-b-md">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" data-bind="attr: { 'aria-valuenow': percent }, style: { width: percent() + '%' }" aria-valuemin="0" aria-valuemax="100">
+                            <span data-bind="text: percent"></span>%
+                        </div>
+                    </div>
+                    <div class="pull-left text-sm text-white m-t-n-md" data-bind="html: uploadLoadedMessage"></div>
+                    <div class="pull-right text-sm text-white m-t-n-md" data-bind="html: uploadRemainingMessage"></div>
+                </div>
+                <!--/ko-->
+                <button class="btn btn-success" data-bind="enable: file, click: upload">
+                    <span class="fa fa-check"></span>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Ok'"></span>
+                </button>
+                <button class="btn btn-default" data-dismiss="modal">
+                    <span class="fa fa-ban"></span>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

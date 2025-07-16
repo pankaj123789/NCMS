@@ -1,0 +1,50 @@
+﻿<table class="table table-bordered m-b-none bg-light dker">
+    <thead>
+    <tr>
+        <th class="col-lg-2">
+            <strong data-bind="reshtml: 'Naati.Resources.Application.resources.RefundPolicy'"></strong>
+        </th>
+    </tr>
+    </thead>
+    <tbody class="bg-white">
+    <tr>
+        <td class="col-lg-2">
+            <span data-bind="html: policy"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table data-bind="if: bankDetails" class="table table-bordered m-b-none bg-light dker">
+    <thead>
+        <tr>
+            <th class="col-lg-2">
+                <strong data-bind="reshtml: 'Naati.Resources.Application.resources.BankDetails'"></strong>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="bg-white">
+        <tr>
+            <td class="col-lg-2">
+                <span data-bind="text: bankDetails"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<table data-bind="if: comments" class="table table-bordered m-b-none bg-light dker">
+    <thead>
+    <tr>
+        <th class="col-lg-2">
+            <strong data-bind="reshtml: 'Naati.Resources.Application.resources.RefundComments'"></strong>
+        </th>
+    </tr>
+    </thead>
+    <tbody class="bg-white">
+    <tr>
+        <td class="col-lg-2">
+            <span data-bind="text: comments"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>

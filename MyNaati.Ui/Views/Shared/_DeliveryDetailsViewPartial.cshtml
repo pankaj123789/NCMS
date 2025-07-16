@@ -1,0 +1,20 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.DeliveryDetailsEditModel
+@if (ViewData["SuppressHeader"] as bool? != true)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-primary">Delivery Details</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            @Model.Name
+            <br />
+            @Model.SelectedAddress.Address
+            <br />
+            @(Model.SelectedAddress.IsFromAustralia ? Model.SelectedAddress.Postcode : Model.SelectedAddress.Country)
+        </p>
+    </div>
+</div>

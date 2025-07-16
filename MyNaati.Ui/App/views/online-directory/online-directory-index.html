@@ -1,0 +1,15 @@
+﻿<div class="m-b-md">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#" data-bind="attr: { href: getHomeUrl() }">Home</a>
+        </li>
+        <li class="active">Online Directory</li>
+    </ol>
+    <hr />
+</div>
+<div>
+    <!--ko component: loaderOptions--><!--/ko-->
+    <p data-bind="html: introcontent"></p>
+    <!--ko component: { name: 'wizard', params: wizardOptions }--><!--/ko-->
+    <div id="recaptcha"></div>
+</div>

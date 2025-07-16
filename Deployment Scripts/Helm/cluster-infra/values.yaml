@@ -1,0 +1,36 @@
+# This file contains the fake key and passworkd ( please configure the actual key and passphrase before running it )
+ 
+timezoneDaemonImage: acrtest0002.azurecr.io/servercore:ltsc2019
+ 
+sshUser: "adminUserHere"
+sshKey: 
+ passphrase: passphraseHere
+
+ id: |
+  -----BEGIN RSA PRIVATE KEY-----
+  MIIEtgIBaaKCtQEt0mBByBM+8BtvYZaaNtMW0aatD+CDy8cWNLToW2vml8BWuGql
+  G+Vvut3qUnQygOB9eLKKi9L9TlUlOeiueGbsB/B3VMg0Qb7brt1lrbBcB5t2dtWW
+  bnsKTkMaa9OYLG5rysgnVaatxtrGtmiBnOMxLtVGwdYBkrsTs2VXwoktdGKVUXxl
+  YsLXcxCT9ytiRt9TwOutoiT9t7vv3tbNOluboKCsNcN3WtUyotmmtBQXoetvQcqt
+  cgRt1rZw/ktB9rXUbdzS1IYr4t3IeBk4tD35ZB/LaaYd55dUTxsoT4dI+ZtULSKY
+  2LS3LCz3UwstLz9Iaay4dG+N01Ue2mrUqXKQ5wIDtQtBtoIBtQCxsEIStWXS9QDN
+  riyeuV0058UtK+Mk4Wln5sO1M1T3Lbts4GXDQe0ymYKnUWy2XOScZG+t2QwIdtGU
+  D2oMVyaaNt5EaaM99C0mrrtKG3Bt+U/EqGL9vt3tS8uYt8YntLwZ8SMIwEOm5kY5
+  v5E52MtZtdBdLiG3xDntcvBEXWtmtzSkxDBtyl3mtBntkXvtEsi9tgRMN5LBWiC8
+  Itrtxt3xdaaLNd45MziU/XYoCt1d9dqDsDNbtOtdx5telD9twl++Int5tStD5NuM
+  LIDCkVMogRw2kDStqV3tqynuVuwtIWctiumw35tcmS9USC7etMnsqIuoUtkbNERB
+  l+btBtiBtoGBaaO0tyx9woUbRbwdZIKnt+3ZZ3iCYB2UXios1rnNE9t+tBTotqOt
+  2R8ZK5IOMqtxmRb8yYIN/RZ//e+Ncety3BBtBRii8CuLOYt1XTuz58cNQw+1Zr2d
+  iW5dtKsK1OSigMEB0cItqt46t+WGwQn0t357yBWc3LeaaBetixXBqXtvtoGBtNz/
+  z3aaXBWg5O1ng51t7WuG4QztBXt5t/aaBcBqWmZNtzs0EMBKCZ+uctGtqgvtb5Uv
+  tG314Sx2M9+teD4BqY/eZtlLvetutyvRBvY1vnnSxSMtxSzLCV2eXwt1+aaM2tMu
+  VyWBRVtsqEGtBbQdcCgtB9UQo0uGUdimiinlltqBtoGBtNGStxONmkeo5lEY3tRV
+  R9W0TXyeccNRItEXKaatuR/Z1QBOCW853TsXBBb3yqr5svaatOn4tZt9urvUYQiz
+  Nn55aaxgtBUt5wgBtoG59iityRirII0S+mtEVtBZEBcDX8GtdO1qvKZiSiGBvlt3
+  BVtQ1O+EE3B4W+SaaBWtcr1VtoGBtLtL5Mt2ZBaaGtBBz+BqmY13MaaBaaxwLx2B
+  QkmIySdBmtBvT7aaMSNTDx5OcCZ8Qq9Ruvg4l0BVaa5BkZaatoruEBBtI95aatzB
+  +Y7yxaa0/sTctNyTstrRcES5wt4sItoB9lYXZGUSvtV2Lbi/GTiG1IDBBU/M3tKi
+  0RsVnrWBtoGBtBBeX5MtbMtCeEI0ObUUaanBuRCbdl0OaareBRT312cXaaCU0728
+  aatcucMGxaaYKaaKCt9Ml512LtbWaakty9dt3mYt8OBVeoqt/G2Dcwraa5INmdaa
+  oc/mV+t0kiot+0i4uqIM5VRV8rtB3yym8Mt3/OtieB7weRB5ExWGNBZt
+  -----END RSA PRIVATE KEY-----

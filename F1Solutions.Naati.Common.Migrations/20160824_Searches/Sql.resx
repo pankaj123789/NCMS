@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CreatePersonSearchTerm" xml:space="preserve">
+    <value>CREATE PROCEDURE [dbo].[PersonSearchTerm]
+(
+	@Term varchar(255) = NULL,
+	@MaxRows int = 0
+)
+AS
+
+SET ROWCOUNT @MaxRows
+
+SELECT DISTINCT P.PersonId,
+	E.EntityId, e.EntityTypeId,
+	CASE WHEN e.EntityTypeId = 2 THEN 'NC' + CONVERT(nvarchar(20), e.NAATINumber)
+		 ELSE CONVERT(nvarchar(20), e.NAATINumber) END As NaatiNumberDisplay, 
+	e.NAATINumber,
+	PN.Surname + '; ' + PN.GivenName + CASE WHEN PN.OtherNames IS NULL THEN '' ELSE ' ' + PN.OtherNames END AS [Name],
+	AD.PostcodeId,
+	S.StateId,
+	CASE WHEN ST.[State] IS NULL THEN '' ELSE ST.[State] END AS StateName,
+	E.GSTApplies,
+	CONVERT(datetime, CONVERT(nvarchar(20), P.BirthDate, 112)) as BirthDate,
+	P.DoNotSendCorrespondence,
+	P.Deceased,
+
+	-- return space for null email to stop app crash when tabbing through or clicking on empty email cell in frmFindPerson
+	CASE WHEN (SELECT TOP 1 Email FROM tblEmail EM WHERE EntityId = E.EntityId AND EM.IsPreferredEmail = 1) IS NULL
+	THEN ' ' ELSE (SELECT TOP 1 Email FROM tblEmail EM WHERE EntityId = E.EntityId AND EM.IsPreferredEmail = 1)
+	END AS Email,
+
+	(SELECT TOP 1 EmailId FROM tblEmail WHERE EntityId = E.EntityId AND tblEmail.isPreferredEmail = 1) AS EmailId,
+	(SELECT TOP 1 Number FROM tblPhone WHERE EntityId = E.EntityId AND PhoneTypeId = 1 AND ContactTypeId = 2) AS Number,
+
+	CASE WHEN AD.AddressID IS NULL 
+	THEN ''
+	ELSE
+		CASE WHEN AD.StreetDetails IS NULL THEN '' ELSE AD.StreetDetails + ',' END
+		+ CASE WHEN S.Suburb IS NULL THEN '' ELSE S.Suburb + ',' END
+       	+ CASE WHEN ST.[State] IS NULL THEN '' ELSE ST.[State] + '-' END
+		+ CASE WHEN PC.PostCode IS NULL THEN '' ELSE PC.PostCode + '  ' END
+		+ CASE WHEN C.Name IS NULL THEN '' ELSE C.Name END
+	END AS PersonAddress			
+
+FROM		tblEntity E
+INNER JOIN	tblPerson P ON E.EntityId = P.EntityId
+INNER JOIN	tblPersonName PN ON P.PersonId = PN.PersonId
+
+LEFT JOIN	tblLanguageExperience LE ON P.PersonId = LE.PersonId
+LEFT JOIN	tblApplication A ON LE.LanguageExperienceId = A.LanguageExperienceId
+LEFT JOIN	tblLanguageExperience LE2 ON A.ToLanguageExperienceId = LE2.LanguageExperienceId
+LEFT JOIN	tblAccreditationResult AR ON A.ApplicationId = AR.ApplicationId
+
+
+INNER JOIN	dbo.vwDistinctPersonName VPN ON PN.PersonNameId = VPN.PersonNameId 
+LEFT JOIN	tblAddress AD ON E.EntityId = AD.EntityId AND AD.PrimaryContact = 1
+LEFT JOIN	tblPostcode PC ON AD.PostcodeId = PC.PostcodeId
+LEFT JOIN	tblSuburb S ON PC.SuburbId = S.SuburbId    
+LEFT JOIN	tlustate ST ON S.StateId = ST.StateId
+LEFT JOIN	tblCountry C ON AD.CountryId = C.CountryId
+
+WHERE	(ISNUMERIC(@Term) != 0 AND CONVERT(VARCHAR, e.NAATINumber) = @Term)
+		OR (
+			ISNUMERIC(@Term) = 0 AND
+			ISNULL(PN.Surname, '') + ISNULL(PN.GivenName, '') + ISNULL(PN.OtherNames, '') LIKE '%' + @Term + '%'
+		)
+
+ORDER BY	Name ASC</value>
+  </data>
+</root>

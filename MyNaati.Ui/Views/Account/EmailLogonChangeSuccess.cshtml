@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.ShowLogon = false;
+    ViewBag.ShowMenu = false;
+    ViewBag.RedirectLogoUrl = System.Configuration.ConfigurationManager.AppSettings["ExternalUrl_NAATI_URL"];
+    ViewBag.Title = "Success";
+}
+@section Head {
+}
+<h2>@ViewBag.Title</h2>
+<div class="text-center wrapper-xl">
+    <span class="fa fa-check-circle text-primary fa-5x"></span>
+    <div class="text-center wrapper">
+        <h4>
+           Your Logon Email has been successfully changed. <br />
+        </h4>
+        <h3> A confirmation has been sent to @ViewBag.NewEmail</h3>
+        <br />
+        <h4><a href="@ViewBag.RedirectUrl">CLICK HERE</a> TO GO TO <span style="text-transform: none">myNAATI</span> HOME</h4>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+﻿@{
+	ViewBag.Title = "My Role-Play Sessions";
+	Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+	ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+new Tuple<string, string>("Examiner Tools", Url.Action("Index")),
+new Tuple<string, string>("My Role-Play Sessions", null)
+};
+}
+@section Scripts
+{
+	<script type="text/javascript">
+		var rolePlaySessions = function () {
+			function reloadDataTable() {
+				$('#sessionsTable').DataTable().ajax.reload();
+			};
+
+			return {
+				reloadDataTable: reloadDataTable,
+				onAjaxFailure: function () {
+					alert('An error occurred, please try again.');
+				},
+				detailSession: function (id) {
+					document.location.href = "@Url.Action("RolePlaySession")/" + id;
+				}
+			};
+		}();
+
+		$(document).ready(function () {
+			var $sessionsTable = $('#sessionsTable');
+
+			$sessionsTable.DataTable({
+				ajax: {
+					url: '@Url.Action("Sessions")',
+					type: 'POST'
+				},
+				rowId: 'TestSessionRolePlayerId',
+				columns: [
+					{
+						data: 'TestSessionId',
+						render: function (data, type, row) {
+							return 'TS' + row.TestSessionId;
+						}
+                    },
+                    { data: 'CredentialTypeExternalName' },
+				    {
+				        data: null,
+				        render: function (data, type, row) {
+                            row.Details = row.Details || [];
+				            var renderData = '<ul>';
+				            for(var i=0 ; i< row.Details.length; i++ ) {
+                                var detail = row.Details[i];
+				                renderData = renderData +
+				                    '<li>' +
+				                    detail.TestComponentName +
+				                    ' (' +
+				                    detail.RolePlayerRoleTypeName +
+				                    ', ' +
+				                    detail.LanguageName +
+				                    ') </li>';
+
+				            };
+
+				            renderData = renderData + '</ul>';
+				            return renderData;
+				        }
+                    },
+				    {
+                        data: 'RolePlayerStatusDisplayName',
+                        render: function (data, type, row) {
+                            return '<span class="badge" style="background-color: #1B81AF;">'+ data+'</span>';
+                        }
+				    },
+					{
+						data: null,
+                        render: function (data, type, row) {
+                            var text = 'View';
+                            if (row.CanAccept=== true || row.CanReject === true) {
+                                text = 'Manage';
+                            }
+                            return '<button class="btn btn-primary pull-right" type="button" data-action="detail" data-id="' + row.TestSessionRolePlayerId + '">' +text+'</button>';
+						}
+					}
+				],
+				dom:
+					"<'row v-offset-xs-1'<'col-sm-12'<'table-responsive't>>>",
+				info: false,
+				language: {
+					processing: $('#loadingOverlayTemplate').html(),
+					zeroRecords: 'No sessions'
+				},
+				ordering: false,
+				paging: false,
+				processing: true,
+				searching: false,
+				serverSide: true,
+				initComplete: function () {
+					rolePlaySessions.reloadDataTable();
+				}
+            });
+
+			$sessionsTable.on('draw.dt', function () {
+                $(this).find('tbody tr').on('click', '.btn', function () {
+                    var $this = $(this);
+                    var action = $this.data('action');
+                    var id = $this.data('id');
+
+					rolePlaySessions[action + 'Session'](id);
+                });
+            });
+		});
+	</script>
+}
+<div class="row m-b-xxl m-t-lg">
+	<div class="col-lg-12">
+		<table id="sessionsTable" class="table table-bordered">
+			<thead class="bg-primary">
+				<tr>
+					<th>Test Session ID</th>					
+					<th>Credential Type</th>
+				    <th>Role-Play</th>
+				    <th>Status</th>
+					<th></th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+</div>

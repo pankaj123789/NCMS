@@ -1,0 +1,35 @@
+﻿<div class="row">
+    <div class="col-sm-12" data-bind="validationElement: selectedIds, validationOptions: { insertMessages: false }">
+        <p data-bind="text: warnMessage, css: { 'text-danger flash': availableSeats() < 0 || !skillMatched() }" class="animated, font-bold"></p>
+        <table class="table table-bordered table-striped" data-bind="datatable: tableDefinition">
+            <thead>
+                <tr>
+                    <th class="w-xxs"></th>
+                    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.CredentialRequestSummary.resources.ApplicationSubmittedDate'"></th>
+                    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.TestSession.resources.CustomerNo'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></th>
+                    <th class="w-md" data-bind="reshtml: 'Naati.Resources.Application.resources.ApplicationReference'"></th>
+                    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Shared.resources.Status'"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: applicants">
+                <tr>
+                    <td class="w-xxs"></td>
+                    <td class="w-sm" data-bind="text: ApplicationSubmittedDate"></td>
+                    <td class="w-xs">
+                        <a href="#" target="_blank" class="text-info" data-bind="text: CustomerNo, attr: { href: '#/person/' + CustomerNo }"></a>
+                    </td>
+                    <td data-bind="text: Name"></td>
+                    <td class="w-md">
+                        <a href="#" target="_blank" class="text-info" data-bind="text: ApplicationReference, attr: { href: '#/application/' + ApplicationId }"></a>
+                        <!-- ko if: AutoCreated == true -->
+                        <span class="label text-base m-t-xs label-info">Auto-Created</span>
+                        <!-- /ko -->
+                    </td>
+                    <td class="w-sm" data-bind="text: Status"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="help-block text-danger" data-bind="validationMessage: selectedIds"></div>
+    </div>
+</div>

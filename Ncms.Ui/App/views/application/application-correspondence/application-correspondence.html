@@ -1,0 +1,40 @@
+
+<div class="hbox" data-bind="component: {
+    name: 'table-component',
+    params: tableDefinition
+}">
+</div>
+<script id="application-correspondence-header-template" type="text/html">
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.Date'"></th>
+    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.Subject'"></th>
+    <th class="w-lg" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.RecipientEmail'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.LastSendDate'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.LastSendResult'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.EmailTemplateId'"></th>
+    <th class="w-xxs">&nbsp;</th>
+</script>
+<script id="application-correspondence-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: CreatedDate"></td>
+        <td data-bind="text: Subject"></td>
+        <td data-bind="text: RecipientEmail"></td>
+        <td data-bind="text: LastSendAttemptDate"></td>
+        <td data-bind="text: LastSendResult"></td>
+        <td data-bind="text: EmailTemplateId"></td>
+        <td class="text-right w-xxs">
+            <div class="btn-group">
+
+                <a href="#" class="btn btn-default btn-xs" data-bind="tooltip: { container: 'body', trigger: 'hover' }, click: $root.viewEmail, resattr: { title: 'Naati.Resources.EmailMessage.resources.View' }">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                </a>
+
+                <a href="#" class="btn btn-default btn-xs" data-bind="tooltip: { container: 'body', trigger: 'hover' }, click: $root.sendEmail, resattr: { title: 'Naati.Resources.EmailMessage.resources.ResendEmail' }">
+                    <span class="glyphicon glyphicon-envelope"></span>
+                </a>
+            </div>
+        </td>
+    </tr>
+</script>
+
+
+

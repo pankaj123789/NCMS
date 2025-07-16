@@ -1,0 +1,67 @@
+﻿<div class="hbox">
+    <div class="hbox" data-bind="component: {
+        name: 'search-component',
+        params: { 
+         title: title, 
+         filters: filters, 
+         searchType: searchType, 
+         searchTerm: searchTerm, 
+         searchCallback: searchCallback, 
+         tableDefinition: tableDefinition, 
+         additionalButtons: additionalButtons,
+         idSearchOptions: idSearchOptions
+        }
+    }">
+    </div>
+ 
+    <script id="testsession-header-template" type="text/html">
+        <th style="width:18%" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestDate'"></th>
+        
+        <th class="hidden"></th>
+
+        <th style="width:8%" class="text-center w-xs" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestSessionId'"></th>
+
+        <th style="width:20%" data-bind="reshtml: 'Naati.Resources.TestSession.resources.SessionName'"></th>
+        <th style="width:10%" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestLocation'"></th>
+        <th style="width:16%" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Venue'"></th>
+        <th style="width:10%" class="text-center w-xs" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Allocated'"></th>
+        <th style="width:10%" class="text-center w-xs" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Capacity'"></th>
+        <th style="width:2%" class="text-center w-xs"></th>
+        <th style="width:6%" ></th>
+        <th class="hide"></th>
+    </script>
+    <script id="testsession-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: TestDate"></td>
+            
+            <td class="hidden" data-bind="text: TestSessionId"></td>
+
+            <td class="text-center"><a class="text-info" target="_blank" data-bind="text: StrTestSessionId, attr: { href: '#/test-session/' + TestSessionId }"></a></td>
+
+            <td data-bind="text: SessionName"></td>
+            <td data-bind="text: StrTestLocation"></td>
+            <td data-bind="text: Venue"></td>
+            <td class="text-center w-xs" data-bind="text: Allocated"></td>
+            <td class="text-center w-xs" data-bind="text: Capacity"></td>           
+            <td class="w-xs text-center">
+                <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover', container: 'body', title: function () { return $root.availableMessage($data); } }">
+                    <i class="fa" data-bind="css: { 'fa-check text-success': IsActive, 'fa-times text-danger': !IsActive }"></i>
+                </a>
+            </td>
+            <td class="text-center w-xs">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#test-session/' + TestSessionId }, clickBubble: false, tooltip: { container: 'body' }, resattr: { title: 'Naati.Resources.TestSession.resources.ViewTestSession' }">
+                        <span class="fa fa-eye"></span>
+                    </a>
+                    <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#test-session-wizard/' + TestSessionId }, clickBubble: false, tooltip: { container: 'body' }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }, enableWithPermission:'TestSession.Manage'">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </div>
+            </td>
+            <td data-bind="text: $index" class="hide"></td>
+            
+        </tr>
+    </script>
+    
+</div>
+

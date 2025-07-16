@@ -1,0 +1,73 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.ApplicationForAccreditation.PurposeOfCredentialsModel
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            If you wish NAATI to provide an option on your educational qualifications or your
+            skilled employment in order to claim points for migration purposes, you must also:
+        </p>
+    </div>
+    <div class="col-lg-12">
+        <ul>
+            <li>
+                Complete an Application for Assessment of Educational Qualifications and Skilled
+                Emploment (From M)
+            </li>
+            <li>Provide additionbal supporting material and </li>
+            <li>Pay an additional fee.</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-7">
+        @Html.LabelFor(m => m.AssessEducationalQualification)
+    </div>
+    <div class="col-sm-5">
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.AssessEducationalQualification, true, new { id = "rbAssessEducationalQualificationYes" })
+            @Html.Label("rbAssessEducationalQualificationYes", "Yes")
+        </label>
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.AssessEducationalQualification, false, new { id = "rbAssessEducationalQualificationNo" })
+            @Html.Label("rbAssessEducationalQualificationNo", "No")
+        </label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-7">
+        @Html.LabelFor(m => m.OverseasQualificationComparable)
+    </div>
+    <div class="col-sm-5">
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.OverseasQualificationComparable, true, new {id = "rbOverseasQualificationComparableYes"})
+            @Html.Label("rbOverseasQualificationComparableYes", "Yes")
+        </label>
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.OverseasQualificationComparable, false, new {id = "rbOverseasQualificationComparableNo"})
+            @Html.Label("rbOverseasQualificationComparableNo", "No")
+        </label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ul>
+            <li>Australian Doctorate Degree</li>
+            <li>At least an Australian Bachelor Degree</li>
+            <li>Australian Diploma or trade qualification</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-7">
+        @Html.LabelFor(m => m.AssessSkillEmployment)
+    </div>
+    <div class="col-sm-5">
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.AssessSkillEmployment, true, new { id = "rbAssessSkillEmploymentYes" })
+            @Html.Label("rbAssessSkillEmploymentYes", "Yes")
+        </label>
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.AssessSkillEmployment, false, new { id = "rbAssessSkillEmploymentNo" })
+            @Html.Label("rbAssessSkillEmploymentNo", "No")
+        </label>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+﻿<div id="validateTestSittingModal" class="modal fade" tabindex="-1" data-backdrop="static" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-light">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.TestSession.resources.ValidateTestSittingTittle'"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <strong data-bind="reshtml:'Naati.Resources.TestSession.resources.IssuesDescription'"> </strong>
+                        <br />
+                        <br />
+                        <!-- ko foreach: { data: issues, as: 'tt' } -->
+                        <div>
+                            <a href="#" data-bind="click:$root.showHideDetails, visible: !tt.showDetails()">
+                                <i class="fa fa-chevron-right"></i>
+                                <!-- <span data-bind="text:'Show Details'"></span>-->
+                            </a>
+                            <a href="#" data-bind="click:$root.showHideDetails, visible: tt.showDetails()">
+                                <i class="fa fa-chevron-down"></i>
+                                <!-- <span data-bind="text:'Hide Details'"></span>-->
+
+                            </a>
+                            <span data-bind="text:tt.Message + ' '" class="text-danger"></span>
+                            <!-- ko if:tt.showDetails -->
+                            <br />
+                            <span data-bind="text:tt.TotalFoundMessage, visible: tt.showDetails "></span>
+                            <br />
+                            <br />
+                            <ul>
+                                <!-- ko foreach: { data: tt.Details, as: 'ttDetails' } -->
+                                <li>
+                                    <span data-bind="text:ttDetails"></span>
+                                </li>
+                                <!--/ko-->
+                            </ul>
+                            <!--/ko-->
+
+                        </div>
+                        <!--/ko-->
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

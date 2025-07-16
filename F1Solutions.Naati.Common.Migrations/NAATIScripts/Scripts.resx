@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PhoneSelect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\phoneselect.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwJobExaminerPayrollStatus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwjobexaminerpayrollstatus.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwMarkingsForPayroll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwmarkingsforpayroll.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="AddressSelect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\addressselect.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PersonSelect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\personselect.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PrerequisiteApplications" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\prerequisiteapplications.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="NH_EntityInsert" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\nh_entityinsert.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="FT_Audit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>indexes\ft_audit.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EmailSelect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\emailselect.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RemovedMigrations" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>removedmigrations.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RemovedSystemValues" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>removedsystemvalues.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwTestStatus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwteststatus.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwTestSittingAsset" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwtestsittingasset.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RequestJobToken" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\requestjobtoken.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReleaseJobToken" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\releasejobtoken.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwDistinctPersonName" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwdistinctpersonname.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwMaxPersonNameEffectiveDate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwmaxpersonnameeffectivedate.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="fnGetNextNaatiNumber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>functions\fngetnextnaatinumber.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RegionSelect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\regionselect.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="vwDistinctInstitutionName" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwdistinctinstitutionname.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwPersonDistinct" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwpersondistinct.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GetSingleKey" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\getsinglekey.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="DeletedApplications" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\deletedapplications.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="LegacyAccreditationMerge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\legacyaccreditationmerge.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RevertTestResult" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reverttestresult.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwSkillDisplayName" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwskilldisplayname.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwRolePlayerLastTestSession" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwroleplayerlasttestsession.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwTestMaterialLastUsed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwtestmateriallastused.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwTestMaterialRequestRoundLatest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwtestmaterialrequestroundlatest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwIssuedCredentialCredentialRequest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\vwissuedcredentialcredentialrequest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RebuildIndexes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\rebuildindexes.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="vwTestMaterialCreationPayments" xml:space="preserve">
+    <value>CREATE VIEW [dbo].[vwTestMaterialCreationPayments]
+AS
+SELECT 
+mr.OutputMaterialId as 'TestMaterialId',
+mrr.SubmittedDate as 'MaterialCreationSubmittedDate',
+CASE 
+WHEN mrr.MaterialRequestRoundStatusTypeId = 1 THEN 'Awaiting Development' 
+WHEN mrr.MaterialRequestRoundStatusTypeId = 2 THEN 'Awaiting NAATI''s Approval' 
+WHEN mrr.MaterialRequestRoundStatusTypeId = 3 THEN 'Rejected' 
+WHEN mrr.MaterialRequestRoundStatusTypeId = 4 THEN 'Approved' 
+WHEN mrr.MaterialRequestRoundStatusTypeId = 5 THEN 'Cancelled' 
+ELSE 'UNKNOWN'
+END as 'CurrentStatus',
+mrp.ApprovedDate as 'PaymentApprovedDate',
+mrp.PaymentDate as 'PaymentProcessedDate',
+COALESCE(mrp.PaymentReference,'') as 'InvoiceNo',
+COALESCE(mrp.Amount,0) as 'AmountPaid',
+CASE WHEN mrp.PaymentReference = NULL THEN 0 ELSE
+(SELECT SUM(amount) FROM tblMaterialRequestPayroll WHERE PaymentReference = mrp.PaymentReference)
+END as 'TotalInvoice',
+CASE WHEN d.DisplayName IS NOT NULL THEN
+	REPLACE(REPLACE(d.DisplayName, '[Language 1]', l1.Name), '[Language 2]', l2.Name)
+ELSE
+	l3.Name
+END
+ as 'Skill',
+ct.InternalName as 'CredentialType',
+e.NAATINumber
+FROM            
+tblmaterialrequest mr INNER JOIN
+tblMaterialRequestRound mrr on mr.MaterialRequestId = mrr.MaterialRequestId INNER JOIN
+tblMaterialRequestPanelMembership mrpm on mr.MaterialRequestId = mrpm.MaterialRequestId LEFT OUTER JOIN
+tblMaterialRequestPayroll mrp on mrp.MaterialRequestPanelMembershipId = mrpm.MaterialRequestPanelMembershipId LEFT OUTER JOIN
+tblTestMaterial tm on mr.OutputMaterialId = tm.TestMaterialId LEFT OUTER JOIN
+tblTestComponentType tct on tm.TestComponentTypeId = tct.TestComponentTypeId  LEFT OUTER JOIN
+tblTestSpecification ts on tct.TestSpecificationId = ts.TestSpecificationId LEFT OUTER JOIN
+tblCredentialType ct on ts.CredentialTypeId = ct.CredentialTypeId LEFT OUTER JOIN
+tblSkill s on tm.SkillId = s.SkillId LEFT OUTER JOIN
+tblSkillType st on s.SkillTypeId = st.SkillTypeId LEFT OUTER JOIN
+tblLanguage l1 on s.Language1Id = l1.LanguageId LEFT OUTER JOIN
+tblLanguage l2 on s.Language2Id = l2.LanguageId LEFT OUTER JOIN
+tblLanguage l3 on tm.LanguageId = l3.LanguageId LEFT OUTER JOIN
+tblDirectionType AS d ON s.DirectionTypeId = d.DirectionTypeId LEFT OUTER JOIN
+tblPanelMembership AS pm on pm.PanelMembershipId = mrpm.PanelMembershipId LEFT OUTER JOIN
+tblPerson AS p on pm.PersonId = p.PersonId LEFT OUTER JOIN
+tblEntity AS e on p.EntityId = e.EntityId</value>
+  </data>
+  <data name="PrerequisiteApplicationsNullableApplications" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\PrerequisiteApplicationsNullableApplications.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
+  </data>
+  <data name="GetStoredFilesForFileDeletion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\GetStoredFilesForFileDeletion.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="PrerequisiteSummary" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\PrerequisiteSummary.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="GetRemainingStoredFilesForDeletionCount" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\GetRemainingStoredFilesForDeletionCount.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="GetNewCredentialsThatCanProgressToEligibleForTesting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\GetNewCredentialsThatCanProgressToEligibleForTesting.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CheckNewCredentialSiblingsCanProgressToEligibleForTesting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\CheckNewCredentialSiblingsCanProgressToEligibleForTesting.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SupplementaryMaterialsFilterTestComponentsThatPassed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\SupplementaryMaterialsFilterTestComponentsThatPassed.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+</root>

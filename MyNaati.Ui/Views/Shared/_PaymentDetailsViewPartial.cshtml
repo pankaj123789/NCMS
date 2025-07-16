@@ -1,0 +1,26 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.PaymentDetailsEditModel
+<div class="row">
+    <div class="col-sm-4">
+        <h3 class="text-primary">Payment Details</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr>
+                    <th class="bg-primary">Card type:</th>
+                    <td>@Html.DisplayFor(c => c.Type)</td>
+                </tr>
+                <tr>
+                    <th class="bg-primary">Card number:</th>
+                    <td>@Html.DisplayFor(c => c.CardNumber)</td>
+                </tr>
+                <tr>
+                    <th class="bg-primary">Name on card:</th>
+                    <td>@Html.DisplayFor(c => c.NameOnCard)</td>
+                </tr>
+                <tr>
+                    <th class="bg-primary">Expiry date:</th>
+                    <td>@Html.DisplayFor(c => c.ExpiryMonth, "month")/@Html.DisplayFor(c => c.ExpiryYear)</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿<div class="hbox" data-bind="component: {
+    name: 'table-component',
+    params: tableDefinition
+}">
+</div>
+<script id="prerequisite-applications-header-template" type="text/html">
+    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.CurrentCredentialRequests'"></th>
+    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.RequiredPrerequisites'"></th>
+    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.ExistingApplications'"></th>
+    <th class="w-xxs" data-bind="reshtml: 'Naati.Resources.Application.resources.AutoCreated'"></th>
+    <th class="w-xxl" data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialRequests'"></th>
+    <th class="w-xxs" data-bind="reshtml: 'Naati.Resources.Application.resources.AutoCreated'"></th>
+    <th class="w-xxs" data-bind="reshtml: 'Naati.Resources.Application.resources.DateCreated'"></th>
+</script>
+<script id="prerequisite-applications-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: CurrentCredentialRequest"></td>
+        <td data-bind="text: RequiredPrerequisite"></td>
+        <td>
+            <a target="_blank" class="text-info" data-bind="text: ExistingApplication, attr: {href: url}"></a>
+            <p class="form-control-static">
+                <span class="label text-base" data-bind="text: ExistingApplicationStatus, css: appStatus"></span>
+            </p>
+        </td>
+        <td data-bind="text: ExistingApplicationAutoCreated"></td>
+        <td>
+            <span data-bind="text: ExistingCredentialRequest"></span>
+            <p class="form-control-static">
+                <span class="label text-base" data-bind="text: ExistingCredentialRequestStatus, css: requestStatus"></span>
+            </p>
+        </td>
+        <td data-bind="text: ExistingCredentialRequestAutoCreated"></td>
+        <td data-bind="text: CreatedDate"></td>
+    </tr>
+</script>

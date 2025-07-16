@@ -1,0 +1,20 @@
+# Default values for naati-infra.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+projectName: "naati"
+myNaatiFullName: "mynaati"
+ncmsFullName: "ncms"
+targetRelease: "dev"
+keyVaultClientId: 21cb472d-2538-4636-b653-fb2a3204e5a0
+keyVaultSecret: ecd83746-656a-4412-befe-7a3e110e30ca
+keyVaultUrl: https://keyvaultprototyping.vault.azure.net
+machineValidationKey: B607EDA1AF054507672258B3A6554895435024820CF064DBAA09A426E9AC4CD8FD64BB84DD0655C9C51AC8DCC2D5E1B5C84091FE60FB9805327DA4EDC9C3F235
+machineDescriptionKey: A5AA15B2234D789CB292C10133DA0A0CF8D258B6542B219A
+azureStorageAccountName: storageappfiles
+azureStorageAccountKey: hg5AsrOt8rC7Ju3THIdoWAgbSi+dpg3H4SoeiR86K0shLhy8mhPtXBRUns4kSCgLn14lVwSoSJno4C1gN4IlJQ==
+azureStorageAccountNameTemp: storageappfilestemp
+azureStorageAccountKeyTemp: 8btJLJisP+Zpl8Tyy+4gXtD17sHqeXM+3XUUVBvrO3P93wqGa0l5UfwF03m+J+XEleZ2GGnJ2a7O2F8jPNdLIw==
+
+
+

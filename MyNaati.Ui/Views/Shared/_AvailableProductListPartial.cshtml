@@ -1,0 +1,32 @@
+﻿@model List<MyNaati.Ui.ViewModels.Products.AvailableProduct>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="bg-primary">
+                <tr>
+                    <th>Skill</th>
+                    <th>Level</th>
+                    <th>Direction</th>
+                    <th>Expiry</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var accreditation in Model)
+                {
+                    var expiry = accreditation.Expiry.HasValue ? accreditation.Expiry.Value.ToString("dd/MM/yyyy") : string.Empty;
+
+                    <tr>
+                        <td>@accreditation.Skill</td>
+                        <td>@accreditation.Level</td>
+                        <td>@accreditation.Direction</td>
+                        <td>
+                            @expiry
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

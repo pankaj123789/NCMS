@@ -1,0 +1,25 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.ApplicationForAccreditation.EmailListModel
+@{
+    ViewBag.Title = "Application for Accreditation by Testing";
+    ViewBag.Subtitle = "Email";
+    Layout = "~/Views/Shared/MasterPages/_ApplicationWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Testing", Url.Action("Index", "ApplicationByTestingWizard")),
+        new Tuple<string, string>("New Application", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+        });
+    </script>
+}
+@{
+    @Html.Partial("_ApplicationForAccreditationEmailPartial", Model);
+}

@@ -1,0 +1,102 @@
+# Default values for naati.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+sharedResourcesName: "naati"
+ncms:
+  image:
+   repository: acrlocalhost0002.azurecr.io/ncmsui
+  replicaCount: 1
+  nameOverride: ""
+  fullnameOverride: ""
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  sharedResourcesName: "naati"
+
+  service:
+   type: LoadBalancer
+   port: 80
+    # Internal ip of ncms
+   loadBalancerIP: 10.40.4.67
+
+  ingress:
+    hosts:
+      - host: chart-example.local
+  configMap:
+    data:
+      # Configuration values can be set as key-value properties 
+      "AccountingOperationsReportEmailsTo": "localhost@altf4solutions.com.au"
+      "EmailBatchingReportEmailsTo": "localhost@altf4solutions.com.au"
+      "AccountingOperationsLogEmailsTo": "localhost@altf4solutions.com.au"
+      "EmailBatchingLogEmailsTo": "localhost@altf4solutions.com.au"
+      "AccountingOperationsReportEmailsFrom": "localhost.noreply@altf4solutions.onmicrosoft.com"
+      "TestSittingsWithoutMaterialReminderEmailAddresses": "NCMSTestTestSittingsWithoutMaterialReminder@altf4solutions.com.au"
+      "AzureAppRedirectUri": "https://ncmslocalhost.naati.com.au"
+      "AadAuthRedirectUri": "https://ncmslocalhost.naati.com.au/api/System/AadResponse"
+      "EnvironmentType": "localhost"
+      "EnvironmentName": "localhost_CLOUD"
+
+       # Internal ip of mynaati
+      "MyNaatiUrl": "http://10.40.4.68"
+      "ShowAllMenuItems" : "False"
+      "ReportingJobName": "NCMSReportingDatabaseDev"
+      "DebugMode" : "False"
+      "logging_MinimumLevel": "Information"
+      "SecretPrefix" : "localhost"   
+      "SecurePayResource": "https://payments-stest.npe.auspost.zone"
+      "SecurePayTokenUrl": "https://welcome.api2.sandbox.auspost.com.au/oauth/token"
+      "QrCodeAccessUrl": "https://mynaatilocalhost.naati.com.au/VerifyPractitioner?QrCode={0}"
+
+      
+mynaati:
+  image:
+   repository: acrlocalhost0002.azurecr.io/mynaatiui
+  replicaCount: 1
+  nameOverride: ""
+  fullnameOverride: ""
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  sharedResourcesName: "naati" 
+  
+  service:
+   type: LoadBalancer
+   port: 80
+   # Internal ip of mynaati
+   loadBalancerIP: 10.40.4.68
+
+  ingress:
+    hosts:
+      - host: chart-example.local
+  configMap:
+    data:
+      # Configuration values can be set as key-value properties 
+      "ExternalUrl_Applications_URL": "https://mynaatilocalhost.naati.com.au/apply"
+      "BypassExaminerAuthentication": "true"
+      "kosettings_allowEmailPaste": "true"
+      "kosettings_skipRecaptcha": "true"
+      "EnvironmentType": "localhost"
+      "EnvironmentName": "localhost_CLOUD"
+      "SecretPrefix": "localhost"
+      # Internal ip of Ncms
+      "NcmsUrl": "http://10.40.4.67"
+      "SecurePay_PaymentUrl": "https://localhost.securepay.com.au/xmlapi/payment"
+      "DebugMode" : "False"     
+      "EnableSwagger" : "False"     
+      "logging_MinimumLevel": "Information"    
+      "AccountingOperationsReportEmailsTo": "localhost@altf4solutions.com.au"
+      "EmailBatchingReportEmailsTo": "localhost@altf4solutions.com.au"
+      "AccountingOperationsLogEmailsTo": "localhost@altf4solutions.com.au"
+      "EmailBatchingLogEmailsTo": "localhost@altf4solutions.com.au"
+      "AccountingOperationsReportEmailsFrom": "localhost.noreply@altf4solutions.onmicrosoft.com"
+      "SecurePayResource": "https://payments-stest.npe.auspost.zone"
+      "SecurePayTokenUrl": "https://welcome.api2.sandbox.auspost.com.au/oauth/token"
+      "SecurePayJavascriptSDKUrl": "https://payments-stest.npe.auspost.zone/v3/ui/client/securepay-ui.min.js"
+      "QrCodeAccessUrl": "https://mynaatilocalhost.naati.com.au/VerifyPractitioner?QrCode={0}"

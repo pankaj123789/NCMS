@@ -1,0 +1,26 @@
+﻿@model List<MyNaati.Ui.ViewModels.Products.Product>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="bg-primary">
+                <tr>
+                    <th>Description</th>
+                    <th>Australia ($AUD including GST)</th>
+                    <th>Other Countries ($AUD)</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var fee in Model)
+                {
+                    <tr>
+                        <td>@fee.Description</td>
+                        <td class="MoneyField">@Html.DisplayFor(e => fee.Price)</td>
+                        <td class="MoneyField">@Html.DisplayFor(e => fee.OverseasPrice)</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿<div class="col">
+    <div class="vbox">
+        <div class="bg-light lter b-b wrapper-md">
+            <h1 class="m-n font-thin h3">
+                <span data-bind="html: title"></span>
+                <button type="button" class="btn btn-success" data-bind="click: createNewPayRun, enableWithPermission: 'PayRun.Create'">
+                    <i class="fa fa-plus"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.CreateNewPayRun'"></span>
+                </button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" data-bind="click: selectAll">
+                        <i class="fa fa-check-square"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.SelectAll'"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" data-bind="click: unselectAll">
+                        <i class="far fa-square"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.UnselectAll'"></span>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" data-bind="click: expandAll">
+                        <i class="fa fa-plus-square"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.ExpandAll'"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" data-bind="click: collapseAll">
+                        <i class="fa fa-minus-square-o"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.CollapseAll'"></span>
+                    </button>
+                </div>
+            </h1>
+        </div>
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner" data-bind="css: { 'bg-white': examiners().length === 0 }">
+                    <div class="wrapper-md">
+                        <div class="alert alert-warning" data-bind="reshtml: 'Naati.Resources.Payroll.resources.NoMarkingForPayroll', visible: examiners().length === 0"></div>
+                        <!--ko foreach: { data: examiners, as: 'examiner' }-->
+                        <!--ko if: examiner.Markings().length-->
+                        <div class="panel panel-default m-b-xs">
+                            <div class="panel-heading wrapper b-b b-light" role="tab" data-bind="attr: { id: examiner.headId }">
+                                <div class="row small">
+                                    <a class="col-lg-10" role="button" data-toggle="collapse" aria-expanded="false" data-bind="click: $root.toggleExpanded, attr: { href: '#' + examiner.childId, 'aria-controls': examiner.childId }">
+                                        <h5 class="row m-t-none m-b-none">
+                                            <div class="col-lg-3">
+                                                <i class="fa" data-bind="css: { 'fa-chevron-right': !examiner.expanded(), 'fa-chevron-down': examiner.expanded() }"></i>
+                                                <span data-bind="text: examiner.Examiner"></span>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <span data-bind="text: examiner.Count"></span>
+                                                <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.Markings'"></span>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <span data-bind="text: $root.formatExaminerCost(examiner)"></span>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <span data-bind="html: $root.getFirstReceivedDateInfo(examiner)"></span>
+                                            </div>
+                                        </h5>
+                                    </a>
+                                    <div class="pull-right m-r-sm m-b-n-xs">
+                                        <h5 class="m-t-none m-b-none">
+                                            <label class="pull-left i-switch m-t-n-xxs m-r-xs">
+                                                <input type="checkbox" data-bind="checked: examiner.IncludeInPayRun">
+                                                <i></i>
+                                            </label>
+                                            <div class="pull-left" data-bind="reshtml: 'Naati.Resources.Payroll.resources.IncludeInPayRun'"></div>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--ko component: { name: 'payroll-markings', params: { examiner: examiner, allowRemoveTest: true } }-->
+                            <!--/ko-->
+                        </div>
+                        <!--/ko-->
+                        <!--/ko-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

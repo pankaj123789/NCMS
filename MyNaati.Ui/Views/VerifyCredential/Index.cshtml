@@ -1,0 +1,141 @@
+﻿@model MyNaati.Ui.ViewModels.VerifyCredential.VerifyCredentialModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="Content/bootstrap-fileinput/css/fileinput.css" rel="stylesheet" />
+    <link href="Content/DataTables/css/buttons.bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.js"></script>
+    @Styles.Render("~/Bundles/Styles")
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div id="verify-practitioner" class="primary-overlay-container">
+        <div class="header_container">
+            <img class="img-small" alt="NAATI" src=@Url.Content("~/Content/Images/NAATI_Primary_Logo_22_White.svg") />
+            <span class="verify-practitioner-header">Practitioner Details</span>
+        </div>
+        <div class="flex_container">
+            @if (@Model.Message != null)
+            {
+                <div class="col-lg-12 v-offset-xs-4">
+                    <span class="env-label col-lg-12" style="white-space: pre-line; text-align: left; line-height: 1.6;">
+                        @Model.Message
+                    </span>
+                </div>
+            }
+            else
+            {
+        <div class="details_container">
+            @if (Model.CertificationDetails.Count >= 1)
+            {
+            <ul class="flex-outer">
+                <li>
+                    <label class="left-label">Name</label>
+                    <label class="right-label bold-label">@Model.Name</label>
+                </li>
+                <li>
+                    <label class="left-label">Current Certifications</label>
+                    <label class="right-label bold-label">@Model.CertificationDetails.First().Certification - @Model.CertificationDetails.First().Skill</label>
+                </li>
+                <li>
+                    <label class="left-label hidden_when_small"></label>
+                    <label class="right-label">Valid from: @Model.CertificationDetails.First().ValidFrom.ToShortDateString()</label>
+                </li>
+                <li>
+                    <label class="left-label hidden_when_small"></label>
+                    <label class="right-label">Valid until: @Model.CertificationDetails.First().ValidTo.ToShortDateString()</label>
+                </li>
+                @foreach (var certification in Model.CertificationDetails.Skip(1))
+                {
+                    <li>
+                        <label class="left-label hidden_when_small"></label>
+                        <label class="right-label bold-label">@certification.Certification - @certification.Skill</label>
+                    </li>
+                    <li>
+                        <label class="left-label hidden_when_small"></label>
+                        <label class="right-label">Valid from: @certification.ValidFrom.ToShortDateString()</label>
+                    </li>
+                    <li>
+                        <label class="left-label hidden_when_small"></label>
+                        <label class="right-label">Valid until: @certification.ValidTo.ToShortDateString()</label>
+                    </li>
+                }
+
+                <li>
+                    <label class="left-label">Digital Stamp</label>
+                    <label class="right-label bold-label">@Model.DigitalStampValid</label>
+                </li>
+                <li>
+                    <label class="left-label">Stamp Generated</label>
+                    <label class="right-label bold-label">@Model.GeneratedOn.ToShortDateString()</label>
+                </li>
+            </ul>
+            }
+            @if (Model.PastCertificationDetails.Count >= 1)
+            {
+                <hr />
+                <div class="verify-practitioner-subheader">Past NAATI Credentials</div>
+                <ul class="flex-outer">
+                    <li>
+                        <label class="left-label">Past Accreditations</label>
+                        <label class="right-label bold-label">@Model.PastCertificationDetails.First().Certification - @Model.PastCertificationDetails.First().Skill</label>
+                    </li>
+                    <li>
+                        <label class="left-label hidden_when_small"></label>
+                        <label class="right-label">Valid from: @Model.PastCertificationDetails.First().ValidFrom.ToShortDateString()</label>
+                    </li>
+                    <li>
+                        <label class="left-label hidden_when_small"></label>
+                        <label class="right-label">Valid until: @Model.PastCertificationDetails.First().ValidTo.ToShortDateString()</label>
+                    </li>
+                    @if (Model.PastCertificationDetails.Count > 1)
+                    {
+                        foreach (var pastCertification in Model.PastCertificationDetails.Skip(1))
+                        {
+                            <li>
+                                <label class="left-label hidden_when_small"></label>
+                                <label class="right-label bold-label">@pastCertification.Certification - @pastCertification.Skill</label>
+                            </li>
+                            <li>
+                                <label class="left-label hidden_when_small"></label>
+                                <label class="right-label">Valid from: @pastCertification.ValidFrom.ToShortDateString()</label>
+                            </li>
+                            <li>
+                                <label class="left-label hidden_when_small"></label>
+                                <label class="right-label">Valid until: @pastCertification.ValidTo.ToShortDateString()</label>
+                            </li>
+                        }
+                    }
+                </ul>
+            }
+            @if (Model.PastCertificationDetails.Count >= 1 || Model.CertificationDetails.Count >= 1)
+            {
+                <hr />
+                <ul class="flex-outer">
+                    <li>
+                        <label class="left-label">Stamp Generated</label>
+                        <label class="right-label bold-label">@Model.GeneratedOn.ToShortDateString()</label>
+                    </li>
+
+                </ul>
+            }
+        </div>
+                <div class="person_image_container">
+                    <div class="person_image">
+                        <img src="@Model.PractitionerImage" />
+                        <div class="person-label">
+                            <label>ID:</label>
+                            <label class="bold-label">@Model.PractitionerId</label>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+</body>
+</html>

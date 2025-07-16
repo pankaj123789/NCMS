@@ -1,0 +1,45 @@
+﻿<div>
+    <h4 class="print-only font-thin m-l-sm m-t-none m-b-none" data-bind="restext: 'Naati.Resources.Finance.resources.Payments'"></h4>
+    <!--ko component: { name: 'table-component', params: tableDefinition }-->
+    <!--/ko-->
+    <script id="end-of-period-payment-header-template" type="text/html">
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Office'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.InvoiceNo'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Shared.resources.NaatiNo'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Customer'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Type'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Amount'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.DatePaid'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.WiisePaymentAccount'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.WiiseReference'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.BSB'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.ChequeNumber'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.BankName'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.EftMachine'"></th>
+        <th class="w-xxs print-hide"></th>
+    </script>
+    <script id="end-of-period-payment-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: Office, attr: { 'data-order': Office }"></td>
+            <td data-bind="attr: { 'data-order': InvoiceNumber }, text: InvoiceNumber"></td>
+            <td data-bind="attr: { 'data-order': NaatiNumber }"><a href="#" class="text-info" data-bind="attr: { href: '#/person/' + NaatiNumber + '?tab=transactions' }, text: NaatiNumber"></a></td>
+            <td data-bind="text: Customer, attr: { 'data-order': Customer }"></td>
+            <td data-bind="text: PaymentType, attr: { 'data-order': PaymentType }"></td>
+            <td data-bind="attr: { 'data-order': Amount }">
+                <span data-bind="textCurrency: { value: Amount, format: '{signal}{value}', negativeFormat: '{signal}({value})' }"></span>
+            </td>
+            <td data-bind="textDate: DatePaid, attr: { 'data-order': DatePaid }"></td>
+            <td data-bind="text: PaymentAccount, attr: { 'data-order': PaymentAccount }"></td>
+            <td data-bind="text: Reference, attr: { 'data-order': Reference }"></td>
+            <td data-bind="text: BSB, attr: { 'data-order': BSB }"></td>
+            <td data-bind="text: ChequeNumber, attr: { 'data-order': ChequeNumber }"></td>
+            <td data-bind="text: BankName, attr: { 'data-order': BankName }"></td>
+            <td data-bind="text: EftMachine, attr: { 'data-order': EftMachine }"></td>
+            <td class="text-center print-hide">
+                <a href="#" class="btn btn-xs btn-default" data-bind="tooltip: { container: 'body' }, resattr: { title: 'Naati.Resources.Finance.resources.DownloadInvoiceFromWiise' }, downloadFile: { url: downloadUrl }">
+                    <i class="fa fa-download"></i>
+                </a>
+            </td>
+        </tr>
+    </script>
+</div>

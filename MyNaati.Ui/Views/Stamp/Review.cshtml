@@ -1,0 +1,128 @@
+﻿@model MyNaati.Ui.ViewModels.Stamp.WizardModel
+@{
+    ViewBag.Title = "Place an Order";
+    ViewBag.Subtitle = "Review";
+    Layout = "~/Views/Shared/MasterPages/_ProductWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Products", Url.Action("index", "Product")),
+        new Tuple<string, string>("Stamps", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(downloadFormButtons).show();
+            $(doneButtons).show();
+            $(confirmButtons).show();
+        });
+    </script>
+    @if (Model.PaymentMethodModel.IsOnlineOrder)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var $processingPaymentModal = $('#processingPaymentModal');
+
+                $(downloadFormButtons).hide();
+                $(doneButtons).hide();
+
+                $('#declarationDiv').show();
+
+                $(confirmButtons).click(function () {
+                    $(confirmButtons).prop('disabled', true);
+                    $(cancelButtons).prop('disabled', true);
+                    $(previousButtons).prop('disabled', true);
+                    $processingPaymentModal.modal('show');
+                });
+            });
+        </script>
+        if (Model.IsProcessed)
+        {
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $(confirmButtons).prop('disabled', true);
+                });
+            </script>
+            if (ViewContext.ViewData.ModelState.IsValid)
+            {
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(cancelButtons).prop('disabled', true);
+                        $(previousButtons).prop('disabled', true);
+                    });
+                </script>
+            }
+        }
+    }
+    else
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(confirmButtons).hide();
+                $(doneButtons).prop('disabled', true);
+
+                $('#declarationDiv').hide();
+
+                $(downloadFormButtons).click(function () {
+                    $(cancelButtons).prop('disabled', true);
+                    $(previousButtons).prop('disabled', true);
+
+                    var anchors = $('.list-group-item');
+
+                    if (anchors.length > 0) {
+                        anchors.removeClass('active');
+                        anchors.addClass('no-navigation');
+                        anchors.attr('href', '#');
+                    }
+                });
+            });
+        </script>
+    }
+}
+<div class="row">
+    <div class="col-lg-12">
+        @if (Model.PaymentMethodModel.IsOnlineOrder)
+        {
+            <p>
+                Review the details of your order below.<br />
+                If you are satisfied with the order, select Confirm to process your payment.
+            </p>
+        }
+        else
+        {
+            <p>
+                Review the details of your order below.<br />
+                If you are satisfied with the order, download the order form. After closing this
+                screen, it will not be possible to retrieve this information.<br />
+                Print the form, sign and date it, and mail it to NAATI.
+            </p>
+        }
+    </div>
+</div>
+@{ Html.RenderPartial("_OrderTotalViewPartial", Model.OrderTotalModel); }
+@{ Html.RenderPartial("_DeliveryDetailsViewPartial", Model.DeliveryDetailsModel); }
+@if (Model.PaymentMethodModel.IsOnlineOrder)
+{
+    Html.RenderPartial("_PaymentDetailsViewPartial", Model.PaymentDetailsModel);
+    <div id="declarationDiv" style="display: none;">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Declaration</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>You have acknowledged your understanding and agreement to the following:Declaration</p>
+            </div>
+        </div>
+        @{ Html.RenderPartial("_DeclarationPartial"); }
+    </div>
+    Html.RenderPartial("_ProcessingPaymentMessagePartial");
+}
+else
+{
+    Html.RenderPartial("_PaymentMethodViewPartial", Model.PaymentMethodModel);
+}

@@ -1,0 +1,119 @@
+﻿<div class="panel panel-default panel-screen test-material-details">
+    <div class="panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title" data-bind="reshtml: mode() == 'edit' ? 'Naati.Resources.TestMaterial.resources.EditRequest' : 'Naati.Resources.TestMaterial.resources.CreateRequest'"></h2>
+        </div>
+    </div>
+    <div class="panel-body">
+        <form>
+            <div class="form-group col-md-2" data-bind="validationElement: jobMaterial.LanguageId">
+                <label data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Language'"></label>
+                <!-- ko component: { name: 'entity-select', params: languageOptions } -->
+                <!-- /ko -->
+            </div>
+            <div class="form-group col-md-2" data-bind="validationElement: jobMaterial.AccreditationCategoryId">
+                <label data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Category'"></label>
+                <!-- ko component: { name: 'entity-select', params: categoryOptions } -->
+                <!-- /ko -->
+            </div>
+            <div class="form-group col-md-2" data-bind="validationElement: jobMaterial.AccreditationLevelId">
+                <label data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Level'"></label>
+                <!-- ko component: { name: 'entity-select', params: levelOptions } -->
+                <!-- /ko -->
+            </div>
+            <div class="form-group col-md-2" data-bind="validationElement: direction">
+                <label data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Direction'"></label>
+                <!-- ko component: { name: 'select-component', params: directionOptions } -->
+                <!-- /ko -->
+            </div>
+            <div class="form-group col-md-2" data-bind="validationElement: job.DueDate">
+                <label data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.DateDue'"></label>
+                <!-- ko component: {
+                name: 'date-input',
+                params: {
+                        value: job.DueDate,
+                        resattr: {
+                            placeholder: 'Naati.Resources.TestMaterial.resources.DateDue'
+                        }
+                    }
+                } -->
+                <!-- /ko -->
+                <span class="help-block" data-bind="validationMessage: job.DueDate"></span>
+            </div>
+            <div class="form-group" data-bind="css: { 'col-md-1': mode() == 'edit', 'col-md-2': mode() == 'new' }, validationElement: job.JobCost">
+                <label data-bind="reshtml: 'Naati.Resources.Test.resources.Cost'"></label>
+                <input data-bind="attr: { value: formatCurrency(cost()) }" class="form-control" disabled="disabled" type="text" />
+            </div>
+            <div class="form-group col-md-1" data-bind="visible: mode() == 'edit', css: { 'col-md-1': mode() == 'edit', 'col-md-2': mode() == 'new' }, validationElement: approved">
+                <label data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Approved'"></label>
+                <div class="form-control">
+                    <label class="i-switch m-t-xs m-r">
+                        <input type="checkbox" data-bind="checked: approved">
+                        <i></i>
+                    </label>
+                </div>
+            </div>
+        </form>
+        <div class="clearfix"></div>
+        <!-- ko component: { name: 'tab-component', params: tabOptions } -->
+        <!-- /ko -->
+    </div>
+    <div class="panel-footer">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="enable: canSave, click: save">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <a href="#test-materials" class="btn btn-default"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div data-bind="compose: { model: examinerModalInstance, view: 'views/test-material/request/edit/examiner-modal' }"></div>
+<script id="examiners-tab-template" type="text/html">
+    <div class="alert alert-danger" data-bind="visible: $root.primaryContactRequired">
+        <span data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.PrimaryContactRequired'"></span>
+    </div>
+    <table data-bind="datatable: dataTable" class="table table-striped b-t b-b" id="examinerTable" style="width: 100%;">
+        <thead>
+        <tr>
+            <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Examiner'"></th>
+            <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.NAATINumber'"></th>
+            <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Sent'"></th>
+            <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Received'"></th>
+            <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.ToPayroll'"></th>
+            <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Cost'"></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody data-bind="foreach: { data: examiners, as: 'e' }">
+        <tr>
+            <td data-bind="text: $root.getPersonName(e)"></td>
+            <td data-bind="text: e.NAATINumber"></td>
+            <td data-bind="text: $root.dateService.toUIDate(e.ExaminerSentDate())"></td>
+            <td data-bind="text: $root.dateService.toUIDate(e.ExaminerReceivedDate())"></td>
+            <td data-bind="text: $root.dateService.toUIDate(e.ExaminerToPayrollDate())"></td>
+            <td data-bind="text: $root.formatCurrency(e.ExaminerCost())"></td>
+            <td class="text-center" style="width: 80px;">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default btn-xs" data-bind="click: function() { $root.edit(e); }, tooltip: { container: '#examinerTable' }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a href="#" class="btn btn-danger btn-xs" data-bind="click: function() { $root.remove(e); }, tooltip: { container: '#examinerTable' }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+<script id="history-tab-template" type="text/html">
+    <!--ko foreach: logs-->
+    <h5>
+        Changed at <b data-bind="text: moment(DateTime).format('l')"></b> by <b data-bind="text: Username"></b>
+    </h5>
+    <div data-bind="html: $root.formatLog(ChangeDetail)"></div>
+    <hr />
+    <!--/ko-->
+</script>

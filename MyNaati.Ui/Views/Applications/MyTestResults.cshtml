@@ -1,0 +1,116 @@
+﻿@model MyNaati.Ui.ViewModels.CredentialApplication.MyTestResultViewModelList
+
+@{
+                /**/
+
+                ViewBag.Title = "My Test Results";
+                Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+                ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+new Tuple<string, string>("My Test Results", null)
+};
+}
+
+
+@helper RenderTests()
+{
+                    /**/
+
+                    if (Model.MyTestResultList.Count > 0)
+                    {
+                        foreach (var item in Model.MyTestResultList)
+                        {
+                            var resultType = "info";
+
+                            if (item.OverallResult == "Passed")
+                            {
+                                resultType = "primary";
+                            }
+                            else if (item.OverallResult == "Test Invalidated" || item.OverallResult == "Failed")
+                            {
+                                resultType = "danger";
+                            }
+
+                            <div class="test-item @resultType">
+                                <div class="col col-lg-6 detail">
+                                    <span>@item.CredentialTypeDisplayName</span>
+                                    <span>-</span>
+                                    <span>@item.SkillDisplayName</span>
+
+                                    @if (item.Supplementary)
+                                    {
+                                        <span class="manageTesttooltip info-glyph badge" data-original-title="Supplementary test">S</span>
+                                    }
+                                    <br />
+
+                                    <span>Attendance ID:</span>
+                                    <span>@item.TestSittingId</span>
+                                </div>
+                                <div class="col col-lg-2 date">
+                                    <span>@item.TestDate.ToString("dd/MM/yyyy")</span>
+                                    <span>@item.TestDate.ToString("h:mm tt")</span>
+                                </div>
+                                <div class="col col-lg-3 location">
+                                    <span>@item.TestLocationName, @item.State</span>
+                                </div>
+                                <div class="col col-lg-1 result">
+                                    <span>@item.OverallResult</span>
+                                </div>
+                            </div>
+                            if (item.EligibleForAPaidTestReview)
+                            {
+                                <div class="test-item @resultType">
+                                    <div class="col col-lg-6">
+                                        <a href="@Url.Action("ApplyForAPaidReview", "Applications", new {item.TestSittingId})" class="btn btn-primary">Apply for a Paid Test Review</a>
+                                    </div>
+                                    <div class="col col-lg-2">&nbsp;</div>
+                                    <div class="col col-lg-3">&nbsp;</div>
+                                    <div class="col col-lg-1 result">&nbsp;</div>
+                                </div>
+                            }
+                            if (item.EligibleForASupplementaryTest)
+                            {
+                                <div class="test-item @resultType">
+                                    <div class="col col-lg-6">
+                                        <a href="@Url.Action("ApplyForASupplementaryTest", "Applications", new {item.TestSittingId})" class="btn btn-primary">Apply for a Supplementary Test</a>
+                                    </div>
+                                    <div class="col col-lg-2">&nbsp;</div>
+                                    <div class="col col-lg-3">&nbsp;</div>
+                                    <div class="col col-lg-1 result">&nbsp;</div>
+                                </div>
+                            }
+                            <div class="m-t-sm"></div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4>No test results</h4>
+                            </div>
+                        </div>
+                    }
+}
+
+<div class="col-lg-12">
+	<div class="row">
+		<div class="col-lg-12">
+			<h2 class="text-primary">@ViewBag.Title</h2>
+		</div>
+	</div>
+	@RenderTests()
+</div>
+
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('.manageTesttooltip').tooltip();
+
+        });
+
+    </script>
+}

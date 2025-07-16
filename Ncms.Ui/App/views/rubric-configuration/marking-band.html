@@ -1,0 +1,70 @@
+<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black">
+                    <span data-bind="html: windowTitle"></span>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.RubricConfiguration.resources.BandID'"></label>
+                            <div class="col-xs-9 col-sm-4">
+                                <p class="form-control-static" data-bind="html: rubricModel.BandId"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.RubricConfiguration.resources.CriterionName'"></label>
+                            <div class="col-xs-9 col-sm-4">
+                                <p class="form-control-static" data-bind="html: rubricModel.CriterionName"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.RubricConfiguration.resources.CriterionLabel'"></label>
+                            <div class="col-xs-9 col-sm-4">
+                                <p class="form-control-static" data-bind="html: rubricModel.CriterionLabel"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.RubricConfiguration.resources.BandLevel'"></label>
+                            <div class="col-xs-9 col-sm-4">
+                                <p class="form-control-static" data-bind="html: rubricModel.Level"></p>
+                            </div>
+                        </div>
+                        <div class="form-group" data-bind="validationElement: rubricModel.Label, validationOptions: { insertMessages: false }">
+                            <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.RubricConfiguration.resources.BandLabel'"></label>
+                            <div class="col-xs-9 col-sm-4">
+                                <input type="text" class="form-control" data-bind="value: rubricModel.Label" />
+                                <span class="help-block" data-bind="validationMessage: rubricModel.Label"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.RubricConfiguration.resources.BandDescription'"></label>
+                            <div class="col-xs-11">
+                                <div data-bind="wysiwyg: wysiwygOptions"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button type="button" class="btn btn-success btn-default" data-bind="enableWithPermission: 'TestSpecification.Update', enable: canSave, click: save">
+                <i class="fa fa-check"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <button class="btn btn-danger" data-bind="click: tryClose">
+                <i class="fa fa-ban"></i>
+                <span data-bind="restext: 'Naati.Resources.Shared.resources.Cancel'"></span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

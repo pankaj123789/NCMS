@@ -1,0 +1,89 @@
+﻿<div class="col">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">
+            <span data-bind="html: title"></span>
+
+        </h1>
+    </div>
+
+    <div class="wrapper-md">
+        <div class="panel hbox hbox-auto-xs no-border">
+            <div class="col wrapper">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div data-bind="component: { name: 'file-upload', params: fileUpload }"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="row" data-bind="visible: displayRequest">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <!-- ko component: {
+                                name: 'date-input',
+                                params: {
+                                        value: date,
+                                        attr: {
+                                            placeholder: 'Archive date'
+                                        }
+                                    }
+                                } -->
+                            <!-- /ko -->
+                            <span>Archive date</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="i-switch m-t-xs m-r bg-info">
+                                <input type="checkbox" checked="" data-bind="checked: updateRecordsOnException">
+
+                                <i></i>
+                            </label>
+                            <span>Update records even if some have errors</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!-- ko foreach: { data: additionalButtons, as: 'button' } -->
+                <button type="button" class="btn btn-success" data-bind="css: button.class, click: button.click, enable: button.enabled"><span data-bind="css: button.icon"></span> <span data-bind="reshtml: button.resourceName"></span></button>
+                <!-- /ko -->
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel hbox hbox-auto-xs no-border m-b-n-md" data-bind="visible: displayResult">
+                <div class="col wrapper">
+                    <div>
+                        <div class="col-md-12 full-width" data-bind="css: success() ? additionalButtons[0].class : errorButtonClass">
+                            <span data-bind="css: successIcon()"></span>
+                            <label data-bind="text: success() ? 'Archive Was Successful' : 'Archive Was Not Successful'"></label>
+                            <p data-bind="text: errorMessage, visible: errorMessage() != null"></p>
+                            <p data-bind="text: 'Response: ' + errorResponse(), visible: errorResponse() != null"></p>
+                            <p data-bind="text: updatedNaatiNumbers() + ' Naati Numbers Updated'"></p>
+                        </div>
+                        <div data-bind="visible: displayGeneralError() || displayNaatiNumberError()">
+                            <p data-bind="text: 'Inner Exception: ' + innerException(), visible: innerException() != null"></p>
+                            <p data-bind="text: 'Stack Trace: ' + stackTrace(), visible: stackTrace() != null"></p>
+                        </div>
+                    </div>
+                    <div class="row" data-bind="visible: displayNaatiNumberError">
+                        <div class="form-group">
+                            <div class="col-md-12 m-b-n-md m-t">
+                                <div data-bind="component: { name: 'table-component', params: tableComponent }">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="archive-header-template" type="text/html">
+    <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.NAATINumber'"></th>
+    <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Error'"></th>
+</script>
+<script id="archive-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: naatiNumber"></td>
+        <td data-bind="text: errorMessage"></td>
+    </tr>
+</script>

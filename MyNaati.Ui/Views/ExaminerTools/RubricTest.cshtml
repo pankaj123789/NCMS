@@ -1,0 +1,335 @@
+﻿@using MyNaati.Ui.ViewModels.ExaminerTools
+@model MyNaati.Ui.ViewModels.ExaminerTools.SubmitTestModel
+@{
+    Layout = "~/Views/ExaminerTools/_SubmitTestResults.cshtml";
+}
+@functions
+{
+    const int MaxColumnsCount = 12;
+
+    List<int> GetColumnsSize(int length)
+    {
+        if (length > MaxColumnsCount)
+        {
+            throw new Exception("Max assessments length exceeded.");
+        }
+
+        var result = new List<int>();
+
+        if (MaxColumnsCount % length == 0)
+        {
+            var defaultSize = MaxColumnsCount / length;
+            for (int i = 0; i < length; i++)
+            {
+                result.Add(defaultSize);
+            }
+        }
+
+        if (length == 5)
+        {
+            result = new List<int> { 3, 3, 2, 2, 2 };
+        }
+
+        if (length == 7)
+        {
+            result = new List<int> { 2, 2, 2, 2, 2, 1, 1 };
+        }
+
+        if (length == 8)
+        {
+            result = new List<int> { 2, 2, 2, 2, 1, 1, 1, 1 };
+        }
+
+        if (length == 9)
+        {
+            result = new List<int> { 2, 2, 2, 1, 1, 1, 1, 1, 1 };
+        }
+
+        if (length == 10)
+        {
+            result = new List<int> { 2, 2, 1, 1, 1, 1, 1, 1, 1, 1 };
+        }
+
+        if (length == 11)
+        {
+            result = new List<int> { 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        }
+
+        return result;
+    }
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var preventSaving = false;
+        function save() {
+            if (preventSaving) {
+                return;
+            }
+
+            var $form = $('#submitTestResults');
+            $.post('@Url.Action("SaveTest")', $form.serialize());
+        }
+
+        $(document).ready(function () {
+            $('.component-attempt').change(function () {
+                var $this = $(this);
+                var attempted = $this.attr('value') === 'true' && $this.prop('checked');
+                var $component = $this.closest('.component');
+                var $competence = $component.find('.component-competence');
+                if (attempted) {
+                    $competence.removeClass('hide');
+                }
+                else {
+                    $competence.addClass('hide');
+                }
+
+                save();
+            });
+
+            $('[data-assessment]').click(function () {
+                var $this = $(this);
+                var $component = $this.closest('.component');
+                var assessmentId = $this.attr('data-assessment');
+                $component.find('[data-assessment]').removeClass('active');
+                $this.addClass('active');
+                $component.find('[data-bands]').addClass('hide');
+                $component.find('[data-bands=' + assessmentId + ']').removeClass('hide');
+            });
+
+            $('[data-bands] [name$="Comment"]').change(function () {
+                var $this = $(this);
+                var $component = $this.closest('.component');
+                var $bands = $this.closest('[data-bands]');
+                var assessmentId = $bands.attr('data-bands');
+                var $assessment = $component.find('[data-assessment=' + assessmentId + ']');
+                var $commentIcon = $assessment.find('.fa-comment');
+
+                if ($this.val() && $this.val().length >= 10) {
+                    $commentIcon.removeClass('hide');
+                }
+                else {
+                    $commentIcon.addClass('hide');
+                }
+
+                save();
+            });
+
+            $('[data-band]').click(function () {
+                var $this = $(this);
+                var $component = $this.closest('.component');
+                var $bands = $this.closest('[data-bands]');
+                var assessmentId = $bands.attr('data-bands');
+                var $assessment = $component.find('[data-assessment=' + assessmentId + ']');
+                var $bandIcon = $assessment.find('.label');
+                var $bandItems = $bands.find('[data-band]');
+
+                $bandItems.removeClass('bg-warning').removeClass('active');
+                $this.addClass('bg-warning').addClass('active');
+
+                //var bandIndex = $bandItems.index($this);
+                var selectedBand = $this.attr('data-band');
+                var selectedLevel = $this.attr('data-level');
+                $bandIcon.html(selectedLevel);
+                $bandIcon.removeClass('hide');
+                $bands.find('[name$="SelectedBand"]').val(selectedBand);
+
+                save();
+            });
+
+            preventSaving = true;
+            $('.component-attempt:checked').trigger('change');
+            $('.assessment-selectedband').trigger('click');
+            $('.assessment-comment:not(:empty)').trigger('change');
+            preventSaving = false;
+        });
+    </script>
+}
+@helper RenderRubric(TestComponentModel component, int index)
+{
+    <div class="component-competence padder-v hide">
+        @{
+            var assessmentsCount = component.Competencies.SelectMany(c => c.Assessments).Count();
+            if (assessmentsCount > 0)
+            {
+                var columnsCss = GetColumnsSize(assessmentsCount);
+                <div class="row bg-success">
+                    @{
+                        var assessementIndex = 0;
+                    }
+                    @for (int i = 0; i < component.Competencies.Count; i++)
+                    {
+                        var competence = component.Competencies[i];
+                        var assessmentCss = 0;
+
+                        foreach (var assessment in competence.Assessments)
+                        {
+                            assessmentCss += columnsCss[assessementIndex];
+                            assessementIndex++;
+                        }
+
+                        <div class="col-sm-@assessmentCss b-white @(i + 1 != component.Competencies.Count ? "b-r" : "")">
+                            <div class="wrapper font-thin h5 m-b-none m-t-none no-padder">
+                                <div class="padder-v">
+                                    @competence.Name
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="row bg-warning hbox">
+                    @{
+                        assessementIndex = 0;
+                    }
+                    @for (int i = 0; i < component.Competencies.Count; i++)
+                    {
+                        var competence = component.Competencies[i];
+                        for (int j = 0; j < competence.Assessments.Count; j++)
+                        {
+                            var assessment = competence.Assessments[j];
+                            <div class="col col-sm-@columnsCss[assessementIndex] cursor-pointer b-white @(assessementIndex + 1 != columnsCss.Count ? "b-r" : "")" data-assessment="@assessment.Id">
+                                <div class="wrapper font-thin m-b-none m-t-none no-padder">
+                                    <div class="padder-v">
+                                        @assessment.Name
+                                        <span data-toggle="tooltip" title="Comment added" class="fa fa-comment hide"></span>
+                                        <span data-toggle="tooltip" class="label badge text-white bg-dark hide" title="Selected Band"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            assessementIndex++;
+                        }
+                    }
+                </div>
+                <div class="row b-l b-r b-b b-warning" data-bands>
+                    <div class="col-sm-12 text-center wrapper h5">
+                        Select a Criterion to show the bands.
+                    </div>
+                </div>
+                        for (int i = 0; i < component.Competencies.Count; i++)
+                        {
+                            var competence = component.Competencies[i];
+                            <input type="hidden" name="Components[@index].Competencies[@i].Id" value="@competence.Id" />
+                            for (int j = 0; j < competence.Assessments.Count; j++)
+                            {
+                                var assessment = competence.Assessments[j];
+                                <input type="hidden" name="Components[@index].Competencies[@i].Assessments[@j].Id" value="@assessment.Id" />
+                                var k = 0;
+                                <div class="hide" data-bands="@assessment.Id">
+                                    <div class="row b-l b-r b-warning cursor-pointer">
+                                        @foreach (var band in assessment.Bands)
+                                        {
+                                            <div class="col-sm-12 b-b b-warning padder-v @(assessment.SelectedBand == band.Id ? "assessment-selectedband" : "")" data-band="@band.Id" data-level="@band.Level">
+                                                <div class="text-base wrapper-xs label no-text-shadow text-dark pos-rlt m-r b b-1x b-warning">
+                                                    <i class="arrow right arrow-warning"></i>
+                                                    <span>@Html.Raw(band.Label)</span>
+                                                </div>
+                                                <br />
+                                                <br />
+                                                @Html.Raw(band.Description)
+                                            </div>
+                                            k++;
+                                        }
+                                    </div>
+                                    <div class="row b-l b-r b-warning">
+                                        <div class="col-sm-12 b-b b-warning padder-v">
+                                            <div class="form-group">
+                                                <div><span class="control-label">Comment</span><span> (Must be between @component.MinExaminerCommentLength characters and  @component.MaxCommentLength characters)</span></div>
+                                                <textarea rows="5" class="form-control assessment-comment" name="Components[@index].Competencies[@i].Assessments[@j].Comment">@assessment.Comment</textarea>
+                                                <input type="hidden" name="Components[@index].Competencies[@i].Assessments[@j].SelectedBand" value="@assessment.SelectedBand" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            }
+                        }
+        }
+    </div>
+}
+@section TabHeader {
+    @if (Model.Components.Any())
+    {
+        for (var i = 0; i < Model.Components.Count; i++)
+        {
+            var component = Model.Components[i];
+            if (!component.ReadOnly)
+            {
+                bool active;
+                if (Model.ReturnElement != null)
+                {
+                    active = Model.ReturnElement == component.Id.ToString();
+                }
+                else
+                {
+                    active = i == 0;
+                }
+
+                <li role="presentation" class="@(active ? "active" : "")"><a href="#@(component.Id)" aria-controls="@(component.Id)" role="tab" data-toggle="tab">@component.TypeLabel @component.Label</a></li>
+
+            }
+        }
+    }
+    
+}
+@section TabContent {
+    @if (Model.Components.Any())
+    {
+        var componentCss = "col-sm-12";
+        for (var i = 0; i < Model.Components.Count; i++)
+        {
+            var component = Model.Components[i];
+            if (!component.ReadOnly)
+            {
+                bool active;
+                if (Model.ReturnElement != null)
+                {
+                    active = Model.ReturnElement == component.Id.ToString();
+                }
+                else
+                {
+                    active = i == 0;
+                }
+
+                <div id="@(component.Id)" class="tab-pane @(active ? "active" : "")" role="tabpanel">
+                    <div class="row">
+                        <div data-component-container="true">
+                            <div class="component col-sm-12">
+                                <div class="row">
+                                    <div class="@componentCss">
+                                        <div class="form-group">
+                                            <label class="control-label">@component.Name</label>
+                                            <input type="hidden" name="Components[@i].ComponentNumber" value="@component.ComponentNumber" />
+                                            <input type="hidden" name="Components[@i].Id" value="@component.Id" />
+                                            <input type="hidden" name="Components[@i].Name" value="@component.Name" />
+                                            <input type="hidden" name="Components[@i].PassMark" value="@component.PassMark" />
+                                            <input type="hidden" name="Components[@i].TotalMarks" value="@component.TotalMarks" />
+                                            <div class="form-control-static">
+                                                <label class="radio-inline">
+                                                    <input type="radio" class="component-attempt" name="Components[@i].WasAttempted" value="true" checked="@component.WasAttempted"> Was Attempted
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" class="component-attempt" name="Components[@i].WasAttempted" value="false" checked="@(!component.WasAttempted)"> Not Attempted
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @RenderRubric(component, i)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <input type="hidden" name="Components[@i].ComponentNumber" value="@component.ComponentNumber" />
+                            <input type="hidden" name="Components[@i].Id" value="@component.Id" />
+                            <input type="hidden" name="Components[@i].Name" value="@component.Name" />
+                            <input type="hidden" name="Components[@i].PassMark" value="@component.PassMark" />
+                            <input type="hidden" name="Components[@i].TotalMarks" value="@component.TotalMarks" />
+                            <input type="hidden" class="form-control" step="any" min="0" max="@component.TotalMarks" name="Components[@i].Mark" value="@component.Mark" />
+            }
+        }
+    }
+}

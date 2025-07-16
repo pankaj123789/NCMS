@@ -1,0 +1,57 @@
+﻿<div class="col">
+    <div class="vbox">
+        <div class="bg-light lter b-b wrapper-md">
+            <h1 class="m-n font-thin h3">
+                <span data-bind="html: title"></span>
+                <button type="button" class="btn btn-success" data-bind="click: add, enableWithPermission:'User.Create'"><span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-bind="reshtml: 'Naati.Resources.Shared.resources.NewUser'"></span></button>
+                <div class="form-group pull-right">
+                    <div class="input-group">
+                        <input type="number" data-bind="event: { keypress: checkEnterPressed }, resattr: { placeholder: 'Naati.Resources.Shared.resources.IDSearch' }, value: idSearchValue, valueUpdate: 'input'" class="form-control bg-white input-sm no-border rounded padder" autocomplete="off">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-sm bg-white rounded" data-bind="click: idSearchClick"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </h1>
+        </div>
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner">
+                    <div class="wrapper-md">
+                        <div data-bind="component: { name: 'table-component', params: tableDefinition }"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script id="users-header-template" type="text/html">
+        <th style="width: 15%" data-bind="reshtml: 'Naati.Resources.Shared.resources.FullName'"></th>
+        <th style="width: 17%" data-bind="reshtml: 'Naati.Resources.User.resources.UserName'"></th>
+        <th style="width: 17%" data-bind="reshtml: 'Naati.Resources.Shared.resources.Email'"></th>
+        <th style="width: 3%" data-bind="reshtml: 'Naati.Resources.Shared.resources.Office'"></th>
+        <th style="width: 5%" data-bind="reshtml: 'Naati.Resources.Shared.resources.UserID'" class="w-xs"></th>
+        <th style="width: 32%" data-bind="reshtml: 'Naati.Resources.Shared.resources.Roles'" class="w-xs"></th>
+        <th style="width: 10%" class="w-xs">&nbsp;</th>
+        <th style="width: 1%" class="hide">&nbsp;</th>
+    </script>
+    <script id="users-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: FullName"></td>
+            <td data-bind="text: UserName"></td>
+            <td data-bind="text: Email"></td>
+            <td data-bind="text: Office"></td>
+            <td data-bind="text: Id"></td>
+            <td data-bind="text:Roles"></td>
+            <td class="w-xs text-right">                
+                <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover', container: 'body', title: function () { return $root.activeMessage($data); } }">
+                    <i class="fa" data-bind="css: { 'fa-check text-success': Active, 'fa-times text-danger': !Active }"></i>
+                </a>
+                <a href="#" class="btn btn-default btn-xs" data-bind="click: $root.edit">
+                    <i class="fa fa-pencil-alt"></i>
+                </a>
+            </td>
+            <td data-bind="text: Active" class="hide"></td>
+        </tr>
+    </script>
+   <!--ko compose: userAddOptions--><!--/ko-->
+</div>

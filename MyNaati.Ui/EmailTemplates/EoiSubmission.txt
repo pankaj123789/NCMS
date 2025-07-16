@@ -1,0 +1,14 @@
+<p>Dear <<GivenName>>,</p>
+
+<p>Thank you for submitting an expression of interest (EOI) to sit a NAATI accreditation test. We have received your EOI and your information has been registered with NAATI.</p>
+
+<p>What's Next?</p>
+
+<p>We will continue to accept expressions of interest until we have sufficient numbers for your chosen language(s). At that time, we will contact you to advise you of a test date. If you decide to sit the test on the scheduled date, you will be required to complete an application form, provide the required supporting documentation and pay the associated fee for your test.</p>
+
+<p>You can read more about these requirements in the application form here  <a href="https://www.naati.com.au/media/1374/application_accreditation_by_testing.pdf">https://www.naati.com.au/media/1374/application_accreditation_by_testing.pdf</a></p>
+
+<p>Should you have any questions, please contact <a href="mailto:info@naati.com.au">info@naati.com.au</a></p>
+
+<p>Kind regards,</p>
+<p>NAATI</p>

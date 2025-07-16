@@ -1,0 +1,253 @@
+﻿@model MyNaati.Ui.ViewModels.ExaminerTools.SubmitTestModel
+@{
+    Layout = "~/Views/ExaminerTools/_SubmitTestResults.cshtml";
+
+    var test = (from t in Model.TestList
+                where t.TestResultID == Model.TestResultID
+                select t).FirstOrDefault();
+
+    var totalMark = 0;
+
+    var activeMarks = string.Empty;
+    var activeCategories = string.Empty;
+    var activeComments = string.Empty;
+    if (Model.ReturnElement != null)
+    {
+        switch (Model.ReturnElement)
+        {
+            case "marks":
+                activeMarks = "active";
+                break;
+            case "categories":
+                activeCategories = "active";
+                break;
+            case "comments":
+                activeComments = "active";
+                break;
+        }
+    }
+    else
+    {
+        activeMarks = "active";
+    }
+
+
+
+    var categories = new List<Category>
+    {
+        new Category
+        {
+            Id = "Accuracy",
+            Name = "1. Accuracy",
+            IsInterpreter = true,
+            Options = new List<CategoryOption>
+            {
+                new CategoryOption("Omissions", "A"),
+                new CategoryOption("Distortions", "B"),
+                new CategoryOption("Unjustified insertions", "C"),
+                new CategoryOption("Excessive requests for repeats", "D"),
+            }
+        },
+        new Category
+        {
+            Id = "Accuracy",
+            Name = "1. Accuracy",
+            IsInterpreter = false,
+            Options = new List<CategoryOption>
+            {
+                new CategoryOption("Omissions", "A"),
+                new CategoryOption("Distortions", "B"),
+                new CategoryOption("Unjustified insertions", "C"),
+                new CategoryOption("Excessive requests for repeats", "D"),
+            }
+        },
+        new Category
+        {
+            Id = "QualityOfLanguage",
+            Name = "2. Quality of Language",
+            IsInterpreter = true,
+            Options = new List<CategoryOption>
+            {
+                new CategoryOption("Inappropriate choice of register in English", "E"),
+                new CategoryOption("Unidiomatic usage in English", "F"),
+                new CategoryOption("Incorrect sentence structures in English", "G"),
+                new CategoryOption("Grammatical errors in English", "H"),
+                new CategoryOption("Inappropriate choice of register in LOTE", "J"),
+                new CategoryOption("Unidiomatic usage in LOTE", "K"),
+                new CategoryOption("Incorrect sentence structures in LOTE", "L"),
+                new CategoryOption("Grammatical errors in LOTE", "M"),
+            }
+        },
+        new Category
+        {
+            Id = "QualityOfLanguage",
+            Name = "2. Quality of Language",
+            IsInterpreter = false,
+            Options = new List<CategoryOption>
+            {
+                new CategoryOption("Inappropriate choice of register in English", "E"),
+                new CategoryOption("Unidiomatic usage in English", "F"),
+                new CategoryOption("Incorrect sentence structures in English", "G"),
+                new CategoryOption("Grammatical errors in English", "H"),
+                new CategoryOption("Inappropriate choice of register in LOTE", "J"),
+                new CategoryOption("Unidiomatic usage in LOTE", "K"),
+                new CategoryOption("Incorrect sentence structures in LOTE", "L"),
+                new CategoryOption("Grammatical errors in LOTE", "M"),
+            }
+        },
+        new Category
+        {
+            Id = "QualityOfDelivery",
+            Name = "3. Quality of Delivery",
+            IsInterpreter = true,
+            Options = new List<CategoryOption>
+            {
+                new CategoryOption("Excessive pauses", "O"),
+                new CategoryOption("Excessive hesitations", "P"),
+                new CategoryOption("Excessive self-corrections", "Q"),
+                new CategoryOption("Wrong direction in LOTE", "R"),
+                new CategoryOption("Wrong direction in English", "S"),
+                new CategoryOption("Exceeding the time limit", "T"),
+                new CategoryOption("No attempt made at interpretation", "U"),
+            }
+        },
+        new Category
+        {
+            Id = "QualityOfDelivery",
+            Name = "3. Quality of Delivery",
+            IsInterpreter = false,
+            Options = new List<CategoryOption>
+            {
+                new CategoryOption("Excessive pauses", "O"),
+                new CategoryOption("Excessive hesitations", "P"),
+                new CategoryOption("Excessive self-corrections", "Q"),
+                new CategoryOption("Wrong direction in LOTE", "R"),
+                new CategoryOption("Wrong direction in English", "S"),
+                new CategoryOption("Exceeding the time limit", "T"),
+                new CategoryOption("No attempt to render", "U"),
+            }
+        },
+    };
+            }
+            @functions
+{
+    public class Category
+            {
+                public string Id { get; set; }
+                public string Name { get; set; }
+                public bool? IsInterpreter { get; set; }
+                public List<CategoryOption> Options { get; set; }
+            }
+
+            public class CategoryOption
+            {
+                public CategoryOption(string name, string value)
+                {
+                    Name = name;
+                    Value = value;
+                }
+
+                public string Name { get; set; }
+                public string Value { get; set; }
+            }
+        }
+        @helper CategoryHelper(Category category)
+        {
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div id="@(category.Id)Heading" class="panel-heading" role="button" data-toggle="collapse" data-target="#@category.Id" aria-expanded="true" aria-controls="@category.Id">
+                    <h4 class="panel-title">@category.Name</h4>
+                </div>
+                <div class="panel-collapse collapse in" role="tabpanel" id="@category.Id" aria-labelledby="@(category.Id)Heading" aria-expanded="true">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            @foreach (var option in category.Options)
+        {
+            @CategoryOptionHelper(option)
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    @helper CategoryOptionHelper(CategoryOption option)
+    {
+        var isChecked = Model.ReasonsForPoorPerformance != null && Model.ReasonsForPoorPerformance.Any(r => r == option.Value);
+
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="ReasonsForPoorPerformance" value="@option.Value" @(isChecked ? "checked=\" checked\"" : string.Empty ) />
+            @option.Value. @option.Name
+        </label>
+    </div>
+}
+@section TabHeader {
+    <li role="presentation" class=@activeMarks><a href="#marks" aria-controls="marks" role="tab" data-toggle="tab">Marks</a></li>
+    <li role="presentation" class=@activeCategories><a href="#categories" aria-controls="categories" role="tab" data-toggle="tab">Categories</a></li>
+    <li role="presentation" class=@activeComments><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Comments</a></li>
+}
+@section TabContent {
+    @if (Model.Components.Any())
+    {
+        <div id="marks" class="tab-pane @activeMarks" role="tabpanel">
+            <div class="row">
+                <div data-component-container="true">
+                    @for (var i = 0; i < Model.Components.Count; i++)
+                    {
+                        var component = Model.Components[i];
+                        totalMark += component.TotalMarks;
+                        if (!component.ReadOnly)
+                        {
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label">@component.Name</label>
+                                    <input type="hidden" name="Components[@i].ComponentNumber" value="@component.ComponentNumber" />
+                                    <input type="hidden" name="Components[@i].Id" value="@component.Id" />
+                                    <input type="hidden" name="Components[@i].Name" value="@component.Name" />
+                                    <input type="hidden" name="Components[@i].PassMark" value="@component.PassMark" />
+                                    <input type="hidden" name="Components[@i].TotalMarks" value="@component.TotalMarks" />
+                                    <input class="form-control" type="number" step="any" min="0" max="@component.TotalMarks" name="Components[@i].Mark" value="@component.Mark" />
+                                    <p class="form-control-static">(@component.PassMark/@component.TotalMarks)</p>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <input type="hidden" name="Components[@i].ComponentNumber" value="@component.ComponentNumber" />
+                            <input type="hidden" name="Components[@i].Id" value="@component.Id" />
+                                    <input type="hidden" name="Components[@i].Name" value="@component.Name" />
+                                    <input type="hidden" name="Components[@i].PassMark" value="@component.PassMark" />
+                                                        <input type="hidden" name="Components[@i].TotalMarks" value="@component.TotalMarks" />
+                                                        <input type="hidden" class="form-control" step="any" min="0" max="@component.TotalMarks" name="Components[@i].Mark" value="@component.Mark" />
+                        }
+                    }
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label">Overall</label>
+                        <input id="overall" class="form-control" type="number" step="any" disabled="disabled" value="@Model.Components.Sum(x => x.Mark.GetValueOrDefault())" />
+                        <p class="form-control-static">(@Model.OverallPassMark/@totalMark)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="categories" class="tab-pane @activeCategories" role="tabpanel">
+            @foreach (var category in categories.Where(x => test.Category == "Interpreter" ? x.IsInterpreter.GetValueOrDefault(true) : !x.IsInterpreter.GetValueOrDefault()))
+        {
+                @CategoryHelper(category)
+            }
+        </div>
+        <div id="comments" class="tab-pane @activeComments" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <textarea name="Comments" class="form-control" rows="5" style="resize: none;">@Model.Comments</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

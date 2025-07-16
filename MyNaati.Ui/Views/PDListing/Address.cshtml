@@ -1,0 +1,43 @@
+﻿@using MyNaati.Ui.ViewModels.PDListing
+@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+@{
+    ViewBag.Subtitle = "Address";
+    Layout = "~/Views/Shared/MasterPages/_PDListingWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Directory Listing", string.Empty)
+    };
+
+    var preferredAddress = Model.Addresses.First(x => x.IsPreferred);
+    var partialAddress = preferredAddress.Country == "Australia" ? preferredAddress.Suburb : preferredAddress.Country;
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(nextButtons).show();
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>Would you like to show your address in the directory?</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="radio">
+            <label>
+                @Html.RadioButton("AddressStep.ShowFullAddress", WizardModel.AddressType.ShowFullAddress.ToString(), Model.Addresses.Any(x => x.InDirectory), new { id = "rb1" })
+                Yes - show my full address
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                @Html.RadioButton("AddressStep.ShowFullAddress", WizardModel.AddressType.DoNotShowFullAddress.ToString(), new { id = "rb2" })
+                No - show only @partialAddress
+            </label>
+        </div>
+    </div>
+</div>

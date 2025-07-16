@@ -1,0 +1,6 @@
+﻿<!--ko if: hasEnableWithPermission-->
+<select type="text" class="form-control" data-bind="enableWithPermission: enableWithPermission, attr: attr, options: customOptions, optionsText: optionsText, optionsValue: optionsValue, multiselect: multiselect, selectedOptions: selectedOptions, value: value, valueAllowUnset: true, optionsAfterRender: optionsAfterRender"></select>
+<!--/ko-->
+<!--ko ifnot: hasEnableWithPermission-->
+<select type="text" class="form-control" data-bind="disable: disable, attr: attr, options: customOptions, optionsText: optionsText, optionsValue: optionsValue, multiselect: multiselect, selectedOptions: selectedOptions, value: value, valueAllowUnset: true, optionsAfterRender: optionsAfterRender"></select>
+<!--/ko-->

@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.ShowLogon = false;
+    ViewBag.ShowMenu = false;
+    ViewBag.RedirectLogoUrl = System.Configuration.ConfigurationManager.AppSettings["ExternalUrl_NAATI_URL"];
+    ViewBag.Title = "Success";
+}
+   
+
+<h2>@ViewBag.Title</h2>
+<div class="text-center wrapper-xl">
+    <span class="fa fa-check-circle text-primary fa-5x"></span>
+    <div class="text-center wrapper">
+        <h4>
+            Thanks for paying bill @ViewBag.InvoiceNumber<br/>
+            Please record the payment reference number @ViewBag.ReferenceNumber for future correspondence<br />
+        </h4>
+        
+        <br />
+        <h4><a href="@Url.Action("index", "Bills")" class="cursor-pointer">CLICK HERE</a> TO RETURN TO THE BILLS PAGE</h4>
+    </div>
+</div>

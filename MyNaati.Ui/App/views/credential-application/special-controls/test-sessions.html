@@ -1,0 +1,102 @@
+﻿<div>
+    <div class="form-group availability" data-bind="validationElement: testSessions">
+        <!--ko foreach: testSessions-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pull-left">
+                    <div class="m-t-xs m-l-xs m-b-xs">
+                        <div data-bind="css: 'text-base wrapper-xs label no-text-shadow text-dark pos-rlt m-r b b-3x b-' + AvailabilityCss">
+                            <i data-bind="css: 'arrow right arrow-' + AvailabilityCss"></i>
+                            <span data-bind="textDate: TestDateTime"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-left">
+                    <div class="m-t-xs m-l-xs m-b-xs">
+                        <strong data-bind="text: TestTimeStart"></strong>
+                        <span>to</span>
+                        <strong data-bind="text: TestTimeEnd"></strong>
+                        <span>at</span>
+                        <strong data-bind="text: VenueName"></strong>
+                    </div>
+                </div>
+                <div class="pull-left">
+                    <div class="m-t-xs m-l-xs m-b-xs">
+                        <strong>·</strong>
+                        <span data-bind="text: CredentialTypeName"></span>
+                        <strong>·</strong>
+                        <span data-bind="text: SkillName"></span>
+                        <strong>·</strong>
+                        <span data-bind="css: 'label text-base label-' + AvailabilityCss, text: Availability"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--ko if: $index() != $root.testSessions().length - 1-->
+        <div class="m-t-n-sm">
+            <hr />
+        </div>
+        <!--/ko-->
+        <!--/ko-->
+        <!--ko if: !testSessions().length-->
+        <p>No available test sessions in selected location</p>
+        <!--/ko-->
+        <br />
+
+        <!--<div class="m-b-sm">
+            <button type="button" class="btn btn-default" data-bind="click: showOtherLocations, disable:showingOtherLocations">
+                <i class="fa fa-plus"></i>
+                <span>Show interstate sessions</span>
+            </button>
+        </div>-->
+
+
+        <!--ko if: showingOtherLocations() && otherLocationSessions().length-->
+        <div class="m-t-n-sm">
+            <hr />
+        </div>
+        <!--ko foreach: otherLocationSessions-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pull-left">
+                    <div class="m-t-xs m-l-xs m-b-xs">
+                        <div data-bind="css: 'text-base wrapper-xs label no-text-shadow text-dark pos-rlt m-r b b-3x b-' + AvailabilityCss">
+                            <i data-bind="css: 'arrow right arrow-' + AvailabilityCss"></i>
+                            <span data-bind="textDate: TestDateTime"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-left">
+                    <div class="m-t-xs m-l-xs m-b-xs">
+                        <strong data-bind="text: TestTimeStart"></strong>
+                        <span>to</span>
+                        <strong data-bind="text: TestTimeEnd"></strong>
+                        <span>at</span>
+                        <strong data-bind="text: VenueName"></strong>
+                        <strong data-bind="text:' ('+ TestLocation +')'"></strong>
+                    </div>
+                </div>
+                <div class="pull-left">
+                    <div class="m-t-xs m-l-xs m-b-xs">
+                        <strong>·</strong>
+                        <span data-bind="text: CredentialTypeName"></span>
+                        <strong>·</strong>
+                        <span data-bind="text: SkillName"></span>
+                        <strong>·</strong>
+                        <span data-bind="css: 'label text-base label-' + AvailabilityCss, text: Availability"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="m-t-n-sm">
+            <hr />
+        </div>
+
+        <!--/ko-->
+        <!--/ko-->
+        <!--ko if: showingOtherLocations() && !otherLocationSessions().length-->
+        <p>No available test sessions in other locations</p>
+        <!--/ko-->
+        <span class="help-block" data-bind="validationMessage: testSessions"></span>
+    </div>
+</div>

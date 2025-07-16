@@ -1,0 +1,29 @@
+﻿namespace F1Solutions.Naati.Common.Contracts.Dal.Enum
+{
+    public enum CredentialFilterTypeName
+    {  
+        NaatiNumberIntList,
+        PractitionerNumberString,
+        GivenNamesString,
+        FamilyNameString,
+        PhoneNumberString,
+        EmailString,
+        DateOfBirthFromString,
+        DateOfBirthToString,
+        GenderStringList,
+        ApplicationTypeIntList,
+        CredentialStartDateFromString,
+        CredentialStartDateToString,
+        CredentialEndDateFromString,
+        CredentialEndDateToString,
+        CredentialTypeIntList,
+        SkillIntList,
+        CredentialStatusTypeIntList,
+        ShowInOnlineDirectoryBoolean,
+        CredentialIssueDateFromString,
+        CredentialIssueDateToString,
+        ProductCardClaimBoolean,
+        CertificationCredentialTypeBoolean,
+        StateIntList
+    }
+}

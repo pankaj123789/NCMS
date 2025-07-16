@@ -1,0 +1,20 @@
+﻿@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+@{
+    ViewBag.Subtitle = "Payment Method";
+    Layout = "~/Views/Shared/MasterPages/_PDListingWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Directory Listing", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+        });
+    </script>
+}
+@{ Html.RenderPartial("_PaymentMethodEditPartial", Model); }

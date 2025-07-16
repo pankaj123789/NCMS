@@ -1,0 +1,114 @@
+﻿
+<div class="wrapper">
+    <div class="row wrapper">
+        <div class="col-sm-7">
+            <h5 class="text-primary" data-bind="text:message"></h5>
+        </div>
+        <div class="col-sm-5 btn-toolbar m-l-none">
+            <!--ko if: showCurrentPeriodButton-->
+            <button type="button" class="btn btn-primary pull-right" data-bind="click: showCurrentPeriod">Show Current Logbook</button>
+            <!--/ko-->
+            <!--ko if: showPeriodsButton-->
+            <button type="button" class="btn btn-primary pull-right" data-bind="click: showPeriods">Show Submitted Logbooks</button>
+            <!--/ko-->
+        </div>
+    </div>
+    <!--ko if: $root.pointsCalculated-->
+    <div class="row wrapper" data-bind="if: selectedPeriod()">
+        <div class="col-sm-4 text-center">
+            <div class="panel panel-primary alt-panel">
+                <div class="panel-heading">Start date</div>
+                <div class="panel-body fa-2x text-muted">
+                    <span class="fa fa-calendar"></span>
+                    <span data-bind="textDate: { value:  selectedPeriod().StartDate, outputFormat: 'LL' }"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 text-center">
+            <div class="panel panel-blue alt-panel">
+                <div class="panel-heading">Recertification Eligibility Date</div>
+                <div class="panel-body fa-2x text-muted">
+                    <span class="fa fa-calendar"></span>
+                    <span data-bind="textDate: { value:  selectedPeriod().RecertificationEligibilityDate, outputFormat: 'LL' }"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 text-center">
+            <div class="panel panel-danger alt-panel">
+                <div class="panel-heading">Certification Expiry Date</div>
+                <div class="panel-body fa-2x text-muted">
+                    <span class="fa fa-calendar"></span>
+                    <span data-bind="textDate: { value:  selectedPeriod().EndDate, outputFormat: 'LL' }"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6 text-center" style="margin-left: -50px;" data-bind="popover: popover, attr: { id: popoverId }">
+            <canvas id="chartCanvas" data-bind="chart: chart"></canvas>
+            <label>Recertification Points</label>
+        </div>
+        <br />
+        <br />
+        <br />
+        <label>Requirements:</label>
+        <br />
+        <!--ko foreach: { data: preRequisites, as: 'preRequisite' }-->
+        <div data-bind="css: { 'text-success': preRequisite.Completed, 'text-danger': !preRequisite.Completed }">
+            <i data-bind="css: { 'fa': true, 'fa-check': preRequisite.Completed, 'fa-remove': !preRequisite.Completed}"> </i>
+            <span data-bind="html:preRequisite.Message"></span>
+        </div>
+        <!--/ko-->
+    </div>
+    <!--/ko-->
+    <br />
+    <br />
+
+    <p>
+        <a data-bind="attr:{href: pdCatalogue}" target="_blank">Click here</a> to see the <b>Professional Development (PD) catalogue</b> which describes the types of activities a practitioner can claim.
+    </p>
+
+    <button type="button" class="btn btn-primary" data-bind="click: addActivity, enable:$root.editable">Add Activity</button><br />
+    <table class="table table-bordered table-striped" data-bind="datatable: tableDefinition">
+        <thead>
+            <tr>
+                <th class="w-sm">Date Completed</th>
+                <th>Description</th>
+                <th class="w-xxs">Category</th>
+                <th class="w-xs">Points</th>
+                <th>Notes</th>
+
+                <th data-bind="visible: $root.isCurrentPeriod" class="w-xxs">Status</th>
+                <th class="w-xxs"></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: { data: activities, as: 'a' }">
+            <tr>
+                <td class="text-center" data-bind="text: a.DateCompleted"></td>
+                <td data-bind="text: a.Description"></td>
+                <td data-bind="text: a.ProfessionalDevelopmentCategoryName"></td>
+                <td class="text-right" data-bind="html: a.PointDescription"></td>
+                <td data-bind="text: a.Notes"></td>
+                <td data-bind="visible: $root.isCurrentPeriod" class="text-center">
+                    <span class="fa" data-bind="text: a.Included, visible:false"></span>
+                    <span class="fa" data-bind="css: $root.statusIcon(a), tooltip: { trigger: 'hover', container: 'body' }, attr: { title: $root.statusTooltip(a) }"></span>
+                </td>
+                <td class="text-center">
+                    <!--ko if: $root.editable-->
+                    <a class="btn btn-xs btn-default" href="#" data-bind="click: $root.editActivity, tooltip: { trigger: 'hover', container: 'body' }" title="Edit this activity"><span class="fa fa-edit"></span></a>
+                    <a class="btn btn-xs btn-default" href="#" data-bind="click: $root.removeActivity, tooltip: { trigger: 'hover', container: 'body' }" title="Delete this activity"><span class="fa fa-trash"></span></a>
+                    <!--/ko-->
+                    <!--ko ifnot: $root.editable-->
+                    <a class="btn btn-xs btn-default" href="#" data-bind="click: $root.editActivity, tooltip: { trigger: 'hover', container: 'body' }" title="View this activity"><span class="fa fa-eye"></span></a>
+                    <!--/ko-->
+                </td>
+
+
+            </tr>
+        </tbody>
+    </table>
+    <!--ko compose: activityEditOptions--><!--/ko-->
+    <!--ko compose: periodSelectorOptions--><!--/ko-->
+</div>

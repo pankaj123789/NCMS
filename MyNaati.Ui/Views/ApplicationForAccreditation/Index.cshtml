@@ -1,0 +1,59 @@
+﻿@using MyNaati.Ui.Common
+@{
+    ViewBag.Title = "Apply for Accreditation";
+    Layout = "~/Views/Shared/MasterPages/_SideMenuLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", string.Empty)
+    };
+}
+@section sideMenu
+{
+    <div class="list-group">
+        <a class="list-group-item active" href="#">Apply for Accreditation</a>
+        @Html.ActionLink("By Testing", "Index", "ApplicationByTestingWizard", null, new { @class = "list-group-item" })
+        @Html.ActionLink("By Approved Course", "Index", "ApplicationByCourseWizard", null, new { @class = "list-group-item" })
+    </div>
+}
+<div class="col-lg-12">
+    <h1 class="text-primary">@ViewBag.Title</h1>
+    <p>
+        <a href='@Url.ExternalUrlFromConfig("AccreditationMethodList")' target="_blank">NAATI accreditation</a> is an acknowledgement that an individual has demonstrated the ability to meet
+        the professional standards required by the translation and interpreting industry.
+    </p>
+    <p>
+        It permits translators and interpreters to quickly and easily demonstrate to clients and agencies
+        their level of skill and ability.
+    </p>
+    <p>
+        Many employers will expect practitioners to have accreditation – it is difficult to get translating
+        and interpreting work without it.
+    </p>
+    <p>You can use myNAATI to apply if you would like to:</p>
+    <ul>
+        <li>Take an <a href='@Url.ExternalUrlFromConfig("AccreditationMethodList")' target="_blank">on demand test</a> set by NAATI</li>
+        <li>Register your <a href='@Url.ExternalUrlFromConfig("ExpressionOfInterestInformation")' target="_blank">Expression of Interest</a> for a NAATI scheduled test</li>
+        <li>Gain accreditation based on your completion of a <a href='@Url.ExternalUrlFromConfig("ApprovedCourseInformation")' target="_blank">NAATI approved course</a></li>
+    </ul>
+    <p>For accreditation for indigenous languages please email <a href="mailto:info@naati.com.au">info@naati.com.au</a>.</p>
+    <p>
+        I acknowledge that, by completing any of these forms, I have read and understood the
+        <a href='@Url.ExternalUrlFromConfig("PrivacyPolicy")' target="_blank">NAATI Privacy Policy</a>, which explains:
+    </p>
+    <ul>
+        <li>How and why NAATI collects; manages and uses my personal information;</li>
+        <li>To whom NAATI may disclose my personal information;</li>
+        <li>How I can access and request correction of my personal information which NAATI holds; and</li>
+        <li>How I can complain about a breach of the <a href="https://www.oaic.gov.au/privacy-law/privacy-act/australian-privacy-principles" target="_blank">Australian Privacy Principles</a> by NAATI.</li>
+    </ul>
+    <p>
+        I understand NAATI will use the personal information collected in this form (plus any
+        further information that I provide to NAATI as part of my application) to process my
+        application, administer tests to me, and determine and record the outcome of my application.
+    </p>
+    <p>
+        I understand that, if I am accredited, NAATI may disclose to people and organisations (to verify
+        my accreditation, including via an online verification register) my name, NAATI credentials, expiry date,
+        suburb and photograph.
+    </p>
+</div>

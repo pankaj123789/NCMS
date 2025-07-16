@@ -1,0 +1,14 @@
+﻿
+
+namespace Ncms.Contracts.Models
+{
+    public class TestComponentTypeModel
+    {
+        public int Id { get; set; }
+        public double DefaultMaterialRequestHours { get; set; }
+        public int DefaultMaterialRequestDueDays { get; set; }
+        public string Description { get; set; }
+        public string CredentialType { get; set; }
+        public int CredentialTypeId { get; set; }
+    }
+}

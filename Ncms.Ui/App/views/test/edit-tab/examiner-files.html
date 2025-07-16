@@ -1,0 +1,36 @@
+<div class="panel panel-default">
+    <div class="table-responsive">
+        <table id="examinerDataTable" data-bind="datatable: datatable" class="table table-striped b-t b-b" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Document.resources.DocumentSource'"></th>
+                    <th class="w-xxl" data-bind="reshtml: 'Naati.Resources.Document.resources.Title'"></th>
+                    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.DocumentType'"></th>
+                    <th class="w-xxs" data-bind="reshtml: 'Naati.Resources.Document.resources.FileType'"></th>
+                    <th class="w-xxs" data-bind="reshtml: 'Naati.Resources.Document.resources.FileSize'"></th>
+                    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.UploadedBy'"></th>
+                    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.UploadedDate'"></th>
+                    <th class="w-xxs"> </th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: { data: datatable.source, as: 'e' }">
+                <tr>
+                    <td data-bind="text: e.DocumentSource"></td>
+                    <td data-bind="text: e.Title"></td>
+                    <td data-bind="text: e.DocumentTypeDisplayName"></td>
+                    <td data-bind="text: e.FileType"></td>
+                    <td data-bind="bytesToSize: e.FileSize"></td>
+                    <td data-bind="text: e.UploadedByUserName"></td>
+                    <td data-bind="text: e.UploadedDateTime"></td>
+                    <td class="text-center" style="width: 150px;">
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-default btn-xs" data-bind="downloadFile: { url: $root.download(e) }, resattr: { title: 'Naati.Resources.Shared.resources.Download' }">
+                                <span class="glyphicon glyphicon-download-alt"></span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

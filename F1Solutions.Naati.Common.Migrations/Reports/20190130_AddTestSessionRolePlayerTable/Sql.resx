@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CreateTestSessionRolePlayerProcedure" xml:space="preserve">
+    <value>CREATE PROCEDURE [dbo].[ReportingSnapshot_TestSessionRolePlayer]
+AS
+BEGIN	
+
+	SELECT 
+		CASE WHEN [Source].[TestSessionRolePlayerId] IS NULL THEN [TestSessionRolePlayer].[TestSessionRolePlayerId] ELSE [Source].[TestSessionRolePlayerId] END AS [TestSessionRolePlayerId]
+		,CASE WHEN [Source].[TestSessionId] IS NULL THEN [TestSessionRolePlayer].[TestSessionId] ELSE [Source].[TestSessionId] END AS [TestSessionId]		
+		,CASE WHEN [Source].[TestSessionName] IS NULL THEN [TestSessionRolePlayer].[TestSessionName] ELSE [Source].[TestSessionName] END AS [TestSessionName]
+		,CASE WHEN [Source].[TestLocationState] IS NULL THEN [TestSessionRolePlayer].[TestLocationState] ELSE [Source].[TestLocationState] END AS [TestLocationState]
+		,CASE WHEN [Source].[TestLocationCountry] IS NULL THEN [TestSessionRolePlayer].[TestLocationCountry] ELSE [Source].[TestLocationCountry] END AS [TestLocationCountry]
+		,CASE WHEN [Source].[TestLocationName] IS NULL THEN [TestSessionRolePlayer].[TestLocationName] ELSE [Source].[TestLocationName] END AS [TestLocationName]		
+		,CASE WHEN [Source].[TestDate] IS NULL THEN [TestSessionRolePlayer].[TestDate] ELSE [Source].[TestDate] END AS [TestDate]
+		,CASE WHEN [Source].[CredentialTypeInternalName] IS NULL THEN [TestSessionRolePlayer].[CredentialTypeInternalName] ELSE [Source].[CredentialTypeInternalName] END AS [CredentialTypeInternalName]
+		,CASE WHEN [Source].[CredentialTypeExternalName] IS NULL THEN [TestSessionRolePlayer].[CredentialTypeExternalName] ELSE [Source].[CredentialTypeExternalName] END AS [CredentialTypeExternalName]		
+		,CASE WHEN [Source].[PersonId] IS NULL THEN [TestSessionRolePlayer].[PersonId] ELSE [Source].[PersonId] END AS [PersonId]
+		,CASE WHEN [Source].[CustomerNo] IS NULL THEN [TestSessionRolePlayer].[CustomerNo] ELSE [Source].[CustomerNo] END AS [CustomerNo]
+		,CASE WHEN [Source].[Status] IS NULL THEN [TestSessionRolePlayer].[Status] ELSE [Source].[Status] END AS [Status]
+
+		,CASE WHEN [Source].[Rehearsed] IS NULL THEN [TestSessionRolePlayer].[Rehearsed] ELSE [Source].[Rehearsed] END AS [Rehearsed]
+		,CASE WHEN [Source].[Attended] IS NULL THEN [TestSessionRolePlayer].[Attended] ELSE [Source].[Attended] END AS [Attended]
+		,CASE WHEN [Source].[Rejected] IS NULL THEN [TestSessionRolePlayer].[Rejected] ELSE [Source].[Rejected] END AS [Rejected]
+		
+		,CASE WHEN [TestSessionRolePlayer].[TestSessionRolePlayerId] IS NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS 'IsNew'
+		,CASE WHEN [Source].[TestSessionRolePlayerId] IS NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS 'IsDeleted'
+	FROM 
+	(
+		SELECT 
+			tsrp.TestSessionRolePlayerId
+			,ts.TestSessionId TestSessionId			
+			,ts.Name TestSessionName			
+			
+			,iname.Abbreviation TestLocationState
+			,c.Name TestLocationCountry
+			,tl.Name TestLocationName
+			
+			,ts.TestDateTime TestDate			
+			,ct.InternalName CredentialTypeInternalName
+			,ct.ExternalName CredentialTypeExternalName
+						
+			,rp.PersonId PersonId
+			,e.NAATINumber CustomerNo
+			,rpst.DisplayName Status
+			
+			,tsrp.Rehearsed
+			,tsrp.Attended
+			,tsrp.Rejected
+						
+		FROM
+             [naati_db]..[tblTestSessionRolePlayer] tsrp		
+		    INNER JOIN [naati_db]..[tblTestSession] ts ON tsrp.TestSessionId = ts.TestSessionId
+			INNER JOIN [naati_db]..[tblRolePlayer] rp ON tsrp.RolePlayerId = rp.RolePlayerId
+			INNER JOIN [naati_db]..[tblRolePlayerStatusType] rpst ON tsrp.RolePlayerStatusTypeId = rpst.RolePlayerStatusTypeId
+			INNER JOIN [naati_db]..[tblPerson] p ON rp.PersonId = p.PersonId
+			INNER JOIN [naati_db]..[tblEntity] e ON p.EntityId = e.EntityId
+			
+			INNER JOIN [naati_db]..[tblVenue] v ON ts.VenueId = v.VenueId
+			INNER JOIN [naati_db]..[tblTestLocation] tl ON v.TestLocationId = tl.TestLocationId
+						
+			INNER JOIN [naati_db]..[tblOffice] o ON tl.OfficeId = o.OfficeId
+			INNER JOIN [naati_db]..[tblInstitution] i ON o.InstitutionId = i.InstitutionId
+			INNER JOIN [naati_db]..[vwDistinctInstitutionName] vwin ON i.InstitutionId = vwin.InstitutionId
+			INNER JOIN [naati_db]..[tblInstitutionName] iname ON vwin.InstitutionNameId = iname.InstitutionNameId
+
+			LEFT JOIN [naati_db]..[tblCountry] c ON tl.CountryId = c.CountryId			
+			
+	) [Source]
+	FULL OUTER JOIN [TestSessionRolePlayer] ON [Source].[TestSessionRolePlayerId] = [TestSessionRolePlayer].[TestSessionRolePlayerId]
+	WHERE 
+		(([Source].[TestSessionRolePlayerId] IS NOT NULL AND [TestSessionRolePlayer].[TestSessionRolePlayerId] IS NULL) OR ([Source].[TestSessionRolePlayerId] IS NULL AND [TestSessionRolePlayer].[TestSessionRolePlayerId] IS NOT NULL) OR (([Source].[TestSessionRolePlayerId] IS NOT NULL AND [TestSessionRolePlayer].[TestSessionRolePlayerId] IS NOT NULL) AND [Source].[TestSessionRolePlayerId] != [TestSessionRolePlayer].[TestSessionRolePlayerId]))
+		OR (([Source].[TestSessionId] IS NOT NULL AND [TestSessionRolePlayer].[TestSessionId] IS NULL) OR ([Source].[TestSessionId] IS NULL AND [TestSessionRolePlayer].[TestSessionId] IS NOT NULL) OR (([Source].[TestSessionId] IS NOT NULL AND [TestSessionRolePlayer].[TestSessionId] IS NOT NULL) AND [Source].[TestSessionId] != [TestSessionRolePlayer].[TestSessionId]))		
+		OR (([Source].[TestSessionName] IS NOT NULL AND [TestSessionRolePlayer].[TestSessionName] IS NULL) OR ([Source].[TestSessionName] IS NULL AND [TestSessionRolePlayer].[TestSessionName] IS NOT NULL) OR (([Source].[TestSessionName] IS NOT NULL AND [TestSessionRolePlayer].[TestSessionName] IS NOT NULL) AND [Source].[TestSessionName] != [TestSessionRolePlayer].[TestSessionName]))
+		OR (([Source].[TestLocationState] IS NOT NULL AND [TestSessionRolePlayer].[TestLocationState] IS NULL) OR ([Source].[TestLocationState] IS NULL AND [TestSessionRolePlayer].[TestLocationState] IS NOT NULL) OR (([Source].[TestLocationState] IS NOT NULL AND [TestSessionRolePlayer].[TestLocationState] IS NOT NULL) AND [Source].[TestLocationState] != [TestSessionRolePlayer].[TestLocationState]))
+		OR (([Source].[TestLocationCountry] IS NOT NULL AND [TestSessionRolePlayer].[TestLocationCountry] IS NULL) OR ([Source].[TestLocationCountry] IS NULL AND [TestSessionRolePlayer].[TestLocationCountry] IS NOT NULL) OR (([Source].[TestLocationCountry] IS NOT NULL AND [TestSessionRolePlayer].[TestLocationCountry] IS NOT NULL) AND [Source].[TestLocationCountry] != [TestSessionRolePlayer].[TestLocationCountry]))
+		OR (([Source].[TestLocationName] IS NOT NULL AND [TestSessionRolePlayer].[TestLocationName] IS NULL) OR ([Source].[TestLocationName] IS NULL AND [TestSessionRolePlayer].[TestLocationName] IS NOT NULL) OR (([Source].[TestLocationName] IS NOT NULL AND [TestSessionRolePlayer].[TestLocationName] IS NOT NULL) AND [Source].[TestLocationName] != [TestSessionRolePlayer].[TestLocationName]))
+		OR (([Source].[TestDate] IS NOT NULL AND [TestSessionRolePlayer].[TestDate] IS NULL) OR ([Source].[TestDate] IS NULL AND [TestSessionRolePlayer].[TestDate] IS NOT NULL) OR (([Source].[TestDate] IS NOT NULL AND [TestSessionRolePlayer].[TestDate] IS NOT NULL) AND [Source].[TestDate] != [TestSessionRolePlayer].[TestDate]))
+		OR (([Source].[CredentialTypeInternalName] IS NOT NULL AND [TestSessionRolePlayer].[CredentialTypeInternalName] IS NULL) OR ([Source].[CredentialTypeInternalName] IS NULL AND [TestSessionRolePlayer].[CredentialTypeInternalName] IS NOT NULL) OR (([Source].[CredentialTypeInternalName] IS NOT NULL AND [TestSessionRolePlayer].[CredentialTypeInternalName] IS NOT NULL) AND [Source].[CredentialTypeInternalName] != [TestSessionRolePlayer].[CredentialTypeInternalName]))
+		OR (([Source].[CredentialTypeExternalName] IS NOT NULL AND [TestSessionRolePlayer].[CredentialTypeExternalName] IS NULL) OR ([Source].[CredentialTypeExternalName] IS NULL AND [TestSessionRolePlayer].[CredentialTypeExternalName] IS NOT NULL) OR (([Source].[CredentialTypeExternalName] IS NOT NULL AND [TestSessionRolePlayer].[CredentialTypeExternalName] IS NOT NULL) AND [Source].[CredentialTypeExternalName] != [TestSessionRolePlayer].[CredentialTypeExternalName]))
+		OR (([Source].[PersonId] IS NOT NULL AND [TestSessionRolePlayer].[PersonId] IS NULL) OR ([Source].[PersonId] IS NULL AND [TestSessionRolePlayer].[PersonId] IS NOT NULL) OR (([Source].[PersonId] IS NOT NULL AND [TestSessionRolePlayer].[PersonId] IS NOT NULL) AND [Source].[PersonId] != [TestSessionRolePlayer].[PersonId]))
+		OR (([Source].[CustomerNo] IS NOT NULL AND [TestSessionRolePlayer].[CustomerNo] IS NULL) OR ([Source].[CustomerNo] IS NULL AND [TestSessionRolePlayer].[CustomerNo] IS NOT NULL) OR (([Source].[CustomerNo] IS NOT NULL AND [TestSessionRolePlayer].[CustomerNo] IS NOT NULL) AND [Source].[CustomerNo] != [TestSessionRolePlayer].[CustomerNo]))		
+		OR (([Source].[Status] IS NOT NULL AND [TestSessionRolePlayer].[Status] IS NULL) OR ([Source].[Status] IS NULL AND [TestSessionRolePlayer].[Status] IS NOT NULL) OR (([Source].[Status] IS NOT NULL AND [TestSessionRolePlayer].[Status] IS NOT NULL) AND [Source].[Status] != [TestSessionRolePlayer].[Status]))			
+
+		OR (([Source].[Rehearsed] IS NOT NULL AND [TestSessionRolePlayer].[Rehearsed] IS NULL) OR ([Source].[Rehearsed] IS NULL AND [TestSessionRolePlayer].[Rehearsed] IS NOT NULL) OR (([Source].[Rehearsed] IS NOT NULL AND [TestSessionRolePlayer].[Rehearsed] IS NOT NULL) AND [Source].[Rehearsed] != [TestSessionRolePlayer].[Rehearsed]))			
+		OR (([Source].[Attended] IS NOT NULL AND [TestSessionRolePlayer].[Attended] IS NULL) OR ([Source].[Attended] IS NULL AND [TestSessionRolePlayer].[Attended] IS NOT NULL) OR (([Source].[Attended] IS NOT NULL AND [TestSessionRolePlayer].[Attended] IS NOT NULL) AND [Source].[Attended] != [TestSessionRolePlayer].[Attended]))			
+		OR (([Source].[Rejected] IS NOT NULL AND [TestSessionRolePlayer].[Rejected] IS NULL) OR ([Source].[Rejected] IS NULL AND [TestSessionRolePlayer].[Rejected] IS NOT NULL) OR (([Source].[Rejected] IS NOT NULL AND [TestSessionRolePlayer].[Rejected] IS NOT NULL) AND [Source].[Rejected] != [TestSessionRolePlayer].[Rejected]))			
+END</value>
+  </data>
+  <data name="CreateTestSessionRolePlayerView" xml:space="preserve">
+    <value>CREATE VIEW [dbo].[TestSessionRolePlayer] AS
+SELECT
+	 [TestSessionRolePlayerId]
+	,[TestSessionId]	
+	,[TestSessionName]
+	,[TestLocationState]
+	,[TestLocationCountry]
+	,[TestLocationName]
+	,[TestDate]	
+	,[CredentialTypeInternalName]
+	,[CredentialTypeExternalName]
+	,[PersonId]
+	,[CustomerNo]
+	,[Status]
+	,[Rehearsed]
+	,[Attended]
+	,[Rejected]	
+	,[ModifiedDate]
+	,[ObsoletedDate]
+	,[DeletedDate]
+FROM [TestSessionRolePlayerHistory] c
+WHERE c.[ModifiedDate] =
+(
+    SELECT MAX([ModifiedDate])
+    FROM [TestSessionRolePlayerHistory] c2
+    WHERE c2.[TestSessionRolePlayerId] = c.[TestSessionRolePlayerId]
+)
+AND [DeletedDate] IS NULL</value>
+  </data>
+</root>

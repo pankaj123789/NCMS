@@ -1,0 +1,97 @@
+﻿@primaryColour: rgb(0,78,99);
+
+
+table.dataTable thead th,
+table.table-primary thead th {
+    color: #FFF !important;
+    background-color: @primaryColour !important;
+    border-color: darken(@primaryColour, 2);
+}
+
+.b-primary {
+    border-color: @primaryColour;
+}
+
+.navbar-default, .footer, .bg-primary {
+    background-color: @primaryColour;
+}
+
+.btn-menu-collapse {
+    background-color: darken(@primaryColour, 5%);
+    border: 1px solid darken(@primaryColour, 20%);
+}
+
+.btn-primary, .btn-primary.disabled, .btn-primary[disabled] {
+    background-color: lighten(@primaryColour, 10%);
+    border: 1px solid lighten(@primaryColour, 5%);
+}
+
+.btn-primary {
+    &:hover, &:focus, &:active, &.active {
+        background-color: lighten(@primaryColour, 5%);
+        border-color: @primaryColour;
+    }
+}
+
+.footer .nav > li a {
+    &:hover, &:focus {
+        background-color: @primaryColour;
+    }
+}
+
+
+
+.menu-link-container {
+    @media (max-width: 592px) {
+        #CredentialCards {
+            display: none;
+        }
+    }
+
+    @media (max-width: 2000px) {
+        #MobileCredentialCards {
+            display: none;
+        }
+    }
+}
+
+.thumbnail {
+    a > img {
+        height: auto;
+    }
+
+    .caption a {
+        color: @primaryColour;
+    }
+}
+
+
+.arrow.right.arrow-primary:after {
+    border-left-color: @primaryColour;
+}
+
+.breadcrumb {
+    & > li {
+        a {
+            color: @primaryColour;
+        }
+    }
+}
+
+.bs-vertical-wizard {
+    > ul {
+
+        > li.complete {
+
+            > a {
+                &:before {
+                    background-color: @primaryColour;
+                }
+
+                .ico {
+                    color: @primaryColour;
+                }
+            }
+        }
+    }
+}

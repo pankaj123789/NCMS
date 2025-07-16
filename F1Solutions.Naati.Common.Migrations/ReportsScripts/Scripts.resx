@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ApplicationCustomFieldsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\applicationcustomfieldsview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ApplicationView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\applicationview.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CredentialRequestsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\credentialrequestsview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CredentialsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\credentialsview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GetDates" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>functions\getdates.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GetExaminerComponentMarks" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>functions\getexaminercomponentmarks.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GetExaminerOverallMark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>functions\getexamineroverallmark.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GetPhoneNumber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>functions\getphonenumber.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GetTestResultOverallMark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>functions\gettestresultoverallmark.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MarkRubricView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\markrubricview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MarkView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\markview.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="OrganisationContactsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\organisationcontactsview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="OrganisationView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\organisationview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PanelMembershipCredentialTypesView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\panelmembershipcredentialtypesview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PanelMembersView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\panelmembersview.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PanelView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\panelview.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PersonView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\personview.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ProfessionalDevelopment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\professionaldevelopment.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Application" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_application.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_ApplicationCustomFIelds" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_applicationcustomfields.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_CredentialRequests" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_credentialrequests.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Credentials" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_credentials.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Mark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_mark.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_MarkRubric" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_markrubric.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Organisation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_organisation.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_OrganisationContacts" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_organisationcontacts.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Panel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_panel.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_PanelMembers" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_panelmembers.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_PanelMembershipCredentialTypes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_panelmembershipcredentialtypes.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Person" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_person.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_ProfessionalDevelopment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_professionaldevelopment.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Test" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_test.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_TestResult" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_testresult.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_TestResultRubric" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_testresultrubric.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_TestSessionRolePlayer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_testsessionroleplayer.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_TestSessionRolePlayerDetails" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_testsessionroleplayerdetails.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_TestSessions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_testsessions.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_TestSittingTestMaterial" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_testsittingtestmaterial.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_WorkPractice" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_workpractice.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RubricTestComponentResultView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\rubrictestcomponentresultview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="TestResultRubricView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\testresultrubricview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestResultView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\testresultview.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestRubricComponentView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\testrubriccomponentview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestSessionRolePlayerDetailsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\testsessionroleplayerdetailsview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestSessionRolePlayerView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\testsessionroleplayerview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestSessionsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\testsessionsview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestSittingTestMaterialView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\testsittingtestmaterialview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\testview.sql;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WorkPractice" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\workpractice.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ExaminerJobView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\examinerjobview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshop_ExaminerJob" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshop_examinerjob.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MaterialRequest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\materialrequest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MaterialRequestPanelMember" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\materialrequestpanelmember.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_MaterialRequest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_materialrequest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_MaterialRequestPanelMember" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_materialrequestpanelmember.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MaterialRequestTaskHours" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\materialrequesttaskhours.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MaterialRequestPayroll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\materialrequestpayroll.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_MaterialRequestTaskHours" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_materialrequesttaskhours.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshop_MaterialRequestPayroll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshop_materialrequestpayroll.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MaterialRequestRound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\materialrequestround.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_MaterialRequestRound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_materialrequestround.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshop_TestMaterial" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshop_testmaterial.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\testmaterialview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Main" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_main.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EndorsedQualificationView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>views\endorsedqualificationview.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshop_EndorsedQualification" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshop_endorsedqualification.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LogExecutionError" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\logexecutionerror.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LogExecutionInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\logexecutioninfo.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LogExecutionWarning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\logexecutionwarning.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Runner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>storedprocedures\reportingsnapshot_runner.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GetSystemValue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>functions\getsystemvalue.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_TestResultExaminerRubricMarkingHistory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\ReportingSnapshot_TestResultExaminerRubricMarkingHistory.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_TestResultExaminerStandardMarkingHistory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\ReportingSnapshot_TestResultExaminerStandardMarkingHistory.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_ApplicationCustomFIelds_Latest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\ReportingSnapshot_ApplicationCustomFIelds_Latest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Application_Latest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\ReportingSnapshot_Application_Latest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_CredentialRequests_Latest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\ReportingSnapshot_CredentialRequests_Latest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_MarkRubric_Latest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\ReportingSnapshot_MarkRubric_Latest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Mark_Latest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\ReportingSnapshot_Mark_Latest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_TestResult_Latest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\ReportingSnapshot_TestResult_Latest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_TestSessions_Latest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\ReportingSnapshot_TestSessions_Latest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ReportingSnapshot_Test_Latest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>StoredProcedures\ReportingSnapshot_Test_Latest.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+</root>

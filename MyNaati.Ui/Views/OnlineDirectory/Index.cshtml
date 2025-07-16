@@ -1,0 +1,10 @@
+﻿@{
+	Layout = "~/Views/Shared/MasterPages/_KnockoutLayout.cshtml";
+	ViewBag.RedirectLogoUrl = System.Configuration.ConfigurationManager.AppSettings["ExternalUrl_NAATI_URL"];
+	ViewBag.Title = "Online Directory";
+	ViewBag.ShowBreadCrumb = false;
+}
+@section Head {
+    @Styles.Render("~/Bundles/Styles")
+}
+<div id="applicationHost" data-app-root="views/online-directory/online-directory-index"></div>

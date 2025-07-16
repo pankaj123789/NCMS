@@ -1,0 +1,31 @@
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" data-bind="attr: { id: modalId }">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.NewTestSpecification'"></h4>
+            </div>
+            <div class="modal-body form">
+                <div class="form-group" data-bind="validationElement: testSpecification.Title">
+                    <label data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.Description'"></label>
+                    <input type="text" class="form-control" data-bind="value: testSpecification.Title" />
+                </div>
+                
+                
+                
+                <div class="form-group" data-bind="validationElement: testSpecification.CredentialTypeId">
+                    <label data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.CredentialType'"></label>
+                    <!-- ko component: { name: 'select-component', params: credentialTypeOptions } --><!-- /ko -->
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-bind="click: save, enable: canSave, disableOnAjaxStart">
+                    <i class="fa fa-check"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

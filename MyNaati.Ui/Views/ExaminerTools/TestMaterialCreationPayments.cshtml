@@ -1,0 +1,176 @@
+﻿@model MyNaati.Ui.ViewModels.ExaminerTools.TestMaterialCreationPaymentsModel
+@{
+    ViewBag.Title = "My test Material Development Payments";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+        new Tuple<string, string>("Examiner Tools", Url.Action("Index")),
+        new Tuple<string, string>("Test Material Development Payments", null)
+    };
+
+    var submittedFrom = Model.SubmittedFrom.HasValue ? Model.SubmittedFrom.Value.ToString("yyyy-MM-dd") : string.Empty;
+    var submittedTo = Model.SubmittedTo.HasValue ? Model.SubmittedTo.Value.ToString("yyyy-MM-dd") : string.Empty;
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("[data-toggle=tooltip]").tooltip();
+
+            var $chosen = $('.chosen');
+
+            $chosen.chosen();
+            $chosen.removeClass('invisible');
+            $chosen.height('auto');
+
+            var dataTable = $('#resultsTable').DataTable({
+                ajax: function (data, callback, settings) {
+                    var url = '@Url.Action("TestMaterialCreationPayments", "ExaminerTools")';
+
+                    var formFieldIds = [
+                            'TestMaterialID',
+                            'PaymentStatus',
+                            'SubmittedFrom',
+                            'SubmittedTo'
+                    ];
+                    var extendedData = {};
+
+                    for (var i = 0; i < formFieldIds.length; i++) {
+                        var formFieldId = formFieldIds[i];
+                        var $formField = $('#' + formFieldId);
+
+                        if ($formField.val()) {
+                            extendedData[formFieldId] = $formField.val();
+                        }
+                    }
+
+                    $.post(url, $.extend({}, data, extendedData)).then(function (result) {
+                        var $errors = $('.validation-summary-errors');
+                        $errors.empty();
+
+                        if (result.IsError) {
+                            $errors.show();
+                            $errors.append('<ul></ul>');
+                            $.each(result.Errors, function (index, value) {
+                                $errors.find('ul').append('<li>' + value + '</li>');
+                            });
+                        }
+
+                        callback(result);
+                    });
+                },
+                columns: [
+                    { data: 'TestMaterialId' },
+                    { data: 'MaterialCreationSubmittedDate' },
+                    { data: 'CurrentStatus' },
+                    { data: 'PaymentApprovedDate' },
+                    { data: 'PaymentProcessedDate' },
+                    { data: 'InvoiceNo' },
+                    { data: 'AmountPaid' },
+                    { data: 'TotalInvoice' },
+                    { data: 'Skill' },
+                    { data: 'CredentialType' },
+
+                ],
+                drawCallback: function () {
+                    $("[data-toggle=tooltip]").tooltip();
+                },
+                deferLoading: 0,
+                dom: "<'row v-offset-xs-1'<'col-sm-12'<'table-responsive't>>>" +
+                    "r",
+                info: false,
+                language: {
+                    processing: $('#loadingOverlayTemplate').html(),
+                    zeroRecords: 'No Results'
+                },
+                ordering: false,
+                paging: false,
+                processing: true,
+                searching: false,
+                serverSide: true
+            });
+
+            $('#searchForm').submit(function () {
+                dataTable.ajax.reload();
+                return false;
+            });
+
+            dataTable.ajax.reload();
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="validation-summary-errors" style="display: none;">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-offset-1 col-sm-10">
+            @using (Html.BeginForm("TestMaterialCreationPayments", "ExaminerTools", FormMethod.Post, new { id = "searchForm", @class = "form-horizontal" }))
+            {
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SubmittedFrom, "Submitted", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => submittedFrom, new { id = "SubmittedFrom", @class = "form-control", type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.SubmittedTo, "To", new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => submittedTo, new { id = "SubmittedTo", @class = "form-control", type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.TestMaterialID, "Test Material ID", new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(x => x.TestMaterialID, new { @class = "form-control", style = "height: 34px;", type = "number" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.PaymentStatus, "Payment Status", new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(x => x.PaymentStatus, Model.Statuses, new { multiple = "multiple", @class = "form-control chosen invisible", style = "height: 34px;" })
+                    </div>
+                </div>
+                <div class="row v-offset-xs-2">
+                    <div class="col-sm-12">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row v-offset-xs-3">
+        <div class="col-lg-12">
+            <table id="resultsTable" class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th data-container="body" title="Test Material ID" data-toggle="tooltip">Test Material ID</th>
+                        <th data-container="body" title="Material Creation Submitted Date" data-toggle="tooltip">Material Creation Submitted Date</th>
+                        <th data-container="body" title="Current Status" data-toggle="tooltip">Current Status</th>
+                        <th data-container="body" title="Payment Approved Date" data-toggle="tooltip">Payment Approved Date</th>
+                        <th data-container="body" title="Payment Processed Date" data-toggle="tooltip">Payment Processed Date</th>
+                        <th data-container="body" title="Invoice No." data-toggle="tooltip">Invoice No.</th>
+                        <th data-container="body" title="Amount Paid (ex GST)" data-toggle="tooltip">Amount Paid (ex GST)</th>
+                        <th data-container="body" title="Total Invoice (ex GST)" data-toggle="tooltip">Total Invoice (ex GST)</th>
+                        <th data-container="body" title="Skill " data-toggle="tooltip">Skill</th>
+                        <th data-container="body" title="Credential Type " data-toggle="tooltip">Credential Type</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>

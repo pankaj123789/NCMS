@@ -1,0 +1,18 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "naati-infra.mynaatiName" . }}
+spec:
+  scaleTargetRef:
+    apiVersion: extensions/v1beta2
+    kind: Deployment
+    name: {{ include "naati-infra.mynaatiName" . }}
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 175

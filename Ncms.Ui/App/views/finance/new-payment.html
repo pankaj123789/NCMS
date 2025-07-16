@@ -1,0 +1,172 @@
+﻿<div class="col">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3" data-bind="html: title"></h1>
+    </div>
+    <div class="wrapper-md">
+        <div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="paidSuccessfullyModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="text-center">
+                            <p>
+                                <i class="fa fa-check-circle text-shadow text-success no-text-shadow"></i>
+                            </p>
+                            <p class="h3 font-thin padder-v" data-bind="html: successMessage()"></p>
+                            <div class="padder-v">
+                                <a href="#" class="btn btn-primary btn-lg" data-bind="downloadFile:{url: downloadUrl() }, restext: 'Naati.Resources.Finance.resources.DownloadInvoice' "></a>
+                                <a href="#" class="btn btn-primary btn-lg" data-dismiss="modal" data-bind="click: clean, restext: 'Naati.Resources.Finance.resources.OrContinue'"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-bind="compose: { model: addDetailInstance, view: 'views/finance/add-payment-detail' }"></div>
+        <div class="panel hbox hbox-auto-xs no-border">
+            <div class="col r-r wrapper-sm">
+                <div class="form-group">
+                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.Search'"></label>
+                    <!-- ko component: { name: 'auto-text-input', params: searchOptions } --><!-- /ko -->
+                    <span class="help-block text-muted text-sm" data-bind="restext: 'Naati.Resources.Finance.resources.SearchHelp'"></span>
+                </div>
+            </div>
+            <div class="col r-r wrapper-sm animated flash i-2" data-bind="css: { 'hide': !showInvoiceSelector() }">
+                <div class="form-group">
+                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.InvoiceOrCreditNote'"></label>
+                    <!-- ko component: { name: 'select-component', params: invoicesOptions } --><!-- /ko -->
+                </div>
+            </div>
+        </div>
+        <div class="panel hbox hbox-auto-xs no-border animated fadeIn i-1" data-bind="css: { hide: !invoice.Total() }">
+            <div class="col bg-light dker r-r form-horizontal wrapper-sm v-middle">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group m-b-none">
+                            <label class="control-label col-xs-5" data-bind="restext: 'Naati.Resources.Finance.resources.Type'"></label>
+                            <div class="col-xs-7">
+                                <p class="form-control-static" data-bind="text: typeName"></p>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-none">
+                            <label class="control-label col-xs-5" data-bind="text: invoiceOrCreditNoteLabel"></label>
+                            <div class="col-xs-7">
+                                <p class="form-control-static">
+                                    <span data-bind="text: invoice.InvoiceNumber"></span>
+                                    <a href="#" class="btn btn-default btn-xs bg-light" data-bind="resattr: { title: 'Naati.Resources.Finance.resources.DownloadInvoice' }, tooltip: { trigger: 'hover' }, downloadFile: { url: downloadUrl() }">
+                                        <span class="fa fa-download"></span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-none">
+                            <label class="control-label col-xs-5" data-bind="restext: 'Naati.Resources.Finance.resources.WiiseReference'"></label>
+                            <div class="col-xs-7">
+                                <p class="form-control-static" data-bind="text: invoice.WiiseReference"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group m-b-none">
+                            <label class="control-label col-xs-5" data-bind="restext: 'Naati.Resources.Finance.resources.Customer'"></label>
+                            <div class="col-xs-7">
+                                <p class="form-control-static" data-bind="text: invoice.Customer"></p>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-none" data-bind="if: invoice.Office() && invoice.Type() == 1">
+                            <label class="control-label col-xs-5" data-bind="restext: 'Naati.Resources.Finance.resources.Office'"></label>
+                            <div class="col-xs-7">
+                                <p class="form-control-static" data-bind="text: invoice.Office"></p>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-none">
+                            <label class="control-label col-xs-5" data-bind="restext: 'Naati.Resources.Finance.resources.DueDate'"></label>
+                            <div class="col-xs-7">
+                                <p class="form-control-static">
+                                    <!--ko ifnot: isInvoice-->
+                                    <span>-</span>
+                                    <!--/ko-->
+                                    <!--ko if: isInvoice-->
+                                    <span data-bind="textDate: invoice.DueDate"></span>
+                                    <!--/ko-->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col v-middle text-center">
+                <div class="r item b-l hbox no-border">
+                    <div class="col v-middle wrapper-sm font-thin">
+                        <div class="h1 text-info"><span data-bind="textCurrency: invoice.Total"></span></div>
+                        <span class="text-xs text-info" data-bind="restext: 'Naati.Resources.Finance.resources.Total'"></span>
+                        <div class="h3 m-t text-success"><span data-bind="textCurrency: paid"></span></div>
+                        <span class="text-xs text-success" data-bind="restext: 'Naati.Resources.Finance.resources.PaymentTotal'"></span>
+                        <div class="h3 m-t text-danger"><span data-bind="textCurrency: balance"></span></div>
+                        <span class="text-xs text-danger" data-bind="restext: 'Naati.Resources.Finance.resources.Balance'"></span>
+                    </div>
+                    <div class="col text-center b-l no-border b-dashed v-middle padder-v">
+                        <div data-bind="sparkline: { values: sparklineValues, options: sparklineOptions }" class="sparkline inline"></div>
+                        <div class="line pull-in"></div>
+                        <div class="text-xs">
+                            <i class="fa fa-circle text-success"></i>
+                            <span data-bind="restext: 'Naati.Resources.Finance.resources.PaymentTotal'"></span>
+                            <i class="fa fa-circle text-danger m-l"></i>
+                            <span data-bind="restext: 'Naati.Resources.Finance.resources.Balance'"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--ko component: { name: 'table-component', params: tableDefinition }-->
+        <!--/ko-->
+        <div class="panel hbox hbox-auto-xs no-border">
+            <div class="panel-body">
+                <button class="btn btn-success" data-bind="click: trySave, enable: canSave">
+                    <i class="glyphicon glyphicon-ok"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.Save'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="payments-header-template" type="text/html">
+    <th data-bind="restext: 'Naati.Resources.Finance.resources.Office'"></th>
+    <th data-bind="restext: 'Naati.Resources.Finance.resources.Type'"></th>
+    <th data-bind="restext: 'Naati.Resources.Finance.resources.Amount'"></th>
+    <th data-bind="restext: 'Naati.Resources.Finance.resources.DatePaid'"></th>
+    <th data-bind="restext: 'Naati.Resources.Finance.resources.Reference'"></th>
+    <th></th>
+</script>
+<script id="payments-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: OfficeObject.Name, attr: { 'data-order': OfficeObject.Name }"></td>
+        <td data-bind="text: PaymentTypeObject.name, attr: { 'data-order': PaymentTypeObject.name }"></td>
+        <td data-bind="textCurrency: Amount, attr: { 'data-order': Amount }"></td>
+        <td data-bind="text: DatePaidFormatted"></td>
+        <td data-bind="text: Reference, attr: { 'data-order': Reference }"></td>
+        <td style="width: 150px;">
+            <!--ko if: $root.invoice.AllowEdit-->
+            <div class="btn-group">
+                <a href="#" class="btn btn-default btn-xs" data-bind="click: $root.edit">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                <a href="#" class="btn btn-danger btn-xs" data-bind="click: $root.remove">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </div>
+            <!--/ko-->
+        </td>
+    </tr>
+</script>
+<script id="entityto-template" type="text/html">
+    <div class="row wrapper suggestion-row">
+        <div class="col-md-2">
+            <strong data-bind="text: TypeName"></strong>
+        </div>
+        <div class="col-md-8 b-l b-light">
+            <span data-bind="text: NaatiNumber > 0 ? NaatiNumber : EntityId"></span>
+            <span> - </span>
+            <span data-bind="text: Name"></span>
+        </div>
+    </div>
+</script>

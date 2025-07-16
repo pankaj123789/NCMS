@@ -1,0 +1,73 @@
+<!--<div data-bind="compose: { model: newBatchInstance, view: 'views/test/edit-tab/new-batch' }"></div>-->
+<div data-bind="compose: { model: editMarksInstance, view: 'views/test/edit-marks' }"></div>
+<div data-bind="compose: { model: addExaminerInstance, view: 'views/test/add-examiner' }"></div>
+<div data-bind="compose: { model: editExaminerInstance, view: 'views/test/edit-examiner' }"></div>
+<div data-bind="compose: { model: confirmationInstance, view: 'views/test/edit-tab/confirmation' }"></div>
+<div class="vbox panel-screen panel-details test-details">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+
+                <button class="btn btn-sm btn-success pull-right dropdown-toggle m-t-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="enable: test.Actions().length">
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                </button>
+                <!-- dropdown -->
+                <ul class="dropdown-menu dropdown-menu-right w-lg">
+                    <!--ko foreach: test.Actions-->
+                    <li><a data-bind="text: Name, click: $root.selectAction"></a></li>
+                    <!--/ko-->
+                    <li><a href="#" data-bind="restext: 'Naati.Resources.Person.resources.AuditHistory', attr: { href: '#/test/' + test.TestAttendanceId() + '/audit-history' }"></a></li>
+                </ul>
+                <!-- / dropdown -->
+                <h1 class="m-n font-thin h3 text-black" data-bind="html: personDetailsHeading"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="alert bg-warning text-black" role="alert" data-bind="visible: resultInstance.requireThirdMarking()">
+                        <span data-bind="reshtml:'Naati.Resources.Test.resources.RequiredThirdMarking'"></span>
+                    </div>
+                    <div class="panel no-border">
+                        <form>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <!-- ko component: { name: 'test-header', params: testHeaderOptions } --><!-- /ko -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="alert text-white label-purple" role="alert" data-bind="visible:testInvalidated() && !hasJob()">
+                        <span>
+                            <span data-bind="reshtml:'Naati.Resources.Test.resources.TestInvalidatedMessage'"></span>
+                            <strong data-bind="text: test.test"></strong>
+                        </span>
+                    </div>
+                    <div class="alert text-white" role="alert" data-bind="visible: hasJob, css: {  'label-info':!passed(), 'label-success': passed(), 'label-danger': failed(), 'label-orange': unknownStatus(), 'label-purple':testInvalidated() }">
+                        <span>
+                            <span data-bind="reshtml:'Naati.Resources.Test.resources.TestMessage'"></span>
+                            <strong data-bind="text: test.TestResultStatus"></strong>
+                        </span>
+                    </div>
+                    <!-- ko component: { name: 'tab-component', params: tabOptions } --><!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="click: save, enableWithPermission:'TestResult.Update'">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <a data-bind="click:close" class="btn btn-default">
+                <i class="fa fa-times"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

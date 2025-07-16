@@ -1,0 +1,100 @@
+﻿<div class="col">
+    <div class="vbox">
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="m-n font-thin h3 row m-t-none m-b-none">
+                <div class="pull-left m-r-md">
+                    <span class="m-r-lg" data-bind="html: title"></span>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" data-bind="click: expandAll">
+                            <i class="fa fa-plus-square"></i>
+                            <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.ExpandAll'"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" data-bind="click: collapseAll">
+                            <i class="fa fa-minus-square-o"></i>
+                            <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.CollapseAll'"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="pull-left b-l b-4x b-white m-t-n-md m-b-n-md col-lg-6">
+                    <div class="m-l-none m-t-md m-b-sm pull-left w-full">
+                        <!--ko component: {
+                        name: 'date-range',
+                        params: dateRangeOptions
+                        }-->
+                        <!--/ko-->
+                    </div>
+                </div>
+                <div class="pull-left m-l-n-sm">
+                    <button class="btn btn-success" data-bind="click: find, enable: canFind()">
+                        <i class="fa fa-search"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Find'"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner" data-bind="css: { 'bg-white': payrolls().length === 0 }">
+                    <div class="wrapper-md">
+                        <div class="alert alert-warning" data-bind="reshtml: 'Naati.Resources.Payroll.resources.NoPayRunFound', visible: payrolls().length === 0 && searched"></div>
+                        <div class="streamline b-l b-info m-b padder-v" data-bind="visible: payrolls().length > 0">
+                            <!--ko foreach: { data: payrolls, as: 'payroll' }-->
+                            <div class="bg-info wrapper-sm m-l-n m-r-n m-b r r-2x cursor-pointer" data-bind="attr: { id: payroll.headId }, click: $root.toggleGroups">
+                                <div class="row m-t-none m-b-none">
+                                    <div class="col-lg-3">
+                                        <i class="fa fa-plus-circle"></i>
+                                        <span data-bind="text: moment(payroll.PayrollModifiedDate).format('dddd, DD MMMM YYYY, h:mm a')"></span>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <span data-bind="text: payroll.Count"></span>
+                                        <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.Markings'"></span>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <span data-bind="text: $root.formatCost(payroll.TotalCost)"></span>
+                                    </div>
+                                    <div class="pull-right m-r-md">
+                                        <span data-bind="text: $root.completedBy(payroll)"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui-helper-hidden" data-bind="attr: { id: payroll.childId }">
+                                <div class="m-l-sm">
+                                    <!--ko foreach: { data: payroll.Examiners, as: 'examiner' }-->
+                                    <div class="panel panel-default m-b-xs">
+                                        <div class="panel-heading b-b b-light" role="tab" data-bind="attr: { id: examiner.headId }">
+                                            <a role="button" data-toggle="collapse" aria-expanded="false" data-bind="click: $root.toggleExpanded, attr: { href: '#' + examiner.childId, 'aria-controls': examiner.childId }">
+                                                <span class="pull-right">
+                                                    <strong data-bind="reshtml: 'Naati.Resources.Payroll.resources.InvoiceNo'"></strong>
+                                                    <span data-bind="text: examiner.AccountingReference"></span>
+                                                </span>
+                                                <div class="row m-t-xs m-b-xxs">
+                                                    <div class="h5">
+                                                        <div class="col-lg-3">
+                                                            <i class="fa" data-bind="css: { 'fa-chevron-right': !examiner.expanded(), 'fa-chevron-down': examiner.expanded() }"></i>
+                                                            <span data-bind="text: examiner.Examiner"></span>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <span data-bind="text: examiner.Count"></span>
+                                                            <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.Markings'"></span>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <span data-bind="text: $root.formatCost(examiner.TotalCost())"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <!--ko component: { name: 'payroll-markings', params: { examiner: examiner } }-->
+                                        <!--/ko-->
+                                    </div>
+                                    <!--/ko-->
+                                </div>
+                            </div>
+                            <!--/ko-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

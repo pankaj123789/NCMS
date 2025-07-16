@@ -1,0 +1,53 @@
+﻿<div class="form-group">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" data-bind="checked: address.ValidateInExternalTool" />
+            Validate in Google
+        </label>
+    </div>
+</div>
+<div class="form-group" data-bind="visible: !address.ValidateInExternalTool()">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" data-bind="checked: overseas" />
+            Overseas
+        </label>
+    </div>
+</div>
+<div class="form-group" data-bind="validationElement: address.StreetDetails, validationOptions: { insertMessages: false }">
+    <!--ko if: overseas-->
+    <label class="control-label">Enter Address</label>
+    <!--/ko-->
+    <!--ko ifnot: overseas-->
+    <label class="control-label">Address</label>
+    <!--/ko-->
+    <input type="text" class="form-control" data-bind="addressAutoComplete: addressAutoCompleteOptions, value: address.FormattedAddress, visible: address.ValidateInExternalTool()" />
+    <input type="text" class="form-control" data-bind="value: address.StreetDetails, visible: !address.ValidateInExternalTool()" />
+    <span class="help-block" data-bind="validationMessage: address.StreetDetails"></span>
+
+    <div class="form-group" data-bind="visible: address.ShowGoogleSuburbDropDown(), validationElement: address.PostCodeId, validationOptions: { insertMessages: false }">
+        <label class="control-label">Suburb</label>
+        <input type="text" class="form-control" maxlength="300" placeholder="Start typing to search for an suburb..." data-bind="autocomplete: suburbOptions, value: address.SuburbName" />
+        <span class="help-block" data-bind="text: addressInvalidSuburb"></span>
+    </div>
+
+</div>
+<div class="form-group" data-bind="visible: address.FormattedAddress() && address.ValidateInExternalTool()">
+    <img data-bind="attr: { id: mapId }" class="map" src="" />
+</div>
+<div data-bind="visible: !address.ValidateInExternalTool()">
+    <div class="form-group" data-bind="visible: !overseas(), validationElement: address.PostCodeId, validationOptions: { insertMessages: false }">
+        <label class="control-label">Suburb</label>
+        <input type="text" class="form-control" maxlength="300" placeholder="Start typing to search for an suburb..." data-bind="autocomplete: suburbOptions, value: address.SuburbName" />
+        <span class="help-block" data-bind="validationMessage: address.PostCodeId"></span>
+    </div>
+    <div class="form-group" data-bind="visible: overseas(), validationElement: address.CountryId">
+        <label class="control-label">Country</label>
+        <!-- ko component: { name: 'select-component', params: countryOptions } -->
+        <!-- /ko -->
+    </div>
+</div>
+<div class="form-group" data-bind="validationElement: person.PhoneNumber">
+    <label class="control-label">Phone Number</label>
+    <input type="text" class="form-control" data-bind="value: person.PhoneNumber" />
+</div>

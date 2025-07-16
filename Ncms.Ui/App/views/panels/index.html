@@ -1,0 +1,61 @@
+<div class="hbox">
+    <div class="hbox" data-bind="component: { name: 'search-component', params: searchComponentOptions }">
+    </div>
+    <div data-bind="compose: { model: createPanelInstance, view: 'views/panels/create.html' }"></div>
+    <script id="panel-header-template" type="text/html">
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Panel.resources.PanelName'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Panel.resources.PanelType'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Language'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Panel.resources.CommissionedDate'"></th>
+        <th>&nbsp;</th>
+    </script>
+    <script id="panel-row-template" type="text/html">
+        <tr>
+            <!-- ko if: HasCurrentMembers -->
+            <td data-bind="attr: { 'data-order': Name }">
+                <a href="#" data-bind="click: $root.toggleDetails, clickBubble: false">
+                    <i class="fa" data-bind="css: Chevron"></i>
+                </a>
+                <span data-bind="text: Name"></span>
+            </td>
+            <!-- /ko -->
+            <!-- ko if: !HasCurrentMembers -->
+            <td data-bind="text: Name, attr: { 'data-order': Name }"></td>
+            <!-- /ko -->
+            <td data-bind="text: PanelType"></td>
+            <td data-bind="text: Language"></td>
+            <td data-bind="text: CommissionedDate"></td>
+            <td class="text-center" style="width: 150px;">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#panel/' + PanelId }, tooltip: { container: '#panelTable' }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </script>
+    <script id="panel-details-template" type="text/html">
+        <table class="table table-bordered table-striped b-t b-b" style="width: 100%;">
+            <thead>
+                <tr data-bind="template: 'panel-details-header-template'"></tr>
+            </thead>
+            <tbody data-bind="template: { name: 'panel-details-row-template', foreach: panelMembers }"></tbody>
+        </table>
+    </script>
+    <script id="panel-details-header-template" type="text/html">
+        <th data-bind="reshtml: 'Naati.Resources.Shared.resources.NAATINumber'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Role'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Shared.resources.StartDate'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Shared.resources.EndDate'"></th>
+    </script>
+    <script id="panel-details-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: NaatiNumber"></td>
+            <td data-bind="text: PersonName"></td>
+            <td data-bind="text: PanelRole"></td>
+            <td data-bind="text: StartDateFormatted"></td>
+            <td data-bind="text: EndDateFormatted"></td>
+        </tr>
+    </script>
+</div>

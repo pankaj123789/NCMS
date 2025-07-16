@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Eoi";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+}
+
+<h1>Expression of Interest</h1>
+<p>To list the expression of interest</p>
+<p>1. Select the date range</p>
+<p>2. Select the required filters</p>
+
+<div class="form">
+    <div class="editorSet">
+        <div class="multiProperty">
+            <div class="property">
+                <p>From:</p>
+                <input type="date" name="FromLanguage">
+            </div>
+            <div class="property">
+                <p>To:</p>
+                <input type="date" name="ToLanguage">
+            </div>
+        </div>
+        <div class="property">
+            <p>Language</p>
+            <select>
+                <option>test1</option>
+                <option>test2</option>
+                <option>test3</option>
+                <option>test4</option>
+            </select>
+        </div>
+        <div class="property">
+            <p>Level</p>
+            <select>
+                <option>test1</option>
+                <option>test2</option>
+                <option>test3</option>
+                <option>test4</option>
+            </select>
+        </div>
+        <div class="property">
+            <p>Type</p>
+            <select>
+                <option>test1</option>
+                <option>test2</option>
+                <option>test3</option>
+                <option>test4</option>
+            </select>
+        </div>
+        <button>Go</button>
+    </div>
+</div>
+<button>Export</button>
+<table style="width: 100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Language</th>
+            <th>Email address</th>
+            <th>Submitted date</th>
+            <th>Prefferred Test Center</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td>Language</td>
+            <td>Email address</td>
+            <td>Submitted date</td>
+            <td>Prefferred Test Center</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>Language</td>
+            <td>Email address</td>
+            <td>Submitted date</td>
+            <td>Prefferred Test Center</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>Language</td>
+            <td>Email address</td>
+            <td>Submitted date</td>
+            <td>Prefferred Test Center</td>
+        </tr>
+    </tbody>
+</table>

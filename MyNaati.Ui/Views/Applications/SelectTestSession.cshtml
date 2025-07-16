@@ -1,0 +1,25 @@
+﻿@model MyNaati.Ui.Controllers.SelectTestSessionRequest
+@{
+    Layout = "~/Views/Shared/MasterPages/_KnockoutLayout.cshtml";
+    ViewBag.ShowLogon = true;
+    ViewBag.ShowMenu = true;
+    ViewBag.RedirectLogoUrl = System.Configuration.ConfigurationManager.AppSettings["ExternalUrl_NAATI_URL"];
+    ViewBag.Title = "Select Test Session";
+    ViewBag.ShowBreadCrumb = false;
+
+}
+@section Head {
+    @Styles.Render("~/Bundles/Styles")
+    <script type="text/javascript">
+        window.TestSessionId = "@Model.TestSessionId";
+        window.CredentialRequestId = "@Model.CredentialRequestId";
+        window.CredentialApplicationId = "@Model.CredentialApplicationId";
+    </script>
+}
+
+@section Scripts
+{
+    <script src="@ViewBag.PayPalClientId"></script>
+}
+
+<div id="applicationHost" data-app-root="views/applications/select-test-session"></div>

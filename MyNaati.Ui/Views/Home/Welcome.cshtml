@@ -1,0 +1,7 @@
+﻿@using MyNaati.Ui.Controllers
+@model MyNaati.Ui.Models.HomeModel
+@{
+    ViewBag.Title = "Welcome";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+}
+@{ Html.RenderPartial("_MenuLinksPartial", HomeController.Menus(User)); }

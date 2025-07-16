@@ -1,0 +1,123 @@
+<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <button class="btn btn-sm btn-success pull-right dropdown-toggle m-t-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="enable: actions().length">
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                </button>
+                <!-- dropdown -->
+                <ul class="dropdown-menu dropdown-menu-right w" data-bind="foreach: actions">
+                    <li>
+                        <a data-bind="text: Name, click: $root.selectAction"></a>
+                    </li>
+                </ul>
+                <!-- / dropdown -->
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: title"></h1>
+                <small class="text-muted" data-bind="text: subtitle"></small>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="panel wrapper text-sm-m">
+                        <div class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.ApplicationOwner'"></label>
+                                    <p class="form-control-static" data-bind="text: application.ApplicationOwner"></p>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs m-l-n-xxl">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.ApplicationStatus'"></label>
+                                    <p class="form-control-static">
+                                        <span class="label text-base" data-bind="text: application.ApplicationStatus, css: statusClass()"></span>
+                                        <!-- ko if: ApplicationIsAutoCreated() -->
+                                        <span class="label text-base label-info">Auto-Created</span>
+                                        <!-- /ko -->
+                                    </p>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs m-l-n-xxl">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.PreferredTestLocation'"></label>
+                                    <div class="col-md-6 no-padder">
+                                        <!-- ko component: { name: 'select-component', params: testLocationOptions } --><!-- /ko -->
+                                    </div>
+                                    <span data-bind="visible: application.ShowNonPreferredTestLocationInfo()">
+                                        <a href="#" class="ml-1" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Application.resources.NonPreferredTestLocationInfo' }" title="" data-original-title="View">
+                                            <span class="glyphicon glyphicon-info-sign" style="font-size: 23px;color: purple;"></span>
+                                        </a>
+                                    </span>
+                                    <span data-bind="visible: application.ErrorNonPreferredTestLocationInfo()">
+                                        <a href="#" class="ml-1" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Application.resources.NonPreferredTestLocationError' }" title="" data-original-title="View">
+                                            <span class="glyphicon glyphicon-info-sign" style="font-size: 23px;color: red;"></span>
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.EnteredDate'"></label>
+                                    <p class="form-control-static" data-bind="textDate: application.EnteredDate"></p>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs m-l-n-xxl" data-bind="validationElement: application.ReceivingOfficeId">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.EnteredOffice'"></label>
+                                    <div class="col-md-6 no-padder">
+                                        <!-- ko component: { name: 'select-component', params: enteredOfficeOptions } --><!-- /ko -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs m-l-n-xxl">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.EnteredUser'"></label>
+                                    <p class="form-control-static" data-bind="text: application.EnteredUserName"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.SponsorOrganisation'"></label>
+                                    <div class="col-md-6 no-padder" data-bind="validationElement: application.SponsorInstitutionNaatiNumber">
+                                        <!-- ko component: { name: 'select-component', params: sponsorOrganisationOptions } --><!-- /ko -->
+                                        <span class="help-block" data-bind="validationMessage: application.SponsorInstitutionNaatiNumber"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs m-l-n-xxl" data-bind="validationElement: application.SponsorInstitutionContactPersonId">
+                                    <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.SponsorContact'"></label>
+                                    <div class="col-md-6 no-padder">
+                                        <!-- ko component: { name: 'select-component', params: sponsorContactOptions } --><!-- /ko -->
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel wrapper text-sm-m">
+                        <!--ko compose: { view: 'views/application/application-parts/application-applicant', model: applicantInstance }-->
+                        <!--/ko-->
+                    </div>
+                    <!--ko if: credentialRequests().length-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" data-bind="reshtml: 'Naati.Resources.Application.resources.OtherCredentialRequests'"></div>
+                        <div class="panel-body">
+                            <!--ko component: credentialRequestOptions-->
+                            <!--/ko-->
+                        </div>
+                    </div>
+                    <!--/ko-->
+                    <!-- ko component: { name: 'tab-component', params: tabOptions } -->
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="click: save, enable: canSave">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <a data-bind="click:close" class="btn btn-default">
+                <i class="fa fa-times"></i> 
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

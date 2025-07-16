@@ -1,0 +1,73 @@
+﻿@using MyNaati.Ui.Common
+@model DateTime?
+
+@helper GetWidth(dynamic width, string defaultValue)
+{
+    if (width == null || width.ToString() == string.Empty)
+    {
+    @defaultValue
+    }
+    else if (width.ToString().EndsWith("%"))
+    {
+    @width
+    }
+    else
+    {
+    @(width + "px")
+    }
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.ui.datepicker-en-GB.js")"></script>
+@{
+    string formatString = "dd M yy";
+
+    if (!string.IsNullOrEmpty(ViewData.ModelMetadata.DisplayFormatString))
+    {
+        formatString = ViewData.ModelMetadata.DisplayFormatString;
+    }
+
+    string maxDateAttribute = string.Empty;
+
+    if (ViewData["MaxDate"] != null)
+    {
+        var maxDate = (DateTime)ViewData["MaxDate"];
+        maxDateAttribute = string.Format("maxDate: new Date({0}, {1}, {2})", maxDate.Year, maxDate.Month - 1, maxDate.Day);
+    }
+
+    int minYear = (int)((int?)ViewData["MinYear"] ?? DateTime.Now.Year - 10);
+    int maxYear = (int)((int?)ViewData["MaxYear"] ?? DateTime.Now.Year + 10);
+    int defaultYear = (int)((int?)ViewData["DefaultYear"] ?? minYear);
+    int currentMonth = DateTime.Now.Month - 1;
+    int currentDay = DateTime.Now.Day;
+}
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#@ViewData.ModelMetadata.PropertyName").datepicker({
+            showOn: 'both',
+            buttonImage: '../Content/images/calendar.gif',
+            buttonImageOnly: true,
+            changeYear: true,
+            constrainInput: false,
+            yearRange: '@minYear:@maxYear',
+            duration: 0,
+            dateFormat: '@formatString',
+            defaultDate: new Date('@defaultYear', '@currentMonth', '@currentDay'),
+            @Html.Raw(maxDateAttribute)
+        });
+    });
+</script>
+
+<div class="editorSet">
+    <div class="editorLabel" style="width:@GetWidth(ViewData["LabelWidth"], "100px");">
+        @Html.LabelFor(e => Model, @ViewData.ModelMetadata.DisplayName + ":")
+    </div>
+    <div class="editorValue">
+        @Html.TextBox("",
+                        Model.HasValue ? Model.Value.ToString(formatString.ToNetDateTimeFormat()) : "",
+                        new { id = ViewData.TemplateInfo.GetFullHtmlFieldId(""),
+                              style = "width: " + GetWidth(ViewData["FieldWidth"], "80px")
+                        })
+        @Html.ValidationMessageFor(e => Model, "*")
+    </div>
+</div>

@@ -1,0 +1,76 @@
+﻿@model MyNaati.Ui.ViewModels.Certificate.WizardModel
+
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Application for NAATI Certificate</title>
+    <link href="@Url.Content("~/Content/Reports.css")" rel="stylesheet" type="text/css" media="print, screen" />    
+</head>
+<body>
+
+    <div id="report">
+        <!-- HEADER -->
+        <div id="header">
+            <div id="title">
+                <img src="@Url.Content("~/Content/Images/NaatiLogo.png")" alt="NAATI Logo" id="logo" />
+                <div class="container">
+                    <div>
+                        <h1>Application for<br />NAATI Certificate</h1>
+                        <p>All Certificates will record the date at which your Accreditation(s) and/or Recognition(s) expire if part of the revalidation system.</p>
+                    </div>
+                </div>
+            </div>
+            <p class="clear">Please complete all parts of this form and send it to: <br />
+            <strong style="padding-left:140px">NAATI PO Box 223 DEAKIN WEST ACT 2600 AUSTRALIA</strong></p>
+        </div>
+
+        @{ Html.RenderPartial("_ProductReportPersonalDetailsPartial", Model); }            
+    
+        <!-- Part 1 - Certificates -->
+        <div class="part">                
+            <table class="wide">
+                <tr class="header">
+                    <th class="part">Part 1</th>
+                    <th>Select Your Certificate(s)</th>
+                </tr>
+            </table>
+            <table class="wide">
+                <tr class="highlight">
+                    <td colspan="2">
+                        Accreditation Certificate(s) - only 1 accreditation per certificate.<br />
+                        *Certificates are available in both directions only if both the accreditations have the same or no expiry date.    
+                    </td>
+                </tr>
+            </table>
+        
+            @{Html.RenderPartial("_ProductReportOrderItemsPartial", Model);}
+        </div>
+
+        <div class="highlight">
+            NAATI maintains the copyright over the certificate design.  The certificate can only be obtained by direct application to NAATI.
+        </div>        
+            
+        <div class="part" style="page-break-before: always">
+            <table class="wide">
+                <tr class="header">
+                    <th class="part">Part 2</th>
+                    <th>Payment Details</th>
+                </tr>
+            </table>
+            @{Html.RenderPartial("_ProductReportPaymentDetailsPartial", Model);}
+        </div>
+
+        @{ Html.RenderPartial("_ProductReportNoteAboutMandatoryFieldsPartial"); }
+        <br />
+            
+        @{Html.RenderPartial("_ProductReportOfficeUseOnlyPartial");}
+            
+        <div id="footer">
+            @{Html.RenderPartial("_OrderFormFooterPartial");}
+        </div>                        
+    </div>
+</body>
+</html>

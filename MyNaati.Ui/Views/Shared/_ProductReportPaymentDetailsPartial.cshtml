@@ -1,0 +1,56 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.Shared.BasePurchaseWizardModel
+
+<table class="highlight">
+    <tr>
+        <td colspan="2">NAATI does not accept personal cheques (only AMO, BANK CHEQUES and OVERSEAS DRAFTS)</td>
+    </tr>
+    <tr>
+        <td style="width:300px;">Amount $AUD: @Model.OrderTotalModel.TotalPrice.ToString("#.00")</td>
+        <td>All payments must be made in Australian dollars</td>
+    </tr>
+    <tr>
+        <td class="tickone" colspan="2">Please tick @FormBoxHelper.TickedBox(Url) one</td>
+    </tr>
+</table>
+<div class="tabular">
+    @FormBoxHelper.UntickedBox(Url) Australian Money Order
+    @FormBoxHelper.UntickedBox(Url) Bank Cheque (a cheque purchased from a bank)
+    @FormBoxHelper.UntickedBox(Url) Overseas Bank Draft
+    @FormBoxHelper.UntickedBox(Url) Credit or Debit Card
+    @FormBoxHelper.UntickedBox(Url) Cash (payable at any NAATI office)
+</div>
+<div class="tabular">
+    Card details <span class="tickone">(please tick @FormBoxHelper.TickedBox(Url) one)</span>
+    <br />
+    @FormBoxHelper.UntickedBox(Url) Visa @FormBoxHelper.UntickedBox(Url) MasterCard @FormBoxHelper.UntickedBox(Url) Amex
+</div>
+<table class="wide">
+    <tr>
+        <td>@FormBoxHelper.Boxes("", 16)</td>
+        <td>@FormBoxHelper.Boxes("", 4)</td>
+        <td>@FormBoxHelper.ExpiryDateBox()</td>
+    </tr>
+    <tr>
+        <td class="belowboxtext">Credit card number*</td>
+        <td class="belowboxtext">Security number if requested*</td>
+        <td class="belowboxtext">Expiry date*</td>
+    </tr>
+</table>
+<table class="wide">
+    <tr>
+        <td style="width:150px;">Card holder's name<span class="manual">*</span></td>
+        <td colspan="2"></td>
+    </tr>
+    <tr>
+        <td>Card holder's signature<span class="manual">*</span></td>
+        <td style="width:250px;">&nbsp;</td>
+        <td><span class="box-container">Date*</span>@FormBoxHelper.DateBox()</td>
+    </tr>
+</table>
+<div class="comment">
+    Prices include Australian Goods and Services Tax (GST) where applicable.<br />
+    Prices include postage and handling fees as applicable.<br />
+    All fees and charges are listed in Australian currency ($AUD).<br />
+    All prices are subject to change without notice.
+</div>

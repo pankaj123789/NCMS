@@ -1,0 +1,118 @@
+# Default values for naati.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Default values for naati.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+sharedResourcesName: "naati"
+ncms:
+  image:
+   repository: ntacr4.azurecr.io/ncmsui
+  replicaCount: 1
+  nameOverride: ""
+  fullnameOverride: ""
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  sharedResourcesName: "naati"
+
+  service:
+   type: LoadBalancer
+   port: 80
+    # Internal ip of ncms
+   loadBalancerIP: 10.60.7.200
+
+  ingress:
+    hosts:
+      - host: chart-example.local
+  configMap:
+    data:
+      # Configuration values can be set as key-value properties 
+      "AccountingOperationsReportEmailsTo": "ncms_prod_batching_dl@f1solutions.com.au"
+      "EmailBatchingReportEmailsTo": "Mananu.Gunawardana@f1solutions.com.au;Bruce.Mcleod@f1solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Murray.McCulloch@f1solutions.com.au"
+      "AccountingOperationsLogEmailsTo": "ncms_prod_batching_dl@f1solutions.com.au"
+      "EmailBatchingLogEmailsTo": "Kevin.Bleasdale@naati.com.au;Roderick.Le@naati.com.au;Mananu.Gunawardana@f1solutions.com.au;Bruce.Mcleod@f1solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Murray.McCulloch@f1solutions.com.au"
+      "AccountingOperationsReportEmailsFrom": "ncms_batching@naati.com.au"
+      "TestSittingsWithoutMaterialReminderEmailAddresses": "info@naati.com.au"
+
+      "AzureAppRedirectUri": "https://ncms.naati.com.au"
+      "AadAuthRedirectUri": "https://ncms.naati.com.au/api/System/AadResponse"
+      "EnvironmentType": "Prod"
+      "EnvironmentName": "PROD_CLOUD"
+       # Internal ip of mynaati
+      "MyNaatiUrl": "http://10.60.7.201"
+      "SecurePay_PaymentUrl": "https://api.securepay.com.au/xmlapi/payment"
+      "ShowAllMenuItems" : "False"
+      "DebugMode" : "False"
+      "logging_MinimumLevel": "Information"
+      "ScriptsTimeoutSeconds" : "1800"
+      "ReportingJobName": "NCMSReportingDatabase"
+      "SecretPrefix" : "PROD"      
+      "SecurePayResource": "https://payments.auspost.net.au"
+      "SecurePayTokenUrl": "https://welcome.api2.auspost.com.au/oauth/token"
+      "PayPalMode": "live" 
+      "PayPalConnectionTimeout": "360000" 
+      "PayPalRequestRetries": "1" 
+      "WiiseAuthRedirectUri": "https://ncms.naati.com.au/api/System/WiiseResponse"
+      "WiiseBaseUrl": "https://api.businesscentral.dynamics.com/v2.0/41bb5789-7441-4051-b270-c49376cfab28/production/api/v2.0/companies(d96ec21b-1177-eb11-b855-000d3a6a22b9)"
+      "QrCodeAccessUrl": "https://my.naati.com.au/VerifyPractitioner?QrCode={0}"
+
+
+mynaati:
+  image:
+   repository: ntacr4.azurecr.io/mynaatiui
+  replicaCount: 1
+  nameOverride: ""
+  fullnameOverride: ""
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  sharedResourcesName: "naati" 
+  
+  service:
+   type: LoadBalancer
+   port: 80
+   # Internal ip of mynaati
+   loadBalancerIP: 10.60.7.201
+
+  ingress:
+    hosts:
+      - host: chart-example.local
+  configMap:
+    data:
+      # Configuration values can be set as key-value properties 
+      "ExternalUrl_Applications_URL": "https://my.naati.com.au/apply"
+      "BypassExaminerAuthentication": "true"
+      "kosettings_allowEmailPaste": "false"
+      "kosettings_skipRecaptcha": "false" 
+      "EnvironmentType": "Prod"
+      "EnvironmentName": "PROD_CLOUD"
+      "SecretPrefix": "PROD"
+      # Internal ip of Ncms
+      "NcmsUrl": "http://10.60.7.200"
+      "SecurePay_PaymentUrl": "https://api.securepay.com.au/xmlapi/payment"
+      "DebugMode" : "False"
+      "EnableSwagger" : "False"
+      "logging_MinimumLevel": "Information"
+      "AccountingOperationsReportEmailsTo": "PROD_Batching@altf4solutions.com.au;Mananu.Gunawardana@f1solutions.com.au;Bruce.Mcleod@f1solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Murray.McCulloch@f1solutions.com.au"
+      "EmailBatchingReportEmailsTo": "Mananu.Gunawardana@f1solutions.com.au;Bruce.Mcleod@f1solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Murray.McCulloch@f1solutions.com.au"
+      "AccountingOperationsLogEmailsTo": "PROD_Batching@altf4solutions.com.au;Bruce.Mcleod@f1solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Murray.McCulloch@f1solutions.com.au"
+      "EmailBatchingLogEmailsTo": "Kevin.Bleasdale@naati.com.au;Roderick.Le@naati.com.au;Bruce.Mcleod@f1solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Murray.McCulloch@f1solutions.com.au"
+      "AccountingOperationsReportEmailsFrom": "ncms_batching@naati.com.au"
+      "SecurePayResource": "https://payments.auspost.net.au"
+      "SecurePayTokenUrl": "https://welcome.api2.auspost.com.au/oauth/token"
+      "SecurePayJavascriptSDKUrl": "https://payments.auspost.net.au/v3/ui/client/securepay-ui.min.js"
+      "PayPalMode": "live" 
+      "PayPalConnectionTimeout": "360000" 
+      "PayPalRequestRetries": "1"
+      "WiiseAuthRedirectUri": "https://ncms.naati.com.au/api/System/WiiseResponse"
+      "WiiseBaseUrl": "https://api.businesscentral.dynamics.com/v2.0/41bb5789-7441-4051-b270-c49376cfab28/production/api/v2.0/companies(d96ec21b-1177-eb11-b855-000d3a6a22b9)"
+      "QrCodeAccessUrl": "https://my.naati.com.au/VerifyPractitioner?QrCode={0}"

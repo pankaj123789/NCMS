@@ -1,0 +1,123 @@
+﻿<div>
+    <div class="form-group" data-bind="validationElement: fees">
+        <!--ko if: fees().length-->
+        <table class="table table-primary table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="w-sm">Code</th>
+                    <th>Description</th>
+                    <th class="w-sm">Ex GST</th>
+                    <th class="w-sm">GST</th>
+                    <th class="w-sm">Total</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: fees">
+                <tr>
+                    <td data-bind="text: Code"></td>
+                    <td data-bind="text: Description"></td>
+                    <td class="text-right" data-bind="textCurrency: ExGST"></td>
+                    <td class="text-right" data-bind="textCurrency: GST"></td>
+                    <td class="text-right" data-bind="textCurrency: Total"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2"></th>
+                    <th class="text-right" data-bind="textCurrency: totalExGST"></th>
+                    <th class="text-right" data-bind="textCurrency: totalGST"></th>
+                    <th class="text-right" data-bind="textCurrency: paymentMethod.Total"></th>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="form-group" data-bind="validationElement: paymentMethod.PaymentMethodType, validationOptions: { insertMessages: false }">
+            <label class="control-label">Payment method</label>
+            <!--ko foreach: paymentMethods-->
+            <div class="radio">
+                <label>
+                    <input type="radio" data-bind="value: id, checked: $root.paymentMethod.PaymentMethodType" />
+                    <span data-bind="html: text"></span>
+                </label>
+                <span class="help-block animated fadeIn" data-bind="visible: $root.paymentMethod.PaymentMethodType() === id">
+                    <!--ko template: template--><!--/ko-->
+                </span>
+            </div>
+            <!--/ko-->
+            <span class="help-block" data-bind="validationMessage: paymentMethod.PaymentMethodType"></span>
+        </div>
+        <!--/ko-->
+        <!--ko if: !fees().length-->
+        <p>No applicable fees</p>
+        <!--/ko-->
+        <span class="help-block" data-bind="validationMessage: fees"></span>
+    </div>
+    <script type="text/html" id="creditCard">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-12 m-t-md">
+                        <div class="form-control-static">
+                            <!--ko foreach: { data: CreditCardOptions, as: 'card' }-->
+                            <div class="radio-inline">
+                                <label>
+                                    <div class="m-t-n-md image" data-bind="css: card.toLowerCase()"></div>
+                                </label>
+                            </div>
+                            <!--/ko-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body row">
+                <div class="col-md-4 form-group" data-bind="validationElement: CreditCardNumber, validationOptions: { insertMessages: false }">
+					<label class="control-label text-dark"><strong>Card Number</strong></label>
+                    <input type="number" class="form-control" data-bind="value: CreditCardNumber, valueUpdate: 'input'" />
+                </div>
+                <div class="col-md-5 form-group" data-bind="validationElement: CreditCardName, validationOptions: { insertMessages: false }">
+                    <label class="control-label text-dark"><strong>Name on Card</strong></label>
+                    <input type="text" class="form-control" data-bind="value: CreditCardName, valueUpdate: 'input'" />
+                </div>
+                <div class="col-md-2 form-group" data-bind="validationElement: CreditCardExpiry">
+					<label class="control-label text-dark"><strong>Expiry Date</strong></label>
+                    <div class="form-control-static row">
+                        <div class="col-xs-6" data-bind="validationElement: CreditCardExpiryMonth, validationOptions: { insertMessages: false }">
+                            <input type="number" class="form-control text-right" data-bind="value: CreditCardExpiryMonth, valueUpdate: 'input'" />
+                            <span class="help-block">Month</span>
+                        </div>
+                        <div class="col-xs-6" data-bind="validationElement: CreditCardExpiryYear, validationOptions: { insertMessages: false }">
+                            <div class="pull-left m-l-n-md h3 m-t-xxs">/</div>
+                            <input type="number" class="form-control text-right" data-bind="value: CreditCardExpiryYear, valueUpdate: 'input'" />
+                            <span class="help-block">Year</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 form-group" data-bind="validationElement: CreditCardCCV, validationOptions: { insertMessages: false }">
+                    <label class="control-label" text-dark"><strong>CCV</strong></label>
+                    <input type="number" class="form-control text-right" data-bind="value: CreditCardCCV, valueUpdate: 'input'" />
+                </div>
+                <div class="col-md-12 form-group has-error m-b-none">                  
+                    <span class="help-block" data-bind="validationMessage: CreditCardNumber"></span>
+                    <span class="help-block" data-bind="validationMessage: CreditCardName"></span>
+                    <span class="help-block" data-bind="validationMessage: CreditCardExpiryMonth"></span>
+                    <span class="help-block" data-bind="validationMessage: CreditCardExpiryYear"></span>
+                    <span class="help-block" data-bind="validationMessage: CreditCardCCV"></span>
+                    <span class="help-block" data-bind="text: CreditCardFailMessageLine1"></span>
+                    <span class="help-block" data-bind="text: CreditCardFailMessageLine2"></span>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label>Total</label>
+                        <strong class="form-control-static" data-bind="textCurrency: Total"></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/html" id="directDeposit">
+        After submitting this form, you will receive an email with an Invoice. Please transfer the funds to the account number provided on the Invoice, and ensure that the transaction description contains your Customer Number and the Invoice Number (for example ‘123456 INV1234’).
+    </script>
+    <script type="text/html" id="cashCheque">
+        After submitting this form, you will receive an email with an Invoice. You will then need to visit a NAATI Office to make a payment by cash or cheque. Please note that we only accept Bank Cheques and Australia Post money orders. 
+    </script>
+</div>

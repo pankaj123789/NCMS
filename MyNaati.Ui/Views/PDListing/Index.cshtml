@@ -1,0 +1,183 @@
+﻿@using MyNaati.Ui.Common
+@model MyNaati.Ui.ViewModels.PDListing.PDListingIndexViewModel
+@{
+    ViewBag.Title = "Practitioners Directory Listing";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Directory Listing", string.Empty)
+    };
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">Practitioners Directory Listing</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                The Directory of Translators and Interpreters is the official myNAATI listing of credentialed Translators and Interpreters (T & I practitioners) in <br />
+                Australia, who wish to have their NAATI details published for the purpose of employment.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Benefits of Listing</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <ul>
+                <li>NAATI is often the first point of contact when organisations and/or individuals are seeking the services of a Translator or Interpreter.</li>
+                <li>The Directory is used by government and private organisations and by individual clients.</li>
+                <li>If you specialise in certain professional fields you can nominate preferred work areas.</li>
+                <li>Your details will be listed under each language in which you hold credentials.</li>
+                <li>You can choose the contact details to be listed (eg home, business, mobile).</li>
+                <li>You get exposure to the marketplace for employment opportunities.</li>
+            </ul>
+        </div>
+    </div>
+    @if (Model.PaymentRequired)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="text-primary">Fees</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>All fees and charges are listed in Australian currency ($AUD).</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="bg-primary">
+                            <tr>
+                                <th>Description</th>
+                                <th>Australia ($AUD including GST)</th>
+                                <th>Other Countries ($AUD)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Administration fee</td>
+                                <td class="MoneyField">@Html.DisplayFor(f => f.AustraliaPrice)</td>
+                                <td class="MoneyField">@Html.DisplayFor(f => f.OverseasPrice)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p>You can list and pay online via MasterCard or Visa.</p>
+                <p>
+                    If you need to pay via Amex, Australian money order, bank cheque, overseas bank draft, or cash myNAATI will guide you through the listing process. You<br />
+                    will be able to download a form to complete and provide along with your payment.
+                </p>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="v-offset-xs-3">Refer to <a href="@Url.ExternalUrlFromConfig("FAQ")" target="_blank">Frequently Asked Questions</a> for more details.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-primary">My Listing</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @if (!Model.HasCredentials)
+            {
+                <p>Sorry you don't have any credentials that can be listed in the directory.</p>
+            }
+            else
+            {
+                if (Model.CurrentExpiry != null)
+                {
+                    var currentExpiry = Model.CurrentExpiry.GetValueOrDefault().Year >= 2018 ? new DateTime(2017, 12, 31) : Model.CurrentExpiry;
+
+                    <p>Your listing in the practitioners directory expires on @currentExpiry.GetValueOrDefault().ToString("dd MMM yyyy").</p>
+                }
+
+                if (Model.IsListedForCurrentFinancialYear)
+                {
+                    <p>
+                        You can select the address, contact details, work areas, and credentials that appear in the directory.
+                        <br />
+                        If you need to change your address or contact details, @(Html.ActionLink("update your personal details", "Index", "PersonalDetails")).
+                    </p>
+                }
+                else
+                {
+                    var newExpiry = Model.NewExpiry.GetValueOrDefault().Year >= 2018 ? new DateTime(2017, 12, 31) : Model.NewExpiry;
+
+                    <p>
+                        To list your details in the directory, you must have at least one address and one phone or email registered with us.
+                        <br />
+                        We recommend that you @Html.ActionLink("review your personal details", "Index", "PersonalDetails") first.
+                        <br />
+                        On payment of the administration fee, you can have your name and details included in the directory until @newExpiry.GetValueOrDefault().ToString("dd MMM yyyy").
+                    </p>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @if (Model.HasCredentials)
+            {
+                if (Model.PaymentRequired)
+                {
+                    if (Model.CurrentExpiry != null && Model.IsListedForCurrentFinancialYear && !Model.IsListedForNextFinancialYear)
+                    {
+                        <a class="btn btn-primary" role="button" href="@Url.Action("StartWizard", "PDListing")">Renew Now</a>
+                    }
+
+                    if (Model.IsListedForCurrentFinancialYear)
+                    {
+                        <a class="btn btn-primary" role="button" href="@Url.Action("StartWizardChangeMySelections", "PDListing")">Change my Listing</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary" role="button" href="@Url.Action("StartWizard", "PDListing")">List Now</a>
+                    }
+                }
+                else
+                {
+                    if (Model.CurrentExpiry != null && Model.IsListedForCurrentFinancialYear && !Model.IsListedForNextFinancialYear)
+                    {
+                        <a class="btn btn-primary" role="button" href="@Url.Action("StartWizard", "PDListing")">Renew Now</a>
+                    }
+
+                    if (Model.IsListedForCurrentFinancialYear)
+                    {
+                        <a class="btn btn-primary" role="button" href="@Url.Action("StartWizardChangeMySelections", "PDListing")">Change my Listing</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-primary" role="button" href="@Url.Action("StartWizard", "PDListing")">Renew/Opt-in Now</a>
+                    }
+                }
+            }
+        </div>
+    </div>
+    @if (Request.Params.Get("Error") != null)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="field-validation-error">
+                    @Request.Params.Get("Error")
+                </p>
+            </div>
+        </div>
+    }
+</div>

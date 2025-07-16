@@ -1,0 +1,43 @@
+<div class="hbox">
+
+    <div class="hbox" data-bind="component: {
+    name: 'search-component',
+    params: { title: title, filters: filters, searchType: searchType, searchTerm: searchTerm, searchCallback: searchCallback, tableDefinition: tableDefinition }
+            }">
+    </div>
+
+    <script id="product-export-header-template" type="text/html">
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.ApplicationId'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.CustomerNumber'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.Category'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialName'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.Direction'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialStartDate'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialEndDate'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialStatus'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.IssueDate'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.OnlineDirectory'"></th>
+    </script>
+    <script id="product-export-row-template" type="text/html">
+        <tr>
+            <td>
+                <a href="#" class="text-info" target="_blank" data-bind="text: CredentialApplicationId, attr: { href: '#application/' + CredentialApplicationId }"></a>
+            </td>
+            <td>
+                <a href="#" class="text-info" target="_blank" data-bind="text: NaatiNumber, attr: { href: '#person/' + NaatiNumber }"></a>
+            </td>
+            <td data-bind="text: Category"></td>
+            <td data-bind="text: CredentialTypeInternalName"></td>
+            <td data-bind="text: Direction"></td>
+            <td data-bind="text: StartDate"></td>
+            <td data-bind="text: EndDate"></td>
+            <td>
+                <span class="label badge m-t-xxs" data-bind="text: credentialStatusDisplay, css: credentialStatusClass"></span>
+            </td>
+            <td data-bind="text: IssuedDate"></td>
+            <td>
+                <i class="fa" data-bind="css: { 'fa-check text-success': ShowInOnlineDirectory, 'fa-times text-danger': !ShowInOnlineDirectory }"></i>
+            </td>
+        </tr>
+    </script>
+</div>

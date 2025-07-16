@@ -1,0 +1,28 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.Shared.ApplicationForAccreditation.PhoneListModel
+@if (Model.CurrentPhones.Any())
+{
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="bg-primary">
+            <tr>
+                <th>Number</th>
+                <th>Preferred</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var phone in Model.CurrentPhones)
+            {
+                <tr>
+                    <td>@phone.FormattedNumber</td>
+                    <td>@((phone.IsPreferred ? "<i class=\"fa fa-check preferred\"></i>" : string.Empty).ToMvcHtmlString())</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>You have no phone numbers listed in your profile. You can supply this information in @Html.ActionLink("My Details", "Phone", "PersonalDetails")</p>
+}

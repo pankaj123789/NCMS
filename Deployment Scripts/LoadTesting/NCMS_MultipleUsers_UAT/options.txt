@@ -1,0 +1,9 @@
+-+
+-DCCI
+-D_IDA_XL
+-DWINNT
+-ID:\Simple_OG_Application_Scripts\Simple_OG_Application_Scripts\NCMS_MultipleUsers_UAT
+-IC:\Program Files (x86)\Micro Focus\LoadRunner\include
+-ed:\simple_og_application_scripts\simple_og_application_scripts\ncms_multipleusers_uat\\logfile.log
+d:\simple_og_application_scripts\simple_og_application_scripts\ncms_multipleusers_uat\\combined_NCMS_MultipleUsers_UAT.c
+d:\simple_og_application_scripts\simple_og_application_scripts\ncms_multipleusers_uat\\pre_cci.c

@@ -1,0 +1,31 @@
+
+
+<div style="padding-bottom: 7px; padding-left: 5px;">
+    <strong><span data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialRelations'"></span></strong>
+</div>
+<div class="hbox" data-bind="component: {
+    name: 'table-component',
+    params: tableDefinition
+}">
+</div>
+<script id="material-relations-header-template" type="text/html">
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialRequestId'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialRequestTitle'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialRequestStatus'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialRequestType'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Relation'"></th>
+</script>
+<script id="material-relations-row-template" type="text/html">
+    <tr>
+        <td>
+            <a href="#" class="text-info" data-bind="text: Id, attr: { href: '#material-request/' + Id }"></a>
+        </td>
+        <td data-bind="text: RequestTitle"></td>
+        <td data-bind="text: RoundStatus"></td>
+        <td data-bind="text: RequestType"></td>
+        <td data-bind="text: RelationType"></td>
+    </tr>
+</script>
+
+
+

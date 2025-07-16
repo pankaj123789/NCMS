@@ -1,0 +1,80 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.BasePurchaseWizardModel
+@using MyNaati.Contracts.Portal
+@using MyNaati.Ui.Common
+@using MyNaati.Ui.Helpers
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.clickableRadioButtonIcon').click(function (e) {
+                var clickedLabelFor = $('#' + e.target.parentElement.htmlFor)[0];
+                clickedLabelFor.checked = true;
+            });
+        });
+    </script>
+}
+@functions
+{
+    private MvcHtmlString IsChecked(CardType cardType)
+    {
+        return (Model.PaymentDetailsModel.Type == cardType ? "checked=\"checked\"" : string.Empty).ToMvcHtmlString();
+    }
+}
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label col-sm-2">Card type</label>
+        <div class="col-sm-10">
+            <label class="radio-inline">
+                <input id="PaymentDetailsModel_Type_2" name="PaymentDetailsModel.Type" type="radio" value="MasterCard" @IsChecked(CardType.MasterCard) />
+                <label for="PaymentDetailsModel_Type_2">
+                    <img src="@Url.Content("~/Content/Images/CardLogoMasterCard.jpg")" alt="MasterCard Icon" style="max-width: 50px; cursor: pointer;" />
+                </label>
+            </label>
+            <label class="radio-inline">
+                <input id="PaymentDetailsModel_Type_1" name="PaymentDetailsModel.Type" type="radio" value="Visa" @IsChecked(CardType.Visa) />
+                <label for="PaymentDetailsModel_Type_1">
+                    <img src="@Url.Content("~/Content/Images/CardLogoVisa.gif")" alt="Visa Icon" style="max-width: 50px; cursor: pointer;" />
+                </label>
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.PaymentDetailsModel.CardNumber, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-3">
+            @Html.TextBoxFor(x => x.PaymentDetailsModel.CardNumber, new { @class = "form-control", type = "number", minlength = 13, maxlength = 16 })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.PaymentDetailsModel.NameOnCard, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-3">
+            @Html.TextBoxFor(x => x.PaymentDetailsModel.NameOnCard, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.PaymentDetailsModel.ExpiryMonth, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-3">
+            <div class="row">
+                <div class="col-xs-5 col-sm-6">
+                    @Html.DropDownListFor(x => x.PaymentDetailsModel.ExpiryMonth, Model.PaymentDetailsModel.ExpiryMonths, new { @class = "form-control" })
+                </div>
+                <div class="col-xs-5 col-sm-6">
+                    @Html.DropDownListFor(x => x.PaymentDetailsModel.ExpiryYear, Model.PaymentDetailsModel.ExpiryYears, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.PaymentDetailsModel.CVV, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-3">
+            @Html.TextBoxFor(x => x.PaymentDetailsModel.CVV, new { @class = "form-control", type = "number", minlength = 3, maxlength = 3 })
+        </div>
+        <div class="col-sm-6">
+            <p class="form-control-static">The CSC is the last 3 digits of the number on the back of your credit card</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <p class="form-control-static col-sm-2">
+            <a href="@Url.ExternalUrlFromConfig("PrivacyPolicy")" target="_blank">Privacy Policy</a>
+        </p>
+    </div>
+</div>

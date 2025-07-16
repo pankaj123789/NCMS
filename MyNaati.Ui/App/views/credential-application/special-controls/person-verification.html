@@ -1,0 +1,89 @@
+﻿<div>
+    <div class="row">
+        <div class="text-muted col-sm-12">           
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-3" data-bind="validationElement: person.Title">
+            <label class="control-label">Title</label>
+            <!-- ko component: { name: 'select-component', params: titleOptions } --><!-- /ko -->
+        </div>
+        <div class="form-group col-sm-3" data-bind="validationElement: person.FirstName">
+            <label class="control-label">First Name</label>
+            <input type="text" class="form-control" data-bind="value: person.FirstName, disable: disableDetails" />
+        </div>
+        <div class="form-group col-sm-3" data-bind="validationElement: person.MiddleNames">
+            <label class="control-label">Middle Names</label>
+            <input type="text" class="form-control" data-bind="value: person.MiddleNames, disable: disableDetails" />
+        </div>
+        <div class="form-group col-sm-3" data-bind="validationElement: person.FamilyName">
+            <label class="control-label">Family Name</label>
+            <input type="text" class="form-control" data-bind="value: person.FamilyName, disable: disableDetails" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-3" data-bind="validationElement: person.Gender">
+            <label class="control-label">Gender</label>
+            <!-- ko component: { name: 'select-component', params: genderOptions } --><!-- /ko -->
+        </div>
+        <div class="form-group col-sm-3" data-bind="validationElement: person.DateOfBirth">
+            <label class="control-label">Date of Birth</label>
+            <input type="text" class="form-control" data-bind="datepicker: { value: person.DateOfBirth }, disable: disableDetails" />
+            <span class="text-muted">Format dd/mm/yyyy</span>
+            <span class="help-block" data-bind="validationMessage: person.DateOfBirth"></span>
+        </div>
+        <div class="form-group col-sm-6" data-bind="validationElement: person.CountryOfBirth">
+            <label class="control-label">Country of Birth</label>
+            <!-- ko component: { name: 'select-component', params: countryOfBirthOptions } --><!-- /ko -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-muted col-sm-12">
+            Please enter your email address for correspondence.
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-6" data-bind="validationElement: person.Email">
+            <label class="control-label">Email</label>
+            <input type="email" class="form-control" data-bind="value: person.Email, event: emailEvent, disable: disableEmail" />
+        </div>
+        <div class="form-group col-sm-6" data-bind="validationElement: person.VerifyEmail">
+            <label class="control-label">Verify Email</label>
+            <input type="email" class="form-control" data-bind="value: person.VerifyEmail, event: emailEvent, disable: disableEmail" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-muted col-sm-12">
+            Have you been provided a Customer Number?  If so, please enter your Customer Number.
+        </div>
+    </div>
+    <div class="form-group w-sm" data-bind="validationElement: person.NAATINumber">
+        <label class="control-label">Customer No.</label>
+        <input type="number" class="form-control" data-bind="value: person.NAATINumber, disable: disableEmail" />
+    </div>
+    <div id="recaptcha"></div>
+    <!--ko if: showApplication-->
+    <!--ko if: application.Id-->
+    <h4>Saved Application</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Status Modified</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-bind="text: application.Status"></td>
+                <td data-bind="textDate: application.Created"></td>
+                <td data-bind="textDate: application.StatusModified"></td>
+            </tr>
+        </tbody>
+    </table>
+    <!--/ko-->
+    <!--ko ifnot: application.Id-->
+    <div class="text-center well">You have no applications.</div>
+    <!--/ko-->
+    <!--/ko-->
+</div>

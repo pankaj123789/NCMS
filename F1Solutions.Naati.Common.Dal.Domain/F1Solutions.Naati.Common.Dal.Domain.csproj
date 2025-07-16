@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{128BDBBB-CE32-48A8-B07C-D1BE04B1F488}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>F1Solutions.Naati.Common.Dal.Domain</RootNamespace>
+    <AssemblyName>F1Solutions.Naati.Common.Dal.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+    <Deterministic>False</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiAccess.cs" />
+    <Compile Include="CandidateBrief.cs" />
+    <Compile Include="CredentialPrerequisiteExemption.cs" />
+    <Compile Include="CredentialQrCode.cs" />
+    <Compile Include="CredentialApplicationEmailMessage.cs" />
+    <Compile Include="CredentialApplicationFieldCategory.cs" />
+    <Compile Include="CredentialApplicationRefund.cs" />
+    <Compile Include="CredentialApplicationRefundPolicy.cs" />
+    <Compile Include="CredentialPrerequisite.cs" />
+    <Compile Include="CredentialTypeTestMaterialDomain.cs" />
+    <Compile Include="EndorsedQualificationInstituionLookup.cs" />
+    <Compile Include="EndorsedQualificationLocationLookup.cs" />
+    <Compile Include="EndorsedQualificationLookup.cs" />
+    <Compile Include="IInvalidCookie.cs" />
+    <Compile Include="IssuedCredentialCredentialRequest.cs" />
+    <Compile Include="JobExaminerPayrollStatus.cs" />
+    <Compile Include="MaterialRequestEmailMessage.cs" />
+    <Compile Include="MaterialRequestPayroll.cs" />
+    <Compile Include="MaterialRequestPublicNote.cs" />
+    <Compile Include="MaterialRequestRoundLatest.cs" />
+    <Compile Include="MaterialRequestPanelMembershipTask.cs" />
+    <Compile Include="MaterialRequestRoundLink.cs" />
+    <Compile Include="MaterialRequestTask.cs" />
+    <Compile Include="MyNaatiInvalidCookie.cs" />
+    <Compile Include="NcmsInvalidCookie.cs" />
+    <Compile Include="Notification.cs" />
+    <Compile Include="NotificationType.cs" />
+    <Compile Include="PanelMembershipCoordinatorCredentialType.cs" />
+    <Compile Include="PanelMembershipMaterialCredentialType.cs" />
+    <Compile Include="PaymentMethodType.cs" />
+    <Compile Include="PodHistory.cs" />
+    <Compile Include="Portal\Application.cs" />
+    <Compile Include="Portal\Download.cs" />
+    <Compile Include="Portal\EmailChange.cs" />
+    <Compile Include="Portal\File.cs" />
+    <Compile Include="Portal\Order.cs" />
+    <Compile Include="Portal\OrderItem.cs" />
+    <Compile Include="Portal\PasswordHistory.cs" />
+    <Compile Include="Portal\RegistrationRequest.cs" />
+    <Compile Include="Portal\SubmitTestDraft.cs" />
+    <Compile Include="Portal\SubmitTestDraftAttachment.cs" />
+    <Compile Include="Portal\SubmitTestDraftComponent.cs" />
+    <Compile Include="Portal\MyNaatiSystemValue.cs" />
+    <Compile Include="Portal\MyNaatiUser.cs" />
+    <Compile Include="RefundMethodType.cs" />
+    <Compile Include="RefundPolicyParameter.cs" />
+    <Compile Include="TestPracticeResultType.cs" />
+    <Compile Include="SecurityNoun.cs" />
+    <Compile Include="StoredFileDeletePolicy.cs" />
+    <Compile Include="StoredFileDeletePolicyDocumentType.cs" />
+    <Compile Include="StoredFileStatusType.cs" />
+    <Compile Include="TestMaterialDomain.cs" />
+    <Compile Include="TestMaterialLink.cs" />
+    <Compile Include="MaterialRequest.cs" />
+    <Compile Include="MaterialRequestAttachment.cs" />
+    <Compile Include="MaterialRequestNote.cs" />
+    <Compile Include="MaterialRequestRound.cs" />
+    <Compile Include="CredentialApplicationFormCredentialType.cs" />
+    <Compile Include="CredentialApplicationTypeTestLocation.cs" />
+    <Compile Include="CredentialApplicationFormUserType.cs" />
+    <Compile Include="CredentialApplicationTypeCategory.cs" />
+    <Compile Include="CredentialTypeDowngradePath.cs" />
+    <Compile Include="CredentialFeeProduct.cs" />
+    <Compile Include="CredentialRequestAssociationType.cs" />
+    <Compile Include="CredentialRequestCredentialRequest.cs" />
+    <Compile Include="CredentialRequestPathType.cs" />
+    <Compile Include="CredentialStatusType.cs" />
+    <Compile Include="CredentialTypeCrossSkill.cs" />
+    <Compile Include="CredentialTypeUpgradePath.cs" />
+    <Compile Include="CredentialWorkflowActionEmailTemplate.cs" />
+    <Compile Include="EmailSendStatusType.cs" />
+    <Compile Include="EndorsedQualification.cs" />
+    <Compile Include="TestMaterialLinkType.cs" />
+    <Compile Include="MaterialRequestPanelMembership.cs" />
+    <Compile Include="MaterialRequestPanelMembershipType.cs" />
+    <Compile Include="MaterialRequestRoundStatusType.cs" />
+    <Compile Include="MaterialRequestStatusType.cs" />
+    <Compile Include="TestMaterialType.cs" />
+    <Compile Include="RolePlayerLastAttendedTestSession.cs" />
+    <Compile Include="RubricQuestionPassRule.cs" />
+    <Compile Include="SkillApplicationType.cs" />
+    <Compile Include="SystemActionEmailTemplateDetail.cs" />
+    <Compile Include="SystemActionEventType.cs" />
+    <Compile Include="CredentialWorkflowFee.cs" />
+    <Compile Include="DocumentTypeRole.cs" />
+    <Compile Include="EmailTemplateDetailType.cs" />
+    <Compile Include="ExaminerStatusType.cs" />
+    <Compile Include="FeeType.cs" />
+    <Compile Include="JobExaminerRubricTestComponentResult.cs" />
+    <Compile Include="OdAddressVisibilityType.cs" />
+    <Compile Include="PanelMembershipCredentialType.cs" />
+    <Compile Include="PanelRoleCategory.cs" />
+    <Compile Include="PdPointsLimitType.cs" />
+    <Compile Include="PersonAttachment.cs" />
+    <Compile Include="ProfessionalDevelopmentCategoryGroup.cs" />
+    <Compile Include="ProfessionalDevelopmentCredentialApplication.cs" />
+    <Compile Include="ProfessionalDevelopmentSectionCategory.cs" />
+    <Compile Include="Recertification.cs" />
+    <Compile Include="RolePlayerTestLocation.cs" />
+    <Compile Include="RubricTestBandRule.cs" />
+    <Compile Include="TestMaterialLastUsed.cs" />
+    <Compile Include="TestResultEligibilityType.cs" />
+    <Compile Include="RubricTestQuestionRule.cs" />
+    <Compile Include="TestSessionRolePlayerDetail.cs" />
+    <Compile Include="TestSessionRolePlayer.cs" />
+    <Compile Include="RolePlayerStatusType.cs" />
+    <Compile Include="RolePlayerRoleType.cs" />
+    <Compile Include="RubricAssessementCriterionResult.cs" />
+    <Compile Include="RubricMarkingAssessmentCriterion.cs" />
+    <Compile Include="RubricMarkingBand.cs" />
+    <Compile Include="RubricTestComponentResult.cs" />
+    <Compile Include="TestComponentBaseType.cs" />
+    <Compile Include="RolePlayer.cs" />
+    <Compile Include="TestSpecificationAttachment.cs" />
+    <Compile Include="RubricMarkingCompetency.cs" />
+    <Compile Include="TestResultRubricTestComponentResult.cs" />
+    <Compile Include="TestSpecificationMarkingScheme.cs" />
+    <Compile Include="TestSpecificationTestComponentType.cs" />
+    <Compile Include="TestComponentTypeStandardMarkingScheme.cs" />
+    <Compile Include="TestComponentResultType.cs" />
+    <Compile Include="TestSessionSkill.cs" />
+    <Compile Include="TestSitting.cs" />
+    <Compile Include="TestSession.cs" />
+    <Compile Include="TestSittingTestMaterial.cs" />
+    <Compile Include="TestSpecificationStandardMarkingScheme.cs" />
+    <Compile Include="TestStatus.cs" />
+    <Compile Include="TestStatusType.cs" />
+    <Compile Include="WorkPractice.cs" />
+    <Compile Include="WorkPracticeAttachment.cs" />
+    <Compile Include="ProfessionalDevelopmentActivityAttachment.cs" />
+    <Compile Include="ProfessionalDevelopmentCategoryRequirement.cs" />
+    <Compile Include="ProfessionalDevelopmentCategory.cs" />
+    <Compile Include="ProfessionalDevelopmentActivity.cs" />
+    <Compile Include="ProfessionalDevelopmentSection.cs" />
+    <Compile Include="ProfessionalDevelopmentRequirement.cs" />
+    <Compile Include="AlternateLanguageName.cs" />
+    <Compile Include="CertificationPeriod.cs" />
+    <Compile Include="CredentialApplicationFieldOption.cs" />
+    <Compile Include="CredentialApplicationFieldOptionOption.cs" />
+    <Compile Include="CredentialApplicationFormActionType.cs" />
+    <Compile Include="CredentialApplicationFormAnswerOption.cs" />
+    <Compile Include="CredentialApplicationFormAnswerOptionActionType.cs" />
+    <Compile Include="CredentialApplicationFormAnswerOptionDocumentType.cs" />
+    <Compile Include="CredentialApplicationFormAnswerType.cs" />
+    <Compile Include="CredentialApplicationFormQuestion.cs" />
+    <Compile Include="CredentialApplicationFormQuestionAnswerOption.cs" />
+    <Compile Include="CredentialApplicationFormQuestionLogic.cs" />
+    <Compile Include="CredentialApplicationFormQuestionType.cs" />
+    <Compile Include="CredentialApplicationFormSection.cs" />
+    <Compile Include="Credential.cs" />
+    <Compile Include="CredentialApplication.cs" />
+    <Compile Include="CredentialApplicationAttachment.cs" />
+    <Compile Include="CredentialApplicationField.cs" />
+    <Compile Include="CredentialApplicationFieldData.cs" />
+    <Compile Include="CredentialApplicationForm.cs" />
+    <Compile Include="CredentialApplicationNote.cs" />
+    <Compile Include="CredentialApplicationStatusType.cs" />
+    <Compile Include="CredentialApplicationType.cs" />
+    <Compile Include="CredentialApplicationTypeCredentialType.cs" />
+    <Compile Include="CredentialApplicationTypeDocumentType.cs" />
+    <Compile Include="SystemActionEmailTemplate.cs" />
+    <Compile Include="SystemActionType.cs" />
+    <Compile Include="CredentialAttachment.cs" />
+    <Compile Include="CredentialCategory.cs" />
+    <Compile Include="CredentialCredentialRequest.cs" />
+    <Compile Include="CredentialRequest.cs" />
+    <Compile Include="CredentialRequestFieldData.cs" />
+    <Compile Include="CredentialRequestStatusType.cs" />
+    <Compile Include="CredentialType.cs" />
+    <Compile Include="CredentialTypeTemplate.cs" />
+    <Compile Include="DataType.cs" />
+    <Compile Include="DirectionType.cs" />
+    <Compile Include="ContactPerson.cs" />
+    <Compile Include="LegacyAccreditation.cs" />
+    <Compile Include="Venue.cs" />
+    <Compile Include="TestLocation.cs" />
+    <Compile Include="LatestInstitutionName.cs" />
+    <Compile Include="LatestPersonName.cs" />
+    <Compile Include="DocumentTypeCategory.cs" />
+    <Compile Include="EmailMessageAttachment.cs" />
+    <Compile Include="ExternalAccountingOperationStatus.cs" />
+    <Compile Include="Address.cs" />
+    <Compile Include="AuditLog.cs" />
+    <Compile Include="AuditType.cs" />
+    <Compile Include="BaseObject.cs" />
+    <Compile Include="DocumentType.cs" />
+    <Compile Include="ExternalAccountingOperation.cs" />
+    <Compile Include="ExternalAccountingOperationType.cs" />
+    <Compile Include="IDynamicLookupType.cs" />
+    <Compile Include="JobExaminerPayroll.cs" />
+    <Compile Include="LanguageGroup.cs" />
+    <Compile Include="NaatiEntityNote.cs" />
+    <Compile Include="EmailMessage.cs" />
+    <Compile Include="Payroll.cs" />
+    <Compile Include="PayrollStatus.cs" />
+    <Compile Include="NoteAttachment.cs" />
+    <Compile Include="Skill.cs" />
+    <Compile Include="SkillType.cs" />
+    <Compile Include="TestSittingNote.cs" />
+    <Compile Include="PanelNote.cs" />
+    <Compile Include="Note.cs" />
+    <Compile Include="TestMaterialAttachment.cs" />
+    <Compile Include="StoredFile.cs" />
+    <Compile Include="AssetType.cs" />
+    <Compile Include="TestSittingDocument.cs" />
+    <Compile Include="Enums\NaatiNumberTypeEnum.cs" />
+    <Compile Include="ExaminerUnavailable.cs" />
+    <Compile Include="InstitutionContactPerson.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="EmailTemplate.cs" />
+    <Compile Include="Country.cs" />
+    <Compile Include="DepositType.cs" />
+    <Compile Include="EFTMachine.cs" />
+    <Compile Include="Email.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="EntityBase.cs" />
+    <Compile Include="ExaminerMarking.cs" />
+    <Compile Include="ExaminerTestComponentResult.cs" />
+    <Compile Include="GLCode.cs" />
+    <Compile Include="IEntityWithTypedId.cs" />
+    <Compile Include="ILookupType.cs" />
+    <Compile Include="Institution.cs" />
+    <Compile Include="InstitutionName.cs" />
+    <Compile Include="Job.cs" />
+    <Compile Include="JobExaminer.cs" />
+    <Compile Include="JobType.cs" />
+    <Compile Include="Language.cs" />
+    <Compile Include="LegacyEntityBase.cs" />
+    <Compile Include="NaatiEntity.cs" />
+    <Compile Include="Office.cs" />
+    <Compile Include="Panel.cs" />
+    <Compile Include="PanelMembership.cs" />
+    <Compile Include="PanelType.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="PersonImage.cs" />
+    <Compile Include="PersonName.cs" />
+    <Compile Include="Phone.cs" />
+    <Compile Include="Postcode.cs" />
+    <Compile Include="ProductCategory.cs" />
+    <Compile Include="ProductSpecification.cs" />
+    <Compile Include="ProductType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Region.cs" />
+    <Compile Include="ResultType.cs" />
+    <Compile Include="SecurityRole.cs" />
+    <Compile Include="SecurityRule.cs" />
+    <Compile Include="PanelRole.cs" />
+    <Compile Include="State.cs" />
+    <Compile Include="Suburb.cs" />
+    <Compile Include="SystemParameter.cs" />
+    <Compile Include="SystemValue.cs" />
+    <Compile Include="TestComponent.cs" />
+    <Compile Include="TestComponentResult.cs" />
+    <Compile Include="TestComponentType.cs" />
+    <Compile Include="TestMaterial.cs" />
+    <Compile Include="TestResult.cs" />
+    <Compile Include="TestSpecification.cs" />
+    <Compile Include="Title.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserRole.cs" />
+    <Compile Include="UserSearch.cs" />
+    <Compile Include="WorkPracticeCredentialRequest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\F1Solutions.Global.Common\F1Solutions.Global.Common.csproj">
+      <Project>{F41C4166-5B4D-4721-97BC-125F3CF0204A}</Project>
+      <Name>F1Solutions.Global.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

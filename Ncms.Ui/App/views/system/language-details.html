@@ -1,0 +1,18 @@
+﻿<div class="form">
+	<div class="form-group" data-bind="validationElement: language.Name">
+		<label data-bind="reshtml: 'Naati.Resources.Language.resources.Name'"></label>
+		<input type="text" class="form-control" data-bind="value: language.Name, valueUpdate: 'input'" />
+	</div>
+	<div class="form-group" data-bind="validationElement: language.Code">
+		<label data-bind="reshtml: 'Naati.Resources.Language.resources.Code'"></label>
+		<input type="text" class="form-control" data-bind="value: language.Code, valueUpdate: 'input'" />
+	</div>
+	<div class="form-group" data-bind="validationElement: language.GroupLanguageId">
+		<label data-bind="reshtml: 'Naati.Resources.Language.resources.Group'"></label>
+		<!-- ko component: { name: 'select-component', params: groupOptions } --><!-- /ko -->
+	</div>
+	<div class="form-group" data-bind="validationElement: language.Note">
+		<label class="control-label" data-bind="reshtml: 'Naati.Resources.Language.resources.Notes'"></label>
+		<textarea class="form-control" rows="5" data-bind="value: language.Note, valueUpdate: 'input'" />
+	</div>
+</div>

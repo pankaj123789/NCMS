@@ -1,0 +1,1080 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TwoFactorAuth.Net</name>
+    </assembly>
+    <members>
+        <member name="T:TwoFactorAuthNet.DefaultProviders">
+            <summary>
+            Provides default values for providers required by <see cref="T:TwoFactorAuthNet.TwoFactorAuth"/> instances.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.DefaultProviders.DefaultRngProvider">
+            <summary>
+            Gets the default RNG provider
+            </summary>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Rng.IRngProvider"/>
+        </member>
+        <member name="P:TwoFactorAuthNet.DefaultProviders.DefaultQrCodeProvider">
+            <summary>
+            Gets the default QR Code provider
+            </summary>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider"/>
+        </member>
+        <member name="P:TwoFactorAuthNet.DefaultProviders.DefaultTimeProvider">
+            <summary>
+            Gets the default Time provider
+            </summary>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Time.ITimeProvider"/>
+        </member>
+        <member name="T:TwoFactorAuthNet.CryptoSecureRequirement">
+            <summary>
+            Specifies if a cryptographically secure RNG is required.
+            </summary>
+            <remarks>
+            Since the RNG is only used to create a one-time created shared secret it is not *terribly* important to require
+            a cryptographically secure RNG but it is ofcourse recommended to use a cryptographically secure RNG.
+            </remarks>
+        </member>
+        <member name="F:TwoFactorAuthNet.CryptoSecureRequirement.RequireSecure">
+            <summary>Require a cryptographically secure RNG.</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.CryptoSecureRequirement.AllowInsecure">
+            <summary>Allow non-cryptographically secure RNG.</summary>
+        </member>
+        <member name="T:TwoFactorAuthNet.Algorithm">
+            <summary>
+            The algorithm to use for the TOTP.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Algorithm.SHA1">
+            <summary>SHA1</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Algorithm.SHA256">
+            <summary>SHA256</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Algorithm.SHA512">
+            <summary>SHA512</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Algorithm.MD5">
+            <summary>MD5</summary>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider">
+            <summary>
+            Provides a base implementation for QR code providers.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.RemoteCertificateValidationCallback">
+            <summary>
+            Gets a callback function to validate the server certificate.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.BaseUri">
+            <summary>
+            Gets the base URI to use when downloading files.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.CachePolicy">
+            <summary>
+            Gets/sets the application's cache policy for any resources obtained by this instance.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.Credentials">
+            <summary>
+            Gets/sets the network credentials that are sent to the host and used to authenticate the request.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.Proxy">
+            <summary>
+            Gets/sets the proxy used by this instance.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.TimeOut">
+            <summary>
+            Gets/sets the default timeout.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.RequireSsl">
+            <summary>
+            Gets/sets whether an SSL connection is required.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.USERAGENT">
+            <summary>
+            Gets the useragent string used to identify when downloading QR codes.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.DEFAULTTIMEOUT">
+            <summary>
+            Gets the default timeout for downloading QR codes.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.#ctor(System.Uri,System.Net.Security.RemoteCertificateValidationCallback)">
+            <summary>
+            Initializes a new instance of a <see cref="T:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider"/>.
+            </summary>
+            <param name="baseUri">The base Uri for the QR code provider.</param>
+            <param name="remoteCertificateValidationCallback">
+            The <see cref="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.RemoteCertificateValidationCallback"/> to be used by the QR code provider.
+            </param>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="baseUri"/> is null.</exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.DownloadData(System.Uri)">
+            <summary>
+            Downloads the resource with the specified <see cref="T:System.Uri"/> as a <see cref="T:System.Byte"/> array.
+            </summary>
+            <param name="address">The URI represented by the <see cref="T:System.Uri"/> object, from which to download data.</param>
+            <returns>A <see cref="T:System.Byte"/> array containing the downloaded resource.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.GetWebClient">
+            <summary>
+            Creates and returns a <see cref="T:System.Net.WebClient"/> initialized with all default / desired properties already set.
+            </summary>
+            <returns>Returns an initialized <see cref="T:System.Net.WebClient"/>.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.Color2Hex(System.Drawing.Color)">
+            <summary>
+            Returns the hexadecimal value for an RGB (<see cref="T:System.Drawing.Color"/>) value.
+            </summary>
+            <param name="value">The <see cref="T:System.Drawing.Color"/> to convert.</param>
+            <returns>Returns the hexadecimal value for an RGB (<see cref="T:System.Drawing.Color"/>) value.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.ExtendedWebClient">
+            <summary>
+            Extended webclient where a timeout can be specified/set.
+            </summary>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Qr.ErrorCorrectionLevel">
+            <summary>
+            Specifies the desired Error Correction Level for the QR code.
+            </summary>
+            <see href="https://en.wikipedia.org/wiki/QR_code#Error_correction"/>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.ErrorCorrectionLevel.Low">
+            <summary>Low, 7% of codewords can be restored.</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.ErrorCorrectionLevel.Medium">
+            <summary>Medium, 15% of codewords can be restored.</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.ErrorCorrectionLevel.Quartile">
+            <summary>Quartile, 25% of codewords can be restored.</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.ErrorCorrectionLevel.High">
+            <summary>High, 30% of codewords can be restored.</summary>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider">
+            <summary>
+            Provides QR codes generated by image-charts.com.
+            </summary>
+            <seealso href="https://documentation.image-charts.com/gallery/"/>.
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.ErrorCorrectionLevel">
+            <summary>
+            Gets the <see cref="P:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.ErrorCorrectionLevel"/> for the QR code.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.MarginRows">
+            <summary>
+            Gets the width of the white border around the data portion of the code.
+            </summary>
+            <remarks>
+            This is in rows, not in pixels.
+            </remarks>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.baseuri">
+            <summary>
+            <see cref="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.BaseUri"/> for this QR code provider.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.#ctor(TwoFactorAuthNet.Providers.Qr.ErrorCorrectionLevel,System.Int32,System.Net.Security.RemoteCertificateValidationCallback)">
+            <summary>
+            Initializes a new instance of a <see cref="T:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider"/> with the specified
+            <see cref="P:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.ErrorCorrectionLevel"/>, <see cref="P:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.MarginRows"/> and 
+            <see cref="T:System.Net.Security.RemoteCertificateValidationCallback"/>.
+            </summary>
+            <param name="errorCorrectionLevel">The <see cref="P:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.ErrorCorrectionLevel"/> to use when generating QR codes.</param>
+            <param name="marginRows">The width of the white border around the data portion of the code.</param>
+            <param name="remoteCertificateValidationCallback">
+            The <see cref="T:System.Net.Security.RemoteCertificateValidationCallback"/> to use when generating QR codes.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown when an invalid <see cref="P:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.ErrorCorrectionLevel"/> is specified or marginRows is less than 0.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.GetQrCodeImage(System.String,System.Int32)">
+            <summary>
+            Downloads / retrieves / generates a QR code as image.
+            </summary>
+            <param name="text">The text to encode in the QR code.</param>
+            <param name="size">The desired size (width and height equal) for the image.</param>
+            <returns>Returns the binary representation of the image.</returns>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider"/>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.GetUri(System.String,System.Int32)">
+            <summary>
+            Builds an <see cref="T:System.Uri"/> based on the instance's <see cref="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.BaseUri"/>.
+            </summary>
+            <param name="qrText">The text to encode in the QR code.</param>
+            <param name="size">The desired size of the QR code.</param>
+            <returns>A <see cref="T:System.Uri"/> to the QR code.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.ImageChartsQrCodeProvider.GetMimeType">
+            <summary>
+            Gets the MIME type of the image.
+            </summary>
+            <returns>Returns the MIME type of the image.</returns>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider"/>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider">
+            <summary>
+            Provides the interface for QR Code providers.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider.GetQrCodeImage(System.String,System.Int32)">
+            <summary>
+            Downloads / retrieves / generates a QR code as image.
+            </summary>
+            <param name="text">The text to encode in the QR code.</param>
+            <param name="size">The desired size (width and height equal) for the image.</param>
+            <returns>Returns the binary representation of the image.</returns>
+            <remarks>
+            Images may under some circumstances be of a different size than the desired size depending on the QR code
+            generator implementing the QR code generation.
+            </remarks>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider.GetMimeType">
+            <summary>
+            Gets the MIME type of the image.
+            </summary>
+            <returns>Returns the MIME type of the image.</returns>
+            <seealso href="https://www.iana.org/assignments/media-types/media-types.xhtml"/>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider">
+            <summary>
+            Provides QR codes generated by QRickit.
+            </summary>
+            <seealso href="http://qrickit.com/qrickit_apps/qrickit_api.php"/>.
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.QRicketImageFormat">
+            <summary>
+            Represents the filetype to be returned.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.QRicketImageFormat.Png">
+            <summary>PNG</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.QRicketImageFormat.Gif">
+            <summary>GIF</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.QRicketImageFormat.Jpeg">
+            <summary>JPEG</summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.ErrorCorrectionLevel">
+            <summary>
+            Gets the <see cref="P:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.ErrorCorrectionLevel"/> for the QR code.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.BackgroundColor">
+            <summary>
+            Gets the background color to be used for the QR code.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.ForegroundColor">
+            <summary>
+            Gets the foreground color to be used for the QR code.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.ImageFormat">
+            <summary>
+            Gets the <see cref="T:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.QRicketImageFormat"/> of the QR code.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.baseuri">
+            <summary>
+            <see cref="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.BaseUri"/> for this QR code provider.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.#ctor(TwoFactorAuthNet.Providers.Qr.ErrorCorrectionLevel,System.Nullable{System.Drawing.Color},System.Nullable{System.Drawing.Color},TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.QRicketImageFormat,System.Net.Security.RemoteCertificateValidationCallback)">
+            <summary>
+            Initializes a new instance of a <see cref="T:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider"/> with the specified
+            <see cref="P:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.ErrorCorrectionLevel"/>, <see cref="P:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.BackgroundColor"/>, <see cref="P:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.ForegroundColor"/>, 
+            <see cref="T:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.QRicketImageFormat">ImageFormat</see> and <see cref="T:System.Net.Security.RemoteCertificateValidationCallback"/>.
+            </summary>
+            <param name="errorCorrectionLevel">The <see cref="P:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.ErrorCorrectionLevel"/> to use when generating QR codes.</param>
+            <param name="backgroundColor">The background color to be used for the QR code.</param>
+            <param name="foregroundColor">The foreground color to be used for the QR code.</param>
+            <param name="imageFormat">The <see cref="T:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.QRicketImageFormat"/> of the QR code.</param>
+            <param name="remoteCertificateValidationCallback">
+            The <see cref="T:System.Net.Security.RemoteCertificateValidationCallback"/> to use when generating QR codes.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown when an invalid <see cref="P:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.ErrorCorrectionLevel"/> or <see cref="T:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.QRicketImageFormat"/> is specified.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.GetMimeType">
+            <summary>
+            Gets the MIME type of the image.
+            </summary>
+            <returns>Returns the MIME type of the image.</returns>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider"/>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when an unknown <see cref="T:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.QRicketImageFormat"/> is used.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.GetQrCodeImage(System.String,System.Int32)">
+            <summary>
+            Downloads / retrieves / generates a QR code as image.
+            </summary>
+            <param name="text">The text to encode in the QR code.</param>
+            <param name="size">The desired size (width and height equal) for the image.</param>
+            <returns>Returns the binary representation of the image.</returns>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider"/>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.QRicketQrCodeProvider.GetUri(System.String,System.Int32)">
+            <summary>
+            Builds an <see cref="T:System.Uri"/> based on the instance's <see cref="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.BaseUri"/>.
+            </summary>
+            <param name="qrText">The text to encode in the QR code.</param>
+            <param name="size">The desired size of the QR code.</param>
+            <returns>A <see cref="T:System.Uri"/> to the QR code.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider">
+            <summary>
+            Provides QR codes generated by GoQR.Me (qrserver.com).
+            </summary>
+            <seealso href="http://goqr.me/api/doc/create-qr-code/"/>.
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat">
+            <summary>
+            Represents the filetype to be returned.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat.Png">
+            <summary>PNG</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat.Gif">
+            <summary>GIF</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat.Jpeg">
+            <summary>JPEG</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat.Svg">
+            <summary>SVG</summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat.Eps">
+            <summary>EPS</summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.ErrorCorrectionLevel">
+            <summary>
+            Gets the <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.ErrorCorrectionLevel"/> for the QR code.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.BackgroundColor">
+            <summary>
+            Gets the background color to be used for the QR code.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.ForegroundColor">
+            <summary>
+            Gets the foreground color to be used for the QR code.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.Margin">
+            <summary>
+            Gets the thickness of a margin in pixels.
+            </summary>
+            <remarks>
+            The margin will always have the same color as the background (you can configure this via 
+            <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.BackgroundColor"/>). It will not be added to the width of the image set by size, therefore it
+            has to be smaller than at least one third of the size value. The margin will be drawn in addition to an
+            optionally set <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QuietZone"/> value. The margin parameter will be ignored if 
+            <see cref="F:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat.Svg"/> or <see cref="F:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat.Eps"/> is used as QR code format 
+            (e.g. the QR code output is a vector graphic).
+            </remarks>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QuietZone">
+            <summary>
+            Gets the thickness of a "quiet zone", an area without disturbing elements to help readers locating the QR
+            code, in modules as measuring unit.
+            </summary>
+            <remarks>
+            Measuring unit means a value of 1 leads to a drawn margin around the QR code which is as thick as a data
+            pixel/module of the QR code. The quiet zone will always have the same color as the background (you can
+            configure this via <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.BackgroundColor"/>). The quiet zone will be drawn in addition to an
+            optionally set margin value.
+            </remarks>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.ImageFormat">
+            <summary>
+            Gets the <see cref="T:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat"/> of the QR code.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.baseuri">
+            <summary>
+            <see cref="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.BaseUri"/> for this QR code provider.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.#ctor(TwoFactorAuthNet.Providers.Qr.ErrorCorrectionLevel,System.Int32,System.Int32,System.Nullable{System.Drawing.Color},System.Nullable{System.Drawing.Color},TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat,System.Net.Security.RemoteCertificateValidationCallback)">
+            <summary>
+            Initializes a new instance of a <see cref="T:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider"/> with the specified
+            <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.ErrorCorrectionLevel"/>, <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.Margin"/>, <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QuietZone"/>, 
+            <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.BackgroundColor"/>, <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.ForegroundColor"/>,
+            <see cref="T:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat">ImageFormat</see> and <see cref="T:System.Net.Security.RemoteCertificateValidationCallback"/>.
+            </summary>
+            <param name="errorCorrectionLevel">The <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.ErrorCorrectionLevel"/> to use when generating QR codes.</param>
+            <param name="margin">The <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.Margin"/> to be used for the QR code.</param>
+            <param name="quietZone">The <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QuietZone"/> to be used for the QR code.</param>
+            <param name="backgroundColor">The background color to be used for the QR code.</param>
+            <param name="foregroundColor">The foreground color to be used for the QR code.</param>
+            <param name="imageFormat">The <see cref="T:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat"/> of the QR code.</param>
+            <param name="remoteCertificateValidationCallback">
+            The <see cref="T:System.Net.Security.RemoteCertificateValidationCallback"/> to use when generating QR codes.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown when an invalid <see cref="P:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.ErrorCorrectionLevel"/> or <see cref="T:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat"/> is specified,
+            <paramref name="margin"/> is less than 0 or more than 50 or <paramref name="quietZone"/> is less than 0 or
+            more than 100.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.GetMimeType">
+            <summary>
+            Gets the MIME type of the image.
+            </summary>
+            <returns>Returns the MIME type of the image.</returns>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider"/>
+            <exception cref="T:System.InvalidOperationException">
+            Thrown when an unknown <see cref="T:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.QrServerImageFormat"/> is used.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.GetQrCodeImage(System.String,System.Int32)">
+            <summary>
+            Downloads / retrieves / generates a QR code as image.
+            </summary>
+            <param name="text">The text to encode in the QR code.</param>
+            <param name="size">The desired size (width and height equal) for the image.</param>
+            <returns>Returns the binary representation of the image.</returns>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider"/>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Qr.QrServerQrCodeProvider.GetUri(System.String,System.Int32)">
+            <summary>
+            Builds an <see cref="T:System.Uri"/> based on the instance's <see cref="P:TwoFactorAuthNet.Providers.Qr.BaseHttpQrCodeProvider.BaseUri"/>.
+            </summary>
+            <param name="qrText">The text to encode in the QR code.</param>
+            <param name="size">The desired size of the QR code.</param>
+            <returns>A <see cref="T:System.Uri"/> to the QR code.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Rng.DefaultRngProvider">
+            <summary>
+            Provides a cryptographically secure RNG provider.
+            </summary>
+            <remarks>
+            The <see cref="T:TwoFactorAuthNet.Providers.Rng.DefaultRngProvider"/> is based on a <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider"/>.
+            </remarks>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Rng.IRngProvider"/>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Rng.DefaultRngProvider.IsCryptographicallySecure">
+            <summary>
+            Gets whether the provider is cryptographically secure.
+            </summary>
+            <remarks>
+            The <see cref="T:TwoFactorAuthNet.Providers.Rng.DefaultRngProvider"/> is cryptographically secure.
+            </remarks>
+            <seealso cref="T:TwoFactorAuthNet.CryptoSecureRequirement"/>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Rng.DefaultRngProvider.GetRandomBytes(System.Int32)">
+            <summary>
+            Fills an array of bytes with a cryptographically secure sequence of random values.
+            </summary>
+            <param name="bytes">The desired number of bytes to return.</param>
+            <returns>An array with a cryptographically secure sequence of random values.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Rng.HashRngProvider">
+            <summary>
+            Provides a non-cryptographically secure RNG provider.
+            </summary>
+            <remarks>
+            The <see cref="T:TwoFactorAuthNet.Providers.Rng.PrngProvider"/> is based on a simple PRNG and iteratively (re)hashed values.
+            </remarks>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Rng.IRngProvider"/>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Rng.HashRngProvider.#ctor(System.Security.Cryptography.HashAlgorithm)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TwoFactorAuthNet.Providers.Rng.HashRngProvider"/> with a specified <see cref="T:System.Security.Cryptography.HashAlgorithm"/>.
+            </summary>
+            <param name="algorithm">The <see cref="T:System.Security.Cryptography.HashAlgorithm"/> to use when generating random number sequences.</param>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Rng.HashRngProvider.IsCryptographicallySecure">
+            <summary>
+            Gets whether the provider is cryptographically secure.
+            </summary>
+            <remarks>
+            The <see cref="T:TwoFactorAuthNet.Providers.Rng.HashRngProvider"/> is not cryptographically secure.
+            </remarks>
+            <seealso cref="T:TwoFactorAuthNet.CryptoSecureRequirement"/>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Rng.HashRngProvider.GetRandomBytes(System.Int32)">
+            <summary>
+            Fills an array of bytes with a sequence of random values.
+            </summary>
+            <param name="bytes">The desired number of bytes to return.</param>
+            <returns>An array with a sequence of random values.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Rng.IRngProvider">
+            <summary>
+            Provides the interface for RNG (Random Number generator) providers.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Rng.IRngProvider.IsCryptographicallySecure">
+            <summary>
+            Gets whether the provider is cryptographically secure.
+            </summary>
+            <seealso cref="T:TwoFactorAuthNet.CryptoSecureRequirement"/>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Rng.IRngProvider.GetRandomBytes(System.Int32)">
+            <summary>
+            Fills an array of bytes with a sequence of random values.
+            </summary>
+            <param name="bytes">The desired number of bytes to return.</param>
+            <returns>An array with a sequence of random values.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Rng.PrngProvider">
+            <summary>
+            Provides a non-cryptographically secure RNG provider.
+            </summary>
+            <remarks>
+            The <see cref="T:TwoFactorAuthNet.Providers.Rng.PrngProvider"/> is based on a simple PRNG.
+            </remarks>
+            <seealso cref="T:TwoFactorAuthNet.Providers.Rng.IRngProvider"/>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Rng.PrngProvider.IsCryptographicallySecure">
+            <summary>
+            Gets whether the provider is cryptographically secure.
+            </summary>
+            <remarks>
+            The <see cref="T:TwoFactorAuthNet.Providers.Rng.PrngProvider"/> is not cryptographically secure.
+            </remarks>
+            <seealso cref="T:TwoFactorAuthNet.CryptoSecureRequirement"/>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Rng.PrngProvider.GetRandomBytes(System.Int32)">
+            <summary>
+            Fills an array of bytes with a sequence of random values.
+            </summary>
+            <param name="bytes">The desired number of bytes to return.</param>
+            <returns>An array with a sequence of random values.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Time.HttpTimeProvider">
+            <summary>
+            Provides time information from a webserver by doing a HEAD request and extracting the Date HTTP response header.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.Providers.Time.HttpTimeProvider.DEFAULTURI">
+            <summary>
+            The default Uri used to 'query'.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Time.HttpTimeProvider.Uri">
+            <summary>
+            Gets the Uri to be queried.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Time.HttpTimeProvider.CachePolicy">
+            <summary>
+            Gets/sets the <see cref="T:System.Net.Cache.RequestCachePolicy"/> used when performing requests.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Time.HttpTimeProvider.Proxy">
+            <summary>
+            Gets/sets the <see cref="T:System.Net.IWebProxy"/> to use when performing requests.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Time.HttpTimeProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of a <see cref="T:TwoFactorAuthNet.Providers.Time.HttpTimeProvider"/>.
+            </summary>
+            <param name="uri">The uri to query; defaults to <see cref="F:TwoFactorAuthNet.Providers.Time.HttpTimeProvider.DEFAULTURI"/>.</param>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Time.HttpTimeProvider.#ctor(System.Uri)">
+            <summary>
+            Initializes a new instance of a <see cref="T:TwoFactorAuthNet.Providers.Time.HttpTimeProvider"/>.
+            </summary>
+            <param name="uri"></param>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Time.HttpTimeProvider.GetTimeAsync">
+            <summary>
+            Gets the time from the webserver by performing a HEAD request on the specified <see cref="P:TwoFactorAuthNet.Providers.Time.HttpTimeProvider.Uri"/>.
+            </summary>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Time.ITimeProvider">
+            <summary>
+            Provides the interface for time providers.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Time.ITimeProvider.GetTimeAsync">
+            <summary>
+            Gets the time from the time provider.
+            </summary>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Time.LocalMachineTimeProvider">
+            <summary>
+            Provides time information from the local machine.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Time.LocalMachineTimeProvider.GetTimeAsync">
+            <summary>
+            Gets the time from the local machine.
+            </summary>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Time.NTPTimeProvider">
+            <summary>
+            Provides time information from an NTP server by doing an NTP request and parsing the result.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.DefaultHost">
+            <summary>
+            The default host used to query.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.DefaultPort">
+            <summary>
+            The default port used to query.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.DefaultTimeout">
+            <summary>
+            The default send- and receive timeout used when querying NTP host.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.Host">
+            <summary>
+            Gets the host to be queried.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.Port">
+            <summary>
+            Gets the port used to query.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.SendTimeout">
+            <summary>
+            Gets the default send timeout.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.ReceiveTimeout">
+            <summary>
+            Gets the default receive timeout.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.#ctor(System.String,System.Int32,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan})">
+            <summary>
+            Initializes a new instance of a <see cref="T:TwoFactorAuthNet.Providers.Time.NTPTimeProvider"/>.
+            </summary>
+            <param name="host">The host to query; defaults to <see cref="P:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.DefaultHost"/>.</param>
+            <param name="port">The port to query; defaults to <see cref="P:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.DefaultPort"/>.</param>
+            <param name="sendTimeout">The send timeout when querying NTP host.</param>
+            <param name="receiveTimeout">The receive timeout when querying NTP host.</param>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.GetTimeAsync">
+            <summary>
+            Gets the time from an NTP server by performing an NTP request on the specified <see cref="P:TwoFactorAuthNet.Providers.Time.NTPTimeProvider.Host"/>.
+            </summary>
+            <returns>The task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.Providers.Time.TimeProviderException">
+            <summary>
+            Represents the exception that is thrown when a problem occurs during time retrieval of an <see cref="T:TwoFactorAuthNet.Providers.Time.ITimeProvider"/>.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Time.TimeProviderException.#ctor">
+            <summary>
+            Initializes a new instance of a <see cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException"/>.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Time.TimeProviderException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of a <see cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException"/>.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Time.TimeProviderException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of a <see cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException"/>.
+            </summary>
+            <param name="message">The message to be given for the exception.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:TwoFactorAuthNet.Providers.Time.TimeProviderException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new, empty instance of the <see cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException" /> class that is serializable using the
+            specified <see cref="T:System.Runtime.Serialization.SerializationInfo" /> and <see cref="T:System.Runtime.Serialization.StreamingContext" /> objects.
+            </summary>
+            <param name="serializationInfo">The information required to serialize the <see cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException" /> object.</param>
+            <param name="streamingContext">The source and destination of the serialized stream associated with the <see cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException" /> object.</param>
+        </member>
+        <member name="T:TwoFactorAuthNet.TwoFactorAuth">
+            <summary>
+            Provides methods to enable 2FA (Two Factor Authentication).
+            </summary>
+            <remarks>
+            This library only provides the TOTP (Time-based One-time Password) implementation of 2FA. It does not provide
+            a HOTP (HMAC-based One-time Password) implementation.
+            </remarks>
+            <seealso href="https://github.com/RobThree/TwoFactorAuth.Net"/>
+            <seealso href="https://github.com/RobThree/TwoFactorAuth"/>
+            <seealso href="https://github.com/google/google-authenticator/wiki/Key-Uri-Format"/>
+        </member>
+        <member name="P:TwoFactorAuthNet.TwoFactorAuth.Issuer">
+            <summary>
+            Gets a string value indicating the provider or service this account is associated with.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.TwoFactorAuth.Digits">
+            <summary>
+            Gets the number of digits to display to the user.
+            </summary>
+            <see cref="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTDIGITS"/>
+        </member>
+        <member name="P:TwoFactorAuthNet.TwoFactorAuth.Period">
+            <summary>
+            Gets the period that a TOTP code will be valid for, in seconds.
+            </summary>
+            <remarks>The period may be ignored by some 2FA client applications.</remarks>
+            <see cref="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTPERIOD"/>
+        </member>
+        <member name="P:TwoFactorAuthNet.TwoFactorAuth.Algorithm">
+            <summary>
+            Gets the algorithm used for generating the TOTP codes.
+            </summary>
+            <remarks>The algorithm may be ignored by some 2FA client applications.</remarks>
+            <see cref="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTALGORITHM"/>
+        </member>
+        <member name="P:TwoFactorAuthNet.TwoFactorAuth.QrCodeProvider">
+            <summary>
+            Gets the <see cref="T:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider"/> to be used for generating QR codes.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.TwoFactorAuth.RngProvider">
+            <summary>
+            Gets the <see cref="T:TwoFactorAuthNet.Providers.Rng.IRngProvider"/> to be used for generating random values.
+            </summary>
+        </member>
+        <member name="P:TwoFactorAuthNet.TwoFactorAuth.TimeProvider">
+            <summary>
+            Gets the <see cref="T:TwoFactorAuthNet.Providers.Time.ITimeProvider"/> to be used when retrieving time information.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTDIGITS">
+            <summary>
+            Defines the default number of digits used when this number is unspecified.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTPERIOD">
+            <summary>
+            Defines the default period used when the period is unspecified.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTLENIENCY">
+            <summary>
+            Defines the default leniency used when ensuring correct time (see <see cref="M:TwoFactorAuthNet.TwoFactorAuth.EnsureCorrectTime(System.Int32)"/>).
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTALGORITHM">
+            <summary>
+            Defines the default algorithm used when the algorithm is unspecified.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTDISCREPANCY">
+            <summary>
+            Defines the default discrepancy used when the discrepancy is unspecified.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTSECRETBITS">
+            <summary>
+            Defines the default number of bits for entryp used when the number is unspecified.
+            </summary>
+        </member>
+        <member name="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTQRCODESIZE">
+            <summary>
+            Defines the default QR code image size, in pixels, when the size is unspecified.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.#ctor">
+            <summary>
+            Intializes a new instance of the <see cref="T:TwoFactorAuthNet.TwoFactorAuth"/> class.
+            </summary>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.#ctor(System.String,System.Int32,System.Int32,TwoFactorAuthNet.Algorithm,TwoFactorAuthNet.Providers.Qr.IQrCodeProvider,TwoFactorAuthNet.Providers.Rng.IRngProvider,TwoFactorAuthNet.Providers.Time.ITimeProvider)">
+            <summary>
+            Intializes a new instance of the <see cref="T:TwoFactorAuthNet.TwoFactorAuth"/> class.
+            </summary>
+            <param name="issuer">The issuer of the TOTP authentication token.</param>
+            <param name="digits">The number of digits to be displayed to the user / required for verification.</param>
+            <param name="period">The period, specified in seconds, a TOTP is valid.</param>
+            <param name="algorithm">The algorithm to use when generating TOTP codes.</param>
+            <param name="qrcodeprovider">The <see cref="T:TwoFactorAuthNet.Providers.Qr.IQrCodeProvider"/> to use for generating QR codes.</param>
+            <param name="rngprovider">The <see cref="T:TwoFactorAuthNet.Providers.Rng.IRngProvider"/> to use for generating sequences of random numbers.</param>
+            <param name="timeprovider">The <see cref="T:TwoFactorAuthNet.Providers.Time.ITimeProvider"/> to use for generating sequences of random numbers.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown when <paramref name="digits"/> or <paramref name="period"/> are less than 0 or the specified 
+            <paramref name="algorithm"/> is invalid.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.CreateSecret">
+            <summary>
+            Creates a 80 bit secret key to be shared with the user on wich the future valid TOTP codes will be based. 
+            The <see cref="T:TwoFactorAuthNet.CryptoSecureRequirement"/> is <see href="CryptoSecureRequirement.RequireSecure"/>.
+            </summary>
+            <returns>
+            Returns a string of random values in 'Base32 alphabet' to be shared with the user / stored with the account.
+            </returns>
+            <seealso cref="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTSECRETBITS"/>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.CreateSecret(System.Int32)">
+            <summary>
+            Creates a secret key with the specified number of bits of entropy to be shared with the user on wich the
+            future valid TOTP codes will be based. The <see cref="T:TwoFactorAuthNet.CryptoSecureRequirement"/> is 
+            <see href="CryptoSecureRequirement.RequireSecure"/>.
+            </summary>
+            <param name="bits">The number of bits of entropy to use.</param>
+            <returns>
+            Returns a string of random values in 'Base32 alphabet' to be shared with the user / stored with the account.
+            </returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.CreateSecret(System.Int32,TwoFactorAuthNet.CryptoSecureRequirement)">
+            <summary>
+            Creates a secret key with the specified number of bits of entropy and specified 
+            <see cref="T:TwoFactorAuthNet.CryptoSecureRequirement"/> to be shared with the user on wich the future valid TOTP codes will
+            be based.
+            </summary>
+            <param name="bits">The number of bits of entropy to use.</param>
+            <param name="cryptoSecureRequirement">The <see cref="T:TwoFactorAuthNet.CryptoSecureRequirement"/> to ensure cryptographically secure RNG's.</param>
+            <returns>
+            Returns a string of random values in 'Base32 alphabet' to be shared with the user / stored with the account.
+            </returns>
+            <exception cref="T:System.Security.Cryptography.CryptographicException">
+            Thrown when the <see cref="T:TwoFactorAuthNet.Providers.Rng.IRngProvider"/> of the instance is not cryptographically secure and the
+            <see cref="T:TwoFactorAuthNet.CryptoSecureRequirement"/> requires a cryptographically secure RNG.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.GetCode(System.String)">
+            <summary>
+            Gets a TOTP code based on the specified secret for the current time.
+            </summary>
+            <param name="secret">The shared secret.</param>
+            <returns>Returns a TOTP code based on the specified secret for the current time.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.GetCode(System.String,System.DateTime)">
+            <summary>
+            Gets a TOTP code based on the specified secret for the specified <see cref="T:System.DateTime"/>.
+            </summary>
+            <param name="secret">The shared secret.</param>
+            <param name="dateTime">The <see cref="T:System.DateTime"/> for the TOTP code.</param>
+            <returns>Returns a TOTP code based on the specified secret for the specified <see cref="T:System.DateTime"/>.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.GetCode(System.String,System.Int64)">
+            <summary>
+            Gets a TOTP code based on the specified secret for the specified timestamp.
+            </summary>
+            <param name="secret">The shared secret.</param>
+            <param name="timestamp">The timestamp for the TOTP code.</param>
+            <returns>Returns a TOTP code based on the specified secret for the specified timestamp.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.VerifyCode(System.String,System.String)">
+            <summary>
+            Verifies a TOTP code with the shared secret for the current time and with a <see cref="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTDISCREPANCY"/>.
+            </summary>
+            <param name="secret">The shared secret.</param>
+            <param name="code">The TOTP code to verify.</param>
+            <returns>Returns true when the TOTP code is valid, false otherwise.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.VerifyCode(System.String,System.String,System.Int64@)">
+            <summary>
+            Verifies a TOTP code with the shared secret for the current time and with a <see cref="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTDISCREPANCY"/>.
+            </summary>
+            <param name="secret">The shared secret.</param>
+            <param name="code">The TOTP code to verify.</param>
+            <param name="timeSlice">When this method returns, contains the timeslice that matched the code</param>
+            <returns>Returns true when the TOTP code is valid, false otherwise.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.VerifyCode(System.String,System.String,System.Int32)">
+            <summary>
+            Verifies a TOTP code with the shared secret for the current time and with a specified discrepancy.
+            </summary>
+            <param name="secret">The shared secret.</param>
+            <param name="code">The TOTP code to verify.</param>
+            <param name="discrepancy">The allowed time discrepancy (in both directions)  in number of <see cref="P:TwoFactorAuthNet.TwoFactorAuth.Period"/>s.</param>
+            <returns>Returns true when the TOTP code is valid, false otherwise.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.VerifyCode(System.String,System.String,System.Int32,System.Int64@)">
+            <summary>
+            Verifies a TOTP code with the shared secret for the current time and with a specified discrepancy.
+            </summary>
+            <param name="secret">The shared secret.</param>
+            <param name="code">The TOTP code to verify.</param>
+            <param name="discrepancy">The allowed time discrepancy (in both directions)  in number of <see cref="P:TwoFactorAuthNet.TwoFactorAuth.Period"/>s.</param>
+            <param name="timeSlice">When this method returns, contains the timeslice that matched the code</param>
+            <returns>Returns true when the TOTP code is valid, false otherwise.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.VerifyCode(System.String,System.String,System.Int32,System.DateTime)">
+            <summary>
+            Verifies a TOTP code with the shared secret for the specified <see cref="T:System.DateTime"/> and with a specified
+            discrepancy.
+            </summary>
+            <param name="secret">The shared secret.</param>
+            <param name="code">The TOTP code to verify.</param>
+            <param name="discrepancy">The allowed time discrepancy (in both directions)  in number of <see cref="P:TwoFactorAuthNet.TwoFactorAuth.Period"/>s.</param>
+            <param name="dateTime">The <see cref="T:System.DateTime"/> for wich to verify the TOTP code.</param>
+            <returns>Returns true when the TOTP code is valid, false otherwise.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.VerifyCode(System.String,System.String,System.Int32,System.DateTime,System.Int64@)">
+            <summary>
+            Verifies a TOTP code with the shared secret for the specified <see cref="T:System.DateTime"/> and with a specified
+            discrepancy.
+            </summary>
+            <param name="secret">The shared secret.</param>
+            <param name="code">The TOTP code to verify.</param>
+            <param name="discrepancy">The allowed time discrepancy (in both directions)  in number of <see cref="P:TwoFactorAuthNet.TwoFactorAuth.Period"/>s.</param>
+            <param name="dateTime">The <see cref="T:System.DateTime"/> for wich to verify the TOTP code.</param>
+            <param name="timeSlice">When this method returns, contains the timeslice that matched the code</param>
+            <returns>Returns true when the TOTP code is valid, false otherwise.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.VerifyCode(System.String,System.String,System.Int32,System.Int64)">
+            <summary>
+            Verifies a TOTP code with the shared secret for the specified timestamp and with a specified discrepancy.
+            </summary>
+            <param name="secret">The shared secret.</param>
+            <param name="code">The TOTP code to verify.</param>
+            <param name="discrepancy">The allowed time discrepancy (in both directions) in number of <see cref="P:TwoFactorAuthNet.TwoFactorAuth.Period"/>s.</param>
+            <param name="timestamp">The timestamp for wich to verify the TOTP code.</param>
+            <returns>Returns true when the TOTP code is valid, false otherwise.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="secret"/> or <paramref name="code"/> is null.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.VerifyCode(System.String,System.String,System.Int32,System.Int64,System.Int64@)">
+            <summary>
+            Verifies a TOTP code with the shared secret for the specified timestamp and with a specified discrepancy.
+            </summary>
+            <param name="secret">The shared secret.</param>
+            <param name="code">The TOTP code to verify.</param>
+            <param name="discrepancy">The allowed time discrepancy (in both directions) in number of <see cref="P:TwoFactorAuthNet.TwoFactorAuth.Period"/>s.</param>
+            <param name="timestamp">The timestamp for wich to verify the TOTP code.</param>
+            <param name="timeSlice">When this method returns, contains the timeslice that matched the code</param>
+            <returns>Returns true when the TOTP code is valid, false otherwise.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            Thrown when <paramref name="secret"/> or <paramref name="code"/> is null.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.GetQrCodeImageAsDataUri(System.String,System.String)">
+            <summary>
+            Retrieves / generates a QR code to be displayed to the user for sharing the shared secret and easy input
+            of this code by scanning with a default size (<see cref="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTQRCODESIZE"/>).
+            </summary>
+            <param name="label">The label to identify which account a key is associated with.</param>
+            <param name="secret">The shared secret.</param>
+            <returns>Returns an image encoded as data uri.</returns>
+            <see href="https://en.wikipedia.org/wiki/Data_URI_scheme"/>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.GetQrCodeImageAsDataUri(System.String,System.String,System.Int32)">
+            <summary>
+            Retrieves / generates a QR code to be displayed to the user for sharing the shared secret and easy input
+            of this code by scanning with a specified size.
+            </summary>
+            <param name="label">The label to identify which account a key is associated with.</param>
+            <param name="secret">The shared secret.</param>
+            <param name="size">The desired size, in pixels (width and height equal), of the QR code.</param>
+            <returns>Returns an image encoded as data uri.</returns>
+            <see href="https://en.wikipedia.org/wiki/Data_URI_scheme"/>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when <paramref name="size"/> is less than 0</exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.EnsureCorrectTime(System.Int32)">
+            <summary>
+            Checks the <see cref="T:TwoFactorAuthNet.TwoFactorAuth"/>'s <see cref="P:TwoFactorAuthNet.TwoFactorAuth.TimeProvider"/> against a number of default built-in
+            <see cref="T:TwoFactorAuthNet.Providers.Time.ITimeProvider"/>s and throws when the time is off by more than the specified leniency. If this
+            value exceeds the given leniency a <see cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException"/> exception will be thrown.
+            </summary>
+            <param name="leniency">
+            The number of seconds the current instance's <see cref="P:TwoFactorAuthNet.TwoFactorAuth.TimeProvider"/> is allowed to be off without
+            throwing an exception.
+            </param>
+            <exception cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException">
+            Thrown when the current instance's <see cref="P:TwoFactorAuthNet.TwoFactorAuth.TimeProvider"/> is off by more than the specified leniency
+            number of seconds.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.EnsureCorrectTime(System.Collections.Generic.IEnumerable{TwoFactorAuthNet.Providers.Time.ITimeProvider})">
+            <summary>
+            Checks the <see cref="T:TwoFactorAuthNet.TwoFactorAuth"/>'s <see cref="P:TwoFactorAuthNet.TwoFactorAuth.TimeProvider"/> against given
+            <see cref="T:TwoFactorAuthNet.Providers.Time.ITimeProvider"/>s and throws when the time is off by more than the <see cref="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTLENIENCY"/>
+            number of seconds. If this value exceeds the given leniency a <see cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException"/> exception
+            will be thrown.
+            </summary>
+            <param name="timeproviders">
+            A collection of <see cref="T:TwoFactorAuthNet.Providers.Time.ITimeProvider"/>s to check the current instance's <see cref="P:TwoFactorAuthNet.TwoFactorAuth.TimeProvider"/>
+            against.
+            </param>
+            <exception cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException">
+            Thrown when the current instance's <see cref="P:TwoFactorAuthNet.TwoFactorAuth.TimeProvider"/> is off by more than the 
+            <see cref="F:TwoFactorAuthNet.TwoFactorAuth.DEFAULTLENIENCY"/> number of seconds.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.EnsureCorrectTime(System.Collections.Generic.IEnumerable{TwoFactorAuthNet.Providers.Time.ITimeProvider},System.Int32)">
+            <summary>
+            Checks the <see cref="T:TwoFactorAuthNet.TwoFactorAuth"/>'s <see cref="P:TwoFactorAuthNet.TwoFactorAuth.TimeProvider"/> against given
+            <see cref="T:TwoFactorAuthNet.Providers.Time.ITimeProvider"/>s and throws when the time is off by more than the specified leniency. If this
+            value exceeds the given leniency a <see cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException"/> exception will be thrown.
+            </summary>
+            <param name="timeproviders">
+            A collection of <see cref="T:TwoFactorAuthNet.Providers.Time.ITimeProvider"/>s to check the current instance's <see cref="P:TwoFactorAuthNet.TwoFactorAuth.TimeProvider"/>
+            against.
+            </param>
+            <param name="leniency">
+            The number of seconds the current instance's <see cref="P:TwoFactorAuthNet.TwoFactorAuth.TimeProvider"/> is allowed to be off without
+            throwing an exception.
+            </param>
+            <exception cref="T:TwoFactorAuthNet.Providers.Time.TimeProviderException">
+            Thrown when the current instance's <see cref="P:TwoFactorAuthNet.TwoFactorAuth.TimeProvider"/> is off by more than the specified leniency
+            number of seconds.
+            </exception>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.GetTimeSlice(System.Int64,System.Int32)">
+            <summary>
+            Calculates the timeslice (e.g. number of periods since <see cref="F:TwoFactorAuthNet.TwoFactorAuth.EPOCH"/>) for a given timestamp and
+            offset (specified in number of periods).
+            </summary>
+            <param name="timestamp">The timestamp to calculate the timeslice for.</param>
+            <param name="offset">The number of periods to offset (positive or negative).</param>
+            <returns>Returns the timeslice for a given timestamp and offset</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.DateTimeToTimestamp(System.DateTime)">
+            <summary>
+            Converts a <see cref="T:System.DateTime"/> to timestamp (based on UNIX EPOCH, see <see cref="F:TwoFactorAuthNet.TwoFactorAuth.EPOCH"/>).
+            </summary>
+            <param name="value">The <see cref="T:System.DateTime"/> to calculate the timestamp from.</param>
+            <returns>Returns the timestamp for the specified <see cref="T:System.DateTime"/>.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.CodeEquals(System.String,System.String)">
+            <summary>
+            Provides a timing-attack safe method of comparing 2 strings.
+            </summary>
+            <param name="safe">The safe/trusted string to compare.</param>
+            <param name="user">The unsafe/user provided string to compare.</param>
+            <returns>Returns when two strings are equal, false otherwise.</returns>
+        </member>
+        <member name="M:TwoFactorAuthNet.TwoFactorAuth.GetQrText(System.String,System.String)">
+            <summary>
+            Generates a TOTP Uri with specified label and secret.
+            </summary>
+            <param name="label">The label for the TOTP Uri.</param>
+            <param name="secret">The secret for the TOTP Uri.</param>
+            <returns>Returns a TOTP Uri with specified label and secret.</returns>
+        </member>
+        <member name="T:TwoFactorAuthNet.TwoFactorAuth.Base32">
+            <summary>
+            Provides a method for decoding a Base32 encoded string and exposes the Base32 "alphabet" for internal uses.
+            </summary>
+        </member>
+    </members>
+</doc>

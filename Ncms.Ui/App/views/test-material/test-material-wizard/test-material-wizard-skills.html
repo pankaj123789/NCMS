@@ -1,0 +1,35 @@
+﻿<div class="row">
+	<div class="col-sm-12">
+		<div data-bind="validationElement: model.SkillId, validationOptions: { insertMessages: false }">
+			<span class="help-block" data-bind="validationMessage: model.SkillId"></span>
+		</div>
+		<table class="table table-bordered table-striped" data-bind="datatable: tableDefinition">
+			<thead>
+				<tr>
+					<th class="w-xxs"></th>
+					<th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Skill'"></th>
+					<th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestDates'"></th>
+					<th class="w-md" data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.ApplicantsWithoutMaterial'"></th>
+				</tr>
+			</thead>
+			<tbody data-bind="foreach: skills">
+				<tr>
+					<td class="w-xxs"></td>
+					<td data-bind="text: Skill"></td>
+					<td>
+						<ul data-bind="foreach: { data: TestDates, as: 't' }">
+							<li data-bind="textDate: { value: t, outputFormat: 'dddd, D MMMM YYYY' }"></li>
+						</ul>
+					</td>
+					<td data-bind="text: ApplicantsWithoutMaterials"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="form-control-static">
+			<label class="checkbox-inline i-checks">
+				<input type="checkbox" data-bind="checked: showIncludedValue"><i></i>
+				<span class="padder-md" data-bind="text: showIncludedMaterialLabel"></span>
+			</label>
+		</div>
+	</div>
+</div>

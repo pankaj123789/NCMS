@@ -1,0 +1,27 @@
+﻿ALTER VIEW [dbo].[TestResultRubric] AS
+SELECT
+	[TestResultId]
+	,DATEADD(dd,DATEDIFF(dd,0,GETDATE()),0)AS[DateRecorded]
+	,[TestSittingId]
+	,[TestSessionId]
+	,[PersonId]
+	,[CustomerNo]
+	,[CandidateName]
+	,[ResultDueDate]
+	,[CredentialTypeInternalName]
+	,[CredentialTypeExternalName]
+	,[Language1]
+	,[Language1Code]
+	,[Language1Group]
+	,[Language2]
+	,[Language2Code]
+	,[Language2Group]
+	,[Skill]
+	,[PaidReview]
+	,[Supplementary]
+	,[OverallResult]
+	,[ResultDate]
+	,[EligibleForSupplementary]
+	,[EligibleForConcededPass]	
+FROM [TestResultRubricHistory] tr
+where [RowStatus] = 'Latest'

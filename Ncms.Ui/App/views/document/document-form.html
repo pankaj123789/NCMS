@@ -1,0 +1,159 @@
+<div data-bind="css: { 'hide': hideForm() }">
+    <div class="panel panel-default" data-bind="showWithPermission: uploadShowWithPermission">
+        <div class="panel-heading">
+            <span data-bind="html: title()"></span>
+            <span data-bind="visible: replaceFile">
+                <span data-bind="showWithPermission: uploadShowWithPermission">
+                    <label data-bind="reshtml: 'Naati.Resources.Document.resources.ReplaceFile'" style="padding-left: 20px; color: red"></label>
+                </span>
+            </span>
+        </div>
+        <div class="panel-body">
+            <form>
+                <div class="form-group" data-bind="validationElement: currentDocument.File, showWithPermission: uploadShowWithPermission">
+                    <label data-bind="reshtml: 'Naati.Resources.Document.resources.UploadFile'"></label>
+                    <div data-bind="component: { name: 'file-upload', params: fileUpload }"></div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3" data-bind="validationElement: currentDocument.Title">
+                        <label data-bind="reshtml: 'Naati.Resources.Document.resources.Title'"></label>
+                        <input type="text" class="form-control" data-bind="value: currentDocument.Title, enable: inEditMode()" />
+                    </div>
+                    <div class="form-group col-md-3" data-bind="validationElement: currentDocument.Type">
+                        <label data-bind="reshtml: 'Naati.Resources.Document.resources.DocumentType'"></label>
+                        <select class="form-control" data-bind="multiselect, value: currentDocumentType, enable: enableDocumentType, options: typeOptions, optionsText: 'name', optionsValue: 'id', valueAllowUnset: true"></select>
+                    </div>
+
+                    <div class="form-group col-md-2" data-bind="visible: showEportalDownload">
+                        <label data-bind="html: showEportalDownloadLabel"></label>
+                        <div class="form-control">
+                            <label class="i-switch m-t-xs m-r">
+                                <input type="checkbox" data-bind="enable: enableEportalDownload, checked: eportalDownload">
+                                <i></i>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-2" data-bind="visible: showMergeDocument">
+                        <label data-bind="html: showMergeDocumentLabel"></label>
+                        <div class="form-control">
+                            <label class="i-switch m-t-xs m-r">
+                                <input type="checkbox" data-bind="enable: enableMergeDocument, checked: mergeDocument, event: { change: setMergeDocument }">
+                                <i></i>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-success" data-bind="click: save, enable: inEditMode()">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-bind="click: cancel, enable: inEditMode()"><i class="fa fa-ban"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span></button>
+        </div>
+    </div>
+</div>
+
+<div data-bind="visible: isTestMaterialDocument()" style="padding-bottom: 7px; padding-left: 5px;">
+    <strong><span data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialsTitle'"></span></strong>
+</div>
+
+<div data-bind="component: { name: 'table-component', params: tableDefinition }"></div>
+
+<div data-bind="visible: isTestMaterialDocument()">
+    <div style="padding-bottom: 7px; padding-left: 5px;">
+        <strong><span data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestCandidateBriefs'"></span></strong>
+    </div>
+    <div data-bind="component: { name: 'table-component', params: childtableDefinition }"></div>
+</div>
+
+<script id="document-header-template" type="text/html">
+    <th data-bind="reshtml: 'Naati.Resources.Document.resources.Title'"></th>
+    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Document.resources.DocumentType'"></th>
+
+    <th class="w-sm text-center" data-bind="reshtml: 'Naati.Resources.Document.resources.AvailableForExaminers'"></th>
+    <th class="w-sm text-center" data-bind="reshtml: 'Naati.Resources.Document.resources.MergeDocument'"></th>
+
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.FileType'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.FileSize'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.UploadedBy'"></th>
+    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Document.resources.UploadedDate'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.UniqueId'"></th>
+    <th class="w-xs">&nbsp;</th>
+</script>
+<script id="document-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: Title"></td>
+        <td data-bind="text: DocumentType"></td>
+
+        <td class="text-center" data-bind="text: AvailableForExaminersDisplayValue"></td>
+        <td class="text-center" data-bind="text: MergeDocumentDisplayValue"></td>
+
+        <td data-bind="text: FileType"></td>
+        <td data-bind="bytesToSize: FileSize"></td>
+        <td data-bind="text: UploadedByName"></td>
+        <td data-bind="text: UploadedDateTime.format('DD/MM/YYYY')"></td>
+        <td data-bind="text: '#' + $root.fileId($data)"></td>
+        <td class="text-right">
+            <!--ko if: ExaminerMarksRemoved -->
+            <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function(){ }, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Test.resources.ExaminerMarksRemoved' }">
+                <span class="glyphicon glyphicon-ban-circle"></span>
+            </a>
+            <!--/ko-->
+            <!--ko if: SoftDeleteDate -->
+            <span data-bind="text:SoftDeleteDateMessage"/>
+            <!--/ko-->
+            <!--ko if: !SoftDeleteDate -->
+            <a href="#" class="btn btn-default btn-xs" data-bind="showWithPermission: $root.editShowWithPermission, visible: $root.canEditDocument($data), clickBubble: false, click: function() { $root.edit(this); }, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                <span class="glyphicon glyphicon-edit"></span>
+            </a>
+            <a href="#" class="btn btn-default btn-xs" data-bind="downloadFile: { url: $root.download($data) }, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Shared.resources.Download' }, visible: $root.allowDownload">
+                <span class="glyphicon glyphicon-download-alt"></span>
+            </a>
+            <a href="#" class="btn btn-danger btn-xs" data-bind="showWithPermission: $root.deleteShowWithPermission, visible: $root.canRemoveDocument($data) , clickBubble: false, click: function() { $root.remove(this); }, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                <span class="glyphicon glyphicon-trash"></span>
+            </a>
+            <!--/ko-->
+        </td>
+    </tr>
+</script>
+
+
+<script id="child-document-header-template" type="text/html">
+    <th data-bind="reshtml: 'Naati.Resources.Document.resources.Title'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.FileType'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.FileSize'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.UploadedBy'"></th>
+    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Document.resources.UploadedDate'"></th>
+    <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Document.resources.UniqueId'"></th>
+    <th class="w-xs">&nbsp;</th>
+</script>
+<script id="child-document-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: Title"></td>
+        <td data-bind="text: FileType"></td>
+        <td data-bind="bytesToSize: FileSize"></td>
+        <td data-bind="text: UploadedByName"></td>
+        <td data-bind="text: UploadedDateTime.format('DD/MM/YYYY')"></td>
+        <td data-bind="text: '#' + $root.fileId($data)"></td>
+        <td class="text-right">
+            <!--ko if: ExaminerMarksRemoved -->
+            <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function(){ }, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Test.resources.ExaminerMarksRemoved' }">
+                <span class="glyphicon glyphicon-ban-circle"></span>
+            </a>
+            <!--/ko-->
+            <a href="#" class="btn btn-default btn-xs" data-bind="showWithPermission: $root.editShowWithPermission, visible: $root.canEditDocument($data), clickBubble: false, click: function() { $root.edit(this); }, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                <span class="glyphicon glyphicon-edit"></span>
+            </a>
+            <a href="#" class="btn btn-default btn-xs" data-bind="downloadFile: { url: $root.download($data) }, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Shared.resources.Download' }, visible: $root.allowDownload">
+                <span class="glyphicon glyphicon-download-alt"></span>
+            </a>
+            <a href="#" class="btn btn-danger btn-xs" data-bind="showWithPermission: $root.deleteShowWithPermission, visible: $root.canRemoveDocument($data) , clickBubble: false, click: function() { $root.remove(this); }, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                <span class="glyphicon glyphicon-trash"></span>
+            </a>
+        </td>
+    </tr>
+</script>

@@ -1,0 +1,63 @@
+﻿<div>
+    <div class="r item hbox no-border v-middle text-center">
+        <div class="col v-middle no-border wrapper-sm font-thin">
+            <div class="h1 text-info"><span data-bind="textCurrency: totalAmount"></span></div>
+            <span class="text-xs text-info" data-bind="restext: 'Naati.Resources.Finance.resources.Total'"></span>
+            <div class="h3 m-t text-success"><span data-bind="textCurrency: totalPayments"></span></div>
+            <span class="text-xs text-success" data-bind="restext: 'Naati.Resources.Finance.resources.PaymentTotal'"></span>
+            <div class="h3 m-t text-danger"><span data-bind="textCurrency: totalBalance"></span></div>
+            <span class="text-xs text-danger" data-bind="restext: 'Naati.Resources.Finance.resources.Balance'"></span>
+        </div>
+        <div class="col text-center no-border v-middle padder-v">
+            <div data-bind="sparkline: { values: sparklineValues, options: sparklineOptions }" class="sparkline inline"></div>
+            <div class="line pull-in"></div>
+            <div class="text-xs">
+                <i class="fa fa-circle text-success"></i>
+                <span data-bind="restext: 'Naati.Resources.Finance.resources.PaymentTotal'"></span>
+                <i class="fa fa-circle text-danger m-l"></i>
+                <span data-bind="restext: 'Naati.Resources.Finance.resources.Balance'"></span>
+            </div>
+        </div>
+    </div>
+    <!--ko component: { name: 'table-component', params: tableDefinition }-->
+    <!--/ko-->
+</div>
+<script id="invoicecredit-header-template" type="text/html">
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.CreatedDate'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.InvoiceNo'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.Type'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.Status'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.InvoiceAmount'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.Payments'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.Balance'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.Office'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.WiiseReference'"></th>
+    <th class="w-xs"></th>
+</script>
+<script id="invoicecredit-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: Date"></td>
+        <td data-bind="attr: { 'data-order': InvoiceNumber }, text: InvoiceNumber"></td>
+        <td data-bind="text: TypeName, attr: { 'data-order': TypeName }"></td>
+        <td data-bind="text: StatusText, attr: { 'data-order': StatusText }"></td>
+        <td data-bind="textCurrency: { value: Total, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Total }"></td>
+        <td data-bind="textCurrency: { value: Payment, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Payment }"></td>
+        <td data-bind="textCurrency: { value: Balance, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Balance }, css: { 'text-danger': Balance > 0, 'text-info': Balance < 0 }"></td>
+        <td data-bind="text: Office, attr: { 'data-order': Office }"></td>
+        <td data-bind="text: WiiseReference, attr: { 'data-order': WiiseReference }"></td>
+        <td class="w-xs text-center">
+            <div class="btn-group">
+                <!--ko if: showLog-->
+                <a href="#" class="btn btn-default btn-xs" data-bind="click: showLog, visible: false, resattr: { title: 'Naati.Resources.Shared.resources.LogDetail' }, tooltip: { trigger: 'hover' }">
+                    <i class="fa fa-history"></i>
+                </a>
+                <!--/ko-->
+                <!--ko if: downloadUrl-->
+                <a href="#" class="btn btn-default btn-xs" data-bind="resattr: { title: 'Naati.Resources.Finance.resources.DownloadInvoice' }, tooltip: { trigger: 'hover' }, downloadFile: { url: downloadUrl }">
+                    <span class="fa fa-download"></span>
+                </a>
+                <!--/ko-->
+            </div>
+        </td>
+    </tr>
+</script>

@@ -1,0 +1,108 @@
+﻿<div class="form">
+	<div class="row">
+		<div class="form-group col-sm-3" data-bind="validationElement: session.Name, validationOptions: { insertMessages: false }">
+			<label class="control-label" data-bind="restext: 'Naati.Resources.TestSession.resources.SessionName'"></label>
+			<input type="text" class="form-control" data-bind="value: session.Name" />
+			<span class="help-block" data-bind="validationMessage: session.Name"></span>
+		</div>
+	    <div class="form-group col-sm-2" data-bind="validationOptions: { insertMessages: false }">
+	        <label class="control-label" data-bind="restext: 'Naati.Resources.TestSession.resources.CredentialType'"></label>
+	        <!-- ko component: { name: 'select-component', params: credentialTypeOptions } --><!-- /ko -->
+	    </div>
+        <div class="form-group col-sm-2" data-bind="validationElement: session.DefaultTestSpecificationId, validationOptions: { insertMessages: false }">
+            <label class="control-label" data-bind="restext: 'Naati.Resources.TestSession.resources.TestSpecification'"></label>
+            <!-- ko component: { name: 'select-component', params: testSpecificationOptions } --><!-- /ko -->
+            <span class="help-block" data-bind="validationMessage: session.DefaultTestSpecificationId"></span>
+        </div>
+		<div class="form-group col-sm-2" data-bind="validationElement: session.TestLocationId, validationOptions: { insertMessages: false }">
+			<label class="control-label" data-bind="restext: 'Naati.Resources.TestSession.resources.TestLocation'"></label>
+			<!-- ko component: { name: 'select-component', params: testLocationOptions } --><!-- /ko -->
+			<span class="help-block" data-bind="validationMessage: session.TestLocationId"></span>
+		</div>
+		<div class="form-group col-sm-3" data-bind="validationElement: session.VenueId, validationOptions: { insertMessages: false }">
+			<label class="control-label" data-bind="restext: 'Naati.Resources.TestSession.resources.Venue'"></label>
+			<!-- ko component: { name: 'select-component', params: venueOptions } --><!-- /ko -->
+			<span class="help-block" data-bind="validationMessage: session.VenueId"></span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="row">
+				<div class="form-group col-sm-3" data-bind="validationElement: session.TestDate, validationOptions: { insertMessages: false }">
+					<label class="control-label" data-bind="restext: 'Naati.Resources.TestSession.resources.TestDate'"></label>
+					<!-- ko component: { name: 'date-input', params: testDateOptions } --><!-- /ko -->
+				</div>
+				<div class="form-group col-sm-3" data-bind="validationElement: session.TestTime, validationOptions: { insertMessages: false }">
+					<label class="control-label" data-bind="restext: 'Naati.Resources.TestSession.resources.TestTime'"></label>
+					<div class="input-group clockpicker">
+						<input type="text" class="form-control" data-bind="clockpicker, value: session.TestTime" />
+						<span class="input-group-addon">
+							<span class="far fa-clock"></span>
+						</span>
+					</div>
+					<span class="help-block" data-bind="validationMessage: session.TestTime"></span>
+				</div>
+				<div class="form-group col-sm-3" data-bind="validationElement: session.PreparationTime">
+					<label class="control-label" data-bind="reshtml: 'Naati.Resources.TestSession.resources.PreparationTime'"></label>
+					<input type="number" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control" data-bind="value: session.PreparationTime, tooltip: { placement: 'bottom', container: 'body' }, resattr: { title: 'Naati.Resources.CredentialRequestSummary.resources.PreparationTimeHelp' }, valueUpdate:['afterkeydown','propertychange','input']" />
+				</div>
+				<div class="form-group col-sm-3" data-bind="validationElement: session.SessionDuration, validationOptions: { insertMessages: false }">
+					<label class="control-label" data-bind="reshtml: 'Naati.Resources.TestSession.resources.SessionDuration'"></label>
+					<input type="number" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control" data-bind="value: session.SessionDuration, tooltip: { placement: 'bottom', trigger: 'hover focus' }, resattr: { title: 'Naati.Resources.CredentialRequestSummary.resources.DurationHelp' }, valueUpdate:['afterkeydown','propertychange','input']" />
+					<span class="help-block" data-bind="validationMessage: session.SessionDuration"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-3">
+					<label class="control-label">&nbsp;</label>
+					<div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+						<label class="checkbox-inline i-checks">
+							<input type="checkbox" data-bind="checked: session.OverrideVenueCapacity"><i></i>
+							<span class="padder-md" data-bind="restext: 'Naati.Resources.TestSession.resources.OverrideVenueCapacity'"></span>
+						</label>
+					</div>
+				</div>
+				<div class="form-group col-sm-3">
+					<label class="control-label">&nbsp;</label>
+					<div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+						<label class="checkbox-inline i-checks">
+							<input type="checkbox" data-bind="checked: session.NewCandidatesOnly"><i></i>
+							<span class="padder-md" data-bind="restext: 'Naati.Resources.TestSession.resources.NewCandidatesOnly'"></span>
+						</label>
+					</div>
+				</div>
+				<div class="form-group col-sm-2" data-bind="validationElement: session.Capacity">
+					<label class="control-label" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Capacity'"></label>
+					<input type="number" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control" data-bind="value: zCapacity, valueUpdate:['afterkeydown','propertychange','input'], enable: session.OverrideVenueCapacity" />
+				</div>
+				<div class="form-group col-sm-2">
+					<label class="control-label">&nbsp;</label>
+					<div class="form-control-static" data-bind="validationOptions: { insertMessages: false }, tooltip: { trigger: 'hover', placement: 'bottom'  }, resattr: { title: 'Naati.Resources.TestSession.resources.AllowSelfAssignHelp' }">
+						<label class="checkbox-inline i-checks">
+							<input type="checkbox" data-bind="checked: session.AllowSelfAssign"><i></i>
+							<span class="padder-md" data-bind="restext: 'Naati.Resources.TestSession.resources.AllowSelfAssign'"></span>
+						</label>
+					</div>
+				</div>
+				<div class="form-group col-sm-2">
+					<label class="control-label">&nbsp;</label>
+					<div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+						<label class="checkbox-inline i-checks">
+							<input type="checkbox" data-bind="checked: session.IsActive"><i></i>
+							<span class="padder-md" data-bind="restext: 'Naati.Resources.TestSession.resources.IsActive'"></span>
+						</label>
+						<span class="help-block" data-bind="validationMessage: session.CredentialTypeId"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="row">
+				<div class="form-group col-sm-12" data-bind="validationElement: session.PublicNote">
+					<label class="control-label" data-bind="restext: 'Naati.Resources.TestSession.resources.Notes'"></label>
+					<textarea class="form-control" style="height: 108px;" data-bind="value:session.PublicNote"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DocumentNamePlaceHolder" xml:space="preserve">
+    <value>Search by documents</value>
+  </data>
+  <data name="DocumentSearch" xml:space="preserve">
+    <value>Document Search</value>
+  </data>
+  <data name="DocumentType" xml:space="preserve">
+    <value>Document Type</value>
+  </data>
+  <data name="DocumentTypeSAMArchiveDocument" xml:space="preserve">
+    <value>SAM Archive Document</value>
+  </data>
+  <data name="DocumentTypeSAMDocument" xml:space="preserve">
+    <value>SAM Document</value>
+  </data>
+  <data name="DocumentTypeTestAsset" xml:space="preserve">
+    <value>Test Asset</value>
+  </data>
+  <data name="DocumentTypeTestAttachment" xml:space="preserve">
+    <value>Test Attachment</value>
+  </data>
+  <data name="DocumentTypeTestAttendanceAsset" xml:space="preserve">
+    <value>Test Attendance Asset</value>
+  </data>
+  <data name="DocumentTypeTestMaterial" xml:space="preserve">
+    <value>Test Material</value>
+  </data>
+  <data name="DocumentTypeUndefined" xml:space="preserve">
+    <value>Undefined</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>File name</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>File size</value>
+  </data>
+  <data name="FileType" xml:space="preserve">
+    <value>File Type</value>
+  </data>
+  <data name="ModifiedBy" xml:space="preserve">
+    <value>Modified by</value>
+  </data>
+  <data name="ModifiedDate" xml:space="preserve">
+    <value>Modified Date</value>
+  </data>
+  <data name="ReplaceFile" xml:space="preserve">
+    <value>File will be replaced</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="UploadedBy" xml:space="preserve">
+    <value>Uploaded by</value>
+  </data>
+  <data name="UploadedDate" xml:space="preserve">
+    <value>Uploaded Date</value>
+  </data>
+  <data name="UploadFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="DocumentTypeGeneralTestDocument" xml:space="preserve">
+    <value>General Test Document</value>
+  </data>
+  <data name="UniqueId" xml:space="preserve">
+    <value>Unique ID</value>
+  </data>
+  <data name="DocumentTypeMarkedTestAsset" xml:space="preserve">
+    <value>Marked Test Asset</value>
+  </data>
+  <data name="DocumentTypeUnmarkedTestAsset" xml:space="preserve">
+    <value>Unmarked Test Asset</value>
+  </data>
+  <data name="DocumentTypeEnglishMarking" xml:space="preserve">
+    <value>English Marking</value>
+  </data>
+  <data name="DocumentTypeReviewReport" xml:space="preserve">
+    <value>Review Report</value>
+  </data>
+  <data name="EportalDowlnoad" xml:space="preserve">
+    <value>ePortal Download?</value>
+  </data>
+  <data name="DocumentTypeAuslanProficiencyEvidence" xml:space="preserve">
+    <value>Auslan Proficiency Evidence</value>
+  </data>
+  <data name="DocumentTypeCertificate" xml:space="preserve">
+    <value>Certificate</value>
+  </data>
+  <data name="DocumentTypeCertificateTemplate" xml:space="preserve">
+    <value>Certificate Template</value>
+  </data>
+  <data name="DocumentTypeChuchotageEvidence" xml:space="preserve">
+    <value>Chuchotage Evidence</value>
+  </data>
+  <data name="DocumentTypeEnglishProficiencyEvidence" xml:space="preserve">
+    <value>English Proficiency Evidence</value>
+  </data>
+  <data name="DocumentTypeEthicalCompetencyEvidence" xml:space="preserve">
+    <value>Ethical Competency Evidence</value>
+  </data>
+  <data name="DocumentTypeIdentification" xml:space="preserve">
+    <value>Identification</value>
+  </data>
+  <data name="DocumentTypeInterculturalCompetencyEvidence" xml:space="preserve">
+    <value>Intercultural Competency Evidence</value>
+  </data>
+  <data name="DocumentTypeOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="DocumentTypeTrainingEvidence" xml:space="preserve">
+    <value>Training Evidence</value>
+  </data>
+  <data name="DocumentTypeTranscript" xml:space="preserve">
+    <value>Transcript</value>
+  </data>
+  <data name="DocumentTypeWorkPracticeEvidence" xml:space="preserve">
+    <value>Work Practice Evidence</value>
+  </data>
+  <data name="DocumentTypeGeneral" xml:space="preserve">
+    <value>General document</value>
+  </data>
+  <data name="DocumentTypeApplicationForm" xml:space="preserve">
+    <value>Application Form</value>
+  </data>
+  <data name="DocumentTypeCredentialLetter" xml:space="preserve">
+    <value>Credential Letter</value>
+  </data>
+  <data name="DocumentTypePurchaseOrder" xml:space="preserve">
+    <value>Purchase Order</value>
+  </data>
+  <data name="DocumentTypeApplicationsOther" xml:space="preserve">
+    <value>Other Application Related</value>
+  </data>
+  <data name="DocumentTypeAiicMembershipEvidence" xml:space="preserve">
+    <value>AIIC Membership Evidence</value>
+  </data>
+  <data name="DocumentTypeAitcMembershipEvidence" xml:space="preserve">
+    <value>AITC Membership Evidence</value>
+  </data>
+  <data name="DocumentTypeCandidateTestMaterial" xml:space="preserve">
+    <value>Candidate Test Material</value>
+  </data>
+  <data name="DocumentTypeExaminerTestMaterial" xml:space="preserve">
+    <value>Examiner Test Material</value>
+  </data>
+  <data name="MyNAATIDownload" xml:space="preserve">
+    <value>Available For Examiners</value>
+  </data>
+  <data name="DocumentTypeScript" xml:space="preserve">
+    <value>Script</value>
+  </data>
+  <data name="DocumentTypeCandidateCoverSheet" xml:space="preserve">
+    <value>Candidate Cover Sheet</value>
+  </data>
+  <data name="DocumentTypeCandidateInformation" xml:space="preserve">
+    <value>Candidate Information</value>
+  </data>
+  <data name="AvailableForExaminers" xml:space="preserve">
+    <value>Available For Examiners</value>
+  </data>
+  <data name="MergeDocument" xml:space="preserve">
+    <value>Merge Document</value>
+  </data>
+  <data name="ReplaceMergeDocumentFlag" xml:space="preserve">
+    <value>There is another document with the Merge Document flag, and only one document can be merged.  Are you sure you want to upload this new document with the Merge Flag and deselect the other document?</value>
+  </data>
+  <data name="DocumentTypeProfessionalDevelopmentEvidence" xml:space="preserve">
+    <value>Professional Development Evidence</value>
+  </data>
+  <data name="DocumentTypeWorkPractice" xml:space="preserve">
+    <value>Work Practice</value>
+  </data>
+  <data name="DocumentTypeProfessionalDevelopmentActivity" xml:space="preserve">
+    <value>Professional Development Activity</value>
+  </data>
+  <data name="DocumentTypeMedicalCertificate" xml:space="preserve">
+    <value>Medical Certificate</value>
+  </data>
+  <data name="DocumentTypeProblemSheet" xml:space="preserve">
+    <value>Problem Sheet</value>
+  </data>
+  <data name="DocumentSource" xml:space="preserve">
+    <value>Document Source</value>
+  </data>
+</root>

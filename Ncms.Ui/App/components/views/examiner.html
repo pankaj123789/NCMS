@@ -1,0 +1,24 @@
+﻿<div class="row bottom-margin">
+    <div class="form-group col-lg-6">
+        <label data-bind="reshtml: 'Naati.Resources.Shared.resources.Panel'"></label>
+        <!-- ko component: { name: 'select-component', params: panel } --><!-- /ko -->
+    </div>
+    <div class="form-group col-lg-3 date-range" data-bind="validationElement: examiner.selectedOptions">
+        <label data-bind="reshtml: 'Naati.Resources.Test.resources.Examiner'"></label>
+        <!-- ko component: { name: 'select-component', params: examiner } --><!-- /ko -->
+    </div>
+    <div class="form-group col-lg-3 date-range">
+        <label data-bind="reshtml: 'Naati.Resources.Test.resources.Status'"></label>
+        <!-- ko component: { name: 'select-component', params: examinerStatus } --><!-- /ko -->
+    </div>
+</div>
+<div class="row bottom-margin">
+    <div class="form-group col-md-6">
+        <label data-bind="reshtml: 'Naati.Resources.Test.resources.Submitted'"></label>
+        <!-- ko component: { name: 'date-range', params: submitted } --><!-- /ko -->
+    </div>
+    <div class="form-group col-md-6 date-range">
+        <label data-bind="reshtml: 'Naati.Resources.Test.resources.DueBy'"></label>
+        <!-- ko component: { name: 'date-range', params: dueBy } --><!-- /ko -->
+    </div>
+</div>

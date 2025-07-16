@@ -1,0 +1,363 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Contracts.BackOffice.RolePlaySessionContract
+@{
+    ViewBag.Title = "Role-Play Session Details";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+    new Tuple<string, string>("Examiner Tools", Url.Action("Index")),
+    new Tuple<string, string>("Role-Play Session", null)
+    };
+
+    var rolePlayerStatus = Model.RolePlayerStatusDisplayName;
+}
+@functions
+{
+    public enum ModalType
+    {
+        Accept,
+        Reject
+    }
+}
+
+@helper ModalBody(ModalType modalType, MvcHtmlString modalBodyHtml)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="manageTestError" class="validation-summary-errors" style="display: block;">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            @modalBodyHtml
+        </div>
+    </div>
+}
+
+
+@helper ConfirmModel(ModalType modalType)
+{
+    if (modalType == ModalType.Accept)
+    {
+        <p class="alert" role="alert">
+            You will not be able to revert this action.<br /> Are you sure you will be available for the role-play session <strong>@Model.TestSessionDate.ToString("dd/MM/yyyy") @Model.TestSessionDate.ToString("HH:mm")?</strong> <br> Please email <a href="mailto://info@naati.com.au">info@naati.com.au</a> for any changes to this action.
+        </p>
+    }
+    else if (modalType == ModalType.Reject)
+    {
+        <p class="alert" role="alert">
+            You will not be able to revert this action.<br /> Are you sure you want to reject the role-play session on  <strong>@Model.TestSessionDate.ToString("dd/MM/yyyy") @Model.TestSessionDate.ToString("HH:mm")?</strong><br /> Please email <a href="mailto://info@naati.com.au">info@naati.com.au</a> for any changes to this action.
+        </p>
+    }
+}
+
+<div id="detailModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="">OK</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script id="confirmAccept" type="text/html">
+        @ModalBody(ModalType.Accept, ConfirmModel(ModalType.Accept).ToMvcHtmlString())
+    </script>
+    <script id="confirmReject" type="text/html">
+        @ModalBody(ModalType.Reject, ConfirmModel(ModalType.Reject).ToMvcHtmlString())
+    </script>
+    <script>
+        $(function() {
+            var $modal = $('#detailModal');
+            var $okButton = $modal.find('.modal-footer .btn-primary');
+            var $cancelButton = $modal.find('.modal-footer .btn-danger');
+            var $target = null;
+            var $vMap = $('#vMap');
+            var callGoogleApiCount = 0;
+
+            function setupModal(event) {
+                $target = $(event.relatedTarget);
+                var modalType = $target.data('modal-type');
+
+                var id = 'confirm' + modalType;
+
+                $modal.find('.modal-title').text(modalType);
+                $modal.find('.modal-body').html($('#' + id).html());
+
+                $okButton.prop('disabled', false);
+                $okButton.text(modalType);
+                $okButton.data('url', $target.data('url'));
+                $target.prop('disabled', true);
+                $okButton.show();
+
+                $cancelButton.prop('disabled', false);
+                $cancelButton.show();
+                $modal.data('modalType', modalType);
+                $modal.modal('show');
+
+            }
+
+            $modal.on('show.bs.modal',
+                function(event) {
+                    $('.validation-summary-errors').empty();
+                    if (event.relatedTarget) {
+                        setupModal(event);
+                    }
+                });
+
+            $modal.on('hidden.bs.modal',
+                function() {
+                    $target.prop('disabled', false);
+                });
+
+
+            $okButton.on('click',
+                function(evt) {
+
+                    evt.preventDefault();
+
+                    var $this = $(this);
+                    var actionButtons = $('#detailModal .modal-footer button');
+                    actionButtons.attr('disabled', true);
+                    var actionButtonsText = actionButtons.filter('.btn-primary').text();
+                    actionButtons.filter('.btn-primary').text('Processing...');
+
+                    function reactivateButtons() {
+                        actionButtons.attr('disabled', false);
+                        actionButtons.filter('.btn-primary').text(actionButtonsText);
+                    }
+
+                    $.ajax({
+                        url: $this.data('url'),
+                        type: 'POST',
+                        success: function(result) {
+                            if (result === '') {
+                                $('#btnGrpAction').empty();
+
+                                if (actionButtonsText === 'Accept') {
+                                    $modal.modal('hide');
+                                    $('#spStatus').text('Accepted');
+                                    $('#btnGrpAction')
+                                        .html(
+                                            '<h4 class="text-primary" style="margin-left:15px;margin-top:20px;"><strong>Test session accepted.</strong></h4>');
+                                } else if (actionButtonsText === 'Reject') {
+                                    window.location.href = "@Url.Action("RolePlaySessions", "ExaminerTools")";
+                                }
+                            } else {
+                                reactivateButtons();
+                                var $errors = $('.validation-summary-errors');
+                                $errors.empty();
+                                $errors.append('<li>' + result.data + '</li>');
+                            }
+                        },
+                        error: function() {
+                            reactivateButtons();
+                            var $errors = $('.validation-summary-errors');
+                            $errors.empty();
+                            $errors.append('<li>A communications error was encountered. Please try again.</li>');
+                        }
+                    });
+                });
+
+            //call google api
+            $vMap.on('click',
+                function(e) {
+
+                    if (callGoogleApiCount === 0) {
+                        var mapUrl =
+                            'https://maps.googleapis.com/maps/api/staticmap?center={0},{1}&zoom=16&size=640x560&maptype=roadmap&markers=color:red|{0},{1}&key=AIzaSyCwRmBZUnlm7MMoIwCVT1uOxx611lfXdSY';
+
+                        var interval = setInterval(function() {
+                                if (window.googleMapsInitialized) {
+                                    clearInterval(interval);
+                                    var address = $('#address').text();
+                                    var coordinates = $('#coordinates').text();
+                                    var venueName = $('#venueName').text();
+                                    var geocoder = new google.maps.Geocoder();
+
+                                    if (coordinates.length > 0) {
+                                        var url = mapUrl
+                                            .replace(/\{0\}/g, coordinates.split(',')[0])
+                                            .replace(/\{1\}/g, coordinates.split(',')[1]);
+
+                                        $('#map').attr('src', url).attr('title', venueName);
+
+                                        callGoogleApiCount++;
+                                    } else {
+                                        geocoder.geocode({
+                                                'address': address
+                                            },
+                                            function(results, status) {
+                                                if (status === google.maps.GeocoderStatus.OK) {
+                                                    var url = mapUrl
+                                                        .replace(/\{0\},/g, encodeURIComponent(address))
+                                                        .replace(/\{1\}/g, '');
+                                                    $('#map').attr('src', url).attr('title', venueName);
+
+                                                    callGoogleApiCount++;
+                                                }
+                                            });
+                                    }
+                                }
+                            },
+                            500);
+                    } //end of if loop
+
+                    if ($(this).text() === 'Show Venue Map') {
+                        $(this).text('Venue Map');
+                    } else {
+                        $(this).text('Show Venue Map');
+                    }
+                });
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+
+
+    <div class="col-lg-12">
+
+        <div id="btnGrpAction" class="row m-t-sm">
+            <div class="form-group" style="float: right; margin-right:10px">
+                @if (Model.CanAccept)
+                {
+                    <button class="btn btn-primary" data-url="@Url.Action("RolePlaySession", "ExaminerTools", new {TestSessionRolePlayerId = Model.TestSessionRolePlayerId, ActionId = Model.AcceptActionId })" type="button" data-toggle="modal" data-target="#detailModal" data-backdrop="static" data-keyboard="false" data-modal-type="Accept" data-modal-detail="Address">Accept</button>
+
+                }
+                @if (Model.CanReject)
+                {
+                    <button class="btn btn-danger" data-url="@Url.Action("RolePlaySession", "ExaminerTools", new {TestSessionRolePlayerId = Model.TestSessionRolePlayerId, ActionId = Model.RejectActionId})" type="button" data-toggle="modal" data-target="#detailModal" data-backdrop="static" data-keyboard="false" data-modal-type="Reject" data-modal-detail="Address">Reject</button>
+                }
+            </div>
+        </div>
+        <div class="row m-t-sm">
+            <div class="form-group col-lg-4">
+                <label class="control-label w-md-130">Test Session ID</label>
+                <div class="form-control-static"><span>TS</span>@Model.TestSessionId</div>
+            </div>
+
+            <div class="form-group col-lg-4">
+                <label class="control-label w-md-130">Test Session Date</label>
+                <p class="form-control-static">@Model.TestSessionDate.ToString("dd/MM/yyyy") @Model.TestSessionDate.ToString("HH:mm")</p>
+
+            </div>
+            <div class="form-group col-lg-4">
+                <label class="control-label w-md-130">Status</label>
+                <p class="form-control-static"><span class="badge" id="spStatus" style="background-color: #1B81AF;">@rolePlayerStatus</span></p>
+            </div>
+
+        </div>
+
+        <div class="row m-t-sm">
+
+            <div class="form-group col-lg-4">
+                <label class="control-label w-md-130">Credential Type</label>
+                <p class="form-control-static">@Model.CredentialTypeExternalName</p>
+            </div>
+            <div class="form-group col-lg-4">
+                <label class="control-label w-md-130">Rehearsal Date</label>
+                <p class="form-control-static">@(Model.RehearsalDate.HasValue ? Model.RehearsalDate.Value.ToString("dd/MM/yyyy") : "-") @(Model.RehearsalDate.HasValue ? Model.RehearsalDate.Value.ToString("HH:mm") : "-")</p>
+            </div>
+
+            <div class="form-group col-lg-4">
+                <label class="control-label w-md-130">Role-play</label>
+                <ul style="list-style-position: inside; padding-left: 0;">
+
+                    @foreach (var detail in Model.Details)
+                    {
+                        <li>Task @detail.TaskLabel@detail.TaskTypeLabel (@detail.RolePlayerRoleTypeName, @detail.LanguageName) </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="row m-t-sm">
+
+            <div class="form-group col-lg-4">
+                <label class="control-label w-md-130">Test Location</label>
+                <p class="form-control-static">@Model.TestSessionLocation</p>
+            </div>
+
+            <div class="form-group col-lg-4">
+                <label class="control-label w-md-130">Venue Name</label>
+                <p class="form-control-static" id="venueName">@Model.VenueName</p>
+            </div>
+
+            <div class="form-group col-lg-4">
+                <label class="control-label w-md-130 ">Venue Address</label>
+                <p class="form-control-static">
+                    @if (!string.IsNullOrWhiteSpace(Model.VenueCoordinates))
+                    {
+                        <a target="_blank" href="https://www.google.com.au/maps/place/@Model.VenueCoordinates" title="@Model.VenueAddress">
+                            <span id="address">@Model.VenueAddress</span>
+                        </a>
+                        <span id="coordinates" hidden>@Model.VenueCoordinates</span>
+                    }
+                    else if (!string.IsNullOrWhiteSpace(Model.VenueAddress))
+                    {
+                        <a target="_blank" href="https://www.google.com.au/maps/place/@Model.VenueAddress.Replace("/", "%2F")" title="@Model.VenueAddress">
+                            <span id="address">@Model.VenueAddress</span>
+                        </a>
+                    }
+                </p>
+            </div>
+
+        </div>
+        @if (!String.IsNullOrWhiteSpace(Model.PublicNote))
+        {
+            <div class="row m-t-sm">
+                <div class="form-group col-lg-12">
+                    <label class="control-label w-md-130">Test Session Notes</label>
+                    <p class="form-control-static">@Model.PublicNote</p>
+                </div>
+            </div>
+        }
+
+        @if (!String.IsNullOrWhiteSpace(Model.RehearsalNotes))
+        {
+            <div class="row m-t-sm">
+                <div class="form-group col-lg-12">
+                    <label class="control-label w-md-130">Role-player Notes</label>
+                    <p class="form-control-static">@Model.RehearsalNotes</p>
+                </div>
+            </div>
+        }
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <h4 class="panel-title" style="text-align: center;">
+                        <a id="vMap" data-toggle="collapse" href="#collapse1">Show Venue Map</a>
+                    </h4>
+                </div>
+
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-lg-8" style="padding-left: 5px; width: 100%">
+                            <img id="map" class="map" src="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

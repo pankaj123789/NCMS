@@ -1,0 +1,201 @@
+﻿@model MyNaati.Ui.ViewModels.ApplicationByTestingWizard.LanguageProficiencyModel
+@{
+    ViewBag.Title = "Application for Accreditation by Testing";
+    ViewBag.Subtitle = "Language Proficiency";
+    Layout = "~/Views/Shared/MasterPages/_ApplicationWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Testing", Url.Action("Index", "ApplicationByTestingWizard")),
+        new Tuple<string, string>("New Application", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var rbTakenEnglishTestSelector = '#rbTakenEnglishTest';
+        var rbIELTSSelector = '#rbIELTS';
+        var rbOtherSelector = '#rbOther';
+        var rbAcademicSelector = '#rbAcademic';
+        var rbGeneralTrainingSelector = '#rbGeneralTraining';
+        var txtOtherSelector = '#txtOther';
+        var txtListeningSelector = '#Listening';
+        var txtSpeakingSelector = '#Speaking';
+        var txtReadingSelector = '#Reading';
+        var txtWritingSelector = '#Writing';
+        var txtOverallSelector = '#Overall';
+
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+
+            updateEditablControlsEnabled();
+
+            if ($(rbTakenEnglishTestSelector)[0].checked === false) {
+                $(rbAcademicSelector).attr('disabled', 'disabled');
+                $(rbGeneralTrainingSelector).attr('disabled', 'disabled');
+            }
+
+            $('#rbProficiencyTest input').change(function () { updateEditablControlsEnabled(); });
+            $('#rbIeltsFormat input').change(function () { updateIeltsFormatEnabled(); });
+            $('#rbOtherTestFormat input').change(function () { updateIeltsFormatEnabled(); });
+        });
+
+        function updateEditablControlsEnabled() {
+            updateIeltsFormatEnabled();
+
+            if ($(rbTakenEnglishTestSelector)[0].checked == true) {
+                $(rbIELTSSelector).removeAttr('disabled');
+                $(rbOtherSelector).removeAttr('disabled');
+                $(txtListeningSelector).removeAttr('disabled');
+                $(txtSpeakingSelector).removeAttr('disabled');
+                $(txtReadingSelector).removeAttr('disabled');
+                $(txtWritingSelector).removeAttr('disabled');
+                $(txtOverallSelector).removeAttr('disabled');
+            }
+            else {
+                $(rbIELTSSelector).attr('disabled', 'disabled');
+                $(rbOtherSelector).attr('disabled', 'disabled');
+                $(txtOtherSelector).attr('disabled', 'disabled');
+                $(txtListeningSelector).attr('disabled', 'disabled');
+                $(txtSpeakingSelector).attr('disabled', 'disabled');
+                $(txtReadingSelector).attr('disabled', 'disabled');
+                $(txtWritingSelector).attr('disabled', 'disabled');
+                $(txtOverallSelector).attr('disabled', 'disabled');
+                $(txtOtherSelector).val('');
+            }
+        }
+
+        function updateIeltsFormatEnabled() {
+            if ($(rbIELTSSelector)[0].checked == true && $(rbTakenEnglishTestSelector)[0].checked == true) {
+                $(rbAcademicSelector).removeAttr('disabled');
+                $(rbGeneralTrainingSelector).removeAttr('disabled');
+                $(txtOtherSelector).val('');
+                $(txtOtherSelector).attr('disabled', 'disabled');
+            }
+            else {
+                if ($(rbTakenEnglishTestSelector)[0].checked == true) {
+                    $(txtOtherSelector).removeAttr('disabled');
+                }
+
+                $(rbAcademicSelector).attr('disabled', 'disabled');
+                $(rbGeneralTrainingSelector).attr('disabled', 'disabled');
+            }
+        }
+
+        function tryParseFloat(value) {
+            var parsedValue = parseFloat(value);
+
+            if (isNaN(parsedValue)) {
+                return 0;
+            }
+
+            return parsedValue;
+        }
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+
+            if ((charCode != 46) && (charCode > 31 && (charCode < 48 || charCode > 57))) {
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+}
+<div class="row">
+    <div class="col-sm-5">
+        <label for="rbProficiencyTest">Have you taken an English proficiency test?</label>
+    </div>
+    <div id="rbProficiencyTest" class="col-sm-7">
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.TookEnglishProficiencyTest, true, new { id = "rbTakenEnglishTest" })@Html.Label("rbTakenEnglishTest", "Yes")
+        </label>
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.TookEnglishProficiencyTest, false, new { id = "rbTakenEnglishTestNo" })@Html.Label("rbTakenEnglishTestNo", "No")
+        </label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <p>Please check your official record of proficiency and enter the information exactly as it appears on the transcript.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        <label class="v-offset-xs-2">What test did you sit?</label>
+    </div>
+    <div class="col-sm-9">
+        <div class="radio">
+            <label id="rbIeltsFormat">
+                @Html.RadioButtonFor(m => m.IsIELTS, true, new { id = "rbIELTS" })@Html.Label("rbIELTS", "International English Language Testing System (IELTS)")
+            </label>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-offset-3 col-sm-2">
+        <p>Test format:</p>
+    </div>
+    <div class="col-sm-6">
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.IsAcademic, true, new { id = "rbAcademic" })@Html.Label("rbAcademic", "Academic")
+        </label>
+        <label class="radio-inline">
+            @Html.RadioButtonFor(m => m.IsAcademic, false, new { id = "rbGeneralTraining" })@Html.Label("rbGeneralTraining", "General Training")
+        </label>
+    </div>
+</div>
+<div id="rbOtherTestFormat" class="row">
+    <div class="col-sm-offset-3 col-sm-3">
+        <div class="radio">
+            <label>
+                @Html.RadioButtonFor(m => m.IsIELTS, false, new { id = "rbOther" })@Html.Label("rbOther", "Other (please specify)")
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        @Html.TextBoxFor(m => m.OtherTestDetails, new { id = "txtOther", @class = "form-control" })
+    </div>
+</div>
+<div id="txtTestScores" class="row v-offset-xs-1">
+    <div class="col-sm-3">
+        <label class="v-offset-xs-3">What were your scores?</label>
+    </div>
+    <div class="col-sm-9">
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Listening)
+                    @Html.TextBoxFor(m => m.Listening, new { id = "Listening", @class = "form-control", size = "4", maxLength = 5, onkeypress = "return isNumberKey(event)" })
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Speaking)
+                    @Html.TextBoxFor(m => m.Speaking, new { id = "Speaking", @class = "form-control", size = "4", maxLength = 5, onkeypress = "return isNumberKey(event)" })
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Reading)
+                    @Html.TextBoxFor(m => m.Reading, new { id = "Reading", @class = "form-control", size = "4", maxLength = 5, onkeypress = "return isNumberKey(event)" })
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Writing)
+                    @Html.TextBoxFor(m => m.Writing, new { id = "Writing", @class = "form-control", size = "4", maxLength = 5, onkeypress = "return isNumberKey(event)" })
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Overall)
+                    @Html.TextBoxFor(m => m.Overall, new { id = "Overall", @class = "form-control", size = "4", maxLength = 10, onkeypress = "return isNumberKey(event)" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

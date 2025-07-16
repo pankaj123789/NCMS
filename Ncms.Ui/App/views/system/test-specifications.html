@@ -1,0 +1,33 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <span data-bind="restext: 'Naati.Resources.SystemResources.resources.TestSpecifications'"></span>
+        </h2>
+    </div>
+    <div class="panel-body">
+        <div class="form">
+            <label data-bind="reshtml: 'Naati.Resources.Document.resources.UploadFile'"></label>
+            <div data-bind="component: { name: 'file-upload', params: fileUpload }"></div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" data-bind="click: upload" , enable: inEditMode()>
+                    <i class="fa fa-arrow-up"></i>
+                    <span data-bind="restext: 'Naati.Resources.SystemResources.resources.Upload'"></span>
+                </button>
+                <button type="button" class="btn btn-primary" data-bind="downloadFile: { url: $root.download($data) }">
+                    <i class="fa fa-arrow-down"></i>
+                    <span data-bind="restext: 'Naati.Resources.SystemResources.resources.Download'"></span>
+                </button>
+            </div>
+        </div>
+        <div data-bind="component: { name: 'table-component', params: tableDefinition }"></div>
+    </div>
+</div>
+
+<script id="document-header-template" type="text/html">
+    <th data-bind="reshtml: 'Naati.Resources.Document.resources.Title'"></th>
+</script>
+<script id="document-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: data"></td>
+    </tr>
+</script>

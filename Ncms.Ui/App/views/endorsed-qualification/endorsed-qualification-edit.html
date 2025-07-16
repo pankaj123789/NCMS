@@ -1,0 +1,80 @@
+﻿<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black" data-bind="reshtml: 'Naati.Resources.Shared.resources.EndorsedQualification'"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="panel wrapper">
+                        <div class="row">
+                            <div class="form-group col-sm-3" data-bind="validationElement: endorsedQualification.InstitutionId">
+                                <label data-bind="reshtml: 'Naati.Resources.Institution.resources.InstitutionName'"></label>
+                                <!-- ko component: { name: 'select-component', params: institutionOptions } --><!-- /ko -->
+                            </div>
+                            <div class="form-group col-sm-3" data-bind="validationElement: endorsedQualification.CredentialTypeId">
+                                <label data-bind="reshtml: 'Naati.Resources.Institution.resources.CredentialType'"></label>
+                                <!-- ko component: { name: 'select-component', params: credentialTypeOptions } --><!-- /ko -->
+                            </div>
+                        </div>
+                        <div class="row">
+                   
+                            <div class="form-group col-sm-3" data-bind="validationElement: endorsedQualification.Location">
+                                <label data-bind="reshtml: 'Naati.Resources.Institution.resources.Location'"></label>
+                                <input placeholder="Entrer Location or 'Online'" class="form-control" rows="5" data-bind="value: endorsedQualification.Location" id="addressInput"/>
+                            </div>
+
+                            <div class="form-group col-sm-2">
+                                <div class="col-sm-5 no-padder " data-bind="validationElement: endorsedQualification.EndorsementPeriodFrom, validationOptions: { insertMessages: false }">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Institution.resources.EndorsementPeriodFrom'"></label>
+                                    <!-- ko component: { name: 'date-input', params: EndorsementPeriodFromOptions } --><!-- /ko -->
+                                </div>
+                                <div class="col-sm-5  col-md-offset-2 no-padder" data-bind="validationElement:endorsedQualification.EndorsementPeriodTo, validationOptions: { insertMessages: false }">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Institution.resources.EndorsementPeriodTo'"></label>
+                                    <!-- ko component: { name: 'date-input', params: EndorsementPeriodToOptions } --><!-- /ko -->
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-1 padder-v" data-bind="validationElement: endorsedQualification.Active">
+                                <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" data-bind="checked: endorsedQualification.Active"><i></i>
+                                        <span class="padder-md" data-bind="reshtml: 'Naati.Resources.Shared.resources.Active'"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group col-sm-3" data-bind="validationElement: endorsedQualification.Qualification">
+                                <label data-bind="reshtml: 'Naati.Resources.Institution.resources.Qualification'"></label>
+                                <textarea class="form-control" rows="3" data-bind="value: endorsedQualification.Qualification, valueUpdate: 'input'" />
+                            </div>
+
+                            <div class="form-group col-sm-3">
+                                <label data-bind="reshtml: 'Naati.Resources.Institution.resources.Notes'"></label>
+                                <textarea class="form-control" rows="3" data-bind="value: endorsedQualification.Notes" />
+                            </div>
+                        </div>
+                                              
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="click: save, enable: canSave">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <a href="#endorsed-qualification" class="btn btn-default"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+

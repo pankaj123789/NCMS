@@ -1,0 +1,124 @@
+<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <button class="btn btn-sm btn-success pull-right dropdown-toggle m-t-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="enable: actions().length">
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                </button>
+                <!-- dropdown -->
+                <ul class="dropdown-menu dropdown-menu-right w" data-bind="foreach: actions">
+                    <li>
+                        <a data-bind="text: Name, click: $root.selectAction"></a>
+                    </li>
+                </ul>
+                <!-- / dropdown -->
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: title"></h1>
+                <small class="text-muted" data-bind="text: subtitle"></small>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="panel wrapper text-sm">
+                        <div class="form-horizontal">
+                            <div class="row">
+                                <div class="col-md-3 form-group m-b-xs">
+                                    <label class="control-label pull-left ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.MaterialRequestName'"></label>
+                                    <p class="form-control-static" data-bind="text: materialRequest.RequestTitle"></p>
+                                </div>
+                                <div class="col-md-3 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.RequestType'"></label>
+                                    <p class="form-control-static" data-bind="text: outputTestMaterial().TestMaterialTypeName"></p>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.MateriaRequestStatus'"></label>
+                                    <span class="label text-base pull-left m-t-xs" data-bind="text: materialRequest.StatusTypeDisplayName, css: 'label-' + materialRequest.StatusClass()"></span>
+                                </div>
+                                <div class="col-md-2 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.CreatedDate'"></label>
+                                    <p class="form-control-static" data-bind="textDate: materialRequest.CreatedDate"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Panel'"></label>
+                                    <p class="form-control-static" data-bind="text: materialRequest.PanelName"></p>
+                                </div>
+                                <div class="col-md-3 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.CredentialType'"></label>
+                                    <p class="form-control-static" data-bind="text: outputTestMaterial().CredentialTypeInternalName"></p>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.TaskType'"></label>
+                                    <p class="form-control-static" data-bind="text: outputTestMaterial().TypeLabel"></p>
+                                </div>
+                                <div class="col-md-2 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Language'"></label>
+                                    <p class="form-control-static" data-bind="text: outputTestMaterial().LanguageName || outputTestMaterial().SkillName"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.SourceMaterialId'"></label>
+                                    <p class="form-control-static">
+                                        <a class=" text-info" data-bind="text: sourceTestMaterial().Id, attr: { href: '#test-material/' + sourceTestMaterial().Id }"></a>
+                                    </p>
+                                </div>
+                                <div class="col-md-3 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.OutputTestMaterial'"></label>
+                                    <p class="form-control-static">
+                                        <a class="text-info" data-bind="text: outputTestMaterial().Id, attr: { href: '#test-material/' + outputTestMaterial().Id }"></a>
+                                    </p>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.ClaimRatePerHour'"></label>
+                                    <p class="form-control-static" data-bind="text: materialRequest.ProductSpecificationDisplayName"></p>
+                                </div>
+                                <div class="col-md-2 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Owner'"></label>
+                                    <p class="form-control-static" data-bind="text: materialRequest.OwnedByUserName"></p>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.CoordinatedBy'"></label>
+                                    <p class="form-control-static" data-bind="text: materialRequest.CoordinatedByName"></p>
+                                </div>
+                                <div class="col-md-3 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialDomain'"></label>
+                                    <p class="form-control-static" data-bind="text: outputTestMaterial().Domain"></p>
+                                </div>
+                                <div class="col-md-4 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.ProductSpecificationCode'"></label>
+                                    <p class="form-control-static" data-bind="text: materialRequest.SpecificationCode"></p>
+                                </div>
+                                <div class="col-md-2 form-group m-b-xs">
+                                    <label class="control-label pull-left  ml-2 m-r-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.MaxBillableHours'"></label>
+                                    <p class="form-control-static" data-bind="text: materialRequest.MaxBillableHours"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ko component: { name: 'tab-component', params: tabOptions } -->
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="click: save, enable: canSave">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <a data-bind="click:close" class="btn btn-default">
+                <i class="fa fa-times"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

@@ -1,0 +1,719 @@
+﻿ALTER TABLE tblTestAvailabilityRollover DROP FK__tblTestAvailabilityRollover__tblTestAvailability
+ALTER TABLE tblTestEvent DROP FK__tblTestEv__TestA__20A2B0EA
+ALTER TABLE tblTestInvitation DROP FK__tblTestIn__TestA__2196D523
+ALTER TABLE tblAccreditationProduct DROP FK_AccreditationProduct_Order
+ALTER TABLE tblAccreditationProduct DROP FK_tblAccreditationProduct_tblAccreditation
+ALTER TABLE tblAccreditationProduct DROP FK_tblAccreditationProduct_tluAccreditationType
+ALTER TABLE tblAccreditationResult DROP FK_tblAccreditationResult_tblApplication
+ALTER TABLE tblAccreditationResult DROP FK_tblAccreditationResult_tluAccreditationLevel
+ALTER TABLE tblAccreditationResult DROP FK_tblAccreditationResult_tluFailureReason
+ALTER TABLE tblAddressMailCategory DROP FK_tblAddressMailCategory_tluMailCategory
+ALTER TABLE tblApplication DROP FK_tblApplication_tblLanguageExperience
+ALTER TABLE tblApplication DROP FK_tblApplication_tblLanguageExperience1
+ALTER TABLE tblApplication DROP FK_tblApplication_tblProject
+ALTER TABLE tblApplication DROP FK_tblApplication_tluAccreditationCategory
+ALTER TABLE tblApplication DROP FK_tblApplication_tluAccreditationLevel
+ALTER TABLE tblApplication DROP FK_tblApplication_tluAccreditationMethod1
+ALTER TABLE tblApplication DROP FK_tblApplication_tluTestCentre
+ALTER TABLE tblApplicationRevalidation DROP FK_tblApplicationRevalidation_tblApplication
+ALTER TABLE tblApplicationRevalidation DROP FK_tblApplicationRevalidation_tblRevalidation
+ALTER TABLE tblApprovalCondition DROP FK_tblApprovalCondition_tblChangeRequest
+ALTER TABLE tblBankDeposit DROP FK_tblBankDeposit_tluDepositType
+ALTER TABLE tblChangeRequest DROP FK_tblChangeRequest_tblCourse
+ALTER TABLE tblChangeRequest DROP FK_tblChangeRequest_tblStandardLetter
+ALTER TABLE tblChangeRequest DROP FK_tblChangeRequest_tluApprovalType
+ALTER TABLE tblChangeRequest DROP FK_tblChangeRequest_tluBoardDecision
+ALTER TABLE tblChangeRequest DROP FK_tblChangeRequest_tluChangeRequestStatus
+ALTER TABLE tblChangeRequest DROP FK_tblChangeRequest_tluQaacDecision
+ALTER TABLE tblChangeRequestCourseApproval DROP FK_tblChangeRequestCourseApproval_tblChangeRequest
+ALTER TABLE tblChangeRequestCourseApproval DROP FK_tblChangeRequestCourseApproval_tblCourseApproval
+ALTER TABLE tblCorrespondence DROP FK_tblCorrespondence_tblStandardLetter
+ALTER TABLE tblCorrespondence DROP FK_tblCorrespondence_tluCorrespondenceCategory
+ALTER TABLE tblCourse DROP FK_tblCourse_tblCourseLocation
+ALTER TABLE tblCourse DROP FK_tblCourse_tluEducationLevel
+ALTER TABLE tblCourseApproval DROP FK_tblCourseApproval_tluAccreditationCategory
+ALTER TABLE tblCourseApproval DROP FK_tblCourseApproval_tluAccreditationLevel
+ALTER TABLE tblCourseApproval DROP FK_tblCourseApproval_tluApprovalStatus
+ALTER TABLE tblCourseApproval DROP FK_tblCourseApprovalLanguage_tblCourse
+ALTER TABLE tblCourseAttendance DROP FK_tblCourseAttendance_tblApplication
+ALTER TABLE tblCourseAttendance DROP FK_tblCourseAttendance_tblCourse
+ALTER TABLE tblCourseCoordinator DROP FK_tblCourseCoordinator_tblCourse
+ALTER TABLE tblEmailBatch DROP FK_tblEmailBatch_tblChangeRequest
+ALTER TABLE tblEmailBatch DROP FK_tblEmailBatch_tluEmailBatchType
+ALTER TABLE tblEmailBatchLetterTemplate DROP FK_tblEmailBatchLetterTemplates_tblStandardLetter
+ALTER TABLE tblEntityCorrespondence DROP FK_tblEntityCorrespondence_tblCorrespondence
+ALTER TABLE tblEoiLanguage DROP FK_tblEoiLanguage_tluAccreditationCategory
+ALTER TABLE tblEoiLanguage DROP FK_tblEoiLanguage_tluAccreditationLevel
+ALTER TABLE tblEvent DROP FK_tblEvent_tblEventVenue
+ALTER TABLE tblEventFacilitator DROP FK_tblEventSupervisor_tblEvent
+ALTER TABLE tblExpressionOfInterest DROP FK_tblExpressionOfInterest_tluAccreditationCategory
+ALTER TABLE tblExpressionOfInterest DROP FK_tblExpressionOfInterest_tluAccreditationLevel
+ALTER TABLE tblGadget DROP FK_tblGadget_tblSidebar
+ALTER TABLE tblGadget DROP FK_tblGadget_tluGadgetType
+ALTER TABLE tblPayment DROP FK_tblIncomingPayment_tblBankDeposit
+ALTER TABLE tblPayment DROP FK_tblIncomingPayment_tblTransaction
+ALTER TABLE tblInspection DROP FK_tblInspection_tblChangeRequest
+ALTER TABLE tblInspection DROP FK_tblInspection_tblCourse
+ALTER TABLE tblInspection DROP FK_tblInspection_tluInspectionType
+ALTER TABLE tblInvoice DROP FK_tblInvoice_tblTransaction
+ALTER TABLE tblInvoiceBatchInvoices DROP FK_tblInvoiceBatchInvoices_tblInvoice
+ALTER TABLE tblInvoiceBatchInvoices DROP FK_tblInvoiceBatchInvoices_tblInvoiceBatch
+ALTER TABLE tblJobCorrespondence DROP FK_tblJobCorrespondence_tblCorrespondence
+ALTER TABLE tblMailingListAddress DROP FK_tblMailingListAddress_tblMailingList
+ALTER TABLE tblMergeData DROP FK_tblMergeData_tblChangeRequest
+ALTER TABLE tblMergeData DROP FK_tblMergeData_tblLetterBatch
+ALTER TABLE tblMergeData DROP FK_tblMergeData_tblLetterBatchExtraFields
+ALTER TABLE tblMergeData DROP FK_tblMergeData_tblStandardLetter
+ALTER TABLE tblMergeData DROP FK_tblMergeData_tluMailCategory
+ALTER TABLE tblMergeDataAccreditationProduct DROP FK_tblMergeDataAccreditationProduct_tblMergeData
+ALTER TABLE tblMergeDataApplication DROP FK_tblMergeDataApplication_tblMergeData
+ALTER TABLE tblMergeDataInvoice DROP FK_tblMergeDataInvoice_tblMergeData
+ALTER TABLE tblMergeDataJob DROP FK_tblMergeDataJob_tblMergeData
+ALTER TABLE tblMergeDataTestAttendance DROP FK_tblMergeDataTestResult_tblMergeData
+ALTER TABLE tblOrder DROP FK_tblOrder_tblRevalidation
+ALTER TABLE tblPaymentAllocation DROP FK_tblPaymentAllocation_tblIncomingPayment
+ALTER TABLE tblPaymentAllocation DROP FK_tblPaymentAllocation_tblInvoiceLine
+ALTER TABLE tblPaymentCash DROP FK_tblPaymentCash_tblIncomingPayment
+ALTER TABLE tblPaymentCC DROP FK_tblPaymentCC_tblIncomingPayment
+ALTER TABLE tblPaymentCC DROP FK_tblPaymentCC_tluCardType
+ALTER TABLE tblPaymentCC DROP FK_tblPaymentCC_tluOrderType
+ALTER TABLE tblPaymentCheque DROP FK_tblPaymentCheque_tblIncomingPayment
+ALTER TABLE tblPaymentDirectDeposit DROP FK_tblPaymentEFT_tblIncomingPayment
+ALTER TABLE tblPaymentOther DROP FK_tblPaymentOther_tblPayment
+ALTER TABLE tblPaymentOther DROP FK_tblPaymentOther_tluPaymentOtherType
+ALTER TABLE tblPDInclusion DROP FK_tblPDInclusion_tluFinancialYear
+ALTER TABLE tblPerson DROP FK_tblPerson_tluEducationLevel
+ALTER TABLE tblPersonExpertise DROP FK_tblPersonExpertise_tluExpertise
+ALTER TABLE tblSmsReceived DROP FK_tblSmsReceived_tblSmsSend2
+ALTER TABLE tblSmsReminderType DROP FK_tblSmsReminder_tblSmsTemplate
+ALTER TABLE tblSmsSend DROP FK_tblSmsSend_tblAccreditationResult1
+ALTER TABLE tblSmsSend DROP FK_tblSmsSend_tblSmsReminderType
+ALTER TABLE tblSmsSend DROP FK_tblSmsSend_tblTestAttendance1
+ALTER TABLE tblSmsSend DROP FK_tblSmsSend_tluSmsStatus2
+ALTER TABLE tblStandardLetter DROP FK_tblStandardLetter_tluStandardLetterCategory
+ALTER TABLE tblTestAttendance DROP FK_tblTestAttendance_tblEventVenue
+ALTER TABLE tblTestAttendance DROP FK_tblTestAttendance_tblTestEvent
+ALTER TABLE tblTestAttendance DROP FK_tblTestAttendance_tblTestInvitation
+ALTER TABLE tblTestAvailability DROP FK_tblTestAvailability_tluAccreditationCategory
+ALTER TABLE tblTestAvailability DROP FK_tblTestAvailability_tluAccreditationCategory1
+ALTER TABLE tblTestAvailability DROP FK_tblTestAvailability_tluAccreditationLevel
+ALTER TABLE tblTestEvent DROP FK_tblTestEvent_tblEvent
+ALTER TABLE tblTestEvent DROP FK_tblTestEvent_tblTestAvailability
+ALTER TABLE tblTestEvent DROP FK_tblTestEvent_tluFinancialYear
+ALTER TABLE tblTestInvitation DROP FK_tblTestInvitation_tblApplication
+ALTER TABLE tblTestInvitation DROP FK_tblTestInvitation_tluFinancialYear
+ALTER TABLE tblTestResultFailureReason DROP FK_tblTestResultFailureReason_tluFailureReason
+ALTER TABLE tblWorkshopEvent DROP FK_tblWorkshop_tblEvent
+ALTER TABLE tblWorkshopAttendance DROP FK_tblWorkshopAttendance_tblWorkshopEvent
+ALTER TABLE tblWorkshopAttendanceLanguage DROP FK_tblWorkshopAttendanceLanguage_tblWorkshopAttendance
+ALTER TABLE tblWorkshopEvent DROP FK_tblWorkshopEvent_tblProject
+ALTER TABLE tblWorkshopMaterial DROP FK_tblWorkshopMaterial_tblWorkshopEvent
+DROP FUNCTION fnCalcInvoiceTotAmt
+DROP PROCEDURE rptAllAustralianTestingLocations
+DROP PROCEDURE rptAllTestingLocation
+DROP PROCEDURE rptAllTestingLocationOS
+DROP PROCEDURE JobMaterialSelect
+DROP PROCEDURE PersonMergeLogSelect
+DROP PROCEDURE rptExecApplicantsByMonth
+DROP PROCEDURE rptTestWork
+DROP VIEW vwJobLastReviewJobId
+DROP FUNCTION fnCalcInvoiceExGST
+DROP FUNCTION fnCalcInvoiceGST
+DROP FUNCTION fnCalcPaymentExGST
+DROP FUNCTION fnCalcPaymentGST
+DROP FUNCTION fnMaxInvoiceLinePaymentDate
+DROP PROCEDURE GetNextAccreditationCertificateNumber
+DROP PROCEDURE GetNextCertificateNumber
+DROP PROCEDURE GetNextRecognitionCertificateNumber
+DROP PROCEDURE InstitutionMergeLogSelect
+DROP PROCEDURE JobTestComponentResultSelect
+DROP FUNCTION cfRptAODAustralianStateTesting
+DROP FUNCTION cfRptTotalTestingLocationOS
+DROP FUNCTION cheque
+DROP PROCEDURE CloseScheduleYear
+DROP PROCEDURE ConditionSelect
+DROP PROCEDURE CorrespondenceCategorySelect
+DROP PROCEDURE CorrespondenceEntityAddressSelect
+DROP PROCEDURE CorrespondenceEntityMailCategorySelect
+DROP PROCEDURE CorrespondenceEntitySelect
+DROP PROCEDURE CorrespondenceSelect
+DROP PROCEDURE CountrySelect
+DROP PROCEDURE CourseAccreditationSelect
+DROP PROCEDURE CourseApprovalSelect
+DROP PROCEDURE CourseAttendanceSelect
+DROP PROCEDURE CourseByLanguageSelect
+DROP PROCEDURE CourseSelect
+DROP PROCEDURE CreateAccreditedPractionerCorrespondence
+DROP PROCEDURE CreateNAATINewsLetterBatch
+DROP PROCEDURE CreatePDInvitations
+DROP PROCEDURE DepositTypeSelect
+DROP PROCEDURE DirectoryEntryDelete
+DROP PROCEDURE DirectoryEntryInsert
+DROP PROCEDURE DirectoryEntrySelect
+DROP PROCEDURE DirectoryEntryUpdate
+DROP PROCEDURE EducationLevelSelect
+DROP PROCEDURE EFTMachineSelect
+DROP PROCEDURE EntityCorrespondenceSelect
+DROP PROCEDURE EntityInvoiceLineSelect
+DROP PROCEDURE EntitySearch
+DROP PROCEDURE EntitySelect
+DROP PROCEDURE EntityTransactionInvoiceLineSelect
+DROP PROCEDURE EntityTransactionInvoiceSelect
+DROP PROCEDURE EntityTransactionPaymentSelect
+DROP PROCEDURE EntityTransactionSelect
+DROP PROCEDURE EntityTransactionSplitPaymentSelect
+DROP PROCEDURE EntityTransactionUnallocatedPaymentSelect
+DROP PROCEDURE EventDateSelect
+DROP PROCEDURE EventFacilitatorSelect
+DROP PROCEDURE EventSelect
+DROP PROCEDURE EventVenueSearch
+DROP PROCEDURE EventVenueSelect
+DROP PROCEDURE ExaminerFromTestResultIDSelect
+DROP PROCEDURE ExaminerMarkingSelect
+DROP PROCEDURE ExaminerNowSelect
+DROP PROCEDURE ExaminerTestComponentResultSelect
+DROP PROCEDURE ExpertiseSelect
+DROP PROCEDURE ExportToMYOBSelect
+DROP PROCEDURE FailureReasonSelect
+DROP PROCEDURE FinancialYearSelect
+DROP PROCEDURE AccreditationCategorySelect
+DROP PROCEDURE AccreditationComboSelect
+DROP PROCEDURE AccreditationDelete
+DROP PROCEDURE AccreditationDescriptionSelect
+DROP PROCEDURE AccreditationInsert
+DROP PROCEDURE AccreditationLevelSelect
+DROP PROCEDURE AccreditationMethodSelect
+DROP PROCEDURE AccreditationProductByResultSelect
+DROP PROCEDURE AccreditationProductSelect
+DROP PROCEDURE AccreditationResultByApplicationSelect
+DROP PROCEDURE AccreditationResultByEntitySelect
+DROP PROCEDURE AccreditationResultSelect
+DROP PROCEDURE AccreditationSelect
+DROP PROCEDURE AccreditationTypeSelect
+DROP PROCEDURE AccreditationUpdate
+DROP PROCEDURE AddressByEntitySelect
+DROP PROCEDURE AddressMailCategorySelect
+DROP PROCEDURE AllCorrespondenceSelect
+DROP PROCEDURE ApplicantByApplicationSelect
+DROP PROCEDURE ApplicantSelect
+DROP PROCEDURE ApplicationEditableListSelect
+DROP PROCEDURE ApplicationPrerequisiteDelete
+DROP PROCEDURE ApplicationPrerequisiteInsert
+DROP PROCEDURE ApplicationPrerequisiteSelect
+DROP PROCEDURE ApplicationPrerequisiteUpdate
+DROP PROCEDURE ApplicationSelect
+DROP PROCEDURE ApplicationsEligibleForInvitation
+DROP PROCEDURE AssignUserRolesToScreen
+DROP PROCEDURE AuditLogSearch
+DROP PROCEDURE AuditLogSelect
+DROP PROCEDURE AuditTypeSelect
+DROP FUNCTION AvailableTestInvitationCount
+DROP PROCEDURE BankDepositPaymentSelect
+DROP PROCEDURE BankDepositSearch
+DROP PROCEDURE BankDepositSelect
+DROP PROCEDURE BatchProductSpecificationSelect
+DROP PROCEDURE BoardDecisionSelect
+DROP PROCEDURE CardTypeSelect
+DROP PROCEDURE CertificateMerge
+DROP FUNCTION cfAustraliaACT
+DROP FUNCTION cfRptAllTestingLocationOS
+DROP FUNCTION cfRptAnnualOnDemandNewZealandTesting
+DROP FUNCTION fnAllInvoiceLinePayments
+DROP FUNCTION fnAllJobExaminers
+DROP FUNCTION fnAmountAfterAMEXCommission
+DROP FUNCTION fnApplicationsEligibleForInvitation
+DROP FUNCTION fnApplicationsEligibleForReporting
+DROP FUNCTION fnApplicationSODUpdate
+DROP FUNCTION fnCalcGST
+DROP PROCEDURE JobTestEventSelect
+DROP PROCEDURE JobTestResultFailureReasonSelect
+DROP PROCEDURE JobTypeDelete
+DROP PROCEDURE JobTypeInsert
+DROP PROCEDURE JobTypeSelect
+DROP PROCEDURE JobTypeUpdate
+DROP PROCEDURE LanguageExperienceSelect
+DROP PROCEDURE LanguageSelect
+DROP PROCEDURE LetterBatchExtraFieldsSelect
+DROP PROCEDURE LetterBatchSelect
+DROP PROCEDURE MailCategorySelect
+DROP PROCEDURE MailingListAddressSelect
+DROP PROCEDURE MailingListDefaultAddressSelect
+DROP PROCEDURE MailingListRecipientsAddressesSelect
+DROP PROCEDURE MailingListSelect
+DROP PROCEDURE MaterialSelect
+DROP PROCEDURE MergeDataAccreditationProductSelect
+DROP PROCEDURE MergeDataApplicationSelect
+DROP PROCEDURE MergeDataInvoiceSelect
+DROP PROCEDURE MergeDataJobSelect
+DROP PROCEDURE MergeDataSelect
+DROP PROCEDURE MergeDataTestAttendanceSelect
+DROP PROCEDURE MergeDataTestComponentResultSelect
+DROP PROCEDURE MergeDataTestResultInsert
+DROP PROCEDURE MergedNAATINumberSearch
+DROP PROCEDURE MergeDuplicatePerson
+DROP PROCEDURE NaatiNewsContactPersonDetailsSelect
+DROP PROCEDURE NextKey
+DROP PROCEDURE NextNAATINumber
+DROP PROCEDURE NH_CorrespondenceInsert
+DROP PROCEDURE OfficeSelect
+DROP PROCEDURE OrderTypeSelect
+DROP PROCEDURE OutstandingStampMerge
+DROP PROCEDURE PanelByLanguageIdSelect
+DROP PROCEDURE PanelMemberSearch
+DROP PROCEDURE PanelMemberSelect
+DROP PROCEDURE PanelMembershipNowSelect
+DROP PROCEDURE PanelMembershipSelect
+DROP PROCEDURE PanelSelect
+DROP PROCEDURE PanelTypeSelect
+DROP PROCEDURE PaymentAllocationSelect
+DROP PROCEDURE PaymentCashSelect
+DROP PROCEDURE PaymentCCSelect
+DROP PROCEDURE PaymentChequeSelect
+DROP PROCEDURE PaymentDirectDepositSelect
+DROP PROCEDURE PaymentEFTPOSDelete
+DROP PROCEDURE PaymentEFTPOSInsert
+DROP PROCEDURE PaymentEFTPOSSelect
+DROP PROCEDURE PaymentEFTPOSUpdate
+DROP PROCEDURE PaymentOtherSelect
+DROP PROCEDURE PaymentOtherTypeSelect
+DROP PROCEDURE PaymentSearchExtended
+DROP PROCEDURE PaymentSearchSimple
+DROP PROCEDURE PaymentSelect
+DROP PROCEDURE PDAccreditations
+DROP PROCEDURE PDExpertise
+DROP PROCEDURE PDInclusionSelect
+DROP PROCEDURE PDRenewedFinancialYear20132014Select
+DROP PROCEDURE PDSearch
+DROP PROCEDURE PDSearchLangaugeSelect
+DROP PROCEDURE PermissionSelect
+DROP PROCEDURE PersonAccreditationResultSelect
+DROP PROCEDURE PersonApplicationSelect
+DROP PROCEDURE PersonCourseAttendanceSelect
+DROP PROCEDURE PersonCourseSelect
+DROP PROCEDURE PersonDelete
+DROP PROCEDURE PersonExpertiseSelect
+DROP PROCEDURE PersonImageDelete
+DROP PROCEDURE PersonImageInsert
+DROP PROCEDURE PersonImageSelect
+DROP PROCEDURE PersonImageUpdate
+DROP PROCEDURE PersonInsert
+DROP PROCEDURE PersonMailingListSelect
+DROP PROCEDURE PersonMerge
+DROP PROCEDURE InstitutionNameSelect
+DROP PROCEDURE InstitutionSearch
+DROP PROCEDURE InstitutionSelect
+DROP FUNCTION InvitationCount
+DROP PROCEDURE InvitationProductDetailsSelect
+DROP PROCEDURE InvitationProductDetailsUpdate
+DROP FUNCTION InvitationTestEventId
+DROP PROCEDURE InvoiceBatchInvoiceDetailsSelect
+DROP PROCEDURE InvoiceBatchInvoicesSelect
+DROP PROCEDURE InvoiceBatchSelect
+DROP PROCEDURE InvoiceByInvoiceIdSelect
+DROP PROCEDURE InvoiceLineOutstandingUpdate
+DROP PROCEDURE InvoiceLineSearch
+DROP PROCEDURE InvoiceLineSelect
+DROP PROCEDURE InvoiceSearch
+DROP PROCEDURE InvoiceSelect
+DROP PROCEDURE isp_Grant_Permissions
+DROP PROCEDURE JobCandidateSearch
+DROP FUNCTION JobCategory
+DROP PROCEDURE JobCorrespondenceSelect
+DROP FUNCTION JobDirection
+DROP PROCEDURE JobExaminerMarkingSelect
+DROP PROCEDURE JobExaminerSelect
+DROP PROCEDURE JobExaminerTestComponentResultSelect
+DROP FUNCTION JobLevel
+DROP PROCEDURE GetPeopleForPDInvitation
+DROP PROCEDURE GetSystemParameter
+DROP PROCEDURE GLCodeSelect
+DROP PROCEDURE IdCardMerge
+DROP PROCEDURE IdCardSelect
+DROP PROCEDURE InitialiseTableData
+DROP PROCEDURE InsertTableDataRow
+DROP PROCEDURE InstitutionAccreditationSelect
+DROP PROCEDURE InstitutionApplicationSelect
+DROP PROCEDURE InstitutionCourseSelect
+DROP PROCEDURE InstitutionMerge
+DROP FUNCTION fnPDDirection
+DROP FUNCTION fnPersonInstitutionDetails
+DROP FUNCTION fnSODInvoiceLinePayment
+DROP FUNCTION FullTableName
+DROP PROCEDURE GetCacheMetaData
+DROP FUNCTION GetFirstApplicationEnteredDate
+DROP PROCEDURE GetKeyAllocation
+DROP PROCEDURE GetKeyAllocationVariableAmount
+DROP FUNCTION fnCorrespondenceAddressID
+DROP FUNCTION fnExtractContactPerson
+DROP FUNCTION fnFinancialYear
+DROP FUNCTION fnFormatCreditCardNumber
+DROP FUNCTION fnFormatDate
+DROP FUNCTION fnFormatPhoneNumber
+DROP FUNCTION fnGetAccreditationResult
+DROP FUNCTION fnGetAccreditationResultDate
+DROP FUNCTION fnGetAccreditedApplicationIds
+DROP FUNCTION fnGetAddress
+DROP FUNCTION fnGetAMEXCommision
+DROP FUNCTION fnGetApplicationStatusString
+DROP FUNCTION fnGetApprovalEndDate
+DROP FUNCTION fnGetApprovalStartDate
+DROP FUNCTION fnGetCorrespondenceAddressId
+DROP FUNCTION fnGetCourseLocation
+DROP FUNCTION fnGetCurrentFinancialYearId
+DROP FUNCTION fnGetDirection
+DROP FUNCTION fnGetEFTMachineId
+DROP FUNCTION fnGetExpertiseString
+DROP FUNCTION fnGetFinancialYearIdFromDates
+DROP FUNCTION fnGetGSTRate
+DROP FUNCTION fnGetIdCardDuration
+DROP FUNCTION fnGetInstitutionContactName
+DROP FUNCTION fnGetInstitutionMerge
+DROP FUNCTION fnGetInstitutionName
+DROP FUNCTION fnGetInvitationStatus
+DROP FUNCTION fnGetInvoiceLinePaymentAllocation
+DROP FUNCTION fnGetJobCost
+DROP FUNCTION fnGetJobDebtorNaatiNumbers
+DROP FUNCTION fnGetJobExaminers
+DROP FUNCTION fnGetJobStatus
+DROP FUNCTION fnGetJobType
+DROP FUNCTION fnGetJobTypeFromJobID
+DROP FUNCTION fnGetLastReviewJobId
+DROP FUNCTION fnGetLastUsedDate
+DROP FUNCTION fnGetMethodList
+DROP FUNCTION fnGetMigrationAssessment
+DROP FUNCTION fnGetMostRecentPersonName
+DROP FUNCTION fnGetMostRecentRolloverDate
+DROP FUNCTION fnGetNaatiNumberFromDate
+DROP FUNCTION fnGetNaatiNumberFromXMLLog
+DROP FUNCTION fnGetNextAccreditationCertificateNumber
+DROP FUNCTION fnGetNextCertificateNumber
+DROP FUNCTION fnGetNextRecognitionCertificateNumber
+DROP FUNCTION fnGetPaymentType
+DROP FUNCTION fnGetPersonName
+DROP FUNCTION fnGetPrerequisiteEligibility
+DROP FUNCTION fnGetRegion
+DROP FUNCTION fnGetTestCandidateStatus
+DROP FUNCTION fnGetTestResult
+DROP FUNCTION fnInvoiceAmount
+DROP FUNCTION fnInvoiceLineAmount
+DROP FUNCTION fnInvoiceLinePayment
+DROP FUNCTION fnIsEligible
+DROP FUNCTION fnIsJobTypeDistinct
+DROP FUNCTION fnJobAccreditationTypes
+DROP FUNCTION fnCalcInvoiceLineOutstanding
+DROP PROCEDURE TransactionSelect
+DROP FUNCTION UserRoleList
+DROP PROCEDURE UserRoleListSelect
+DROP PROCEDURE UserRoleSelect
+DROP PROCEDURE UserSelect
+DROP VIEW vwAccreditationDescription
+DROP VIEW vwAccreditationDescriptionLetterBatch
+DROP VIEW vwAccreditationType
+DROP VIEW vwAccreditationTypeFixed
+DROP VIEW vwAmountAfterAMEXCommission
+DROP VIEW vwApplicationDirection
+DROP VIEW vwApplicationEligibility
+DROP VIEW vwApplicationsEligibleForInvitation
+DROP VIEW vwApplicationsExceededMaxOpportunities
+DROP VIEW vwApplicationTestAvailability
+DROP VIEW vwAvailableTestDetails
+DROP VIEW vwAvailableTests
+DROP VIEW vwCashChequePayment
+DROP VIEW vwDepositType
+DROP VIEW vwDisplayPaymentType
+DROP VIEW vwDistinctEntityContactDetails
+DROP VIEW vwDomainPayment
+DROP VIEW vwEntityContact
+DROP VIEW vwEntityName
+DROP VIEW vwEPortalUser
+DROP VIEW vwEventDate
+DROP VIEW vwExaminerMarking
+DROP VIEW vwInvitedPersonDetails
+DROP VIEW vwInvoiceAmount
+DROP VIEW vwInvoiceLineAmount
+DROP VIEW vwInvoiceLinePayment
+DROP VIEW vwInvoicePayment
+DROP VIEW vwJobDetail
+DROP VIEW vwJobPaperNumber
+DROP VIEW vwLanguageNotTested
+DROP VIEW vwLastTestInvitation
+DROP VIEW vwOfficeName
+DROP VIEW vwOfflinePD
+DROP VIEW vwPaymentAllocationAmount
+DROP VIEW vwPaymentDepositType
+DROP VIEW vwPaymentDetail
+DROP VIEW vwPaymentDetailsforInvoiceLine
+DROP VIEW vwPaymentType
+DROP VIEW vwPaymentTypeString
+DROP VIEW vwPersonInstitutionDetail
+DROP VIEW vwPractitionerAddressDetails
+DROP VIEW vwPractitionerContactDetails
+DROP VIEW vwPractitioners
+DROP VIEW vwScheduledTestDetails
+DROP VIEW vwScheduledTests
+DROP VIEW vwSplitPayments
+DROP VIEW vwTestAttendanceAsset
+DROP VIEW vwTestAttendanceFinancialYear
+DROP VIEW vwTestAttendanceSat
+DROP VIEW vwTestMaterialRequestStatus
+DROP VIEW vwTestProductSpecifications
+DROP VIEW vwTestResultDetails
+DROP VIEW vwTranslatorAccreditationBothDirection
+DROP VIEW vwUnallocatedPayments
+DROP PROCEDURE WorkshopAttendanceLanguageDelete
+DROP PROCEDURE WorkshopAttendanceLanguageInsert
+DROP PROCEDURE WorkshopAttendanceLanguageSelect
+DROP PROCEDURE WorkshopAttendanceLanguageUpdate
+DROP PROCEDURE WorkshopAttendanceSelect
+DROP PROCEDURE WorkshopAttendeeSelect
+DROP PROCEDURE WorkshopEventSelect
+DROP PROCEDURE WorkshopMaterialSelect
+DROP PROCEDURE WorkshopSearch
+DROP PROCEDURE TestAttemptsSelect
+DROP PROCEDURE TestAttendanceByTestEventIdSelect
+DROP PROCEDURE TestAttendanceSelect
+DROP PROCEDURE TestAvailabilityForNaatiNumberSelect
+DROP PROCEDURE TestAvailabilityForSingleInvitationSelect
+DROP PROCEDURE TestAvailabilityRolloverAutocreate
+DROP PROCEDURE TestAvailabilityRolloverDelete
+DROP PROCEDURE TestAvailabilityRolloverHistorySelect
+DROP PROCEDURE TestAvailabilityRolloverInsert
+DROP PROCEDURE TestAvailabilityRolloverProgramSelect
+DROP PROCEDURE TestAvailabilityRolloverSelect
+DROP PROCEDURE TestAvailabilityRolloverUpdate
+DROP PROCEDURE TestAvailabilitySelect
+DROP PROCEDURE TestAvailabilitySpecificationSelect
+DROP PROCEDURE TestCandidateSelect
+DROP PROCEDURE TestCentreSelect
+DROP PROCEDURE TestCommentGroupDelete
+DROP PROCEDURE TestCommentGroupInsert
+DROP PROCEDURE TestCommentGroupSelect
+DROP PROCEDURE TestCommentGroupUpdate
+DROP PROCEDURE TestComponentResultSelect
+DROP PROCEDURE TestComponentSelect
+DROP PROCEDURE TestComponentTypeSelect
+DROP PROCEDURE TestEventByDetailsSelect
+DROP PROCEDURE TestEventByResultSelect
+DROP PROCEDURE TestEventSelect
+DROP FUNCTION TESTINGAvailableTestInvitationCount
+DROP PROCEDURE TestInvitationByEventIdSelect
+DROP PROCEDURE TestInvitationInsert
+DROP PROCEDURE TestInvitationSelect
+DROP PROCEDURE TestInvitationSelectByInvitationIdSelect
+DROP PROCEDURE TestInvitationUpdate
+DROP PROCEDURE TestMaterialSelect
+DROP PROCEDURE TestResultByNAATINumberSelect
+DROP PROCEDURE TestResultByTestAttendanceSelect
+DROP PROCEDURE TestResultCommentDelete
+DROP PROCEDURE TestResultCommentInsert
+DROP PROCEDURE TestResultCommentSelect
+DROP PROCEDURE TestResultCommentUpdate
+DROP PROCEDURE TestResultFailureReasonSelect
+DROP PROCEDURE TestResultSelect
+DROP PROCEDURE TestScheduleEventSelect
+DROP PROCEDURE TestSearch
+DROP PROCEDURE TestSpecificationByComponentSelect
+DROP PROCEDURE TestSpecificationSelect
+DROP PROCEDURE TitleSelect
+DROP PROCEDURE ScreenSecuritySelect
+DROP PROCEDURE SecurityScreenSelect
+DROP PROCEDURE StandardLetterCategorySelect
+DROP PROCEDURE StandardLetterSelect
+DROP PROCEDURE StateSelect
+DROP PROCEDURE SuburbSelect
+DROP PROCEDURE SystemParameterDelete
+DROP PROCEDURE SystemParameterSelect
+DROP PROCEDURE TaxRateSelect
+DROP PROCEDURE rptExecCandidateListing
+DROP PROCEDURE rptExecCandidateStatistics
+DROP PROCEDURE rptExecEligibleForTesting
+DROP PROCEDURE rptExecLanguageAideSponsor
+DROP PROCEDURE rptExecNonScheduleTestResult
+DROP PROCEDURE rptExecNOOSRStatistics
+DROP PROCEDURE rptExecOverseasAssessment
+DROP PROCEDURE rptExecOverseasTesting
+DROP PROCEDURE rptExecProfessionalsWithAccred
+DROP PROCEDURE rptExecTestResult
+DROP PROCEDURE rptFinanceARInvoice
+DROP PROCEDURE rptFinanceARReceipt
+DROP PROCEDURE rptFinanceBankDeposit
+DROP PROCEDURE rptFinanceBankDepositAMEX
+DROP PROCEDURE rptFinanceBankDepositCheque
+DROP PROCEDURE rptFinanceBankDepositOther
+DROP PROCEDURE rptFinanceBankDepositTotal
+DROP PROCEDURE rptFinanceDebtor
+DROP PROCEDURE rptFinanceIncomeByType
+DROP PROCEDURE rptFinanceOutstandingInvoice
+DROP PROCEDURE rptFinanceSOD
+DROP PROCEDURE rptFinanceTaxInvoice
+DROP PROCEDURE rptFinanceTaxInvoicePayment
+DROP PROCEDURE rptGeneralInstitutionCourse
+DROP PROCEDURE rptGenPersonDetails
+DROP PROCEDURE rptPanelMemberDetail
+DROP PROCEDURE rptPanelMemberSummary
+DROP PROCEDURE rptPatrickOverseasTesting
+DROP PROCEDURE rptPatrickSODTesting
+DROP PROCEDURE rptTemplateUsedTemplates
+DROP PROCEDURE rptTestAttendance
+DROP PROCEDURE rptTestCandidate
+DROP PROCEDURE rptTestConfirmedTestCandidates
+DROP PROCEDURE rptTestJobCandidate
+DROP PROCEDURE PersonNameDelete
+DROP PROCEDURE PersonNameInsert
+DROP PROCEDURE PersonNameSearchSimple
+DROP PROCEDURE PersonNameSelect
+DROP PROCEDURE PersonNameUpdate
+DROP PROCEDURE PersonPanelSelect
+DROP PROCEDURE PersonSearchExtended
+DROP PROCEDURE PersonSearchSimple
+DROP PROCEDURE PersonSearchTerm
+DROP PROCEDURE PersonSelect
+DROP PROCEDURE PersonTestSelect
+DROP PROCEDURE PersonToInstitutionMerge
+DROP PROCEDURE PersonUpdate
+DROP PROCEDURE PersonWorkshopSelect
+DROP FUNCTION PKColumn
+DROP PROCEDURE PostcodeDelete
+DROP PROCEDURE PostcodeSelect
+DROP PROCEDURE ProductCategorySelect
+DROP PROCEDURE ProductSpecificationSelect
+DROP PROCEDURE QaacDecisionSelect
+DROP PROCEDURE qryInstitutionCountries
+DROP PROCEDURE RecognitionCertificateMerge
+DROP PROCEDURE RecognitionIdCardMerge
+DROP PROCEDURE ReminderSelect
+DROP PROCEDURE JobResultSelect
+DROP PROCEDURE JobSearch
+DROP PROCEDURE JobSelect
+DROP PROCEDURE ResultTypeSelect
+DROP PROCEDURE RoleScreenSelect
+DROP PROCEDURE RoleSelect
+DROP PROCEDURE RoleTypeSelect
+DROP PROCEDURE rptAnnualOnDemandAustralianStateBasedTesting
+DROP PROCEDURE rptAnnualOnDemandAustralianStateTesting
+DROP PROCEDURE rptAnnualOnDemandNewZealandTesting
+DROP PROCEDURE rptBatchProductSummary
+DROP PROCEDURE rptCertExpiredCourse
+DROP PROCEDURE rptCertExpiredIDCard
+DROP PROCEDURE rptCertVerifyCertificate
+DROP PROCEDURE rptDirPrintDirectory
+DROP PROCEDURE rptExecAccreditationByCourse
+DROP PROCEDURE rptExecAccreditationSummary
+DROP TABLE Results
+DROP TABLE tblAccreditationProduct
+DROP TABLE tblAccreditationResult
+DROP TABLE tblAddressMailCategory
+DROP TABLE tblAlternateLanguageName
+DROP TABLE tblApplication
+DROP TABLE tblApplicationRevalidation
+DROP TABLE tblApprovalCondition
+DROP TABLE tblBankDeposit
+DROP TABLE tblChangeRequest
+DROP TABLE tblChangeRequestCourseApproval
+DROP TABLE tblCorrespondence
+DROP TABLE tblCourse
+DROP TABLE tblCourseApproval
+DROP TABLE tblCourseAttendance
+DROP TABLE tblCourseCoordinator
+DROP TABLE tblCourseLocation
+DROP TABLE tblCredentialRecordLog
+DROP TABLE tblDashboardReport
+DROP TABLE tblEmailBatchAttachment
+DROP TABLE tblEmailBatchLetterTemplate
+DROP TABLE tblEntityCorrespondence
+DROP TABLE tblEoiLanguage
+DROP TABLE tblEvent
+DROP TABLE tblEventDate
+DROP TABLE tblEventFacilitator
+DROP TABLE tblEventLog
+DROP TABLE tblEventVenue
+DROP TABLE tblExpressionOfInterest
+DROP TABLE tblGadget
+DROP TABLE tblInspection
+DROP TABLE tblInstitutionContactPerson
+DROP TABLE tblInstitutionMergeLog
+DROP TABLE tblInvoice
+DROP TABLE tblInvoiceBatch
+DROP TABLE tblInvoiceBatchInvoices
+DROP TABLE tblInvoiceLine
+DROP TABLE tblJobCorrespondence
+DROP TABLE tblLanguageExperience
+DROP TABLE tblLetterBatch
+DROP TABLE tblLetterBatchExtraFields
+DROP TABLE tblMachineScanner
+DROP TABLE tblMailingList
+DROP TABLE tblMailingListAddress
+DROP TABLE tblMergeData
+DROP TABLE tblMergeData_OLD
+DROP TABLE tblMergeDataAccreditationProduct
+DROP TABLE tblMergeDataApplication
+DROP TABLE tblMergeDataInvoice
+DROP TABLE tblMergeDataJob
+DROP TABLE tblMergeDataTestAttendance
+DROP TABLE tblNonStandardData
+DROP TABLE tblOrder
+DROP TABLE tblPayment
+DROP TABLE tblPaymentAllocation
+DROP TABLE tblPaymentCash
+DROP TABLE tblPaymentCC
+DROP TABLE tblPaymentCheque
+DROP TABLE tblPaymentDirectDeposit
+DROP TABLE tblPaymentOther
+DROP TABLE tblPDInclusion
+DROP TABLE tblPersonArchiveHistory
+DROP TABLE tblPersonExpertise
+DROP TABLE tblPersonMergeLog
+DROP TABLE tblPersonToInstitutionMergeLog
+DROP TABLE tblProject
+DROP TABLE tblReminder
+DROP TABLE tblRevalidation
+DROP TABLE tblSidebar
+DROP TABLE tblSmsReceived
+DROP TABLE tblSmsReminderType
+DROP TABLE tblSmsSend
+DROP TABLE tblSmsTemplate
+DROP TABLE tblStandardLetter
+DROP TABLE tblStoredSearches
+DROP TABLE tblTestAttendance
+DROP TABLE tblTestAvailability
+DROP TABLE tblTestAvailabilityRollover
+DROP TABLE tblTestEvent
+DROP TABLE tblTestInvitation
+DROP TABLE tblTestResultAttachment
+DROP TABLE tblTestResultFailureReason
+DROP TABLE tblTransaction
+DROP TABLE tblWorkshopAttendance
+DROP TABLE tblWorkshopAttendanceLanguage
+DROP TABLE tblWorkshopEvent
+DROP TABLE tblWorkshopMaterial
+DROP TABLE tluAccreditationCategory
+DROP TABLE tluAccreditationDescription
+DROP TABLE tluAccreditationLevel
+DROP TABLE tluAccreditationMethod
+DROP TABLE tluAccreditationType
+DROP TABLE tluApplicationProductMatchup
+DROP TABLE tluApprovalStatus
+DROP TABLE tluApprovalType
+DROP TABLE tluBoardDecision
+DROP TABLE tluCardType
+DROP TABLE tluCondition
+DROP TABLE tluCorrespondenceCategory
+DROP TABLE tluDepositType
+DROP TABLE tluEducationLevel
+DROP TABLE tluEmailBatchType
+DROP TABLE tluExpertise
+DROP TABLE tluFailureReason
+DROP TABLE tluFinancialYear
+DROP TABLE tluGadgetType
+DROP TABLE tluInspectionType
+DROP TABLE tluMailCategory
+DROP TABLE tluOrderType
+DROP TABLE tluPaymentOtherType
+DROP TABLE tluQaacDecision
+DROP TABLE tluSmsStatus
+DROP TABLE tluStandardLetterCategory
+DROP TABLE tluTaxRate
+DROP TABLE tluTestCentre
+DROP TABLE tmpApplicationStatus
+DROP TABLE tmpDirection
+DROP TABLE vwAccreditationTypeFixed_2

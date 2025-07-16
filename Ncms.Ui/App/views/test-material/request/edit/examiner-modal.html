@@ -1,0 +1,43 @@
+﻿<div id="examinerModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: mode() == 'edit' ? 'Naati.Resources.TestMaterial.resources.EditExaminer' : 'Naati.Resources.TestMaterial.resources.AddExaminer'"></h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group" data-bind="validationElement: editing().EntityId">
+                        <label data-bind="reshtml: 'Naati.Resources.Test.resources.Examiner'"></label>
+                        <!--ko if: mode() == 'add'-->
+                        <select class="form-control" data-bind="multiselect, value: editing().EntityId, options: examinersOptions, optionsValue: 'EntityId', optionsText: 'PersonNameSuffixed', valueAllowUnset: true"></select>
+                        <!--/ko-->
+                        <!--ko if: mode() == 'edit'-->
+                        <input type="text" disabled="disabled" class="form-control" data-bind="value: editing().PersonName" />
+                        <!--/ko-->
+                    </div>
+                    <div class="form-group">
+                        <label data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.PrimaryContact'"></label>
+                        <div class="m-t-xs">
+                            <label class="i-switch i-switch-md bg-info">
+                                <input type="checkbox" data-bind="checked: primaryContact">
+                                <i></i>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group w-md" data-bind="validationElement: editing().ExaminerCost">
+                        <label data-bind="reshtml: 'Naati.Resources.Test.resources.Cost'"></label>
+                        <input ui-jq="TouchSpin" data-bind="jqueryui, value: editing().ExaminerCost" type="text" value="0" class="form-control" data-min="0" data-step="0.01" data-max="9999999" data-decimals="2" data-prefix="$" data-buttondown_class="hide" data-buttonup_class="hide">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-bind="click: save">
+                    <i class="fa fa-check"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Ok'"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+﻿@model MyNaati.Ui.ViewModels.Home.AboutModel
+@{
+    ViewBag.Title = "About myNAATI";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("About", null)
+    };
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>About <span style="text-transform: none">myNAATI</span></h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                myNAATI provides a simple way for registered users to manage their NAATI details without the need to telephone NAATI.  To use
+                the full features you must have a Customer Number and be registered for myNAATI access.  Once your registration is processed, you can log in and
+                start using myNAATI.  Registration normally takes only a few minutes.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                The National Accreditation Authority for Translators and Interpreters Ltd (trading as NAATI) is the national standards and accreditation body for
+                translators and interpreters in Australia.  It is the only agency that issues accreditations for practitioners who wish to work in these professions in
+                Australia.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <p>
+                <b>Sponsor</b><br />
+                NAATI: The National Accreditation Authority for Translators and Interpreters Ltd.<br />
+                17A 2 King St<br />
+                Deakin ACT 2600
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <p>
+                <b>Software Information</b><br />
+                Product: myNAATI<br />
+                Version: @Model.Version
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <p>
+                <b>Developer</b><br />
+                F1 Solutions Pty Ltd<br />
+                Level 1, 103 Northbourne Avenue<br />
+                Turner ACT 2612<br />
+                <a href="http://www.f1solutions.com.au">http://www.f1solutions.com.au</a>
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <p>
+                <b>System Requirements</b><br />
+                This site has been designed for use with W3C compliant browsers.<br />
+                The site has been tested and is best viewed with Chrome 50.0+ and Firefox 48.0+.
+            </p>
+        </div>
+    </div>
+</div>

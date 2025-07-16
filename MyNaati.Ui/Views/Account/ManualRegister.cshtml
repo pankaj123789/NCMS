@@ -1,0 +1,119 @@
+﻿@model MyNaati.Ui.Models.ManualRegisterModel
+
+@{
+    ViewBag.Title = "myNAATI Registration";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Register", Url.Action("Register", "Account"))
+    };
+}
+
+@section Scripts
+{
+  <script type="text/javascript">
+      //var valSumSelector = '#valSum';
+
+      $(document).ready(function () {
+          var validationItems = $('#valSum li');
+          for (var iValidationItem = 0; iValidationItem < validationItems.length; iValidationItem++) {
+              var item = validationItems[iValidationItem];
+              if (item.innerText.indexOf('|') > 0) {
+                  //there's an embedded pipe-delimited list. Break it out into a sub list.
+                  var subItems = item.innerText.split('|');
+                  insertSubList(item, subItems);
+              }
+          }                   
+      });
+
+      function insertSubList(targetElement, subItems) {
+          targetElement.innerText = '';
+
+          //re-insert the first line
+          textNode = document.createTextNode(subItems[0]);
+          targetElement.appendChild(textNode);
+
+          //insert the middle lines as a sub-list
+          var ul = document.createElement('UL');
+          for (var i = 1; i < subItems.length - 1; i++) {
+
+              li = document.createElement("li");
+              textNode = document.createTextNode(subItems[i]);
+
+
+              li.appendChild(textNode);
+              ul.appendChild(li);
+          }
+          targetElement.appendChild(ul);
+
+          //insert the last line outside of the sub-list
+          textNode = document.createTextNode(subItems[subItems.length - 1]);
+          targetElement.appendChild(textNode);
+      }
+  </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2><span style="text-transform: none">myNAATI</span> Registration</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.ValidationSummary("", new { id = "valSum" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                We are unable to verify your identity.<br />
+                Please provide your details and NAATI staff will contact you to finalise your registration.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @using (Html.BeginForm("ManualRegister", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    <div class="col-lg-8">
+                        <div class="row">
+                            @Html.LabelFor(m => m.GivenName, "Given Name:", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.GivenName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-8">
+                        <div class="row">
+                            @Html.LabelFor(m => m.FamilyName, "Family Name:", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-8">
+                        <div class="row">
+                            @Html.LabelFor(m => m.DateOfBirth, "Date Of Birth:", new { @class = "col-sm-2 control-label" })
+                            <div class="col-sm-4">
+                                @Html.TextBoxFor(m => m.DateOfBirth, new { type = "date", @class = "form-control", MinYear = DateTime.Now.Year - 100, MaxYear = DateTime.Now.Year })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.HiddenFor(x => x.NaatiNumber)
+                @Html.HiddenFor(x => x.Email)
+                @Html.HiddenFor(x => x.ConfirmEmail)
+                <div class="form-group">
+                    <div class="col-lg-6">
+                        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-danger btn-lg">Cancel</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

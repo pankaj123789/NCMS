@@ -1,0 +1,10 @@
+﻿@model DateTime?
+
+@if (Model != null)
+{
+    <text>@string.Format("{0:dd MMM yyyy}", Model)</text>
+}
+else
+{
+    Html.Encode("&nbsp;");
+}

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "naati-infra.tempVolumeClaimName" . }}	
+spec:
+  accessModes:
+    - ReadWriteMany 
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: standard
+  volumeName: {{ include "naati-infra.tempPersistentStorage" . }}	

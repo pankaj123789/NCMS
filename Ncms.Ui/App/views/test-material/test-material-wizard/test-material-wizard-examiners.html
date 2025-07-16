@@ -1,0 +1,36 @@
+﻿<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered table-striped" data-bind="datatable: tableDefinition">
+			<thead>
+				<tr>
+					<th class="w-sm" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.CustomerNumber'"></th>
+					<th class="w-md" data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></th>
+					<th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.PanelMemberships'"></th>
+				</tr>
+			</thead>
+			<tbody data-bind="foreach: examiners">
+				<tr>
+					<td>
+						<a href="#" target="_blank" class="text-info" data-bind="text: NaatiNumber, attr: { href: '#person/' + NaatiNumber }"></a>
+					</td>
+					<td data-bind="text: Name"></td>    
+                    <td>
+                        <ul class="m-l-n-md">
+                            <!--ko foreach: PanelMemberships-->
+                            <li>
+                                <a href="#" class="text-info" target="_blank" data-bind="text: Panel.Name, attr: { href: '#panel/' + Panel.PanelId }"></a>
+                                <span> - </span>
+                                <span data-bind="text: RoleName"></span>
+                                <span> - </span>
+                                <span data-bind="textDate: From"></span>
+                                <span> to </span>
+                                <span data-bind="textDate: To"></span>
+                            </li>
+                            <!--/ko-->
+                        </ul>
+                    </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,42 @@
+﻿<div class="vbox" id="personSettings">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: windowTitle"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="wrapper-sm">
+            <table class="table table-bordered table-striped m-b-none">
+                <thead>
+                    <tr>
+                        <th data-bind="reshtml: 'Naati.Resources.Person.resources.Title'"></th>
+                        <th data-bind="reshtml: 'Naati.Resources.Person.resources.GivenName'"></th>
+                        <th data-bind="reshtml: 'Naati.Resources.Person.resources.OtherNames'"></th>
+                        <th data-bind="reshtml: 'Naati.Resources.Person.resources.FamilyName'"></th>
+                        <th data-bind="reshtml: 'Naati.Resources.Person.resources.EffectiveDate'"></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: person.NameHistory">
+                    <tr>
+                        <td data-bind="text: Title"></td>
+                        <td data-bind="text: GivenName"></td>
+                        <td data-bind="text: OtherNames"></td>
+                        <td data-bind="text: Surname"></td>
+                        <td data-bind="text: $root.dateService.toUIDate(EffectiveDate())"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button type="button" class="btn btn-default" data-bind="click: close">
+                <i class="fa fa-times"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

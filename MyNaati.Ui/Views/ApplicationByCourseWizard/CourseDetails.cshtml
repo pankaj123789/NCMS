@@ -1,0 +1,110 @@
+﻿@model MyNaati.Ui.ViewModels.ApplicationByCourseWizard.CourseDetailsModel
+@{
+    ViewBag.Title = "Application for Accreditation by Course";
+    ViewBag.Subtitle = "Course Details";
+    Layout = "~/Views/Shared/MasterPages/_ApplicationWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Course", Url.Action("Index", "ApplicationByCourseWizard")),
+        new Tuple<string, string>("New Application", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var australianStateSelector = '#AustralianStateId';
+
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(nextButtons).show();
+            $('#InstitutionSelect').change(function () { updateCourses($(this).val()); });
+        });
+
+        function updateCourses(institutionId) {
+            $.ajax({
+                type: "POST",
+                data: { institutionId: institutionId },
+                cache: false,
+                url: '@Url.Action("InsitutionCourseSearch","ApplicationByCourseWizard")',
+                success: updateCoursesSuccess,
+                error: updateCoursesError
+            });
+        }
+
+        function updateCoursesSuccess(data) {
+            var courseSelect = $('#CourseSelect');
+            var oldVal = courseSelect.val();
+            var containsOldVal = false;
+            var courseHtml = '';
+
+            $.each(data.Results, function (i, course) {
+                courseHtml += '<option value="' + course.Value + '">' + course.Text + '</option>';
+
+                if (course.Value === oldVal) {
+                    containsOldVal = true;
+                }
+            });
+
+            courseSelect.html(courseHtml);
+
+            if (containsOldVal === true) {
+                courseSelect.val(oldVal);
+            }
+        }
+
+        function updateCoursesError() {
+            alert('An error occurred while processing your request.');
+        }
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>Provide the details of the Australian course you completed. You may only select the institutions and courses approved by NAATI.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(e => e.InstitutionId, new { @class = "col-sm-5" })
+                <div class="col-sm-7">
+                    @Html.DropDownListFor(m => m.InstitutionId, new SelectList(Model.InstitutionList, "Value", "Text", Model.InstitutionId), new { id = "InstitutionSelect", @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(e => e.Campus, new { @class = "col-sm-5" })
+                <div class="col-sm-7">
+                    @Html.TextBoxFor(m => m.Campus, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(e => e.StateId, new { @class = "col-sm-5" })
+                <div class="col-sm-2">
+                    @Html.DropDownListFor(m => m.StateId, new SelectList(Model.StateList, "Value", "Text", Model.State), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(e => e.CourseId, new { @class = "col-sm-5" })
+                <div class="col-sm-7">
+                    @Html.DropDownListFor(m => m.CourseId, new SelectList(Model.CourseList, "Value", "Text", Model.State), new { id = "CourseSelect", @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(e => e.YearStarted, new {@class = "col-sm-5"})
+                <div class="col-sm-2">
+                    @Html.DropDownListFor(m => m.YearStarted, new SelectList(Model.YearsStarted, "Value", "Text", Model.State), new {@class = "form-control"})
+                </div>
+                @Html.LabelFor(e => e.DateCompleted, new {@class = "col-sm-2"})
+                <div class="col-sm-3">
+                    @Html.TextBoxFor(m => m.DateCompleted, new {type = "date", @class = "form-control", MinYear = DateTime.Now.Year - 100, MaxYear = DateTime.Now.Year, DefaultYear = DateTime.Now.Year})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-5 col-sm-7">
+                    <p class="form-control-static">Note: if your course was completed more than 3 years ago, you should submit your application using the form on the NAATI website.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

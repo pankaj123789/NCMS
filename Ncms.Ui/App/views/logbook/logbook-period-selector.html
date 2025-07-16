@@ -1,0 +1,42 @@
+﻿<div id="certificationPeriodsModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.Logbook.resources.SelectSubmittedLogbookTitle'"></h4>
+            </div>
+            <div class="modal-body">
+                <span data-bind="reshtml: 'Naati.Resources.Logbook.resources.SelectSubmittedLogbookHelp'"></span>
+                <br />
+                <br />
+                <table class="table table-bordered table-striped" data-bind="datatable: tableDefinition">
+                    <thead>
+                        <tr>
+                            <th class="w-xxs text-center" data-bind="reshtml: 'Naati.Resources.Logbook.resources.SubmittedDate'"></th>
+                            <th class="w-xxs text-center" data-bind="reshtml: 'Naati.Resources.Logbook.resources.ApplicationReference'"></th>
+                            <th class="text-center" data-bind="reshtml: 'Naati.Resources.Logbook.resources.Credentials'">Credentials</th>
+                            <th class="w-xxs text-center"></th>
+
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: { data: certificationPeriods, as: 'a' }">
+                        <tr>
+                            <td class="text-center" data-bind="text: a.RecertificationEnteredDate"></td>
+                            <td class="text-center" data-bind="text: a.RecertificationApplication"></td>
+                            <td class="text-center" data-bind="html: a.Credentials"></td>
+                            <td class="text-right">
+                                <button type="button" class="btn btn-default btn-sm" data-bind="click: $root.viewPeriod">
+									<span class="glyphicon glyphicon-eye-open"></span>
+									<span data-bind="reshtml: 'Naati.Resources.Shared.resources.View'"></span>
+								</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></button>
+            </div>
+        </div>
+    </div>
+</div>

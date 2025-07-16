@@ -1,0 +1,22 @@
+﻿<div class="hbox">
+	<div class="hbox" data-bind="component: searchOptions"></div>
+	<!-- ko compose: skillCreateOptions --><!-- /ko -->
+	<script id="skills-header-template" type="text/html">
+		<th data-bind="reshtml: 'Naati.Resources.Skill.resources.Name'"></th>
+		<th class="w-md" data-bind="reshtml: 'Naati.Resources.Skill.resources.SkillType'"></th>
+		<th class="w-md" data-bind="reshtml: 'Naati.Resources.Skill.resources.ApplicationTypes'"></th>
+		<th class="w-xxs"></th>
+	</script>
+	<script id="skills-row-template" type="text/html">
+		<tr>
+			<td data-bind="text: DisplayName"></td>
+			<td data-bind="text: TypeDisplayName"></td>
+			<td data-bind="html: ApplicationTypesDisplay"></td>
+			<td class="text-right">
+				<a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#system/skill/' + SkillId }">
+					<i class="fa fa-pencil-alt"></i>
+				</a>
+			</td>
+		</tr>
+	</script>
+</div>

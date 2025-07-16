@@ -1,0 +1,31 @@
+﻿
+<div class="form-group" data-bind="validationElement: attachments">
+    <!--ko if: editable-->
+    <div class="file-loading">
+        <input type="file" multiple accept=".pdf,.doc,.docx,.xlsx,.xls,.jpeg,.jpg,.png" data-bind="fileinput: fileOptions, event: fileEvent">
+    </div>
+    <span class="help-block" data-bind="validationMessage: attachments"></span>
+    <!--/ko-->
+</div>
+
+<table class="table table-bordered table-striped" data-bind="datatable: tableDefinition">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th class="w-xs">Size</th>
+            <th class="w-sm"></th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: { data: attachments, as: 'a' }">
+        <tr>
+            <td data-bind="text: a.Description"></td>
+            <td data-bind="bytesToSize: a.StoredFile.FileSize"></td>
+            <td class="text-center">
+                <a class="btn btn-xs btn-default" href="#" data-bind="tooltip: { trigger: 'hover', container: 'body' }, downloadFile: { url: $root.attachmentDownloadUrl(a) }" title="Download this attachment"><span class="fa fa-download"></span></a>
+                <!--ko if: $root.editable-->
+                <a class="btn btn-xs btn-default" href="#" data-bind="click: $root.removeAttachment, tooltip: { trigger: 'hover', container: 'body' }" title="Delete this attachment"><span class="fa fa-trash"></span></a>
+                <!--/ko-->
+            </td>
+        </tr>
+    </tbody>
+</table>

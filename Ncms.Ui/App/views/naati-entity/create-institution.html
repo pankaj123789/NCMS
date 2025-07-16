@@ -1,0 +1,37 @@
+﻿<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" data-bind="attr: { id: modalId }">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.Institution.resources.NewInstitution'"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></label>
+                        <div class="col-sm-8" data-bind="validationElement: institution.Name">
+                            <input id="nameInput" type="text" class="form-control" data-bind="value: institution.Name" />                            
+                                
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" data-bind="reshtml: 'Naati.Resources.Shared.resources.vNAATINumber'"></label>
+                        <div class="col-sm-8"  data-bind="validationElement: institution.NaatiNumber">
+                            <input id="naatiNoInput" type="text" class="form-control" data-bind="value: institution.NaatiNumber" />                               
+                        </div>
+                    </div>
+                      
+                </div>
+                   
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bind="enable:canSave, click: create, disableOnAjaxStart">
+                    <i class="glyphicon glyphicon-import"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Create'"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-ban"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

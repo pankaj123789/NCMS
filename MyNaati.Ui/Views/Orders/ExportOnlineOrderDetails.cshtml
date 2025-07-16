@@ -1,0 +1,69 @@
+﻿@model MyNaati.Ui.ViewModels.Orders.ExportOnlineOrderDetailsModel
+@{
+    ViewBag.Title = "Export Online Order Details";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Export Details", null)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#StartDate").val('@Model.StartDate.ToString("yyyy-MM-dd")');
+            $("#EndDate").val('@Model.EndDate.ToString("yyyy-MM-dd")');
+        });
+    </script>
+}
+
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">Export Online Orders</h2>
+        </div>
+    </div>
+    <div id="ValidationSummary" class="row">
+        <div class="col-lg-12">
+            <div>@Html.ValidationSummary()</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>To export the online orders for a period:</p>
+            <ul>
+                <li>Enter the relevant period;</li>
+                <li>Click the Export button below.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Online Orders for period:</p>
+            @using (Html.BeginForm("ExportOnlineOrderDetails", "Orders", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            @Html.Label("StartDate", "From", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                <input id="StartDate" class="form-control" type="date" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            @Html.Label("EndDate", "To", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                <input id="EndDate" class="form-control" type="date" name="EndDate" value="@Model.EndDate.ToString("yyyy-MM-dd")" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <button id="exportButton" class="btn btn-success" type="submit" onclick="$('#ValidationSummary').hide();">Export</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

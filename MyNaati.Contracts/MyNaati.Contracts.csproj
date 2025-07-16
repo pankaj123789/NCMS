@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3B282190-56F0-494B-B94B-FA76EFFFB895}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyNaati.Contracts</RootNamespace>
+    <AssemblyName>MyNaati.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>CODE_ANALYSIS;DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackgroundTask\BackgroundTasks.cs" />
+    <Compile Include="BackOffice\AccreditationResults\Credential.cs" />
+    <Compile Include="BackOffice\AccreditationResults\IAccreditationResultService.cs" />
+    <Compile Include="BackOffice\AccreditationResults\PersonCredentialsResponse.cs" />
+    <Compile Include="BackOffice\Common\ExtendedValueType.cs" />
+    <Compile Include="BackOffice\Common\Extensions.cs" />
+    <Compile Include="BackOffice\Common\FileModel.cs" />
+    <Compile Include="BackOffice\Common\FileType.cs" />
+    <Compile Include="BackOffice\Common\PersonNaatiNumberRequest.cs" />
+    <Compile Include="BackOffice\IAccountingService.cs" />
+    <Compile Include="BackOffice\IAccreditationApplicationService.cs" />
+    <Compile Include="BackOffice\IApiAccessService.cs" />
+    <Compile Include="BackOffice\IApiPublicService.cs" />
+    <Compile Include="BackOffice\ICourseApprovalService.cs" />
+    <Compile Include="BackOffice\ICredentialApplicationService.cs" />
+    <Compile Include="BackOffice\IEmailCodeVerificationService.cs" />
+    <Compile Include="BackOffice\IExaminerToolsService.cs" />
+    <Compile Include="BackOffice\ILogbookService.cs" />
+    <Compile Include="BackOffice\IUnraisedInvoiceService.cs" />
+    <Compile Include="BackOffice\Language\EoiLanguagesGetResponse.cs" />
+    <Compile Include="BackOffice\Legacy\IAccreditationResultService.cs" />
+    <Compile Include="BackOffice\Legacy\IPersonalDetailsService.cs" />
+    <Compile Include="BackOffice\Lookups\GetAllLookups.cs" />
+    <Compile Include="BackOffice\Lookups\ILookupService.cs" />
+    <Compile Include="BackOffice\MaterialRequest\IMaterialRequestService.cs" />
+    <Compile Include="BackOffice\NcmsIntegration\INcmsIntegrationService.cs" />
+    <Compile Include="BackOffice\Panel\IPanelMembershipService.cs" />
+    <Compile Include="BackOffice\PersonalDetails\GetNaatiNumberRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\GetNaatiNumberResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\GetPrimaryEmailRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\GetPrimaryEmailResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\IPersonalDetailsService.cs" />
+    <Compile Include="BackOffice\PersonalDetails\NaatiNumberRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsAddNewSuburbRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsAddNewSuburbResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsCreateNonCandidateRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsCreateNonCandidateResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetAddressesResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetAddressRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetAddressResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetEmailRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetEmailResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetEmailsResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetExtendedInformationResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetHasPreferredOfTypeRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetHasPreferredOfTypeResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetHasValidPhotographResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetLastUpdatedResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetPeopleRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetPeopleResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetPersonResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetPhoneRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetPhoneResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetPhonesResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetVerifyOnline.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsGetWebsiteResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsSubmitEoiApplicationRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsSubmitEoiApplicationResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsUpdateAddressResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsUpdateEmailRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsUpdateEmailResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsUpdatePhoneRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsUpdatePhoneResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsUpdateWebsiteRequest.cs" />
+    <Compile Include="BackOffice\PersonalDetails\PersonalDetailsUpdateWebsiteResponse.cs" />
+    <Compile Include="BackOffice\PersonalDetails\ValidatePrimaryEmailResponse.cs" />
+    <Compile Include="BackOffice\PortalUser\IEPortalSamUserService.cs" />
+    <Compile Include="BackOffice\PractitionerDirectory\AccreditationLegacy.cs" />
+    <Compile Include="BackOffice\PractitionerDirectory\IPractitionerDirectoryService.cs" />
+    <Compile Include="BackOffice\PractitionerDirectory\PractitionerDirectoryGetContactDetailsRequest.cs" />
+    <Compile Include="BackOffice\PractitionerDirectory\PractitionerDirectoryGetContactDetailsResponse.cs" />
+    <Compile Include="BackOffice\PractitionerDirectory\PractitionerDirectoryGetCurrentListingRequest.cs" />
+    <Compile Include="BackOffice\PractitionerDirectory\PractitionerDirectoryGetCurrentListingResponse.cs" />
+    <Compile Include="BackOffice\Products\IProductSpecificationService.cs" />
+    <Compile Include="BackOffice\Products\ProductSpecification.cs" />
+    <Compile Include="BackOffice\Products\ProductSpecificationGetProductSpecificationRequest.cs" />
+    <Compile Include="BackOffice\Products\ProductSpecificationGetProductSpecificationResponse.cs" />
+    <Compile Include="BackOffice\SMS\IInboundSmsService.cs" />
+    <Compile Include="BackOffice\SMS\InboundSmsMessageNotifyRequest.cs" />
+    <Compile Include="BackOffice\SMS\InboundSmsMessageNotifyResponse.cs" />
+    <Compile Include="IMyNaatiPodsIntegrationService.cs" />
+    <Compile Include="Portal\ILookupProvider.cs" />
+    <Compile Include="Portal\ISamCreditCardEncryptionService.cs" />
+    <Compile Include="Portal\ePortalUser.cs" />
+    <Compile Include="Portal\IApplicationService.cs" />
+    <Compile Include="Portal\IConfigurationService.cs" />
+    <Compile Include="Portal\IDownloadService.cs" />
+    <Compile Include="Portal\IEmailService.cs" />
+    <Compile Include="Portal\IExaminerToolsInternalService.cs" />
+    <Compile Include="Portal\IFileService.cs" />
+    <Compile Include="Portal\IMembershipProviderService.cs" />
+    <Compile Include="Portal\IOrderService.cs" />
+    <Compile Include="Portal\IPasswordService.cs" />
+    <Compile Include="Portal\IRoleProviderService.cs" />
+    <Compile Include="Portal\ISystemService.cs" />
+    <Compile Include="Portal\IUserService.cs" />
+    <Compile Include="Portal\MembershipCreateResult.cs" />
+    <Compile Include="Portal\OrderSubmission.cs" />
+    <Compile Include="Portal\PayPal\OrderSubmission.cs" />
+    <Compile Include="Portal\Users\ChangeUserNameRequest.cs" />
+    <Compile Include="Portal\Users\EmailChangeRequest.cs" />
+    <Compile Include="Portal\Users\EmailChangeResponse.cs" />
+    <Compile Include="Portal\Users\GetEmailChangeRequest.cs" />
+    <Compile Include="Portal\Users\GetEmailChangeResponse.cs" />
+    <Compile Include="Portal\Users\GetRegistrationRequest.cs" />
+    <Compile Include="Portal\Users\RefreshUsersRequest.cs" />
+    <Compile Include="Portal\Users\RegistrationRequestSearchResult.cs" />
+    <Compile Include="Portal\Users\ResolveRegistrationRequest.cs" />
+    <Compile Include="Portal\Users\SearchRegistrationRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BackOffice\Messages\" />
+    <Folder Include="Portal\SecurePay\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Contracts\F1Solutions.Naati.Common.Contracts.csproj">
+      <Project>{039e6de4-aeb9-4a6e-ac19-135239ddbde2}</Project>
+      <Name>F1Solutions.Naati.Common.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

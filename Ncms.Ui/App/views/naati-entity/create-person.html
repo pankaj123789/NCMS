@@ -1,0 +1,71 @@
+﻿ <div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" data-bind="attr: { id: modalId }">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.Person.resources.CreateNewPerson'"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group col-sm-6">
+                        <label class="control-label col-sm-4" data-bind="reshtml: 'Naati.Resources.Person.resources.GivenName'"></label>
+                        <div class="col-sm-8" data-bind="validationElement:details.GivenName">
+                            <input type="text" class="form-control" data-bind="value: details.GivenName, valueUpdate: 'afterkeydown'" />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="control-label col-sm-4" data-bind="reshtml: 'Naati.Resources.Person.resources.OtherNames'"></label>
+                        <div class="col-sm-8" data-bind="validationElement:details.OtherNames">
+                            <input type="text" class="form-control" data-bind="value: details.OtherNames, valueUpdate: 'afterkeydown'" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group col-sm-6">
+                        <label class="control-label col-sm-4" data-bind="reshtml: 'Naati.Resources.Person.resources.FamilyName'"></label>
+                        <div class="col-sm-8" data-bind="validationElement:details.FamilyName">
+                            <input type="text" class="form-control" data-bind="value: details.FamilyName, valueUpdate: 'afterkeydown'" />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="control-label col-sm-4" data-bind="reshtml: 'Naati.Resources.Person.resources.PrimaryEmail'"></label>
+                        <div class="col-sm-8" data-bind="validationElement:details.PrimaryEmail">
+                            <input type="text" class="form-control" data-bind="value: details.PrimaryEmail, valueUpdate: 'afterkeydown'" />
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="control-label col-sm-4" data-bind="reshtml: 'Naati.Resources.Person.resources.DateOfBirth'"></label>
+                        <div class="col-sm-8" data-bind="validationElement:details.BirthDate">
+                            <input type="text" class="form-control" data-bind="datepicker: { value: details.BirthDate }, valueUpdate: 'afterkeydown'" />
+                            <span class="text-muted">Format dd/mm/yyyy</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="control-label col-sm-4" data-bind="reshtml: 'Naati.Resources.Person.resources.CountryOfBirth'"></label>
+                        <div class="col-sm-8" data-bind="validationElement:details.CountryOfBirth">
+                            <!-- ko component: { name: 'entity-select', params: countryOfBirthOptions } -->
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="control-label col-sm-4" data-bind="reshtml: 'Naati.Resources.Person.resources.Gender'"></label>
+                        <div class="col-sm-8" data-bind="validationElement:details.Gender">
+                            <!-- ko component: { name: 'gender-select', params: genderOptions } -->
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    </div>
+                </div>
+             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bind="enable:canSave, click: create, disableOnAjaxStart">
+                    <i class="glyphicon glyphicon-import"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Create'"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-ban"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,225 @@
+﻿<div class="vbox" id="personMain">
+    <!--ko compose: applicationNewOptions--><!--/ko-->
+    <!--ko compose: credentialApplicationsOptions--><!--/ko-->
+    <!--ko compose: changePhotoOptions--><!--/ko-->
+    <!--ko compose: extendCertificationsOptions--><!--/ko-->
+    <!--ko compose: deregisterMyNaatiOptions--><!--/ko-->
+    <!--ko compose: deregisterMfaOptions--><!--/ko-->
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <button class="btn btn-sm btn-success pull-right dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                </button>
+                <!-- dropdown -->
+                <ul class="dropdown-menu dropdown-menu-right w">
+                    <li>
+                        <a data-bind="restext: 'Naati.Resources.Application.resources.NewApplication', click: newApplication, showWithPermission: 'Application.Create'"></a>
+                    </li>
+                    <!--ko if: person.IsPractitioner() || person.IsFormerPractitioner() || person.IsFuturePractitioner()-->
+                    <li>
+                        <a data-bind="restext: 'Naati.Resources.Person.resources.ViewLogbook', attr: { href: getUrl('#logbook/{0}') }, showWithPermission: 'Logbook.Read'"></a>
+                    </li>
+                    <!--/ko-->
+                    <!--ko if: showChangeCertificationPeriods-->
+                    <li>
+                        <a href="#" data-bind="restext: 'Naati.Resources.Person.resources.CertificationPeriods', attr: { href: '#/person/' + person.NaatiNumber() + '/certification-periods/'  }, showWithPermission: 'CertificationPeriod.Read'"></a>
+                    </li>
+                    <!--/ko-->
+                    <!--ko if: showExtendCertifications()-->
+                    <li>
+                        <a data-bind="restext: 'Naati.Resources.Person.resources.ExtendCertifications', click: extendCertifications, showWithPermission: 'CertificationPeriod.Manage'"></a>
+                    </li>
+                    <!--/ko-->
+                    <!--ko if: hasMyNaatiAccount -->
+                    <li>
+                        <a data-bind="showWithPermission: 'PersonMyNaatiRegistration.Delete', restext: 'Naati.Resources.Person.resources.DeregisterMyNaatiAccount', click: deregisterMyNaatiAccount"></a>
+                    </li>
+                    <!--/ko-->
+                    <li>
+                        <a data-bind="restext: 'Naati.Resources.Shared.resources.Settings', attr: { href: getUrl('#person/{0}/settings') },showWithPermission: 'Person.Read'"></a>
+                    </li>
+                    <li>
+                        <a data-bind="restext: 'Naati.Resources.Person.resources.NameHistory', attr: { href: getUrl('#person/{0}/namehistory') },showWithPermission: 'PersonHistory.Read'"></a>
+                    </li>
+                    <li>
+                        <a data-bind="restext: 'Naati.Resources.Person.resources.AddName', attr: { href: getUrl('#person/{0}/addname') }, showWithPermission: 'Person.Update'"></a>
+                    </li>
+                    <!--ko if: person.IsMfaEnabled() == "Enabled" -->
+                    <li>
+                        <a data-bind="showWithPermission: 'PersonMyNaatiRegistration.Delete', restext: 'Naati.Resources.Person.resources.DeregisterMfaAccount', click: deregisterMfaAccount"></a>
+                    </li>
+                    <!--/ko-->
+
+                </ul>
+                <!-- / dropdown -->
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: windowTitle"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <!--ko if: isPerson-->
+                    <div class="panel no-border">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="hbox">
+                                    <div class="col photo-container">
+                                        <!--ko component: { name: 'person-photo', params: personPhotoOptions }--><!--/ko-->
+                                    </div>
+                                    <div class="col dker bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-9">
+                                                <div class="form-horizontal m-sm m-b-none">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.Gender'"></label>
+                                                        <div class="col-sm-2 col-xs-3 pt-7">
+                                                            <span data-bind="text: person.GenderText"></span>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.MyNaatiAccount'"></label>
+                                                        <div class="col-sm-2 col-xs-3 pt-7">
+                                                            <span data-bind="text: myNaatiStatus"></span>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.MyNaatiUsername'"></label>
+                                                        <div class="col-sm-2 col-xs-3 pt-7">
+                                                            <span data-bind="text: person.UserName"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.CountryOfBirth'"></label>
+                                                        <div class="col-sm-2 col-xs-3 pt-7">
+                                                            <span data-bind="text: person.BirthCountry"></span>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.MyNaatiRegistrationDate'"></label>
+                                                        <div class="col-sm-2 col-xs-3 pt-7">
+                                                            <span data-bind="text: person.MyNaatiRegistrationDate"></span>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.LastmyNaatiLogin'"></label>
+                                                        <div class="col-sm-2 col-xs-3 pt-7">
+                                                            <span data-bind="text: person.LastmyNaatiLogin"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group" data-bind="validationElement: person.BirthDate, validationOptions: { insertMessages: false }">
+                                                        <label class="col-sm-2 col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.DateOfBirth'"></label>
+                                                        <div class="col-sm-2 col-xs-3 pt-7">
+                                                            <span data-bind="text: person.BirthDate"></span>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.LastPasswordChangeDate'"></label>
+                                                        <div class="col-sm-2 col-xs-3 pt-7">
+                                                            <span data-bind="text: person.LastPasswordChangeDate"></span>
+                                                        </div>
+                                                        <!--ko if: person.IsAccountLocked()-->
+                                                        <label class="col-sm-3 col-xs-3 control-label banner-center" data-bind="restext: 'Naati.Resources.Person.resources.AccountLockedBanner'"></label>
+                                                        <button class="col-sm-1 col-xs-3 btn btn-primary" data-bind="showWithPermission: 'PersonMyNaatiRegistration.Manage', click: unlock">
+                                                            <i class="fa fa-unlock"></i>
+                                                            <span data-bind="restext: 'Naati.Resources.Person.resources.Unlock'"></span>
+                                                        </button>
+                                                        <!--/ko-->
+                                                    </div>
+                                                    <div class="form-group m-b-none">
+                                                        <label class="col-sm-2 col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.MultiFactorAuthentication'"></label>
+                                                        <div class="col-sm-2 col-xs-3 pt-7">
+                                                            <span data-bind="text: person.IsMfaEnabled"></span>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.LastMfaAuthentication'"></label>
+                                                        <div class="col-sm-2 col-xs-3 pt-7">
+                                                            <span data-bind="text: person.MfaExpireStartDate"></span>
+                                                        </div>
+
+                                                        <label class="col-sm-2 col-xs-3 control-label" data-bind="restext: 'Naati.Resources.Person.resources.DisabledByNaati'"></label>
+                                                        <div class="col-sm-2 col-xs-3 pt-7">
+                                                            <span data-bind="text: person.DisabledByNaati"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-horizontal col-lg-3">
+                                                <div class="form-group wrapper-sm">
+                                                    <div class="col-lg-9 col-lg-offset-3 text-right">
+                                                        <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+
+                                                            <div class="person-passed-text">
+                                                                <!--ko foreach: { data: person.Types, as: 'type' }-->
+                                                                <label class="badge bg-darkblue">
+                                                                    <!--ko if: type.tooltip-->
+                                                                    <span class="padder-md ml-1" data-bind="text: type.name, tooltip, attr:{title:type.tooltip}"></span>
+                                                                    <!-- /ko -->
+                                                                    <!--ko ifnot: type.tooltip-->
+                                                                    <span class="padder-md" data-bind="text: type.name"></span>
+                                                                    <!-- /ko -->
+                                                                </label>
+                                                                <!-- /ko -->
+                                                            </div>
+                                                            <!--ko if: person.EthicalCompetency-->
+                                                            <div class="person-passed-text">
+
+                                                                <label class="display-text">
+                                                                    <span class="padder-md ">
+                                                                        <span class="inline-span-text text-green" data-bind="restext: 'Naati.Resources.Person.resources.Passed'"></span>
+                                                                        <span data-bind="restext: 'Naati.Resources.Person.resources.EthicalCompetency'"></span>
+                                                                    </span>
+                                                                </label>
+
+                                                            </div>
+                                                            <!-- /ko -->
+                                                            <!--ko if: person.InterculturalCompetency-->
+                                                            <div class="person-passed-text">
+
+                                                                <label class="display-text">
+                                                                    <span class="padder-md">
+                                                                        <span class="inline-span-text text-green" data-bind="restext: 'Naati.Resources.Person.resources.Passed'"></span>
+                                                                        <span data-bind="restext: 'Naati.Resources.Person.resources.InterculturalCompetency'"></span>
+                                                                    </span>
+                                                                </label>
+
+                                                            </div>
+                                                            <!-- /ko -->
+                                                            <!--ko if: person.KnowledgeTest-->
+                                                            <div class="person-passed-text">
+
+                                                                <label class="display-text">
+                                                                    <span class="padder-md">
+                                                                        <span class="inline-span-text text-green" data-bind="restext: 'Naati.Resources.Person.resources.Passed'"></span>
+                                                                        <span data-bind="restext: 'Naati.Resources.Person.resources.KnowledgeTest'"></span>
+                                                                    </span>
+                                                                </label>
+
+                                                            </div>
+                                                            <!-- /ko -->
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ko-->
+                    <!-- ko component: { name: 'tab-component', params: tabOptions } -->
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+
+        <div class="pull-right">
+            <a class="btn btn-default" data-bind="click:close">
+                <i class="fa fa-times"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span>
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.BasePurchaseWizardModel
+@{    
+    ViewBag.Subtitle = "Payment Unsuccessful";
+    Layout = "~/Views/Shared/MasterPages/_WizardLayout.cshtml";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $cancelButton = $(cancelButtons);
+            var $previousButton = $(previousButtons);
+            var $downloadButton = $(downloadFormButtons);
+
+            $cancelButton.show();
+            $previousButton.show();
+            $downloadButton.show();
+
+            $downloadButton.click(function () {
+                $cancelButton.prop('disabled', true);
+                $previousButton.prop('disabled', true);
+            });
+        });      
+    </script>
+}
+<p>
+    We were unable to process your payment.<br />
+    Your order has not been finalised.<br />
+    Select the Previous option below to return to your order, make changes and try again.<br />
+    You can also download an order form with your order details and complete it manually.
+</p>

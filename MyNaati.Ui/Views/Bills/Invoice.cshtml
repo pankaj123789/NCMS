@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Invoice";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Invoice", null)
+    };
+}
+
+<h2>Invoice</h2>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="pull-right text-center">
+            <div class="h1 text-info">
+                <span data-bind="textCurrency: totalAmount">$674.99</span>
+            </div>
+            <span class="text-xs text-info" data-bind="restext: 'EPortal.Resources.Finance.resources.Total'"></span>
+            <span class="text-xs text-info" data-bind="restext: 'EPortal.Resources.Finance.Total'"></span>
+            <div class="h3 m-t text-success">
+                <span data-bind="textCurrency: totalPayments">$0.00</span>
+            </div>
+            <span class="text-xs text-success" data-bind="restext: 'EPortal.Resources.Finance.resources.PaymentTotal'"></span>
+            <div class="h3 m-t text-danger">
+                <span data-bind="textCurrency: totalBalance">$674.99</span>
+            </div>
+            <span class="text-xs text-danger" data-bind="restext: 'EPortal.Resources.Finance.resources.Balance'"></span>
+        </div>
+    </div>
+    <div class="col-sm-6 m-t-lg">
+        <div data-bind="sparkline: { values: sparklineValues, options: sparklineOptions }" class="sparkline inline">
+            <canvas width="135" height="135" style="display: inline-block; width: 135px; height: 135px; vertical-align: top;"></canvas>
+        </div>
+        <div class="line pull-in"></div>
+        <div class="text-xs">
+            <i class="fa fa-circle text-success"></i>
+            <span data-bind="restext: 'EPortal.Resources.Finance.resources.PaymentTotal'"></span>
+            <i class="fa fa-circle text-danger m-l"></i>
+            <span data-bind="restext: 'EPortal.Resources.Finance.resources.Balance'"></span>
+        </div>
+    </div>
+</div>
+
+
+

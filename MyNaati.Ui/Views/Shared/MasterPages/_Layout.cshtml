@@ -1,0 +1,209 @@
+﻿@using MyNaati.Ui.Common
+@using MyNaati.Ui.Common
+@using MyNaati.Ui.Helpers
+@using MyNaati.Ui.UI
+@{
+    var publicActions = new Dictionary<string, IEnumerable<string>>()
+    {
+        {
+            "Account",
+            new[]
+            {
+                "Register",
+                "ResetPassword"
+            }
+        },
+        {
+            "PDSearch",
+            new[]
+            {
+                "StartNewSearch",
+                "NewSearch"
+            }
+        }
+    };
+
+    var showBreadCrumb = (ViewBag.ShowBreadCrumb == null || ViewBag.ShowBreadCrumb == true) && User.Identity.IsAuthenticated || publicActions.Any(x => ViewContext.IsInController(x.Key) && x.Value.Any(y => ViewContext.IsInAction(y)));
+
+    var breadCrumbs = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Home", Url.Action("index", "Home"))
+    };
+
+    if ((ViewBag.BreadCrumb as IEnumerable<Tuple<string, string>>) != null)
+    {
+        breadCrumbs.AddRange(ViewBag.BreadCrumb);
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    @Styles.Render("~/Content/bootstrap-fileinput/css/css")
+    @Styles.Render("~/Content/themes/base/base")
+    @Styles.Render("~/Content/DataTables/css/css")
+    @Styles.Render("~/Bundles/Styles")
+
+    @RenderSection("Head", false)
+    <script type="text/javascript">
+        window.googleMapsInitialized = false;
+        function __initializeGoogleMaps() {
+            window.googleMapsInitialized = true;
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRmBZUnlm7MMoIwCVT1uOxx611lfXdSY&libraries=places&language=en&region=AU&callback=__initializeGoogleMaps"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script id="securepay-ui-js" src="@System.Configuration.ConfigurationManager.AppSettings["SecurePayJavascriptSDKUrl"]"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			@if (ViewBag.ShowMenu == null || ViewBag.ShowMenu == true)
+            {
+
+                <a class="btn btn-primary btn-menu-collapse pull-left" data-toggle="collapse" href="#navMenu"><i class="fa fa-bars fa-2x"></i></a>
+			}
+			@{
+				var redirectLogoUrl = Url.Action("Index", "Home");
+
+				if (ViewBag.RedirectLogoUrl != null)
+				{
+					redirectLogoUrl = ViewBag.RedirectLogoUrl;
+				}
+			}
+			<a class="navbar-brand" href="@redirectLogoUrl" title="Home">
+				<img class="logo" alt="Naati Logo" src="@Url.Content("~/Content/Images/NAATIAltLogo.png")">
+			</a>
+			@if (!string.IsNullOrEmpty(User.GetEnvironment()))
+			{
+				<span class="env-label" id="environment">@User.GetEnvironment()</span>
+			}
+			<div class="pull-right font-size-20">
+				@if (ViewBag.ShowLogon == null || ViewBag.ShowLogon == true)
+    {
+        if (Request.IsAuthenticated && User.NaatiNumber() > 0)
+        {
+
+                        <span id="customerNumber">Customer Number: @User.NaatiNumber()</span>
+
+                    }
+
+                    <a href="@Url.Action(Request.IsAuthenticated ? "LogOff" : "LogOn", "Account")" class="navbar-link">@(Request.IsAuthenticated ? "Logout" : "")</a>
+				}
+			</div>
+		</div>
+	</nav>
+	<div id="navMenu" class="nav-menu panel panel-default panel-collapse collapse">
+		<div>
+			<ul class="nav nav-stacked nav-sidebar list-group">
+				@Html.Partial(User.Identity.IsAuthenticated ? "_AuthorizedMenu" : "_PublicMenu")
+			</ul>
+		</div>
+	</div>
+	<div class="content">
+		<div class="container">
+			@if (showBreadCrumb)
+    {
+
+                <div class="row">
+					<ol class="breadcrumb">
+						@for (var i = 0; i < breadCrumbs.Count; i++)
+						{
+							var breadCrumb = breadCrumbs[i];
+
+							if (i == breadCrumbs.Count - 1)
+							{
+								<li class="active">@breadCrumb.Item1</li>
+							}
+							else
+							{
+								<li>
+									<a href="@breadCrumb.Item2">@breadCrumb.Item1</a>
+
+                                </li>
+							}
+						}
+					</ol>
+					<hr />
+				</div>
+			}
+			<div class="row">
+				@RenderBody()
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="container">
+			<ul class="nav nav-pills">
+				<li>@Html.ActionLink("About", "About", "Home")</li>
+				<li><a href="@Url.ExternalUrlFromConfig("ContactUs")" target="_blank">Contact Us</a></li>
+				<li><a href="@Url.ExternalUrlFromConfig("PrivacyPolicy")" target="_blank">Privacy</a></li>
+
+                <li><a href="@Url.ExternalUrlFromConfig("TermsAndConditions")" target="_blank">Terms and Conditions</a></li>
+				<li><a href="@Url.ExternalUrlFromConfig("NAATI_URL")" target="_blank">NAATI Website</a></li>
+			</ul>
+			<span class="glyphicon glyphicon-copyright-mark"></span> National Accreditation Authority for Translators and Interpreters Ltd ABN 42 008 596 996
+		</div>
+	</div>
+
+	@Scripts.Render("~/Bundles/Scripts")
+    @Scripts.Render("~/Bundles/mvcfoolproof")
+	<script type="text/javascript">
+        $(function () {
+            var $navMenu = $('#navMenu');
+            $navMenu.click(function (e) {
+                if ($navMenu[0] === $(e.target)[0]) {
+                    $navMenu.collapse('hide');
+                }
+            });
+
+            @* Add the modal-layer2 class to modal backdrops *@
+            $('.modal.modal-layer2').on('shown.bs.modal', function () {
+                var index = $('.modal.in').index(this);
+                if (index >= 0) {
+                    $('.modal-backdrop').eq(index).addClass('modal-layer2');
+                }
+            });
+
+            $(window).resize(function () {
+                $('.chosen-container').each(function () {
+                    var $this = $(this);
+                    $this.width($this.parent().width());
+                });
+            });
+
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "2000",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        });
+	</script>
+    <script id="loadingOverlayTemplate" type="text/html">
+        @Html.Partial("_LoadingOverlayPartial", true)
+    </script>
+    @RenderSection("Scripts", false)
+    @if (ViewContext.IsGoogleAnalyticsEnabled())
+        {
+    @Html.Partial("_GoogleAnalytics")
+        }
+    </body>
+</html>

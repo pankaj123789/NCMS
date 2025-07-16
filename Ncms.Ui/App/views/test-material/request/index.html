@@ -1,0 +1,70 @@
+<div class="hbox">
+    <div class="hbox" data-bind="component: {
+    name: 'search-component',
+    params: { title: title, filters: filters, searchType: searchType, searchTerm: searchTerm, searchCallback: searchCallback, additionalButtons: additionalButtons, tableDefinition: tableDefinition }
+}">
+    </div>
+    <script id="testmaterialrequest-header-template" type="text/html">
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.MaterialID'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.JobID'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Language'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Category'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Level'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.ToPayroll'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.RequestStatus'"></th>
+        <th class="col-xs-1" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.JobCost'"></th>
+        <th>&nbsp;</th>
+    </script>
+    <script id="testmaterialrequest-row-template" type="text/html">
+        <tr>
+            <td>
+                <a href="#" data-bind="click: $root.showDetails, clickBubble: false"><i class="fa fa-chevron-right"></i></a>
+                <span data-bind="text: MaterialID"></span>
+            </td>
+            <td data-bind="text: JobID"></td>
+            <td data-bind="text: Language"></td>
+            <td data-bind="text: Category"></td>
+            <td data-bind="text: Level"></td>
+            <td data-bind="textDate: ToPayroll"></td>
+            <td data-bind="text: Status"></td>
+            <td class="text-right col-xs-1" data-bind="textCurrency: JobCost"></td>
+            <td class="text-center" style="width: 150px;">
+                <div class="btn-group">
+                    <!--ko if: Status != "A"-->
+                    <a href="#" class="btn btn-default btn-xs" data-bind="clickBubble: false, click: function() { $root.approve(this); }, tooltip: { container: '#testMaterialTable' }, resattr: { title: 'Naati.Resources.TestMaterial.resources.Approve' }">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                    <!--/ko-->
+                    <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#materialreq/' + JobID }, tooltip: { container: '#testMaterialTable' }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </script>
+    <script type="text/template" id="testRowDetail">
+        <table class="table table-bordered table-striped b-t b-b" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>{0}</th>
+                    <th>{1}</th>
+                    <th>{2}</th>
+                    <th>{3}</th>
+                    <th>{4}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {5}
+            </tbody>
+        </table>
+    </script>
+    <script type="text/template" id="examinerRow">
+        <tr>
+            <td>{0}</td>
+            <td>{1}</td>
+            <td>{2}</td>
+            <td>{3}</td>
+            <td>{4}</td>
+        </tr>
+    </script>
+</div>

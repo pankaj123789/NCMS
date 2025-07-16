@@ -1,0 +1,28 @@
+﻿<div id="deregisterMyNaatiModal" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-light">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.Person.resources.DeregisterMyNaatiAccount'"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <span data-bind="text: message"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-md-offset-7 col-md-5">
+                        <button class="btn btn-primary" data-bind="click: deregister">
+                            <i class="fa fa-user-times"></i>
+                            <span data-bind="reshtml: 'Naati.Resources.Person.resources.Deregister'"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

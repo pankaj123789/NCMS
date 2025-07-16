@@ -1,0 +1,176 @@
+﻿<div class="col-sm-12 m-t-md m-b-md">
+    <div data-bind="validationElement: settings.RolePlayers, validationOptions: { insertMessages: false }" class="m-l-sm">
+        <span class="help-block" data-bind="validationMessage: settings.RolePlayers"></span>
+    </div>
+    <ul class="m-l-n-lg">
+        <li data-bind="reshtml: 'Naati.Resources.TestSession.resources.AllocateRolePlayersDraggingHelpText'"></li>
+        <li data-bind="reshtml: 'Naati.Resources.TestSession.resources.RemoveRolePlayersDraggingHelpText'"></li>
+    </ul>
+</div>
+<div data-bind="component: { name: 'tab-component', params: tabOptions }"></div>
+<script type="text/html" id="allocate-role-player-task">
+    <div data-bind="validationElement: assignedRolePlayers1Primary, validationOptions: { insertMessages: false }" class="m-l-sm">
+        <span class="help-block" data-bind="validationMessage: assignedRolePlayers1Primary"></span>
+    </div>
+    <div data-bind="validationElement: assignedRolePlayers2Primary, validationOptions: { insertMessages: false }" class="m-l-sm">
+        <span class="help-block" data-bind="validationMessage: assignedRolePlayers2Primary"></span>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <button type="button" class="btn btn-default pull-right" data-bind="click: toggleOutOfAreaRolPlayers">
+                <span class="fa fa-filter"></span>
+                <span data-bind="html: toggleOutOfAreaRolPlayersText"></span>
+            </button>
+            <h4 data-bind="reshtml: 'Naati.Resources.TestSession.resources.EligibleRolePlayers'"></h4>
+            <div class="eligible-role-players" data-bind="css: { 'padder-v': !elegibleRolePlayers().length }, dropZone: { accepts: ['target1Primary', 'target1Secondary', 'target2Primary', 'target2Secondary', 'source'], drop: dropSource }">
+                <!--ko with: testSession-->
+                <!--ko if: $parent.elegibleRolePlayers().length-->
+                <ul class="list-unstyled" data-bind="foreach: { data: $parent.elegibleRolePlayers, as: 'rp' }">
+                    <li data-bind="dragZone: { name: 'source', dragStart: $parents[1].dragStart }, template: { name: 'allocate-role-player-tile', data: rp }"></li>
+                </ul>
+                <!--/ko-->
+                <!--/ko-->
+                <!--ko ifnot: elegibleRolePlayers().length-->
+                <div class="m-t-md m-b-md" data-bind="reshtml: 'Naati.Resources.TestSession.resources.DropPersonHere'"></div>
+                <!--/ko-->
+            </div>
+        </div>
+        <div class="col-md-9">
+            <h4 data-bind="reshtml: 'Naati.Resources.TestSession.resources.AssignedRolePlayers'"></h4>
+            <table class="table table-bordered role-player-matrix" style="table-layout: fixed">
+                <thead>
+                    <tr>
+                        <th class="w-xs"></th>
+                        <th class="bg-info">
+                            <span data-bind="reshtml: 'Naati.Resources.Skill.resources.Language1'"></span>:
+                            <span data-bind="text: skill().Language1DisplayName"></span>
+                        </th>
+                        <!--ko if: showLanguage2-->
+                        <th class="bg-info">
+                            <span data-bind="reshtml: 'Naati.Resources.Skill.resources.Language2'"></span>:
+                            <span data-bind="text: skill().Language2DisplayName"></span>
+                        </th>
+                        <!--/ko-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="w-xs bg-light dker" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Primary'"></td>
+                        <!--ko with: skill().Language1Id-->
+                        <td class="no-padder" data-bind="dropZone: { accepts: ['target1Primary', 'target1Secondary', 'target2Primary', 'target2Secondary', 'source'], drop: $parent.dropTarget1Primary }">
+                            <!--ko if: $parent.assignedRolePlayers1Primary().length-->
+                            <ul class="list-unstyled" data-bind="foreach: { data: $parent.assignedRolePlayers1Primary, as: 'rp' }">
+                                <li data-bind="dragZone: { name: 'target1Primary', dragStart: $parents[1].dragStart }, template: { name: 'allocate-role-player-tile', data: rp }"></li>
+                            </ul>
+                            <!--/ko-->
+                            <!--ko ifnot: $parent.assignedRolePlayers1Primary().length-->
+                            <div class="h5 wrapper" data-bind="reshtml: 'Naati.Resources.TestSession.resources.DropPersonHere'"></div>
+                            <!--/ko-->
+                        </td>
+                        <!--/ko-->
+                        <!--ko if: showLanguage2-->
+                        <!--ko with: skill().Language2Id-->
+                        <td class="no-padder" data-bind="dropZone: { accepts: ['target1Primary', 'target1Secondary', 'target2Primary', 'target2Secondary', 'source'], drop: $parent.dropTarget2Primary }">
+                            <!--ko if: $parent.assignedRolePlayers2Primary().length-->
+                            <ul class="list-unstyled" data-bind="foreach: { data: $parent.assignedRolePlayers2Primary, as: 'rp' }">
+                                <li data-bind="dragZone: { name: 'target2Primary', dragStart: $parents[1].dragStart }, template: { name: 'allocate-role-player-tile', data: rp }"></li>
+                            </ul>
+                            <!--/ko-->
+                            <!--ko ifnot: $parent.assignedRolePlayers2Primary().length-->
+                            <div class="h5 wrapper" data-bind="reshtml: 'Naati.Resources.TestSession.resources.DropPersonHere'"></div>
+                            <!--/ko-->
+                        </td>
+                        <!--/ko-->
+                        <!--/ko-->
+                    </tr>
+                    <tr>
+                        <td class="bg-light" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Backup'"></td>
+                        <!--ko with: skill().Language1Id-->
+                        <td class="no-padder" data-bind="dropZone: { accepts: ['target1Primary', 'target1Secondary', 'target2Primary', 'target2Secondary', 'source'], drop: $parent.dropTarget1Secondary }">
+                            <!--ko if: $parent.assignedRolePlayers1Secondary().length-->
+                            <ul class="list-unstyled" data-bind="foreach: { data: $parent.assignedRolePlayers1Secondary, as: 'rp' }">
+                                <li data-bind="dragZone: { name: 'target1Secondary', dragStart: $parents[1].dragStart }, template: { name: 'allocate-role-player-tile', data: rp }"></li>
+                            </ul>
+                            <!--/ko-->
+                            <!--ko ifnot: $parent.assignedRolePlayers1Secondary().length-->
+                            <div class="font h5 wrapper" data-bind="reshtml: 'Naati.Resources.TestSession.resources.DropPersonHere'"></div>
+                            <!--/ko-->
+                        </td>
+                        <!--/ko-->
+                        <!--ko if: showLanguage2-->
+                        <!--ko with: skill().Language2Id-->
+                        <td class="no-padder" data-bind="dropZone: { accepts: ['target1Primary', 'target1Secondary', 'target2Primary', 'target2Secondary', 'source'], drop: $parent.dropTarget2Secondary }">
+                            <!--ko if: $parent.assignedRolePlayers2Secondary().length-->
+                            <ul class="list-unstyled" data-bind="foreach: { data: $parent.assignedRolePlayers2Secondary, as: 'rp' }">
+                                <li data-bind="dragZone: { name: 'target2Secondary', dragStart: $parents[1].dragStart }, template: { name: 'allocate-role-player-tile', data: rp }"></li>
+                            </ul>
+                            <!--/ko-->
+                            <!--ko ifnot: $parent.assignedRolePlayers2Secondary().length-->
+                            <div class="h5 wrapper" data-bind="reshtml: 'Naati.Resources.TestSession.resources.DropPersonHere'"></div>
+                            <!--/ko-->
+                        </td>
+                        <!--/ko-->
+                        <!--/ko-->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-right m-l-md">
+                <span class="label label-gray">&nbsp;&nbsp;&nbsp;</span>
+                <span>Unspecified</span>
+            </div>
+            <div class="pull-right m-l-md">
+                <span class="label label-pink">&nbsp;&nbsp;&nbsp;</span>
+                <span>Female</span>
+            </div>
+            <div class="pull-right">
+                <span class="label label-info">&nbsp;&nbsp;&nbsp;</span>
+                <span>Male</span>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/html" id="allocate-role-player-tile">
+    <div class="role-player wrapper b b-light">
+        <div class="m-b-xs">
+            <a href="#" class="text-info" target="_blank" data-bind="attr: { href: '#person/' + CustomerNo }, text: CustomerNo"></a>
+            <strong data-bind="text: Name"></strong>
+            <span class="pull-right" data-bind="text: RatingDisplay"></span>
+        </div>
+        <div class="m-b-xs">
+            <!--ko if: Senior-->
+            <span class="label label-primary">Senior</span>
+            <!--/ko-->
+            <span class="label label-gray" data-bind="text: Languages"></span>
+            <span class="label" data-bind="text: RolePlayerStatus, css: 'label-' + $root.rolePlayerStatusClass(RolePlayerStatusId)"></span>
+            <div class="label" data-bind="attr: { title: GenderDescription }, css: { 'label-info': Gender == 'M', 'label-pink': Gender == 'F', 'label-default': Gender != 'F' && Gender != 'M' }, tooltip">
+                <span>Age</span>
+                <span data-bind="text: Age"></span>
+            </div>
+            <!--ko if: NotMatchTestLocationTooltip-->
+            <!--ko if: MatchTestLocation-->
+            <span class="label label-success m-l-xs cursor-pointer" data-bind="text: MatchTestLocation.DisplayName, popover: NotMatchTestLocationTooltip"></span>
+            <!--/ko-->
+            <!--ko ifnot: MatchTestLocation-->
+            <span class="label label-danger m-l-xs cursor-pointer" data-bind="popover: NotMatchTestLocationTooltip, reshtml: 'Naati.Resources.TestSession.resources.OtherLocations'"></span>
+            <!--/ko-->
+            <!--/ko-->
+            <!--ko ifnot: NotMatchTestLocationTooltip-->
+            <!--ko if: MatchTestLocation-->
+            <span class="label label-success m-l-xs" data-bind="text: MatchTestLocation.DisplayName"></span>
+            <!--/ko-->
+            <!--/ko-->
+            <span class="pull-right m-t-xs fa m-l-xs" data-bind="css: { 'fas fa-thermometer-quarter text-success': HasCapacity, 'fas fa-temperature-high text-danger': !HasCapacity }, tooltip, resattr: { title: 'Naati.Resources.TestSession.resources.Capacity' }"></span>
+            <span class="pull-right m-t-xs fa" data-bind="css: { 'fa-calendar-check text-success': Available, 'fa-calendar-times text-danger': !Available }, tooltip, resattr: { title: Available ? 'Naati.Resources.TestSession.resources.Available' : 'Naati.Resources.TestSession.resources.NotAvailable' }"></span>
+        </div>
+        <!--ko if: AssignedTasks-->
+        <div class="m-b-xs">
+            Assigned to
+            <span data-bind="text: AssignedTasks"></span>
+        </div>
+        <!--/ko-->
+    </div>
+</script>

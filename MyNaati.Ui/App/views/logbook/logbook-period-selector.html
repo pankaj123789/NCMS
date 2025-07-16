@@ -1,0 +1,39 @@
+﻿<div id="certificationPeriodsModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Select Submitted Logbook</h4>
+            </div>
+            <div class="modal-body">
+                <span>To view submitted activites, select one of the following applications.</span>
+                <br/>
+                <br/>
+                <table class="table table-bordered table-striped" data-bind="datatable: tableDefinition">
+                    <thead>
+                    <tr>
+                        <th class="w-xxs text-center">Submitted Date</th>
+                        <th class="w-xxs text-center">Application Reference</th>
+                        <th class="w-xxl text-center">Credentials</th>
+                        <th class="w-xxs text-center"></th>
+
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: { data: $root.certificationPeriods, as: 'a' }">
+                    <tr>
+                        <td class="text-center" data-bind="text: a.RecertificationEnteredDate"></td>
+                        <td class="text-center" data-bind="text: a.RecertificationApplication"></td>
+                        <td class="text-center" data-bind="html: a.Credentials"></td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-primary"  data-bind="click: $root.viewPeriod">View</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

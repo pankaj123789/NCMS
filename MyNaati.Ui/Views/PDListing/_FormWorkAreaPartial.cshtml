@@ -1,0 +1,49 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+
+<div class="part">
+                <table class="wide">
+                    <tr class="header">
+                        <th>Part 2</th>
+                        <th>Preferred Translation and/or Interpreting Work Area</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Please tick your preferred translation and/or interpreting work area(s).  If you do not specify a work area the words "any work area" will be published.</td>
+                    </tr>
+                </table>
+                <table class="wide">
+
+                    @{ 
+                        int i; 
+                        int numColumns = 4;
+                        HtmlString tr = new HtmlString("<tr>");
+                        HtmlString etr = new HtmlString("</tr>");
+                        HtmlString td = new HtmlString("<td>");
+                        HtmlString etd = new HtmlString("</td>");
+                    }
+
+                    @tr
+                    @for (i = 0; i < Model.WorkAreas.Count; i++)
+                    {                    
+                        
+                        if (i % numColumns == 0)
+                        {
+                            @tr
+                        }
+                        @td @FormBoxHelper.TickBoxFor(Model.WorkAreas[i].IsChecked, Url) @Model.WorkAreas[i].Expertise @etd
+                        if ((i + 1) % numColumns == 0)
+                        {
+                            @etr
+                        }
+                    }
+                    
+                    @if ((i + 1) % numColumns != 0)
+                    {
+                        while ((i++) % numColumns != 0)
+                        {
+                            @(new HtmlString("<td>&nbsp;</td>"))                            
+                        }                                        
+                        @etr
+                    }   
+                </table>
+            </div>

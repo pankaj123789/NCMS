@@ -1,0 +1,29 @@
+﻿<div class="row">
+	<div class="col-sm-12">
+		<div data-bind="validationElement: model.TestSpecificationId, validationOptions: { insertMessages: false }">
+			<span class="help-block" data-bind="validationMessage: model.TestSpecificationId"></span>
+		</div>
+		<table class="table table-bordered table-striped" data-bind="datatable: tableDefinition">
+			<thead>
+				<tr>
+					<th class="w-xxs"></th>
+					<th class="w-md" data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.TestSpecificationID'"></th>
+					<th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.Description'"></th>
+					<th class="w-sm" data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.NumberOfTasks'"></th>
+					<th class="w-md" data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.TasksWithoutRolePlayers'"></th>
+				</tr>
+			</thead>
+			<tbody data-bind="foreach: testSpecifications">
+				<tr>
+					<td class="w-xxs"></td>
+					<td>
+						SPEC<span data-bind="text: Id"></span>
+					</td>
+					<td data-bind="text: Description"></td>
+					<td data-bind="text: NumberOfTasksWithRequiredRolePlayers"></td>
+					<td data-bind="text: TasksWithoutRolePlayers"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

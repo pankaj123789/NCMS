@@ -1,0 +1,17 @@
+﻿@{
+    string id = ViewData.ModelMetadata.PropertyName;
+}
+
+<div class="editorSet">
+    <div class="editorLabel">
+        <label for="@id">@ViewData.ModelMetadata.DisplayName:</label>
+    </div>
+    <div class="editorValue">
+        <select id="@id">
+            @foreach (var value in Enum.GetValues(Model.GetType())) {
+                <option @(Model == value ? "selected=selected" : "")>@value</option>
+            }
+        </select>
+        @if (ViewData["Note"] != null) { <br />@ViewData["Note"] }
+    </div>
+</div>

@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B684501E-4F34-45EF-A6BC-2C00088BA2A2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ncms.Contracts</RootNamespace>
+    <AssemblyName>Ncms.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Hangfire.Console, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Console.1.4.2\lib\net45\Hangfire.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.7.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.7.8\lib\net46\Hangfire.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackgroundOperations\IBackgroundOperation.cs" />
+    <Compile Include="DocumentUploadWizardHelper.cs" />
+    <Compile Include="BackgroundTask\BackgroundTasks.cs" />
+    <Compile Include="IBackgroundOperationScheduler.cs" />
+    <Compile Include="IBackgroundTaskLogger.cs" />
+    <Compile Include="ICredentialPrerequisiteService.cs" />
+    <Compile Include="IFileDeletionGenerator.cs" />
+    <Compile Include="IMaterialRequestService.cs" />
+    <Compile Include="IMaterialRequestWizardLogicService.cs" />
+    <Compile Include="IMyNaatiIntegrationService.cs" />
+    <Compile Include="INcmsPodsIntegrationService.cs" />
+    <Compile Include="ITestSpecificationSpreadsheetService.cs" />
+    <Compile Include="ITestSpecificationVerificationService.cs" />
+    <Compile Include="IVenueService.cs" />
+    <Compile Include="Models\Accounting\ApplicationRefundCreateRequestModel.cs" />
+    <Compile Include="Models\Accounting\ProgressInvoiceModel.cs" />
+    <Compile Include="Models\Accounting\ProgressCreditNoteModel.cs" />
+    <Compile Include="Models\Accounting\RefundCreateResponseModel.cs" />
+    <Compile Include="Models\Application\PrerequisiteApplicationsModel.cs" />
+    <Compile Include="Models\Application\RefundApprovalModel.cs" />
+    <Compile Include="Models\Application\RefundRequestsGroupingModel.cs" />
+    <Compile Include="Models\Application\CredentialExportModel.cs" />
+    <Compile Include="Models\Application\CredentialResultModel.cs" />
+    <Compile Include="Models\Application\OutstandingRefundsRequestModel.cs" />
+    <Compile Include="Models\Application\Wizard\RefundStepModel.cs" />
+    <Compile Include="Models\Common\AttachmentModel.cs" />
+    <Compile Include="Models\Common\Crypt.cs" />
+    <Compile Include="Models\Common\ExtendedValueType.cs" />
+    <Compile Include="Models\Common\ExtentionHelper.cs" />
+    <Compile Include="Models\Common\FileModel.cs" />
+    <Compile Include="Models\Common\FileType.cs" />
+    <Compile Include="Models\Application\RefundModel.cs" />
+    <Compile Include="Models\CredentialPrerequisite\CreatePrerequisiteRequest.cs" />
+    <Compile Include="Models\CredentialPrerequisite\CredentialPrerequisiteExemptionModel.cs" />
+    <Compile Include="Models\MaterialRequest\ListAttachmentsRequestModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestActionPublicNoteModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestPayrollModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestRoundAttachmentModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestRoundLinkModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestTaskModel.cs" />
+    <Compile Include="Models\MaterialRequest\TestMaterialLinkModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestActionModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestActionOutput.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestDocumentInfoModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestInfoModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestActionNoteModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestPersonNoteModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestPanelMembershipModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestRoundModel.cs" />
+    <Compile Include="Models\MaterialRequest\MaterialRequestWizardModel.cs" />
+    <Compile Include="Models\MaterialRequest\Wizard\CoordinatorStepModel.cs" />
+    <Compile Include="Models\MaterialRequest\TestMaterialRequestSearchResultModel.cs" />
+    <Compile Include="Models\MaterialRequest\Wizard\DocumentsUploadStepModel.cs" />
+    <Compile Include="Models\MaterialRequest\Wizard\EmailPreviewStepsModel.cs" />
+    <Compile Include="Models\MaterialRequest\Wizard\ExistingDocumentsStepsModel.cs" />
+    <Compile Include="Models\MaterialRequest\Wizard\MembersStepModel.cs" />
+    <Compile Include="Models\MaterialRequest\Wizard\NotesStepModel.cs" />
+    <Compile Include="Models\MaterialRequest\Wizard\RoundDetailsStepModel.cs" />
+    <Compile Include="Models\MaterialRequest\Wizard\RoundLinksStepModel.cs" />
+    <Compile Include="Models\MaterialRequest\Wizard\SendEmailCheckOptionStepModel.cs" />
+    <Compile Include="Models\MaterialRequest\Wizard\TestMaterialSourceStepModel.cs" />
+    <Compile Include="Models\MaterialRequest\Wizard\TestMaterialStepModel.cs" />
+    <Compile Include="Models\MaterialRequest\UpsertMaterialRequestResultModel.cs" />
+    <Compile Include="Models\OnHoldCredentialsToBeIssuedModel.cs" />
+    <Compile Include="Models\Panel\OverlappingMembershipModel.cs" />
+    <Compile Include="Models\Panel\PanelMembershipInfoModel.cs" />
+    <Compile Include="Models\Person\PersonAttachmentModel.cs" />
+    <Compile Include="Models\Person\QrCodeSummaryModel.cs" />
+    <Compile Include="Models\RolePlayer\RolePlayerActionWizardModel.cs" />
+    <Compile Include="Models\System\StepDataModel.cs" />
+    <Compile Include="Models\ExaminerDocumentModel.cs" />
+    <Compile Include="Models\TestComponentTypeModel.cs" />
+    <Compile Include="Models\TestMaterial\TestMaterialActionModel.cs" />
+    <Compile Include="Models\TestResult\AutomaticIssuingExaminerRequestModel.cs" />
+    <Compile Include="Models\TestSpecification\BaseModelClass.cs" />
+    <Compile Include="Models\TestSpecification\CredentialType.cs" />
+    <Compile Include="Models\TestSpecification\RubricMarkingAssessmentCriterion.cs" />
+    <Compile Include="Models\TestSpecification\RubricMarkingBand.cs" />
+    <Compile Include="Models\TestSpecification\RubricMarkingCompetency.cs" />
+    <Compile Include="Models\TestSpecification\TestComponent.cs" />
+    <Compile Include="Models\TestSpecification\TestComponentType.cs" />
+    <Compile Include="Models\TestSpecification\TestComponentTypeStandardMarkingScheme.cs" />
+    <Compile Include="Models\TestSpecification\TestSpecification.cs" />
+    <Compile Include="Models\TestSpecification\TestSpecificationStandardMarkingScheme.cs" />
+    <Compile Include="Models\Test\FeedbackResponseModel.cs" />
+    <Compile Include="Models\User\UserDetailsModel.cs" />
+    <Compile Include="ITestSpecificationService.cs" />
+    <Compile Include="CredentialSearchRequest.cs" />
+    <Compile Include="RefreshUserNotificationsRequest.cs" />
+    <Compile Include="RefreshUsersRequest.cs" />
+    <Compile Include="SearchRequest.cs" />
+    <Compile Include="CredentialRequestBulkActionRequest.cs" />
+    <Compile Include="CredentialRequestSummarySearchRequest.cs" />
+    <Compile Include="CredentialTestSearchRequestModel.cs" />
+    <Compile Include="IAddressService.cs" />
+    <Compile Include="IBackgroundTaskService.cs" />
+    <Compile Include="IContactPersonService.cs" />
+    <Compile Include="ICredentialService.cs" />
+    <Compile Include="IEmailTemplateService.cs" />
+    <Compile Include="IInstitutionService.cs" />
+    <Compile Include="ITestSessionService.cs" />
+    <Compile Include="IApplicationService.cs" />
+    <Compile Include="IAccountingService.cs" />
+    <Compile Include="IEmailMessageService.cs" />
+    <Compile Include="IPayrollService.cs" />
+    <Compile Include="ISecurityService.cs" />
+    <Compile Include="IAssetService.cs" />
+    <Compile Include="IAuditService.cs" />
+    <Compile Include="INavigationService.cs" />
+    <Compile Include="IJobService.cs" />
+    <Compile Include="ILanguageService.cs" />
+    <Compile Include="IFileService.cs" />
+    <Compile Include="INoteService.cs" />
+    <Compile Include="IPersonImageService.cs" />
+    <Compile Include="ISystemService.cs" />
+    <Compile Include="ITestMaterialService.cs" />
+    <Compile Include="IPanelService.cs" />
+    <Compile Include="ILetterService.cs" />
+    <Compile Include="ITestResultService.cs" />
+    <Compile Include="IExaminerService.cs" />
+    <Compile Include="ITestService.cs" />
+    <Compile Include="IUserSearchService.cs" />
+    <Compile Include="IPersonService.cs" />
+    <Compile Include="IEntityService.cs" />
+    <Compile Include="IUserService.cs" />
+    <Compile Include="IResourceService.cs" />
+    <Compile Include="IApplicationWizardLogicService.cs" />
+    <Compile Include="Models\Accounting\AccountingOptionsModel.cs" />
+    <Compile Include="Models\Accounting\ApplicationInvoiceCreateRequestModel.cs" />
+    <Compile Include="Models\Accounting\BankAcountModel.cs" />
+    <Compile Include="Models\Accounting\EftMachineModel.cs" />
+    <Compile Include="Models\Accounting\GstRequestModel.cs" />
+    <Compile Include="Models\Accounting\InvoiceBrandingThemeModel.cs" />
+    <Compile Include="Models\Accounting\InvoiceCreateRequestModel.cs" />
+    <Compile Include="Models\Accounting\InvoiceCreateResponseModel.cs" />
+    <Compile Include="Models\Accounting\InvoiceLineItemModel.cs" />
+    <Compile Include="Models\Accounting\EndOfPeriodRequest.cs" />
+    <Compile Include="Models\Accounting\InvoicePreviewModel.cs" />
+    <Compile Include="Models\Accounting\PaymentCreateRequestModel.cs" />
+    <Compile Include="Models\Accounting\PaymentCreateResponseModel.cs" />
+    <Compile Include="Models\Accounting\PaymentModel.cs" />
+    <Compile Include="Models\Accounting\InvoiceModel.cs" />
+    <Compile Include="Models\Accounting\OfficeModel.cs" />
+    <Compile Include="Models\Accounting\QueuedOperationModel.cs" />
+    <Compile Include="Models\Accounting\SubmitQueuedOperationModel.cs" />
+    <Compile Include="Models\Address\AddressListRequestModel.cs" />
+    <Compile Include="Models\Address\AddressListResponseModel.cs" />
+    <Compile Include="Models\Address\AddressModel.cs" />
+    <Compile Include="Models\System\ApplicationActionModel.cs" />
+    <Compile Include="Models\Application\ApplicationActionWizardModel.cs" />
+    <Compile Include="Models\Application\ApplicationSearchResultModel.cs" />
+    <Compile Include="Models\Application\ApplicationWizardRulesRequest.cs" />
+    <Compile Include="Models\Application\CertificationPeriodDetailsModel.cs" />
+    <Compile Include="Models\Application\CreateCredentialDocumentsRequestModel.cs" />
+    <Compile Include="Models\Application\CredentialApplicationAttachmentModel.cs" />
+    <Compile Include="Models\Application\CredentialApplicationDetailedModel.cs" />
+    <Compile Include="Models\Application\CredentialApplicationFieldModel.cs" />
+    <Compile Include="Models\Application\CredentialApplicationFieldOptionModel.cs" />
+    <Compile Include="Models\Application\CredentialApplicationInfoModel.cs" />
+    <Compile Include="Models\Application\CredentialApplicationTypeCredentialTypeModel.cs" />
+    <Compile Include="Models\Application\CredentialApplicationTypeDocumentTypeModel.cs" />
+    <Compile Include="Models\Application\CredentialApplicationTypeModel.cs" />
+    <Compile Include="Models\Application\CredentialApplicationSectionModel.cs" />
+    <Compile Include="Models\Application\CredentialModel.cs" />
+    <Compile Include="Models\Application\CredentialRequestFieldModel.cs" />
+    <Compile Include="Models\Application\CredentialRequestModel.cs" />
+    <Compile Include="Models\Application\CredentialRequestSummarySearchResultModel.cs" />
+    <Compile Include="Models\Application\CredentialRequestTestRequestModel.cs" />
+    <Compile Include="Models\Application\CredentialRequestTestSessionModel.cs" />
+    <Compile Include="Models\Application\CredentialTypeModel.cs" />
+    <Compile Include="Models\Application\ApplicationRequest.cs" />
+    <Compile Include="Models\Application\ApplicationModel.cs" />
+    <Compile Include="Models\Application\CredentialTypeUpgradePathModel.cs" />
+    <Compile Include="Models\Application\CredentialWorkflowFeeModel.cs" />
+    <Compile Include="Models\EmailTemplateModel.cs" />
+    <Compile Include="Models\Application\CredentialPathRequestModel.cs" />
+    <Compile Include="Models\Application\LookupTypeModel.cs" />
+    <Compile Include="Models\Application\MoveCredentialModel.cs" />
+    <Compile Include="Models\Application\NoteFieldRules.cs" />
+    <Compile Include="Models\Application\RecertificationModel.cs" />
+    <Compile Include="Models\Application\SkillModel.cs" />
+    <Compile Include="Models\Application\TestSpecificationInfoModel.cs" />
+    <Compile Include="Models\CredentialRequest\CredentialRequestApplicantModel.cs" />
+    <Compile Include="Models\CredentialRequest\TestSessionApplicantModel.cs" />
+    <Compile Include="Models\CredentialRequest\TestSessionRequestModel.cs" />
+    <Compile Include="Models\Application\UpdateOutstandingInvoicesRequestModel.cs" />
+    <Compile Include="Models\Application\UpsertApplicationResultModel.cs" />
+    <Compile Include="Models\Application\ValidationResultModel.cs" />
+    <Compile Include="Models\Application\WizardIssueCredentialStepModel.cs" />
+    <Compile Include="Models\AssetModel.cs" />
+    <Compile Include="Models\AssetTypeModel.cs" />
+    <Compile Include="Models\Audit\AuditListRequestModel.cs" />
+    <Compile Include="Models\Audit\AuditLogModel.cs" />
+    <Compile Include="Models\CredentialRequest\TestSessionItemModel.cs" />
+    <Compile Include="Models\CredentialRequest\VenueModel.cs" />
+    <Compile Include="Models\File\DocumentTypeModel.cs" />
+    <Compile Include="Models\GetMarksResponseModel.cs" />
+    <Compile Include="Models\GetMarksRequestModel.cs" />
+    <Compile Include="Models\Institution\InstitutionModel.cs" />
+    <Compile Include="Models\Institution\InstitutionResultModel.cs" />
+    <Compile Include="Models\CredentialDetailsModel.cs" />
+    <Compile Include="Models\Logbook\ActivityModel.cs" />
+    <Compile Include="Models\Logbook\CategoryGroupModel.cs" />
+    <Compile Include="Models\Logbook\CategoryModel.cs" />
+    <Compile Include="Models\Logbook\RequirementModel.cs" />
+    <Compile Include="Models\Person\CreatePersonModel.cs" />
+    <Compile Include="Models\Person\EntitySearchRequest.cs" />
+    <Compile Include="Models\Person\GetSam4PersonResultModel.cs" />
+    <Compile Include="Models\Person\Sam4PersonModel.cs" />
+    <Compile Include="Models\SaveMarksRequestModel.cs" />
+    <Compile Include="Models\Examiner\UpdateCountMarksRequestModel.cs" />
+    <Compile Include="Models\File\CreateOrUpdateRelatedRequestModel.cs" />
+    <Compile Include="Models\File\CreateOrUpdateFileRequestModel.cs" />
+    <Compile Include="Models\File\CreateOrUpdateFileResponseModel.cs" />
+    <Compile Include="Models\File\FileSearchRquestModel.cs" />
+    <Compile Include="Models\File\PostRequestModel.cs" />
+    <Compile Include="Models\Job\UpdateDueDateRequestModel.cs" />
+    <Compile Include="Models\Language\ExaminerModel.cs" />
+    <Compile Include="Models\Letter\AddToBatchRequestModel.cs" />
+    <Compile Include="Models\Letter\LetterBatchModel.cs" />
+    <Compile Include="Models\Letter\LetterModel.cs" />
+    <Compile Include="Models\MenuModel.cs" />
+    <Compile Include="Models\LanguageModel.cs" />
+    <Compile Include="Models\Panel\PanelMembershipModel.cs" />
+    <Compile Include="Models\NoteModel.cs" />
+    <Compile Include="Models\Panel\ReappointMembersModel.cs" />
+    <Compile Include="Models\Person\DeleteResponseModel.cs" />
+    <Compile Include="Models\Person\DeleteRequestModel.cs" />
+    <Compile Include="Models\Person\PersonListRequest.cs" />
+    <Compile Include="Models\Panel\PanelModel.cs" />
+    <Compile Include="Models\Person\PersonModel.cs" />
+    <Compile Include="Models\QueryRequest.cs" />
+    <Compile Include="Models\File\FileResponseModel.cs" />
+    <Compile Include="Models\TestMaterial\AssignTestMaterialModel.cs" />
+    <Compile Include="Models\TestMaterial\TestMaterialSearchRequestModel.cs" />
+    <Compile Include="Models\TestMaterial\TestMaterialSearchResponseModel.cs" />
+    <Compile Include="Models\TestResult\GenerateOfficialCredentialRequestModel.cs" />
+    <Compile Include="Models\TestResult\GetOfficialCredentialRecordMessageRequestModel.cs" />
+    <Compile Include="Models\TestResult\SpecificationResponseModel.cs" />
+    <Compile Include="Models\TestComponentModel.cs" />
+    <Compile Include="Models\TestResult\TestResultSaveResponseModel.cs" />
+    <Compile Include="Models\TestResult\TestResultSaveRequestModel.cs" />
+    <Compile Include="Models\Examiner\GetExaminersResponseModel.cs" />
+    <Compile Include="Models\Examiner\GetExaminersRequestModel.cs" />
+    <Compile Include="Models\TestResult\CreateOrReplaceTestSittingDocumentModel.cs" />
+    <Compile Include="Models\TestSittingDocumentModel.cs" />
+    <Compile Include="Models\Test\ApplicantModel.cs" />
+    <Compile Include="Models\Test\ExaminerRequestModel.cs" />
+    <Compile Include="Models\Test\ExaminerResultModel.cs" />
+    <Compile Include="Models\Test\TestAssessmentModel.cs" />
+    <Compile Include="Models\Test\TestRubricModel.cs" />
+    <Compile Include="Models\Test\TestBandModel.cs" />
+    <Compile Include="Models\Test\TestCompetenceModel.cs" />
+    <Compile Include="Models\Test\TestComponentModel.cs" />
+    <Compile Include="Models\Test\TestMarkSatResponseModel.cs" />
+    <Compile Include="Models\Test\AddExaminerResponseModel.cs" />
+    <Compile Include="Models\Test\AddExaminerRequestModel.cs" />
+    <Compile Include="Models\Job\JobModel.cs" />
+    <Compile Include="Models\Test\TestSearchResponseModel.cs" />
+    <Compile Include="Models\Test\TestSessionDetails.cs" />
+    <Compile Include="Models\Test\TestSessionModel.cs" />
+    <Compile Include="Models\Test\TestSessionSearchResultModel.cs" />
+    <Compile Include="Models\Test\TestTaskModel.cs" />
+    <Compile Include="Models\UserSearch\UserSearchListRequest.cs" />
+    <Compile Include="Models\UserSearch\UserSearchModel.cs" />
+    <Compile Include="OperationCancelRequestModel.cs" />
+    <Compile Include="InstitutionSearchRequest.cs" />
+    <Compile Include="PersonSearchRequest.cs" />
+    <Compile Include="ProductType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\ScreenSecurityModel.cs" />
+    <Compile Include="Models\User\UserModel.cs" />
+    <Compile Include="Models\Application\UpsertApplicationRequestModel.cs" />
+    <Compile Include="TestSearchRequest.cs" />
+    <Compile Include="TestSessionSearchRequest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Contracts\F1Solutions.Naati.Common.Contracts.csproj">
+      <Project>{039e6de4-aeb9-4a6e-ac19-135239ddbde2}</Project>
+      <Name>F1Solutions.Naati.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Dal.Domain\F1Solutions.Naati.Common.Dal.Domain.csproj">
+      <Project>{128BDBBB-CE32-48A8-B07C-D1BE04B1F488}</Project>
+      <Name>F1Solutions.Naati.Common.Dal.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Resources\Naati.Resources.csproj">
+      <Project>{7c8ceb61-f41b-4951-a2d5-7286874765f7}</Project>
+      <Name>Naati.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Models\Common\packages.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\BackgroundNotification\" />
+    <Folder Include="Models\Security\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

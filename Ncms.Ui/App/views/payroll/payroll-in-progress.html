@@ -1,0 +1,80 @@
+﻿<div class="col">
+    <div class="vbox">
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="m-n font-thin h3">
+                <span data-bind="html: title"></span>
+                <button id="finaliseButton" type="button" class="btn btn-success" data-bind="attr: { title: finaliseButtonHintResource }, click: finalise, enable: canFinalise">
+                    <i class="fa fa-check"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.FinalisePayRun'"></span>
+                </button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" data-bind="click: expandAll">
+                        <i class="fa fa-plus-square"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.ExpandAll'"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" data-bind="click: collapseAll">
+                        <i class="fa fa-minus-square-o"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.CollapseAll'"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner" data-bind="css: { 'bg-white': examiners().length === 0 }">
+                    <div class="wrapper-md">
+                        <div class="alert alert-warning" data-bind="reshtml: 'Naati.Resources.Payroll.resources.NoPayRunInProgress', visible: examiners().length === 0"></div>
+                        <!--ko foreach: { data: examiners, as: 'examiner' }-->
+                        <div class="panel panel-default m-b-xs">
+                            <div class="panel-heading wrapper b-b b-light" role="tab" data-bind="attr: { id: examiner.headId }">
+                                <div class="row small">
+                                    <a class="col-xs-9" role="button" data-toggle="collapse" aria-expanded="false" data-bind="click: $root.toggleExpanded, attr: { href: '#' + examiner.childId, 'aria-controls': examiner.childId }">
+                                        <div class="row">
+                                            <div class="h5 m-t-none m-b-none">
+                                                <div class="col-xs-3">
+                                                    <i class="fa" data-bind="css: { 'fa-chevron-right': !examiner.expanded(), 'fa-chevron-down': examiner.expanded() }"></i>
+                                                    <span data-bind="text: examiner.Examiner"></span>
+                                                </div>
+                                                <div class="col-xs-2">
+                                                    <span data-bind="text: examiner.Count"></span>
+                                                    <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.Markings'"></span>
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <span data-bind="text: $root.formatExaminerCost(examiner)"></span>
+                                                </div>
+                                                <div class="col-xs-4 m-r-none">
+                                                    <span data-bind="text: $root.getFirstReceivedDateInfo(examiner)"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="pull-right m-t-n-xs m-r-sm col-xs-2">
+                                        <div class="input-group input-group-sm m-b-n-sm m-t-n-xxs">
+                                            <!-- ko if: !examiner.AccountingReference() -->
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-success" data-bind="reshtml: 'Naati.Resources.Payroll.resources.CreateBill', resattr: { title: 'Naati.Resources.Payroll.resources.CreateBill' }, click: $root.createInvoice"></button>
+                                            </div>
+                                            <!--/ko-->
+                                            <input type="text" class="form-control" autocomplete="off" data-bind="resattr: { placeholder: 'Naati.Resources.Payroll.resources.InvoiceNo' }, value: examiner.AccountingReference, valueUpdate: 'input'">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-success" data-bind="tooltip: { container: '#' + examiner.headId, placement: 'bottom' }, resattr: { title: 'Naati.Resources.Shared.resources.Save' }, click: $root.save, enable: examiner.dirtyFlag().isDirty">
+                                                    <i class="glyphicon glyphicon-ok"></i>
+                                                </button>
+                                                <button class="btn btn-danger" data-bind="tooltip: { container: '#' + examiner.headId, placement: 'bottom' }, resattr: { title: 'Naati.Resources.Payroll.resources.RemoveFromPayRun' }, disable: examiner.AccountingReference, click: $root.removeExaminerFromPayRun">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--ko component: { name: 'payroll-markings', params: { examiner: examiner } }-->
+                            <!--/ko-->
+                        </div>
+                        <!--/ko-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

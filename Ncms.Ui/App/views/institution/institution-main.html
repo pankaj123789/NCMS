@@ -1,0 +1,42 @@
+﻿<div class="vbox" id="institutionMain">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <button class="btn btn-sm btn-success pull-right dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                </button>
+                <!-- dropdown -->
+                <ul class="dropdown-menu dropdown-menu-right w">
+                    <li>
+                        <a data-bind="restext: 'Naati.Resources.Person.resources.NameHistory', attr: { href: getUrl('#organisation/{0}/namehistory') }, showWithPermission: 'OrganisationHistory.Read'"></a>
+                    </li>
+                    <li>
+                        <a data-bind="restext: 'Naati.Resources.Person.resources.AddName', attr: { href: getUrl('#organisation/{0}/addname') }, showWithPermission: 'Organisation.Update'"></a>
+                    </li>
+                    <li>
+                        <a data-bind="restext: 'Naati.Resources.Person.resources.AuditHistory', attr: { href: auditHistoryUrl }, showWithPermission: 'Audit.Read'"></a>
+                    </li>
+                    <li>
+                        <a data-bind="restext: 'Naati.Resources.Shared.resources.Settings', attr: { href: getUrl('#organisation/{0}/settings') }, showWithPermission: 'Organisation.Read'"></a>
+                    </li>
+                </ul>
+                <!-- / dropdown -->
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: windowTitle"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <!-- ko component: { name: 'tab-component', params: tabOptions } -->
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+
+        <div class="clearfix"></div>
+    </div>
+</div>

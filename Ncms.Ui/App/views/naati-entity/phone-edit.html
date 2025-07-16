@@ -1,0 +1,75 @@
+﻿<div id="phoneEdit" class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: windowTitle"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="wrapper-md form-horizontal">
+            <div class="form-group" data-bind="validationElement: phone.LocalNumber, validationOptions: { insertMessages: false }">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.PhoneNumber'"></label>
+                <div class="col-xs-3">
+                    <input id="phoneInput" type="text" class="form-control" maxlength="20" data-bind="value: phone.LocalNumber, valueUpdate: 'input'" />
+                    <small class="help-block text-muted" data-bind="reshtml: 'Naati.Resources.Person.resources.PhoneInstructions'"></small>
+                    <span class="help-block" data-bind="validationMessage: phone.LocalNumber"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.PrimaryContact'"></label>
+                <div class="col-xs-2" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="i-switch i-switch-md bg-info">
+                        <input type="checkbox" data-bind="checked: phone.PrimaryContact" />
+                        <i></i>
+                    </label>
+                </div>
+            </div>
+
+            <!--ko ifnot: IsOrganisation()-->
+            <div class="form-group">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.IncludeInPd'"></label>
+                <div class="col-xs-2" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="i-switch i-switch-md bg-info">
+                        <input type="checkbox" data-bind="checked: phone.IncludeInPd" />
+                        <i></i>
+                    </label>
+                </div>
+            </div>
+            <!--/ko-->
+
+            <!--ko if: phone.IsExaminer-->
+            <div class="form-group">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.ExaminerCorrespondence'"></label>
+                <div class="col-xs-2" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="i-switch i-switch-md bg-info">
+                        <input type="checkbox" data-bind="checked: phone.ExaminerCorrespondence" />
+
+                        <i></i>
+                    </label>
+                </div>
+            </div>
+            <!--/ko-->
+            <div class="form-group">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.PhoneNote'" style="height: 50px"></label>
+                <div class="col-xs-9">
+                    <textarea class="form-control" data-bind="value: phone.Note, valueUpdate: 'input'"></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="enable: dirtyFlag().isDirty, click: save">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" data-bind="click: tryClose">
+                <i class="fa fa-ban"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

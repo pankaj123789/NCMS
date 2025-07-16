@@ -1,0 +1,27 @@
+﻿ALTER VIEW[dbo].[ProfessionalDevelopment] AS
+SELECT
+      [ProfessionalDevelopmentActivityId]
+    , DATEADD(dd, DATEDIFF(dd, 0, GETDATE()), 0) AS[DateRecorded]
+    , [PersonId]
+    , [CustomerNumber]
+    , [PractitionerNumber]
+	, [ApplicationID]
+    , [ApplicationStatus]
+    , [CertificationPeriodID]    
+    , [CertificationPeriodStartDate]
+    , [CertificationPeriodOriginalEndDate]
+    , [CertificationPeriodEndDate]    
+	, [DateCompleted]
+	, [Description]
+	, [SectionID]
+	, [SectionName]
+	, [CategoryId]
+	, [CategoryName]
+	, [CategoryGroup]
+	, [RequirementID]
+	, [RequirementName]
+	, [Points]
+	, [NumberOfAttachments]	
+    , [ModifiedDate]    
+FROM [ProfessionalDevelopmentHistory] a
+where [RowStatus] = 'Latest'

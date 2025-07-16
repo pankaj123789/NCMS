@@ -1,0 +1,17 @@
+﻿<ul class="timeline timeline-lg" data-bind="foreach: { data: items, as: 'item' }">
+    <li class="tl-item" data-bind="css: item.css, attr: { id: item.id }">
+        <div class="tl-wrap" data-bind="css: { 'b-success': item.success, 'b-primary': item.current, 'b-danger': item.cancel }">
+            <div class="tl-date">
+                <span data-bind="text: item.label"></span>
+                <div class="w-auto"></div>
+                <span class="fa fa-redo cursor-pointer" data-bind="click: $parent.regenerateEmailPreview, visible:item.regenerateIconVisible, tooltip: { trigger: 'hover' },  resattr: { title: 'Naati.Resources.Shared.resources.Regenerate'}"></span>
+            </div>
+            <div class="tl-content panel padder b-a" data-bind="css: item.contentCss">
+                <span class="arrow left pull-up hidden-left"></span>
+                <span class="arrow right pull-up visible-left"></span>
+                <!--ko compose: item.compose-->
+                <!--/ko-->
+            </div>
+        </div>
+    </li>
+</ul>

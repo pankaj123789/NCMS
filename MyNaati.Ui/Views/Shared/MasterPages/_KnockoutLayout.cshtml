@@ -1,0 +1,32 @@
+﻿@using MyNaati.Ui.Common
+@using MyNaati.Ui.UI
+@{
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    var version = ViewContext.GetVersionInfo();
+}
+@section Head {
+    @RenderSection("Head", false)
+    <script type="text/javascript">
+        window.currentUser = {
+            NaatiNumber: @(System.Threading.Thread.CurrentPrincipal != null ? System.Threading.Thread.CurrentPrincipal.NaatiNumber() : 0)
+        };
+		window.version = "@version";
+    </script>
+}
+@section Scripts{
+    @Scripts.Render("~/Bundles/knockout")
+    @Scripts.Render("~/Bundles/template")
+    @{
+        var mainScript = "~/App/main.dist.js";
+
+        if (HttpContext.Current.IsDebuggingEnabled)
+        {
+            @Scripts.Render("~/Bundles/debug")
+            mainScript = "~/App/main.js";
+        }
+    }
+    <script src="~/Scripts/require.js" data-main="@Url.Content(mainScript)?v=@version"></script>
+    @Html.KOSettings()
+    @RenderSection("Scripts", false)
+}
+@RenderBody()

@@ -1,0 +1,30 @@
+﻿@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+@{
+    ViewBag.UseSideMenu = true;
+    Layout = "~/Views/Shared/MasterPages/_WizardLayout.cshtml";
+}
+@section Head
+{
+    @RenderSection("Head", false)
+}
+@section Scripts
+{
+    @RenderSection("Scripts", false)
+}
+@section SideMenu
+{
+    @Html.Partial("_SideWizardMenu", (object)ViewBag.WholeWizardModel)
+}
+@section BeforeDefaultForm
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>@Model.Title</h1>
+        </div>
+    </div>
+}
+@section AfterDefaultForm
+{
+    @RenderSection("AfterDefaultForm", false)
+}
+@RenderBody()

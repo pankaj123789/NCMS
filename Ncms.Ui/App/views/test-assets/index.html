@@ -1,0 +1,50 @@
+<div class="hbox">
+    <div class="hbox" data-bind="component: {
+    name: 'search-component',
+    params: { title: title, filters: filters, searchType: searchType, searchTerm: searchTerm, searchCallback: searchCallback, tableDefinition: tableDefinition, additionalButtons: additionalButtons  }
+}">
+    </div>
+    <script id="testasset-header-template" type="text/html">
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Test.resources.AttendanceId'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.NAATINumber'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Title'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.FileType'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.FileSize'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.UploadedBy'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.UploadedDate'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestAsset.resources.AssetType'"></th>
+        <th>&nbsp;</th>
+        <th class="hide"></th>
+    </script>
+    <script id="testasset-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: TestAttendanceId"></td>
+            <td data-bind="text: NaatiNumber"></td>
+            <td data-bind="text: Title"></td>
+            <td data-bind="text: FileType"></td>
+            <td data-bind="bytesToSize: FileSize"></td>
+            <td data-bind="text: UploadedByName"></td>
+            <td data-bind="text: UploadedDateTime"></td>
+            <td data-bind="text: DocumentType"></td>
+            <td class="text-center" style="width: 150px;">
+                <div class="btn-group">
+                    <!--ko if: ExaminerMarksRemoved-->
+                    <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function(){ }, tooltip: { container: '#testassetTable' }, resattr: { title: 'Naati.Resources.Test.resources.ExaminerMarksRemoved' }">
+                        <span class="glyphicon glyphicon-ban-circle"></span>
+                    </a>
+                    <!--/ko-->
+                    <a href="#" class="btn btn-default btn-xs" data-bind="downloadFile:{url: $root.downloadAsset($data) }, tooltip: { container: '#testassetTable' }, resattr: { title: 'Naati.Resources.Shared.resources.Download' }">
+                        <span class="glyphicon glyphicon-download"></span>
+                    </a>
+                    <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#test/' + TestAttendanceId }, clickBubble: false, tooltip: { container: '#testTable' }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    <a href="#" class="btn btn-danger btn-xs" data-bind="enableWithPermission: 'TestAsset.Delete', clickBubble: false, click: function() { $root.tryDelete(this); }, tooltip: { container: '#testassetTable' }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </div>
+            </td>
+            <td data-bind="text: $index" class="hide"></td>
+        </tr>
+    </script>
+</div>

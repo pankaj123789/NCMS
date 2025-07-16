@@ -1,0 +1,19 @@
+﻿<div>
+    <div class="m-b-md">
+        <ol class="breadcrumb">
+            <!--ko foreach: { data: app.breadCrumbs, as: 'breadCrumb' }-->
+            <!--ko if: $index() == $root.app.breadCrumbs().length - 1-->
+            <li class="active" data-bind="text: breadCrumb.text"></li>
+            <!--/ko-->
+            <!--ko ifnot: $index() == $root.app.breadCrumbs().length - 1-->
+            <li>
+                <a href="#" data-bind="attr: { href: breadCrumb.href }, text: breadCrumb.text"></a>
+            </li>
+            <!--/ko-->
+            <!--/ko-->
+        </ol>
+        <hr />
+    </div>
+    <div class="hbox hbox-auto" data-bind="router: { cacheViews: true, alwaysAttachView:true }">
+    </div>
+</div>

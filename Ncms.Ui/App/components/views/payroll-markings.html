@@ -1,0 +1,69 @@
+﻿<div class="panel-collapse collapse" role="tabpanel" data-bind="attr: { id: examiner.childId,  'aria-labelledby': examiner.headId }">
+    <table class="table table-striped m-b-none">
+        <thead>
+            <tr>
+                <th data-bind="reshtml: 'Naati.Resources.Payroll.resources.Code'"></th>
+                <th data-bind="reshtml: 'Naati.Resources.Payroll.resources.GLCode'"></th>
+                <th data-bind="reshtml: 'Naati.Resources.Payroll.resources.Count'"></th>
+                <th data-bind="reshtml: 'Naati.Resources.Payroll.resources.UnitCost'"></th>
+                <th data-bind="reshtml: 'Naati.Resources.Payroll.resources.TotalCost'"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--ko foreach: { data: examiner.Markings, as: 'marking' }-->
+            <tr data-bind="click: $component.showTests" class="cursor-pointer">
+                <td>
+                    <i class="fa fa-caret-right"></i>
+                    <span data-bind="text: marking.ProductSpecificationCode"></span>
+                </td>
+                <td data-bind="text: marking.GlCode"></td>
+                <td data-bind="text: marking.Count"></td>
+                <td data-bind="text: $component.parseCost(marking.ExaminerCost())"></td>
+                <td data-bind="text: $component.totalCost(marking)"></td>
+            </tr>
+            <tr class="ui-helper-hidden">
+                <td colspan="5">
+                    <div class="ui-helper-hidden">
+                        <table class="table table-striped m-b-none" data-bind="if: marking.expanded()">
+                            <thead>
+                                <tr class="text-sm">
+                                    <th data-bind="reshtml: 'Naati.Resources.Application.resources.Skill'"></th>
+                                    <th data-bind="reshtml: 'Naati.Resources.Payroll.resources.AttendanceID'"></th>
+                                    <th data-bind="reshtml: 'Naati.Resources.Payroll.resources.Office'"></th>
+                                    <th data-bind="reshtml: 'Naati.Resources.Payroll.resources.ValidatedBy'"></th>
+                                    <th data-bind="reshtml: 'Naati.Resources.Payroll.resources.ValidatedDate'"></th>
+                                    <!--ko if: $component.allowRemoveTest-->
+                                    <th class="w-xxs"></th>
+                                    <!--/ko-->
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: { data: marking.VisibleTests, as: 't' }">
+                                <tr class="text-sm">
+                                    <td data-bind="text: t.Language"></td>
+                                    <td>
+                                        <a class="btn-link" data-bind="text: t.TestAttendanceId, click: $component.openTest"></a>
+                                        <span class="label badge bg-black-opacity m-t-xxs" data-bind="visible: t.Supplementary, resattr: { title: 'Naati.Resources.Test.resources.Supplementary' }, tooltip: { trigger: 'hover' }">S</span>
+                                    </td>
+                                    <td data-bind="text: t.Office"></td>
+                                    <td data-bind="text: t.ValidatedUser"></td>
+                                    <td data-bind="text: moment(t.ValidatedDate()).format('L')"></td>
+                                    <!--ko if: $component.allowRemoveTest-->
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-danger btn-xs" data-bind="resattr: { title: 'Naati.Resources.Payroll.resources.RevertMarkingHint' }, click: $component.removeTest, tooltip: { container: 'body' }">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </td>
+                                    <!--/ko-->
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--ko if: marking.TotalSize() < marking.Tests().length-->
+                        <a href="#" class="btn btn-block btn-lg text-center" data-bind="click: marking.increaseTotalSize">Load more items...</a>
+                        <!--/ko-->
+                    </div>
+                </td>
+            </tr>
+            <!--/ko-->
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,58 @@
+﻿<div class="form email-preview">
+    <!--ko ifnot: loaded-->
+    <p data-bind="reshtml: 'Naati.Resources.Application.resources.LoadingEmails'"></p>
+    <!--/ko-->
+    <!--ko if: loaded-->
+    <!--ko if: !computedEmails().length-->
+    <div class="alert alert-info" data-bind="reshtml: 'Naati.Resources.Application.resources.NoEmailsAreRequired'"></div>
+    <!--/ko-->
+    <!--ko foreach: { data: computedEmails, as: 'email', afterRender: setEmailContent }-->
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.From'"></label>
+            &nbsp;&nbsp;<p class="form-control-static m-t-n-sm display-inline" data-bind="text: email.From"></p>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.To'"></label>
+            &nbsp;&nbsp;<p class="form-control-static m-t-n-sm display-inline" data-bind="text: email.To"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.Subject'"></label>
+            &nbsp;&nbsp;<p class="form-control-static m-t-n-sm display-inline" data-bind="text: email.Subject"></p>
+        </div>
+        <!--ko if: email.FormattedCreatedDate-->
+        <div class="form-group col-md-6">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.CreatedDate'"></label>
+            &nbsp;&nbsp;<p class="form-control-static m-t-n-sm display-inline" data-bind="text: email.FormattedCreatedDate"></p>
+        </div>
+        <!--/ko-->
+    </div>
+    <!--ko if: email.Attachments().length-->
+    <div class="row">
+        <div class="form-group col-md-12">
+            <!--ko foreach: email.Attachments-->
+            <div class="pull-left b b-light m-r-xs">
+                <a href="#" data-bind="attr: { download: (DownloadFileName ? DownloadFileName : ''), href: DownloadUrl }">
+                    <span class="wrapper bg-light fa fa-paperclip"></span>
+                    <span class="wrapper" data-bind="text: FileName"></span>
+                </a>
+                &nbsp;&nbsp;&nbsp;
+            </div>
+            <!--/ko-->
+        </div>
+    </div>
+    <!--/ko-->
+    <div class="form-group">
+        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.EmailContent'"></label>
+        <p class="form-control-static m-t-n-sm">
+            <iframe class="m-b-none w-full" frameborder="0" name="emailContent" data-bind="attr: { id: email.ContentId }, style: { height: email.FrameHeight }"></iframe>
+        </p>
+    </div>
+    <!--ko if: $index() != $component.computedEmails().length - 1-->
+    <div class="line bg-light"></div>
+    <!--/ko-->
+    <!--/ko-->
+    <!--/ko-->
+</div>

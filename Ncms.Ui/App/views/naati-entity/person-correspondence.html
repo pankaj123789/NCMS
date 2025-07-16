@@ -1,0 +1,45 @@
+<div class="panel-container mailbox">
+    <div class="panel-left b-5x b-r b-light" data-bind="resizable: resizableOptions">
+        <div class="m-r-sm">
+            <table class="table" data-bind="datatable: tableDefinition, attr: { id: tableDefinition.id }">
+                <thead>
+                    <tr>
+                        <td class="hide"></td>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: emails">
+                    <tr>
+                        <td class="no-padder">
+                            <div class="hbox hbox-auto-xs hbox-auto-sm m-l-sm m-t-sm m-b-sm">
+                                <div class="col">
+                                    <div class="h4 font-thin" data-bind="text: From"></div>
+                                    <div class="wrapping" data-bind="text: Subject"></div>
+                                </div>
+                                <div class="col w-xs">
+                                    <div class="text-right m-r-md">
+                                        <!--ko if: HasAttachments -->
+                                        <div>
+                                            <span class="fa fa-paperclip"></span>
+                                        </div>
+                                        <!--/ko-->
+                                        <div data-bind="text: $root.humanizeDate(LastSendAttemptDate())"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel-right">
+        <div class="m-l-md m-t-xs">
+            <!--ko ifnot: selectedEmail-->
+            <h4 class="font-thin m-t-xxl m-b-md text-muted text-center" data-bind="reshtml: 'Naati.Resources.Person.resources.SelectAnEmail'"></h4>
+            <!--/ko-->
+            <!--ko if: selectedEmail-->
+            <div data-bind="component: { name: 'emails-preview', params: emailsPreviewOptions }"></div>
+            <!--/ko-->
+        </div>
+    </div>
+</div>

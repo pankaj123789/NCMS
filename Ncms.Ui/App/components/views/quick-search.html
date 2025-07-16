@@ -1,0 +1,13 @@
+﻿<div class="input-group">
+    <input type="text" data-bind="disable: disable, jqAuto: auto, attr: attr, value: textValue, valueUpdate: 'afterkeydown', event: { keypress: checkEnterPressed }, resattr: resattr">
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-sm bg-light rounded" data-bind="click: gotoPerson"><i class="fa fa-search"></i></button>
+    </span>
+</div>
+<script id="suggestionTmpl" type="text/html">
+    <div class="wrapper suggestion-row full-width">
+        <span class="pull-right m-t-xs label" data-bind="css: { 'bg-info-default': PersonId, 'bg-primary': InstitutionId  }, text: Type"></span>
+        <span class="pull-left w-xxs" data-bind="text: NaatiNumber"></span>
+        <strong data-bind="text: Name"></strong>
+    </div>
+</script>

@@ -1,0 +1,1287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionTakenSuccessfully" xml:space="preserve">
+    <value>Action successful.</value>
+  </data>
+  <data name="AddingApplicationTitle" xml:space="preserve">
+    <value>Adding Application</value>
+  </data>
+  <data name="Applicant" xml:space="preserve">
+    <value>Applicant</value>
+  </data>
+  <data name="ApplicationHeader" xml:space="preserve">
+    <value>Application Header</value>
+  </data>
+  <data name="ApplicationOwner" xml:space="preserve">
+    <value>Application Owner</value>
+  </data>
+  <data name="ApplicationReference" xml:space="preserve">
+    <value>Application Reference</value>
+  </data>
+  <data name="ApplicationStatus" xml:space="preserve">
+    <value>Application Status</value>
+  </data>
+  <data name="ApplicationStatusChangeNote" xml:space="preserve">
+    <value>The status of this application has changed from {0} to {1}.</value>
+  </data>
+  <data name="ApplicationType" xml:space="preserve">
+    <value>Application Type</value>
+  </data>
+  <data name="ApprovedBySponsor" xml:space="preserve">
+    <value>Approved by Sponsor</value>
+  </data>
+  <data name="AssessmentPendingActionLabel" xml:space="preserve">
+    <value>Pend Assessment</value>
+  </data>
+  <data name="AssessmentSuccessfulActionLabel" xml:space="preserve">
+    <value>Pass Assessment</value>
+  </data>
+  <data name="CancelAssessmentActionLabel" xml:space="preserve">
+    <value>Cancel Assessment</value>
+  </data>
+  <data name="CancelCheckingActionLabel" xml:space="preserve">
+    <value>Cancel Checking Application</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="ChangeActionConfirmation" xml:space="preserve">
+    <value>You will lost all filled data. Are you sure that you want change the action?</value>
+  </data>
+  <data name="ChangeStatus" xml:space="preserve">
+    <value>Change Status</value>
+  </data>
+  <data name="CollapseAllSections" xml:space="preserve">
+    <value>Collapse all sections</value>
+  </data>
+  <data name="ContactNumber" xml:space="preserve">
+    <value>Contact No</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CountryOfBirth" xml:space="preserve">
+    <value>Country of Birth</value>
+  </data>
+  <data name="CreatePaidReviewActionLabel" xml:space="preserve">
+    <value>Create Paid Review</value>
+  </data>
+  <data name="CredentialName" xml:space="preserve">
+    <value>Credential Name</value>
+  </data>
+  <data name="CredentialRequest" xml:space="preserve">
+    <value>Credential Request</value>
+  </data>
+  <data name="CredentialRequests" xml:space="preserve">
+    <value>Credential Requests</value>
+  </data>
+  <data name="CredentialRequestStateChangeNote" xml:space="preserve">
+    <value>The status of the credential request {0} {1} has changed from {2} to {3}.</value>
+  </data>
+  <data name="CredentialType" xml:space="preserve">
+    <value>Credential Type</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="StatusDate" xml:space="preserve">
+    <value>Status Date</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
+  <data name="Direction" xml:space="preserve">
+    <value>Direction</value>
+  </data>
+  <data name="EditingApplicationTitle" xml:space="preserve">
+    <value>Editing Application</value>
+  </data>
+  <data name="EmailContent" xml:space="preserve">
+    <value>Email Content</value>
+  </data>
+  <data name="EnteredDate" xml:space="preserve">
+    <value>Entered Date</value>
+  </data>
+  <data name="EnteredInfo" xml:space="preserve">
+    <value>Entered {0} on {1} office</value>
+  </data>
+  <data name="EnteredOffice" xml:space="preserve">
+    <value>Entered Office</value>
+  </data>
+  <data name="EvidenceOfChuchotage" xml:space="preserve">
+    <value>Evidence of Chuchotage</value>
+  </data>
+  <data name="ExpandAllSections" xml:space="preserve">
+    <value>Expand all sections</value>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>Expiry Date</value>
+  </data>
+  <data name="FailAssessmentActionLabel" xml:space="preserve">
+    <value>Fail Assessment</value>
+  </data>
+  <data name="FailReviewActionLabel" xml:space="preserve">
+    <value>Fail Review</value>
+  </data>
+  <data name="FamilyName" xml:space="preserve">
+    <value>Family Name</value>
+  </data>
+  <data name="FinishCheckingActionLabel" xml:space="preserve">
+    <value>Finish Checking Application</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="GivenName" xml:space="preserve">
+    <value>Given Name(s)</value>
+  </data>
+  <data name="IssueCredentialActionLabel" xml:space="preserve">
+    <value>Issue Credential</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Language1" xml:space="preserve">
+    <value>Language 1</value>
+  </data>
+  <data name="Language2" xml:space="preserve">
+    <value>Language 2</value>
+  </data>
+  <data name="MinimumCredentialRequestsErrorMessage" xml:space="preserve">
+    <value>The application must have at least {0} Credential Request(s) to perform this action.</value>
+  </data>
+  <data name="MissingMandatoryDocumentErrorMessage" xml:space="preserve">
+    <value>The following mandatory document(s) have not been attached: {0}.</value>
+  </data>
+  <data name="MissingMandatoryFieldErrorMessage" xml:space="preserve">
+    <value>A value is required for field '{0}'.</value>
+  </data>
+  <data name="MissingMandatoryPersonFieldsErrorMessage" xml:space="preserve">
+    <value>A value is required for person field '{0}'. </value>
+  </data>
+  <data name="StatusChanged" xml:space="preserve">
+    <value>Status changed</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Nationality" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+  <data name="NewApplication" xml:space="preserve">
+    <value>New Application</value>
+  </data>
+  <data name="NewCredentialRequestActionLabel" xml:space="preserve">
+    <value>New Credential Request</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="OtherTypesNote" xml:space="preserve">
+    <value>Other types of applications should be entered via NAATI Online on behalf of the applicant</value>
+  </data>
+  <data name="PractitionerNumber" xml:space="preserve">
+    <value>Practitioner No</value>
+  </data>
+  <data name="PreferredTestLocation" xml:space="preserve">
+    <value>Preferred Test Location</value>
+  </data>
+  <data name="PrimaryAddress" xml:space="preserve">
+    <value>Primary Address</value>
+  </data>
+  <data name="PrimaryContactNumber" xml:space="preserve">
+    <value>Primary Contact No</value>
+  </data>
+  <data name="PrimaryEmail" xml:space="preserve">
+    <value>Primary Email</value>
+  </data>
+  <data name="PrivateNotes" xml:space="preserve">
+    <value>Private Notes</value>
+  </data>
+  <data name="PrivateNotesHelp" xml:space="preserve">
+    <value>Private notes are not visible to the applicant, and are only visible to NAATI staff.</value>
+  </data>
+  <data name="PublicNotes" xml:space="preserve">
+    <value>Public Notes</value>
+  </data>
+  <data name="PublicNotesHelp" xml:space="preserve">
+    <value>Public notes are emailed to the Applicant.</value>
+  </data>
+  <data name="RejectActionLabel" xml:space="preserve">
+    <value>Reject Application</value>
+  </data>
+  <data name="Revalidation" xml:space="preserve">
+    <value>Revalidation</value>
+  </data>
+  <data name="SelectAction" xml:space="preserve">
+    <value>Select Action</value>
+  </data>
+  <data name="SelectCredential" xml:space="preserve">
+    <value>Select Credential</value>
+  </data>
+  <data name="ShowInOnlineDirectory" xml:space="preserve">
+    <value>Show in Online Directory</value>
+  </data>
+  <data name="SkillLabel" xml:space="preserve">
+    <value>Language(s) and Direction</value>
+  </data>
+  <data name="Sponsor" xml:space="preserve">
+    <value>Sponsor</value>
+  </data>
+  <data name="SponsorApprovedDate" xml:space="preserve">
+    <value>Sponsor Approved Date</value>
+  </data>
+  <data name="StartAssessingActionLabel" xml:space="preserve">
+    <value>Start Assessing</value>
+  </data>
+  <data name="StartCheckingActionLabel" xml:space="preserve">
+    <value>Start Checking Application</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StatusModified" xml:space="preserve">
+    <value>Status Modified</value>
+  </data>
+  <data name="StatusModifiedBy" xml:space="preserve">
+    <value>Status Modified By</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="SubmitActionLabel" xml:space="preserve">
+    <value>Submit Application</value>
+  </data>
+  <data name="TakeAction" xml:space="preserve">
+    <value>Take Action</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="UnpaidInvoicesErrorMessage" xml:space="preserve">
+    <value>All Invoices for this application should be paid in full, unless the Application Sponsor is a Trusted Payer.</value>
+  </data>
+  <data name="PreviewEmail" xml:space="preserve">
+    <value>Preview Email</value>
+  </data>
+  <data name="ViewInvoice" xml:space="preserve">
+    <value>Preview Invoice</value>
+  </data>
+  <data name="WrongApplicationStatusErrorMessage" xml:space="preserve">
+    <value>The Application status must be one of: [{0}] to perform this action.</value>
+  </data>
+  <data name="WrongCredentialRequestStatusErrorMessage" xml:space="preserve">
+    <value>The Credential Request status must be one of: [{0}] to perform this action.</value>
+  </data>
+  <data name="CredentialRequestCreatedNote" xml:space="preserve">
+    <value>Credential request {0} {1} created with status {2}.</value>
+  </data>
+  <data name="ApplicationCreatedNote" xml:space="preserve">
+    <value>Application created.</value>
+  </data>
+  <data name="EnteredUser" xml:space="preserve">
+    <value>Entered User</value>
+  </data>
+  <data name="OtherNames" xml:space="preserve">
+    <value>Other Name(s)</value>
+  </data>
+  <data name="ApplicationTypeFilterTooltip" xml:space="preserve">
+    <value>Display people who have Active applications of this type.</value>
+  </data>
+  <data name="PassAssessmentActionLabel" xml:space="preserve">
+    <value>Pass Assessment</value>
+  </data>
+  <data name="PendAssessmentActionLabel" xml:space="preserve">
+    <value>Pend Assessment</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="DuplicatedApplication" xml:space="preserve">
+    <value>This applicant has another {0} application.  Are you sure you want to create another application for this person?  Please check the Applications tab before creating a duplicate application.</value>
+  </data>
+  <data name="PassReviewActionLabel" xml:space="preserve">
+    <value>Pass Review</value>
+  </data>
+  <data name="OwnedBy" xml:space="preserve">
+    <value>Owned by</value>
+  </data>
+  <data name="StatusChangedBy" xml:space="preserve">
+    <value>Status changed by</value>
+  </data>
+  <data name="CancelRequestActionLabel" xml:space="preserve">
+    <value>Cancel Request</value>
+  </data>
+  <data name="EmailAttachments" xml:space="preserve">
+    <value>Attachments</value>
+  </data>
+  <data name="TerminationDate" xml:space="preserve">
+    <value>Termination Date</value>
+  </data>
+  <data name="SponsorContact" xml:space="preserve">
+    <value>Sponsor Contact</value>
+  </data>
+  <data name="SponsorOrganisation" xml:space="preserve">
+    <value>Sponsor Organisation</value>
+  </data>
+  <data name="PreviewDocuments" xml:space="preserve">
+    <value>Preview Documents</value>
+  </data>
+  <data name="DeleteConfirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="SupplementaryTest" xml:space="preserve">
+    <value>Supplementary Test</value>
+  </data>
+  <data name="OtherCredentialRequests" xml:space="preserve">
+    <value>List of other credential requests</value>
+  </data>
+  <data name="CertificationPeriod" xml:space="preserve">
+    <value>Certification Period</value>
+  </data>
+  <data name="CertificationPeriodEnd" xml:space="preserve">
+    <value>Certification Period End</value>
+  </data>
+  <data name="CertificationPeriodStart" xml:space="preserve">
+    <value>Certification Period Start</value>
+  </data>
+  <data name="LastActiveCertificationCredentialSetTermination" xml:space="preserve">
+    <value>Please note that setting a Termination date for this credential will also cause the Certification Period to end, thus changing this person to a Former Practitioner, and this practitioner will not have access to Recertify.  This action is irreversible.</value>
+  </data>
+  <data name="NewTerminationDate" xml:space="preserve">
+    <value>New Termination Date</value>
+  </data>
+  <data name="SetTermination" xml:space="preserve">
+    <value>Set Termination</value>
+  </data>
+  <data name="SetTerminationDate" xml:space="preserve">
+    <value>Set Termination Date</value>
+  </data>
+  <data name="Skill" xml:space="preserve">
+    <value>Skill</value>
+  </data>
+  <data name="NewCertificationPeriod" xml:space="preserve">
+    <value>New Certification Period</value>
+  </data>
+  <data name="CredentialCertificationIssuedNote" xml:space="preserve">
+    <value>The credential of {0} {1} has been Issued in a Certification Period with Start Date {2} and End Date {3}.  The credential has been Issued with a start date of {4} and expiry of {3}.</value>
+  </data>
+  <data name="CredentialCertificationReissuedNote" xml:space="preserve">
+    <value>The credential of {0} {1} has been reissued in a Certification Period with Start Date {2} and End Date {3}.  The credential has been reissued with a start date of {4} and expiry of {3}.</value>
+  </data>
+  <data name="CredentialExpiryDate" xml:space="preserve">
+    <value>expiry of {0}</value>
+  </data>
+  <data name="CredentialIssuedNote" xml:space="preserve">
+    <value>The credential of {0} {1} has been issued with a start date of {2} and {3}.</value>
+  </data>
+  <data name="CredentialNotExpiryDate" xml:space="preserve">
+    <value>no expiry date</value>
+  </data>
+  <data name="CredentialReissuedNote" xml:space="preserve">
+    <value>The credential of {0} {1} has been reissued with a start date of {2} and {3}.</value>
+  </data>
+  <data name="InvalidCredentialRequestMessage" xml:space="preserve">
+    <value>Credential Request '{0}' was not found</value>
+  </data>
+  <data name="InvalidCredentialStatus" xml:space="preserve">
+    <value>Current credential status is  '{0}'</value>
+  </data>
+  <data name="NewCertificationPeriodNote" xml:space="preserve">
+    <value>A new Certification Period has been created with Start Date {0} and End Date {1}.</value>
+  </data>
+  <data name="ReissueCredentialActionLabel" xml:space="preserve">
+    <value>Reissue Credential</value>
+  </data>
+  <data name="UnpaidApplicationInvoiceErrorMessage" xml:space="preserve">
+    <value>The Invoice number {0} must have been fully paid.</value>
+  </data>
+  <data name="UnpaidTestInvoiceErrorMessage" xml:space="preserve">
+    <value>The Test Invoice must have been fully paid.</value>
+  </data>
+  <data name="FailPendingAssessmentActionLabel" xml:space="preserve">
+    <value>Fail Assessment</value>
+  </data>
+  <data name="DeleteApplicationActionLabel" xml:space="preserve">
+    <value>Delete Application</value>
+  </data>
+  <data name="TestInvoicePaidActionLabel" xml:space="preserve">
+    <value>Test Invoice Paid</value>
+  </data>
+  <data name="InvoicesUpdated" xml:space="preserve">
+    <value>{0} Invoice(s) updated</value>
+  </data>
+  <data name="UpdateInvoiceError" xml:space="preserve">
+    <value>Invoice {0}: {1}</value>
+  </data>
+  <data name="DeleteRequestActionLabel" xml:space="preserve">
+    <value>Delete Request</value>
+  </data>
+  <data name="WithdrawRequestActionLabel" xml:space="preserve">
+    <value>Withdraw Request</value>
+  </data>
+  <data name="InviteForTestingActionLabel" xml:space="preserve">
+    <value>Invite for Testing</value>
+  </data>
+  <data name="ApplicationInvoicePaidActionLabel" xml:space="preserve">
+    <value>Application Invoice Paid</value>
+  </data>
+  <data name="LoadingEmails" xml:space="preserve">
+    <value>Loading emails...</value>
+  </data>
+  <data name="NoEmailsAreRequired" xml:space="preserve">
+    <value>No emails are required</value>
+  </data>
+  <data name="AllocateTestSessionActionLabel" xml:space="preserve">
+    <value>Allocate Test Session</value>
+  </data>
+  <data name="RejectTestSession" xml:space="preserve">
+    <value>Reject Test Session</value>
+  </data>
+  <data name="TestSessionAllocatedNote" xml:space="preserve">
+    <value>The credential request {0} {1} has been allocated to Test Session TS{2} on the {3}.</value>
+  </data>
+  <data name="TestSessionRemovedNote" xml:space="preserve">
+    <value>The credential request {0} {1} has been removed from Test Session TS{2} on the {3}.</value>
+  </data>
+  <data name="AcceptTestSessionActionLabel" xml:space="preserve">
+    <value>Accept Test Session</value>
+  </data>
+  <data name="RejectTestSessionActionLabel" xml:space="preserve">
+    <value>Reject Test Session</value>
+  </data>
+  <data name="TestSessionIsInFuture" xml:space="preserve">
+    <value>You cannot change the status of this request because the test session is in the future.</value>
+  </data>
+  <data name="TestSessionNotFound" xml:space="preserve">
+    <value>Test Session Not Found</value>
+  </data>
+  <data name="MarkAsSatActionLabel" xml:space="preserve">
+    <value>Mark as Sat</value>
+  </data>
+  <data name="TestSessionLinkText" xml:space="preserve">
+    <value>TS{0} - {1} - {2}</value>
+  </data>
+  <data name="CheckInActionLabel" xml:space="preserve">
+    <value>Check In</value>
+  </data>
+  <data name="UndoCheckInActionLabel" xml:space="preserve">
+    <value>Undo Check In</value>
+  </data>
+  <data name="UndoMarkAsSatActionLabel" xml:space="preserve">
+    <value>Undo Mark as Sat</value>
+  </data>
+  <data name="IssueFailActionLabel" xml:space="preserve">
+    <value>Issue Fail</value>
+  </data>
+  <data name="IssuePassActionLabel" xml:space="preserve">
+    <value>Issue Pass</value>
+  </data>
+  <data name="CreatePaidTestReviewActionLabel" xml:space="preserve">
+    <value>Create Paid Test Review</value>
+  </data>
+  <data name="FinalMark" xml:space="preserve">
+    <value>Final Mark</value>
+  </data>
+  <data name="Requirements" xml:space="preserve">
+    <value>Requirements</value>
+  </data>
+  <data name="Resit" xml:space="preserve">
+    <value>Resit</value>
+  </data>
+  <data name="SupplementaryTestHeader" xml:space="preserve">
+    <value>Please select the components of the tests which are eligible for a Supplementary Test.</value>
+  </data>
+  <data name="TestComponent" xml:space="preserve">
+    <value>Test Component</value>
+  </data>
+  <data name="IssueSupplementaryResultActionLabel" xml:space="preserve">
+    <value>Issue Supplementary Result</value>
+  </data>
+  <data name="SupplementaryTestInvoicePaidActionLabel" xml:space="preserve">
+    <value>Supplementary Test Invoice Paid</value>
+  </data>
+  <data name="CreateSupplementaryTestActionLabel" xml:space="preserve">
+    <value>Create Supplementary Test</value>
+  </data>
+  <data name="IssuePaidTestReviewFailActionLabel" xml:space="preserve">
+    <value>Issue Fail</value>
+  </data>
+  <data name="IssuePaidTestReviewPassActionLabel" xml:space="preserve">
+    <value>Issue Pass</value>
+  </data>
+  <data name="IssueSupplementaryPaidReviewResultActionLabel" xml:space="preserve">
+    <value>Issue Supplementary Result</value>
+  </data>
+  <data name="WithdrawSupplementaryTestActionLabel" xml:space="preserve">
+    <value>Withdraw Supplementary</value>
+  </data>
+  <data name="ApplicationTypeIdValidation" xml:space="preserve">
+    <value>ApplicationTypeId not provided.</value>
+  </data>
+  <data name="CredentialTypeIdValidation" xml:space="preserve">
+    <value>CredentialTypeId not provided.</value>
+  </data>
+  <data name="ProductFeeValidationWithCredentialTypeForSupplementaryTest" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="ProductFeeValidationWithCredentialTypeForTest" xml:space="preserve">
+    <value>More than one test fee found for the application type with the same credential type.</value>
+  </data>
+  <data name="ProductFeeValidationWithNoCredentialTypeForSupplementaryTest" xml:space="preserve">
+    <value>More than one supplementary test fee found for the application type without a credential type.</value>
+  </data>
+  <data name="ProductFeeValidationWithNoCredentialTypeForTest" xml:space="preserve">
+    <value>More than one test fee found for the application type without a credential type.</value>
+  </data>
+  <data name="AttendanceLinkText" xml:space="preserve">
+    <value>Attendance ID {0}</value>
+  </data>
+  <data name="ApplicationSubmissionProcessedActionLabel" xml:space="preserve">
+    <value>Process Submission</value>
+  </data>
+  <data name="PaidApplicationSubmissionProcessedActionLabel" xml:space="preserve">
+    <value>Process Paid Submission</value>
+  </data>
+  <data name="CancelTestInvitationLabel" xml:space="preserve">
+    <value>Cancel Test Invitation</value>
+  </data>
+  <data name="CancelTestInvitationActionLabel" xml:space="preserve">
+    <value>Cancel Test Invitation</value>
+  </data>
+  <data name="AssessmentInvoicePaidActionLabel" xml:space="preserve">
+    <value>Application Invoice Paid</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="NonPreferredTestLocationInfo" xml:space="preserve">
+    <value>This application contains a test in a non-preferred test location</value>
+  </data>
+  <data name="ShowAllCredentials" xml:space="preserve">
+    <value>Show All Credentials</value>
+  </data>
+  <data name="RecertificationStatus" xml:space="preserve">
+    <value>Recertification Status</value>
+  </data>
+  <data name="RecertificationStatusBeingAssessed" xml:space="preserve">
+    <value>Being Assessed</value>
+  </data>
+  <data name="RecertificationStatusBeingAssessedTooltip" xml:space="preserve">
+    <value>Currently being assessed for Recertification</value>
+  </data>
+  <data name="RecertificationStatusEligibleForExisting" xml:space="preserve">
+    <value>Eligible (Existing)</value>
+  </data>
+  <data name="RecertificationStatusEligibleForExistingTooltip" xml:space="preserve">
+    <value>Eligible to be recertified via existing Recertification application</value>
+  </data>
+  <data name="RecertificationStatusEligibleForNew" xml:space="preserve">
+    <value>Eligible</value>
+  </data>
+  <data name="RecertificationStatusEligibleForNewTooltip" xml:space="preserve">
+    <value>Eligible to be recertified via new Recertification application</value>
+  </data>
+  <data name="RecertificationStatusFailed" xml:space="preserve">
+    <value>Failed Recertification</value>
+  </data>
+  <data name="RecertificationStatusFailedTooltip" xml:space="preserve">
+    <value>Failed assessment for Recertification </value>
+  </data>
+  <data name="CredentialStatusActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="CredentialStatusActiveTooltip" xml:space="preserve">
+    <value>An Active credential is one which has started after today and has not finished</value>
+  </data>
+  <data name="CredentialStatusExpired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="CredentialStatusExpiredTooltip" xml:space="preserve">
+    <value>An Expired credential has gone past the Expiry Date</value>
+  </data>
+  <data name="CredentialStatusFuture" xml:space="preserve">
+    <value>Future</value>
+  </data>
+  <data name="CredentialStatusFutureTooltip" xml:space="preserve">
+    <value>A Future credential is one which has a Start Date after today</value>
+  </data>
+  <data name="CredentialStatusTerminated" xml:space="preserve">
+    <value>Terminated</value>
+  </data>
+  <data name="CredentialStatusTerminatedTooltip" xml:space="preserve">
+    <value>A Terminated credential is one which has a Terminated Date, and the termination date is today or earlier</value>
+  </data>
+  <data name="NonPreferredTestLocationError" xml:space="preserve">
+    <value>Missing Preferred Test Location: This application contains a test however no Preferred Test Location has been set on the application.</value>
+  </data>
+  <data name="ExpiringOn" xml:space="preserve">
+    <value>Expiring on</value>
+  </data>
+  <data name="LoadingCredentials" xml:space="preserve">
+    <value>Loading credentials...</value>
+  </data>
+  <data name="ThereAreNoEligibleCredentials" xml:space="preserve">
+    <value>There are no eligible credentials.</value>
+  </data>
+  <data name="CertificationPeriodID" xml:space="preserve">
+    <value>Certification Period ID</value>
+  </data>
+  <data name="MoveCredential" xml:space="preserve">
+    <value>Move Credential</value>
+  </data>
+  <data name="MoveCredentialHeader" xml:space="preserve">
+    <value>Please note that any modifications which are made on this screen can impact not only the expiration date of this credential, but also the recertification process. This screen should only be used for fixing errors.  Ensure this is not part of a Recertification application.</value>
+  </data>
+  <data name="SelectAPeriod" xml:space="preserve">
+    <value>You need to select a certification period.</value>
+  </data>
+  <data name="CredentialStatus" xml:space="preserve">
+    <value>Credential Status</value>
+  </data>
+  <data name="ReactivateApplicationActionLabel" xml:space="preserve">
+    <value>Reactivate Application</value>
+  </data>
+  <data name="RecertificationStatusNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="CloseApplicationActionLabel" xml:space="preserve">
+    <value>Close Application</value>
+  </data>
+  <data name="MoveCredentialTooltip" xml:space="preserve">
+    <value>Move this credential to another Certification Period</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="PaidReviewInvoicePaidLabel" xml:space="preserve">
+    <value>Paid Review Invoice Paid</value>
+  </data>
+  <data name="PaidReviewInvoiceProcessedActionLabel" xml:space="preserve">
+    <value>Paid Review Invoice Processed</value>
+  </data>
+  <data name="WithdrawPaidReviewLabel" xml:space="preserve">
+    <value>Withdraw Paid Review</value>
+  </data>
+  <data name="ActionEventName" xml:space="preserve">
+    <value>Event Name</value>
+  </data>
+  <data name="TemplateActions" xml:space="preserve">
+    <value>Template Actions</value>
+  </data>
+  <data name="TooltipActive" xml:space="preserve">
+    <value>Indicates whether or not template is active</value>
+  </data>
+  <data name="ConcededPassCredentialCreated" xml:space="preserve">
+    <value>Conceced Pass Credential {0} {1} was created</value>
+  </data>
+  <data name="IssueConcededPass" xml:space="preserve">
+    <value>Issue Conceded Pass</value>
+  </data>
+  <data name="ConcededPass" xml:space="preserve">
+    <value>Conceded Pass</value>
+  </data>
+  <data name="NotifyTestSessionDetailsMessage" xml:space="preserve">
+    <value>Changes have been made for test session TS{0}</value>
+  </data>
+  <data name="NotifiyTestSessionDetails" xml:space="preserve">
+    <value>Notify Test Session Details</value>
+  </data>
+  <data name="SkipEmailWarning" xml:space="preserve">
+    <value>The changes will &lt;strong&gt; NOT&lt;/strong&gt; be sent to the affected applicant(s).</value>
+  </data>
+  <data name="TestSessionModfied" xml:space="preserve">
+    <value>Test session TS{0} has been modified. No email has been sent to the applicant.</value>
+  </data>
+  <data name="EmailSkipped" xml:space="preserve">
+    <value>The changes have NOT been notified to the applicant.</value>
+  </data>
+  <data name="NotifiyToApplicant" xml:space="preserve">
+    <value>Notify to Applicant(s)</value>
+  </data>
+  <data name="SendEmailOption" xml:space="preserve">
+    <value>Send notification to applicant(s)</value>
+  </data>
+  <data name="SupplementaryTestInvoiceProcessedLabel" xml:space="preserve">
+    <value>Supplementary Test Invoice Processed</value>
+  </data>
+  <data name="CandidateInvoiceCustomerDetails" xml:space="preserve">
+    <value>Candidate : {0}</value>
+  </data>
+  <data name="InvalidRecertificationCertificationPeriod" xml:space="preserve">
+    <value>Same certication period has been selected</value>
+  </data>
+  <data name="DocumentBriefSentNote" xml:space="preserve">
+    <value>Brief documents has been sent to the applicant.</value>
+  </data>
+  <data name="NoPendingCandidateBriefs" xml:space="preserve">
+    <value>No pending Candidate Briefs are available to send to the applicant. Brief can be only sent within a system-specified number of days prior to the test date.</value>
+  </data>
+  <data name="SendCandidateBriefLabel" xml:space="preserve">
+    <value>Send Candidate Brief</value>
+  </data>
+  <data name="PaidReviewExaminersAddedErrorMessage" xml:space="preserve">
+    <value>This Paid Review cannot be withdrawn as paid reviewers have been assigned or a second test result has already been created.</value>
+  </data>
+  <data name="ActionNotSupportedForCertification" xml:space="preserve">
+    <value>Action is not supported for Certification credential Types</value>
+  </data>
+  <data name="RevertResultsLabel" xml:space="preserve">
+    <value>Revert Results</value>
+  </data>
+  <data name="TestSittingNotFound" xml:space="preserve">
+    <value>No Test Sitting was found.</value>
+  </data>
+  <data name="InvalidFailMarks" xml:space="preserve">
+    <value>A Fail cannot be given. These scores are high enough to be eligible for a Pass</value>
+  </data>
+  <data name="InvalidPassMarks" xml:space="preserve">
+    <value>A Pass cannot be given. These scores are too low to be eligible for a Pass</value>
+  </data>
+  <data name="ActionDisabledForTestSpecification" xml:space="preserve">
+    <value>Action disabled for current Test Specification</value>
+  </data>
+  <data name="ActionInvalidForPaidReview" xml:space="preserve">
+    <value>Action Invalid for Paid reviews</value>
+  </data>
+  <data name="ActionValidForStandardMarkingSchema" xml:space="preserve">
+    <value>Action valid for standard marking schema only</value>
+  </data>
+  <data name="ExaminerMarkDifferenceToHigh" xml:space="preserve">
+    <value>Examiner marks difference is higher than max difference configured. Max. difference allowed is {0} points.</value>
+  </data>
+  <data name="InvalidExaminerQuantity" xml:space="preserve">
+    <value>Action available when {0} examiners have been assigned to the test</value>
+  </data>
+  <data name="MarksNotSubmitted" xml:space="preserve">
+    <value>All examiner marks must be submitted</value>
+  </data>
+  <data name="ResultsAlreadyChecked" xml:space="preserve">
+    <value>Results has been already checked</value>
+  </data>
+  <data name="TestDoesntAllowAutoCalculate" xml:space="preserve">
+    <value>Marks has been overriden</value>
+  </data>
+  <data name="ExaminerResultIsDifferentToFinalResult" xml:space="preserve">
+    <value>Examiner result is different to final result.</value>
+  </data>
+  <data name="InvalidateTestLabel" xml:space="preserve">
+    <value>Invalidate Test</value>
+  </data>
+  <data name="ActionNotSupportedForSponsoredApplications" xml:space="preserve">
+    <value>Action not supported for Untrusted sponsored applications</value>
+  </data>
+  <data name="ActivtyPointsNotFulfilled" xml:space="preserve">
+    <value>Activity points not fulfilled</value>
+  </data>
+  <data name="CredentialPreconditionsNotMet" xml:space="preserve">
+    <value>Credential preconditions not met</value>
+  </data>
+  <data name="CredentialRequirementNotMet" xml:space="preserve">
+    <value>Requirement not met for credential {0} {1}</value>
+  </data>
+  <data name="InvalidCredentialRequestStatus" xml:space="preserve">
+    <value>Credential requests must be  in {0} status</value>
+  </data>
+  <data name="MarkAsReadyForAssessmentLabel" xml:space="preserve">
+    <value>Mark For Assessment</value>
+  </data>
+  <data name="TestInvoiceProcessedLabel" xml:space="preserve">
+    <value>Test Invoice Processed</value>
+  </data>
+  <data name="TestSpecificationChanged" xml:space="preserve">
+    <value>Test Specifcation for Test Attendance Id {0} has been changed from #{1} to # {2}</value>
+  </data>
+  <data name="TestResultsComputed" xml:space="preserve">
+    <value>Test results have been computed for Test Attendance Id {0}</value>
+  </data>
+  <data name="CredentialMustBeAssessManually" xml:space="preserve">
+    <value>To satisfy auditing requirements, these credentials must be assessed manually</value>
+  </data>
+  <data name="NotRequiredPoints" xml:space="preserve">
+    <value>Credential {0} {1} does not have required points</value>
+  </data>
+  <data name="ProfessionalDevelopmentDoesntHaveRequiredPoints" xml:space="preserve">
+    <value>Professional Development doesnt have required points</value>
+  </data>
+  <data name="EndorsedQualifications" xml:space="preserve">
+    <value>Endorsed Qualifications</value>
+  </data>
+  <data name="EndorsementPeriod" xml:space="preserve">
+    <value>Endorsement Period</value>
+  </data>
+  <data name="Institution" xml:space="preserve">
+    <value>Institution</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Qualification" xml:space="preserve">
+    <value>Qualification</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Date/Time</value>
+  </data>
+  <data name="CredentialNotFound" xml:space="preserve">
+    <value>Credential {0} {1} was not found in certification period {2}. It may has been manually processed.</value>
+  </data>
+  <data name="ApplicationId" xml:space="preserve">
+    <value>Application Id</value>
+  </data>
+  <data name="CredentialEndDate" xml:space="preserve">
+    <value>Credential End Date</value>
+  </data>
+  <data name="CredentialStartDate" xml:space="preserve">
+    <value>Credential Start Date</value>
+  </data>
+  <data name="CustomerNumber" xml:space="preserve">
+    <value>Customer Number</value>
+  </data>
+  <data name="IssueDate" xml:space="preserve">
+    <value>Issue Date</value>
+  </data>
+  <data name="OnlineDirectory" xml:space="preserve">
+    <value>Online Directory</value>
+  </data>
+  <data name="IssuingNotAllowed" xml:space="preserve">
+    <value>Issuing Pass/Fail for this test is not allowed.</value>
+  </data>
+  <data name="IssueResultsNotAllowed" xml:space="preserve">
+    <value>Issue Results not allowed</value>
+  </data>
+  <data name="NoCredentials" xml:space="preserve">
+    <value>No credentials are available to recertify.</value>
+  </data>
+  <data name="RecertificationReminderSent" xml:space="preserve">
+    <value>Recertification reminder email sent.</value>
+  </data>
+  <data name="SendTestSessionReminder" xml:space="preserve">
+    <value>Send Test Session Reminder</value>
+  </data>
+  <data name="AvailabilityNoticeNotAllowed" xml:space="preserve">
+    <value>Availability notice cannot be sent for this credential type.</value>
+  </data>
+  <data name="SendSessionAvailabilityReminderLabel" xml:space="preserve">
+    <value>Send Session Availability Reminder</value>
+  </data>
+  <data name="RequestRefundLabel" xml:space="preserve">
+    <value>Request Refund</value>
+  </data>
+  <data name="PaidAmount" xml:space="preserve">
+    <value>Paid Amount</value>
+  </data>
+  <data name="RefundAmount" xml:space="preserve">
+    <value>Refund Amount</value>
+  </data>
+  <data name="RefundMethod" xml:space="preserve">
+    <value>Refund Method</value>
+  </data>
+  <data name="RefundPercentage" xml:space="preserve">
+    <value>Refund Percentage</value>
+  </data>
+  <data name="RefundPolicy" xml:space="preserve">
+    <value>Refund Policy</value>
+  </data>
+  <data name="InvoiceNumber" xml:space="preserve">
+    <value>Invoice Number</value>
+  </data>
+  <data name="RefundNotCalculated" xml:space="preserve">
+    <value>Refund Amount could not be calculated</value>
+  </data>
+  <data name="UpdateCreditNoteError" xml:space="preserve">
+    <value>Credit Note{0}: {1}</value>
+  </data>
+  <data name="NoRefundCalculated" xml:space="preserve">
+    <value>System has calculated that payment is not entitled for a refund</value>
+  </data>
+  <data name="UndefinedRefund" xml:space="preserve">
+    <value>Refund Not Available</value>
+  </data>
+  <data name="ApproveRefundLabel" xml:space="preserve">
+    <value>Approve Refund Request</value>
+  </data>
+  <data name="RejectRefundLabel" xml:space="preserve">
+    <value>Reject Refund</value>
+  </data>
+  <data name="CalculatedRefundAmount" xml:space="preserve">
+    <value>Calculated Refund Amount (based on the policy)</value>
+  </data>
+  <data name="NoRefundRequestFound" xml:space="preserve">
+    <value>No refund requests found</value>
+  </data>
+  <data name="CreditNotePaidLabel" xml:space="preserve">
+    <value>Credit Note Paid</value>
+  </data>
+  <data name="CreditNoteProcessedLabel" xml:space="preserve">
+    <value>Credit Note Processed</value>
+  </data>
+  <data name="ProcessRefundLabel" xml:space="preserve">
+    <value>Process Refund</value>
+  </data>
+  <data name="CreditNoteProcessedActionLabel" xml:space="preserve">
+    <value>Credit Note Processed</value>
+  </data>
+  <data name="CreditNotFoundErrorMessage" xml:space="preserve">
+    <value>Credit note not found</value>
+  </data>
+  <data name="PaymentReferenceNotFoundErrorMessage" xml:space="preserve">
+    <value>Payment Reference not found</value>
+  </data>
+  <data name="ApproveRefundActionLabel" xml:space="preserve">
+    <value>Approve Refund Request</value>
+  </data>
+  <data name="ProcessRefundActionLabel" xml:space="preserve">
+    <value>Process Refund</value>
+  </data>
+  <data name="RejectRefundActionLabel" xml:space="preserve">
+    <value>Reject Refund</value>
+  </data>
+  <data name="RequestRefundActionLabel" xml:space="preserve">
+    <value>Request Refund</value>
+  </data>
+  <data name="RequestRefund" xml:space="preserve">
+    <value>Request Refund</value>
+  </data>
+  <data name="StartAssesingActionLabel" xml:space="preserve">
+    <value>Start Assessing</value>
+  </data>
+  <data name="ErrorProcessingSecurePayRefund" xml:space="preserve">
+    <value>Error processing Secure Pay refund. Error code: {0}. Error description: {1}. System Error: {2}</value>
+  </data>
+  <data name="RefundComments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="BankDetails" xml:space="preserve">
+    <value>Bank Account Details</value>
+  </data>
+  <data name="InvalidRefundAmount" xml:space="preserve">
+    <value>Invalid refund amount.</value>
+  </data>
+  <data name="SendRecertificationReminderLabel" xml:space="preserve">
+    <value>Send Recertification Reminder</value>
+  </data>
+  <data name="CoordinatorCredentialTypes" xml:space="preserve">
+    <value>Coordinator Credential Types</value>
+  </data>
+  <data name="MarkingCredentialTypes" xml:space="preserve">
+    <value>Marking Credential Types</value>
+  </data>
+  <data name="MaterialCredentialTypes" xml:space="preserve">
+    <value>Material Credential Types</value>
+  </data>
+  <data name="CredentialRequestWizardMessage" xml:space="preserve">
+    <value>Please take note that completing the allocation of test session from this screen will mean that there is no test fee applicable. Ensure this is correct before completing this step. Invoice will still be generated for sponsored application.</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="InvalidRefundRequestDate" xml:space="preserve">
+    <value>Invoice is not found. You cannot submit a refund request for this.</value>
+  </data>
+  <data name="CreatePaidTestReviewWizardMessage" xml:space="preserve">
+    <value>Please take note that creating a paid test review from this screen does NOT generate an invoice for the review fee. Ensure this is correct before completing this step. Invoice will still be generated for sponsored application.</value>
+  </data>
+  <data name="CreateSupplementaryTestWizardMessage" xml:space="preserve">
+    <value>Please take note that creating a supplementary test from this screen does NOT generate an invoice for the supplementary test fee. Ensure this is correct before completing this step. Invoice will still be generated for sponsored application.</value>
+  </data>
+  <data name="PrerequisiteSummary" xml:space="preserve">
+    <value>Prerequisite Summary</value>
+  </data>
+  <data name="Match" xml:space="preserve">
+    <value>Match</value>
+  </data>
+  <data name="MatchingCredential" xml:space="preserve">
+    <value>Matching Credential</value>
+  </data>
+  <data name="PrerequisiteCredential" xml:space="preserve">
+    <value>Prerequisite Credential</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="IncompleteCredentialPrerequisiteCheckMessage" xml:space="preserve">
+    <value>The person does not have all mandatory prerequisite credentials. Do you want to proceed with issuing this credential?</value>
+  </data>
+  <data name="IncompleteCredentialPrerequisiteUncheckMessage" xml:space="preserve">
+    <value>Completing this wizard will move the credential request to On Hold. You may come back and retry issuing this credential once all prerequisite credentials are completed.</value>
+  </data>
+  <data name="ProceedWithCredentialIssue" xml:space="preserve">
+    <value>Proceed with issuing this credential</value>
+  </data>
+  <data name="IncompletePrerequisite" xml:space="preserve">
+    <value>Incomplete Prerequisite Credential(s)</value>
+  </data>
+  <data name="PrerequisitesSatisfied" xml:space="preserve">
+    <value>All Prerequisite Credentials are satisfied.</value>
+  </data>
+  <data name="CertificationOnHoldLabel" xml:space="preserve">
+    <value>Certification On Hold</value>
+  </data>
+  <data name="CreatePreRequisiteApplicationsLabel" xml:space="preserve">
+    <value>Create Prerequisite Applications</value>
+  </data>
+  <data name="PrerequisiteApplications" xml:space="preserve">
+    <value>Prerequisite Applications</value>
+  </data>
+  <data name="PrerequisiteConfirmApplicationCreation" xml:space="preserve">
+    <value>Prerequisite Confirm Application Creation</value>
+  </data>
+  <data name="PrerequisiteMandatoryDocumentTypes" xml:space="preserve">
+    <value>Prerequisite Mandatory Document Types</value>
+  </data>
+  <data name="PrerequisiteMandatoryFields" xml:space="preserve">
+    <value>Prerequisite Mandatory Fields</value>
+  </data>
+  <data name="AutoCreated" xml:space="preserve">
+    <value>Auto Created</value>
+  </data>
+  <data name="CurrentCredentialRequests" xml:space="preserve">
+    <value>Current Credential Requests</value>
+  </data>
+  <data name="DateCreated" xml:space="preserve">
+    <value>Created Date</value>
+  </data>
+  <data name="ExistingApplications" xml:space="preserve">
+    <value>Existing Applications</value>
+  </data>
+  <data name="RequiredPrerequisites" xml:space="preserve">
+    <value>Required Prerequisites</value>
+  </data>
+  <data name="MandatoryDocumentsSatisfied" xml:space="preserve">
+    <value>All mandatory application documents are satisfied.</value>
+  </data>
+  <data name="MandatoryInformationSatisfied" xml:space="preserve">
+    <value>All mandatory application information is satisfied.</value>
+  </data>
+  <data name="NoIncompleteMandatories" xml:space="preserve">
+    <value>No incomplete mandatories found. Press OK to proceed with new application(s) creation.</value>
+  </data>
+  <data name="IncompleteMandatoriesFound" xml:space="preserve">
+    <value>There is incomplete mandatory information found. Do you want to poceed with the new applications(s) creation?</value>
+  </data>
+  <data name="ProceedWithApplicationCreation" xml:space="preserve">
+    <value>Proceed to new application creation.</value>
+  </data>
+  <data name="IncompleteMandatoriesCreateAsDraft" xml:space="preserve">
+    <value>The new application(s) will be created as Draft due to insufficient mandatory information. You may need to manually update the mandatory fields by going to the affected application(s).</value>
+  </data>
+  <data name="IncompleteMandatoriesNoCreation" xml:space="preserve">
+    <value>No new applications will be created.</value>
+  </data>
+  <data name="MandatoryDocumentTypes" xml:space="preserve">
+    <value>Mandatory Document Types</value>
+  </data>
+  <data name="MandatoryInformation" xml:space="preserve">
+    <value>Mandatory Information</value>
+  </data>
+  <data name="CreatePrerequisiteApplictionsActionLabel" xml:space="preserve">
+    <value>Create Prerequisite Applications</value>
+  </data>
+  <data name="NoNewApplications" xml:space="preserve">
+    <value>No new applications</value>
+  </data>
+  <data name="NoSelectionNewApplications" xml:space="preserve">
+    <value>There is no selection to create new applications. No new prerequisite applications will be created.</value>
+  </data>
+  <data name="PrerequisiteApplicationsWizardStep" xml:space="preserve">
+    <value>These are the applications to the prerequisite credential(s). Check the box for the creation of a new application relating to the prerequisite credential from this table.</value>
+  </data>
+  <data name="CredentialOnHold" xml:space="preserve">
+    <value>The credential will be placed on hold.</value>
+  </data>
+  <data name="CredentialWillBePutOnHold" xml:space="preserve">
+    <value>Place on hold</value>
+  </data>
+  <data name="IssuePracticeTestResultsLabel" xml:space="preserve">
+    <value>Issue Practice Test Results</value>
+  </data>
+  <data name="Exempted" xml:space="preserve">
+    <value>Exempted</value>
+  </data>
+  <data name="ExemptedBy" xml:space="preserve">
+    <value>Exempted By</value>
+  </data>
+  <data name="ExemptedDate" xml:space="preserve">
+    <value>Exempted Date</value>
+  </data>
+  <data name="PrerequisiteExemptionStep" xml:space="preserve">
+    <value>There seems to be mandatory prerequisite credentials not available to the person. {0}</value>
+  </data>
+  <data name="PrerequisiteExemptions" xml:space="preserve">
+    <value>Prerequisite Exemptions</value>
+  </data>
+  <data name="ExemptionDate" xml:space="preserve">
+    <value>Exemption Date</value>
+  </data>
+  <data name="IssueOnHoldCredentialsCheckBoxMessage" xml:space="preserve">
+    <value>Proceed with issuing the parent credential(s).</value>
+  </data>
+  <data name="IssueOnHoldCredentialsStepMessage" xml:space="preserve">
+    <value>The current credential being issued has the following credentials on hold which are dependant on this credential. Would you like to issue these credentials as well?</value>
+  </data>
+  <data name="IssueOnHoldCredentialsUnCheckMesssage" xml:space="preserve">
+    <value>Completing this wizard will not issue any of the parent credentials on hold that are dependant on this credential.</value>
+  </data>
+  <data name="CredentialIssuedSuccessfully" xml:space="preserve">
+    <value>The issue credential action for credential request [{0}] completed successfully.</value>
+  </data>
+  <data name="Deactivate" xml:space="preserve">
+    <value>Deactivate</value>
+  </data>
+  <data name="GeneratedDate" xml:space="preserve">
+    <value>Generated Date</value>
+  </data>
+  <data name="ModifiedDate" xml:space="preserve">
+    <value>Modified Date</value>
+  </data>
+  <data name="PractitionerVerificationUrl" xml:space="preserve">
+    <value>Practitioner Verification Url</value>
+  </data>
+  <data name="IssueOnHoldCredentialsLabel" xml:space="preserve">
+    <value>Issue On Hold Credentials</value>
+  </data>
+  <data name="IssuePracticeTestResultsActionLabel" xml:space="preserve">
+    <value>Issue Practice Test Results</value>
+  </data>
+  <data name="NoParentOnHoldCredentials" xml:space="preserve">
+    <value>There are no parent on hold credentials that are elligible to be issued with the current credential.</value>
+  </data>
+  <data name="OnHoldToOnHoldToBeIssuedNote" xml:space="preserve">
+    <value>The status of the credential request {0} has changed from Credential On Hold to On Hold To Be Issued.</value>
+  </data>
+  <data name="IssueOnHoldCredentialsCheckMesssage" xml:space="preserve">
+    <value>The selected credential will be issued in the next batch job that runs every 20 minutes.</value>
+  </data>
+  <data name="ComposeEmail" xml:space="preserve">
+    <value>Compose Email</value>
+  </data>
+  <data name="SendEmailActionLabel" xml:space="preserve">
+    <value>Send Email</value>
+  </data>
+</root>

@@ -1,0 +1,21 @@
+﻿[
+  {
+    "outputFile": "Content/Overrides.css",
+    "inputFile": "Content/Overrides.less",
+    "options": {
+      "relativeUrls": false
+    }
+  },
+  {
+    "outputFile": "Content/Forms.css",
+    "inputFile": "Content/Forms.less"
+  },
+  {
+    "outputFile": "Content/roboto.css",
+    "inputFile": "Content/roboto.less"
+  },
+  {
+    "outputFile": "fonts/SourceSansPro/sourcesanspro.css",
+    "inputFile": "fonts/SourceSansPro/sourcesanspro.less"
+  }
+]

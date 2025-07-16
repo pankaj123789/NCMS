@@ -1,0 +1,6 @@
+﻿SET IDENTITY_INSERT tblCredentialApplicationType ON
+INSERT INTO tblCredentialApplicationType (CredentialApplicationTypeId, Name, DisplayName, Online, BackOffice, RequiresChecking, RequiresAssessment, PendingAllowed, AssessmentReviewAllowed) VALUES (2, 'Certification', 'Certification', 1, 0, 1, 1, 1, 0)
+INSERT INTO tblCredentialApplicationType (CredentialApplicationTypeId, Name, DisplayName, Online, BackOffice, RequiresChecking, RequiresAssessment, PendingAllowed, AssessmentReviewAllowed) VALUES (3, 'CCL', 'Credentialed Community Language', 1, 0, 1, 0, 0, 0)
+INSERT INTO tblCredentialApplicationType (CredentialApplicationTypeId, Name, DisplayName, Online, BackOffice, RequiresChecking, RequiresAssessment, PendingAllowed, AssessmentReviewAllowed) VALUES (4, 'Ethics', 'Ethics', 0, 1, 0, 0, 0, 0)
+INSERT INTO tblCredentialApplicationType (CredentialApplicationTypeId, Name, DisplayName, Online, BackOffice, RequiresChecking, RequiresAssessment, PendingAllowed, AssessmentReviewAllowed) VALUES (5, 'Intercultural', 'Intercultural', 0, 1, 0, 0, 0, 0)
+SET IDENTITY_INSERT tblCredentialApplicationType OFF

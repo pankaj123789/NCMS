@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.ShowLogon = false;
+    ViewBag.ShowMenu = false;
+    ViewBag.RedirectLogoUrl = System.Configuration.ConfigurationManager.AppSettings["ExternalUrl_NAATI_URL"];
+    ViewBag.Title = "myNAATI Registration";
+}
+@section Head {
+}
+<h2><span style="text-transform: none">myNAATI</span> Registration</h2>
+<div class="text-center wrapper-xl">
+    <span class="fa fa-check-circle text-primary fa-5x"></span>
+    <div class="text-center wrapper">
+        <h4>
+            You have been successfully registered to use <span style="text-transform: none">myNAATI</span>.
+        </h4>
+        <h3>  An email has been sent to @ViewBag.RegisterEmail with the password you will need to logon.<br /></h3>
+        <br/>
+        <h4>@Html.ActionLink("CLICK HERE", "Index", "Home") TO RETURN TO LOGON PAGE </h4>
+    </div>
+</div>
+

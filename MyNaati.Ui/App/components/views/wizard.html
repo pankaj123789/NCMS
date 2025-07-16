@@ -1,0 +1,49 @@
+﻿<div>
+    <!--ko component: loaderOptions--><!--/ko-->
+    <div class="bs-vertical-wizard">
+        <ul>
+            <!--ko foreach: { data: sections, as: 's' }-->
+            <li data-bind="css: { current: s.current, complete: s.complete, locked: !s.skipped() && !s.current() && !s.complete() }">
+                <a href="#" data-bind="event: { click: function() { event.preventDefault(); } }">
+                    <span data-bind="html: s.Name"></span>
+                    <!--ko if: s.complete-->
+                    <i class="ico fa fa-check"></i>
+                    <!--/ko-->
+                    <!--ko if: !s.skipped() && !s.current() && !s.complete()-->
+                    <i class="ico fa fa-lock"></i>
+                    <!--/ko-->
+                    <!--ko if: s.Description-->
+                    <span class="desc" data-bind="html: s.Description"></span>
+                    <!--/ko-->
+                </a>
+                <div class="content" data-bind="visible: s.show">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="form">
+                                <!--ko foreach: { data: s.Questions, as: 'q' }-->
+                                <div class="form-group" data-bind="attr: { id: 'question' + q.Id() }, validationElement: q.Response">
+                                    <label class="control-label" data-bind="html: q.Question, visible: q.Question"></label>
+                                    <p class="text-muted" data-bind="visible: q.Description()">
+                                        <em data-bind="html: q.Description"></em>
+                                    </p>
+                                    <!--ko if: q.composeReady-->
+                                    <!--ko compose: q.getCompose()--><!--/ko-->
+                                    <!--/ko-->
+                                    <span class="help-block" data-bind="validationMessage: q.Response"></span>
+                                </div>
+                                <!--/ko-->
+                            </div>
+                        </div>
+                        <!--ko if: s.current-->
+                        <div class="panel-footer">
+                            <button class="btn btn-primary" data-bind="click: $component.next, visible: $component.nextQuestion(), enable: $component.enableActions">Next</button>
+                            <button class="btn btn-primary" data-bind="click: $component.finish, visible: !$component.nextQuestion(), enable: $component.enableActions, text: $component.finishLabel"></button>
+                        </div>
+                        <!--/ko-->
+                    </div>
+                </div>
+            </li>
+            <!--/ko-->
+        </ul>
+    </div>
+</div>

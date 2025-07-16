@@ -1,0 +1,109 @@
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" data-bind="attr: { id: modalId }">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-light">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.Test.resources.AddExaminer'"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="ui-front">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group col-md-2" data-bind="validationElement: dueDate">
+                                    <label data-bind="reshtml: 'Naati.Resources.Test.resources.DueDate'"></label>
+                                    <!-- ko component: {
+                                    name: 'date-input',
+                                    params: {
+                                            value: dueDate,
+                                            resattr: {
+                                                placeholder: 'Naati.Resources.Test.resources.DueDate'
+                                            }
+                                        }
+                                    } -->
+                                    <!-- /ko -->
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialType'"></label>
+                                    <span class="clear m-t-xs" data-bind="html: test().CredentialTypeInternalName"></span>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label data-bind="reshtml: 'Naati.Resources.Application.resources.Skill'"></label>
+                                    <span class="clear m-t-xs" data-bind="html: test().Skill"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form>
+                                <div class="row">
+                                    <div class="form-group" data-bind="validationElement: currentExaminer.PanelMembershipId, css: { 'col-md-3': !addMode() && showExaminerType(), 'col-md-6': addMode() || !showExaminerType() }">
+                                        <label data-bind="reshtml: 'Naati.Resources.Test.resources.Examiner'"></label>
+                                        <select class="form-control" data-bind="multiselect, value: currentExaminer.PanelMembershipId, options: examinersOptions, optionsValue: 'PanelMembershipId', optionsText: 'DisplayName', valueAllowUnset: true"></select>
+                                    </div>
+                                    <div class="form-group col-md-3" data-bind="validationElement: currentExaminer.ProductSpecificationId">
+                                        <label data-bind="reshtml: 'Naati.Resources.Test.resources.ProductSpecificationCodeLabel'"></label>
+                                        <select class="form-control" data-bind="multiselect, value: examinerProductSpecificationId, options: productSpecificationsOptions, optionsValue: 'Id', optionsText: 'DisplayNameWithGlCode', valueAllowUnset: true"></select>
+                                    </div>
+                                    <div class="form-group col-md-2" data-bind="validationElement: currentExaminer.ExaminerCost">
+                                        <label data-bind="reshtml: 'Naati.Resources.Test.resources.CostPerTest'"></label>
+                                        <input ui-jq="TouchSpin" data-bind="jqueryui, value: currentExaminer.ExaminerCost, enableWithPermission: 'FinanceOther.Update'" type="text" value="0" class="form-control w-md" data-min="0" data-max="9999999" data-step="0.01" data-decimals="2" data-buttondown_class="hide" data-buttonup_class="hide" data-prefix="$">
+                                    </div>
+                                    <!--ko if: showExaminerType()-->
+                                    <div class="form-group col-md-3" data-bind="validationElement: currentExaminer.ExaminerType, css: { 'col-md-4': !addMode() }">
+                                        <label data-bind="reshtml: 'Naati.Resources.Test.resources.ExaminerType'"></label>
+                                        <select class="form-control" data-bind="multiselect: { enableFiltering: false, enableCaseInsensitiveFiltering: null }, value: currentExaminer.ExaminerType, options: examinerTypesOptions, optionsValue: 'Type', optionsText: 'Name', valueAllowUnset: true, optionsAfterRender: examinerTypesOptionsAfterRender"></select>
+                                    </div>
+                                    <!--/ko-->
+                                    <div class="form-group col-md-1">
+                                        <label>&nbsp;</label>
+                                        <button class="btn btn-success form-control" data-bind="click: pushExaminer">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="table-responsive">
+                            <table data-bind="datatable: datatable" class="table table-striped b-t b-b" style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th data-bind="reshtml: 'Naati.Resources.Test.resources.Examiner'"></th>
+                                        <!--<th data-bind="reshtml: 'Naati.Resources.Test.resources.ProductSpecificationCodeLabel'"></th>-->
+                                        <th data-bind="reshtml: 'Naati.Resources.Test.resources.CostPerTest'"></th>
+                                        <th data-bind="reshtml: 'Naati.Resources.Test.resources.ExaminerType'"></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach: { data: examinersToSave, as: 'e' }">
+                                    <tr>
+                                        <td data-bind="text: e.DisplayName"></td>
+                                        <!--<td data-bind="text: e.ProductSpecification"></td>-->
+                                        <td data-bind="text: e.ExaminerCost"></td>
+                                        <td data-bind="text: $root.getExaminerType(e)"></td>
+                                        <td class="text-center" style="width: 150px;">
+                                            <div class="btn-group">
+                                                <a href="#" class="btn btn-danger btn-xs" data-bind="click: function() { $parent.removeExaminer(e); }, tooltip: { container: '.modal-body:visible' }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-bind="enable: canSave, click: save, disableOnAjaxStart">
+                    <i class="fa fa-check"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fa fa-ban"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

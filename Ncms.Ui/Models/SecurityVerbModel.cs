@@ -1,0 +1,9 @@
+﻿namespace Ncms.Ui.Models {
+    public class SecurityVerbModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
+        public long Value { get; set; }
+    }
+}

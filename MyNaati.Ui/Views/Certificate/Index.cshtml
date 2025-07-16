@@ -1,0 +1,70 @@
+﻿@model MyNaati.Ui.ViewModels.Products.ProductListViewModel
+@{
+    ViewBag.Title = "Certificates";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Products", Url.Action("index", "Product")),
+        new Tuple<string, string>("Certificates", string.Empty)
+    };
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">What Certificates Can I Order?</h2>
+        </div>
+    </div>
+    @if (Model.AvailableProducts.Any())
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <p>
+                    You can order any of the certificates listed below. All certificates show the date at which your credential expires if part of the revalidation system.
+                    <br />
+                    If you would like a certificate in both directions that is not available in the list below, please contact NAATI.
+                </p>
+            </div>
+        </div>
+        Html.RenderPartial("_AvailableProductListPartial", Model.AvailableProducts);
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <p>You have no credentials for which a certificate may be purchased.</p>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-primary">How Much Does It Cost?</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                Prices include postage and handling fees for standard delivery. All fees and charges are listed in Australian currency ($AUD).
+                <br />
+                NAATI maintains the copyright over the certificate design. The certificate can only be obtained by direct application to NAATI.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @{ Html.RenderPartial("_ProductFeeListPartial", Model.Fees); }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Note: if special delivery is required, contact NAATI for prices.</p>
+        </div>
+    </div>
+    @if (Model.AvailableProducts.Any())
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <a class="btn btn-primary" href="@Url.Action("StartWizard", "Certificate")">Order Now</a>
+            </div>
+        </div>
+    }
+</div>

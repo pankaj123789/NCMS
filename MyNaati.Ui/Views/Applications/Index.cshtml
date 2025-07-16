@@ -1,0 +1,31 @@
+﻿@using MyNaati.Ui.Common
+@{
+    ViewBag.Title = "Apply for Credentials";
+    Layout = "~/Views/Shared/MasterPages/_ApplicationsIntroLayout.cshtml";
+}
+
+<h2>Apply for Credentials</h2>
+
+<p>A NAATI credential is proof of your professional qualifications as a translator and interpreter.  Only credentials issued by NAATI
+       are officially accepted by employers in Australia
+</p>
+<p>
+       A NAATI credential can be obtained in one of <a href="@Url.ExternalUrlFromConfig("AccreditationAndTesting")" target="_blank">five ways</a>.
+</p>
+<p>
+You can apply online if you would like to:
+   <ul>
+       <li>Take a test set by NAATI or</li>
+       <li>Apply based on your completion of an approved Australian course.</li>
+   </ul>
+</P>
+
+<p>myNAATI walks you through the application process.  At the end of the process, you will download a pre-filled application to send to us along with your 
+      payment and supporting documentation.
+</p>
+
+<p>If you are a registered user of myNAATI, you will need to supply less information if you @Html.ActionLink("log On", "LogOn", "Account") first.
+
+
+
+

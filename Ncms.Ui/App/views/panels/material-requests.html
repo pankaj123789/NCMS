@@ -1,0 +1,59 @@
+<div id="memberModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-light">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: title()"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form>
+                            <div class="form-group col-md-12" data-bind="validationElement: currentMember.PersonId">
+                                <label data-bind="reshtml: 'Naati.Resources.Shared.resources.NAATINumber'"></label>
+                                <!-- ko component: { name: 'auto-text-input', params: naatiNumberOptions } -->
+                                <!-- /ko -->
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></label>
+                                <!-- ko component: { name: 'text-input', params: personNameOptions } -->
+                                <!-- /ko -->
+                            </div>
+                            <div class="form-group col-md-12" data-bind="validationElement: currentMember.PanelRoleId">
+                                <label data-bind="reshtml: 'Naati.Resources.Shared.resources.Role'"></label>
+                                <!-- ko component: { name: 'select-component', params: panelRoleOptions } -->
+                                <!-- /ko -->
+                            </div>
+                            <!-- ko ifnot: credentialTypeOptions.disable() -->
+                            <div class="form-group col-md-12">
+                                <label data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialType'"></label>
+                                <!-- ko component: { name: 'select-component', params: credentialTypeOptions } -->
+                                <!-- /ko -->
+                            </div>
+                            <!-- /ko -->
+                            <div class="form-group col-md-12" data-bind="validationElement: currentMember.StartDate">
+                                <label data-bind="reshtml: 'Naati.Resources.Shared.resources.StartDate'"></label>
+                                <!-- ko component: { name: 'date-input', params: startDateOptions } -->
+                                <!-- /ko -->
+                            </div>
+                            <div class="form-group col-md-12" data-bind="validationElement: currentMember.EndDate">
+                                <label data-bind="reshtml: 'Naati.Resources.Shared.resources.EndDate'"></label>
+                                <!-- ko component: { name: 'date-input', params: endDateOptions } -->
+                                <!-- /ko -->
+                            </div>
+
+                        </form>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-bind="click: save">
+                    <i class="fa fa-check"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

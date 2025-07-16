@@ -1,0 +1,87 @@
+﻿@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+@{
+    ViewBag.Subtitle = "Select Address";
+    Layout = "~/Views/Shared/MasterPages/_PDListingWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Directory Listing", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+
+            var $checkboxes = $(formSelector + ' input[type="checkbox"]');
+
+            function onCheckboxChange() {
+                var $checkbox = $(this);
+                var checked = $checkbox.prop('checked');
+
+                if (checked) {
+                    $.each($checkboxes, function (index, value) {
+                        var $value = $(value);
+                        $value.prop('checked', false);
+                        $value.val(false);
+                    });
+                }
+
+                $checkbox.prop('checked', checked);
+                $checkbox.val(checked);
+            }
+
+            $checkboxes.change(onCheckboxChange);
+
+            $('tr').click(function (event) {
+                var $checkbox = $(this).find('input[type="checkbox"]');
+
+                if (event.target !== $checkbox[0]) {
+                    $checkbox.prop('checked', !$checkbox.prop('checked'));
+                    onCheckboxChange.call($checkbox[0]);
+                }
+            });
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>Select an address to be shown in the directory.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>In Directory</th>
+                        <th>Address</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Addresses.Count; i++)
+                    {
+                        var address = Model.Addresses[i];
+
+                        <tr style="cursor: pointer">
+                            <td class="text-center">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="Addresses[@i].InDirectory" type="checkbox" value="@address.InDirectory.ToString().ToLower()" />
+                                        <input name="Addresses[@i].Id" type="hidden" value="@address.Id" />
+                                    </label>
+                                </div>
+                            </td>
+                            <td>@address.Address</td>
+                            <td>@address.Type</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

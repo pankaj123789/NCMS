@@ -1,0 +1,31 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.ApplicationForAccreditation.ResidencyStatusModel
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Are you currently residing in Australia?</label>
+        <div class="col-sm-3">
+            <label class="radio-inline">
+                @Html.RadioButtonFor(model => model.IsCurrentlyResidingInAustralia, true, new { id = "rbCurrentlyResidingInAustraliaYes" })@Html.Label("rbCurrentlyResidingInAustraliaYes", "Yes")
+            </label>
+            <label class="radio-inline">
+                @Html.RadioButtonFor(model => model.IsCurrentlyResidingInAustralia, false, new { id = "rbCurrentlyResidingInAustraliaNo" })@Html.Label("rbCurrentlyResidingInAustraliaNo", "No")
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CountryId, new { @class = "col-sm-offset-1 col-sm-5 control-label" })
+        <div class="col-sm-3">
+            @Html.DropDownListFor(model => model.CountryId, Model.CountryList, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Are you an Australian Permanent Resident or citizen?</label>
+        <div class="col-sm-3">
+            <label class="radio-inline">
+                @Html.RadioButtonFor(model => model.IsAustralianResident, true, new { id = "rbAustralianResidentYes" })@Html.Label("rbAustralianResidentYes", "Yes")
+            </label>
+            <label class="radio-inline">
+                @Html.RadioButtonFor(model => model.IsAustralianResident, false, new { id = "rbAustralianResidentNo" })@Html.Label("rbAustralianResidentNo", "No")
+            </label>
+        </div>
+    </div>
+</div>

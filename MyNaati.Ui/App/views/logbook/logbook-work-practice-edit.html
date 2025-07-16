@@ -1,0 +1,34 @@
+﻿<div id="addWorkPracticeModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span data-bind="text: workPractice.Id() ? 'Edit ' : 'Add '"></span>work practice</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form">
+                    <div class="row">
+                        <div class="form-group col-sm-6" data-bind="validationElement: workPractice.Date">
+                            <label class="control-label">Date</label>
+                            <input type="text" class="form-control w-sm" data-bind="datepicker: { value: workPractice.Date}, enable: editable" />
+                            <span class="help-block" data-bind="validationMessage: workPractice.Date"></span>
+                        </div>
+                        <div class="form-group col-sm-6" data-bind="validationElement: workPractice.Points">
+                            <label class="control-label" data-bind="text: credential.WorkPracticeUnits"></label>
+                            <input type="number" class="form-control w-sm" data-bind="value: workPractice.Points, enable: editable" />
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: workPractice.Description">
+                        <label class="control-label">Description</label>
+                        <textarea class="form-control" data-bind="value: workPractice.Description, enable: editable" rows="3"></textarea>
+                    </div>
+                </div>
+                <!--ko compose: attachmentsOptions--><!--/ko-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bind="click: save, enable: editable, text: workPractice.Id() ? 'Save' : 'Add'">Add</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

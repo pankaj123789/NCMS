@@ -1,0 +1,69 @@
+<div id="editMarksModal" class="modal fade" data-backdrop="static" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content bg-light">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.Test.resources.EditMarks'"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="ui-front">
+                    <div class="panel panel-default">
+                        <div class="table-responsive">
+                            <table id="resultTable" class="table table-striped table-bordered table-hover b-t b-b">
+                                <thead>
+                                    <tr>
+                                        <!--ko foreach: components-->
+                                        <th class="text-center">
+                                            <span data-bind="text: Name"></span><br />
+                                            <span data-bind="text: PassMark"></span>
+                                            <span>/</span>
+                                            <span data-bind="text: TotalMarks"></span>
+                                        </th>
+                                        <!--/ko-->
+                                        <th class="text-center">
+                                            <span data-bind="reshtml: 'Naati.Resources.Test.resources.Total'"></span><br />
+                                            <span data-bind="text: overAllPassMark"></span>
+                                            <span>/</span>
+                                            <span data-bind="text: totalMarks"></span>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <!--ko foreach: components-->
+                                        <td class="text-center form-group" data-bind="validationElement: Mark">
+                                            <div class="w-xs pull-none margin-auto">
+                                                <!--ko if:ReadOnly()-->
+                                                <input ui-jq="TouchSpin" data-bind="jqueryui, value: Mark, valueUpdate: 'input'" type="text" value="0" class="form-control w-xs" data-min='0' data-max='9999999' data-step="0.1" data-decimals="1" data-buttondown_class="hide" data-buttonup_class="hide"  readonly="readonly">
+                                                <!--/ko-->
+                                                <!--ko ifnot:ReadOnly()-->
+                                                <input ui-jq="TouchSpin" data-bind="jqueryui, value: Mark, valueUpdate: 'input'" type="text" value="0" class="form-control w-xs" data-min='0' data-max='9999999' data-step="0.1" data-decimals="1" data-buttondown_class="hide" data-buttonup_class="hide">
+                                                <!--/ko-->
+                                                
+                                            </div>
+                                            <span class="help-block" data-bind="validationMessage: Mark"></span>
+                                        </td>
+                                        <!--/ko-->
+                                        <td class="text-center">
+                                            <div class="w-xs pull-none margin-auto">
+                                                <input data-bind="value: sumTotalMarks" disabled type="text" class="form-control w-x" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-bind="enable: canSave, click: save">
+                    <i class="fa fa-check"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fa fa-ban"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

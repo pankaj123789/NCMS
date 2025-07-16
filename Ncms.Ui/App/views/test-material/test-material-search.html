@@ -1,0 +1,64 @@
+<div class="hbox">
+    <div class="hbox" data-bind="component: {
+    name: 'search-component',
+    params: { 
+         title: title, 
+         filters: filters, 
+         searchType: searchType, 
+         searchTerm: searchTerm, 
+         searchCallback: searchCallback, 
+         tableDefinition: tableDefinition, 
+         additionalButtons: additionalButtons,
+         idSearchOptions: idSearchOptions
+    }
+}">
+    </div>
+    <script id="testmaterialsearch-header-template" type="text/html">
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.MaterialID'"></th>
+        <th data-bind=""></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Title'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialDomain'"></th>
+        <th class="w-sm">
+            <span data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Language'"></span>/
+            <span data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Skill'"></span>
+        </th>
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.CredentialType'" class="w-xsm"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Status'" class="w-xsm"></th>
+
+        <th class="w-xs">&nbsp;</th>
+    </script>
+    <script id="testmaterialsearch-row-template" type="text/html">
+        <tr>
+            <td style="width: 120px !important;" data-bind="text:'#'+ Id"></td>
+            <td data-bind="text: Id" class="w-xs"></td>
+            <td data-bind="text: Title"></td>
+            <td data-bind="text: Domain"></td>
+            <td data-bind="text: LanguageOrSkill" class="w-sm"></td>
+            <td data-bind="text: CredentialType" class="w-sm"></td>
+            <td class="w-sm">              
+                <span class="label text-base" data-bind="tooltip, attr: { title: BadgeTooltip },  text:BadgeText, css: 'bg-' + BadgeColor">&nbsp;</span>
+            </td>
+            <td class="w-xs text-right">
+                <!--ko if: HasFile -->
+                <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover' }, resattr: { title: 'Naati.Resources.TestMaterial.resources.ContainsFiles' }">
+                    <span class="fa fa-paperclip"></span>
+                </a>
+                <!--/ko-->
+                <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover', container: 'body', title: function () { return $root.availableMessage($data); } }">
+                    <i class="fa" data-bind="css: { 'fa-check text-success': Available, 'fa-times text-danger': !Available }"></i>
+                </a>
+                <!--ko if: $root.isWriter-->
+                <a href="#" class="btn btn-default btn-xs" data-bind="click: $root.edit">
+                    <i class="fa fa-pencil-alt"></i>
+                </a>
+                <!--/ko-->
+                <!--ko ifnot: $root.isWriter-->
+                <a href="#" class="btn btn-default btn-xs" data-bind="click: $root.edit">
+                    <i class="fa fa-eye"></i>
+                </a>
+                <!--/ko-->
+            </td>
+        </tr>
+    </script>
+    <!--ko compose: testMaterialAddOptions--><!--/ko-->
+</div>

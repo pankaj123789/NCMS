@@ -1,0 +1,28 @@
+﻿<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-bordered table-striped" data-bind="datatable: tableDefinition">
+			<thead>
+				<tr>
+					<th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.CustomerNumber'"></th>
+					<th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.ApplicationReference'"></th>
+					<th class="w-sm" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.AttendanceID'"></th>
+					<th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestSession'"></th>
+				</tr>
+			</thead>
+			<tbody data-bind="foreach: tests">
+				<tr>
+					<td>
+						<a href="#" target="_blank" class="text-info" data-bind="text: NaatiNumber, attr: { href: '#person/' + NaatiNumber }"></a>
+					</td>
+					<td>
+						<a href="#" target="_blank" class="text-info" data-bind="text: ApplicationReference, attr: { href: '#application/' + ApplicationId }"></a>
+					</td>
+					<td data-bind="text: TestSittingId"></td>
+					<td>
+						<a href="#" target="_blank" class="text-info" data-bind="text: 'TS' + TestSessionId, attr: { href: '#test-session/' + TestSessionId }"></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

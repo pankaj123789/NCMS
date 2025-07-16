@@ -1,0 +1,95 @@
+﻿<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: title"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="panel wrapper form">
+                        <div class="row">
+                            <div class="form-group col-sm-3" data-bind="validationElement: testMaterial.Title">
+                                <label class="control-label" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Title'"></label>
+                                <input type="text" class="form-control" data-bind="value: testMaterial.Title, valueUpdate: 'input', enable: isWriter" />
+                            </div>
+                            <div class="form-group col-sm-3" data-bind="validationElement: testMaterial.CredentialTypeId">
+                                <label class="control-label" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.CredentialType'"></label>
+                                <!-- ko component: { name: 'select-component', params: credentialTypeOptions } --><!-- /ko -->
+                            </div>
+                            <div class="form-group col-sm-3" data-bind="validationElement: testMaterial.TestComponentTypeId">
+                                <label class="control-label" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TaskType'"></label>
+                                <!-- ko component: { name: 'select-component', params: testComponentTypeOptions } --><!-- /ko -->
+                            </div>
+                            <div class="form-group col-sm-3" data-bind="validationElement: testMaterial.TestMaterialDomainId">
+                                <label class="control-label" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialDomain'"></label>
+                                <!-- ko component: { name: 'select-component', params: testMaterialDomainOptions } --><!-- /ko -->
+                            </div>
+                            <!--ko if: baseOnSkill-->
+                            <div class="form-group col-sm-3" data-bind="validationElement: testMaterial.SkillId">
+                                <label class="control-label" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Skill'"></label>
+                                <!-- ko component: { name: 'select-component', params: skillOptions } --><!-- /ko -->
+                            </div>
+                            <!--/ko-->
+                            <!--ko if: baseOnLanguage-->
+                            <div class="form-group col-sm-3" data-bind="validationElement: testMaterial.LanguageId">
+                                <label class="control-label" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Language'"></label>
+                                <!-- ko component: { name: 'select-component', params: languageOptions } --><!-- /ko -->
+                            </div>
+                            <!--/ko-->
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12" data-bind="validationElement: testMaterial.Notes">
+                                <label class="control-label" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Notes'"></label>
+                                <textarea class="form-control" rows="5" data-bind="value: testMaterial.Notes, valueUpdate: 'input', enable: isWriter" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-3" data-bind="validationElement: testMaterial.Available">
+                                <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" data-bind="checked: testMaterial.Available, enable: isWriter"><i></i>
+                                        <span class="padder-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Available'"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-3" data-bind="validationElement: testMaterial.IsTestMaterialTypeSource">
+                                <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" data-bind="checked: testMaterial.IsTestMaterialTypeSource, enable: isWriter"><i></i>
+                                        <span class="padder-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.ThisIsSourceMaterial'"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <!--ko compose: { model: documentsInstance, view: 'views/document/document-form-multi' }--><!--/ko-->
+                    </div>
+                    <div>
+                        <!--ko compose: { model: relationsInstance, view: 'views/test-material/test-material-relations' }--><!--/ko-->
+                    </div>
+                    <div>
+                        <!--ko compose: { model: sourceRelationsInstance, view: 'views/test-material/source-test-material-relations' }--><!--/ko-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <!--ko if: isWriter-->
+            <button class="btn btn-success" data-bind="click: save, enable: canSave">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <!--/ko-->
+            <a href="#test-material" class="btn btn-default"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+

@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "";
+}
+<html>
+<head>
+    <link href="@Url.Content("~/Content/helpStyle.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript"><!--
+        function navigate(link) {
+            parent.Content.location.hash = $(link).attr('helpTopic');
+            return false;
+        }
+    //--></script>
+</head>
+<body class="MenuBody">
+    <div id="Menu">
+        <ul>
+            <li><a href="" helpTopic="#WhatIsNAATIOnline" onClick="return navigate(this);">What is myNAATI?</a></li>
+            <li><a href="" helpTopic="#AccessNAATI" onClick="return navigate(this);">Accessing myNAATI</a></li>
+            <ul>
+                <li><a href="" helpTopic="#FindPractitioner" onClick="return navigate(this);">Find a Practitioner</a></li>
+                <li><a href="" helpTopic="#AdvancedSearch" onClick="return navigate(this);">Advanced Search</a></li>
+                <li><a href="" helpTopic="#ViewPractitionerDetails" onClick="return navigate(this);">View Details</a></li>
+            </ul>
+            <li><a href="" helpTopic="#LogIn" onClick="return navigate(this);">Log In</a></li>
+            <li><a href="" helpTopic="#Register" onClick="return navigate(this);">Register with myNAATI</a></li>
+            <ul>
+                <li><a href="" helpTopic="#RecoverPassword" onClick="return navigate(this);">Recover your password</a></li>
+                <li><a href="" helpTopic="#ChangePassword" onClick="return navigate(this);">Change your password</a></li>
+            </ul>
+            <li><a href="" helptopic="#PractitionersDirectory" onclick="return navigate(this);">
+                Practitioners Directory</a></li>
+            <ul>
+                <li><a href="" helpTopic="#MyPractitionerListing" onClick="return navigate(this);">My Listing</a></li>
+                <li><a href="" helpTopic="#UpdatePractitionerListing" onClick="return navigate(this);">To update your listing</a></li>
+            </ul>
+            <li><a href="" helpTopic="#ApplyForCredentials" onClick="return navigate(this);">Apply for Credentials</a></li>
+            <li><a href="" helpTopic="#PurchaseProducts" onClick="return navigate(this);">Purchase Products</a></li>
+            <li><a href="" helpTopic="#MaintainPersonalDetails" onClick="return navigate(this);">Maintain Details</a></li>
+            <ul>
+                <li><a href="" helpTopic="#ViewDetails" onClick="return navigate(this);">View Personal details</a></li>
+                <li><a href="" helpTopic="#UpdateDetails" onClick="return navigate(this);">Update your details</a></li></ul>
+        </ul>
+    </div>
+</body>
+</html>

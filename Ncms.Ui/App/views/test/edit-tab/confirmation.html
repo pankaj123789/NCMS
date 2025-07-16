@@ -1,0 +1,45 @@
+﻿<div class="modal fade" tabindex="-1" role="dialog" data-bind="attr: { id: modalId }">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.Test.resources.CheckResult'"></h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="text-black" data-bind="reshtml: 'Naati.Resources.Test.resources.ResultsDontMatch'"></div>
+                <ul class="m-t-md">
+                    <!--ko foreach: messages-->
+                    <li data-bind="text:$data"></li>
+                    <!--/ko-->
+                </ul>
+
+                <!--ko if: isAdmin()-->
+                <div class="text-danger m-t-md" data-bind="reshtml: 'Naati.Resources.Test.resources.OverrideResultQuestion'"></div>
+                <!--/ko-->
+                <!--ko ifnot: isAdmin()-->
+                <div class="text-danger m-t-md" data-bind="reshtml: 'Naati.Resources.Test.resources.PleaseSeeYourManager'"></div>
+                <!--/ko-->
+            </div>
+
+            <div class="modal-footer">
+                <!--ko if: isAdmin()-->
+                <button class="btn btn-success" data-bind="click: save">
+                    <span class="fa fa-check"></span>
+                    <span data-bind="reshtml: 'Naati.Resources.Test.resources.Override'"></span>
+                </button>
+                <!--/ko-->
+                <button class="btn btn-default" data-dismiss="modal">
+                    <!--ko if: isAdmin()-->
+                    <span class="fa fa-ban"></span>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+                    <!--/ko-->
+                    <!--ko ifnot: isAdmin()-->
+                    <span class="fa fa-check"></span>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Ok'"></span>
+                    <!--/ko-->
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿<div>
+    <span data-bind="reshtml: 'Naati.Resources.Application.resources.PrerequisiteApplicationsWizardStep'"></span>
+</div>
+<div class="m-t-n-md">
+    <table class="table table-primary table-bordered table-striped" data-bind="datatable: tableDefinition">
+        <thead>
+            <tr>
+                <th class="w-xxs">&nbsp;</th>
+                <th class="w-xxl" data-bind="reshtml: 'Naati.Resources.Application.resources.PrerequisiteCredential'"></th>
+                <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Application.resources.ExistingApplications'"></th>
+                <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.ApplicationType'"></th>
+                <th class="w-xxl" data-bind="reshtml: 'Naati.Resources.Application.resources.MatchingCredential'"></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: prerequisiteApplications">
+            <tr>
+                <td class="text-center select-checkbox sorting_1"></td>
+                <td data-bind="text: CredentialPrerequisiteDisplayName"></td>
+                <td>
+                    <!-- ko if: ApplicationExists -->
+                    <a target="_blank" class="text-info" data-bind="text: ExistingApplicationId, attr: {href: url}"></a>
+                    <!-- /ko -->
+                    <!-- ko ifnot: ApplicationExists -->
+                    <span data-bind="text: ExistingApplicationId"></span>
+                    <!-- /ko -->
+                    <p class="form-control-static">
+                        <span class="label text-base" data-bind="text: ExistingApplicationStatusName, css: appStatus"></span>
+                    </p>
+                </td>
+                <td data-bind="text: ExistingApplicationTypeName"></td>
+                <td>
+                    <span data-bind="text: MatchingCredentialDisplayName"></span>
+                    <p class="form-control-static">
+                        <span class="label text-base" data-bind="text: MatchingCredentialStatusName, css: requestStatus"></span>
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

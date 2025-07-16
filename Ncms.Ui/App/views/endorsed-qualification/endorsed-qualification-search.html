@@ -1,0 +1,52 @@
+﻿<div class="hbox">
+    <div class="hbox" data-bind="component: {
+    name: 'search-component',
+    params: {
+         title: title,
+         filters: filters,
+         searchType: searchType,
+         searchTerm: searchTerm,
+         searchCallback: searchCallback,
+         tableDefinition: tableDefinition,
+         additionalButtons: additionalButtons,
+         idSearchOptions: idSearchOptions
+    }
+}">
+    </div>
+    <script id="endorsed-qualification-header-template" type="text/html">
+        <th class="hidden"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Institution.resources.OrganisationName'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Institution.resources.Location'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Institution.resources.Qualification'"></th>
+        <th>
+            <span data-bind="reshtml: 'Naati.Resources.Institution.resources.CredentialType'"></span>
+            <i class="fa fa-question-circle" data-bind="tooltip: { container: 'body' }, resattr: { title: 'Naati.Resources.Institution.resources.CredentialTypeTooltip' }"></i>
+        </th>
+        <th data-bind="reshtml: 'Naati.Resources.Institution.resources.EndorsementPeriod'"></th>
+
+        <th class="w-xs">&nbsp;</th>
+    </script>
+    <script id="endorsed-qualification-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: EndorsedQualificationId" class="hidden"></td>
+            <td data-bind="text: InstitutionName" class="w-md"></td>
+            <td data-bind="text: Location" class="w-sm"></td>
+            <td data-bind="text: Qualification"></td>
+            <td>
+                <span data-popover="credentialType" class="w-sm" data-bind="text: CredentialTypeInternalName"></span>
+            </td>
+            <td data-bind="text: FormattedPeriod" class="w-sm"></td>
+
+            <td class="w-xxs text-right">
+
+                <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover', container: 'body', title: function () { return $root.ActiveMessage($data); } }">
+                    <i class="fa" data-bind="css: { 'fa-check text-success': Active, 'fa-times text-danger': !Active }"></i>
+                </a>
+                <a href="#" class="btn btn-default btn-xs" data-bind="click: $root.edit">
+                    <i class="fa fa-pencil-alt"></i>
+                </a>
+            </td>
+        </tr>
+    </script>
+    <!--ko compose: endorsedQualificationOptions--><!--/ko-->
+</div>

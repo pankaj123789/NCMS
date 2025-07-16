@@ -1,0 +1,43 @@
+﻿<div class="row">
+	<div class="col-sm-12">
+		<div class="text-center" style="height: 120px;">
+			<canvas data-bind="chart: barChart" style="width: 100%;"></canvas>
+		</div>
+		<div class="m-t-md m-b-n-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.ApplicantsAlreadySatHelp'"></div>
+		<table class="table table-bordered table-striped" data-bind="datatable: tableDefinition">
+			<thead>
+				<tr>
+					<th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.CustomerNumber'"></th>
+					<th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Name'"></th>
+					<th class="w-sm" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.PreviousTestSession'"></th>
+					<th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.ConflictingTestMaterials'"></th>
+				</tr>
+			</thead>
+			<tbody data-bind="foreach: applicants">
+				<tr>
+					<td>
+						<a href="#" target="_blank" class="text-info" data-bind="text: NaatiNumber, attr: { href: '#person/' + NaatiNumber }"></a>
+					</td>
+					<td data-bind="text: Name"></td>
+					<td>
+						<a href="#" target="_blank" class="text-info" data-bind="attr: { href: '#test-session/' + PreviousTestSessionId }">
+							TS<span data-bind="text: PreviousTestSessionId"></span>
+							<span> - </span>
+							<span data-bind="text: PreviousTestSessionName"></span>
+							<span> - </span>
+							<span data-bind="textDate: PreviousTestSessionDate"></span>
+						</a>
+					</td>
+					<td>
+						<!--ko foreach: ConflictingTestMaterialsIds-->
+						<a href="#" class="text-info" target="_blank" data-bind="text: '#' + $data, attr: { href: '#test-material/' + $data }"></a>
+						<!--ko if: $index() != $parent.ConflictingTestMaterialsIds.length - 1-->
+						<span>, </span>
+						<!--/ko-->
+						<!--/ko-->
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

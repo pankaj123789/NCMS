@@ -1,0 +1,62 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.ApplicationByTestingWizard.ProfessionalEligibilityModel
+@{
+    ViewBag.Title = "Application for Accreditation by Testing";
+    ViewBag.Subtitle = "Professional Level Testing Eligibility";
+    Layout = "~/Views/Shared/MasterPages/_ApplicationWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Testing", Url.Action("Index", "ApplicationByTestingWizard")),
+        new Tuple<string, string>("New Application", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var group0selector = '.rbSelectedCriteriaX_0';
+        var group1selector = '.rbSelectedCriteriaX_1';
+        var group2selector = '.rbSelectedCriteriaX_2';
+
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+
+            //set the first 3 radio buttons to select the corresponding buttons on other groups
+            $('.rbSelectedCriteria0_0').change(function () { if ($(this).attr('checked') === true) { $(group0selector).attr('checked', true); } });
+            $('.rbSelectedCriteria0_1').change(function () { if ($(this).attr('checked') === true) { $(group1selector).attr('checked', true); } });
+            $('.rbSelectedCriteria0_2').change(function () { if ($(this).attr('checked') === true) { $(group2selector).attr('checked', true); } });
+        });
+    </script>
+}
+@for (int i = 0; i < Model.RequiredCriteria.Count(); i++)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <strong>Professional @Model.RequiredCriteria[i].Skill - @Model.RequiredCriteria[i].Language</strong>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>You need to meet one of the following eligibility criteria.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @for (var j = 0; j < Model.CriteriaList.Count(); j++)
+            {
+                if ((Model.RequiredCriteria[i].IsInterpreter && Model.CriteriaList[j].VisibleInterpreter)
+                    || (Model.RequiredCriteria[i].IsInterpreter == false && Model.CriteriaList[j].VisibleTranslator))
+                {
+                    <div class="radio">
+                        <label>
+                            @Html.RadioButtonFor(m => Model.RequiredCriteria[i].SelectedValue, Model.CriteriaList[j].Value, new { id = "rbSelectedCriteria" + i + "_" + j, @class = string.Format("rbSelectedCriteria{0}_{1} rbSelectedCriteriaX_{1}", i, j) })
+                            <label for="@string.Format("rbSelectedCriteria{0}_{1}", i, j)">@Model.CriteriaList[j].Text.ToMvcHtmlString()</label>
+                        </label>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+}

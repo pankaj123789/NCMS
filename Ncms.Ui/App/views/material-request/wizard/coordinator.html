@@ -1,0 +1,39 @@
+﻿<div class="form">
+    <div class="row">
+        <div class="form-group col-sm-12" data-bind="validationElement: coordinatorId">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Coordinator'"></label>
+            <!-- ko component: { name: 'select-component', params: coordinatorOptions } --><!-- /ko -->
+        </div>
+    </div>
+    <div class="row">
+
+        <div  class="form-group col-sm-12">
+            <br />
+            <strong><p class="text-center" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.ActiveRequests'"></p> </strong>
+            <!--ko component: { name: 'table-component', params: tableDefinition }--><!--/ko-->
+
+            <script id="active-requests-header-template" type="text/html">
+                <th class="w-md" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Id'"></th>
+                <th class="w-md" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.MaterialType'"></th>
+                <th class="w-md" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.CredentialType'"></th>
+                <th class="w-md" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.TaskType'"></th>
+                <th class="w-md" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.SkillLanguage'"></th>
+                <th class="w-md" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Status'"></th>
+                <th class="w-md" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Round'"></th>
+            </script>
+            <script id="active-requests-row-template" type="text/html">
+                <tr>
+                    <td data-bind="text:Id"></td>
+                    <td data-bind="text:RequestType"></td>
+                    <td data-bind="text:CredentialType"></td>
+                    <td data-bind="text:TestTaskType"></td>
+                    <td data-bind="text:Language"></td>
+                    <td>
+                        <span class="label text-base pull-left m-t-xs" data-bind="text:RequestStatus, css: 'label-' + StatusClass"></span>
+                    </td>
+                    <td data-bind="text:Round"></td>
+                </tr>
+            </script>
+        </div>
+    </div>
+</div>

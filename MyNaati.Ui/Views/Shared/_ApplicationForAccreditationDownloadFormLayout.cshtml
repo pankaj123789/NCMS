@@ -1,0 +1,190 @@
+﻿@model MyNaati.Ui.ViewModels.IDownloadFormModel
+@{
+    ViewBag.Subtitle = "Download Form";
+    Layout = "~/Views/Shared/MasterPages/_ApplicationWizardLayout.cshtml";
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var downloadModalSelector = '#downloadModal';
+        var createErrorsSelector = '#createErrors';
+        var downloadApplicationForCredentialsButtonSelector = '#btnDownloadApplicationForCredentialsForm';
+        var downloadApplicationForAssessmentButtonSelector = '#btnDownloadApplicationForAssessmentForm';
+        var closeButtonSelector = '#btnCancelCreate';
+        var downloadApplicationForCredentialsClicked = false;
+        var downloadApplicationForAssessmentClicked = false;
+
+        $(document).ready(function () {
+            @if(Model.SkillsAssessmentRequested)
+            {
+                @:useDefaultDownloadButtonHandler = false;
+            }
+
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(doneButtons).show();
+            $(downloadFormButtons).show();
+            $(doneButtons).prop('disabled', true);
+
+            $(downloadFormButtons).click(function () {
+                @if(Model.SkillsAssessmentRequested)
+                {
+                    @:popupDownloadForm();
+                }
+
+                $(cancelButtons).prop('disabled', true);
+                $(previousButtons).prop('disabled', true);
+
+                $('.side-menu li:not(.active):not(.skipped)').addClass('no-navigation');
+                $('.side-menu .no-navigation a').replaceWith(function () {
+                    return $(this).text();
+                });
+            });
+
+            $(closeButtonSelector).click(function () { $(downloadModalSelector).modal('hide'); });
+
+            $(downloadApplicationForCredentialsButtonSelector).click(function () {
+                handleDownloadForm();
+                downloadApplicationForCredentialsClicked = true;
+                handleEnableOrDisableCloseButton(downloadApplicationForCredentialsClicked, downloadApplicationForAssessmentClicked);
+            });
+
+            $(downloadApplicationForAssessmentButtonSelector).click(function () {
+                handleDownloadApplicationForAssessment();
+                downloadApplicationForAssessmentClicked = true;
+                handleEnableOrDisableCloseButton(downloadApplicationForCredentialsClicked, downloadApplicationForAssessmentClicked);
+            });
+        });
+
+        function popupDownloadForm() {
+            $(createErrorsSelector).empty();
+            $(createErrorsSelector).hide();
+            $(downloadModalSelector).modal('show');
+            $(closeButtonSelector).prop('disabled', true);
+        }
+
+        function handleEnableOrDisableCloseButton(applicationForCredentialsClicked, applicationForAssessmentClicked) {
+            if (applicationForAssessmentClicked === true && applicationForCredentialsClicked === true) {
+                $(closeButtonSelector).prop('disabled', false);
+            }
+            else {
+                $(closeButtonSelector).prop('disabled', true);
+            }
+        }
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            Download and review the application form. After closing this screen (selecting Done),
+            it will not be possible to retrieve this information.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <p>You need to:</p>
+    </div>
+    <div class="col-lg-12">
+        <ul>
+            <li>Print and complete the form</li>
+            <li>Ensure the relevant sections are completed, signed, and dated by others as requested</li>
+            <li>Sign and date the form yourself</li>
+            <li>Attach the supporting documents listed in the checklist</li>
+            <li>Attach your payment</li>
+            <li>Mail to NAATI</li>
+        </ul>
+    </div>
+</div>
+@if (Request.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                To expedite processing of your application, please use My Details to ensure that
+                your most recent contact details are registered with us.
+            </p>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Application Fees</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            The total cost of your application for credentials is shown below, including GST where applicable.
+            This fee covers all tests requested in this application, and is payable when you
+            send the application to NAATI.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            @RenderSection("Table", true)
+        </div>
+    </div>
+</div>
+@section AfterDefaultForm
+{
+    <div id="downloadModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h4 class="modal-title">Download Application Forms</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="createErrors" class="validation-summary-errors">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>Application for Credentials</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>Download and review your application form for NAATI credentials.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button id="btnDownloadApplicationForCredentialsForm" type="button" class="btn btn-primary">Download Application for Credentials</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3>Application for Assessment of Educational Qualification and Skilled Employment</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p>
+                                You have requested an assessment of your education and/or skills for migration purposes.
+                                Due to pending changes in the migration process, no interactive form is avalaible.
+                            </p>
+                            <p>
+                                You need to download and complete an Application for Assessment of Educational Qualification
+                                and Skilled Employment using the button below:
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button id="btnDownloadApplicationForAssessmentForm" type="button" class="btn btn-primary">Download Application for Assessment</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnCancelCreate" type="button" class="btn btn-primary">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

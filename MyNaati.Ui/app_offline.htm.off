@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>myNAATI</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #F5F5F5;
+            font: 12pt Calibri, Arial;
+            background: #FFFFFF;
+            text-align: left;
+        }
+
+        a img {
+            border: none;
+        }
+
+        #Header {
+            background: #00756B url(https://www.naati.com.au/Images/ePortal/HeaderBackground.png) repeat-x top left;
+            height: 72px;
+            color: #FFFFFF;
+        }
+
+            #Header div {
+                width: 960px;
+                margin: 0 auto;
+            }
+
+                #Header div img {
+                    float: left;
+                }
+
+                #Header div #Options {
+                    text-align: right;
+                    float: right;
+                    width: 200px;
+                    padding-top: 10px;
+                }
+
+                    #Header div #Options a,
+                    #Header div #Options a:visited {
+                        color: #FFFFFF;
+                        text-decoration: none;
+                    }
+
+                        #Header div #Options a:hover,
+                        #Header div #Options a:active {
+                            text-decoration: underline;
+                        }
+        
+        #Menu {
+            height: 31px;
+            background: #F5F5F5 url(https://www.naati.com.au/Images/ePortal/MenuBackground.png) repeat-x bottom left;
+        }
+
+            #Menu div {
+                width: 960px;
+                margin: 0 auto;
+            }
+
+                #Menu div ul a,
+                #Menu div ul a span {
+                    padding-top: 3px;
+                    height: 27px;
+                }
+
+                    #Menu div ul a,
+                    #Menu div ul a span {
+                        display: block;
+                    }
+
+                #Menu div ul li:hover > ul {
+                    display: block;
+                    background: #00756B;
+                    border: 1px solid #40B5AB;
+                    border-top: none;
+                    padding: 0px;
+                    margin: 0px;
+                }
+
+                /* This is just for IE7 */
+                #Menu div > ul > li:hover {
+                    margin-bottom: 5px;
+                }
+
+                #Menu div ul li ul a,
+                #Menu div ul li ul a:visited {
+                    padding: 0px;
+                    color: #FFFFFF;
+                }
+
+            #Menu ul li {
+                position: relative;
+                float: left;
+            }
+
+            #Menu li ul {
+                position: absolute;
+                top: 30px;
+                display: none;
+                padding: 0px;
+            }
+
+            #Menu div a,
+            #Menu div a:visited {
+                width: 80px;
+                display: block;
+                text-align: center;
+                font-size: 11pt;
+                color: #000000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            #Menu div > ul > li:hover > a,
+            #Menu div ul li.ActiveMenuItem > a {
+                text-decoration: none;
+                font-weight: bold;
+                background: url( "https://www.naati.com.au/Images/ePortal/MenuItemSelectedBackgroundLeft.png" ) no-repeat left center;
+            }
+
+            #Menu li > ul > li > a {
+                font-weight: bold;
+            }
+
+                #Menu li > ul > li > a:hover {
+                    text-decoration: underline;
+                }
+
+            #Menu div li:hover a > span,
+            #Menu ul li:hover a > span,
+            #Menu div ul li.ActiveMenuItem > a > span {
+                background: url( "https://www.naati.com.au/Images/ePortal/MenuItemSelectedBackgroundRight.png" ) no-repeat right center;
+            }
+
+            #Menu div a span {
+                display: block;
+                padding: 0px 5px 0 5px;
+                margin-top: -2px;
+                height: 24px;
+            }
+
+                #Menu div a span img {
+                    border: none;
+                    padding: 0px 0px 0px 0px;
+                    margin: 4px 6px 4px 0;
+                    vertical-align: middle;
+                }
+
+        #ContainerHeader {
+            width: 1010px;
+            margin: 0 auto;
+            text-align: left;
+            background: #FFFFFF url(https://www.naati.com.au/Images/ePortal/ContainerHeaderBackground.png) no-repeat top left;
+            height: 60px;
+        }
+
+        #ContainerBackground {
+            min-height: 650px;
+            background: #FFFFFF url(https://www.naati.com.au/Images/ePortal/ContainerBackground.png) no-repeat center center;
+        }
+
+        #Container {
+            width: 1010px;
+            margin: 0 auto;
+            text-align: left;
+            background: transparent url(https://www.naati.com.au/Images/ePortal/ContainerBorderBackground.png) repeat-y top left;
+            height: 100%;
+            min-height: 650px;
+        }
+
+            #Container #Content {
+                width: 910px;
+                margin: 0 auto;
+                padding: 30px 40px 15px 40px;
+            }
+
+                #Container #Content h1 {
+                    margin: 0;
+                    padding: 0;
+                    padding-bottom: 10px;
+                    font-size: 20pt;
+                    color: #00756B;
+                }
+
+                #Container #Content h2 {
+                    margin: 0;
+                    padding: 0;
+                    padding-bottom: 8px;
+                    font-size: 13pt;
+                    color: #00756B;
+                }
+
+                #Container #Content h3 {
+                    margin: 0;
+                    padding: 0;
+                    padding-bottom: 5px;
+                    font-size: 12pt;
+                    color: #00756B;
+                }
+
+                #Container #Content p {
+                    padding: 5px 0;
+                    margin: 0;
+                }
+
+        #Content a,
+        #Content a:visited,
+        #ContainerFooter a,
+        #ContainerFooter a:visited {
+            color: #00756B;
+        }
+
+            #ContainerFooter a,
+            #ContainerFooter a:visited {
+                text-decoration: none;
+            }
+
+                #ContainerFooter a:active,
+                #ContainerFooter a:hover {
+                    text-decoration: underline;
+                }
+
+        #ContainerFooter {
+            width: 1010px;
+            margin: 0 auto;
+            text-align: right;
+            background: #FFFFFF url(https://www.naati.com.au/Images/ePortal/ContainerFooterBackground.png) no-repeat top left;
+            height: 116px;
+        }
+
+            #ContainerFooter div {
+                padding-top: 50px;
+                width: 720px;
+                margin: 0 auto;
+                text-align: right;
+            }
+        a.top_link {
+            color: #000;
+        }
+
+        a.alignCentre {
+            text-align: center;
+        }
+       
+        .clear {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div id="Header">
+        <div>            
+            <div id="Options">
+            </div>
+        </div>
+    </div>
+    <div id="Menu">
+    </div>
+    <div id="ContainerHeader">
+    </div>
+    <div id="ContainerBackground">
+        <div id="Container">
+            <div id="Content">
+                <div id="WelcomeBody">
+                    <h1>Sorry!</h1>
+                    <p>We are making some important improvements to myNAATI and will be back up and running again soon. Please check back shortly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="ContainerFooter">
+        <div>
+            &copy; National Accreditation Authority for Translators and Interpreters Ltd ABN 42 008 596 996
+        </div>
+    </div>
+</body>
+</html>
+

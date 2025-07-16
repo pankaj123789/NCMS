@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Welcome";
+    //Layout = "../Shared/_Logon.cshtml";
+}
+
+@model MyNaati.Ui.ViewModels.Account.AccessCodeModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    @Styles.Render("~/Content/bootstrap-fileinput/css/css")
+    @Styles.Render("~/Content/themes/base/base")
+    @Styles.Render("~/Content/DataTables/css/css")
+    @Styles.Render("~/Bundles/Styles")
+
+</head>
+<body>
+
+    <div id="reenterMfa" class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="text-primary">Enter access code from Email</h2>
+                @if (Model.error != null)
+                {
+                    <span class="text-danger">@Model.error</span>
+                }
+                <div>
+                    Please check your email inbox for the access code.
+                </div>
+
+                <div>
+                    @using (Html.BeginForm("EnterAccessCode", "Account", FormMethod.Post))
+                    {
+                        <div>
+                            @Html.TextBoxFor(x => x.code, new { style = "width:50%;margin:10px;" })
+                        </div>
+                        <div>
+                            <p>Click Save after entering the code or click Close if you do not have the code ready.</p>
+                            <p>To send a new access code, click Send New Code.</p>
+                        </div>
+                        @Html.HiddenFor(x => x.returnView)
+                        @Html.HiddenFor(x => x.returnController)
+                        <div class="m-t-lg">
+                            <input type="submit" id="save" name="action" value="SAVE" class="btn btn-primary" />
+                            <input type="submit" id="send" name="action" value="SEND NEW CODE" class="btn" />
+                            <input type="submit" id="cancel" name="action" value="CLOSE" class="btn btn-danger" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+
+@{
+    ViewBag.Subtitle = "Listing Successfully Processed";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Directory Listing", string.Empty)
+    };
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                @if (Model.PaymentRequired)
+                {
+                    <text>Your payment has been successfully processed, and your listing will be applied shortly. An invoice and receipt will be issued separately.<br /></text>
+                }
+                Please print the details of your listing below for reference.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-primary">Reference Number: @Model.ReferenceNumber</h3>
+        </div>
+    </div>
+    @if (Model.PaymentRequired)
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="text-primary">Fee</h3>
+                <p>Your details will be included in the directory until @Html.DisplayFor(d => d.ListingEndDate) for an administration fee of AUD @Html.DisplayFor(m => m.OrderTotalModel.TotalPrice) (inclusive of GST, if applicable).</p>
+            </div>
+        </div>
+    }
+    @{ Html.RenderPartial("_AddressViewPartial", Model); }
+    @{ Html.RenderPartial("_ContactDetailsViewPartial", Model); }
+    @{ Html.RenderPartial("_WorkAreasViewPartial", Model); }
+    @{ Html.RenderPartial("_CredentialViewPartial", Model); }
+    @if (Model.IsListing && Model.PaymentRequired)
+    {
+        if (Model.PaymentMethodModel.IsOnlineOrder)
+        {
+            Html.RenderPartial("_PaymentDetailsViewPartial", Model.PaymentDetailsModel);
+        }
+        else
+        {
+            Html.RenderPartial("_PaymentMethodViewPartial", Model.PaymentMethodModel);
+        }
+    }
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-primary">Declaration</h3>
+            <p>You have acknowledged your understanding and agreement to the following:</p>
+        </div>
+    </div>
+    @{ Html.RenderPartial("_PDDeclarationPartial", Model); }
+    @using (Html.BeginForm())
+    {
+        <button class="btn btn-success" type="button" onclick="print()">Print</button>
+        <button class="btn btn-primary" type="submit">OK</button>
+    }
+</div>

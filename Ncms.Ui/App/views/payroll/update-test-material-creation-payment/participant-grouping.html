@@ -1,0 +1,34 @@
+﻿<div class="group-container">
+    <div class="streamline b-l b-info m-b" data-bind="visible: items().length > 0">
+        <!--ko foreach: { data: items, as: 'item' }-->
+        <!--ko collapser: item.expanded-->
+        <div class="bg-info wrapper-sm m-l-n m-r-n m-b r r-2x cursor-pointer" data-bind="collapserHeader">
+            <div class="row m-t-none m-b-none">
+                <div class="col-lg-3 m-t-xs">
+                    <i class="fa" data-bind="css: { 'fa-open': !$expanded(), 'fa-close': $expanded }"></i>
+                    <span data-bind="text: item.DisplayName"></span>
+                </div>
+                <div class="col-lg-2 m-t-xs">
+                    <span data-bind="html: $root.requestsToBeVerified(item)"></span>
+                </div>
+                <div class="col-lg-2 m-t-xs">
+                    <span data-bind="html: $root.cost(item)"></span>
+                </div>
+                <div class="col-lg-3 m-t-xs">
+                    <span data-bind="html: $root.oldestApproved(item)"></span>
+                </div>
+                <div class="col-lg-2 text-right">
+                    <input type="text" class="form-control input-sm m-t-n-xxs" data-bind="value: PaymentReference, valueUpdate: 'input', clickBubble: false, click: function() { event.stopPropagation(); return true; }, resattr: { placeholder: 'Naati.Resources.Payroll.resources.InvoiceNo' }" />
+                </div>
+            </div>
+        </div>
+        <div data-bind="collapserContent">
+            <div class="m-l-md m-t-n-sm m-b-n-sm">
+                <!--ko compose: groupingCompose -->
+                <!--/ko-->
+            </div>
+        </div>
+        <!--/ko-->
+        <!--/ko-->
+    </div>
+</div>

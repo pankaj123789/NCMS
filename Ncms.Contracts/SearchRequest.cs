@@ -1,0 +1,12 @@
+﻿namespace Ncms.Contracts
+{
+    public class SearchRequest 
+    {
+        public int? Skip { get; set; }
+     
+        public int? Take { get; set; }
+     
+        public string Filter { get; set; }
+
+    }
+}

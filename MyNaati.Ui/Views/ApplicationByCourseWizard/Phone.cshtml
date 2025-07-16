@@ -1,0 +1,25 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.ApplicationForAccreditation.PhoneListModel
+@{
+    ViewBag.Title = "Application for Accreditation by Course";
+    ViewBag.Subtitle = "Phone";
+    Layout = "~/Views/Shared/MasterPages/_ApplicationWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Course", Url.Action("Index", "ApplicationByCourseWizard")),
+        new Tuple<string, string>("New Application", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+        });
+    </script>
+}
+@{
+    Html.RenderPartial("_ApplicationForAccreditationPhonePartial", Model);
+}

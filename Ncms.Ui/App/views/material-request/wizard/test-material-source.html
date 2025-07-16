@@ -1,0 +1,50 @@
+﻿<div>
+    <div class="row form m-b">
+        <div class="form-group col-sm-3" data-bind="validationElement: searchCriteria">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.TitleOrId'"></label>
+            <input type="text" class="form-control" data-bind="value: searchCriteria, valueUpdate: 'input'" />
+        </div>
+        <div class="form-group col-sm-9">
+            <label></label>
+            <p class="form-control-static">
+                <button class="btn btn-primary" data-bind="click: find">
+                    <i class="glyphicon glyphicon-search"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Find'"></span>
+                </button>
+            </p>
+        </div>
+    </div>
+    <div class="row form">
+        <div class="form-group col-sm-12" data-bind="validationElement: testMaterialSourceId, validationOptions: { insertMessages: false }">
+            <!--ko component: testMaterialSourceTableOptions--><!--/ko-->
+            <span class="help-block" data-bind="validationMessage: testMaterialSourceId"></span>
+        </div>
+    </div>
+        <script id="materialsource-header-template" type="text/html">
+            <th class="w-xxs">&nbsp;</th>
+            <th class="w-sm" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.MaterialID'"></th>
+            <th data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Title'"></th>
+            <th class="w-sm" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Status'"></th>
+            <th class="w-xs">&nbsp;</th>
+        </script>
+        <script id="materialsource-row-template" type="text/html">
+            <tr>
+                <td class="text-center"></td>
+                <td data-bind="text:'#'+ Id"></td>
+                <td data-bind="text: Title"></td>
+                <td>
+                    <span class="label text-base" data-bind="tooltip, attr: { title: BadgeTooltip },  text:BadgeText, css: 'bg-' + BadgeColor">&nbsp;</span>
+                </td>
+                <td class="text-right">
+                    <!--ko if: HasFile -->
+                    <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover' }, resattr: { title: 'Naati.Resources.TestMaterial.resources.ContainsFiles' }">
+                        <span class="fa fa-paperclip"></span>
+                    </a>
+                    <!--/ko-->
+                    <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover', container: 'body', title: AvailableMessage }">
+                        <i class="fa" data-bind="css: { 'fa-check text-success': Available, 'fa-times text-danger': !Available }"></i>
+                    </a>
+                </td>
+            </tr>
+        </script>
+    </div>

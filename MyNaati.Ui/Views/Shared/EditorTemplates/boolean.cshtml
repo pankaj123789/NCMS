@@ -1,0 +1,18 @@
+﻿@model bool
+
+@{
+    bool hideLabel = (bool)(ViewData["HideLabel"] ?? false);
+}
+
+<div class="editorSet">
+    <div class="editorValue">
+        @Html.CheckBoxFor(e => Model)
+        @if (!hideLabel)
+        {
+            <label for="@ViewData.TemplateInfo.GetFullHtmlFieldId("")">@ViewData.ModelMetadata.DisplayName</label>
+        }
+        @Html.ValidationMessageFor(e => Model, "*")
+        @if (ViewData["Note"] != null)
+        { <br />@ViewData["Note"] }
+    </div>
+</div>

@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{00D21610-A7A2-4E9E-B720-94AEA281D4F7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>F1Solutions.Naati.Common.Wiise</RootNamespace>
+    <AssemblyName>F1Solutions.Naati.Common.Wiise</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EntityNativeOperations\AccountOperation.cs" />
+    <Compile Include="EntityNativeOperations\BaseEntityOperation.cs" />
+    <Compile Include="EntityNativeOperations\JournalOperation.cs" />
+    <Compile Include="EntityNativeOperations\CustomerPaymentJournalOperation.cs" />
+    <Compile Include="EntityNativeOperations\PurchaseInvoiceOperation.cs" />
+    <Compile Include="EntityNativeOperations\VendorOperation.cs" />
+    <Compile Include="EntityPublicOperations\AccountOperation.cs" />
+    <Compile Include="EntityPublicOperations\BaseEntityOperation.cs" />
+    <Compile Include="EntityPublicOperations\ContactOperation.cs" />
+    <Compile Include="EntityPublicOperations\SalesInvoiceOperation.cs" />
+    <Compile Include="EntityPublicOperations\CreditNoteOperation.cs" />
+    <Compile Include="EntityPublicOperations\PaymentOperation.cs" />
+    <Compile Include="EntityPublicOperations\PurchaseInvoiceOperation.cs" />
+    <Compile Include="EntityPublicOperations\VendorOperation.cs" />
+    <Compile Include="HttpOperations\ApiClient.cs" />
+    <Compile Include="HttpOperations\ApiException.cs" />
+    <Compile Include="HttpOperations\ApiResponse.cs" />
+    <Compile Include="HttpOperations\ClientUtils.cs" />
+    <Compile Include="HttpOperations\Configuration.cs" />
+    <Compile Include="HttpOperations\ExceptionFactory.cs" />
+    <Compile Include="HttpOperations\GlobalConfiguration.cs" />
+    <Compile Include="HttpOperations\HttpMethod.cs" />
+    <Compile Include="HttpOperations\IApiResponse.cs" />
+    <Compile Include="HttpOperations\IAsynchronousClient.cs" />
+    <Compile Include="HttpOperations\IReadableConfiguration.cs" />
+    <Compile Include="HttpOperations\ISynchronousClient.cs" />
+    <Compile Include="HttpOperations\MockApiResponse.cs" />
+    <Compile Include="HttpOperations\Models\ApiError.cs" />
+    <Compile Include="HttpOperations\Models\Root.cs" />
+    <Compile Include="HttpOperations\Multimap.cs" />
+    <Compile Include="HttpOperations\RequestOptions.cs" />
+    <Compile Include="IWiiseAccountingApi.cs" />
+    <Compile Include="Mappers\AccountMapper.cs" />
+    <Compile Include="Mappers\BaseMapper.cs" />
+    <Compile Include="Mappers\CommonEnums.cs" />
+    <Compile Include="Mappers\ContactMapper.cs" />
+    <Compile Include="Mappers\CountryMapper.cs" />
+    <Compile Include="Mappers\CreditNoteMapper.cs" />
+    <Compile Include="Mappers\CustomerPaymentJournalMapper.cs" />
+    <Compile Include="Mappers\DimensionSetMapper.cs" />
+    <Compile Include="Mappers\FilterMapper.cs" />
+    <Compile Include="Mappers\HttpStatusCodeMapper.cs" />
+    <Compile Include="Mappers\InvoiceMapper.cs" />
+    <Compile Include="Mappers\PaymentMapper.cs" />
+    <Compile Include="Mappers\VendorMapper.cs" />
+    <Compile Include="NativeModels\Account.cs" />
+    <Compile Include="NativeModels\Accounts.cs" />
+    <Compile Include="NativeModels\BaseModel.cs" />
+    <Compile Include="NativeModels\DimensionSetLine.cs" />
+    <Compile Include="NativeModels\Journal.cs" />
+    <Compile Include="NativeModels\JournalLine.cs" />
+    <Compile Include="NativeModels\Journals.cs" />
+    <Compile Include="NativeModels\PdfDocument.cs" />
+    <Compile Include="NativeModels\PdfDocuments.cs" />
+    <Compile Include="NativeModels\PurchaseInvoiceLinetItem.cs" />
+    <Compile Include="NativeModels\Vendor.cs" />
+    <Compile Include="NativeModels\Contact.cs" />
+    <Compile Include="NativeModels\Contacts.cs" />
+    <Compile Include="NativeModels\CreditNote.cs" />
+    <Compile Include="NativeModels\CreditNotes.cs" />
+    <Compile Include="NativeModels\CustomerPaymentJournal.cs" />
+    <Compile Include="NativeModels\CustomerPaymentJournals.cs" />
+    <Compile Include="NativeModels\PurchaseInvoice.cs" />
+    <Compile Include="NativeModels\SalesInvoice.cs" />
+    <Compile Include="NativeModels\PurchaseInvoices.cs" />
+    <Compile Include="NativeModels\SalesInvoices.cs" />
+    <Compile Include="NativeModels\LineItem.cs" />
+    <Compile Include="NativeModels\Payment.cs" />
+    <Compile Include="NativeModels\Payments.cs" />
+    <Compile Include="NativeModels\ValidationError.cs" />
+    <Compile Include="NativeModels\Vendors.cs" />
+    <Compile Include="PublicModels\Account.cs" />
+    <Compile Include="PublicModels\Accounts.cs" />
+    <Compile Include="PublicModels\Address.cs" />
+    <Compile Include="PublicModels\BaseModel.cs" />
+    <Compile Include="PublicModels\BrandingTheme.cs" />
+    <Compile Include="PublicModels\BrandingThemes.cs" />
+    <Compile Include="PublicModels\Contact.cs" />
+    <Compile Include="PublicModels\Contacts.cs" />
+    <Compile Include="PublicModels\CreditNote.cs" />
+    <Compile Include="PublicModels\CreditNotes.cs" />
+    <Compile Include="PublicModels\CustomerPaymentJournal.cs" />
+    <Compile Include="PublicModels\CustomerPaymentJournals.cs" />
+    <Compile Include="PublicModels\Enums.cs" />
+    <Compile Include="PublicModels\Invoice.cs" />
+    <Compile Include="PublicModels\Invoices.cs" />
+    <Compile Include="PublicModels\LineItem.cs" />
+    <Compile Include="PublicModels\LineItemTracking.cs" />
+    <Compile Include="PublicModels\Payment.cs" />
+    <Compile Include="PublicModels\Payments.cs" />
+    <Compile Include="PublicModels\Phone.cs" />
+    <Compile Include="PublicModels\SalesTrackingCategory.cs" />
+    <Compile Include="PublicModels\ValidationError.cs" />
+    <Compile Include="PublicModels\WiiseLineItemModel.cs" />
+    <Compile Include="WiiseAccountingApi.cs" />
+    <Compile Include="EntityNativeOperations\CreditNoteOperation.cs" />
+    <Compile Include="EntityNativeOperations\ContactOperation.cs" />
+    <Compile Include="EntityNativeOperations\SalesInvoiceOperation.cs" />
+    <Compile Include="EntityNativeOperations\PaymentOperation.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BatchOperations\" />
+    <Folder Include="OAuth\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\F1Solutions.Global.Common\F1Solutions.Global.Common.csproj">
+      <Project>{f41c4166-5b4d-4721-97bc-125f3cf0204a}</Project>
+      <Name>F1Solutions.Global.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Contracts\F1Solutions.Naati.Common.Contracts.csproj">
+      <Project>{039E6DE4-AEB9-4A6E-AC19-135239DDBDE2}</Project>
+      <Name>F1Solutions.Naati.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ncms.Contracts\Ncms.Contracts.csproj">
+      <Project>{B684501E-4F34-45EF-A6BC-2C00088BA2A2}</Project>
+      <Name>Ncms.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

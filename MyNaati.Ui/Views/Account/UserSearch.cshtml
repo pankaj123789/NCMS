@@ -1,0 +1,253 @@
+﻿@model MyNaati.Ui.Models.UserSearchModel
+@{
+    ViewBag.Title = "Search for Users";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Manage Users", null)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#CreatedDateFrom").val('');
+            $("#CreatedDateTo").val('');
+
+            var $resultsTable = $('#resultsTable');
+
+            var dataTable = $resultsTable.DataTable({
+                ajax: {
+                    url: '@Url.Action("UserSearch", "Account")',
+                    type: 'POST',
+                    data: function (data) {
+                        return $.extend({}, data, {
+                            NaatiNumber: $('#NaatiNumber').val(),
+                            Email: $('#Email').val(),
+                            GivenName: $('#GivenName').val(),
+                            FamilyName: $('#FamilyName').val(),
+                            CreatedDateFrom: $('#CreatedDateFrom').val(),
+                            CreatedDateTo: $('#CreatedDateTo').val()
+                        });
+                    }
+                },
+                columns: [
+                    {
+                        data: 'NaatiNumber',
+                        orderable: true
+                    },
+                    {
+                        data: 'FullName',
+                        orderable: true
+                    },
+                    {
+                        data: 'Email',
+                        orderable: true,
+                        render: function (data) {
+                            return '<a href="mailto:' + data + '">' + data + '</a>';
+                        }
+                    },
+                    {
+                        data: 'WebAccountCreateDate',
+                        orderable: true
+                    },
+                    {
+                        data: function (row) {
+                            return row.Deceased && row.Action === 'Activate' ? 'Deceased' : row.Action;
+                        },
+                        orderable: false,
+                        render: function (data, type, row) {
+                            var buttonClass = data === 'Activate' ? 'primary' : 'danger';
+
+                            return '<button class="btn btn-' + buttonClass + '" data-action-url="' +
+                                row.ActionUrl +
+                                '">' +
+                                data +
+                                '</button>';
+                        }
+                    }
+                ],
+                dom: "<'row v-offset-xs-1'<'col-sm-12'<'table-responsive't>>>" +
+                     "<'row'<'col-sm-5'i><'col-sm-7'<'pull-right'p>>>" +
+                    "r",
+                language: {
+                    processing: $('#loadingOverlayTemplate').html(),
+                    zeroRecords: 'No Results'
+                },
+                orderMulti: false,
+                processing: true,
+                searching: false,
+                serverSide: true
+            });
+
+            var $searchButton = $('#btnSearch');
+            var $exportButton = $('#btnExport');
+
+            $resultsTable.on('draw.dt', function () {
+                $searchButton.prop('disabled', false);
+                $exportButton.prop('disabled', false);
+
+                $resultsTable.find('.btn').click(function () {
+                    var $this = $(this);
+                    $this.prop('disabled', true);
+                    $.post($this.data('actionUrl'), {}, function () {
+                        dataTable.ajax.reload();
+                    });
+                });
+            });
+
+            $('#searchForm').submit(function () {
+                $searchButton.prop('disabled', true);
+                $exportButton.prop('disabled', true);
+
+                dataTable.ajax.reload();
+
+                return false;
+            });
+
+            var $exportForm = $('#exportForm');
+
+            function appendHiddenField(name, value) {
+                var $input = $('<input />');
+
+                $input.attr('type', 'hidden');
+                $input.data('order', 'true');
+                $input.attr('name', name);
+                $input.val(value);
+
+                $exportForm.append($input);
+            }
+
+            $exportForm.submit(function () {
+                $('#exportCriteriaNaatiNumber').val($('#NaatiNumber').val());
+                $('#exportCriteriaEmail').val($('#Email').val());
+                $('#exportCriteriaGivenName').val($('#GivenName').val());
+                $('#exportCriteriaFamilyName').val($('#FamilyName').val());
+                $('#exportCriteriaCreatedDateFrom').val($('#CreatedDateFrom').val());
+                $('#exportCriteriaCreatedDateTo').val($('#CreatedDateTo').val());
+
+                $exportForm.find('input[data-order="true"]').remove();
+
+                var order = dataTable.order();
+
+                for (var i = 0; i < order.length; i++) {
+                    appendHiddenField('order[' + i + '][column]', order[i][0]);
+                    appendHiddenField('order[' + i + '][dir]', order[i][1]);
+                }
+
+                return true;
+            });
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.ValidationSummary()
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                Enter your search criteria to find members registered for myNAATI.<br />
+                From here you can activate or deactivate a user's access to myNAATI.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @using (Html.BeginForm("UserSearch", "Account", FormMethod.Post, new { id = "searchForm", @class = "form-horizontal" }))
+            {
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            @Html.Label("NaatiNumber", "Customer Number", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.NaatiNumber, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            @Html.Label("Email", "Email", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            @Html.Label("GivenName", "Given Name", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.GivenName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            @Html.Label("FamilyName", "Family Name", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.FamilyName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            @Html.Label("CreatedDateFrom", "Created Date From", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.CreatedDateFrom, new { @class = "form-control", type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            @Html.Label("CreatedDateTo", "To", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.CreatedDateTo, new { @class = "form-control", type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button id="btnSearch" class="btn btn-primary" type="submit">Search</button>
+                        <button id="btnExport" class="btn btn-success pull-right" type="button" onclick="$('#exportForm').submit();">Export</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="resultsTable" class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>Customer number</th>
+                        <th>Name</th>
+                        <th>Email address</th>
+                        <th>Date Created</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("ExportUser", "Account", FormMethod.Post, new { id = "exportForm" }))
+{
+    <input type="hidden" name="NaatiNumber" id="exportCriteriaNaatiNumber" />
+    <input type="hidden" name="Email" id="exportCriteriaEmail" />
+    <input type="hidden" name="GivenName" id="exportCriteriaGivenName" />
+    <input type="hidden" name="FamilyName" id="exportCriteriaFamilyName" />
+    <input type="hidden" name="CreatedDateFrom" id="exportCriteriaCreatedDateFrom" />
+    <input type="hidden" name="CreatedDateTo" id="exportCriteriaCreatedDateTo" />
+}

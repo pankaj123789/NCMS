@@ -1,0 +1,21 @@
+﻿<div class="form-control-static">
+
+    <!--ko ifnot: hasOptions()-->
+    <label class="radio-inline">
+        <input type="radio" value="true" data-bind="checked: checked"> <span data-bind="text: trueText"></span>
+    </label>
+    <label class="radio-inline">
+        <input type="radio" value="false" data-bind="checked: checked"> <span data-bind="text: falseText"></span>
+    </label>
+    <!--/ko-->
+
+    <!--ko if: hasOptions-->
+    <!--ko foreach: { data: options, as: 'o' }-->
+    <label class="radio-inline">
+        <input name="radioOptionGroup" type="radio" data-bind="value: o.value, checked: $component.selectedValue" />
+        <span data-bind="text: o.DisplayName()"></span>
+    </label>
+    <!--/ko-->
+    <!--/ko-->
+
+</div>

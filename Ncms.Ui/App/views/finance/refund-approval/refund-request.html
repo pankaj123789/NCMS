@@ -1,0 +1,45 @@
+﻿<div class="streamline b-l b-info m-b">
+    <!--ko foreach: { data: items, as: 'item' }-->
+    <!--ko collapser: item.expanded-->
+    <div class="bg-info wrapper-sm m-l-n m-r-n m-b r r-2x cursor-pointer" data-bind="collapserHeader">
+        <div class="row m-t-none m-b-none">
+            <div class="col-lg-2">
+                <i class="fa" data-bind="css: { 'fa-open': !$expanded(), 'fa-close': $expanded }"></i>
+                <label class="checkbox-inline i-checks">
+                    <input type="checkbox" data-bind="nullableChecked: item.Approved"><i></i>
+                </label>
+                <a href="#" class="text-info" data-bind="attr: { href: '#application/' + item.CredentialApplicationId() + '?tab=credentialRequests' }, text: 'APP' + item.CredentialApplicationId(), clickBubble: false, click: function() { event.stopPropagation(); return true; }" target="_blank"></a>
+            </div>
+            <div class="col-lg-2">
+                <a href="#" class="text-info" data-bind="attr: { href: '#person/' + item.NAATINumber() + '?tab=contactDetails' }, text: 'Customer No. ' + item.NAATINumber(), clickBubble: false, click: function() { event.stopPropagation(); return true; }" target="_blank"></a>
+            </div>
+            <div class="col-lg-2">
+                <span data-bind="restext: 'Naati.Resources.Application.resources.PaidAmount'"></span><br />
+                <span data-bind="textCurrency: item.InitialPaidAmount"></span>
+            </div>
+            <div class="col-lg-2">
+                <span data-bind="restext: 'Naati.Resources.Application.resources.RefundAmount'"></span><br />
+                <span data-bind="textCurrency: item.RefundAmount"></span>
+            </div>
+            <div class="col-lg-2">
+                <span data-bind="restext: 'Naati.Resources.Application.resources.RefundPercentage'"></span><br />
+                <span data-bind="text: item.refundPercentageString"></span>
+            </div>
+            <div class="col-lg-1">
+                <span data-bind="restext: 'Naati.Resources.Application.resources.RefundMethod'"></span><br />
+                <span data-bind="text: item.refundMethodType"></span>
+            </div>
+            <div data-bind="if: Comments" class="col-lg-1 text-center">
+                <i class="fa fa-comment-dots text-danger" data-bind="tooltip: { trigger: 'hover', container: 'body' }, resattr: { title: 'Naati.Resources.Shared.resources.CommentsProvided' }"></i>
+            </div>
+        </div>
+    </div>
+    <div data-bind="collapserContent">
+        <div class="m-l-md m-t-n-sm m-b-n-sm">
+            <!--ko compose: groupingCompose -->
+            <!--/ko-->
+        </div>
+    </div>
+    <!--/ko-->
+    <!--/ko-->
+</div>

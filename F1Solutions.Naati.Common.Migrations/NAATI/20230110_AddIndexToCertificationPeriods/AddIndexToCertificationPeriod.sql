@@ -1,0 +1,3 @@
+DROP INDEX IF EXISTS IX_Credential_Period_StartDate_TermDate ON tblCredential
+
+CREATE NONCLUSTERED INDEX IX_Credential_Period_StartDate_TermDate ON tblCredential (CertificationPeriodId,StartDate,TerminationDate)

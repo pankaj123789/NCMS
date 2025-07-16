@@ -1,0 +1,124 @@
+# Default values for mynaati.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+strategy:
+ #type: Recreate
+ type: RollingUpdate
+ rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+sharedResourcesName: "naati"
+
+image:
+  repository: acrtest0002.azurecr.io/mynaatiui
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: LoadBalancer
+  port: 80
+  loadBalancerIP: 127.0.0.1
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:  #Deployment is not using this property. pods will take default values specified on limit-range defined in naati-infra package
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+   limits:
+     cpu: .5
+     memory: 800M
+   requests:
+     cpu: .1
+     memory: 300M
+
+nodeSelector: 
+  "kubernetes.io/os": windows
+
+tolerations: []
+
+affinity: {}
+
+livenessProbe:
+ timeoutSeconds: 15
+ initialDelaySeconds: 240
+ periodSeconds: 45
+ failureThreshold: 4
+ path: /home
+ 
+readinessProbe:
+ timeoutSeconds: 15
+ initialDelaySeconds: 90
+ periodSeconds: 45
+ successThreshold: 1
+ failureThreshold: 3
+ path: /home/testconnection
+ 
+lifecycle:
+ postStart: 
+  exec:
+   command: ["powershell.exe,", "\"Start-Sleep -s 10 | Out-Null; Invoke-WebRequest -URI http://localhost/home -UseBasicParsing | Out-Null; Write-Host postStartMyNaatiExecuted; \""]
+ preStop: 
+  exec:
+   command: ["powershell.exe,", "\"Invoke-WebRequest -URI http://localhost/lifecycle/stop -UseBasicParsing | Out-Null; Start-Sleep -s 15;  Write-Host preStopMyNaatiExecuted; \""]
+   
+
+terminationGracePeriodSeconds: 15
+configMap:
+  data:
+    # Configuration values can be set as key-value properties 
+    "ExternalUrl_Applications_URL": "http://localhost/mynaati.Web/apply"
+    "BypassExaminerAuthentication": "true"
+    "kosettings_allowEmailPaste": "true"
+    "kosettings_skipRecaptcha": "true"
+    "EnvironmentType": "Localhost"
+    "EnvironmentName": "Localhost"
+    "NcmsUrl": "https://localhost"
+    "SecretPrefix": "LOCALHOST"
+    "SecurePay_PaymentUrl": "https://test.securepay.com.au/xmlapi/payment"
+    "DebugMode" : "True"
+    "EnableSwagger" : "False"
+    "logging_MinimumLevel": "Information"
+    "OnlineDirectoryUrl" : "https://naati.com.au/online-directory/"
+    "OnlineHelpUrl" : "https://www.naati.com.au"
+    "AccountingOperationsReportEmailsTo": "LOCALHOST@altf4solutions.com.au"
+    "EmailBatchingReportEmailsTo": "Hector.Figueroa@f1solutions.com.au"
+    "AccountingOperationsLogEmailsTo": "LOCALHOST@altf4solutions.com.au"
+    "EmailBatchingLogEmailsTo": "Hector.Figueroa@f1solutions.com.au"
+    "AccountingOperationsReportEmailsFrom": "localhost.noreply@altf4solutions.onmicrosoft.com"

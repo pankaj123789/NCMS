@@ -1,0 +1,93 @@
+﻿<div class="vbox">
+	<div class="bg-light lter b-b wrapper-md">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<h1 class="m-n font-thin h3 text-black" data-bind="text: windowTitle"></h1>
+				<div class="pull-right m-t-n-lg">
+					<div class="w-xxl pull-right m-r-xxl m-t-n-xs">
+						<div class="pull-right">
+							<label class="i-switch i-switch-md bg-info m-t-sm">
+								<input type="checkbox" data-bind="checked: showAll " />
+								<i></i>
+							</label>
+						</div>
+						<label class="control-label pull-right m-t-sm m-r-sm" data-bind="restext: 'Naati.Resources.Application.resources.ShowAllCredentials'"></label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-row">
+		<div class="wrapper-md">
+			<div class="row m-t">
+				<div class="col-md-12">
+					<div class="text-center">
+						<a href="#" data-bind="attr: { href: '#logbook/' + naatiNumber() + '/professional-development'  }">
+							<div class="panel padder-v item">
+								<div class="h1 font-thin"><i class="fa fa-list"></i> Professional Development</div>
+								<span class="text-muted text-xs">View</span>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- ko if: logbook.Credentials().length > 0 -->
+			<div class="panel">
+				<ul class="list-group alt">
+					<!--ko foreach: { data: logbook.Credentials, as: 'credential' }-->
+					<li class="list-group-item no-padder">
+						<div class="media">
+							<div class="hbox">
+								<div class="col padder-v">
+									<div class="h4 font-thin margin-left-xs" data-bind="text:credential.CredentialTypeSkillName"></div>
+									<span class="text-muted text-xs margin-left-xs" data-bind="reshtml: 'Naati.Resources.Shared.resources.Credential'"></span>
+								</div>
+								<div class="col text-center padder-v">
+									<div class="hbox">
+										<div class="col">
+											<span class="font-thin h4 block" data-bind="textDate: credential.StartDate"></span>
+											<span class="text-muted text-xs" data-bind="reshtml: 'Naati.Resources.Menu.resources.Caption'"></span>
+										</div>
+										<div class="col">
+											<span class="font-thin h4 block" data-bind="textDate: credential.EndDate"></span>
+											<span class="text-muted text-xs" data-bind="reshtml: 'Naati.Resources.Shared.resources.Expiry'"></span>
+										</div>
+									</div>
+								</div>
+								<div class="col text-center">
+									<div class="hbox">
+										<div class="col padder-v">
+											<span class="font-thin h4 block" data-bind="reshtml: 'Naati.Resources.Application.resources.RecertificationStatus' + credential.RecertificationStatus()"></span>
+											<span class="text-muted text-xs" data-bind="reshtml: 'Naati.Resources.Person.resources.RecertificationStatus'"></span>
+										</div>
+										<div class="col padder-v">
+											<span class="font-thin h4 block" data-bind="text: credential.CredentialStatus || ' '"></span>
+											<span class="text-muted text-xs" data-bind="reshtml: 'Naati.Resources.Shared.resources.Status'"></span>
+										</div>
+										<div class="col padder-v bg-info">
+											<a data-bind="attr:{href:'#/logbook/' + $root.naatiNumber() + '/credential/' + credential.Id()}">
+												<span class="text-white font-thin h4 block"><i class="fa fa-list"></i></span>
+												<span class="text-muted text-xs" data-bind="reshtml: 'Naati.Resources.EmailMessage.resources.View'"></span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<!--/ko-->
+				</ul>
+			</div>
+			<!--/ko-->
+		</div>
+	</div>
+	<div class="padder b-t b-gray bg-white wrapper-sm">
+		<div class="pull-right">
+			<a type="button" class="btn btn-default" data-dismiss="modal" data-bind="attr:{href:'#/person/' + $root.naatiNumber()}">
+				<i class="fa fa-times"></i>
+				<span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span>
+			</a>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>

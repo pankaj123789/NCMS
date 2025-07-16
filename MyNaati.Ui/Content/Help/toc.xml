@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toc>
+  <item>
+    <title><![CDATA[Welcome to myNAATI]]></title>
+    <tooltip><![CDATA[Welcome to myNAATI]]></tooltip>
+    <item url="Documents/whatisnaationline.htm">
+      <title><![CDATA[What is myNAATI?]]></title>
+      <tooltip><![CDATA[What is myNAATI?]]></tooltip>
+    </item>
+    <item url="Documents/learningmoreaboutnaa.htm">
+      <title><![CDATA[Learning more about myNAATI]]></title>
+      <tooltip><![CDATA[Learning more about myNAATI]]></tooltip>
+    </item>
+    <item url="Documents/findapractitioner1.htm">
+      <title><![CDATA[Find a Practitioner]]></title>
+      <tooltip><![CDATA[Find a Practitioner]]></tooltip>
+    </item>
+    <item url="Documents/login.htm">
+      <title><![CDATA[Log In]]></title>
+      <tooltip><![CDATA[Log In]]></tooltip>
+    </item>
+    <item url="Documents/registerwithnaationl.htm">
+      <title><![CDATA[Register with myNAATI]]></title>
+      <tooltip><![CDATA[Register with myNAATI]]></tooltip>
+      <item url="Documents/recoveryourpassword.htm">
+        <title><![CDATA[Recover your password]]></title>
+        <tooltip><![CDATA[Recover your password]]></tooltip>
+      </item>
+      <item url="Documents/changeyourpassword.htm">
+        <title><![CDATA[Change your password]]></title>
+        <tooltip><![CDATA[Change your password]]></tooltip>
+      </item>
+      <item url="Documents/mylisting.htm">
+        <title><![CDATA[My Listing]]></title>
+        <tooltip><![CDATA[My Listing]]></tooltip>
+      </item>
+      <item url="Documents/toupdateyourlisting.htm">
+        <title><![CDATA[To update your listing]]></title>
+        <tooltip><![CDATA[To update your listing]]></tooltip>
+      </item>
+    </item>
+    <item url="Documents/applyforcredentials.htm">
+      <title><![CDATA[Apply for Credentials]]></title>
+      <tooltip><![CDATA[Apply for Credentials]]></tooltip>
+    </item>
+    <item url="Documents/purchaseproducts.htm">
+      <title><![CDATA[Purchase Products]]></title>
+      <tooltip><![CDATA[Purchase Products]]></tooltip>
+    </item>
+    <item url="Documents/maintaindetails.htm">
+      <title><![CDATA[Maintain Details]]></title>
+      <tooltip><![CDATA[Maintain Details]]></tooltip>
+      <item url="Documents/viewpersonaldetails.htm">
+        <title><![CDATA[View Personal details]]></title>
+        <tooltip><![CDATA[View Personal details]]></tooltip>
+      </item>
+      <item url="Documents/updateyourdetails.htm">
+        <title><![CDATA[Update your details]]></title>
+        <tooltip><![CDATA[Update your details]]></tooltip>
+      </item>
+    </item>
+  </item>
+</toc>

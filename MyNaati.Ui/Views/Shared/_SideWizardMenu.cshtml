@@ -1,0 +1,30 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.Shared.BaseWizardModel
+@{
+    var haveReachedCurrentStep = false;
+}
+<div class="list-group">
+    @foreach (var step in Model.Steps.Where(s => s.HideInStepList != true))
+    {
+        var onCurrentStep = ViewContext.IsInAction(step.Action);
+
+        haveReachedCurrentStep = haveReachedCurrentStep || onCurrentStep;
+
+        var className = string.Empty;
+
+        if (onCurrentStep)
+        {
+            className = " active";
+        }
+        else if (step.Skipped)
+        {
+            className = " disabled";
+        }
+        else if (!step.AllowDirectNavigation || haveReachedCurrentStep)
+        {
+            className = " no-navigation";
+        }
+        
+        <a class="list-group-item@(className)" href="@(string.IsNullOrEmpty(className) ? Url.Action(step.Action, new { Model.WizardId }) : "#")">@step.Name</a>
+    }
+</div>

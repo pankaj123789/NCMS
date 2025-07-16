@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="CollapseAll" xml:space="preserve">
+    <value>Collapse All</value>
+  </data>
+  <data name="CostFormat" xml:space="preserve">
+    <value>{0} (ex GST)</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="CounterInfo" xml:space="preserve">
+    <value>{0} marking(s) to be verified</value>
+  </data>
+  <data name="CreateNewPayRun" xml:space="preserve">
+    <value>Create New Pay Run</value>
+  </data>
+  <data name="EnteredBy" xml:space="preserve">
+    <value>Entered by {0}</value>
+  </data>
+  <data name="ExpandAll" xml:space="preserve">
+    <value>Expand All</value>
+  </data>
+  <data name="GLCode" xml:space="preserve">
+    <value>GL Code</value>
+  </data>
+  <data name="IncludeInPayRun" xml:space="preserve">
+    <value>Include in pay run</value>
+  </data>
+  <data name="Markings" xml:space="preserve">
+    <value>Marking(s)</value>
+  </data>
+  <data name="NoCodeCounterInfo" xml:space="preserve">
+    <value>{0} marking(s) requiring GL code assignment</value>
+  </data>
+  <data name="NoCodeValidationGroupTitle" xml:space="preserve">
+    <value>Marking(s) requiring GL code assignment</value>
+  </data>
+  <data name="NoMarkingForPayroll" xml:space="preserve">
+    <value>There are no markings ready for payroll.</value>
+  </data>
+  <data name="NoValidationsToBeDone" xml:space="preserve">
+    <value>There are no markings ready to be verified.</value>
+  </data>
+  <data name="OldestReceivedDay" xml:space="preserve">
+    <value>Oldest test received {0} day(s) ago</value>
+  </data>
+  <data name="PayRunAlreadyProgressError" xml:space="preserve">
+    <value>A pay run is already in progress. A new pay run cannot be created until the previous pay run is complete.</value>
+  </data>
+  <data name="PayRunCreatedSuccessfully" xml:space="preserve">
+    <value>Pay run created.</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="TotalCost" xml:space="preserve">
+    <value>Total Cost (ex GST)</value>
+  </data>
+  <data name="UnitCost" xml:space="preserve">
+    <value>Unit Cost (ex GST)</value>
+  </data>
+  <data name="UnselectAll" xml:space="preserve">
+    <value>Unselect All</value>
+  </data>
+  <data name="Verified" xml:space="preserve">
+    <value>Verified</value>
+  </data>
+  <data name="MarkAsPaid" xml:space="preserve">
+    <value>Mark as paid</value>
+  </data>
+  <data name="DeletedFromPayRunSuccessfully" xml:space="preserve">
+    <value>Examiner removed from pay run.</value>
+  </data>
+  <data name="DeleteFromPayRunConfirmation" xml:space="preserve">
+    <value>Are you sure that want to remove this examiner from the Pay Run?</value>
+  </data>
+  <data name="InvoiceNo" xml:space="preserve">
+    <value>Invoice No</value>
+  </data>
+  <data name="NoPayRunInProgress" xml:space="preserve">
+    <value>There is no pay run in progress.</value>
+  </data>
+  <data name="RemoveFromPayRun" xml:space="preserve">
+    <value>Remove from Pay Run</value>
+  </data>
+  <data name="PaidReview" xml:space="preserve">
+    <value>Paid Review</value>
+  </data>
+  <data name="PaidReviewBadge" xml:space="preserve">
+    <value>PAID REVIEW</value>
+  </data>
+  <data name="Office" xml:space="preserve">
+    <value>Office</value>
+  </data>
+  <data name="CanFinaliseHint" xml:space="preserve">
+    <value>This pay run is ready to be finalised.</value>
+  </data>
+  <data name="CannotFinaliseHint" xml:space="preserve">
+    <value>Pay run cannot be finalised until all invoice numbers are entered and saved.</value>
+  </data>
+  <data name="FinalisePayRun" xml:space="preserve">
+    <value>Finalise Pay Run</value>
+  </data>
+  <data name="FinalisePayRunConfirmation" xml:space="preserve">
+    <value>A finalised pay run cannot be changed. Are you sure you want to finalise this pay run?</value>
+  </data>
+  <data name="InvoiceNumberSaved" xml:space="preserve">
+    <value>Invoice number saved.</value>
+  </data>
+  <data name="PayRunFinalised" xml:space="preserve">
+    <value>Pay run finalised.</value>
+  </data>
+  <data name="CompletedBy" xml:space="preserve">
+    <value>Completed by {0}</value>
+  </data>
+  <data name="NoPayRunFound" xml:space="preserve">
+    <value>No pay runs found.</value>
+  </data>
+  <data name="AttendanceID" xml:space="preserve">
+    <value>Attendance ID</value>
+  </data>
+  <data name="RevertMarkingHint" xml:space="preserve">
+    <value>Revert payroll status to "Received"</value>
+  </data>
+  <data name="RevertMarkingConfirmation" xml:space="preserve">
+    <value>Are you sure that want to revert the payroll status of this marking to "Received"?</value>
+  </data>
+  <data name="ValidatedBy" xml:space="preserve">
+    <value>Validated By</value>
+  </data>
+  <data name="ValidatedDate" xml:space="preserve">
+    <value>Validated Date</value>
+  </data>
+  <data name="MarkingReverted" xml:space="preserve">
+    <value>Payroll status of marking reverted to "Received".</value>
+  </data>
+  <data name="RevertMarkingConfirmationTitle" xml:space="preserve">
+    <value>Revert Marking Status</value>
+  </data>
+  <data name="CreateInvoice" xml:space="preserve">
+    <value>Create Invoice</value>
+  </data>
+  <data name="InvoiceCreated" xml:space="preserve">
+    <value>Invoice created.</value>
+  </data>
+  <data name="BillExists" xml:space="preserve">
+    <value>A bill already exists for this account: {0}</value>
+  </data>
+  <data name="CreateBill" xml:space="preserve">
+    <value>Create Bill</value>
+  </data>
+  <data name="NoMaterialRequestFound" xml:space="preserve">
+    <value>No material requests found.</value>
+  </data>
+</root>

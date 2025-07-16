@@ -1,0 +1,78 @@
+<div class="modal fade" data-backdrop="static" tabindex="-1" role="dialog" id="addInvoiceDetailModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-light">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Invoice Line Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ui-front">
+                    <div class="panel panel-default m-b-none">
+                        <div class="panel-body form">
+                            <div class="form-group">
+                                <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" data-bind="checked: invoiceOnBehalfOfOtherCandidate"><i></i>
+                                        <span class="padder-md" data-bind="restext: 'Naati.Resources.Finance.resources.InvoiceOnBehalfOfOtherCandidate'"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group animated fadeIn" data-bind="validationElement: item.EntityId, css: { hide: !invoiceOnBehalfOfOtherCandidate() }">
+                                <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.Candidate'"></label>
+                                <!-- ko component: { name: 'auto-text-input', params: invoiceOnBehalfOfOptions } --><!-- /ko -->
+                            </div>
+                            <div class="form-group" data-bind="validationElement: item.ProductSpecificationId">
+                                <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.CodeAndProduct'"></label>
+                                <!-- ko component: { name: 'select-component', params: productOptions } --><!-- /ko -->
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-6" data-bind="validationElement: item.Quantity">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.Quantity'"></label>
+                                    <input ui-jq="TouchSpin" data-bind="jqueryui, value: item.Quantity, valueUpdate: 'input'" type="text" value="0" class="form-control w-xs" data-min='0' data-max='9999999' data-step="1" data-decimals="0" data-buttondown_class="hide" data-buttonup_class="hide">
+                                </div>
+                                <div class="form-group col-sm-6" data-bind="validationElement: item.IncGstCostPerUnit">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.UnitPrice'"></label>
+                                    <input ui-jq="TouchSpin" data-bind="jqueryui, value: item.IncGstCostPerUnit, valueUpdate: 'input'" type="text" value="0" class="form-control w-xs" data-min='0' data-max='9999999' data-step="0.1" data-decimals="2" data-buttondown_class="hide" data-buttonup_class="hide" data-prefix="$">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.ExGst'"></label>
+                                    <p class="form-control-static" data-bind="textCurrency: item.ExGstCostPerUnit"></p>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.Gst'"></label>
+                                    <p class="form-control-static" data-bind="textCurrency: item.Gst"></p>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label class="control-label">&nbsp;</label>
+                                    <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+                                        <label class="checkbox-inline i-checks">
+                                            <input type="checkbox" data-bind="checked: item.GSTApplies" disabled="disabled"><i></i> <span class="padder-md" data-bind="restext: 'Naati.Resources.Finance.resources.GstApplies'"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" data-bind="validationElement: item.Description">
+                                <label class="control-label" data-bind="restext: 'Naati.Resources.Finance.resources.Description'"></label>
+                                <textarea class="form-control" rows="4" data-bind="value: item.Description, valueUpdate: 'input'"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <label class="pull-left checkbox-inline i-checks" data-bind="click: tryDisplayInactiveProducts">
+                    <input type="checkbox" data-bind="checked: displayInactiveProducts"><i></i>
+                    <span class="padder-md" data-bind="restext: 'Naati.Resources.Finance.resources.DisplayInactiveProducts'"></span>
+                </label>
+                <button class="btn btn-success" data-bind="click: save, enable: isDirty">
+                    <i class="fa fa-check"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fa fa-ban"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

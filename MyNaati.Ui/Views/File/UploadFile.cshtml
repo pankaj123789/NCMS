@@ -1,0 +1,78 @@
+﻿@model MyNaati.Ui.ViewModels.File.FileListingModel
+
+@{
+    ViewBag.Title = "Upload File";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Form Templates", null)
+    };
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.ValidationSummary()
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>This page allows you to replace / view files that are used within the system.  To replace a file:</p>
+            <ul>
+                <li>Select the file you would like to replace, and choose a file to replace it with</li>
+                <li>Click the Upload button below</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-primary">Replace File</h3>
+            @using (Html.BeginForm("UploadFile", "File", FormMethod.Post, new { id = "uploadForm", enctype = "multipart/form-data", @class = "form-horizontal" }))
+            {
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.FileUpload.FileName, "Existing File", new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-6">
+                                @Html.DropDownListFor(x => x.FileUpload.FileName, Model.FileNames.OrderBy(x => x).Select(x => new SelectListItem { Text = x, Value = x }), new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.FileUpload.File, "With File", new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-6">
+                                <input id="File" type="file" name="FileUpload.File" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-offset-2 col-sm-6">
+                        <button class="btn btn-primary" type="submit">Upload</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-primary">Download Existing File</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @foreach (var filename in Model.FileNames.OrderBy(e => e))
+            {
+                @Html.ActionLink(filename, "DownloadFile", "File", new { FileName = filename }, null)
+                <br/>
+            }
+        </div>
+    </div>
+</div>

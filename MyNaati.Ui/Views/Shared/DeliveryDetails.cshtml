@@ -1,0 +1,370 @@
+﻿@using MyNaati.Ui.Helpers
+@using MyNaati.Ui.ViewModels.Shared
+@model MyNaati.Ui.ViewModels.Shared.BasePurchaseWizardModel
+@{
+    ViewBag.Title = "Place an Order";
+    ViewBag.Subtitle = "Delivery Details";
+    Layout = "~/Views/Shared/MasterPages/_ProductWizardLayout.cshtml";
+
+    var addAddressModel = new AddAddressModel
+    {
+        WizardId = Model.WizardId
+    };
+
+    var ajaxOptions = new AjaxOptions
+    {
+        OnSuccess = "updateAjaxCallSucceeded",
+        OnFailure = "updateAjaxCallFailed"
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var isAustraliaRadio = '[name="IsFromAustralia"]';
+        var postcodeDiv = '#postcode';
+        var countryDiv = '#country';
+        var selectedsuburb = null;
+        var tableSelector = '#resultsTable';
+        var noRecordsSelector = '#noRecords';
+        var addModalSelector = '#addAddressModal';
+        var addErrorSelector = "#addErrors";
+        var createAddressButtonSelector = '#createAddressButton';
+
+        var suburbNameForId = '@Model.DeliveryDetailsModel.SelectedAddress.Postcode';
+        var countryNameForId = '@Model.DeliveryDetailsModel.SelectedAddress.Country';
+
+        var dataTable = null;
+
+        @if (Model.DeliveryDetailsModel.SelectedAddress.Suburb != null)
+        {
+        <text>selectedsuburb = {
+            'Suburb': '@Ajax.JavaScriptStringEncode(Model.DeliveryDetailsModel.SelectedAddress.Suburb.Suburb)',
+            'State': '@Ajax.JavaScriptStringEncode(Model.DeliveryDetailsModel.SelectedAddress.Suburb.State)',
+            'Code': '@Ajax.JavaScriptStringEncode(Model.DeliveryDetailsModel.SelectedAddress.Suburb.Code)',
+            'value': '@Ajax.JavaScriptStringEncode(Model.DeliveryDetailsModel.SelectedAddress.Suburb.DisplayText)'
+        };</text>
+        }
+
+        $(document).ready(function () {
+            var $table = $(tableSelector);
+            var $isAustralia = $(isAustraliaRadio);
+            var $suburbText = $('#suburbText');
+            var $countryText = $('#countryText');
+
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+
+            dataTable = $table.DataTable({
+                ajax: {
+                    url: 'AddressListSearch',
+                    type: 'POST'
+                },
+                buttons: {
+                    buttons: [{
+                        action: function (dt) {
+                            popupAddAddress();
+                        },
+                        text: 'New Address'
+                    }],
+                    dom: {
+                        button: {
+                            tag: 'button',
+                            className: 'btn btn-primary'
+                        },
+                        container: {
+                            className: 'btn-group'
+                        }
+                    }
+                },
+                columns: [
+                    {
+                        className: 'text-center',
+                        data: 'Selected',
+                        render: function (data, type, row) {
+                            return '<input type="radio" name="address" data-row-id="' + row.Id + '" class="radio"' + (data ? 'checked="true"' : '') + ' onclick="selectAddressRow(' + row.Id + ')" />';
+                        }
+                    },
+                    {
+                        data: function (row) {
+                            return row.StreetDetails + '<br />' + (row.IsFromAustralia ? row.Suburb : row.Country);
+                        }
+                    },
+                    {
+                        data: 'ContactType',
+                        defaultContent: 'Delivery'
+                    }
+                ],
+                dom:
+                    "<'row'<'col-sm-12'B>>" +
+                    "<'row v-offset-xs-1'<'col-sm-12'<'table-responsive't>>>",
+                info: false,
+                initComplete: function () {
+                    $table.find('tbody > tr').click(function () {
+                        var $radio = $(this).find('input[type="radio"]');
+                        $radio.prop('checked', true);
+                        selectAddressRow($radio.data('rowId'));
+                    });
+                },
+                language: {
+                    processing: $('#loadingOverlayTemplate').html(),
+                    zeroRecords: 'No Addresses'
+                },
+                ordering: false,
+                paging: false,
+                processing: true,
+                searching: false,
+                serverSide: true
+            });
+
+            $isAustralia.change(updateComboBoxes);
+            $isAustralia.focusout(updateComboBoxes);
+            updateComboBoxes();
+
+            $suburbText.autocomplete({
+                source: '@Url.Action("Suburbs", "Autocomplete")',
+                minLength: 1,
+                select: function (event, ui) {
+                    $('#suburbId').val(ui.item.SamId);
+                    suburbNameForId = ui.item.value;
+                    selectedsuburb = ui.item;
+                }
+            });
+
+            $suburbText.blur(function () { revertAutocompleteIfNecessary('#suburbText', '#suburbId', suburbNameForId) });
+
+            $countryText.autocomplete({
+                source: '@Url.Action("Countries", "Autocomplete")',
+                minLength: 1,
+                select: function (event, ui) {
+                    $('#countryId').val(ui.item.SamId);
+                    countryNameForId = ui.item.value;
+                }
+            });
+
+            $countryText.blur(function () { revertAutocompleteIfNecessary('#countryText', '#countryId', countryNameForId) });
+
+            $(createAddressButtonSelector).click(function () {
+                var streetDetailsLower = $('#Address').val().toLowerCase();
+                var countryDetails = $countryText.val();
+                var isFromAustralia = $(isAustraliaRadio).prop('checked');
+
+                if (isFromAustralia) {
+                    var matches = new Array();
+                    var message = checkForAustralia(matches, streetDetailsLower, selectedsuburb);
+                    if (message !== '')
+                        return confirm(message);
+                }
+                else if (countryDetails !== '' && streetDetailsLower !== '') {
+                    if (countryDetails != null && streetDetailsLower.indexOf(countryDetails.toLowerCase()) >= 0) {
+                        return confirm("We can see " + countryDetails + " in your street details.\r\n\r\n If this is the country for the address. it is already present in the country field. Please remove it from street details.\r\n\r\n Would you like to continue? Click OK to continue or Cancel to update your street details.");
+                    }
+                }
+
+                return true;
+            });
+        });
+
+        function selectAddressRow(rowNumber) {
+            $('#DeliveryDetailsModel_SelectedAddressId').val(rowNumber);
+        }
+
+        function allowWizardProgress(button) {
+            if (button === 'next' && $('#resultsTable input[type="radio"]').is(':checked')) {
+                $('#DeliveryDetailsModel_AnyAddressSelected').val('true');
+            }
+
+            return true;
+        }
+
+        function checkForAustralia(matches, streetDetailsLower, selectedsuburb) {
+            var returnMessage = '';
+            if (selectedsuburb != null) {
+                var suburbRegexp = new RegExp("(^|\\s)" + selectedsuburb.Suburb.toLowerCase().replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&") + "($|\\s)", "im");
+                if (streetDetailsLower.match(suburbRegexp)) {
+                    matches.push(selectedsuburb.Suburb);
+                }
+
+                var stateRegexp = new RegExp("(^|\\s)" + selectedsuburb.State.toLowerCase().replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&") + "($|\\s)", "im");
+                if (streetDetailsLower.match(stateRegexp)) {
+                    matches.push(selectedsuburb.State);
+                }
+
+                var postcodeRegexp = new RegExp("(^|\\s)" + selectedsuburb.Code.toLowerCase().replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&") + "($|\\s)", "im");
+                if (streetDetailsLower.match(postcodeRegexp)) {
+                    matches.push(selectedsuburb.Code);
+                }
+
+                if (matches.length > 0) {
+                    var matchString = matches.pop();
+                    if (matches.length > 0) {
+                        matchString = matches.pop() + ' and ' + matchString;
+                    }
+
+                    while (matches.length > 0) {
+                        matchString = matches.pop() + ', ' + matchString;
+                    }
+
+                    returnMessage = "We can see " + matchString + " in your street details." + "\r\n\r\n" + "If this information is your suburb, state, or postcode, it is already present in the suburb (" + selectedsuburb.value + "). Please remove it from street details. " + "\r\n\r\n" + "Would you like to continue? Click OK to continue or Cancel to update your street details.";
+                }
+            }
+
+            return returnMessage;
+        }
+
+        function revertAutocompleteIfNecessary(nameFieldId, idFieldId, nameValue) {
+            if (nameValue !== $(nameFieldId).val()) {
+                if ($(idFieldId).val() !== '' && $(idFieldId).val() !== '0') { @* They started to change the value and aborted; revert to the previously-selected value *@
+                    $(nameFieldId).val(nameValue);
+                } @* else nothing was selected yet, leave as-is *@
+            };
+        }
+
+        function updateComboBoxes() {
+            if ($(isAustraliaRadio).prop('checked')) {
+                $(postcodeDiv).show();
+                $(countryDiv).hide();
+            } else {
+                $(postcodeDiv).hide();
+                $(countryDiv).show();
+            }
+        }
+
+        function popupAddAddress() {
+            var $errors = $(addErrorSelector);
+
+            $('#addAddressForm')[0].reset();
+            $errors.empty();
+            $errors.hide();
+            $(addModalSelector).modal('show');
+        }
+
+        function updateAjaxCallSucceeded(ajaxResponse) {
+            var $errors = $(addErrorSelector);
+
+            $errors.empty();
+            if (ajaxResponse.Success) {
+                $errors.hide();
+                $('#DeliveryDetailsModel_SelectedAddressId').val(0);
+                dataTable.ajax.reload();
+                $(addModalSelector).modal('hide');
+            }
+            else {
+                $errors.show();
+                $errors.append('<ul></ul>');
+                $.each(ajaxResponse.Errors, function (index, value) {
+                    $(addErrorSelector + ' ul').append('<li>' + value + '</li>');
+                });
+            }
+        }
+
+        function updateAjaxCallFailed() {
+            var $errors = $(addErrorSelector);
+
+            $errors.empty();
+            $errors.append("<li>A communications error was encountered. Please try again.</li>");
+        }
+    </script>
+}
+@section AfterDefaultForm
+{
+    <div id="addAddressModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @using (Ajax.BeginForm("AddressCreateJson", ViewContext.CurrentController(), new { Model.WizardId }, ajaxOptions, new { id = "addAddressForm", @class = "form-horizontal" }))
+                {
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Delivery Address</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div id="addErrors" class="validation-summary-errors" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    @Html.Label("IsFromAustralia", "Location", new { @class = "control-label col-sm-4" })
+                                    <div class="col-sm-8">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="IsFromAustralia" value="true" checked="checked">
+                                            Australia
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="IsFromAustralia" value="false">
+                                            Overseas
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.Label("Address", new { @class = "control-label col-sm-4" })
+                                    <div class="col-sm-8">
+                                        @Html.TextBox("Address", addAddressModel.Address, new { id = "Address", @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div id="postcode" class="form-group">
+                                    @Html.Label("PostcodeId", "Suburb", new { @class = "control-label col-sm-4" })
+                                    <div class="col-sm-8">
+                                        <input type="text" id="suburbText" class="form-control" value="@addAddressModel.Postcode" />
+                                        <input type="hidden" id="suburbId" name="PostcodeId" value="@addAddressModel.PostcodeId" />
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <p class="form-control-static">Note: if the suburb you are looking for is not in the list, contact NAATI.</p>
+                                    </div>
+                                </div>
+                                <div id="country" class="form-group">
+                                    @Html.Label("CountryId", "Country", new { @class = "control-label col-sm-4" })
+                                    <div class="col-sm-8">
+                                        <input type="text" id="countryText" class="form-control" value="@addAddressModel.CountryIfNotAustralia" />
+                                        <input type="hidden" id="countryId" name="CountryId" value="@addAddressModel.CountryIdIgnoringAustralia" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="createAddressButton" type="submit" class="btn btn-primary">OK</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>Where should the order be delivered? Note: orders that require special delivery must be submitted manually on an order form.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        @Html.TextBoxFor(e => e.DeliveryDetailsModel.Name, new { @class = "form-control" })
+    </div>
+</div>
+<div class="row v-offset-xs-2">
+    <div class="col-lg-12">
+        <p>Either select one of the addresses below, or provide a new address for use with this delivery.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-10">
+        <table id="resultsTable" class="table table-bordered table-select">
+            <thead class="bg-primary">
+                <tr>
+                    <th>Deliver To</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <p id="noRecords" style="display: none;">You don't have any addresses registered with us.</p>
+    </div>
+</div>
+@Html.HiddenFor(x => x.DeliveryDetailsModel.AnyAddressSelected)
+@Html.HiddenFor(x => x.DeliveryDetailsModel.SelectedAddressId)

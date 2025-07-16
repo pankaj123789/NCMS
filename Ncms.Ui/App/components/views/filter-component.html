@@ -1,0 +1,13 @@
+﻿<div data-bind="css: css()">
+    <button type="button" class="close" data-bind="click: remove" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div class="form-group">
+        <!--ko if: showLabel-->
+        <label data-bind="reshtml: filterName"></label>
+        <!-- /ko -->
+        <!--ko if: helpText-->
+        <i class="fa fa-question-circle" data-bind="tooltip: { container: 'body' }, attr: { title: helpText }"></i>
+        <!--/ko-->
+        <!-- ko component: { name: componentName, params: componentOptions } -->
+        <!-- /ko -->
+    </div>
+</div>

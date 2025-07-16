@@ -1,0 +1,119 @@
+﻿<div class="col">
+    <div class="vbox">
+        <div class="bg-light lter b-b wrapper-md">
+            <h1 class="m-n font-thin h3">
+                <span data-bind="html: title"></span>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" data-bind="click: expandAll">
+                        <i class="fa fa-plus-square"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.ExpandAll'"></span>
+                    </button>
+                    <button type="button" class="btn btn-default" data-bind="click: collapseAll">
+                        <i class="fa fa-minus-square-o"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.CollapseAll'"></span>
+                    </button>
+                </div>
+            </h1>
+        </div>
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner" data-bind="css: { 'bg-white': users().length === 0 }">
+                    <div class="wrapper-md">
+                        <div class="alert alert-warning" data-bind="reshtml: 'Naati.Resources.Payroll.resources.NoValidationsToBeDone', visible: users().length === 0"></div>
+                        <div class="streamline b-l b-info m-b padder-v" data-bind="visible: users().length > 0">
+                            <!--ko foreach: { data: users, as: 'user' } -->
+                            <!--ko collapser: user.expanded-->
+                            <div class="bg-info wrapper-sm m-l-n m-r-n m-b r r-2x cursor-pointer" data-bind="collapserHeader">
+                                <i class="fa" data-bind="css: { 'fa-plus-circle': !$expanded(), 'fa-minus-circle': $expanded }"></i>
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" data-bind="nullableChecked: user.Verified, enable: !user.NoCode"><i></i>
+                                </label>
+                                <span data-bind="text: $root.enteredInfo(user)"></span>
+                            </div>
+                            <div data-bind="collapserContent">
+                                <div class="m-l-md">
+                                    <!--ko foreach: { data: user.Groups, as: 'group' }-->
+                                    <!--ko collapser: group.expanded-->
+                                    <div class="bg-white wrapper-sm m-l-n m-r-n m-b r r-2x cursor-pointer b b-gray" data-bind="collapserHeader">
+                                        <div class="row m-t-none m-b-none">
+                                            <div class="col-lg-4">
+                                                <i class="fa" data-bind="css: { 'fa-chevron-right': !group.expanded(), 'fa-chevron-down': group.expanded() }"></i>
+                                                <label class="checkbox-inline i-checks">
+                                                    <input type="checkbox" data-bind="nullableChecked: group.Verified, enable: !user.NoCode"><i></i>
+                                                </label>
+                                                <span data-bind="html: group.TestType"></span>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <span data-bind="text: $root.counterInfo(group)"> </span>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <span data-bind="html: $root.getFirstReceivedDateInfo(group)"></span>
+                                                <i data-bind="css: { 'text-danger': user.NoCode, 'text-info': !user.NoCode }" class="pull-right fa fa-circle m-r-xs m-l-sm"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div data-bind="collapserContent">
+                                        <div class="m-l-sm m-t-n-xs m-b-sm">
+                                            <table class="table table-bordered m-b-none b-gray table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Examiner'"></th>
+                                                        <th data-bind="reshtml: 'Naati.Resources.Application.resources.Skill'"></th>
+                                                        <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Test.resources.AttendanceId'"></th>
+                                                        <th class="w-sm"></th>
+                                                        <th class="w" data-bind="reshtml: 'Naati.Resources.Payroll.resources.Office'"></th>
+                                                        <th data-bind="reshtml: 'Naati.Resources.Test.resources.ProductSpecificationCodeLabel', visible: !user.NoCode"></th>
+                                                        <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Payroll.resources.GLCode', visible: !user.NoCode"></th>
+                                                        <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Payroll.resources.UnitCost'"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody data-bind="foreach: { data: group.VisibleMarkings, as: 'marking' }">
+                                                    <tr data-bind="click: $root.toggleVerified">
+                                                        <td>
+                                                            <label class="checkbox-inline i-checks">
+                                                                <input type="checkbox" data-bind="nullableChecked: marking.Verified, enable: !user.NoCode"><i></i>
+                                                            </label>
+                                                            <span data-bind="text: marking.Examiner"></span>
+                                                        </td>
+                                                        <td data-bind="text: marking.Language"></td>
+                                                        <td class="w-sm">
+                                                            <a class="btn-link" data-bind="text: marking.TestAttendanceId, click: $root.openTest"></a>
+                                                        </td>
+                                                        <td class="w-sm">
+                                                            <span class="label badge bg-black-opacity m-t-xxs m-r-sm" data-bind="visible: marking.PaidReviewer, resattr: { title: 'Naati.Resources.Payroll.resources.PaidReview' }, tooltip: { trigger: 'hover' }">P</span>
+                                                            <span class="label badge bg-black-opacity m-t-xxs" data-bind="visible: marking.Supplementary, resattr: { title: 'Naati.Resources.Test.resources.Supplementary' }, tooltip: { trigger: 'hover' }">S</span>
+                                                        </td>
+                                                        <td class="w" data-bind="text: marking.Office"></td>
+                                                        <td data-bind="text: marking.ProductSpecificationCode, visible: !user.NoCode"></td>
+                                                        <td class="w-sm" data-bind="text: marking.GlCode, visible: !user.NoCode"></td>
+                                                        <td class="w-sm" data-bind="text: $root.parseCost(marking.ExaminerCost)"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <!--ko if: group.TotalSize() < group.Markings().length-->
+                                            <a href="#" class="btn btn-block btn-lg text-center" data-bind="click: group.increaseTotalSize">Load more items...</a>
+                                            <!--/ko-->
+                                        </div>
+                                    </div>
+                                    <!--/ko-->
+                                    <!--/ko-->
+                                </div>
+                            </div>
+                            <!--/ko-->
+                            <!--/ko-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="padder b-t b-gray bg-white wrapper-sm">
+            <div class="pull-right">
+                <button class="btn btn-success" data-bind="click: validate">
+                    <i class="fa fa-check"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.Verified'"></span>
+                </button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

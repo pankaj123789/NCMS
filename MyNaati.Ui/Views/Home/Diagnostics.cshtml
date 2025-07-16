@@ -1,0 +1,29 @@
+﻿@model MyNaati.Ui.ViewModels.Home.DiagnosticsModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Diagnostics</title>
+</head>
+<body>
+    <div>
+        @if (Model.IsFullyFunctional)
+        {
+            <p>Everything is great!</p>
+        }
+        else
+        {
+            <ul>
+            @foreach (var child in Model.ErrorMessages)
+            {
+                <li>@{Html.RenderPartial("_MessageNodePartial", child);}</li>
+            }    
+            </ul>
+        }   
+    </div>
+</body>
+</html>

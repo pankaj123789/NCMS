@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Shared/MasterPages/_KnockoutLayout.cshtml";
+    ViewBag.RedirectLogoUrl = System.Configuration.ConfigurationManager.AppSettings["ExternalUrl_NAATI_URL"];
+    ViewBag.Title = "My Test Material Development";
+    ViewBag.ShowBreadCrumb = false;
+}
+@section Head
+{
+    @Styles.Render("~/Bundles/Styles/FileUpload")
+}
+@section Scripts
+{
+    @Scripts.Render("~/Bundles/Scripts/FileUpload")
+}
+<div id="applicationHost" data-app-root="views/examiner-tools/manage-test-material"></div>

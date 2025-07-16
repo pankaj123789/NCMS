@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Online Directory";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";    
+}
+@section Head
+{
+    @RenderSection("Head", false)
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        var formSelector = 'form';
+        var previousButtons = 'input[value=Previous]';
+        var nextButtons = 'input[value=Next]';
+        var searchButtons = 'input[value=Search]';
+        var buttonQueryStringName = 'Button';
+
+        $(document).ready(function () {
+            $(previousButtons).click(function () { return gotoButton('previous'); });
+            $(nextButtons).click(function () { return gotoButton('next'); });
+            $(searchButtons).click(function () { return gotoButton('search'); });
+        });
+
+        function gotoButton(button) {
+            var queryString = getBaseQueryString();
+
+            if (queryString.indexOf('?') != -1) {
+                queryString += '&';
+            }
+            else {
+                queryString += '?';
+            }
+
+            queryString += buttonQueryStringName + '=' + button;
+
+            $(formSelector)
+                .attr('action', queryString)
+                .submit();
+            return false;
+        }
+
+        function getBaseQueryString() {
+            var queryString = $(formSelector).attr('action');
+            var textIndex = queryString.indexOf('&' + buttonQueryStringName);
+            if (textIndex != -1) {
+                queryString = queryString.slice(0, textIndex);
+            }
+            return queryString;
+        }
+    </script>
+    @RenderSection("Scripts", false)
+}
+<h1>@ViewBag.Title</h1>
+<p>
+    Search the Online Directory of translators and interpreters accredited or recognised by NAATI.
+    <br />
+    If you know the person's name or need more options, try our @Html.ActionLink("advanced search", "StartNewSearch").
+</p>
+<hr />
+<div id="main">
+    @using (Html.BeginForm())
+    {
+        <input type="hidden" name="WizardId" value="@TempData["WizardId"]" />
+        <div>
+            <h2>@ViewBag.Subtitle</h2>
+            @Html.ValidationSummary()
+
+            @RenderBody()
+            <br style="clear: both" />
+            <br style="clear: both" />
+            <div class="">
+                <input type="submit" value="Previous" />
+                <input type="submit" value="Next" />
+                <input type="submit" value="Search" style="display:none" />
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,838 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllFiltersWereAdded" xml:space="preserve">
+    <value>All filters were added</value>
+  </data>
+  <data name="AllMarksReceived" xml:space="preserve">
+    <value>All Marks Received</value>
+  </data>
+  <data name="AvailableFilters" xml:space="preserve">
+    <value>Available Filters</value>
+  </data>
+  <data name="AwaitingConfirmation" xml:space="preserve">
+    <value>Awaiting Confirmation</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Both</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Checked" xml:space="preserve">
+    <value>Checked</value>
+  </data>
+  <data name="Confirmed" xml:space="preserve">
+    <value>Confirmed</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="DateFilterType" xml:space="preserve">
+    <value>Filter Type</value>
+  </data>
+  <data name="Direction" xml:space="preserve">
+    <value>Direction</value>
+  </data>
+  <data name="DueBy" xml:space="preserve">
+    <value>Due By</value>
+  </data>
+  <data name="Examiner" xml:space="preserve">
+    <value>Examiner</value>
+  </data>
+  <data name="MarkerAllocated" xml:space="preserve">
+    <value>Examiner Allocated</value>
+  </data>
+  <data name="ExaminerName" xml:space="preserve">
+    <value>Examiner Name</value>
+  </data>
+  <data name="ExaminerStatus" xml:space="preserve">
+    <value>Examiner Status</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="FromEnglish" xml:space="preserve">
+    <value>From English</value>
+  </data>
+  <data name="JobID" xml:space="preserve">
+    <value>Job ID</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LastWeek" xml:space="preserve">
+    <value>Last Week</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="LoadSearch" xml:space="preserve">
+    <value>Load search</value>
+  </data>
+  <data name="LoadSearchConfirm" xml:space="preserve">
+    <value>When loading a new search the current search data will be lost. Are you sure you want to do this?</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PleaseSelectAFilter" xml:space="preserve">
+    <value>Select filters from right side to begin your search</value>
+  </data>
+  <data name="SaveCurrentOrSaveNewOne" xml:space="preserve">
+    <value>You are editing the search '{0}'. What do you want to do?</value>
+  </data>
+  <data name="SavedSearches" xml:space="preserve">
+    <value>Saved Searches</value>
+  </data>
+  <data name="SaveSearch" xml:space="preserve">
+    <value>Save search</value>
+  </data>
+  <data name="Submitted" xml:space="preserve">
+    <value>Submitted</value>
+  </data>
+  <data name="Tentative" xml:space="preserve">
+    <value>Tentative</value>
+  </data>
+  <data name="TestDate" xml:space="preserve">
+    <value>Test Date</value>
+  </data>
+  <data name="TestDateFromAndTo" xml:space="preserve">
+    <value>Test Date From and To</value>
+  </data>
+  <data name="AttendanceId" xml:space="preserve">
+    <value>Attendance ID</value>
+  </data>
+  <data name="TestOffice" xml:space="preserve">
+    <value>Test Office</value>
+  </data>
+  <data name="TestStatus" xml:space="preserve">
+    <value>Test Status</value>
+  </data>
+  <data name="TestVenue" xml:space="preserve">
+    <value>Test Venue</value>
+  </data>
+  <data name="ThisMonth" xml:space="preserve">
+    <value>This Month</value>
+  </data>
+  <data name="ThisWeek" xml:space="preserve">
+    <value>This Week</value>
+  </data>
+  <data name="ThisYear" xml:space="preserve">
+    <value>This Year</value>
+  </data>
+  <data name="ToEnglish" xml:space="preserve">
+    <value>To English</value>
+  </data>
+  <data name="IncludeWithoutAssets" xml:space="preserve">
+    <value>Include Without Assets</value>
+  </data>
+  <data name="Withdrawn" xml:space="preserve">
+    <value>Withdrawn</value>
+  </data>
+  <data name="Yesterday" xml:space="preserve">
+    <value>Yesterday</value>
+  </data>
+  <data name="YouHaveNoSavedSearches" xml:space="preserve">
+    <value>You have no saved searches</value>
+  </data>
+  <data name="AddExaminer" xml:space="preserve">
+    <value>Add Examiners</value>
+  </data>
+  <data name="Assets" xml:space="preserve">
+    <value>Assets</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="InProgress" xml:space="preserve">
+    <value>In Progress</value>
+  </data>
+  <data name="AdditionalExaminer" xml:space="preserve">
+    <value>Additional examiner</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="ResultDue" xml:space="preserve">
+    <value>Result due</value>
+  </data>
+  <data name="UnmarkAsSat" xml:space="preserve">
+    <value>Unmark as Sat</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="PaperLost" xml:space="preserve">
+    <value>Paper lost</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="ToPayroll" xml:space="preserve">
+    <value>To Payroll</value>
+  </data>
+  <data name="EditExaminer" xml:space="preserve">
+    <value>Edit examiner</value>
+  </data>
+  <data name="ExaminerAddFail" xml:space="preserve">
+    <value>{0} tests do not have a valid status for adding a examiner.</value>
+  </data>
+  <data name="ExaminerAddSuccess" xml:space="preserve">
+    <value>Examiner '{0}' added to {1} tests.</value>
+  </data>
+  <data name="ExaminersAddedSuccess" xml:space="preserve">
+    <value>The following marking assignments have been created. &lt;br&gt;&lt;br&gt;&lt;b&gt;Examiner(s):&lt;/b&gt; {0}&lt;br&gt;&lt;br&gt;&lt;b&gt;Test(s):&lt;/b&gt; {1}</value>
+  </data>
+  <data name="JobsCreated" xml:space="preserve">
+    <value>Job(s) {0} created.</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="ReceivedDate" xml:space="preserve">
+    <value>Received date</value>
+  </data>
+  <data name="SentDate" xml:space="preserve">
+    <value>Sent date</value>
+  </data>
+  <data name="SentToPayrollDate" xml:space="preserve">
+    <value>Sent to payroll date</value>
+  </data>
+  <data name="LoadSearchOrSelectFilter" xml:space="preserve">
+    <value>Load a saved search from the list below or select filters from right side to begin your search.</value>
+  </data>
+  <data name="Overdue" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="DateAllocated" xml:space="preserve">
+    <value>Date Allocated</value>
+  </data>
+  <data name="DateDue" xml:space="preserve">
+    <value>Date Due</value>
+  </data>
+  <data name="DateReceived" xml:space="preserve">
+    <value>Date Received</value>
+  </data>
+  <data name="Marker" xml:space="preserve">
+    <value>Examiner</value>
+  </data>
+  <data name="MarkerStatus" xml:space="preserve">
+    <value>Examiner Status</value>
+  </data>
+  <data name="DateSent" xml:space="preserve">
+    <value>Date Sent</value>
+  </data>
+  <data name="NoMarkers" xml:space="preserve">
+    <value>This test does not have examiners.</value>
+  </data>
+  <data name="AccreditFor" xml:space="preserve">
+    <value>Accredit for</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="FinalMark" xml:space="preserve">
+    <value>Final mark</value>
+  </data>
+  <data name="InsufficientForPass" xml:space="preserve">
+    <value>The results entered are not sufficient for a pass. Are you sure you wish to continue?</value>
+  </data>
+  <data name="Marks" xml:space="preserve">
+    <value>Marks</value>
+  </data>
+  <data name="OutstandingInvoices" xml:space="preserve">
+    <value>This candidate has outstanding invoices! Are you sure you wish to save this test result?</value>
+  </data>
+  <data name="OverallResult" xml:space="preserve">
+    <value>Overall result</value>
+  </data>
+  <data name="PrimaryReasonForFailure" xml:space="preserve">
+    <value>Primary reason for failure</value>
+  </data>
+  <data name="ReasonsForPoorPerformance" xml:space="preserve">
+    <value>Reasons for poor performance</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="ResultChecked" xml:space="preserve">
+    <value>Result checked</value>
+  </data>
+  <data name="ShowResults" xml:space="preserve">
+    <value>Show results</value>
+  </data>
+  <data name="SufficientForPass" xml:space="preserve">
+    <value>The results entered are sufficient for a Pass, but you have selected Fail. Are you sure you wish to continue?</value>
+  </data>
+  <data name="TestMessage" xml:space="preserve">
+    <value>The Overall Result for this Test Result is:</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Overall</value>
+  </data>
+  <data name="Comments1" xml:space="preserve">
+    <value>Code (Group 1)</value>
+  </data>
+  <data name="Comments2" xml:space="preserve">
+    <value>Code (Group 2)</value>
+  </data>
+  <data name="CommentsEthics" xml:space="preserve">
+    <value>Ethics / Social / Cultural</value>
+  </data>
+  <data name="CommentsGeneral" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="FailureReason" xml:space="preserve">
+    <value>Failure reason</value>
+  </data>
+  <data name="RequiredThirdMarking" xml:space="preserve">
+    <value>The two examiner results differ and a third marking is required.</value>
+  </data>
+  <data name="TestSearch" xml:space="preserve">
+    <value>Test Search</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="LanguageId" xml:space="preserve">
+    <value>Language ID</value>
+  </data>
+  <data name="TestDateAtVenue" xml:space="preserve">
+    <value>Test Date (at Venue)</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="UploadAssets" xml:space="preserve">
+    <value>Upload Assets</value>
+  </data>
+  <data name="Tests" xml:space="preserve">
+    <value>Tests</value>
+  </data>
+  <data name="MarkAsSat" xml:space="preserve">
+    <value>Mark as Sat</value>
+  </data>
+  <data name="MarkSatFail" xml:space="preserve">
+    <value>{0} tests cannot be marked as Sat</value>
+  </data>
+  <data name="MarkSatSuccess" xml:space="preserve">
+    <value>{0} tests marked as Sat</value>
+  </data>
+  <data name="ResultStatus" xml:space="preserve">
+    <value>Result Status</value>
+  </data>
+  <data name="TestEventId" xml:space="preserve">
+    <value>Test Event ID</value>
+  </data>
+  <data name="TestResultId" xml:space="preserve">
+    <value>Test Result ID</value>
+  </data>
+  <data name="PersonDetailsHeadingFormat" xml:space="preserve">
+    <value>{0} - {1}{2}{3}{4}</value>
+  </data>
+  <data name="Material" xml:space="preserve">
+    <value>Material</value>
+  </data>
+  <data name="Sat" xml:space="preserve">
+    <value>Sat</value>
+  </data>
+  <data name="FailOnUnmarkSat" xml:space="preserve">
+    <value>This test cannot be unmarked as Sat because it has associated assets or examiners allocated.</value>
+  </data>
+  <data name="DefaultAvatarBase64" xml:space="preserve">
+    <value>data:image/png;base64,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</value>
+    <comment>Base64 encoded png</comment>
+  </data>
+  <data name="NoIdCard" xml:space="preserve">
+    <value>No ID card</value>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>Expiry Date</value>
+  </data>
+  <data name="HasAssets" xml:space="preserve">
+    <value>It has assets</value>
+  </data>
+  <data name="ProcessedDate" xml:space="preserve">
+    <value>Processed Date</value>
+  </data>
+  <data name="HasRelatedTestsInTheSameJob" xml:space="preserve">
+    <value>This test is related to other tests in a job. Any changes you make to this test will be applied to all related tests. Select the Split option to only make changes to this test.</value>
+  </data>
+  <data name="SplitJob" xml:space="preserve">
+    <value>Split Job</value>
+  </data>
+  <data name="ExaminerPaperReceivedDate" xml:space="preserve">
+    <value>Paper received</value>
+  </data>
+  <data name="DueDate" xml:space="preserve">
+    <value>Due date</value>
+  </data>
+  <data name="DueDateApplicability" xml:space="preserve">
+    <value>The due date will be applied to all selected tests.</value>
+  </data>
+  <data name="UpdateDueDate" xml:space="preserve">
+    <value>Update Due Date</value>
+  </data>
+  <data name="UpdateDueDateModalTitle" xml:space="preserve">
+    <value>Bulk update due by date</value>
+  </data>
+  <data name="ExaminerType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ExaminerTypeOriginal" xml:space="preserve">
+    <value>Original</value>
+  </data>
+  <data name="ExaminerTypePaidReviewer" xml:space="preserve">
+    <value>Paid Reviewer</value>
+  </data>
+  <data name="ExaminerTypeThirdExaminer" xml:space="preserve">
+    <value>Third Examiner</value>
+  </data>
+  <data name="IncludePreviousMark" xml:space="preserve">
+    <value>Include previous marks</value>
+  </data>
+  <data name="PaidReview" xml:space="preserve">
+    <value>Paid Review</value>
+  </data>
+  <data name="CannotSubmitAssets" xml:space="preserve">
+    <value>Cannot submit assets on a test which has not been sat</value>
+  </data>
+  <data name="CannotAlterDueDateWithoutAMarker" xml:space="preserve">
+    <value>You cannot alter the due date of a test without an examiner.</value>
+  </data>
+  <data name="SplitJobConfirm" xml:space="preserve">
+    <value>Select Yes to split this test from related tests. This action cannot be undone.</value>
+  </data>
+  <data name="SplitJobSuccess" xml:space="preserve">
+    <value>The job has been split.</value>
+  </data>
+  <data name="Attendance" xml:space="preserve">
+    <value>Attendance</value>
+  </data>
+  <data name="TestResultsOutOfDateMessage" xml:space="preserve">
+    <value>Results are out of date. Please refresh your search for the latest results.</value>
+  </data>
+  <data name="UnmarkAsSatSuccess" xml:space="preserve">
+    <value>Successfully unmarked test as Sat</value>
+  </data>
+  <data name="ExaminerMarksRemoved" xml:space="preserve">
+    <value>Examiner marks removed</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="ExaminersAddSuccess" xml:space="preserve">
+    <value>Examiners '{0}' added to {1} tests.</value>
+  </data>
+  <data name="TestType" xml:space="preserve">
+    <value>Test Type</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>Original</value>
+  </data>
+  <data name="Supplementary" xml:space="preserve">
+    <value>Supplementary</value>
+  </data>
+  <data name="EditMarks" xml:space="preserve">
+    <value>Edit marks</value>
+  </data>
+  <data name="MarksSavedSuccessfully" xml:space="preserve">
+    <value>Marks saved.</value>
+  </data>
+  <data name="AddToBatch" xml:space="preserve">
+    <value>Add to Batch</value>
+  </data>
+  <data name="CreateNewBatch" xml:space="preserve">
+    <value>Create new batch</value>
+  </data>
+  <data name="LetterBatch" xml:space="preserve">
+    <value>Letter Batch</value>
+  </data>
+  <data name="LetterNotSent" xml:space="preserve">
+    <value>You have not sent a letter for this result.</value>
+  </data>
+  <data name="LetterSentSendAnother" xml:space="preserve">
+    <value>You have already sent a letter to this recipient. Are you sure you wish to send another?</value>
+  </data>
+  <data name="LetterAddedToBatchSuccessfully" xml:space="preserve">
+    <value>Letter added to batch</value>
+  </data>
+  <data name="PrimaryAddressIsInvalid" xml:space="preserve">
+    <value>Primary address for this recipient is invalid. Please ensure this entity has a valid primary address.</value>
+  </data>
+  <data name="StandardLetter" xml:space="preserve">
+    <value>Standard Letter</value>
+  </data>
+  <data name="ResultLetter" xml:space="preserve">
+    <value>Result Letter</value>
+  </data>
+  <data name="StandardLetterCategory" xml:space="preserve">
+    <value>Letter Category</value>
+  </data>
+  <data name="CostPerTest" xml:space="preserve">
+    <value>Cost (per test)</value>
+  </data>
+  <data name="AccreditationExpiryDate" xml:space="preserve">
+    <value>Accreditation Expiry Date</value>
+  </data>
+  <data name="ProductSpecificationCodeLabel" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="PayrollStatus" xml:space="preserve">
+    <value>Payroll status</value>
+  </data>
+  <data name="AllowCalculate" xml:space="preserve">
+    <value>Allow Calculate</value>
+  </data>
+  <data name="EditFinalMarks" xml:space="preserve">
+    <value>Edit Final Marks</value>
+  </data>
+  <data name="ConfirmAllowCalculate" xml:space="preserve">
+    <value>Allowing marks to be calculated will overwrite any currently overridden marks</value>
+  </data>
+  <data name="MarksOverridden" xml:space="preserve">
+    <value>Marks Overridden</value>
+  </data>
+  <data name="MarksOverriddenTooltip" xml:space="preserve">
+    <value>Select this option to manually overwrite the final marks</value>
+  </data>
+  <data name="ExaminerSavedSuccessfully" xml:space="preserve">
+    <value>Examiner saved.</value>
+  </data>
+  <data name="ResultReceived" xml:space="preserve">
+    <value>Result Received</value>
+  </data>
+  <data name="CannotUpdateDueDate" xml:space="preserve">
+    <value>Cannot update due date of a test with no markers assigned.</value>
+  </data>
+  <data name="NaatiEntityDetailsHeadingFormat" xml:space="preserve">
+    <value>{0} - {1}</value>
+  </data>
+  <data name="ApplicationType" xml:space="preserve">
+    <value>Application Type</value>
+  </data>
+  <data name="TestLocation" xml:space="preserve">
+    <value>Test Location</value>
+  </data>
+  <data name="TestMaterials" xml:space="preserve">
+    <value>Test Materials</value>
+  </data>
+  <data name="Venue" xml:space="preserve">
+    <value>Venue</value>
+  </data>
+  <data name="ObservationsOnPerformance" xml:space="preserve">
+    <value>Observations On Performance</value>
+  </data>
+  <data name="TestHasAssetsOrExaminers" xml:space="preserve">
+    <value>Test already has assets or examiners.</value>
+  </data>
+  <data name="InvalidTestResultStatus" xml:space="preserve">
+    <value>Test must be finalised and the test result must be in the following status: {0}</value>
+  </data>
+  <data name="TestAlreadyHasAPaidReview" xml:space="preserve">
+    <value>There is already a Paid Review for this test result</value>
+  </data>
+  <data name="NoResultsSelected" xml:space="preserve">
+    <value>At least one Test Task must be selected</value>
+  </data>
+  <data name="TestAlreadyHasASupplementaryTest" xml:space="preserve">
+    <value>There is already a Supplementary Test for this result</value>
+  </data>
+  <data name="SupplementaryTest" xml:space="preserve">
+    <value>Supplementary Test</value>
+  </data>
+  <data name="SupplementaryTestNotAllowed" xml:space="preserve">
+    <value>This test result is not eligible for a Supplementary Test</value>
+  </data>
+  <data name="AllResultsSelected" xml:space="preserve">
+    <value>All results can't be selected</value>
+  </data>
+  <data name="DateSubmitted" xml:space="preserve">
+    <value>Date Submitted</value>
+  </data>
+  <data name="EditRubricResult" xml:space="preserve">
+    <value>Edit Rubric Result</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="CommentAdded" xml:space="preserve">
+    <value>Comment added</value>
+  </data>
+  <data name="NotAttempted" xml:space="preserve">
+    <value>Not Attempted</value>
+  </data>
+  <data name="SelectBand" xml:space="preserve">
+    <value>Select an assessment to show the bands</value>
+  </data>
+  <data name="SelectedBand" xml:space="preserve">
+    <value>Selected Band</value>
+  </data>
+  <data name="WasAttempted" xml:space="preserve">
+    <value>Was Attempted</value>
+  </data>
+  <data name="FinalMarksRubricResult" xml:space="preserve">
+    <value>Final Marks Rubric Result</value>
+  </data>
+  <data name="GetExaminerComments" xml:space="preserve">
+    <value>Get Examiner Comments</value>
+  </data>
+  <data name="PopulateFromExaminers" xml:space="preserve">
+    <value>Populate the comments field from the examiner comments</value>
+  </data>
+  <data name="Band" xml:space="preserve">
+    <value>Band</value>
+  </data>
+  <data name="FeeNotFound" xml:space="preserve">
+    <value>Cannot find a Processed Fee for Application Id {0}</value>
+  </data>
+  <data name="FinalResult" xml:space="preserve">
+    <value>Final Result</value>
+  </data>
+  <data name="myNAATIDateSubmitted" xml:space="preserve">
+    <value>myNAATI Date Submitted</value>
+  </data>
+  <data name="ExaminerAlreadyExists" xml:space="preserve">
+    <value>Cannot add '{0}' because these examiner(s) have already been assigned.</value>
+  </data>
+  <data name="NotApplicable" xml:space="preserve">
+    <value>Not applicable for this result</value>
+  </data>
+  <data name="OriginalResult" xml:space="preserve">
+    <value>Original result</value>
+  </data>
+  <data name="SupplementaryResult" xml:space="preserve">
+    <value>Supplementary result</value>
+  </data>
+  <data name="RequiredPaidReviewExamier" xml:space="preserve">
+    <value>Cannot issue a result on a test without any examiner</value>
+  </data>
+  <data name="RequiredExaminer" xml:space="preserve">
+    <value>Cannot issue a result on a test without any examiner</value>
+  </data>
+  <data name="IsSupplementary" xml:space="preserve">
+    <value>Is Supplementary</value>
+  </data>
+  <data name="PersonLogbookHeadingFormat" xml:space="preserve">
+    <value>{0} - {1} - {2} - {3}</value>
+  </data>
+  <data name="PaidReviewNotAllowed" xml:space="preserve">
+    <value>Paid Review Not Allowed</value>
+  </data>
+  <data name="EligibleForConcededPass" xml:space="preserve">
+    <value>Eligible for Conceded Pass</value>
+  </data>
+  <data name="EligibleForSupplementary" xml:space="preserve">
+    <value>Eligible for Supplementary Test</value>
+  </data>
+  <data name="MaxLengthCommentText" xml:space="preserve">
+    <value> (Must be less than {0} characters)</value>
+  </data>
+  <data name="MinMaxLengthCommentText" xml:space="preserve">
+    <value> (Must be between {0} characters and {1} characters)</value>
+  </data>
+  <data name="PendingToAssignPaidReviewers" xml:space="preserve">
+    <value>Pending Paid Reviewers</value>
+  </data>
+  <data name="MarksOverriddenRequiresAdministratorTooltip" xml:space="preserve">
+    <value>You do not have permission to override test results</value>
+  </data>
+  <data name="ExaminerFiles" xml:space="preserve">
+    <value>Examiner Files</value>
+  </data>
+  <data name="Calculate" xml:space="preserve">
+    <value>Calculate</value>
+  </data>
+  <data name="CalculateMarks" xml:space="preserve">
+    <value>Calculate Marks</value>
+  </data>
+  <data name="CheckResult" xml:space="preserve">
+    <value>Check Result</value>
+  </data>
+  <data name="ComputedResult" xml:space="preserve">
+    <value>Computed Result</value>
+  </data>
+  <data name="Fail" xml:space="preserve">
+    <value>Fail</value>
+  </data>
+  <data name="OneOrTwoExaminerRequired" xml:space="preserve">
+    <value>Final rubric can only be calculated when there are 1 or 2 examiners</value>
+  </data>
+  <data name="Override" xml:space="preserve">
+    <value>Override</value>
+  </data>
+  <data name="OverrideResultQuestion" xml:space="preserve">
+    <value>Do you wish to override the system result?</value>
+  </data>
+  <data name="Pass" xml:space="preserve">
+    <value>Pass</value>
+  </data>
+  <data name="PassFailed" xml:space="preserve">
+    <value>Overall Result</value>
+  </data>
+  <data name="ResultsDontMatch" xml:space="preserve">
+    <value>The system has calculated a different result. The following areas differ:</value>
+  </data>
+  <data name="RubricMismatch" xml:space="preserve">
+    <value>Final rubric cannot be calculated because examiners do not agree on results of all tasks.</value>
+  </data>
+  <data name="PleaseSeeYourManager" xml:space="preserve">
+    <value>Please see your manager.</value>
+  </data>
+  <data name="RubricFalsePassDetected" xml:space="preserve">
+    <value>Final rubric cannot be calculated because a false pass has been detected for {0}. A third marking is required.</value>
+  </data>
+  <data name="AssessmentChanged" xml:space="preserve">
+    <value>This assessment have been changed</value>
+  </data>
+  <data name="BandChanged" xml:space="preserve">
+    <value>This band have been changed</value>
+  </data>
+  <data name="TasksResultChanged" xml:space="preserve">
+    <value>The following tasks result(s) have been changed. Are you sure you want to proceed?</value>
+  </data>
+  <data name="TestInvalidatedMessage" xml:space="preserve">
+    <value>This test has been invalidated</value>
+  </data>
+  <data name="NotDefaultSpecification" xml:space="preserve">
+    <value>Different Test Specification</value>
+  </data>
+  <data name="IssueResult" xml:space="preserve">
+    <value>Issue result</value>
+  </data>
+  <data name="NewCandidatesOnly" xml:space="preserve">
+    <value>New Candidates Only</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Is Active</value>
+  </data>
+  <data name="ReadyForAutomation" xml:space="preserve">
+    <value>Ready for Automation</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+</root>

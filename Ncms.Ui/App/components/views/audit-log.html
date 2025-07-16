@@ -1,0 +1,45 @@
+﻿<div>
+    <!--ko if: showInModal-->
+    <div class="modal fade modal-fullscreen" data-backdrop="static" tabindex="-1" role="dialog" id="auditLogModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Log detail</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <!--ko component: { name: 'table-component', params: tableDefinition }-->
+                        <!--/ko-->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-ban"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ko-->
+    <!--ko ifnot: showInModal-->
+    <!--ko component: { name: 'table-component', params: tableDefinition }-->
+    <!--/ko-->
+    <!--/ko-->
+</div>
+<script id="auditLog-header-template" type="text/html">
+    <th data-bind="restext: 'Naati.Resources.Shared.resources.Record'"></th>
+    <th data-bind="restext: 'Naati.Resources.Shared.resources.ChangeDescription'"></th>
+    <th data-bind="restext: 'Naati.Resources.Shared.resources.UpdatedBy'"></th>
+    <th data-bind="restext: 'Naati.Resources.Shared.resources.UpdatedDateTime'"></th>
+</script>
+<script id="auditLog-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: RecordName, attr: { 'data-order': RecordName }"></td>
+        <td class="w-lg text-ellipsis" style="width:700px;" data-bind="attr: { 'data-order': ChangeDetail }">
+            <a href="#" class="text-info" data-bind="text: ChangeDetail, click: detail"></a>
+        </td>
+        <td data-bind="text: Username, attr: { 'data-order': Username }"></td>
+        <td data-bind="text: DateTime"></td>
+    </tr>
+</script>

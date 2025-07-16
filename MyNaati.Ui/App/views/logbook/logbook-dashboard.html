@@ -1,0 +1,63 @@
+﻿<div>
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-xs-8">
+				<h2 class="text-primary">My Logbook</h2>
+				<br />
+				<br />
+			</div>
+			<!--<div class="checkbox col-xs-4 m-t-lg">
+				<label class="pull-right">
+					<input type="checkbox" data-bind="checked: showAllCredentials" />
+					Show All Credentials
+				</label>
+			</div>-->
+		</div>
+	</div>
+	<div class="row text-center menu-link-container">
+		<!--ko foreach: { data: credentials, as: 'c' }-->
+			<!--ko if: c.IsRecertification-->
+			<div data-bind="css: $root.formSelectorClass, click: $root.gotoRecertificationForm" class="cursor-pointer">
+				<div class="thumbnail">
+					<a href="#">
+						<img class="img-responsive" src="Content/Images/recertification.png" />
+					</a>
+					<div class="caption">
+						<h3>
+							<a href="#">Apply for Recertification</a>
+						</h3>
+					</div>
+				</div>
+			</div>
+			<!--/ko-->
+			<!--ko if: c.IsPD-->
+			<div data-bind="css: $root.formSelectorClass, click: $root.gotoProfessionalDevelopment" class="cursor-pointer">
+				<div class="thumbnail">
+					<a href="#">
+						<img class="img-responsive" src="Content/Images/professional-development.png" />
+					</a>
+					<div class="caption">
+						<h3>
+							<a href="#">Professional Development</a>
+						</h3>
+					</div>
+				</div>
+			</div>
+			<!--/ko-->
+			<!--ko if: !c.IsPD && !c.IsRecertification-->
+			<div data-bind="css: $root.formSelectorClass, click: $root.gotoWorkPractice" class="cursor-pointer">
+				<div class="thumbnail">
+					<a href="#">
+						<img class="img-responsive" src="Content/Images/work-practice.png" />
+					</a>
+					<div class="caption">
+						<h3>
+							<a href="#" data-bind="html: $root.certificationName(c)"></a>
+						</h3>
+					</div>
+				</div>
+			</div>
+			<!--/ko-->
+		<!--/ko-->
+	</div>
+</div>

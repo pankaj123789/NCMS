@@ -1,0 +1,41 @@
+﻿<div class="col">
+    <div class="vbox">
+        <div class="bg-light lter b-b wrapper-md">
+            <div class="m-n font-thin h3 row m-t-none m-b-none">
+                <div class="pull-left m-r-md">
+                    <span class="m-r-lg" data-bind="html: title"></span>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" data-bind="click: expandAll">
+                            <i class="fa fa-plus-square"></i>
+                            <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.ExpandAll'"></span>
+                        </button>
+                        <button type="button" class="btn btn-default" data-bind="click: collapseAll">
+                            <i class="fa fa-minus-square-o"></i>
+                            <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.CollapseAll'"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner" data-bind="css: { 'bg-white': refundGroups().length === 0 }">
+                    <div class="wrapper-md">
+                        <div class="alert alert-warning" data-bind="reshtml: 'Naati.Resources.Application.resources.NoRefundRequestFound', visible: refundGroups().length === 0 && searched"></div>
+                        <!--ko compose: refundRequestGroupingCompose -->
+                        <!--/ko-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="padder b-t b-gray bg-white wrapper-sm">
+            <div class="pull-right">
+                <button class="btn btn-success" data-bind="click: approve, enableWithPermission:'CredentialRequest.ApproveRefund'">
+                    <i class="fa fa-check"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Approve'"></span>
+                </button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

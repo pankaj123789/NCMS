@@ -1,0 +1,62 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.ApplicationForAccreditation.ApplicationFormModel
+<div>
+@if (Model.PersonalDetails.IsRegisteredUser)
+{
+    <div class="fieldLabel">Customer Number</div>
+    <div class="fieldValue">@Html.DisplayFor(m => m.PersonalDetails.NaatiNumber)</div>
+    <br style="clear:both" />
+
+    <div class="fieldLabel">Name</div>
+    <div class="fieldValue">@Html.DisplayFor(m => m.PersonalDetails.FullName)</div>
+    <br style="clear:both" />
+}
+else
+{
+    <div class="fieldLabel">First application to NAATI</div>
+    <div class="fieldValue">@Html.DisplayFor(m => m.PersonalDetails.IsFirstApplication)</div>
+    <br style="clear:both" />
+
+    <div class="fieldLabel">Title</div>
+    <div class="fieldValue">@Html.DisplayFor(m => m.PersonalDetails.Title)</div>
+    <br style="clear:both" />
+
+    <div class="fieldLabel">Given names</div>
+    <div class="fieldValue">@Html.DisplayFor(m => m.PersonalDetails.GivenNames)</div>
+    <br style="clear:both" />
+
+    <div class="fieldLabel">Family name</div>
+    <div class="fieldValue">@Html.DisplayFor(m => m.PersonalDetails.FamilyName)</div>
+    <br style="clear:both" />
+
+    <div class="fieldLabel">Alternate names</div>
+    <div class="fieldValue">@Html.DisplayFor(m => m.PersonalDetails.AlternateName)</div>
+    <br style="clear:both" />
+
+    <div class="fieldLabel">Date of birth</div>
+    <div class="fieldValue">@Html.DisplayFor(m => m.PersonalDetails.DateOfBirth)</div>
+    <br style="clear:both" />
+
+    <div class="fieldLabel">Country of birth</div>
+    <div class="fieldValue">@Html.DisplayFor(m => m.PersonalDetails.CountryOfBirth)</div>
+    <br style="clear:both" />
+
+    @*<div class="fieldLabel">@Html.DisplayFor(m => m.PersonalDetails.AddressType) Address</div>*@
+    <div class="fieldValue">@Model.PersonalDetails.AddressContent.Replace(Environment.NewLine, "<br />")</div>
+    <br style="clear:both" />
+
+    foreach (var phone in Model.PersonalDetails.PhoneNumbers)
+    {
+        //<div class="fieldLabel">@phone.Type</div>
+        <div class="fieldValue">@phone.Value</div>
+        <br style="clear:both" />
+    }
+
+    foreach (var email in Model.PersonalDetails.Emails)
+    {
+        //<div class="fieldLabel">@email.Type Email</div>
+        <div class="fieldValue">@email.Value</div>
+        <br style="clear:both" />
+    }
+
+}
+</div>

@@ -1,0 +1,456 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.PersonalDetails.PersonalDetailsModel
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+        new Tuple<string, string>("My Account", Url.Action("Index", "Account")),
+        new Tuple<string, string>("My Profile", string.Empty)
+    };
+    var lastUpdatedText = Model.LastUpdated.HasValue
+        ? string.Format("Your personal details were last changed via myNAATI on {0}.", FormatLastUpdated(Model.LastUpdated.Value))
+        : string.Empty;
+
+    var ajaxOptions = new AjaxOptions { OnSuccess = "ajaxSuccess", OnFailure = "ajaxFailure" };
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs" role="tablist" id="tabstrip">
+            <li role="presentation" class="active"><a href="#personaldetailstab" aria-controls="personaldetailstab" role="tab" data-toggle="tab">Personal Details</a></li>
+            @if (Model.CredentialDetailRequest.Credentials.Any())
+            {
+                <li role="presentation"><a href="#credentialstab" aria-controls="credentialstab" role="tab" data-toggle="tab">Credentials</a></li>
+            }
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="personaldetailstab">
+
+                <!--Personal Details-->
+                @functions
+                {
+                    public enum ModalType
+                    {
+                        Add,
+                        Edit,
+                        Delete
+                    }
+
+                    public enum DetailType
+                    {
+                        Address,
+                        Phone,
+                        Email,
+                        Website
+                    }
+
+                    private static string FormatLastUpdated(DateTime lastUpdated)
+                    {
+                        return string.Format("{0:dddd d}{1} {0:MMMM, yyyy} at {0:h:mm}{2}",
+                                                        lastUpdated,
+                                                        GetNumberSuffix(lastUpdated.Day),
+                                                        string.Format("{0:tt}", lastUpdated).ToLower());
+                    }
+
+                    private static string GetNumberSuffix(int number)
+                    {
+                        if (number / 10 % 10 == 1) // tens
+                        {
+                            return "th";
+                        }
+
+                        switch (number % 10)
+                        {
+                            case 1: return "st";
+                            case 2: return "nd";
+                            case 3: return "rd";
+                            default: return "th";
+                        }
+                    }
+                }
+                @helper Table(string type, IEnumerable<Tuple<string, string>> columnsInfo)
+                {
+                    <div class="row">
+                        <div class="col-xs-7 col-sm-3">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <h3 class="text-primary">@type</h3>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="btn btn-primary v-offset-xs-3" type="button" data-toggle="modal" data-target="#detailModal" data-modal-type="Add" data-modal-detail="@type">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsive">
+                                <table id="@(type.ToLower())Table" class="table">
+                                    <thead class="bg-primary">
+                                        <tr style="text-align:center">
+                                            @foreach (var columnInfo in columnsInfo)
+                                            {
+                                                <th id="@(type.ToLower())@(columnInfo.Item1)Column" class="col-sm-4">@columnInfo.Item2</th>
+                                            }
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @helper ModalBody(ModalType modalType, DetailType detailType, AjaxOptions ajaxOptions, MvcHtmlString modalBodyHtml)
+                {
+                    var modalTypeName = Enum.GetName(typeof(ModalType), modalType) ?? string.Empty;
+                    var detailTypeName = Enum.GetName(typeof(DetailType), detailType) ?? string.Empty;
+                    var formAction = detailTypeName + (modalType == ModalType.Add ? "CreateJson" : "EditJson");
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="validation-summary-errors" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    if (modalType == ModalType.Edit)
+                    {
+                        <div id="@(detailTypeName.ToLower())IsCurrentlyListed" class="row" style="display: none;">
+                            <div class="col-lg-12">
+                                @switch (detailType)
+                                {
+                                    case DetailType.Address:
+                                        <p>Any changes to this address will be reflected in the Practitioners Directory. You can also manage your directory listing contents via myNAATI.</p>
+                                        break;
+                                    case DetailType.Phone:
+                                        <p>Any changes to this phone number will be reflected in the Practitioners Directory. You can also manage your directory listing contents via myNAATI.</p>
+                                        break;
+                                    case DetailType.Email:
+                                        <p>Any changes to this email address will be reflected in the Practitioners Directory. You can also manage your directory listing contents via myNAATI.</p>
+                                        break;
+                                    case DetailType.Website:
+                                        <p>Any changes to this website will be reflected in the Practitioners Directory. You can also manage your directory listing contents via myNAATI.</p>
+                                        break;
+                                    default:
+                                        throw new ArgumentOutOfRangeException("detailType", detailType, null);
+                                }
+                            </div>
+                        </div>
+                    }
+                    <div class="row">
+                        <div class="col-lg-12">
+                            @using (Ajax.BeginForm(formAction, "PersonalDetails", null, ajaxOptions, new { id = modalTypeName.ToLower() + detailTypeName + "Form", @class = "form-horizontal" }))
+                            {
+                                @modalBodyHtml
+                            }
+                        </div>
+                    </div>
+                }
+                @helper Address(ModalType modalType, AjaxOptions ajaxOptions)
+                {
+                    var typeName = Enum.GetName(typeof(ModalType), modalType) ?? string.Empty;
+                    var prefix = modalType == ModalType.Add ? "AddressForCreateGoogle_" : "AddressForEditGoogle_";
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3" for="@("googleAddressSearch" + typeName)">Address</label>
+                        <div class="col-sm-9">
+                            <input id="googleAddressSearch@(typeName)" type="text" class="form-control" address-search-minlength="3" maxlength="300" placeholder="Start typing to search for an address..." />
+                        </div>
+                    </div>
+                    if (modalType == ModalType.Edit)
+                    {
+                        <div id="noAddressResultsFoundEdit" class="form-group" style="display: none;">
+                            <div class="col-lg-12">
+                                <p class="form-control-static">No results were found try refining your search.</p>
+                            </div>
+                        </div>
+                    }
+                    <p id="contactNaati@(typeName)" class="alert" role="alert">
+                        If your address is not on the list contact NAATI at <a href="mailto:info@naati.com.au?subject=@Model.NaatiNumber - Address could not be validated">info@naati.com.au</a>
+                    </p>
+                    <div class="form-group">
+                        @Html.Label(prefix + "IsPreferred", "Preferred Address", new { @class = "control-label col-sm-3" })
+                        <div class="col-sm-1">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="@(prefix)IsPreferred" name="IsPreferred" type="checkbox" value="false" />
+                                    <input id="hiddenUnlessNoPrefferredAddress" name="hiddenUnlessNoPrefferredAddress" type="checkbox" value="false" checked="checked" disabled readonly hidden  />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    if (Model.IsPractitioner || Model.IsFuturePractitioner)
+                    {
+                        <div class="form-group" hidden>
+                            @Html.Label(prefix + "OdAddressVisibilityTypeId", "Show in the Online Directory", new { @class = "control-label col-sm-3" })
+                            <div class="col-sm-5">
+                                <div class="dropdown">
+                                    @Html.DropDownList("OdAddressVisibilityTypeId", Model.AddressModel.OdAddressVisibilityTypes, new { @id = prefix + "OdAddressVisibilityTypeId", @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                    if (Model.IsExaminer)
+                    {
+                        <div class="form-group">
+                            @Html.Label(prefix + "ExaminerCorrespondence", "Examiner Correspondence", new { @class = "control-label col-sm-3" })
+                            <div class="col-sm-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="@(prefix)ExaminerCorrespondence" name="ExaminerCorrespondence" type="checkbox" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <img id="map" class="map" src="" />
+                        </div>
+                    </div>
+
+                    @Html.Hidden("StreetDetails", Model.AddressModel.StreetDetails, new { id = prefix + "StreetDetails" })
+                    @Html.Hidden("CountryName", Model.AddressModel.CountryName, new { id = prefix + "CountryName" })
+                    @Html.Hidden("IsFromAustralia", Model.AddressModel.IsFromAustralia, new { id = prefix + "IsFromAustralia" })
+                    @Html.Hidden("SuburbName", Model.AddressModel.SuburbName, new { id = prefix + "SuburbName" })
+                    @Html.Hidden("Postcode", Model.AddressModel.Postcode, new { id = prefix + "Postcode" })
+                    @Html.Hidden("State", Model.AddressModel.State, new { id = prefix + "State" })
+                    @Html.Hidden("ValidateInExternalTool", Model.AddressModel.ValidateInExternalTool, new { id = prefix + "ValidateInExternalTool" })
+
+                    @Html.Hidden("OverseasAddress")
+                    @Html.Hidden("ValidateByGoogle", "false")
+
+                    if (modalType == ModalType.Edit)
+                    {
+                        @Html.Hidden("Id", Model.AddressModel.Id, new { id = prefix + "Id" })
+                    }
+
+
+                }
+                @helper Phone(ModalType modalType, AjaxOptions ajaxOptions)
+                {
+                    var prefix = modalType == ModalType.Add ? "PhoneForCreate_" : "PhoneForEdit_";
+
+                    <div class="form-group">
+                        @Html.Label(prefix + "Number", "Number", new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-6">
+                            @Html.TextBox("Number", Model.PhoneModel.Number, new { id = prefix + "Number", @class = "form-control", maxlength = "25" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label(prefix + "IsPreferred", "Preferred Phone", new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-1">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="@(prefix)IsPreferred" name="IsPreferred" type="checkbox" value="false" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    if (Model.IsPractitioner || Model.IsFuturePractitioner)
+                    {
+                        <div class="form-group" hidden>
+                            @Html.Label(prefix + "IsCurrentlyListed", "Show in the Online Directory", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="@(prefix)IsCurrentlyListed" name="IsCurrentlyListed" type="checkbox" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    if (Model.IsExaminer)
+                    {
+                        <div class="form-group">
+                            @Html.Label(prefix + "ExaminerCorrespondence", "Examiner Correspondence", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="@(prefix)ExaminerCorrespondence" name="ExaminerCorrespondence" type="checkbox" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                    if (modalType == ModalType.Edit)
+                    {
+                        <input type="hidden" id="PhoneForEdit_Id" name="Id" />
+                    }
+                }
+                @helper Email(ModalType modalType, AjaxOptions ajaxOptions)
+                {
+                    var prefix = modalType == ModalType.Add ? "EmailForCreate_" : "EmailForEdit_";
+
+                    <div class="form-group">
+                        @Html.Label(prefix + "Email", "Email", new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-7">
+                            @Html.TextBox("Email", Model.EmailModel.Email, new { id = prefix + "Email", @class = "form-control", maxlength = "200" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.Label(prefix + "IsPreferred", "Preferred Email", new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-1">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="@(prefix)IsPreferred" name="IsPreferred" type="checkbox" value="false" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    if (Model.IsPractitioner || Model.IsFuturePractitioner)
+                    {
+                        <div class="form-group" hidden>
+                            @Html.Label(prefix + "IsCurrentlyListed", "Show in the Online Directory", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="@(prefix)IsCurrentlyListed" name="IsCurrentlyListed" type="checkbox" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    if (Model.IsExaminer)
+                    {
+                        <div class="form-group">
+                            @Html.Label(prefix + "ExaminerCorrespondence", "Examiner Correspondence", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-1">
+                                <div class="checkbox">
+                                    <label>
+                                        <input id="@(prefix)ExaminerCorrespondence" name="ExaminerCorrespondence" type="checkbox" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    <span id="@(prefix)ChangeEmailMessage">*Once you modify your preferred email and click OK, we will send an email to [[primaryEmail]] with a link to confirm this change.</span>
+
+
+                    if (modalType == ModalType.Edit)
+                    {
+                        <input type="hidden" id="EmailForEdit_Id" name="Id" />
+                    }
+                }
+                @helper Website(ModalType modalType, AjaxOptions ajaxOptions)
+                {
+                    var prefix = modalType == ModalType.Add ? "WebsiteForCreate_" : "WebsiteForEdit_";
+
+                    <div class="form-group">
+                        @Html.Label(prefix + "Url", "URL", new { @class = "control-label col-sm-3" })
+                        <div class="col-sm-8">
+                            <input id="@(prefix)Url" name="Url" type="text" class="form-control" />
+                        </div>
+                    </div>
+
+                }
+                <div class="col-lg-12">
+                    <div class="row">
+                        @if (Model.IsPractitioner || Model.IsFuturePractitioner)
+                        {
+                            <div class="col-lg-12">
+                                <p>If you want to show your full address or any of your other contact information in the Online Directory, please set the Show In Online Directory flag by editing your contact details. Please note that even if you have not selected an address, the Online Directory will still display your State. </p>
+                            </div>
+                        }
+                        <div class="col-lg-12">
+                            <p>
+                                If there is a tick next to your details in the Preferred column, this means that you have nominated this address, phone number or email as your primary contact details for NAATI. Primary contact details can be changed at any time.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    @Table("Address", new[] { new Tuple<string, string>("", ""), new Tuple<string, string>("Address", "Address"), new Tuple<string, string>("OnlineDirectory", "Online Directory") })
+                    @Table("Phone", new[] { new Tuple<string, string>("", ""), new Tuple<string, string>("Phone", "Phone Number"), new Tuple<string, string>("OnlineDirectory", "Online Directory") })
+                    @Table("Email", new[] { new Tuple<string, string>("", ""), new Tuple<string, string>("Email", "Email"), new Tuple<string, string>("OnlineDirectory", "Online Directory") })
+                    @if (Model.IsFuturePractitioner || Model.IsPractitioner || Model.IsFormerPractitioner)
+                    {
+                        @Table("Website", new[] { new Tuple<string, string>("", ""), new Tuple<string, string>("Website", "Website") })
+                    }
+                </div>
+                <div id="detailModal" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title"></h4>
+                            </div>
+                            <div class="modal-body">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="">OK</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script id="addAddress" type="text/html">
+                    @ModalBody(ModalType.Add, DetailType.Address, ajaxOptions, Address(ModalType.Add, ajaxOptions).ToMvcHtmlString())
+                </script>
+                <script id="editAddress" type="text/html">
+                    @ModalBody(ModalType.Edit, DetailType.Address, ajaxOptions, Address(ModalType.Edit, ajaxOptions).ToMvcHtmlString())
+                </script>
+                <script id="deleteAddress" type="text/html">
+                    <p data-message="generic" style="display: none">Are you sure you want to delete this address?</p>
+                    <p data-message="inPD" style="display: none">This address is selected for use in the Practitioners Directory. Are you sure you want to delete it?</p>
+                    <p data-message="lastInPD" style="display: none">This address is the only contact detail shown for you in the Practitioners Directory. If you proceed with the deletion, your preferred email will be shown in the Practitioners Directory instead. Are you sure you want to continue?</p>
+                </script>
+                <script id="addPhone" type="text/html">
+                    @ModalBody(ModalType.Add, DetailType.Phone, ajaxOptions, Phone(ModalType.Add, ajaxOptions).ToMvcHtmlString())
+                </script>
+                <script id="editPhone" type="text/html">
+                    @ModalBody(ModalType.Edit, DetailType.Phone, ajaxOptions, Phone(ModalType.Edit, ajaxOptions).ToMvcHtmlString())
+                </script>
+                <script id="deletePhone" type="text/html">
+                    <p data-message="generic" style="display: none">Are you sure you want to delete this phone number?</p>
+                    <p data-message="inPD" style="display: none">This phone number is selected for use in the Practitioners Directory. Are you sure you want to delete it?</p>
+                    <p data-message="lastInPD" style="display: none">This phone number is the only contact detail shown for you in the Practitioners Directory. If you proceed with the deletion, your preferred email will be shown in the Practitioners Directory instead. Are you sure you want to continue?</p>
+                </script>
+                <script id="addEmail" type="text/html">
+                    @ModalBody(ModalType.Add, DetailType.Email, ajaxOptions, Email(ModalType.Add, ajaxOptions).ToMvcHtmlString())
+                </script>
+                <script id="editEmail" type="text/html">
+                    @ModalBody(ModalType.Edit, DetailType.Email, ajaxOptions, Email(ModalType.Edit, ajaxOptions).ToMvcHtmlString())
+                </script>
+                <script id="deleteEmail" type="text/html">
+                    <p data-message="generic" style="display: none">Are you sure you want to delete this email address?</p>
+                    <p data-message="inPD" style="display: none">This email address is selected for use in the Practitioners Directory. Are you sure you want to delete it?</p>
+                    <p data-message="lastInPD" style="display: none">This email address is the only contact detail shown for you in the Practitioners Directory. If you proceed with the deletion, your preferred email will be shown in the Practitioners Directory instead. Are you sure you want to continue?</p>
+                </script>
+                <script id="requestError" type="text/html">
+                    <p>An error occurred while processing your request.</p>
+                </script>
+                <script id="addWebsite" type="text/html">
+                    @ModalBody(ModalType.Add, DetailType.Website, ajaxOptions, Website(ModalType.Add, ajaxOptions).ToMvcHtmlString())
+                </script>
+                <script id="editWebsite" type="text/html">
+                    @ModalBody(ModalType.Edit, DetailType.Website, ajaxOptions, Website(ModalType.Edit, ajaxOptions).ToMvcHtmlString())
+                </script>
+                <script id="deleteWebsite" type="text/html">
+                    <p>Are you sure you want to delete this website?</p>
+                </script>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="credentialstab">
+                <!-- Credentials -->
+                @Html.Partial("~/Views/Credential/CredentialComponent.cshtml", Model.CredentialDetailRequest)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/Bundles/Scripts/PersonalDetails")
+    @Scripts.Render("~/Bundles/Scripts/Credentials")
+}

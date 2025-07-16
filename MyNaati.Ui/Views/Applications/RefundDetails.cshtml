@@ -1,0 +1,225 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.CredentialApplication.RefundViewModel
+@{
+    ViewBag.Title = "Request Refund";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+        new Tuple<string, string>("My Tests", Url.Action("MyTests", "Applications")),
+        new Tuple<string, string>("Request Refund", null)
+    };
+}
+
+
+@helper ConfirmModel()
+{
+    <p class="alert" role="alert">
+        Are you sure you want to Request for a refund?
+    </p>
+}
+
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-lg-9">
+            <label class="control-label w-md-130">Cancellation Policy</label>
+            <div class="form-control-static">
+                @Html.Raw(Model.Policy)
+            </div>
+        </div>
+    </div>
+
+    @if (Model.IsPreMigrationRefundRequest)
+    {
+        <div class="row">
+            <div class="form-group col-lg-6">
+                @Html.Raw(Model.PreMigrationRequestMessage)
+            </div>
+        </div>
+    }
+    else
+    {
+        if (Model.IsEligibleForRefund)
+        {
+            <div class="row">
+                <div class="form-group col-lg-9">
+                    <label class="control-label w-md-130">Refund amount</label>
+                    <div class="form-control-static">
+                        <p>You are eligible for a refund of @Model.RefundPercentage <span class="text-danger">*</span></p>
+                        <strong class="text-danger"> * All refunds will go back to the same payment method used to pay the fee.</strong>
+                    </div>
+                </div>
+            </div>
+
+            if (Model.IsManualRefund)
+            {
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                        <label class="control-label w-md-130">Bank Account Details</label>
+                        <p>Please provide Bank Name, BSB and Bank Account Number (if applicable)</p>
+                        <div class="form-control-static">
+                            <textarea id="BankAccountDetails" maxlength="200" name="BankAccountDetails" form="usrform" class="form-control" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="row">
+                <div class="form-group col-lg-6">
+                    <label class="control-label w-md-130">Comments</label>
+                    <div class="form-control-static">
+                        <textarea id="Comments" maxlength="400" name="Comments" form="usrform" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-9">
+                    <button class="btn btn-primary" data-redirect-url="@Url.Action("Index","Home")" data-url="@Url.Action("RequestRefund", "Applications")" type="button" data-toggle="modal" data-target="#detailModal" data-backdrop="static" data-keyboard="false">Request Refund</button>
+                </div>
+            </div>
+        }
+        else if (Model.RefundNotCalculated)
+        {
+            <div class="row">
+                <div class="form-group col-lg-9">
+                    <label class="control-label w-md-130">Refund amount</label>
+                    <div class="form-control-static">
+                        <p>Please contact <a href="mailto://finance@naati.com.au">finance@naati.com.au</a> to request a refund.</p>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="form-group col-lg-9">
+                    <label class="control-label w-md-130">Refund amount</label>
+                    <div class="form-control-static">
+                        You are not eligible for a refund
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<div id="detailModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Request Refund</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to request for a refund?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="">Ok</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script id="confirmDialog" type="text/html">
+        ConfirmModel().ToMvcHtmlString()
+    </script>
+
+    <script>
+        $(function () {
+            var $modal = $('#detailModal');
+            var $okButton = $modal.find('.modal-footer .btn-primary');
+            var $cancelButton = $modal.find('.modal-footer .btn-danger');
+            var $target = null;
+            var $button = null;
+
+            function setupModal(event) {
+                $target = $(event.relatedTarget);
+                $okButton.prop('disabled', false);
+
+                $okButton.data('url', $target.data('url'));
+                $okButton.data('ajax-mode', $target.data('ajax-mode'));
+                $target.prop('disabled', true);
+                $okButton.show();
+
+                $cancelButton.prop('disabled', false);
+                $cancelButton.data('url', $target.data('redirect-url'));
+
+                $cancelButton.show();
+                $modal.modal('show');
+
+                $modal.find('.modal-body').html("Are you sure you want to request for a refund?");
+            }
+
+            $modal.on('show.bs.modal',
+                function (event) {
+                    $('.validation-summary-errors').empty();
+                    if (event.relatedTarget) {
+                        setupModal(event);
+                    }
+                });
+
+            $okButton.on('click',
+                function (evt) {
+                    evt.preventDefault();
+                    $button = $(this);
+                    $button.prop('disabled', true);
+                    $cancelButton.prop('disabled', true);
+
+                    var formUrl = $button.data('url');
+                    $.ajax({
+                        url: formUrl,
+                        type: 'POST',
+                        data: {
+                            CredentialRequestId: '@Model.CredentialRequestId',
+                            CredentialApplicationId: '@Model.CredentialApplicationId',
+                            IsManualRefund: '@Model.IsManualRefund',
+                            Comments: $("#Comments").val(),
+                            BankAccountDetails : $('#BankAccountDetails').val()
+                        },
+                        success: function (result) {
+                            if (result === '') {
+                                $cancelButton.attr('disabled', false);
+                                $okButton.hide();
+                                $cancelButton.text('Close');
+                                $cancelButton.on('click',
+                                    function (cl) {
+                                        cl.preventDefault();
+                                        $button = $(this);
+                                        window.location = $button.data('url');
+                                    }),
+                                    $modal.find('.modal-body').html("Refund requested");
+                            }
+                            else {
+                                //server returned error response
+                                $cancelButton.attr('disabled', false);
+                                $okButton.hide();
+                                $cancelButton.text('Close');
+                                $modal.find('.modal-body').html(result.data);
+                                $target.prop('disabled', false);
+                            }
+                        },
+                        error: function () {
+                            //failed sending ajax request
+                            $cancelButton.attr('disabled', false);
+                            $okButton.hide();
+                            $cancelButton.text('Close');
+                            $modal.find('.modal-body').html("Refund request failed");
+                            $target.prop('disabled', true);
+                        }
+                    });
+                });
+        }
+        );
+    </script>
+}
+
+

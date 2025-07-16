@@ -1,0 +1,16 @@
+﻿<div class="row">
+    <div class="col-sm-12 text-center" data-bind="visible: photoUrl">
+        <div class="w-xxl center-block">
+            <img class="img-rounded img-responsive center-block" data-bind="attr: { src: photoUrl }" />
+            <span class="text-muted">If you want to change your photo, please email NAATI at <a href="mailto:info@naati.com.au">info@naati.com.au</a></span>
+        </div>
+    </div>
+    <div class="col-sm-12" data-bind="visible: !photoUrl()">
+        <div class="form-group main-photo-upload" data-bind="validationElement: fileSelected">
+            <div class="file-loading">
+                <input type="file" accept=".jpg,.jpeg,.png" data-bind="fileinput: fileOptions, event: fileEvent">
+            </div>
+            <span class="help-block" data-bind="validationMessage: fileSelected"></span>
+        </div>
+    </div>
+</div>

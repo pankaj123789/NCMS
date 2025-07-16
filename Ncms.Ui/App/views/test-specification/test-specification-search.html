@@ -1,0 +1,56 @@
+<div class="col">
+    <div class="vbox">
+        <div class="bg-light lter b-b wrapper-md">
+            <h1 class="m-n font-thin h3">
+                <span data-bind="html: title"></span>
+                <button type="button" data-bind="click: add" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    &nbsp;
+                    <span>New Test Specification</span>
+                </button>
+                <div class="form-group pull-right">
+                    <div class="input-group">
+                        <span class="input-group-addon rounded no-border dk">SPEC</span>
+                        <input type="number" data-bind="event: { keypress: checkEnterPressed }, resattr: { placeholder: 'Naati.Resources.Shared.resources.IDSearch' }, value: idSearchValue, valueUpdate: 'input'" class="form-control bg-white input-sm no-border rounded padder" autocomplete="off">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-sm bg-white rounded" data-bind="click: idSearchClick"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </h1>
+        </div>
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner">
+                    <div class="wrapper-md">
+                        <div data-bind="component: { name: 'table-component', params: tableDefinition }"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script id="testspecification-header-template" type="text/html">
+        <th class="hidden"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.TestSpecificationID'" class="w-xs"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.Description'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.CredentialType'" class="w-xsm"></th>
+        <th class="w-xs">&nbsp;</th>
+    </script>
+    <script id="testspecification-row-template" type="text/html">
+        <tr>
+            <td class="hidden" data-bind="text: Id"></td>
+            <td data-bind="text: Reference" class="w-sm"></td>
+            <td data-bind="text: Description"></td>
+            <td data-bind="text: CredentialType" class="w-md"></td>
+            <td class="w-xs text-right">
+                <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover', container: 'body', title: function () { return $root.availableMessage($data); } }">
+                    <i class="fa" data-bind="css: { 'fa-check text-success': Active, 'fa-times text-danger': !Active }"></i>
+                </a>
+                <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#test-specification/' + Id }">
+                    <i class="fa fa-pencil-alt"></i>
+                </a>
+            </td>
+        </tr>
+    </script>
+    <!--ko compose: testSpecificationAddOptions--><!--/ko-->
+</div>

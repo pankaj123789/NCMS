@@ -1,0 +1,176 @@
+﻿@model MyNaati.Ui.ViewModels.PDSearch.ContactDetailsModel
+@{
+	Layout = null;
+}
+<div class="modal-header bg-primary">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<h4 class="modal-title">@Model.Title @Model.GivenName @Model.Surname</h4>
+</div>
+<div class="modal-body">
+	@*@if (!string.IsNullOrWhiteSpace(Model.PrefferedWorkAreas))
+		{
+			<div class="row">
+				<div class="col-lg-12">
+					<h4>Preferred Areas</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>@Model.PrefferedWorkAreas</p>
+				</div>
+			</div>
+		}*@
+	@if (Model.Credentails.Any())
+	{
+		<div class="row">
+			<div class="col-lg-12">
+				<h4>Current NAATI credentials</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				@{
+					foreach (var item in Model.Credentails)
+					{
+
+						<ul class="list-unstyled">
+							<li>
+								@string.Format(@"{0} ({1})", item.Skill, item.Direction)
+							</li>
+						</ul>
+
+					}
+				}
+			</div>
+		</div>
+	}
+	<div class="row">
+		<div class="col-lg-12">
+			<h4>Location</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<p>@Model.Address</p>
+		</div>
+	</div>
+
+	@if (Model.ContactDetails.Any())
+	{
+		<div class="row">
+			<div class="col-lg-12">
+				<h4>Contact Details</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				@{
+					foreach (var item in Model.ContactDetails)
+					{
+						if (!string.IsNullOrEmpty(item.Contact))
+						{
+							<div class="row">
+								<div class="col-sm-2">
+									<strong>@item.Type</strong>
+								</div>
+								<div class="col-sm-10">
+									@if (item.Type.Contains("Email"))
+									{
+										<a href="mailto:@item.Contact">@item.Contact</a>
+
+									}
+									else
+									{
+										@item.Contact
+									}
+								</div>
+							</div>
+						}
+					}
+				}
+			</div>
+		</div>
+	}
+
+	@if (!string.IsNullOrWhiteSpace(Model.Website))
+	{
+		var url = Model.Website.Contains("://") ? Model.Website : "http://" + Model.Website;
+		if (Model.ContactDetails.Any())
+		{
+			<div class="row">
+				<div class="col-sm-2">
+					<strong>Website</strong>
+				</div>
+				<div class="col-sm-10">
+					<a href="@url" target="_blank">@Model.Website</a>
+				</div>
+			</div>
+		}
+		else
+		{
+			<div class="row">
+				<div class="col-lg-12">
+					<h4>Contact Details</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="row">
+								<div class="col-sm-2">
+									<strong>Website</strong>
+								</div>
+								<div class="col-sm-10">
+									<a href="@url" target="_blank">@Model.Website</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	}
+
+	@if (Model.Accreditations.Any())
+	{
+		<div class="row m-t-md">
+			<div class="col-lg-12">
+				<h4>Past NAATI Credentials</h4>
+			</div>
+		</div>
+	    <div class="panel panel-default accreditation-history">
+	 
+	        <a href="#">
+	            <div class="panel-heading" style="cursor: pointer !important;">
+	                View Details
+	                <i class="glyphicon glyphicon-chevron-down pull-right"></i>
+	            </div>
+	        </a>
+
+	        <div class="panel-body animated fadeIn hide">
+	            <p>NAATI Accreditation (1977-2017) has been discontinued and replaced by NAATI Certification 2018. @Model.Title @Model.GivenName @Model.Surname's previous Accreditation records are shown below:</p>
+	            @{
+	                foreach (var item in Model.Accreditations)
+	                {
+	                    if (!string.IsNullOrEmpty(item.Accreditation))
+	                    {
+	                        <ul>
+	                            <li class="m-t-md">
+	                                @item.Accreditation <br/>
+	                                @item.Expiration
+	                            </li>
+	                        </ul>
+	                    }
+	                }
+	            }
+	        </div>
+	    </div>
+	}
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
+</div>
+<script type="text/javascript">
+
+</script>

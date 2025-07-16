@@ -1,0 +1,64 @@
+﻿<aside id="aside" class="app-aside hidden-xs bg-dark">
+    <div class="aside-wrap">
+        <div class="navi-wrap">
+            <!-- nav -->
+            <nav ui-nav class="navi clearfix">
+                <ul class="nav" style="-ms-overflow-style:none">
+                    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+                        <span data-bind="restext: 'Naati.Resources.Menu.resources.Navigation'"></span>
+                    </li>
+                    <!--ko foreach: { data: menus, as: 'menu', afterRender: applyScroll } -->
+                    <li>
+                        <!-- ko template: { name: 'menu-template', data: menu } -->
+                        <!-- /ko -->
+                        <!-- ko if: menu.menus && menu.menus.length -->
+                        <ul class="nav nav-sub no-scroll">
+                            <!-- ko foreach: { data: menu.menus, as: 'subMenu' } -->
+                            <li>
+                                <!-- ko if: subMenu.showWithPermission -->
+                                <!-- ko template: { name: 'menu-template-permission', data: subMenu } -->
+                                <!-- /ko -->
+                                <!-- /ko -->
+                                <!-- ko if: !subMenu.showWithPermission -->
+                                <!-- ko template: { name: 'menu-template', data: subMenu } -->
+                                <!-- /ko -->
+                                <!-- /ko -->
+
+                            </li>
+                            <!-- /ko -->
+                        </ul>
+                        <!-- /ko -->
+                    </li>
+                    <!--/ko-->
+                </ul>
+            </nav>
+            <!-- nav -->
+        </div>
+    </div>
+</aside>
+<script id="menu-template" type="text/html">    
+    <a href="#" data-bind="attr: { href: '#' + $root.route($data), title: title }, click: $root.navigate">
+        <!--ko if: $root.hasMenus($data)-->
+        <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+        </span>
+        <!--/ko-->
+        <i data-bind="css: ico"></i>
+        &nbsp;
+        <span class="font-bold" data-bind="text: title"></span>
+    </a>
+</script>
+<script id="menu-template-permission" type="text/html">
+    <a href="#" data-bind="attr: { href: '#' + $root.route($data), title: title }, click: $root.navigate, showWithPermission:$data.showWithPermission">
+        <!--ko if: $root.hasMenus($data)-->
+        <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+        </span>
+        <!--/ko-->
+        <i data-bind="css: ico"></i>
+        &nbsp;
+        <span class="font-bold" data-bind="text: title"></span>
+    </a>
+</script>

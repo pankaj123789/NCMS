@@ -1,0 +1,38 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.BasePurchaseWizardModel
+@{
+    ViewBag.Title = "Order Confirmation";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Products", Url.Action("index", "Product")),
+        new Tuple<string, string>("Certificates", string.Empty)
+    };
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>Order Successfully Submitted</h2>
+        </div>
+    </div>
+    @Html.Partial("_OrderSuccessfulMessagePartial")
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="text-primary">Reference Number: @Model.ReferenceNumber</h3>
+        </div>
+    </div>
+    @{
+        Html.RenderPartial("_OrderTotalViewPartial", Model.OrderTotalModel);
+        Html.RenderPartial("_DeliveryDetailsViewPartial", Model.DeliveryDetailsModel);
+        Html.RenderPartial("_PaymentDetailsViewPartial", Model.PaymentDetailsModel);
+        Html.RenderPartial("_CertificateAndIdCardDeclarationPartial");
+    }
+    <div class="row">
+        <div class="col-lg-12">
+            @using (Html.BeginForm())
+            {
+                <button class="btn btn-success" type="button" onclick="print()">Print</button>
+                <button class="btn btn-primary" type="submit">OK</button>
+            }
+        </div>
+    </div>
+</div>

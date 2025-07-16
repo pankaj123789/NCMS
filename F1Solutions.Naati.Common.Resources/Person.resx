@@ -1,0 +1,651 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Abn" xml:space="preserve">
+    <value>ABN</value>
+  </data>
+  <data name="AddName" xml:space="preserve">
+    <value>Add Name</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AddressNote" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="AllowVerifyOnline" xml:space="preserve">
+    <value>Allow Verify Online</value>
+  </data>
+  <data name="ArchiveHistory" xml:space="preserve">
+    <value>Archive History</value>
+  </data>
+  <data name="AustralianCitizen" xml:space="preserve">
+    <value>Australian citizen</value>
+  </data>
+  <data name="ContactDetails" xml:space="preserve">
+    <value>Contact Details</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CountryOfBirth" xml:space="preserve">
+    <value>Country of Birth</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
+  <data name="Deceased" xml:space="preserve">
+    <value>Deceased</value>
+  </data>
+  <data name="DoesNotMeetTherPersonReversionCriteria" xml:space="preserve">
+    <value>This person does not meet the person type reversion criteria.</value>
+  </data>
+  <data name="DoNotInviteToPd" xml:space="preserve">
+    <value>Do not Invite to PD</value>
+  </data>
+  <data name="SendCorrespondence" xml:space="preserve">
+    <value>Send correspondence</value>
+  </data>
+  <data name="EnterAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="GstApplies" xml:space="preserve">
+    <value>Gst Applies</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="IncludeInPd" xml:space="preserve">
+    <value>Include in OD</value>
+  </data>
+  <data name="InPd" xml:space="preserve">
+    <value>Display in Online Directory</value>
+  </data>
+  <data name="NaatiNumber" xml:space="preserve">
+    <value>Customer Number</value>
+  </data>
+  <data name="NameHistory" xml:space="preserve">
+    <value>Name History</value>
+  </data>
+  <data name="NoAddresses" xml:space="preserve">
+    <value>There are no addresses for this contact.</value>
+  </data>
+  <data name="NoEmails" xml:space="preserve">
+    <value>There are no email addresses for this contact.</value>
+  </data>
+  <data name="NoPhones" xml:space="preserve">
+    <value>There are no phone numbers for this contact.</value>
+  </data>
+  <data name="NoWebsites" xml:space="preserve">
+    <value>There is no website for this contact.</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Overseas" xml:space="preserve">
+    <value>Overseas</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Postal" xml:space="preserve">
+    <value>Postal</value>
+  </data>
+  <data name="PrimaryAddress" xml:space="preserve">
+    <value>Primary Address</value>
+  </data>
+  <data name="ReleaseDetails" xml:space="preserve">
+    <value>Release Details</value>
+  </data>
+  <data name="RevalidationScheme" xml:space="preserve">
+    <value>Revalidation Scheme</value>
+  </data>
+  <data name="RevertToNc" xml:space="preserve">
+    <value>Revert to NC</value>
+  </data>
+  <data name="SelectedAddress" xml:space="preserve">
+    <value>Selected Address</value>
+  </data>
+  <data name="ShowPhotoOnline" xml:space="preserve">
+    <value>Show Photo Online</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="Suburb" xml:space="preserve">
+    <value>Suburb</value>
+  </data>
+  <data name="UseEmail" xml:space="preserve">
+    <value>Use Email</value>
+  </data>
+  <data name="ValidateInGoogle" xml:space="preserve">
+    <value>Validate in Google</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="RevertToNCConfirm" xml:space="preserve">
+    <value>Are you sure you wish to change this person's entity type to Other?</value>
+  </data>
+  <data name="AllowSmsNotifications" xml:space="preserve">
+    <value>Allow SMS Notifications</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="EmailNote" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="PhoneNote" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="PrimaryEmail" xml:space="preserve">
+    <value>Primary Email</value>
+  </data>
+  <data name="InPdBadge" xml:space="preserve">
+    <value>OD</value>
+  </data>
+  <data name="PrimaryBadge" xml:space="preserve">
+    <value>PRIMARY</value>
+  </data>
+  <data name="SmsAllowed" xml:space="preserve">
+    <value>SMS allowed</value>
+  </data>
+  <data name="SmsAllowedBadge" xml:space="preserve">
+    <value>SMS</value>
+  </data>
+  <data name="AlternativeGivenName" xml:space="preserve">
+    <value>Alternative Given Name</value>
+  </data>
+  <data name="AlternativeSurname" xml:space="preserve">
+    <value>Alternative Surname</value>
+  </data>
+  <data name="EffectiveDate" xml:space="preserve">
+    <value>Effective Date</value>
+  </data>
+  <data name="GivenName" xml:space="preserve">
+    <value>Given Name</value>
+  </data>
+  <data name="OtherNames" xml:space="preserve">
+    <value>Other Names</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="NoPrimaryAddressSet" xml:space="preserve">
+    <value>No primary address has been set for this contact.</value>
+  </data>
+  <data name="NoPrimaryEmailSet" xml:space="preserve">
+    <value>No primary email has been set for this contact.</value>
+  </data>
+  <data name="PhoneInstructions" xml:space="preserve">
+    <value>Just + symbol and numbers. No spaces, brackets, dashes.</value>
+  </data>
+  <data name="Bills" xml:space="preserve">
+    <value>Bills</value>
+  </data>
+  <data name="InvoicesAndCreditNotes" xml:space="preserve">
+    <value>Invoices &amp; Credit Notes</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>Payments</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>Account Number</value>
+  </data>
+  <data name="CertificationType" xml:space="preserve">
+    <value>Certification Type</value>
+  </data>
+  <data name="ContactNumber" xml:space="preserve">
+    <value>Contact No</value>
+  </data>
+  <data name="Direction" xml:space="preserve">
+    <value>Direction</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Nationality" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+  <data name="PractitionerNumber" xml:space="preserve">
+    <value>Practitioner No</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="TrackingCategory" xml:space="preserve">
+    <value>Supplier Tracking Category</value>
+  </data>
+  <data name="Applications" xml:space="preserve">
+    <value>Applications</value>
+  </data>
+  <data name="AuditHistory" xml:space="preserve">
+    <value>Audit History</value>
+  </data>
+  <data name="CredentialType" xml:space="preserve">
+    <value>Credential Type</value>
+  </data>
+  <data name="PrimaryContactNumber" xml:space="preserve">
+    <value>Primary Contact No</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="PrimaryContact" xml:space="preserve">
+    <value>Primary Contact</value>
+  </data>
+  <data name="FamilyName" xml:space="preserve">
+    <value>Family Name</value>
+  </data>
+  <data name="PrimaryPhone" xml:space="preserve">
+    <value>Primary Phone</value>
+  </data>
+  <data name="AddContactFromSam" xml:space="preserve">
+    <value>Add Contact from SAM</value>
+  </data>
+  <data name="CreateNewPerson" xml:space="preserve">
+    <value>New Person</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Valid" xml:space="preserve">
+    <value>Valid</value>
+  </data>
+  <data name="CredentialRequests" xml:space="preserve">
+    <value>Credential Requests</value>
+  </data>
+  <data name="Credentials" xml:space="preserve">
+    <value>Credentials</value>
+  </data>
+  <data name="CredentialApplications" xml:space="preserve">
+    <value>Credential Applications</value>
+  </data>
+  <data name="ApplicationReference" xml:space="preserve">
+    <value>Application Reference</value>
+  </data>
+  <data name="ApplicationType" xml:space="preserve">
+    <value>Application Type</value>
+  </data>
+  <data name="EnteredDate" xml:space="preserve">
+    <value>Entered Date</value>
+  </data>
+  <data name="ExaminerCorrespondence" xml:space="preserve">
+    <value>Examiner Correspondence</value>
+  </data>
+  <data name="EthicalCompetency" xml:space="preserve">
+    <value>Ethical Competency</value>
+  </data>
+  <data name="InterculturalCompetency" xml:space="preserve">
+    <value>Intercultural Competency</value>
+  </data>
+  <data name="Passed" xml:space="preserve">
+    <value>Passed</value>
+  </data>
+  <data name="ExtendCertifications" xml:space="preserve">
+    <value>Extend Certifications</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="Expired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="Future" xml:space="preserve">
+    <value>Future</value>
+  </data>
+  <data name="NewEndDate" xml:space="preserve">
+    <value>New End Date</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="OriginalEndDate" xml:space="preserve">
+    <value>Original End Date</value>
+  </data>
+  <data name="Periods" xml:space="preserve">
+    <value>Periods</value>
+  </data>
+  <data name="SelectAPeriod" xml:space="preserve">
+    <value>Select a period&lt;br /&gt;on the left panel</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="PersonVerificationFailed" xml:space="preserve">
+    <value>NCMS already contains {0} person(s) with the same person details.  [Verification error code #{1}]. Only import this person from SAM if you are sure this is a different person</value>
+  </data>
+  <data name="AddressExaminerCorrespondence" xml:space="preserve">
+    <value>Preferred address for examination tasks</value>
+  </data>
+  <data name="EmailExaminerCorrespondence" xml:space="preserve">
+    <value>Preferred email for examination tasks</value>
+  </data>
+  <data name="PhoneExaminerCorrespondence" xml:space="preserve">
+    <value>Preferred phone for examination tasks</value>
+  </data>
+  <data name="Correspondence" xml:space="preserve">
+    <value>Correspondence</value>
+  </data>
+  <data name="SelectAnEmail" xml:space="preserve">
+    <value>Select an email&lt;br /&gt;on the left panel</value>
+  </data>
+  <data name="ViewEmail" xml:space="preserve">
+    <value>View Email</value>
+  </data>
+  <data name="OdAddressVisibilityType" xml:space="preserve">
+    <value>OD Address Visibility Type</value>
+  </data>
+  <data name="ViewLogbook" xml:space="preserve">
+    <value>View Logbook</value>
+  </data>
+  <data name="CertificationExpiryDate" xml:space="preserve">
+    <value>Certification Expiry Date</value>
+  </data>
+  <data name="RecertificationEligibilityDate" xml:space="preserve">
+    <value>Recertification Eligibility Date</value>
+  </data>
+  <data name="RecertificationStatus" xml:space="preserve">
+    <value>Recertification Status</value>
+  </data>
+  <data name="AddWorkPractice" xml:space="preserve">
+    <value>Add Work Practice</value>
+  </data>
+  <data name="DeleteWorkPractice" xml:space="preserve">
+    <value>Are you sure that want to remove this Work Practice from the Credential?</value>
+  </data>
+  <data name="ProfessionalDevelopment" xml:space="preserve">
+    <value>Professional Development</value>
+  </data>
+  <data name="CertificationPeriods" xml:space="preserve">
+    <value>Certification Periods</value>
+  </data>
+  <data name="CertificationPeriodsHelpBlock" xml:space="preserve">
+    <value>Please note that any modifications which are made on this screen can impact not only the expiration date of certifications, but also the recertification requirements. This screen should only be used for fixing errors.  Ensure that there are no gaps between the Certification Periods for this practitioner.</value>
+  </data>
+  <data name="CheckResult" xml:space="preserve">
+    <value>Check Result</value>
+  </data>
+  <data name="CheckTooltip" xml:space="preserve">
+    <value>You must check the new dates before they can be saved.</value>
+  </data>
+  <data name="PassedAllChecks" xml:space="preserve">
+    <value>Passed all checks!</value>
+  </data>
+  <data name="Recheck" xml:space="preserve">
+    <value>Recheck</value>
+  </data>
+  <data name="AccountLockedBanner" xml:space="preserve">
+    <value>This person's myNAATI account is locked</value>
+  </data>
+  <data name="LastmyNaatiLogin" xml:space="preserve">
+    <value>Last Login</value>
+  </data>
+  <data name="LastPasswordChangeDate" xml:space="preserve">
+    <value>Last Password Change</value>
+  </data>
+  <data name="MyNaatiRegistrationDate" xml:space="preserve">
+    <value>Registration Date</value>
+  </data>
+  <data name="Deregister" xml:space="preserve">
+    <value>Deregister</value>
+  </data>
+  <data name="DeregisterConfirmation" xml:space="preserve">
+    <value>The myNAATI account for {0} will be deleted. This will not affect their NCMS records. Continue?</value>
+  </data>
+  <data name="DeregisterMyNaatiAccount" xml:space="preserve">
+    <value>Deregister myNAATI Account</value>
+  </data>
+  <data name="MyNaatiAccountDeleted" xml:space="preserve">
+    <value>myNAATI account deleted</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="UnlockSucessful" xml:space="preserve">
+    <value>myNAATI account unlocked</value>
+  </data>
+  <data name="UnlockUnsuccesful" xml:space="preserve">
+    <value>An error occurred while unlocking the myNAATI account</value>
+  </data>
+  <data name="PersonAlreadyExists" xml:space="preserve">
+    <value>Person already exists</value>
+  </data>
+  <data name="PersonCreated" xml:space="preserve">
+    <value>Person successfully created</value>
+  </data>
+  <data name="PrimaryEmailChangeHint2" xml:space="preserve">
+    <value>Primary email address of a myNAATI user can only be changed by an administrator</value>
+  </data>
+  <data name="PrimaryEmailChangeWarning1" xml:space="preserve">
+    <value>Changing this email address will also change this person's myNAATI username to match. Please ensure they are informed of this change.</value>
+  </data>
+  <data name="MyNaatiAccount" xml:space="preserve">
+    <value>myNAATI Account</value>
+  </data>
+  <data name="MyNaatiAccountLocked" xml:space="preserve">
+    <value>LOCKED</value>
+  </data>
+  <data name="MyNaatiAccountNotRegistered" xml:space="preserve">
+    <value>Not registered</value>
+  </data>
+  <data name="MyNaatiAccountRegistered" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="MyNaatiUsername" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="PrimaryEmailChangeHint1" xml:space="preserve">
+    <value>The Primary email address of a myNAATI user can only be demoted by setting another email address to Primary</value>
+  </data>
+  <data name="PrimaryEmailChangeHint3" xml:space="preserve">
+    <value>The Primary email address can only be demoted by setting another email address to Primary</value>
+  </data>
+  <data name="PrimaryEmailChangeWarning2" xml:space="preserve">
+    <value>Setting this email address to Primary will cause this person's myNAATI username to be changed to this email address. Please ensure they are informed of this change.</value>
+  </data>
+  <data name="RolePlayerTestLocations" xml:space="preserve">
+    <value>Role-player Test Locations</value>
+  </data>
+  <data name="RolePlayerRating" xml:space="preserve">
+    <value>Role-player Rating</value>
+  </data>
+  <data name="RolePlayerSession" xml:space="preserve">
+    <value>Role-player Session Limit</value>
+  </data>
+  <data name="SeniorRolePlayer" xml:space="preserve">
+    <value>Senior Role-player</value>
+  </data>
+  <data name="WrongRolePlayerStatus" xml:space="preserve">
+    <value>The  Role-player status must be one of: [{0}] to perform this action.</value>
+  </data>
+  <data name="RolePlays" xml:space="preserve">
+    <value>Role Play</value>
+  </data>
+  <data name="MaxRolePlaySessionsToolTip" xml:space="preserve">
+    <value>Maximum number of Role Play sessions per 4-week period</value>
+  </data>
+  <data name="RolePlayerSessionToolTip" xml:space="preserve">
+    <value>Maximum number of Role Play sessions per 4-week period</value>
+  </data>
+  <data name="Recalculate" xml:space="preserve">
+    <value>Recalculate</value>
+  </data>
+  <data name="AllowAutoRecertification" xml:space="preserve">
+    <value>Allow Auto-Recertification</value>
+  </data>
+  <data name="KnowledgeTest" xml:space="preserve">
+    <value>Knowledge Test</value>
+  </data>
+  <data name="LastMfaAuthentication" xml:space="preserve">
+    <value>Last MFA Authentication</value>
+  </data>
+  <data name="MultiFactorAuthentication" xml:space="preserve">
+    <value>Multi Factor Authentication</value>
+  </data>
+  <data name="DeregisterMfaAccount" xml:space="preserve">
+    <value>Deregister MFA Account</value>
+  </data>
+  <data name="DeregisterMfaConfirmation" xml:space="preserve">
+    <value>This will remove the MFA setup to this person's myNAATI account. The person will need to reregister for MFA from myNAATI (if required). Continue?</value>
+  </data>
+  <data name="MyMfaAccountDeleted" xml:space="preserve">
+    <value>MFA setup to the myNAATI account is removed.</value>
+  </data>
+  <data name="QrCodeLog" xml:space="preserve">
+    <value>QR Code Stamp Activity Log</value>
+  </data>
+  <data name="Exemptions" xml:space="preserve">
+    <value>Exemptions</value>
+  </data>
+  <data name="Qrcodes" xml:space="preserve">
+    <value>QR Codes</value>
+  </data>
+  <data name="AccessDisabledByNcms" xml:space="preserve">
+    <value>MyNaati access disabled</value>
+  </data>
+  <data name="DisabledByNaati" xml:space="preserve">
+    <value>Access Disabled By Naati</value>
+  </data>
+</root>

@@ -1,0 +1,3 @@
+DatabaseSourcePath,DatabaseSourceFileName,DatabaseName,DatabaseDestinationServer,TemporaryFolder,AGName,AGSharedPath,AGSecondServer,TDECertificate
+\\F1FS009-TEST\F1HADB003-TEST\Deployments,NAATI_SAM_Test.bak,SAM_TEST4,F1DB013-TEST,C:\TEMP\NAATI\,F1HADB004-TEST,\\F1fs009-test\f1hadb003-test\F1CLS004-TEST$F1HADB004-TEST\HAJoin,F1DB014-TEST,
+\\F1FS009-TEST\F1HADB003-TEST\Deployments,NAATI_Reporting_Test.bak,SAM_Reporting_TEST4,F1DB013-TEST,C:\TEMP\NAATI\,F1HADB004-TEST,\\F1fs009-test\f1hadb003-test\F1CLS004-TEST$F1HADB004-TEST\HAJoin,F1DB014-TEST,

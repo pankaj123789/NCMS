@@ -1,0 +1,125 @@
+﻿<div>
+    <!-- ko component: { name: 'tab-component', params: tabOptions } --><!-- /ko -->
+    <script type="text/html" id="rubric-marks">
+        <div class="hbox">
+            <div class="col wrapper w-xl">
+                <div class="form-control-static">
+                    <label class="radio-inline i-checks">
+                        <input type="radio" value="true" data-bind="checked: component.WasAttemptedFlag, disable: component.Disable">
+                        <i></i>
+                        <span class="padder-md" data-bind="reshtml: 'Naati.Resources.Test.resources.WasAttempted'"></span>
+                    </label>
+                    <label class="radio-inline i-checks">
+                        <input type="radio" value="false" data-bind="checked: component.WasAttemptedFlag, disable: component.Disable">
+                        <i></i>
+                        <span class="padder-md" data-bind="reshtml: 'Naati.Resources.Test.resources.NotAttempted'"></span>
+                    </label>
+                </div>
+            </div>
+            <!--ko if: component.showResult -->
+            <div class="col wrapper b-l b-light animated fadeIn">
+                <div class="form-control-static m-l-lg">
+                    <label class="radio-inline i-checks">
+                        <input type="radio" value="true" data-bind="checked: component.SuccessfulFlag, disable: component.Disable">
+                        <i></i>
+                        <span class="padder-md" data-bind="reshtml: 'Naati.Resources.Shared.resources.Successful'"></span>
+                    </label>
+                    <label class="radio-inline i-checks">
+                        <input type="radio" value="false" data-bind="checked: component.SuccessfulFlag, disable: component.Disable">
+                        <i></i>
+                        <span class="padder-md" data-bind="reshtml: 'Naati.Resources.Shared.resources.Unsuccessful'"></span>
+                    </label>
+                </div>
+            </div>
+            <!--/ko-->
+        </div>
+        <div class="component-competence wrapper animated fadeIn hide" data-bind="css: { hide: !component.WasAttempted() }">
+            <div class="row bg-success m-l-none m-r-none hbox">
+                <!--ko foreach: { data: component.Competencies, as: 'competence' }-->
+                <div data-bind="css: competence.Css">
+                    <div class="wrapper font-thin h5 m-b-none m-t-none no-padder">
+                        <div class="padder-v" data-bind="text: competence.Name"></div>
+                    </div>
+                </div>
+                <!--/ko-->
+            </div>
+            <div class="row bg-warning m-l-none m-r-none hbox">
+                <!--ko foreach: { data: component.Competencies, as: 'competence' }-->
+                <div class="no-padder" data-bind="css: competence.Css">
+                    <div class="wrapper font-thin h5 m-b-none m-t-none no-padder hbox">
+                        <!--ko foreach: { data: competence.Assessments, as: 'assessment' }-->
+                        <div class="col cursor-pointer" data-bind="css: { active: $parents[1].selectedAssessment() === assessment }, click: $parents[1].selectAssessment">
+                            <div class="font-thin m-b-none m-t-none">
+                                <div class="wrapper">
+                                    <!--ko if: $parents[1].assessmentChanged(assessment)-->
+                                    <i class="fas fa-save text-black animated flash infinite" data-bind="tooltip: { trigger: 'hover', container: 'body' }, resattr: { title: 'Naati.Resources.Test.resources.AssessmentChanged' }"></i>
+                                    <!--/ko-->
+                                    <span class="fa fa-exclamation-circle" data-bind="css: { hide: $parents[1].assessmentValidations['{0}_{1}'.format($parents[1].component.Id(), assessment.Id())].isValid() }"></span>
+                                    <span class="text-black font-thin" data-bind="text: assessment.Name"></span>
+                                    <span class="fa fa-comment text-black" data-bind="css: { hide: !((assessment.Comment() || '').length > 9) }, tooltip, resattr: { title: 'Naati.Resources.Test.resources.CommentAdded' }"></span>
+                                    <span class="label badge text-white bg-black" data-bind="text: assessment.selectedLevel, css: { hide: !assessment.SelectedBand() }, tooltip, resattr: { title: 'Naati.Resources.Test.resources.SelectedBand' }"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ko-->
+                    </div>
+                </div>
+                <!--/ko-->
+            </div>
+            <!--ko ifnot: selectedAssessment-->
+            <div class="row b-l b-r b-b b-warning m-l-none m-r-none">
+                <div class="col-sm-12 text-center wrapper h5" data-bind="reshtml: 'Naati.Resources.Test.resources.SelectBand'"></div>
+            </div>
+            <!--/ko-->
+            <!--ko foreach: { data: component.Competencies, as: 'competence' }-->
+            <!--ko foreach: { data: competence.Assessments, as: 'assessment' }-->
+            <!--ko if: $parents[1].selectedAssessment() === assessment-->
+            <div class="row b-l b-r b-warning cursor-pointer m-l-none m-r-none">
+                <!--ko if: assessment.ExaminerResults && assessment.ExaminerResults() && assessment.ExaminerResults().length-->
+                <div class="col-sm-12 b-b b-warning padder-v text-black">
+                    <!--ko foreach:  { data: assessment.ExaminerResults, as: 'examiner' }-->
+                    <div class="label label-primary text-base m-r-sm">
+                        <span data-bind="text: examiner.Initials"></span>
+                        <span>-</span>
+                        <span data-bind="text: examiner.BandLevel"></span>
+                    </div>
+                    <!--/ko-->
+                </div>
+                <!--/ko-->
+                <!--ko foreach: { data: assessment.Bands, as: 'band' }-->
+                <div class="col-sm-12 b-b b-warning padder-v text-black" data-bind="click: function() { $parents[2].selectBand(assessment, band, competence); }, css: { 'bg-warning active': assessment.SelectedBand() === band.Id() }">
+                    <div class="text-base wrapper-xs label no-text-shadow text-dark pos-rlt m-r b b-1x b-warning">
+                        <i class="arrow right arrow-warning"></i>
+                        <!--ko if: $parents[2].assessmentChanged(assessment) && assessment.SelectedBand() === band.Id()-->
+                        <i class="fas fa-save animated flash infinite" data-bind="tooltip: { trigger: 'hover', container: 'body' }, resattr: { title: 'Naati.Resources.Test.resources.BandChanged' }"></i>
+                        <!--/ko-->
+                        <span data-bind="html: band.Label"></span>
+                    </div>
+                    <br />
+                    <br />
+                    <span data-bind="html: band.Description"></span>
+                </div>
+                <!--/ko-->
+            </div>
+            <div class="row b-l b-r b-warning m-l-none m-r-none">
+                <div class="col-sm-12 b-b b-warning padder-v">
+                    <div class="form-group" data-bind="validationElement: assessment.Comment">
+                        <!--ko if: assessment.ExaminerResults && assessment.ExaminerResults() && assessment.ExaminerResults().length-->
+                        <button class="btn btn-info pull-right m-t-n-sm" data-bind="tooltip, resattr:{title:'Naati.Resources.Test.resources.PopulateFromExaminers'}, click: $parents[1].getExaminerComments">
+                            <i class="fa fa-comment"></i>
+                            <span data-bind="restext:'Naati.Resources.Test.resources.GetExaminerComments'"></span>
+                        </button>
+                        <!--/ko-->
+                        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Test.resources.Comment'"></label>
+                        <span data-bind="text:$parents[1].component.MinCommentLengthText"></span>
+
+                        <textarea rows="5" class="form-control" data-bind="value: assessment.Comment, valueUpdate: 'input', disable: $parents[1].component.Disable"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!--/ko-->
+            <!--/ko-->
+            <!--/ko-->
+        </div>
+    </script>
+</div>

@@ -1,0 +1,177 @@
+﻿<div id="personContacts" class="panel no-border">
+    <div class="panel no-border">
+        <div class="panel-heading wrapper b-b b-light">
+            <!--ko if: showAddAddress()-->
+            <button class="pull-right btn btn-success btn-addon btn-sm m-t-n-xs" data-bind="click: addAddress">
+                <i class="fa fa-plus"></i>
+                <span data-bind="restext: 'Naati.Resources.Shared.resources.Add'"></span>
+            </button>
+            <!--/ko-->
+            <h4 class="m-t-none m-b-none" data-bind="restext: 'Naati.Resources.Person.resources.Address'"></h4>
+        </div>
+        <ul class="list-group list-group-lg m-b-none">
+            <li class="list-group-item bg-danger" data-bind="visible: !hasPrimaryAddress()">
+                <small data-bind="reshtml: 'Naati.Resources.Person.resources.NoPrimaryAddressSet'"></small>
+            </li>
+            <!--ko foreach: addressList-->
+            <li class="list-group-item clearfix">
+                <div class="col-sm-5" data-bind="text: Address"></div>
+                <div class="col-sm-7">
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default btn-xs" data-bind="clickBubble: false, click: function() { $root.editAddress(this); }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a href="#" class="btn btn-danger btn-xs" data-bind="visible: !PrimaryContact(), clickBubble: false, click: function() { $root.tryDeleteAddress(this); }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                        <div class="m-l-sm pull-right" data-bind="visible: IsOdAddressVisibility, resattr: { title: 'Naati.Resources.Person.resources.InPd' }">
+                            <span class="pull-right label badge bg-black-opacity m-t-xs" data-bind="text: OdAddressVisibilityTypeName"></span>
+                        </div>
+                        <div class="m-l-sm pull-right" data-bind="visible: PrimaryContact, resattr: { title: 'Naati.Resources.Person.resources.PrimaryAddress' }">
+                            <span class="pull-right label badge bg-black-opacity m-t-xs" data-bind="restext: 'Naati.Resources.Person.resources.PrimaryBadge'"></span>
+                        </div>
+                        <div class="m-l-sm pull-right" data-bind="visible: ExaminerCorrespondence() && IsExaminer(), resattr: { title: 'Naati.Resources.Person.resources.AddressExaminerCorrespondence' }">
+                            <span class="pull-right label badge bg-black-opacity m-t-xs text-uppercase" data-bind="restext: 'Naati.Resources.Test.resources.Examiner'"></span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!--/ko-->
+            <!--ko if: !addressList().length-->
+            <li class="list-group-item info-text">
+                <span data-bind="restext: 'Naati.Resources.Person.resources.NoAddresses'"></span>
+            </li>
+            <!--/ko-->
+        </ul>
+    </div>
+</div>
+<div class="panel no-border">
+    <div class="panel no-border">
+        <div class="panel-heading wrapper b-b b-light">
+            <!--ko if: showAddPhone()-->
+            <button class="pull-right btn btn-success btn-addon btn-sm m-t-n-xs" data-bind="click: addPhone">
+                <i class="fa fa-plus"></i>
+                <span data-bind="restext: 'Naati.Resources.Shared.resources.Add'"></span>
+            </button>
+            <!--/ko-->
+            <h4 class="m-t-none m-b-none" data-bind="restext: 'Naati.Resources.Person.resources.Phone'"></h4>
+        </div>
+        <ul class="list-group list-group-lg m-b-none">
+            <!--ko foreach: phoneList-->
+            <li class="list-group-item clearfix">
+                <div class="col-sm-5" data-bind="text: $root.formatPhone($data)"></div>
+                <div class="col-sm-7">
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default btn-xs" data-bind="clickBubble: false, click: function() { $root.editPhone(this); }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a href="#" class="btn btn-danger btn-xs" data-bind="visible: !PrimaryContact(), clickBubble: false, click: function() { $root.tryDeletePhone(this); }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                        <div class="m-l-sm pull-right" data-bind="visible: IncludeInPd, resattr: { title: 'Naati.Resources.Person.resources.InPd' }">
+                            <span class="pull-right label badge bg-black-opacity m-t-xs" data-bind="restext: 'Naati.Resources.Person.resources.InPdBadge'"></span>
+                        </div>
+                        <div class="m-l-sm pull-right" data-bind="visible: PrimaryContact(), resattr: { title: 'Naati.Resources.Person.resources.PrimaryPhone' }">
+                            <span class="pull-right label badge bg-black-opacity m-t-xs" data-bind="restext: 'Naati.Resources.Person.resources.PrimaryBadge'"></span>
+                        </div>
+                        <div class="m-l-sm pull-right" data-bind="visible: ExaminerCorrespondence() && IsExaminer(), resattr: { title: 'Naati.Resources.Person.resources.PhoneExaminerCorrespondence' }">
+                            <span class="pull-right label badge bg-black-opacity m-t-xs text-uppercase" data-bind="restext: 'Naati.Resources.Test.resources.Examiner'"></span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!--/ko-->
+            <!--ko if: !phoneList().length-->
+            <li class="list-group-item info-text">
+                <span data-bind="restext: 'Naati.Resources.Person.resources.NoPhones'"></span>
+            </li>
+            <!--/ko-->
+        </ul>
+    </div>
+</div>
+<div class="panel no-border">
+    <div class="panel no-border">
+        <div class="panel-heading wrapper b-b b-light">
+            <!--ko if: showAddEmail()-->
+            <button class="pull-right btn btn-success btn-addon btn-sm m-t-n-xs" data-bind="click: addEmail">
+                <i class="fa fa-plus"></i>
+                <span data-bind="restext: 'Naati.Resources.Shared.resources.Add'"></span>
+            </button>
+            <!--/ko-->
+            <h4 class="m-t-none m-b-none" data-bind="restext: 'Naati.Resources.Person.resources.Email'"></h4>
+        </div>
+        <ul class="list-group list-group-lg m-b-none">
+            <li class="list-group-item bg-danger" data-bind="visible: !hasPrimaryEmail()">
+                <small data-bind="reshtml: 'Naati.Resources.Person.resources.NoPrimaryEmailSet'"></small>
+            </li>
+            <!--ko foreach: emailList-->
+            <li class="list-group-item clearfix">
+                <div class="col-sm-5" data-bind="text: Email"></div>
+                <div class="col-sm-7">
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default btn-xs" data-bind="clickBubble: false, click: function() { $root.editEmail(this); }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a href="#" class="btn btn-danger btn-xs" data-bind="visible: !IsPreferredEmail(), clickBubble: false, click: function() { $root.tryDeleteEmail(this); }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                        <div class="m-l-sm pull-right" data-bind="visible: IncludeInPd, resattr: { title: 'Naati.Resources.Person.resources.InPd' }">
+                            <span class="pull-right label badge bg-black-opacity m-t-xs" data-bind="restext: 'Naati.Resources.Person.resources.InPdBadge'"></span>
+                        </div>
+                        <div class="m-l-sm pull-right" data-bind="visible: IsPreferredEmail, resattr: { title: 'Naati.Resources.Person.resources.PrimaryEmail' }">
+                            <span class="pull-right label badge bg-black-opacity m-t-xs" data-bind="restext: 'Naati.Resources.Person.resources.PrimaryBadge'"></span>
+                        </div>
+                        <div class="m-l-sm pull-right" data-bind="visible: ExaminerCorrespondence() && IsExaminer(), resattr: { title: 'Naati.Resources.Person.resources.EmailExaminerCorrespondence' }">
+                            <span class="pull-right label badge bg-black-opacity m-t-xs text-uppercase" data-bind="restext: 'Naati.Resources.Test.resources.Examiner'"></span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!--/ko-->
+            <!--ko if: !emailList().length-->
+            <li class="list-group-item info-text">
+                <span data-bind="restext: 'Naati.Resources.Person.resources.NoEmails'"></span>
+            </li>
+            <!--/ko-->
+        </ul>
+    </div>
+</div>
+<div class="panel no-border" data-bind="visible: showWebsite()">
+    <div class="panel no-border">
+        <div class="panel-heading wrapper b-b b-light">
+            <!--ko if: websiteList().length == 0-->
+            <button class="pull-right btn btn-success btn-addon btn-sm m-t-n-xs" data-bind="click: addWebsite">
+                <i class="fa fa-plus"></i>
+                <span data-bind="restext: 'Naati.Resources.Shared.resources.Add'"></span>
+            </button>
+            <!--/ko-->
+            <h4 class="m-t-none m-b-none" data-bind="restext: 'Naati.Resources.Person.resources.Website'"></h4>
+        </div>
+        <ul class="list-group list-group-lg m-b-none">
+            <!--ko foreach: websiteList-->
+            <li class="list-group-item clearfix">
+                <div class="col-sm-4" data-bind="text: Url"></div>
+                <div class="col-sm-1">&nbsp;</div>
+                <div class="col-sm-7">
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default btn-xs" data-bind="clickBubble: false, click: function() { $root.editWebsite(this); }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a href="#" class="btn btn-danger btn-xs" data-bind="clickBubble: false, click: function() { $root.tryDeleteWebsite(this); }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                        <div class="m-l-sm pull-right" data-bind="visible: !$root.isInstitution(), resattr: { title: 'Naati.Resources.Person.resources.InPd' }">
+                            <span class="pull-right label badge bg-black-opacity m-t-xs" data-bind="restext: 'Naati.Resources.Person.resources.InPdBadge'"></span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!--/ko-->
+            <!--ko if: !websiteList().length-->
+            <li class="list-group-item info-text">
+                <span data-bind="restext: 'Naati.Resources.Person.resources.NoWebsites'"></span>
+            </li>
+            <!--/ko-->
+        </ul>
+    </div>
+</div>

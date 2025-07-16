@@ -1,0 +1,7 @@
+*
+!obj\Docker\publish\*
+!obj\Docker\empty\
+!ncmstest09.local.pfx
+!NCMSCertificate.ps1
+!InstallFonts.ps1
+!ContainerFonts\*

@@ -1,0 +1,2 @@
+ALTER TABLE [TestResultExaminerRubricMarkingHistory]
+ADD RubricAssessementCriterionResultId int

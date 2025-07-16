@@ -1,0 +1,51 @@
+﻿<div>
+    <div class="text-center padder-v">
+        <div class="h1"><span data-bind="textCurrency: { value: totalPayments, format: '{signal}{value}', negativeFormat: '{signal}({value})' }"></span></div>
+        <span class="text-xs" data-bind="restext: 'Naati.Resources.NaatiEntity.resources.TotalPayments'"></span>
+    </div>
+    <!--ko component: { name: 'table-component', params: tableDefinition }-->
+    <!--/ko-->
+</div>
+<script id="transation-payment-header-template" type="text/html">
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.InvoiceNo'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.InvoiceType'"></th>
+    <th data-bind="restext: 'Naati.Resources.Finance.resources.DatePaid'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.PaymentAmount'"></th>
+    <th data-bind="restext: 'Naati.Resources.Finance.resources.PaymentType'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.Office'"></th>
+    <th data-bind="restext: 'Naati.Resources.Finance.resources.BSB'"></th>
+    <th data-bind="restext: 'Naati.Resources.Finance.resources.ChequeNumber'"></th>
+    <th data-bind="restext: 'Naati.Resources.Finance.resources.BankName'"></th>
+    <th data-bind="restext: 'Naati.Resources.Finance.resources.EftMachine'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.WiiseReference'"></th>
+    <th class="w-xs"></th>
+</script>
+<script id="transation-payment-row-template" type="text/html">
+    <tr>
+        <td data-bind="attr: { 'data-order': InvoiceNumber }, text: InvoiceNumber"></td>
+        <td data-bind="text: TypeName, attr: { 'data-order': TypeName }"></td>
+        <td data-bind="text: DatePaid"></td>
+        <td data-bind="textCurrency: { value: Amount, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Amount }"></td>
+        <td data-bind="text: PaymentType, attr: { 'data-order': PaymentType }"></td>
+        <td data-bind="text: Office, attr: { 'data-order': Office }"></td>
+        <td data-bind="text: BSB, attr: { 'data-order': BSB }"></td>
+        <td data-bind="text: ChequeNumber, attr: { 'data-order': ChequeNumber }"></td>
+        <td data-bind="text: BankName, attr: { 'data-order': BankName }"></td>
+        <td data-bind="text: EftMachine, attr: { 'data-order': EftMachine }"></td>
+        <td data-bind="text: Reference, attr: { 'data-order': Reference }"></td>
+        <td class="w-xs text-center">
+            <div class="btn-group">
+                <!--ko if: showLog-->
+                <a href="#" class="btn btn-default btn-xs" data-bind="click: showLog, resattr: { title: 'Naati.Resources.Shared.resources.LogDetail' }, tooltip: { trigger: 'hover' }">
+                    <i class="fa fa-history"></i>
+                </a>
+                <!--/ko-->
+                <!--ko if: downloadUrl-->
+                <a href="#" class="btn btn-default btn-xs" data-bind="resattr: { title: 'Naati.Resources.Finance.resources.DownloadInvoice' }, tooltip: { trigger: 'hover' }, downloadFile: { url: downloadUrl }">
+                    <span class="fa fa-download"></span>
+                </a>
+                <!--/ko-->
+            </div>
+        </td>
+    </tr>
+</script>

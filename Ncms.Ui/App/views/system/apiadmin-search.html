@@ -1,0 +1,46 @@
+﻿<div class="col">
+    <div class="vbox">
+        <div class="bg-light lter b-b wrapper-md">
+            <h1 class="m-n font-thin h3">
+                <!--ko if: canEdit-->
+                <button type="button" class="btn btn-success" data-bind="click: create"><span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-bind="reshtml: 'Naati.Resources.Api.resources.NewClient'"></span></button>
+                <!--/ko-->
+            </h1>
+        </div>
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner">
+                    <div class="wrapper-md">
+                        <div data-bind="component: { name: 'table-component', params: tableDefinition }"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ko compose: apiAdminCreateOptions --><!-- /ko -->
+    <script id="apiclient-header-template" type="text/html">
+        <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Api.resources.ApiAccessId'"></th>
+        <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Api.resources.InstitutionName'"></th>
+        <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Api.resources.ApiEndpoints'"></th>
+        <th class="w-xxs"></th>
+    </script>
+    <script id="apiclient-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: ApiAccessId"></td>
+            <td>
+                <a href="#" class="text-info" data-bind="text: Name, attr: { href: '#organisation/' + OrgNaatiNumber }"></a>
+            </td>
+            <td data-bind="text: PermissionLabels" style="white-space:pre-wrap; word-wrap:break-word"></td>
+            <td class="w-xs text-right">
+                <!--ko if: $root.canEdit-->
+                <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover', container: 'body', title: function () { return $root.activeMessage($data); } }">
+                    <i class="fa" data-bind="css: { 'fa-check text-success': Active, 'fa-times text-danger': !Active }"></i>
+                </a>
+                <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#system/apiadmin/' + ApiAccessId }">
+                    <i class="fa fa-pencil-alt"></i>
+                </a>
+                <!--/ko-->
+            </td>
+        </tr>
+    </script>
+</div>

@@ -1,0 +1,22 @@
+﻿<div class="hbox">
+	<div class="hbox" data-bind="component: searchOptions"></div>
+	<!-- ko compose: languageCreateOptions --><!-- /ko -->
+	<script id="languages-header-template" type="text/html">
+		<th data-bind="reshtml: 'Naati.Resources.Language.resources.Name'"></th>
+		<th class="w-sm" data-bind="reshtml: 'Naati.Resources.Language.resources.Code'"></th>
+		<th class="w-md" data-bind="reshtml: 'Naati.Resources.Language.resources.Group'"></th>
+		<th class="w-xxs"></th>
+	</script>
+	<script id="languages-row-template" type="text/html">
+		<tr>
+			<td data-bind="text: Name"></td>
+			<td data-bind="text: Code"></td>
+			<td data-bind="text: GroupLanguageName"></td>
+			<td class="text-right">
+				<a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#system/language/' + LanguageId }">
+					<i class="fa fa-pencil-alt"></i>
+				</a>
+			</td>
+		</tr>
+	</script>
+</div>

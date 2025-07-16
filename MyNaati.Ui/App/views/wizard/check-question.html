@@ -1,0 +1,11 @@
+﻿<div data-bind="foreach: { data: question.Answers, as: 'a' }">
+    <div data-bind="css: { 'radio': $root.question.Type() === ENUMS.AnswerTypes.RadioOptions, 'checkbox':  $root.question.Type() === ENUMS.AnswerTypes.CheckOptions }">
+        <label>
+            <input type="radio" data-bind="attr: { type: $root.question.Type() === ENUMS.AnswerTypes.RadioOptions ? 'radio' : 'checkbox', name: 'list' + $root.question.Id() }, value: a.Id, checked: $root.question.tryValue" />
+            <span data-bind="html: a.Name"></span>
+        </label>
+        <!--ko if: a.Description-->
+        <span class="help-block animated fadeIn" data-bind="html: a.Description, visible: $root.answerSelected(a, $root.question)"></span>
+        <!--/ko-->
+    </div>
+</div>

@@ -1,0 +1,106 @@
+﻿<div>
+    <!-- ko component: { name: 'tab-component', params: tabOptions } --><!-- /ko -->
+    <script type="text/html" id="rubric-marks-configuration">
+        <div class="component-competence wrapper animated fadeIn">
+            <div class="row bg-success m-l-none m-r-none hbox">
+                <!--ko foreach: { data: component.Competencies, as: 'competence' }-->
+                <div data-bind="css: competence.Css">
+                    <div class="wrapper font-thin h5 m-b-none m-t-none no-padder">
+                        <div class="padder-v" data-bind="text: competence.Name"></div>
+                    </div>
+                </div>
+                <!--/ko-->
+            </div>
+            <div class="row bg-warning m-l-none m-r-none hbox">
+                <!--ko foreach: { data: component.Competencies, as: 'competence' }-->
+                <div class="no-padder" data-bind="css: competence.Css">
+                    <div class="wrapper font-thin h5 m-b-none m-t-none no-padder hbox">
+                        <!--ko foreach: { data: competence.Assessments, as: 'assessment' }-->
+                        <div class="col">
+                            <div class="font-thin m-b-none m-t-none">
+                                <div class="wrapper-sm text-black font-thin">
+                                    <div data-bind="text: assessment.Name"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ko-->
+                    </div>
+                </div>
+                <!--/ko-->
+            </div>
+            <!--ko foreach: { data: componentBands, as: 'band' }-->
+            <div class="row m-l-none m-r-none hbox b-b b-l b-warning">
+                <!--ko foreach: { data: $parent.component.Competencies, as: 'competence' }-->
+                <div class="no-padder" data-bind="css: competence.Css">
+                    <div class="m-b-none m-t-none no-padder hbox">
+                        <!--ko foreach: { data: competence.Assessments, as: 'assessment' }-->
+                        <div class="col b-r b-warning">
+                            <!--ko with: $parents[2].getBand(band, assessment), as: 'markingBand'-->
+                            <!--ko let: { markingBand: $data }-->
+                            <div class="wrapper">
+                                <!--ko if: $parents[3].isWriter-->
+                                <!--ko if: $parents[3].addConditionOptions-->
+                                <!--ko if: $parents[3].addConditionOptions.length == 1-->
+                                <!--ko with: $parents[3].addConditionOptions[0]-->
+                                <!--ko let: { opt: $data }-->
+                                <a href="#" class="btn btn-default btn-xs pull-right" data-bind="click: function() { $parents[4].addCondition(assessment, band, markingBand, $data.action); }">
+                                    <!--ko if: opt.icon-->
+                                    <i class="fas" data-bind="css: opt.icon"></i>
+                                    <!--/ko-->
+                                    <span data-bind="html: opt.text"></span>
+                                </a>
+                                <!--/ko-->
+                                <!--/ko-->
+                                <!--/ko-->
+                                <!--ko if: $parents[3].addConditionOptions.length > 1-->
+                                <div class="btn-group pull-right m-r-sm">
+                                    <div class="pull-right dropdown">
+                                        <a href="#" data-bind="resattr: { title: 'Naati.Resources.RubricConfiguration.resources.MaximumBandLevel' }, tooltip: { container: 'body', trigger: 'hover' }" class="btn btn-default btn-xs pull-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" data-bind="foreach: { data: $parents[3].addConditionOptions, as: 'opt' }">
+                                            <li>
+                                                <a href="#" data-bind="click: function() { $parents[4].addCondition(assessment, band, markingBand, opt.action); }">
+                                                    <span data-bind="html: opt.text"></span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--/ko-->
+                                <!--/ko-->
+                                <!--ko ifnot: $parents[3].addConditionOptions-->
+                                <!--ko if: $parents[3].addBand-->
+                                <a href="#" data-bind="click: function() { $parents[3].addCondition(assessment, band, markingBand, $parents[3].addBand) }, resattr: { title: 'Naati.Resources.RubricConfiguration.resources.MaximumBandLevel' }, tooltip: { container: 'body', trigger: 'hover' }" class="btn btn-default btn-xs pull-right">
+                                    <i class="fas fa-plus"></i>
+                                </a>
+                                <!--/ko-->
+                                <!--/ko-->
+                                <!--/ko-->
+                                <div class="text-base wrapper-xs label no-text-shadow text-dark pos-rlt m-r b b-1x b-warning" data-bind="popover: { trigger: 'hover', html: true, content: Description }">
+                                    <i class="arrow right arrow-warning"></i>
+                                    <span data-bind="html: Label"></span>
+                                </div>
+                                <!--ko if: $parents[3].showDescriptions-->
+                                <div class="animated fadeIn m-t-sm">
+                                    <span data-bind="html: Description"></span>
+                                </div>
+                                <!--/ko-->
+                            </div>
+                            <!--/ko-->
+                            <!--/ko-->
+                        </div>
+                        <!--/ko-->
+                    </div>
+                </div>
+                <!--/ko-->
+            </div>
+            <!--/ko-->
+        </div>
+        <!--ko if: component.tableTemplate-->
+        <div class="wrapper animated fadeIn">
+            <!--ko template: { name: component.tableTemplate, data: component }--><!--/ko-->
+        </div>
+        <!--/ko-->
+    </script>
+</div>

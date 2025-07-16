@@ -1,0 +1,47 @@
+﻿@using MyNaati.Ui.ViewModels.Shared
+@model MyNaati.Ui.ViewModels.Shared.BasePurchaseWizardModel
+
+<table class="wide">
+    <tr>
+        <th>Product</th>
+        @if (!Model.OrderTotalModel.IsIdCard)
+        {
+            <th>Skill</th>
+            <th>Level</th>
+            <th>Direction</th>
+            <th>Expiry</th>
+        }
+        <th>Quantity</th>
+        <th>Per Unit ($AUD)</th>
+        <th>Total ($AUD)</th>
+    </tr>
+    @foreach (ProductOrderItem item in Model.OrderTotalModel.Items)
+    {
+        <tr>
+            <td>@item.Product</td>
+            @if (!Model.OrderTotalModel.IsIdCard)
+            {
+                <td>@item.Skill</td>
+                <td>@item.Level</td>
+                <td>@item.Direction</td>
+                <td>@string.Format("{0:dd MMM yyyy}", item.Expiry)</td>
+            }
+            <td>@item.Quantity</td>
+            <td>@Html.DisplayFor(i => item.UnitPrice, "decimalToCurrency")</td>
+            <td>@Html.DisplayFor(i => item.TotalPrice, "decimalToCurrency")</td>
+        </tr>
+    }
+    <tr>
+        <td>Total</td>
+        @if (!Model.OrderTotalModel.IsIdCard)
+        {
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        }
+        <td>@Model.OrderTotalModel.Items.Sum(e => e.Quantity)</td>
+        <td>&nbsp;</td>
+        <td>@Model.OrderTotalModel.Items.Sum(e => e.TotalPrice).ToString("C")</td>
+    </tr>
+</table>

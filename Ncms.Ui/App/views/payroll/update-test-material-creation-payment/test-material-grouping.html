@@ -1,0 +1,74 @@
+﻿<table class="table table-bordered m-b-none bg-light dker">
+    <thead>
+        <tr>
+            <th class="col-lg-2">
+                <strong data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialRequestId'"></strong>
+            </th>
+            <th class="col-lg-2">
+                <!--ko ifnot: isLoading-->
+                <strong data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Task'"></strong>
+                <!--/ko-->
+                <!--ko if: isLoading-->
+                <strong data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.TotalHours'"></strong>
+                <!--/ko-->
+            </th>
+            <th class="col-lg-2">
+                <!--ko ifnot: isLoading-->
+                <strong data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Hours'"></strong>
+                <!--/ko-->
+                <!--ko if: isLoading-->
+                <strong data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.TotalClaims'"></strong>
+                <!--/ko-->
+            </th>
+            <th class="col-lg-2">
+                <!--ko ifnot: isLoading-->
+                <strong data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.ClaimAmount'"></strong>
+                <!--/ko-->
+                <!--ko if: isLoading-->
+                <strong data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.LoadingAmount'"></strong>
+                <!--/ko-->
+            </th>
+            <th class="col-lg-2">
+                <strong data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.ApprovedBy'"></strong>
+            </th>
+            <th class="col-lg-2">
+                <strong data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.ApprovedDate'"></strong>
+            </th>
+        </tr>
+    </thead>
+    <tbody class="bg-white">
+        <!--ko foreach: { data: items, as: 'item' }-->
+        <tr>
+            <td class="col-lg-2">
+                <a href="#" class="text-info" data-bind="attr: { href: '#/material-Request/' + item.MaterialRequestId() + '?tab=materialParticipants' }, text: 'MR' + item.MaterialRequestId(), clickBubble: false, click: function() { event.stopPropagation(); return true; }" target="_blank"></a>
+            </td>
+            <td class="col-lg-2">
+                <!--ko ifnot: $root.isLoading-->
+                <span data-bind="text: item.TaskTypeDisplayName"></span>
+                <!--/ko-->
+                <!--ko if: $root.isLoading-->
+                <span data-bind="text: item.TotalHours"></span>
+                <!--/ko-->
+            </td>
+            <td class="col-lg-2">
+                <!--ko ifnot: $root.isLoading-->
+                <span data-bind="text: item.HoursSpent"></span>
+                <!--/ko-->
+                <!--ko if: $root.isLoading-->
+                <span data-bind="text: item.TotalClaims"></span>
+                <!--/ko-->
+            </td>
+            <td class="col-lg-2">
+                <span data-bind="textCurrency: item.Amount"></span>
+            </td>
+            <td class="col-lg-2">
+                <span data-bind="text: item.ApprovedByUserDisplayName"></span>
+            </td>
+            <td class="col-lg-2">
+                <span data-bind="textDate: item.ApprovedDate"></span>
+                <button class="pull-right btn btn-danger btn-xs" data-bind="click: $root.remove"><i class="fa fa-times"></i></button>
+            </td>
+        </tr>
+        <!--/ko-->
+    </tbody>
+</table>

@@ -1,0 +1,64 @@
+﻿<div class="hbox">
+    <div class="col photo-container">
+        <!--ko component: { name: 'person-photo', params: personPhotoOptions }--><!--/ko-->
+    </div>
+    <div class="col wrapper">
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <label data-bind="reshtml: 'Naati.Resources.Application.resources.ApplicationReference'"></label>
+                <p>
+                    <a href="#" target="_blank" class="text-info" data-bind="text: test.ApplicationReference, attr: { href: '#/application/' + test.ApplicationId() }"></a> -
+                    <span data-bind="text: test.ApplicationType"></span>
+                </p>
+            </div>
+            <div class="form-group col-sm-2">
+                <label data-bind="reshtml: 'Naati.Resources.Test.resources.AttendanceId'"></label>
+                <p data-bind="text:  test.TestAttendanceId"></p>
+            </div>
+            <div class="form-group col-sm-2">
+                <label data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialType'"></label>
+                <!--ko ifnot: test.DefaultTestSpecification() -->
+                <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Shared.resources.NotDefaultSpecification' }"> ! </span>
+                <!--/ko-->
+                <p data-bind="text:  test.CredentialTypeInternalName"></p>
+            </div>
+            <div class="form-group col-sm-2">
+                <label data-bind="reshtml: 'Naati.Resources.Application.resources.Skill'"></label>
+                <p data-bind="text:  test.Skill"></p>
+            </div>
+            <div class="form-group col-sm-3">
+                <label data-bind="reshtml: 'Naati.Resources.Test.resources.TestDate'"></label>
+                <p data-bind="text: moment(test.TestDate()).format(CONST.settings.shortDateTimeDisplayFormat)"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-3">
+                <label data-bind="reshtml: 'Naati.Resources.Test.resources.TestStatus'"></label>
+                <p data-bind="text:  test.TestStatus"></p>
+            </div>
+            <div class="form-group col-sm-2">
+                <label data-bind="reshtml: 'Naati.Resources.Test.resources.TestLocation'"></label>
+                <p data-bind="text:  test.TestLocation"></p>
+            </div>
+            <div class="form-group col-sm-2">
+                <label data-bind="reshtml: 'Naati.Resources.Test.resources.ResultStatus'"></label>
+                <p data-bind="text:  test.TestResultStatus"></p>
+            </div>
+            <div class="form-group col-sm-2">
+                <label data-bind="reshtml: 'Naati.Resources.Test.resources.Venue'"></label>
+                <p data-bind="text:  test.Venue"></p>
+            </div>
+            <div class="form-group col-sm-3">
+                <label data-bind="reshtml: 'Naati.Resources.Test.resources.TestMaterials'"></label>
+                <p>
+                    <!--ko foreach: test.TestMaterialIds-->
+                    <a href="#" target="_blank" class="text-info" data-bind="text: '#' + $data, tooltip: { trigger: 'hover' }, attr: { href: '#test-material/' + $data, title: $root.test.TestMaterialNames()[$index()] }"></a>
+                    <!--ko if: $index() != $root.test.TestMaterialIds().length - 1-->
+                    <span>,&nbsp;</span>
+                    <!--/ko-->
+                    <!--/ko-->
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

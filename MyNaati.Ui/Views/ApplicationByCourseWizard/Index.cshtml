@@ -1,0 +1,60 @@
+﻿@using MyNaati.Ui.Common
+@model MyNaati.Ui.ViewModels.ApplicationByCourseWizard.CourseFeesModel
+@{
+    ViewBag.Title = "Apply for Accreditation by Approved Course";
+    Layout = "~/Views/Shared/MasterPages/_SideMenuLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Approved Course", string.Empty)
+    };
+}
+@section sideMenu
+{
+    <div class="list-group">
+        @Html.ActionLink("Apply for Accreditation", "Index", "ApplicationForAccreditation", null, new { @class = "list-group-item" })
+        @Html.ActionLink("By Testing", "Index", "ApplicationByTestingWizard", null, new { @class = "list-group-item" })
+        <a class="list-group-item active" href="#">By Approved Course</a>
+    </div>
+}
+<div class="col-lg-12">
+    <h1 class="text-primary">@ViewBag.Title</h1>
+    <p>
+        Use this application to be awarded accreditation through a completed approved Australian course.
+        For more detailed information, <a href='@Url.ExternalUrlFromConfig("AccreditationByCourseInformationBooklet")' target="_blank">click here</a>.
+    </p>
+    <h2 class="text-primary">Am I eligible?</h2>
+    <p>To be eligible:</p>
+    <ul>
+        <li>You must have successfully completed an Australian tertiary course approved by NAATI.</li>
+        <li>You must have completed the course to the standard required by NAATI.</li>
+        <li>You must have been officially recommended to NAATI by your education institution.</li>
+    </ul>
+    <p>You do not need to take any further testing.</p>
+    <h2 class="text-primary">How do I apply?</h2>
+    <ol>
+        <li>Click the button below to start the application process.</li>
+        <li>Complete all the relevant fields using <span style="text-transform: none">myNAATI</span>.</li>
+        <li>Download the pre-filled application.</li>
+        <li>Print, complete and sign the application.</li>
+        <li>Arrange the supporting documents and photos for your application.</li>
+        <li>Send us the application, your payment and the supporting documentation.</li>
+
+    </ol>
+    <h2 class="text-primary">What does it cost?</h2>
+    <p><a href='@Url.ExternalUrlFromConfig("FormsAndFees")' target="_blank">Click here</a> to see our list of fees and charges.</p>
+    <p>If this is your first application to NAATI you will be required to pay an application fee + assessment fee. If this is not your first application, you only need to pay the assessment fee.</p>
+    @if (!Model.UserHasCompletedProfile)
+    {
+        <div class="validation-summary-errors">
+            You must have an address, phone number and email address registered with us before you can proceed.
+            You can supply this information in @(Html.ActionLink("My Details", "Index", "PersonalDetails")).
+        </div>
+    }
+    else
+    {
+        <div>
+            <a href="@Url.Action("StartWizard", "ApplicationByCourseWizard")" class="btn btn-primary">Apply Now</a>
+        </div>
+    }
+</div>

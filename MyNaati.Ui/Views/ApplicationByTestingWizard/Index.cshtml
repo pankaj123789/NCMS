@@ -1,0 +1,67 @@
+﻿@using MyNaati.Ui.Common
+@model MyNaati.Ui.ViewModels.ApplicationByTestingWizard.TestingFeesModel
+@{
+    ViewBag.Title = "Apply for Accreditation by Testing";
+    Layout = "~/Views/Shared/MasterPages/_SideMenuLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Testing", string.Empty)
+    };
+}
+@section sideMenu
+{
+    <div class="list-group">
+        @Html.ActionLink("Apply for Accreditation", "Index", "ApplicationForAccreditation", null, new { @class = "list-group-item" })
+        <a class="list-group-item active" href="#">By Testing</a>
+        @Html.ActionLink("By Approved Course", "Index", "ApplicationByCourseWizard", null, new { @class = "list-group-item" })
+    </div>
+}
+<div class="col-lg-12">
+    <h1 class="text-primary">@ViewBag.Title</h1>
+    <p>
+        You can use this application process to apply for an <a href='@Url.ExternalUrlFromConfig("AccreditationMethodList")' target="_blank">on demand</a> accreditation test
+        or submit an <a href='@Url.ExternalUrlFromConfig("ExpressionOfInterestInformation")' target="_blank">expression of interest</a> to take a scheduled accreditation test.
+        For more detailed information about the various types of test, <a href='@Url.ExternalUrlFromConfig("AccreditationByTestingInformationBooklet")' target="_blank">click here</a>.
+    </p>
+    <h2 class="text-primary">How does the Expression of Interest system work?</h2>
+    <ol>
+        <li>Check <a href='@Url.ExternalUrlFromConfig("AccreditationByTestingLanguages")' target="_blank">this table</a> for the list of languages by test type.</li>
+        <li>Click the apply button below to step through the start of the application process.</li>
+        <li>NAATI will then contact you via email with an invitation to apply for a set test date.</li>
+        <li>Come back to <span style="text-transform: none">myNAATI</span> to step through the rest of the application process.</li>
+        <li>Download the pre-filled application.</li>
+        <li>Print, complete and sign the application.</li>
+        <li>Arrange the supporting documents and photos for your application.</li>
+        <li>Send us the application, your payment and the supporting documentation.</li>
+    </ol>
+    <p>Please note that NAATI may only be able to set a test date once every 12-24 months.</p>
+    <h2 class="text-primary">How do I apply for an on-demand test?</h2>
+    <ol>
+        <li>Click the button below to start the application process.</li>
+        <li>Complete all the relevant fields using <span style="text-transform: none">myNAATI</span>.</li>
+        <li>Download the pre-filled application.</li>
+        <li>Print, complete and sign the application.</li>
+        <li>Arrange the supporting documents and photos for your application.</li>
+        <li>Send us the application, your payment and the supporting documentation.</li>
+    </ol>
+    <h2 class="text-primary">What does it cost?</h2>
+    <p>
+        Submitting an Expression of Interest is free, test applications will require an upfront payment.<br/>
+        <a href='@Url.ExternalUrlFromConfig("FormsAndFees")' target="_blank">Click here</a> to see our list of fees and charges.
+    </p>
+    <p>If this is your first application to NAATI you will be required to pay an application fee + the test fee. If this is not your first application, you only need to pay the test fee.</p>
+    @if (!Model.UserHasCompletedProfile)
+    {
+        <div class="validation-summary-errors">
+            You must have an address, phone number and email address registered with us before you can proceed.
+            You can supply this information in @(Html.ActionLink("My Details", "Index", "PersonalDetails")).
+        </div>
+    }
+    else
+    {
+        <div>
+            <a href="@Url.Action("StartWizard")" class="btn btn-primary">Apply Now</a>
+        </div>
+    }
+</div>

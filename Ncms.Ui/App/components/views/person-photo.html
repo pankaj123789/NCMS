@@ -1,0 +1,15 @@
+﻿<div class="clearfix hidden-xs thumb-container" data-bind="tooltip: photoTooltip">
+    <a href="#" data-bind="click: changePhoto">
+        <span class="thumb w-auto-folded avatar text-center" data-bind="css: { 'wrapper bg-info dk': !person.HasPhoto() }">
+            <!--ko ifnot: person.HasPhoto-->
+            <span class="fa fa-user fa-6x text-white m-t-lg"></span>
+            <!--/ko-->
+            <!--ko if: person.HasPhoto-->
+            <div class="img">
+                <img class="img-full" data-bind="attr: { src: idCardSrc }, style: thumbStyle, event: { load: thumbLoad }">
+            </div>
+            <!--/ko-->
+            <i class="b-white bottom" data-bind="css: personRegistrationStatus"></i>
+        </span>
+    </a>
+</div>

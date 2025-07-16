@@ -1,0 +1,865 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FontFamily" xml:space="preserve">
+    <value>calibri</value>
+  </data>
+  <data name="FurtherQuestions" xml:space="preserve">
+    <value>If you have any further questions, please email &lt;a href="mailto://info@naati.com.au"&gt;info@naati.com.au&lt;/a&gt;.</value>
+  </data>
+  <data name="YourCustomerNumber" xml:space="preserve">
+    <value>&lt;b&gt;For future correspondence, your NAATI Customer Number is [[NAATI No]].&lt;/b&gt;</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CclApplicationRejectedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclapplicationrejectedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclApplicationSubmittedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclapplicationsubmittedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclCreatePaidTestReviewCreditCardPaymentBeingProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclcreatepaidtestreviewcreditcardpaymentbeingprocessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclCreatePaidTestReviewInvoiceBeingProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclcreatepaidtestreviewinvoicebeingprocessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclCreatePaidTestReviewSponsoredBeingProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclcreatepaidtestreviewsponsoredbeingprocessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclCredentialRequestCancelledTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclcredentialrequestcancelledtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclEmailTemplateFooter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclemailtemplatefooter.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclFailedTestResultReverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclfailedtestresultreverted.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclFailEligibleForSupplementaryTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclfaileligibleforsupplementarytemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclFailPaidReviewTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclfailpaidreviewtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclInviteForTestingInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclinvitefortestinginvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclInviteForTestingInvoiceSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclinvitefortestinginvoicesponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclInviteForTestingNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclinvitefortestingnoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclIssueCredentialTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclissuecredentialtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclIssuedCredentialReverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclissuedcredentialreverted.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclIssuedPassResultTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclissuedpassresulttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclIssueFailConcededPassOfferedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclissuefailconcededpassofferedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclNotifyTestSessionDetailsTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclnotifytestsessiondetailstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclPaidRevieInvoiceProcessedTrustedSponsoredAppilcantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclpaidrevieinvoiceprocessedtrustedsponsoredappilcanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclPaidReviewInvoiceProcessedCreditCardReceivedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclpaidreviewinvoiceprocessedcreditcardreceivedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclPaidReviewInvoiceProcessedInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclpaidreviewinvoiceprocessedinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclPaidReviewInvoiceProcessedInvoiceSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclpaidreviewinvoiceprocessedinvoicesponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclPaidReviewInvoiceProcessedNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclpaidreviewinvoiceprocessednoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclPaidReviewWithdrawnTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclpaidreviewwithdrawntemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclPaidTestReviewPaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclpaidtestreviewpaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclPassedTestResultReverted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclpassedtestresultreverted.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclPassPaidReviewTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclpasspaidreviewtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclReIssueCredentialTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclreissuecredentialtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclTestFailedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\ccltestfailedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclTestInvoicePaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\ccltestinvoicepaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclTestSessionAcceptedMyNaatiTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\ccltestsessionacceptedmynaatitemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CclTestSessionAcceptedNcmsTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\ccltestsessionacceptedncmstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CclTestSessionAllocatedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\ccltestsessionallocatedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CclTestSessionRejectedMyNaatiTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\ccltestsessionrejectedmynaatitemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CclTestSessionRejectedNcmsTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\ccltestsessionrejectedncmstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CclV2ApplicationCheckingFinishedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclv2applicationcheckingfinishedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclV2ApplicationInvoicePaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclv2applicationinvoicepaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclV2ApplicationSubmissionProcessedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclv2applicationsubmissionprocessedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclV2ApplicationSubmittedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclv2applicationsubmittedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclV2ApplicationSubmittedWithCreditCardTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclv2applicationsubmittedwithcreditcardtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclV2PaidApplicationSubmissionProcessedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclv2paidapplicationsubmissionprocessedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclV2TestSessionAllocatedAndAcceptedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclv2testsessionallocatedandacceptedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclV2TestSessionRejectedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclv2testsessionrejectedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclWithdrawRequestTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclwithdrawrequesttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationApplicationRejectedAfterInvoiceTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationapplicationrejectedafterinvoicetemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationApplicationRejectedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationapplicationrejectedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationApplicationSubmittedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationapplicationsubmittedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationAssessmentFailedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationassessmentfailedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationAssessmentInvoicePaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationassessmentinvoicepaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationAssessmentPassedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationassessmentpassedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationAssessmentPendingTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationassessmentpendingtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCancelTestInvitationTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcanceltestinvitationtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCreatePaidTestReviewCreditCardPaymentBeingProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcreatepaidtestreviewcreditcardpaymentbeingprocessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCreatePaidTestReviewInvoiceBeingProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcreatepaidtestreviewinvoicebeingprocessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCreatePaidTestReviewSponsoredBeingProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcreatepaidtestreviewsponsoredbeingprocessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCreateSupplemementaryTestInvoiceBeingProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcreatesupplemementarytestinvoicebeingprocessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCreateSupplementaryTestCreditCardPaymentBeingProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcreatesupplementarytestcreditcardpaymentbeingprocessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCreateSupplementaryTestInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcreatesupplementarytestinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCreateSupplementaryTestInvoiceSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcreatesupplementarytestinvoicesponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCreateSupplementaryTestNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcreatesupplementarytestnoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCreateSupplementaryTestSponsoredBeingProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcreatesupplementarytestsponsoredbeingprocessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCredentialIssuedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcredentialissuedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationCredentialRequestCancelledTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationcredentialrequestcancelledtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationFinishCheckingInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationfinishcheckinginvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationFinishCheckingInvoiceSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationfinishcheckinginvoicesponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationFinishCheckingNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationfinishcheckingnoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationInviteForTestingInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationinvitefortestinginvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationInviteForTestingInvoiceSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationinvitefortestinginvoicesponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationInviteForTestingNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationinvitefortestingnoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationIssueFailAfterReviewConcededPassOfferedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationissuefailafterreviewconcededpassofferedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationIssueFailAfterReviewEligibleForSupplementaryTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationissuefailafterrevieweligibleforsupplementarytemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationIssueFailAfterReviewTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationissuefailafterreviewtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationIssueFailConcededPassOfferedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationissuefailconcededpassofferedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationIssueFailEligibleForSupplementaryTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationissuefaileligibleforsupplementarytemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationIssueFailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationissuefailtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationIssuePassAfterReviewTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationissuepassafterreviewtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationIssuePassTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationissuepasstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationNotifyTestSessionDetailsTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationnotifytestsessiondetailstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationPaidRevieInvoiceProcessedTrustedSponsoredApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationpaidrevieinvoiceprocessedtrustedsponsoredapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationPaidReviewInvoiceProcessedCreditCardReceivedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationpaidreviewinvoiceprocessedcreditcardreceivedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationPaidReviewInvoiceProcessedInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationpaidreviewinvoiceprocessedinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationPaidReviewInvoiceProcessedInvoiceSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationpaidreviewinvoiceprocessedinvoicesponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationPaidReviewInvoiceProcessedNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationpaidreviewinvoiceprocessednoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationPaidReviewWithdrawnTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationpaidreviewwithdrawntemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationPaidTestReviewPaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationpaidtestreviewpaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationPendingAssessmentFailedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationpendingassessmentfailedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationSendCandidateBrief" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationsendcandidatebrief.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationSupplementaryTestInvoicePaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationsupplementarytestinvoicepaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationSupplementaryTestInvoiceProcessedTrustedSponsoredApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationsupplementarytestinvoiceprocessedtrustedsponsoredapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationSupplementaryTestPaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationsupplementarytestpaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationTestInvoicePaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationtestinvoicepaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationTestSessionAcceptedMyNaatiTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationtestsessionacceptedmynaatitemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CertificationTestSessionAcceptedNcmsTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationtestsessionacceptedncmstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CertificationTestSessionAllocatedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationtestsessionallocatedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CertificationTestSessionRejectedMyNaatiTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationtestsessionrejectedmynaatitemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CertificationTestSessionRejectedNcmsTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationtestsessionrejectedncmstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="CertificationWithdrawRequestTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationwithdrawrequesttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationWithdrawSupplementaryTestTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationwithdrawsupplementarytesttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaApplicationInvoicePaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\claapplicationinvoicepaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaApplicationRejectedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\claapplicationrejectedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaApplicationSubmittedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\claapplicationsubmittedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaCreateTestPaidReviewTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clacreatetestpaidreviewtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaCredentialRequestCancelledTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clacredentialrequestcancelledtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaEmailTemplateFooter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\claemailtemplatefooter.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaFailPaidReviewTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clafailpaidreviewtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaFinishCheckingInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clafinishcheckinginvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaFinishCheckingInvoiceSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clafinishcheckinginvoicesponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaFinishCheckingNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clafinishcheckingnoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaInviteForTestingInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clainvitefortestinginvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaInviteForTestingNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clainvitefortestingnoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaIssueCredentialTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\claissuecredentialtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaIssuedPassResultTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\claissuedpassresulttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaNotifyTestSessionDetailsTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clanotifytestsessiondetailstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaPassPaidReviewTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clapasspaidreviewtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaReIssueCredentialTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clareissuecredentialtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaTestFailedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clatestfailedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaTestInvoicePaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clatestinvoicepaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaTestSessionAcceptedMyNaatiTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clatestsessionacceptedmynaatitemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ClaTestSessionAcceptedNcmsTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clatestsessionacceptedncmstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ClaTestSessionAllocatedAndAcceptedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clatestsessionallocatedandacceptedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaTestSessionAllocatedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clatestsessionallocatedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ClaTestSessionRejectedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clatestsessionrejectedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ClaWithdrawRequestTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\cla\clawithdrawrequesttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EmailTemplateCommonClosing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\emailtemplatecommonclosing.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EmailTemplateFooter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\emailtemplatefooter.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EmailTemplateHead" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\emailtemplatehead.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EmailTemplatePaymentOptions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\emailtemplatepaymentoptions.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicalCompetencyCancelTestInvitationTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicalcompetencycanceltestinvitationtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsApplicationSubmittedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsapplicationsubmittedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInterculturalIssueCredentialTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturalissuecredentialtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInterculturalTestSessionAcceptedMyNaatiTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturaltestsessionacceptedmynaatitemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EthicsInterculturalTestSessionAcceptedNcmsTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturaltestsessionacceptedncmstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EthicsInterculturalTestSessionAllocatedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturaltestsessionallocatedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EthicsInterculturalTestSessionRejectedMyNaatiTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturaltestsessionrejectedmynaatitemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EthicsInterculturalTestSessionRejectedNcmsTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturaltestsessionrejectedncmstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="EthicsInterculturalWithdrawRequestTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturalwithdrawrequesttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInviteForTestingInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinvitefortestinginvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInviteForTestingInvoiceSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinvitefortestinginvoicesponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInviteForTestingNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinvitefortestingnoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsIssueFailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsissuefailtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsIssuePassTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsissuepasstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsNotifyTestSessionDetailsTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsnotifytestsessiondetailstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsTestInvoicePaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicstestinvoicepaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousCertificationCredentialIssuedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenouscertificationcredentialissuedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousCertificationIssueFailAfterReviewConcededPassOfferedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenouscertificationissuefailafterreviewconcededpassofferedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousCertificationIssueFailAfterReviewEligibleForSupplementaryTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenouscertificationissuefailafterrevieweligibleforsupplementarytemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousCertificationIssueFailAfterReviewTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenouscertificationissuefailafterreviewtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousCertificationIssueFailConcededPassOfferedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenouscertificationissuefailconcededpassofferedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousCertificationIssueFailEligibleForSupplementaryTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenouscertificationissuefaileligibleforsupplementarytemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousCertificationIssueFailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenouscertificationissuefailtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousCertificationIssuePassAfterReviewTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenouscertificationissuepassafterreviewtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousCertificationIssuePassTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenouscertificationissuepasstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousEthicsInterculturalIssueCredentialTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenousethicsinterculturalissuecredentialtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousEthicsIssueFailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenousethicsissuefailtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousEthicsIssuePassTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenousethicsissuepasstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousInterculturalIssueFailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenousinterculturalissuefailtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="IndigenousInterculturalIssuePassTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\indigenous\indigenousinterculturalissuepasstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InterculturalApplicationSubmittedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\intercultural\interculturalapplicationsubmittedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InterculturalCompetencyCancelTestInvitationTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\intercultural\interculturalcompetencycanceltestinvitationtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InterculturalInviteForTestingInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\intercultural\interculturalinvitefortestinginvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InterculturalInviteForTestingInvoiceSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\intercultural\interculturalinvitefortestinginvoicesponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InterculturalInviteForTestingNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\intercultural\interculturalinvitefortestingnoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InterculturalIssueFailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\intercultural\interculturalissuefailtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InterculturalIssuePassTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\intercultural\interculturalissuepasstemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="InterculturalTestInvoicePaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\intercultural\interculturaltestinvoicepaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="NaatiOperationTeamEmailTemplateFooter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\naatioperationteamemailtemplatefooter.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationApplicationRejectedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationapplicationrejectedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationApplicationSubmittedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationapplicationsubmittedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationAssessmentFailedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationassessmentfailedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationAssessmentInvoicePaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationassessmentinvoicepaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationAssessmentPendingTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationassessmentpendingtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationCredentialIssuedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationcredentialissuedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationCredentialRequestCancelledTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationcredentialrequestcancelledtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationFinishCheckingInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationfinishcheckinginvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationFinishCheckingInvoiceSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationfinishcheckinginvoicesponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationFinishCheckingNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationfinishcheckingnoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationPendingAssessmentFailedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationpendingassessmentfailedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RolePlayerRemovedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>roleplayer\roleplayerremovedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RolePlayerTestSessionAllocatedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>roleplayer\roleplayertestsessionallocatedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RolePlayerTestSessionAllocationChangedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>roleplayer\roleplayertestsessionallocationchangedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RolePlayerTestSessionChangedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>roleplayer\roleplayertestsessionchangedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclInvalidatedTestRevertedEmailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclinvalidatedtestrevertedemailtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclTestInvalidatedEmailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\ccltestinvalidatedemailtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclAllocateTestSessionCreditCardPayment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclallocatetestsessioncreditcardpayment.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclAllocateTestSessionDirectDebit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\cclallocatetestsessiondirectdebit.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclTestInvoicePaidAfterSelectSession" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\ccltestinvoicepaidafterselectsession.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclTestInvoiceProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\ccltestinvoiceprocessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CclTestInvoiceProcessedCreditCardPayment" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ccl\ccltestinvoiceprocessedcreditcardpayment.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationAllocateTestSessionCreditCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationallocatetestsessioncreditcard.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationAllocateTestSessionDirectDebit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationallocatetestsessiondirectdebit.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationAllocateTestSessionUntrustedSponsorApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationallocatetestsessionuntrustedsponsorapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationTestInvoicePaidAfterSelectTestSession" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationtestinvoicepaidafterselecttestsession.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationTestInvoiceProcessedCreditCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationtestinvoiceprocessedcreditcard.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationTestInvoiceProcessedDirectDebit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationtestinvoiceprocesseddirectdebit.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CertificationTestInvoiceProcessedSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\certificationtestinvoiceprocessedsponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInterCulturalAllocateTestSessionDirectCreditCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturalallocatetestsessiondirectcreditcard.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInterCulturalAllocateTestSessionDirectDebit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturalallocatetestsessiondirectdebit.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInterculturalAllocateTestSessionUntrustedSponsorApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturalallocatetestsessionuntrustedsponsorapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInterculturalTestInvoicePaidAfterSelectTestSesession" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturaltestinvoicepaidafterselecttestsesession.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInterCulturalTestInvoiceProcessedCreditCard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturaltestinvoiceprocessedcreditcard.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInterCulturalTestInvoiceProcessedDirectDebit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturaltestinvoiceprocesseddirectdebit.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="EthicsInterculturalTestInvoiceProcessedSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\ethics\ethicsinterculturaltestinvoiceprocessedsponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="AutomatedEmailTemplateFooter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\automatedemailtemplatefooter.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MaterialRequestEmailTemplateFooter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\materialrequestemailtemplatefooter.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialRequestApprovedCoordinatorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>materialrequest\testmaterialrequestapprovedcoordinatortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialRequestAssignCoordinatorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>materialrequest\testmaterialrequestassigncoordinatortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialRequestCancelCoordinatorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>materialrequest\testmaterialrequestcancelcoordinatortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialRequestRejectedCoordinatorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>materialrequest\testmaterialrequestrejectedcoordinatortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialRequestRevertCoordinatorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>materialrequest\testmaterialrequestrevertcoordinatortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialRequestSubmitForApprovalCoordinatorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>materialrequest\testmaterialrequestsubmitforapprovalcoordinatortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialRequestSubmitForApprovalRequestorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>materialrequest\testmaterialrequestsubmitforapprovalrequestortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialRequestUpdateDueDateTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>materialrequest\testmaterialrequestupdateduedatetemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialRequestUpdateRequestDetailsCoordinatorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>materialrequest\testmaterialrequestupdaterequestdetailscoordinatortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MaterialRequestCollaboratorEmailTemplateFooter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\materialrequestcollaboratoremailtemplatefooter.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialRequestAssignPanelCollaborator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>materialrequest\testmaterialrequestassignpanelcollaborator.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialRequestRemovePanelCollaborator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>materialrequest\testmaterialrequestremovepanelcollaborator.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransitionAccreditationApplicationRejectedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\transitionaccreditationapplicationrejectedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransitionAccreditationApplicationSubmittedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\transitionaccreditationapplicationsubmittedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransitionAccreditationAssessmentFailedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\transitionaccreditationassessmentfailedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransitionAccreditationAssessmentInvoicePaidTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\transitionaccreditationassessmentinvoicepaidtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransitionAccreditationAssessmentPendingTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\transitionaccreditationassessmentpendingtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransitionAccreditationCredentialRequestCancelledTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\transitionaccreditationcredentialrequestcancelledtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransitionAccreditationFinishCheckingInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\transitionaccreditationfinishcheckinginvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransitionAccreditationFinishCheckingInvoiceSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\transitionaccreditationfinishcheckinginvoicesponsortemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransitionAccreditationFinishCheckingNoInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\transitionaccreditationfinishcheckingnoinvoiceapplicanttemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransitionAccreditationPendingAssessmentFailedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\transitionaccreditationpendingassessmentfailedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="AccreditationCredentialIssuedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\accreditationcredentialissuedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TransitionCredentialIssuedTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\transition\transitioncredentialissuedtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RecertificationReminderTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\recertification\recertificationremindertemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestSessionReminderTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\testsessionremindertemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestSessionAvailabilityNoticeTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\certification\testsessionavailabilitynoticetemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CreditNoteProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\creditnoteprocessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RefundRejectedEmailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\refundrejectedemailtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RefundRequestedEmailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\refundrequestedemailtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="RefundApprovedEmailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\refundapprovedemailtemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="MakeApplicationPaymentTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>CredentialApplication\MakeApplicationPaymentTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TestMaterialReminderEmailTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>TestSessions\TestMaterialReminderEmailTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PracticeTestInviteForTestingInvoiceApplicantTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>CredentialApplication\PracticeTest\PracticeTestInviteForTestingInvoiceApplicantTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PracticeTestIssueResultTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>CredentialApplication\PracticeTest\PracticeTestIssueResultTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Regen" xml:space="preserve">
+    <value>Can be removed</value>
+  </data>
+  <data name="PracticeTestAllocateTestSessionApplicantWithSponsorTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>CredentialApplication\PracticeTest\PracticeTestAllocateTestSessionApplicantWithSponsorTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PracticeTestAllocateTestSessionCreditCardTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>CredentialApplication\PracticeTest\PracticeTestAllocateTestSessionCreditCardTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PracticeTestInvoiceProcessedApplicationInvoiceCreditCardTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>CredentialApplication\PracticeTest\PracticeTestInvoiceProcessedApplicationInvoiceCreditCardTemplate.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PracticeTestSponsoredTestInvoiceProcessed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>CredentialApplication\PracticeTest\PracticeTestSponsoredTestInvoiceProcessed.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Generic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>credentialapplication\generic.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+</root>

@@ -1,0 +1,138 @@
+﻿<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black">
+                    <span data-bind="text: title"></span>
+                    <i><span class="h3italic" data-bind="text: systemUserFlagTxt"></span></i>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="col-md-4">
+
+                        <div class="panel panel-default wrapper form">
+                            <div class="panel-body" style="height: 800px;">
+                                <div class="form-group" data-bind="validationElement: user.FullName">
+                                    <label data-bind="reshtml: 'Naati.Resources.Shared.resources.FullName'"></label>
+                                    <input type="text" class="form-control" data-bind="value: user.FullName, valueUpdate: 'input'" spellcheck="false" />
+                                </div>
+
+                                <!--ko if: user.NonWindowsUser-->
+                                <div class="form-group" data-bind="validationElement: user.UserName">
+                                    <label data-bind="reshtml: 'Naati.Resources.User.resources.UserName'"></label>
+
+                                    <input type="text" class="form-control upper-text" data-bind="value: user.UserName, valueUpdate: 'input'" spellcheck="false" />
+
+                                    <p class="form-control-static" style="padding-left: 14px;" data-bind="visible: !user.NonWindowsUser()">
+                                        <span><strong data-bind="text: user.UserName"></strong></span>
+                                    </p>
+                                </div>
+                                <!--/ko-->
+
+                                <!--ko ifnot: user.NonWindowsUser-->
+                                <div class="form-group" data-bind="validationElement: user.Email, validationOptions: { insertMessage: false }">
+                                    <label data-bind="reshtml: 'Naati.Resources.Shared.resources.Email'"></label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" data-bind="value: user.User, valueUpdate: 'input'" spellcheck="false" />
+                                        <div class="input-group-addon" data-bind="text: domainName"></div>
+                                    </div>
+                                    <span class="help-block" data-bind="validationMessage: user.Email"></span>
+                                </div>
+                                <!--/ko-->
+                                <!--ko if: user.NonWindowsUser-->
+                                <div class="form-group" data-bind="validationElement: user.Email">
+                                    <label data-bind="reshtml: 'Naati.Resources.Shared.resources.Email'"></label>
+                                    <input type="text" class="form-control" data-bind="value: user.Email, valueUpdate: 'input'" spellcheck="false" />
+                                </div>
+                                <!--/ko-->
+
+                                <div class="form-group" data-bind="validationElement: user.OfficeId">
+                                    <label data-bind="reshtml: 'Naati.Resources.Shared.resources.Office'"></label>
+                                    <!-- ko component: { name: 'select-component', params: officeOptions } --><!-- /ko -->
+                                </div>
+
+                                <div class="form-group" data-bind="validationElement: user.Notes">
+                                    <label class="control-label" data-bind="reshtml: 'Naati.Resources.Shared.resources.Notes'"></label>
+                                    <textarea class="form-control" rows="5" data-bind="value: user.Notes, valueUpdate: 'input'"></textarea>
+                                </div>
+
+                                <div class="form-group" data-bind="validationElement: user.Active">
+                                    <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+                                        <label class="checkbox-inline i-checks">
+                                            <input type="checkbox" data-bind="checked: user.Active"><i></i>
+                                            <span class="padder-md" data-bind="reshtml: 'Naati.Resources.Shared.resources.Active'"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" data-bind="validationOptions: { insertMessages: false }, visible: user.NonWindowsUser">
+                                    <label class="control-label" data-bind="restext: 'Naati.Resources.User.resources.SetPassword'"></label>
+                                    <div>
+                                        <label class="i-switch i-switch-md bg-info">
+                                            <input type="checkbox" data-bind="checked: user.UpdatePassword" />
+                                            <i></i>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" data-bind="validationElement: user.Password, visible: user.UpdatePassword">
+                                    <div class="row">
+                                        <div class="col-sm-11">
+                                            <input class="form-control" data-bind="value: user.Password, attr: { type: showPassword() ? 'text' : 'password' }, valueUpdate: 'input'" />
+                                        </div>
+                                        <div class="m-l-n m-t-xs col-sm-1">
+                                            <i aria-hidden="true" data-bind="click: viewPassword, css: showPassword() ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                                        </div>
+                                    </div>
+                                    <span data-bind="restext: 'Naati.Resources.User.resources.PasswordViewWarning'"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="panel panel-default wrapper form">
+                            <label class="control-label" style="margin-left: 15px;">User Roles</label>
+                            <div class="panel-body" style="height: 775px;">
+                                <div class="hbox" data-bind="component: { name: 'table-component', params: tableDefinition}"></div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="click: save, disableOnAjaxStart, disable: ajaxError, enable: canSave">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <a href="#system/user" class="btn btn-default"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<script id="useredit-header-template" type="text/html">
+    <th data-bind="visible: false">Id</th>
+    <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Role'"></th>
+    <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.Description'"></th>
+    <th class="w-xxs"></th>
+</script>
+<script id="useredit-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: Id, visible: false"></td>
+        <td data-bind="text: DisplayName"></td>
+        <td data-bind="text: Description"></td>
+        <td class="w-xxs select-checkbox"></td>
+    </tr>
+</script>

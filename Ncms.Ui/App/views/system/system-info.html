@@ -1,0 +1,130 @@
+﻿<div class="panel panel-default">
+    <div class="panel-body">
+        <h2>System Information</h2>
+
+        <table id="table" class="table sortable results table-no-hover" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th class="w-md" ">Aspect</th>
+                    <th>Info</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: systemInfo">
+                <tr>
+                    <td class="font-bold" data-bind="text: aspect"></td>
+                    <td data-bind="text: info"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Your permissions</h3>
+
+        <table id="permissions" class="table sortable results table-no-hover" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th class="w-md">Noun</th>
+                    <th>Verb</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: userPermissions">
+                <tr>
+                    <td data-bind="text: noun"></td>
+                    <td data-bind="text: verb"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div data-bind="enableWithPermission: 'System.Manage'">
+            <h3 data-bind="restext: 'Naati.Resources.Shared.resources.BackgroundTasks'"></h3>
+         
+
+            <div class="row">
+                <br />
+                <button type="button" class="btn btn-success" data-bind="click: processApplications, disableOnAjaxStart">
+                    <i class="fas fa-file-invoice"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.ProcessApplications'"></span>
+                </button>
+
+                <button type="button" class="btn btn-success" data-bind="click: sendCandidateBrief, disableOnAjaxStart">
+                    <i class="fas fa-file-import"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.SendCandidateBriefs'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: clearCache, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.ClearCache'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: refreshCookieCache, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.RefreshCookieCache'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: refreshUsersCache, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.RefreshUsersCache'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: deleteTemporaryFiles, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.DeleteTemporaryFiles'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: issueTestResults, disableOnAjaxStart">
+                    <i class="fas fa-file-import"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.IssueTestResultsAndCredentials'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: sendPendingEmails, disableOnAjaxStart">
+                    <i class="fas fa-file-import"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.SendPendingEmails'"></span>
+                </button>
+            </div>
+            <div class="row">
+                <br />
+                <button type="button" class="btn btn-success" data-bind="click: syncNcmsReportLogs, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.SyncNcmsReportLogs'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: deleteOldSystemFiles, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.DeleteSystemFiles'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: executeNcmsReports, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.ExecuteNcmsReports'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: sendRecertificationReminders, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.SendRecertificationReminders'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: sendTestSessionReminders, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.SendTestSessionReminders'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: sendTestSessionAvailabilityNotices, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.SendTestSessionAvailabilityNotices'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: processRefund, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.ProcessRefund'"></span>
+                </button>
+                
+            </div>
+            <div class="row">
+                <br />
+
+                <button type="button" class="btn btn-success" data-bind="click: refreshNotifications, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.RefreshNotifications'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: deleteBankDetails, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.DeleteBankDetails'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: sendTestMaterialReminders, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.SendTestMaterialReminders'"></span>
+                </button>
+                <button type="button" class="btn btn-success" data-bind="click: processFileDeletesPastExpiryDate, disableOnAjaxStart">
+                    <i class="fab fa-creative-commons-sa"></i>
+                    <span data-bind="restext: 'Naati.Resources.Shared.resources.ProcessFileDeletesPastExpiryDate'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

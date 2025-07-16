@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Welcome";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+        new Tuple<string, string>("My Account", Url.Action("Index", "Account")),
+        new Tuple<string, string>("Setup Multi Factor Authentication", string.Empty)
+    };
+}
+
+@model MyNaati.Ui.ViewModels.Account.MfaModel
+
+<!DOCTYPE html>
+
+
+<div class="col-lg-12">
+    <div id="setupMfa" class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">SETUP MULTI-FACTOR AUTHENTICATION</h2>
+            <p>MULTI-FACTOR AUTHENTICATION PROTECTS YOU FROM HACKERS. EVEN IF SOMEONE STEALS YOUR PASSWORD, YOUR ACCOUNT STAYS SECURE.</p>
+            <p>Follow these steps to setup your Multi-Factor Authentication for your myNAATI account.</p>
+
+            <div class="mfa-step">STEP 1 Open your Authenticator app from your smart device</div>
+
+            <p class="p-10">If you do not have an Authenticator app installed, you will need to download and install one to proceed.</p>
+
+            <p class="p-10">
+                If you have setup MFA for your account before but had it turned off, you may need to remove the Account from your Authenticator app.
+                Or you may be prompted to replace the Account when you scan the QR Code again.
+            </p>
+
+            <hr />
+
+            <div class="mfa-step">
+                STEP 2 Add your account to the Authenticator app by scanning this QR Code
+            </div>
+
+            <div class="center">
+                @Html.Raw(Model.img)
+            </div>
+            <div class="center">
+                Can't scan the QR Code? Use the setup key instead<br />
+                @Html.Raw(Model.code)
+            </div>
+
+            <hr />
+
+            <div class="mfa-step">
+                STEP 3 Enter the 6-digit code found in your Authenticator app under 'NAATI - @Html.Raw(Model.email)'
+            </div>
+
+            <div class="center p-20">
+                <button class="btn btn-primary" data-url="@Url.Action("EnterMfaModal",@Html.Raw(Model.code))" type="button" data-toggle="modal" data-target="#detailModal" data-backdrop="static" data-keyboard="false">ENTER CODE</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="detailModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Enter code from Authenticator app</h4>
+                </div>
+                <div class="modal-body">
+                    <div>Enter the 6-digit code found in your Authenticator app under 'NAATI - @Html.Raw(Model.email)'.</div>
+                    <input type='hidden' id='key' name='key' value='@Html.Raw(Model.code)'/>
+                    <input id="code" name="code" />
+                    <div>Click Save after entering code or click Close if you do not have the code ready.</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    @section Scripts
+{
+        <script id="confirmDialog" type="text/html">
+            ConfirmModel().ToMvcHtmlString()
+        </script>
+
+        <script>
+        $(function () {
+            var $modal = $('#detailModal');
+            var $okButton = $modal.find('.modal-footer .btn-primary');
+            var $cancelButton = $modal.find('.modal-footer .btn-danger');
+            var $target = null;
+            var $button = null;
+            var successful = false;
+
+            function setupModal(event) {
+                $target = $(event.relatedTarget);
+                $okButton.prop('disabled', false);
+
+                $okButton.data('url', $target.data('url'));
+                $okButton.data('ajax-mode', $target.data('ajax-mode'));
+                $target.prop('disabled', true);
+                $okButton.show();
+
+                if (!successful) {
+                    $modal.find('.modal-body').html(`<div>The code can be found in your Authenticator app under 'NAATI - @Html.Raw(Model.email)'.</div>
+                                                <input type='hidden' id='key' name='key' value='@Html.Raw(Model.code)'/>
+                                                <input id="code" name="code" />
+                                                <div>Click Save after entering code or click Close if you do not have the code ready.</div>`);
+                }
+
+                $cancelButton.prop('disabled', false);
+                $cancelButton.data('url', $target.data('redirect-url'));
+
+                $cancelButton.show();
+                $modal.modal('show');
+            }
+
+            $modal.on('show.bs.modal',
+                function (event) {
+                    $('.validation-summary-errors').empty();
+                    if (event.relatedTarget) {
+                        setupModal(event);
+                    }
+                });
+
+            $okButton.on('click',
+                function (evt) {
+                    evt.preventDefault();
+                    $button = $(this);
+                    $button.prop('disabled', true);
+                    $cancelButton.prop('disabled', true);
+                    var formUrl = $button.data('url');
+
+                    $.ajax({
+                        url: formUrl,
+                        type: 'POST',
+                        data: {
+                            Code: $("#code").val(),
+                            Key: $("#key").val()
+                        },
+                        success: function (result) {
+                            if (result === true) {
+                                $cancelButton.attr('disabled', false);
+                                $okButton.hide();
+                                $cancelButton.text('Close');
+                                $modal.find('.modal-body').html("Authentication succeeded");
+                                successful = true;
+                                $cancelButton.on('click',
+                                    function (cl) {
+                                        cl.preventDefault();
+                                        $button = $(this);
+                                        window.location.href = '../Account/MultiFactorAuthentication';
+                                    }),
+                                    $modal.find('.modal-body').html("Authentication succeeded");
+                            }
+                            else {
+                                //server returned error response
+                                $cancelButton.attr('disabled', false);
+                                $okButton.hide();
+                                $cancelButton.text('Close');
+                                $modal.find('.modal-body').html("Authentication failed");
+                                $target.prop('disabled', false);
+                            }
+                        },
+                        error: function () {
+                            //failed sending ajax request
+                            $cancelButton.attr('disabled', false);
+                            $okButton.hide();
+                            $cancelButton.text('Close');
+                            $modal.find('.modal-body').html("Authentication failed");
+                            $target.prop('disabled', true);
+                        }
+                    });
+                });
+        }
+        );
+        </script>
+    }

@@ -1,0 +1,22 @@
+<table data-bind="datatable: naatiTable" class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>NAATI Number</th>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>State</th>
+            <th>Work Phone</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: naatiTable.source">
+        <tr>
+            <td data-bind="text: NAATINumber"></td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: BirthDateFormatted"></td>
+            <td data-bind="text: StateName"></td>
+            <td data-bind="text: Number"></td>
+            <td><a data-bind="attr: { href: 'mailto: ' + Email }, text: Email"></a></td>
+        </tr>
+    </tbody>
+</table><!--/ .col-->

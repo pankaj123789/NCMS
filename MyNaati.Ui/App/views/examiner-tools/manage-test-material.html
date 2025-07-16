@@ -1,0 +1,414 @@
+﻿<div>
+    <div class="m-b-md">
+        <ol class="breadcrumb">
+            <li>
+                <a data-bind="attr: { href: homeLink }">Home</a>
+            </li>
+            <li>
+                <a href="#" data-bind="attr: { href: examinerToolsLink }">Examiner Tools</a>
+            </li>
+            <li>
+                <a href="#" data-bind="attr: { href: manageTestMaterialsLink }">My Test Material Development</a>
+            </li>
+            <li class="active" data-bind="html: title"></li>
+        </ol>
+        <hr />
+    </div>
+    <!--ko ifnot: submitted-->
+    <div class="wrapper">
+        <!--ko component: loaderOptions--><!--/ko-->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label>Test Material ID</label>
+                            <p class="form-control-static availability">
+                                <span data-bind="html: materialRequest.TestMaterialId"></span>
+                                <span class="text-base label" data-bind="html: roundStatusDisplayName, css: 'label-' + roundStatusCss()"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label>Test Material Title</label>
+                            <p class="form-control-static" data-bind="html: materialRequest.Title"></p>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label>Credential Type</label>
+                            <p class="form-control-static" data-bind="html: materialRequest.CredentialTypeExternalName"></p>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label>Task Type</label>
+                            <p class="form-control-static" data-bind="html: materialRequest.TaskTypeName"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label>Round</label>
+                            <p class="form-control-static" data-bind="html: materialRequest.Round"></p>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label>Due Date</label>
+                            <p class="form-control-static" data-bind="textDate: dueDateDisplay"></p>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="form-group">
+                            <label>Max Billable Hours</label>
+                            <p class="form-control-static" data-bind="html: materialRequest.MaxBillableHours"></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group" data-bind="validationElement: materialRequest.TestMaterialDomainId">
+                            <label class="control-label">Domain</label>
+                            <!--ko component: { name: 'select-component', params: domainOptions }-->
+                            <!--/ko-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <!--ko ifnot: isFinalised-->
+                            <li role="presentation" data-bind="css: { active: tab() == 'files' }"><a href="#files" aria-controls="files" role="tab" data-toggle="tab">Files</a></li>
+                            <!--/ko-->
+                            <!--ko if: isCoordinator-->
+                            <li role="presentation" data-bind="css: { active: tab() == 'participants' }"><a href="#participants" aria-controls="participants" role="tab" data-toggle="tab">Participants</a></li>
+                            <!--/ko-->
+                            <!--ko ifnot: readOnly-->
+                            <li role="presentation" data-bind="css: { active: tab() == 'urls' }"><a href="#urls" aria-controls="urls" role="tab" data-toggle="tab">URLs</a></li>
+                            <!--/ko-->
+                            <li role="presentation" data-bind="css: { active: tab() == 'notes' }"><a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <!--ko ifnot: isFinalised-->
+                            <div role="tabpanel" class="tab-pane" id="files" data-bind="css: { active: tab() == 'files' }">
+                                <!--ko if: isCoordinator-->
+                                <!--ko ifnot: readOnly-->
+                                <button class="btn btn-primary m-t" data-bind="click: addFile, clickBubble: false">Add file</button>
+                                <!--/ko-->
+                                <!--/ko-->
+                                <table class="table table-bordered" data-bind="datatable: disableTableFeatures">
+                                    <thead class="bg-primary">
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Document Type</th>
+                                            <th>File Type</th>
+                                            <th>Size</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: files">
+                                        <tr>
+                                            <td data-bind="text: Description"></td>
+                                            <td data-bind="text: DocumentType"></td>
+                                            <td data-bind="text: FileType"></td>
+                                            <td data-bind="bytesToSize: FileSize"></td>
+                                            <td>
+                                                <div class="btn-group pull-right">
+                                                    <!--ko if: IsOwner-->
+                                                    <!--ko ifnot: $root.readOnly-->
+                                                    <button class="btn btn-danger" type="button" data-bind="click: $root.deleteAttachment">Delete</button>
+                                                    <!--/ko-->
+                                                    <!--/ko-->
+                                                    <!--ko ifnot: $root.readOnly-->
+                                                    <button class="btn btn-success" type="button" data-bind="click: $root.downloadAttachment">Download</button>
+                                                    <!--/ko-->
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--/ko-->
+                            <!--ko if: isCoordinator-->
+                            <div role="tabpanel" class="tab-pane" id="participants" data-bind="css: { active: tab() == 'participants' }">
+                                </br>
+                                <table class="table table-bordered">
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="2" class="bg-primary">
+                                                <input type="text" class="form-control w-full form-control-plain-text text-white" disabled value="Coordinator" />
+                                            </th>
+                                            <th colspan="4">
+                                                <input type="text" class="form-control w-full form-control-plain-text" disabled data-bind="value: coordinator" />
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2" class="bg-primary">
+                                                <input type="text" class="form-control w-full form-control-plain-text text-white" disabled value="Coordinator Loading" />
+                                            </th>
+                                            <th colspan="2">
+                                                <input type="text" class="form-control w-full form-control-plain-text" disabled data-bind="value: coordinatorLoadingPercent" />
+                                            </th>
+                                            <th colspan="2">
+                                                <input type="text" class="form-control w-full form-control-plain-text" disabled data-bind="value: coordinatorLoadingTotalAmount" />
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <!--ko ifnot: isMemberReadOnly-->
+                                <button class="btn btn-primary m-t" data-bind="click: addParticipant, clickBubble: false">Add participant</button>
+                                <!--/ko-->
+                                <table class="table table-bordered" data-bind="datatable: disableTableFeatures">
+                                    <thead class="bg-primary">
+                                        <tr>
+                                            <th>Participant</th>
+                                            <th>Action</th>
+                                            <th>No. Of Hours</th>
+                                            <th>Unit Cost (ex GST)</th>
+                                            <th>Total Amount</th>
+                                            <th class="w-xs"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: { data: materialRequest.Members, as: 'm' }">
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control w-full form-control-plain-text" disabled data-bind="value: m.GivenName" />
+                                            </td>
+                                            <td>
+                                                <!--ko foreach: { data: m.Tasks, as: 't' }-->
+                                                <p>
+                                                    <select class="form-control w-full" data-bind="value: t.MaterialRequestTaskTypeId, options: t.AvailableTasks, optionsText: 'Value', optionsValue: 'Key', disable: $root.isMemberReadOnly, css: { 'form-control-plain-text': $root.isMemberReadOnly }"></select>
+                                                </p>
+                                                <!--/ko-->
+                                            </td>
+                                            <td>
+                                                <!--ko foreach: { data: m.Tasks, as: 't' }-->
+                                                <p>
+                                                    <input type="number" class="form-control" data-bind="value: t.HoursSpent, valueUpdate: 'input', disable: $root.isMemberReadOnly, css: { 'form-control-plain-text': $root.isMemberReadOnly }" />
+                                                </p>
+                                                <!--/ko-->
+                                            </td>
+                                            <td>
+                                                <!--ko foreach: { data: m.Tasks, as: 't' }-->
+                                                <p>
+                                                    <input type="text" class="form-control w-full form-control-plain-text" disabled data-bind="value: $root.productSpecificationCostPerUnit" />
+                                                </p>
+                                                <!--/ko-->
+                                            </td>
+                                            <td>
+                                                <!--ko foreach: { data: m.Tasks, as: 't' }-->
+                                                <p>
+                                                    <input type="text" class="form-control w-full form-control-plain-text" disabled data-bind="value: t.TotalAmount" />
+                                                </p>
+                                                <!--/ko-->
+                                            </td>
+                                            <td>
+                                                <!--ko ifnot: $root.readOnly-->
+                                                <!--ko foreach: { data: m.Tasks, as: 't' }-->
+                                                <p>
+                                                    <button class="btn btn-default" data-bind="click: function() { $root.addTask(m); }, css: { invisible: m.Tasks().length >= $root.maxTasks() || $index() > 0  ||  $root.isMemberReadOnly}">
+                                                        <i class="glyphicon glyphicon-plus"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" data-bind="click: function() { $root.removeTask(m, t); }, css: { invisible: (m.IsCoordinator() && $index() == 0) || ($index() == 0 && m.Tasks().length > 1) ||  $root.isMemberReadOnly }">
+                                                        <i class="glyphicon glyphicon-minus"></i>
+                                                    </button>
+                                                </p>
+                                                <!--/ko-->
+                                                <!--/ko-->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="2" class="bg-primary">
+                                                <input type="text" class="form-control w-full form-control-plain-text text-white" disabled value="Material Creation Total Claims" />
+                                            </th>
+                                            <th colspan="2">
+                                                <input type="text" class="form-control w-full form-control-plain-text" disabled data-bind="value: numberOfHours" />
+                                            </th>
+                                            <th colspan="2">
+                                                <input type="text" class="form-control w-full form-control-plain-text" disabled data-bind="value: totalAmountCurrency" />
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!--/ko-->
+                            <!--ko ifnot: isFinalised-->
+                            <div role="tabpanel" class="tab-pane" id="urls" data-bind="css: { active: tab() == 'urls' }">
+                                <!--ko if: isCoordinator-->
+                                <!--ko ifnot: readOnly-->
+                                <div class="form row">
+                                    <div class="form-group col-md-11">
+                                        <input type="text" class="form-control" placeholder="Type to add a new link" data-bind="value: link, event: { focus: linkFocus, focusout: linkFocusOut }" />
+                                    </div>
+                                    <div class="form-group col-md-1">
+                                        <button class="btn btn-primary" data-bind="click: addLink">
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--/ko-->
+                                <!--/ko-->
+                                <table class="table table-bordered" data-bind="datatable: disableTableFeatures">
+                                    <thead class="bg-primary">
+                                        <tr>
+                                            <th>Link</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: links">
+                                        <tr>
+                                            <td>
+                                                <a href="#" target="_blank" data-bind="html: Link, attr: { href: Link }"></a>
+                                            </td>
+                                            <td class="text-right">
+                                                <!--ko if: $root.isCoordinator-->
+                                                <!--ko ifnot: $root.readOnly-->
+                                                <!--ko if: IsOwner-->
+                                                <button class="btn btn-danger btn-sm" data-bind="click: $root.removeLink">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                                <!--/ko-->
+                                                <!--/ko-->
+                                                <!--/ko-->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--/ko-->
+                            <div role="tabpanel" class="tab-pane" id="notes" data-bind="css: { active: tab() == 'notes' }">
+                                <!--ko ifnot: readOnly-->
+                                <!--ko if: isCoordinator-->
+                                <form data-bind="submit: addNote">
+                                    <div class="row">
+                                        <div class="col-lg-11">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control input-lg" placeholder="Type to add a note..." data-bind="value: note, valueUpdate: 'input'">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <button type="button" class="btn btn-primary btn-lg btn-block" data-bind="click: addNote, enable: note">Add</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!--/ko-->
+                                <!--/ko-->
+                                <!--ko ifnot: notes().length-->
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h4>No notes</h4>
+                                    </div>
+                                </div>
+                                <!--/ko-->
+                                <!--ko if: notes().length-->
+                                <table class="table table-striped table-hover m-t-lg w-full">
+                                    <tbody data-bind="foreach: notes">
+                                        <tr>
+                                            <td data-bind="text: Description"></td>
+                                            <td class="w-xxl text-right">
+                                                <em>
+                                                    <span>Created</span>
+                                                    <span class="text-info" data-bind="text: DateHumanized"></span>
+                                                    <span>by</span>
+                                                    <span class="text-info" data-bind="text: User"></span>
+                                                </em>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!--/ko-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-t m-b">
+                    <div class="col-lg-12">
+                        <div class="b-t b-light">
+                            <div class="m-t m-b">
+                                <!--ko ifnot: readOnly-->
+                                <!--ko if: isCoordinator-->
+                                <!--ko ifnot: showSaveParticipants-->
+                                <button class="btn btn-primary" data-bind="click: submitForApproval, disable: processing">Submit for Approval</button>
+                                <!--/ko-->
+                                <!--/ko-->
+                                <!--/ko-->
+                                <!--ko if: showSaveParticipants-->
+                                <button class="btn btn-primary" data-bind="click: commitNewParticipants, disable: processing">Save Changes</button>
+                                <!--/ko-->
+                                <a href="#" class="btn btn-default" data-bind="attr: { href: manageTestMaterialsLink }">Close</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="addFileModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Add file</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="fileAttachments" class="dropzone" data-bind="dropzone: dropzone">
+                        <div class="dz-message">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <i class="fa fa-upload fa-5x text-primary" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="row v-offset-xs-3">
+                                <div class="col-lg-12">
+                                    <p><strong>Choose a file</strong> or drag it here.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group m-t">
+                        <label class="control-label">Document Type</label>
+                        <select class="form-control" data-bind="value: materialRequest.DocumentType, options: materialRequest.AvailableDocumentTypes, optionsText: 'Value', optionsValue: 'Key'"></select>
+                    </div>
+                    <div id="previews" class="table table-striped files">
+                    </div>
+                    <form id="downloadForm" method="get"></form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bind="click: uploadAttachment">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="addParticipantModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Add participant</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group m-t">
+                        <select multiple data-placeholder="Select some participants" class="form-control w-full chosen invisible" data-bind="selectedOptions: newParticipants, options: availableMembers, optionsText: 'Name', optionsValue: 'Id'"></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bind="click: stackParticipant, enable: enableSaveParticipant">Add</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ko-->
+    <!--ko if: submitted-->
+    <div class="wrapper">
+        <h2 class="text-primary">Material Request Submitted</h2>
+        <br />
+        <p><a href="#" data-bind="attr: { href: manageTestMaterialsLink }">Click here</a> to return to the My Test Material Development page</p>
+    </div>
+    <!--/ko-->
+</div>

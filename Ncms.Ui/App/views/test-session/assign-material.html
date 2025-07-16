@@ -1,0 +1,70 @@
+﻿<div id="drawMaterialModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-light" style="width: 1100px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="text: title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="control-label" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestTasks'"></label>
+                            <!-- ko component: { name: 'select-component', params: testTasksOptions } --><!-- /ko -->
+                        </div>
+                        <div class="hbox" data-bind="component: { name: 'table-component', params: tableDefinition}"></div>
+                        <div>
+                            <div class="form-control-static">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" data-bind="checked: showAllValue"><i></i>
+                                    <span class="padder-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.ShowAll'"></span>
+                                </label>
+                            </div>
+                            <div class="form-control-static">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" data-bind="checked: showIncludedValue"><i></i>
+                                    <span class="padder-md" data-bind="text: showIncludedMaterialLabel"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-bind="click: assign, enable: canAssign">
+                    <i class="fa fa-check"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="testsittingmaterial-header-template" type="text/html">
+    <th class="sortable w-xs" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.MaterialID'"></th>
+    <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Title'"></th>
+    <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialDomain'"></th>
+    <th class="sortable">
+        <span data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Language'"></span>
+        <span>&nbsp;/&nbsp;</span>
+        <span data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Skill'"></span>
+    </th>
+    <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Notes'"></th>
+    <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Source'"></th>
+    <th class="w-xxs"></th>
+</script>
+<script id="testsettingmaterial-row-template" type="text/html">
+    <tr>
+        <td data-bind="text: Id"></td>
+        <td data-bind="text: Title"></td>
+        <td data-bind="text: Domain"></td>
+        <td data-bind="text: Language"></td>
+        <td data-bind="text: Notes"></td>
+        <td class="fa-align-center"><i data-bind="visible: IsTestMaterialTypeSource" class="fa fa-check" aria-hidden="true"></i></td>
+        <td class="w-xxs select-checkbox"></td>
+    </tr>
+</script>
+
+

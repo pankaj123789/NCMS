@@ -1,0 +1,57 @@
+<div class="hbox">
+
+    <!--ko compose: createPersonOptions--><!--/ko-->
+    <div class="hbox" data-bind="component: {
+    name: 'search-component',
+    params: { title: title, filters: filters, searchType: searchType, searchTerm: searchTerm, searchCallback: searchCallback, tableDefinition: tableDefinition, additionalButtons: additionalButtons }
+            }">
+    </div>
+
+    <script id="person-header-template" type="text/html">
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Person.resources.NaatiNumber'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Person.resources.Name'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Person.resources.PrimaryContactNumber'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Person.resources.PrimaryEmail'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Person.resources.Type'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Person.resources.PractitionerNumber'"></th>
+        <th>&nbsp;</th>
+    </script>
+    <script id="person-row-template" type="text/html">
+        <tr>
+            <td>
+                <a href="#" data-bind="click: $root.showDetails, clickBubble: false"><i class="fa fa-chevron-right"></i></a>
+                <a href="#" class="text-info" data-bind="text: NaatiNumber, attr: { href: '#person/' + NaatiNumber }"></a>
+            </td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: $root.formatPhone(PrimaryContactNumber)"></td>
+            <td data-bind="text: PrimaryEmail"></td>
+            <td data-bind="text: PersonTypes"></td>
+            <td data-bind="text: PractitionerNumber"></td>
+            <td class="text-center w-xs">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#person/' + NaatiNumber }, clickBubble: false, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </script>
+    <script id="persondetail-template" type="text/html">
+        <table class="table table-bordered table-striped b-t b-b w-full" data-bind="datatable: tableDefinition">
+            <thead>
+                <tr>
+                    <th data-bind="reshtml: 'Naati.Resources.Person.resources.CredentialType'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Person.resources.Direction'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Person.resources.Status'"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: data">
+                <tr>
+                    <td data-bind="text: CredentialType"></td>
+                    <td data-bind="text: Direction"></td>
+                    <td data-bind="text: CredentialStatus"></td>
+                </tr>
+            </tbody>
+        </table>
+    </script>
+</div>

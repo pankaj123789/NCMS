@@ -1,0 +1,62 @@
+﻿<script type="text/javascript">
+    //Form without an id
+    var formSelector = 'form:not(\'[id]\')';
+    var cancelButtons = '.wizard-buttons input[value=Cancel]';
+    var previousButtons = '.wizard-buttons input[value=Previous]';
+    var downloadFormButtons = '.wizard-buttons input[value=\'Download Form\']';
+    var nextButtons = '.wizard-buttons input[value=Next]';
+    var doneButtons = '.wizard-buttons input[value=Done]';
+    var submitButtons = '.wizard-buttons input[value=Submit]';
+    var confirmButtons = '.wizard-buttons input[value=Confirm]';
+    var buttonQueryStringName = 'Button';
+    var useDefaultDownloadButtonHandler = true;
+
+    $(document).ready(function() {
+        $(cancelButtons).click(function() { handleCancel(); });
+        $(previousButtons).click(function() { return gotoButton('previous'); });
+        $(downloadFormButtons).click(function() {
+            if (useDefaultDownloadButtonHandler) {
+                handleDownloadForm();
+            }
+        });
+        $(nextButtons).click(function() { return gotoButton('next'); });
+        $(doneButtons).click(function() { return gotoButton('done'); });
+        $(confirmButtons).click(function() { return gotoButton('confirm'); });
+    });
+
+    function gotoButton(button) {
+        if (allowWizardProgress(button)) {
+            var queryString = getBaseQueryString() + '&' + buttonQueryStringName + '=' + button;
+            $(formSelector)
+                .attr('action', queryString)
+                .submit();
+        }
+
+        return false;
+    }
+
+    // This method is intended to overwritten in different wizard control.
+    function allowWizardProgress(buttonName) {
+        return true;
+    }
+
+    function getBaseQueryString() {
+        var queryString = $(formSelector).attr('action');
+        var textIndex = queryString.indexOf('&' + buttonQueryStringName);
+        if (textIndex !== -1) {
+            queryString = queryString.slice(0, textIndex);
+        }
+
+        return queryString;
+    }
+
+    function handleDownloadForm() {
+        window.open('@Url.Action("OrderForm", new { ViewBag.WholeWizardModel.WizardId })');
+        $(doneButtons).prop('disabled', false);
+    }
+
+    function handleDownloadApplicationForAssessment() {
+        window.open('@Url.Action("DownloadApplicationForAssessment", new { ViewBag.WholeWizardModel.WizardId })');
+        $(doneButtons).prop('disabled', false);
+    }
+</script>

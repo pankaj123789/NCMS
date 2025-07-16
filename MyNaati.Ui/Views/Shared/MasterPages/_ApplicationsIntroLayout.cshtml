@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";    
+}
+@section Head
+{
+    @RenderSection("Head", false)
+}
+
+@section Scripts
+{
+    @RenderSection("Scripts", false)
+}
+<div id="SideMenu">
+    <ul class="Inline">
+        <li id="Applications">
+            @Html.ActionLink("Apply for Accreditation", "Index", "Applications", null, new { style="width:200px" })
+        </li>
+        <li id="ByTesting">
+            @Html.ActionLink("By Testing", "Index", "Testing")
+        </li>
+        <li id="ByAustralianCourse">
+            @Html.ActionLink("By Australian Course", "Index", "ApplicationByCourseWizard")
+        </li>
+    </ul>
+</div>
+<div id="ContentWithSideMenu">
+    @RenderBody()
+</div>
+<br style="clear:both" />

@@ -1,0 +1,34 @@
+<div class="hbox">
+    <div class="hbox" data-bind="component: { name: 'search-component', params: searchComponentOptions }">
+    </div>
+    <script id="finance-queue-header-template" type="text/html">
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Finance.resources.Id'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Finance.resources.Description'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Finance.resources.RequestedBy'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Finance.resources.DateRequested'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Finance.resources.DateProcessed'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Finance.resources.Status'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Finance.resources.Message'"></th>
+        <th>&nbsp;</th>
+    </script>
+    <script id="finance-queue-row-template" type="text/html">
+        <tr>
+            <td class="text-center" data-bind="text: Id"></td>
+            <td data-bind="text: Description"></td>
+            <td data-bind="text: RequestedBy"></td>
+            <td class="text-center" data-bind="text: RequestedDateTime"></td>
+            <td class="text-center" data-bind="text: ProcessedDateTime"></td>
+            <td data-bind="text: StatusDescription"></td>
+            <td data-bind="text: Message"></td>
+            <td class="text-center" style="width: 40px;">
+                <!--ko if: CanReprocess-->
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default btn-xs" data-bind="tooltip: { container: '#financeQueueTable' }, resattr: { title: 'Naati.Resources.Finance.resources.SubmitToWiise' }, click: $root.submitToWiise">
+                        <span class="fa fa-redo"></span>
+                    </a>
+                </div>
+                <!--/ko-->
+            </td>
+        </tr>
+    </script>
+</div>

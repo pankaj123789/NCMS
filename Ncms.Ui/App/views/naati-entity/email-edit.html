@@ -1,0 +1,94 @@
+﻿<div id="emailEdit" class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: windowTitle"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="wrapper-md form-horizontal">
+            <div class="form-group" data-bind="validationElement: email.Email">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.EmailAddress'"></label>
+                <div class="col-xs-9 col-sm-3">
+                    <input id="emailInput" type="text" class="form-control" data-bind="value: email.Email, valueUpdate: 'input', disable: disableAddressEdit" />
+                </div>
+                <div class="col-xs-1" data-bind="visible: disableAddressEdit">
+                    <i class="fa fa-lock fa-2x" data-bind="tooltip, resattr: { 'data-original-title': 'Naati.Resources.Person.resources.PrimaryEmailChangeHint2' }"></i>
+                </div>
+            </div>
+
+            <div class="form-group" data-bind="visible: showMyNaatiWarningForEmail">
+                <div class="col-xs-2">
+                </div>
+                <div class="col-lg-10">
+                    <label class="text-danger" data-bind="restext: 'Naati.Resources.Person.resources.PrimaryEmailChangeWarning1'"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.PrimaryEmail'"></label>
+                <div class="col-xs-4" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="i-switch i-switch-md bg-info">
+                        <input type="checkbox" data-bind="checked: email.IsPreferredEmail, disable: primaryFlagLockReason" />
+                        <i></i>
+                    </label>
+                    <i class="fa fa-lock fa-2x m-l-md" data-bind="visible: primaryFlagLockReason, tooltip, attr: { 'data-original-title': primaryFlagLockReason() }"></i>
+                </div>
+            </div>
+
+            <div class="form-group" data-bind="visible: showMyNaatiWarningForPrimary">
+                <div class="col-xs-2">
+                </div>
+                <div class="col-lg-10">
+                    <label class="text-danger" data-bind="restext: 'Naati.Resources.Person.resources.PrimaryEmailChangeWarning2'"></label>
+                </div>
+            </div>
+
+            <!--ko ifnot: IsOrganisation()-->
+            <div class="form-group">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.IncludeInPd'"></label>
+                <div class="col-xs-2" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="i-switch i-switch-md bg-info">
+                        <input type="checkbox" data-bind="checked: email.IncludeInPd" />
+                        <i></i>
+                    </label>
+                </div>
+            </div>
+            <!--/ko-->
+
+            <!--ko if: email.ShowExaminer-->
+            <div class="form-group">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.ExaminerCorrespondence'"></label>
+                <div class="col-xs-2" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="i-switch i-switch-md bg-info">
+                        <input type="checkbox" data-bind="checked: email.ExaminerCorrespondence" />
+
+                        <i></i>
+                    </label>
+                </div>
+            </div>
+            <!--/ko-->
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.EmailNote'" style="height: 50px"></label>
+                <div class="col-xs-9">
+                    <textarea class="form-control" data-bind="value: email.Note, valueUpdate: 'input'"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="enable: canSave, click: save">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" data-bind="click: tryClose">
+                <i class="fa fa-ban"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

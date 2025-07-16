@@ -1,0 +1,106 @@
+﻿@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+@{
+    ViewBag.Subtitle = "Contact Details";
+    Layout = "~/Views/Shared/MasterPages/_PDListingWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Directory Listing", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+
+            function onCheckboxChange() {
+                var $checkbox = $(this);
+                $checkbox.val($checkbox.prop('checked'));
+            }
+
+            $(formSelector + ' input[type="checkbox"]').change(onCheckboxChange);
+
+            $('tr').click(function (event) {
+                var $checkbox = $(this).find('input[type="checkbox"]');
+
+                if (event.target !== $checkbox[0]) {
+                    $checkbox.prop('checked', !$checkbox.prop('checked'));
+                    onCheckboxChange.call($checkbox[0]);
+                }
+            });
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>Select the contact details to be shown in the directory. At least one phone or email contact is required for the directory.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>In Directory</th>
+                        <th>Type</th>
+                        <th>Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Phones.Count; i++)
+                    {
+                        var phone = Model.Phones[i];
+
+                        <tr style="cursor: pointer">
+                            <td class="text-center">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="Phones[@i].InDirectory" type="checkbox" value="@phone.InDirectory.ToString().ToLower()" />
+                                        <input name="Phones[@i].Id" type="hidden" value="@phone.Id" />
+                                    </label>
+                                </div>
+                            </td>
+                            <td>@Model.Phones[i].Type</td>
+                            <td>@Model.Phones[i].Contact</td>
+                        </tr>
+                    }
+                    @for (var i = 0; i < Model.Emails.Count; i++)
+                    {
+                        var email = Model.Emails[i];
+
+                        <tr style="cursor: pointer">
+                            <td class="text-center">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="Emails[@i].InDirectory" type="checkbox" value="@email.InDirectory.ToString().ToLower()" />
+                                        <input name="Emails[@i].Id" type="hidden" value="@email.Id" />
+                                    </label>
+                                </div>
+                            </td>
+                            <td>@Model.Emails[i].Type</td>
+                            <td>@Model.Emails[i].Contact</td>
+                        </tr>
+                    }
+                    @if (Model.Website != null)
+                    {
+                        <tr style="cursor: pointer">
+                            <td class="text-center">
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="Website.InDirectory" type="checkbox" value="@Model.Website.InDirectory.ToString().ToLower()" />
+                                        <input name="Website.Id" type="hidden" value="@Model.Website.Id" />
+                                    </label>
+                                </div>
+                            </td>
+                            <td>@Model.Website.Type</td>
+                            <td>@Model.Website.Contact</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

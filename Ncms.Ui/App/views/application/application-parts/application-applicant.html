@@ -1,0 +1,91 @@
+<div class="form-horizontal">
+    <div class="row">
+        <div class="pull-right m-r-md">
+            <button type="button" class="btn btn-default" data-bind="click: refresh">
+                <i class="fa fa-redo"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Refresh'"></span>
+            </button>
+        </div>
+        <div class="col-md-4 form-group m-b-xs">
+            <label class="control-label pull-left w-sm m-r-sm">
+                <div class="pull-left m-l-md m-t-xxs">
+                    <a href="#" data-bind="click: function() { showPersonDetails(!showPersonDetails()); }">
+                        <span class="fa" data-bind="css: { 'fa-chevron-down': !showPersonDetails(), 'fa-chevron-up': showPersonDetails() }"></span>
+                    </a>
+                </div>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.NaatiNo'"></span>
+            </label>
+            <p class="form-control-static text-info">
+                <a href="#" target="_blank" data-bind="text: applicant.NaatiNumber, attr: { href: '#/person/' + applicant.NaatiNumber() }"></a>
+            </p>
+        </div>
+        <div class="col-md-4 form-group m-b-xs">
+            <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.GivenName'"></label>
+            <p class="form-control-static" data-bind="text: applicant.GivenName"></p>
+        </div>
+        <div class="col-md-3 form-group m-b-xs">
+            <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.FamilyName'"></label>
+            <p class="form-control-static" data-bind="text: applicant.FamilyName"></p>
+        </div>
+    </div>
+    <div class="animated fadeIn" data-bind="css: { 'hide': !showPersonDetails() }">
+        <div class="row">
+            <div class="col-md-4 form-group m-b-xs">
+                <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.OtherNames'"></label>
+                <p class="form-control-static" data-bind="text: applicant.OtherNames"></p>
+            </div>
+            <div class="col-md-4 form-group m-b-xs">
+                <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.DateOfBirth'"></label>
+                <p class="form-control-static">
+                    <span data-bind="textDate: applicant.DateOfBirth, tooltip: dateOfBirthTooltip"></span>
+                </p>
+            </div>
+            <div class="col-md-4 form-group m-b-xs">
+                <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.Gender'"></label>
+                <p class="form-control-static" data-bind="text: applicant.GenderText"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 form-group m-b-xs">
+                <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.PrimaryEmail'"></label>
+                <p class="form-control-static" data-bind="text: applicant.PrimaryEmail"></p>
+            </div>
+            <div class="col-md-4 form-group m-b-xs">
+                <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.PrimaryContactNumber'"></label>
+                <p class="form-control-static" data-bind="text: applicant.PrimaryContactNumberFormatted"></p>
+            </div>
+            <div class="col-md-4 form-group m-b-xs">
+                <label class="control-label pull-left w-sm m-r-sm" data-bind="reshtml: 'Naati.Resources.Application.resources.PrimaryAddress'"></label>
+                <p class="form-control-static applicant-address" data-bind="text: applicant.Address"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 form-group m-b-xs margin-left-xs">
+                <!--ko if: applicant.EthicalCompetency-->
+                <label class="display-text">
+                    <span class="padder-md ">
+                        <span class="inline-span-text text-green" data-bind="restext: 'Naati.Resources.Person.resources.Passed'"></span>
+                        <span class="inline-span-text" data-bind="restext: 'Naati.Resources.Person.resources.EthicalCompetency'"></span>
+                    </span>
+                </label>
+                <!-- /ko -->
+                <!--ko if: applicant.InterculturalCompetency-->
+                <label class="display-text">
+                    <span class="padder-md">
+                        <span class="inline-span-text text-green" data-bind="restext: 'Naati.Resources.Person.resources.Passed'"></span>
+                        <span class="inline-span-text" data-bind="restext: 'Naati.Resources.Person.resources.InterculturalCompetency'"></span>
+                    </span>
+                </label>
+                <!-- /ko -->
+                <!--ko if: applicant.KnowledgeTest-->
+                <label class="display-text">
+                    <span class="padder-md">
+                        <span class="inline-span-text text-green" data-bind="restext: 'Naati.Resources.Person.resources.Passed'"></span>
+                        <span class="inline-span-text" data-bind="restext: 'Naati.Resources.Person.resources.KnowledgeTest'"></span>
+                    </span>
+                </label>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+</div>

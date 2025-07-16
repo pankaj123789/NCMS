@@ -1,0 +1,55 @@
+﻿<div class="form">
+    <div class="row">
+        <div class="form-group m-l-md">
+            <p class="text-danger" data-bind="text: message"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group m-l-md">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.RefundPolicy'"></label>
+            <p class="form-control-static" data-bind="html: refundDetails.Policy"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group pull-left w-md m-l-md">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.InvoiceNumber'"></label>
+            <p class="form-control-static" data-bind="text: refundDetails.InvoiceNumber"></p>
+        </div>
+        <div class="form-group pull-left w-md m-l-md">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.PaidAmount'"></label>
+            <p class="form-control-static" data-bind="text: refundDetails.PaidAmount"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group m-l-md">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.CalculatedRefundAmount'"></label>
+            <p class="form-control-static" data-bind="text: calculatedAmount"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group pull-left w-md m-l-md">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.RefundPercentage'"></label>
+            <p class="form-control-static" data-bind="text: refundPercentage"></p>
+        </div>
+        <div class="form-group pull-left w-md m-l-md" data-bind="validationElement: refundDetails.RefundAmount">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.RefundAmount'"></label>
+            <input type="text" class="form-control" data-bind="value: refundDetails.RefundAmount, valueUpdate: 'input'">
+        </div>
+        <div class="form-group pull-left w-md m-l-md m-r-md" data-bind="validationElement: refundDetails.RefundMethodType">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.RefundMethod'"></label>
+            <!-- ko component: { name: 'select-component', params: refundMethodTypeOptions } --><!-- /ko -->
+        </div>
+    </div>
+    <div class="row" data-bind="visible: showBankDetails">
+        <div class="form-group m-l-md m-r-md col-8" data-bind="validationElement: refundDetails.BankDetails">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.BankDetails'"></label>
+            <textarea class="form-control" rows="5" maxlength="500" data-bind="value: refundDetails.BankDetails, valueUpdate: 'input'"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group m-l-md m-r-md col-8">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.RefundComments'"></label>
+            <textarea class="form-control" rows="5" maxlength="500" data-bind="value: refundDetails.Comments, valueUpdate: 'input'"></textarea>
+        </div>
+    </div>
+</div>

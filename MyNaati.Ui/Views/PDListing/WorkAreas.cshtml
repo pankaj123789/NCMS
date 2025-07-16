@@ -1,0 +1,64 @@
+﻿@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+@{
+    ViewBag.Subtitle = "Work Areas";
+    Layout = "~/Views/Shared/MasterPages/_PDListingWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Directory Listing", string.Empty)
+    };
+
+    const int numberOfColumns = 3;
+    var boxesPerColumn = (int)(Model.WorkAreas.Count / (float)numberOfColumns);
+    var columnStartIndex = 0;
+    var columnEndIndex = boxesPerColumn;
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+
+            $(formSelector + ' input[type="checkbox"]').change(function () {
+                var $checkbox = $(this);
+                $checkbox.val($checkbox.prop('checked'));
+            });
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>Tick your preferred translation and/or interpreting work area(s). If you do not specify a work area the words "any work area" will be published.</p>
+    </div>
+</div>
+<div class="row">
+    @for (var i = 0; i < numberOfColumns; i++)
+    {
+        var columnsSize = 12 / numberOfColumns;
+        var columnClass = string.Format("col-sm-{0}", columnsSize);
+
+        <div class="@columnClass">
+            @for (var j = columnStartIndex; j < columnEndIndex; j++)
+            {
+                var workArea = Model.WorkAreas[j];
+
+                <div class="checkbox">
+                    <label>
+                        <input name="WorkAreas[@j].IsChecked" type="checkbox" value="@workArea.IsChecked.ToString().ToLower()" />
+                        @workArea.Expertise
+                        <input name="WorkAreas[@j].Id" type="hidden" value="@workArea.Id" />
+                    </label>
+                </div>
+            }
+        </div>
+
+        columnStartIndex += boxesPerColumn;
+        columnEndIndex += boxesPerColumn;
+
+        if (columnEndIndex > Model.WorkAreas.Count)
+        {
+            columnEndIndex = Model.WorkAreas.Count;
+        }
+    }
+</div>

@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "File Too Large";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+
+    ViewBag.Title = "Failed to download the test assets as the files were too large";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("File Too Large", string.Empty)
+    };
+    var pathAndQuery = HttpContext.Current.Request.Url.PathAndQuery;
+    var webHome = pathAndQuery.Split('/')[1];
+}
+
+<div class="col-lg-12">
+    <h2 class="text-primary">Failed to download</h2>
+    <p>Failed to download the test assets as the files were too large. Please contact NAATI.</p>
+</div>

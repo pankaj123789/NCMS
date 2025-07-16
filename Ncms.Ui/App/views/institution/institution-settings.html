@@ -1,0 +1,37 @@
+﻿<div class="vbox" id="institutionSettings">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h2 class="m-n font-thin h3 text-black" data-bind="text: windowTitle"></h2>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Institution.resources.TrustedPayer'"></label>
+                    <div class="col-xs-4" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="i-switch i-switch-md bg-info">
+                            <input type="checkbox" data-bind="enableWithPermission: 'Organisation.Configure', checked: settings.TrustedPayer" />
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="click: save">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" data-bind="click: close">
+                <i class="fa fa-ban"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+# Default values for naati.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Default values for naati.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+sharedResourcesName: "naati"
+ncms:
+  image:
+   repository: ntacr3.azurecr.io/ncmsui
+  replicaCount: 2
+  nameOverride: ""
+  fullnameOverride: ""
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  sharedResourcesName: "naati"
+
+  service:
+   type: LoadBalancer
+   port: 80
+    # Internal ip of ncms
+   loadBalancerIP: 10.150.7.200
+
+  ingress:
+    hosts:
+      - host: chart-example.local
+  configMap:
+    data:
+      # Configuration values can be set as key-value properties 
+      "AccountingOperationsReportEmailsTo": "ncms_uat_batching_dl@f1solutions.com.au"
+      "EmailBatchingReportEmailsTo": "UAT_Batching@altf4solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Josh.Yip@f1solutions.com.au;Hector.Figueroa@f1solutions.com.au"
+      "AccountingOperationsLogEmailsTo": "ncms_uat_batching_dl@f1solutions.com.au"
+      "EmailBatchingLogEmailsTo": "UAT_Batching@altf4solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Josh.Yip@f1solutions.com.au;Hector.Figueroa@f1solutions.com.au"
+      "TestSittingsWithoutMaterialReminderEmailAddresses": "NCMSUATTestSittingsWithoutMaterialReminder@altf4solutions.com.au;Kevin.bleasdale@naati.com.au"
+      "AccountingOperationsReportEmailsFrom": "uat.ncms_batching@naati.com.au"
+      "AzureAppRedirectUri": "https://uatncms.naati.com.au"
+      "AadAuthRedirectUri": "https://uatncms.naati.com.au/api/System/AadResponse"
+      "EnvironmentType": "Uat"
+      "EnvironmentName": "UAT_CLOUD"
+
+       # Internal ip of mynaati
+      "MyNaatiUrl": "http://10.150.7.201"
+      "SecurePay_PaymentUrl": "https://test.securepay.com.au/xmlapi/payment"
+      "ShowAllMenuItems" : "False"
+      "DebugMode" : "False"
+      "logging_MinimumLevel": "Information"
+      "ScriptsTimeoutSeconds" : "1800"
+      "ReportingJobName": "NCMSReportingDatabase"
+      "SecretPrefix" : "UATDR"
+      "SecurePayResource": "https://payments-stest.npe.auspost.zone"
+      "SecurePayTokenUrl": "https://welcome.api2.sandbox.auspost.com.au/oauth/token"
+      "PayPalMode": "sandbox" 
+      "PayPalConnectionTimeout": "360000" 
+      "PayPalRequestRetries": "1" 
+      "WiiseAuthRedirectUri": "https://uatncms.naati.com.au/api/System/WiiseResponse"
+      "WiiseBaseUrl": "https://api.businesscentral.dynamics.com/v2.0/41bb5789-7441-4051-b270-c49376cfab28/wiisev2_sandbox/api/v2.0/companies(fed3af4d-b48d-eb11-8ce5-000d3aca5a42)"
+      "QrCodeAccessUrl": "https://mynaatiuat.naati.com.au/VerifyPractitioner?QrCode={0}"
+
+mynaati:
+  image:
+   repository: ntacr3.azurecr.io/mynaatiui
+  replicaCount: 2
+  nameOverride: ""
+  fullnameOverride: ""
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: false
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+  sharedResourcesName: "naati" 
+  
+  service:
+   type: LoadBalancer
+   port: 80
+   # Internal ip of mynaati
+   loadBalancerIP: 10.150.7.201
+
+  ingress:
+    hosts:
+      - host: chart-example.local
+  configMap:
+    data:
+      # Configuration values can be set as key-value properties 
+      "ExternalUrl_Applications_URL": "https://uatmynaati.naati.com.au/apply"
+      "BypassExaminerAuthentication": "true"
+      "kosettings_allowEmailPaste": "true"
+      "kosettings_skipRecaptcha": "true" 
+      "EnvironmentType": "Uat"
+      "EnvironmentName": "UAT_CLOUD"
+      "SecretPrefix": "UATDR"
+      # Internal ip of Ncms
+      "NcmsUrl": "http://10.150.7.200"
+      "SecurePay_PaymentUrl": "https://test.securepay.com.au/xmlapi/payment"
+      "DebugMode" : "False"
+      "EnableSwagger" : "False"
+      "logging_MinimumLevel": "Information"
+      "AccountingOperationsReportEmailsTo": "UAT_Batching@altf4solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Josh.Yip@f1solutions.com.au;Hector.Figueroa@f1solutions.com.au"
+      "EmailBatchingReportEmailsTo": "UAT_Batching@altf4solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Josh.Yip@f1solutions.com.au;Hector.Figueroa@f1solutions.com.au"
+      "AccountingOperationsLogEmailsTo": "UAT_Batching@altf4solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Josh.Yip@f1solutions.com.au;Hector.Figueroa@f1solutions.com.au"
+      "EmailBatchingLogEmailsTo": "UAT_Batching@altf4solutions.com.au;Pasindu.Wijayatilaka@f1solutions.com.au;Josh.Yip@f1solutions.com.au;Hector.Figueroa@f1solutions.com.au"
+      "AccountingOperationsReportEmailsFrom": "uat.ncms_batching@naati.com.au"
+      "SecurePayResource": "https://payments-stest.npe.auspost.zone"
+      "SecurePayTokenUrl": "https://welcome.api2.sandbox.auspost.com.au/oauth/token"
+      "SecurePayJavascriptSDKUrl": "https://payments-stest.npe.auspost.zone/v3/ui/client/securepay-ui.min.js"
+      "PayPalMode": "sandbox" 
+      "PayPalConnectionTimeout": "360000" 
+      "PayPalRequestRetries": "1" 
+      "WiiseAuthRedirectUri": "https://uatncms.naati.com.au/api/System/WiiseResponse"
+      "WiiseBaseUrl": "https://api.businesscentral.dynamics.com/v2.0/41bb5789-7441-4051-b270-c49376cfab28/wiisev2_sandbox/api/v2.0/companies(fed3af4d-b48d-eb11-8ce5-000d3aca5a42)"
+      "QrCodeAccessUrl": "https://mynaatiuat.naati.com.au/VerifyPractitioner?QrCode={0}"

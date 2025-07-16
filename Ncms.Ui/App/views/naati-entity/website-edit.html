@@ -1,0 +1,57 @@
+﻿<div id="websiteEdit" class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: windowTitle"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="wrapper-md form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.Website'"></label>
+                <div class="col-xs-9 col-sm-4">
+                    <input id="websiteInput" type="text" class="form-control" data-bind="value: website.Url, valueUpdate: 'input'" />
+                </div>
+            </div>
+
+            <!-- below is the code for the include in pd switch -->
+            <!--<div class="form-group">
+                <label class="col-xs-2 control-label" data-bind="restext: 'Naati.Resources.Person.resources.IncludeInPd'"></label>
+                <div class="col-xs-2" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="i-switch i-switch-md bg-info">
+                        <input type="checkbox" data-bind="checked: website.IncludeInPd" />
+                        <i></i>
+                    </label>
+                </div>
+            </div>-->
+
+            <div class="form-group">
+                <div class="col-xs-2">
+                </div>
+                <div class="col-xs-2">
+                    <button class="btn btn-primary" data-bind="enable: formattedUrl().length, click: gotoWebsite">
+                        <i class="glyphicon glyphicon-arrow-right"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Shared.resources.GoToWebsite'"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="enable: canSave, click: save">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" data-bind="click: tryClose">
+                <i class="fa fa-ban"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

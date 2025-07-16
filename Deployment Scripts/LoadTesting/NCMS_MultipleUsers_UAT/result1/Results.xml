@@ -1,0 +1,928 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE Report
+[
+<!ELEMENT Report (General ,(Doc|BPT)) >
+<!ATTLIST Report ver CDATA #REQUIRED tmZone CDATA #REQUIRED>
+
+<!ELEMENT General ( DocLocation ) >
+<!ATTLIST General productName CDATA #REQUIRED productVer CDATA #REQUIRED os CDATA #REQUIRED host CDATA #REQUIRED qcserver CDATA #IMPLIED qcproject CDATA #IMPLIED SolManSolutionId CDATA #IMPLIED SolManProjectId CDATA #IMPLIED SolManTestPlanId CDATA #IMPLIED SolManTestPackageId CDATA #IMPLIED SolManUserInfoData CDATA #IMPLIED  >
+
+<!ELEMENT BPT (DName,Res,DVer?,TSet?,TInst?,NodeArgs,AdditionalInfo*,Doc*) >
+<!ATTLIST BPT rID ID #REQUIRED >
+
+<!ELEMENT Doc (DName,ConfName?,Res,DVer?,TSet?,TInst?,RunType?,DT?,AdditionalInfo*,Step*,DIter*,Step*,Action*,Doc*,Summary?,TestMaintenanceSummary*,NodeArgs?) >
+<!ATTLIST Doc rID ID #REQUIRED type (Test|BC|BPTWrapperTest|Flow|Group|Action) "Test" productName CDATA #REQUIRED BCIter CDATA #IMPLIED >
+
+<!ELEMENT RunType ( #PCDATA )>
+<!ATTLIST RunType fmStep (False|True) "False" batch (False|True) "False" upDesc (False|True) "False" upChk (False|True) "False" upAS (False|True) "False">
+
+<!ELEMENT DName ( #PCDATA ) >
+
+<!ELEMENT ConfName ( #PCDATA ) >
+
+<!ELEMENT Res ( #PCDATA ) >
+
+<!ELEMENT AdditionalInfo (AdditionalDataName,AdditionalDataValue ) >
+
+<!ELEMENT AdditionalDataName ( #PCDATA ) >
+
+<!ELEMENT AdditionalDataValue ( #PCDATA ) >
+
+<!ELEMENT DVer ( #PCDATA ) >
+
+<!ELEMENT TSet ( #PCDATA ) >
+
+<!ELEMENT TInst ( #PCDATA ) >
+
+<!ELEMENT DIter (Step*,Action+,Summary?,NodeArgs)>
+<!ATTLIST DIter rID ID #REQUIRED iterID CDATA #REQUIRED>
+
+<!ELEMENT DocLocation ( #PCDATA )>
+
+<!ELEMENT Action (AName,AIter*,(Step|HtmlStep|Action)*, Summary,ActionMaintenanceSummary*, NodeArgs ) >
+<!ATTLIST Action rID ID #REQUIRED>
+
+<!ELEMENT AIter ((Step|HtmlStep|Action)*,DataMapping?, Summary?,NodeArgs) >
+<!ATTLIST AIter rID ID #REQUIRED iterID CDATA #REQUIRED isCountable (False|True) "False" >
+
+<!ELEMENT AName ( #PCDATA ) >
+
+<!ELEMENT TestMaintenanceSummary (ActionMaintenanceSummary*) >
+<!ATTLIST TestMaintenanceSummary ObjectsAdded CDATA #REQUIRED ObjectsUpdated CDATA #REQUIRED StepsUpdated CDATA #REQUIRED StepsComments CDATA #REQUIRED><!ELEMENT ActionMaintenanceSummary (ObjectChange* ) >
+<!ATTLIST ActionMaintenanceSummary Action CDATA #REQUIRED Objects CDATA #REQUIRED Updated CDATA #REQUIRED LinesTotal CDATA #REQUIRED Added CDATA #REQUIRED LinesUpdated CDATA #REQUIRED>
+
+<!ELEMENT ObjectChange  (Hierarchy, PropertyChangeList* ) >
+<!ATTLIST ObjectChange Operation CDATA #IMPLIED OriginalRepository CDATA #IMPLIED>
+
+<!ELEMENT PropertyChangeList (PropertyDef*) >
+
+<!ELEMENT PropertyDef (OriginalValue, NewValue) >
+<!ATTLIST PropertyDef PropName CDATA #REQUIRED OriginRegularExpression (True|False) "False" NewRegularExpression (True|False) "False" AddedProperty (True|False) "False" >
+
+<!ELEMENT OriginalValue ( #PCDATA )>
+
+<!ELEMENT NewValue ( #PCDATA )>
+
+<!ELEMENT Hierarchy  (ObjectName, Hierarchy*) >
+<!ATTLIST Hierarchy MicClass CDATA #REQUIRED>
+
+<!ELEMENT ObjectName  ( #PCDATA ) >
+
+<!ELEMENT Step (Obj,Details,Time,TimeTick* ,(Step|HtmlStep|Doc)*, DataMapping?, NodeArgs) >
+<!ATTLIST Step rID ID #REQUIRED retval CDATA #IMPLIED>
+
+<!ELEMENT HtmlStep (HTML,TimeTick*,(Step|HtmlStep|Doc)*,NodeArgs) >
+<!ATTLIST HtmlStep rID ID #REQUIRED >
+
+<!ELEMENT Obj ( #PCDATA ) >
+<!ATTLIST Obj plainTxt (False|True) "True">
+
+<!ELEMENT Details ( #PCDATA ) >
+<!ATTLIST Details plainTxt (False|True) "True">
+
+<!ELEMENT Time ( #PCDATA ) >
+
+<!ELEMENT HTML ( #PCDATA ) >
+
+<!ELEMENT Disp ( #PCDATA ) >
+
+<!ELEMENT TimeTick ( #PCDATA ) >
+
+<!ELEMENT DataMapping ( DataMappedItem* )>
+<!ELEMENT DataMappedItem EMPTY >
+<!ATTLIST DataMappedItem dsName CDATA #REQUIRED >
+<!ATTLIST DataMappedItem rowId CDATA #REQUIRED >
+
+<!ELEMENT NodeArgs (Disp,TopPane?,BtmPane?,ExtendedInfo? )>
+<!ATTLIST NodeArgs eType CDATA #REQUIRED icon CDATA #REQUIRED nRep CDATA #REQUIRED UserNote CDATA #IMPLIED filter (False|True) "True">
+<!ATTLIST NodeArgs status (Passed|Failed|Done|Warning|Information) "Done">
+<!ATTLIST NodeArgs iconSel CDATA #IMPLIED nType CDATA #IMPLIED MovieMarker CDATA "">
+<!ATTLIST NodeArgs Source CDATA #IMPLIED SourceLine CDATA #IMPLIED StepFlowItemKey CDATA #IMPLIED >
+
+<!ELEMENT TopPane (Path)>
+
+<!ELEMENT BtmPane ( (Path|WR)?,ASHilite?)>
+<!ATTLIST BtmPane vType CDATA "HTML">
+
+<!ELEMENT Path ( #PCDATA ) >
+
+<!ELEMENT ASHilite ( #PCDATA ) >
+
+<!ELEMENT WR ( #PCDATA ) >
+
+<!ELEMENT ExtendedInfo ( StepData ) >
+
+<!ATTLIST ExtendedInfo StepType CDATA #REQUIRED>
+<!ELEMENT DT (NodeArgs) >
+<!ATTLIST DT rID ID #REQUIRED>
+
+<!ELEMENT Summary (Param*)>
+<!ATTLIST Summary sTime CDATA #IMPLIED eTime CDATA #IMPLIED passed CDATA #IMPLIED failed CDATA #IMPLIED warnings CDATA #IMPLIED retval CDATA #IMPLIED stopped (False|True) "False" >
+
+<!ELEMENT Param (ParamName,ParamVal)+ >
+<!ATTLIST Param paramInOut (In|Out) "In">
+
+<!ELEMENT ParamName ( #PCDATA ) >
+
+<!ELEMENT ParamVal ( #PCDATA ) >
+
+]
+>
+<Report ver="2.0" tmZone="AUS Eastern Standard Time">
+<General productName="Vugen" productVer="12" os="" host="WIN-89C9EER8621"><DocLocation><![CDATA[C:\LoadTesting\NHMRC\R4.0\Scripts\Perf_Apply_Formal_Ideas]]></DocLocation></General>
+<Doc rID="T1"   productName= "Vugen"  >
+<DName><![CDATA[Perf_Apply_Formal_Ideas]]></DName>
+<Res><![CDATA[result1]]></Res>
+<Action rID="T2">
+<AName><![CDATA[Init]]></AName>
+<Summary sTime="28-Jan-21 - 8:08:54" eTime="28-Jan-21 - 8:08:54" passed="0" failed="0" warnings="0" ></Summary>
+<NodeArgs eType="StartAction" icon="2" nRep="5" >
+<Disp><![CDATA[Init Summary]]></Disp>
+</NodeArgs>
+</Action>
+<DIter rID="T3" iterID="1" >
+<Action rID="T4">
+<AName><![CDATA[Action]]></AName>
+<Step rID="T5">
+<Obj plainTxt="False" ><![CDATA[Navigate]]></Obj>
+<Details plainTxt="False" ><![CDATA[1: Navigate to https://nhmrcomnistarper...olutions.com.au/ was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:08:57]]></Time>
+<TimeTick>1611781737</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="9" status="Passed" >
+<Disp><![CDATA[Navigate]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T6">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[2: Click on User name textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:08:58]]></Time>
+<TimeTick>1611781738</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="10" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T7">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[3: Type clara.shepherd.1408@testdata.email in User name textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:08:59]]></Time>
+<TimeTick>1611781739</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="11" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T8">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[6: Type *********** in Password passwordbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:00]]></Time>
+<TimeTick>1611781740</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="12" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T9">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[7: Click on Log in button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:02]]></Time>
+<TimeTick>1611781742</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="13" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T10">
+<Obj plainTxt="False" ><![CDATA[Wait]]></Obj>
+<Details plainTxt="False" ><![CDATA[8: Wait until Agree button exists was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:02]]></Time>
+<TimeTick>1611781742</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="14" status="Passed" >
+<Disp><![CDATA[Wait]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T11">
+<Obj plainTxt="False" ><![CDATA[Wait]]></Obj>
+<Details plainTxt="False" ><![CDATA[: Wait until Apply now button exists was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:22]]></Time>
+<TimeTick>1611781762</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="15" status="Passed" >
+<Disp><![CDATA[Wait]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T12">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[8.1: Click on Agree button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:22]]></Time>
+<TimeTick>1611781762</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="16" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T13">
+<Obj plainTxt="False" ><![CDATA[Wait]]></Obj>
+<Details plainTxt="False" ><![CDATA[: Wait until Name application  exists was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:28]]></Time>
+<TimeTick>1611781768</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="17" status="Passed" >
+<Disp><![CDATA[Wait]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T14">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[13: Click on Apply now button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:28]]></Time>
+<TimeTick>1611781768</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="18" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T15">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[16: Click on Application title textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:29]]></Time>
+<TimeTick>1611781769</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="19" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T16">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[17: Type LT IDEAS 71125951 to be ... New South Wales in Application title textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:31]]></Time>
+<TimeTick>1611781771</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="20" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T17">
+<Obj plainTxt="False" ><![CDATA[Wait]]></Obj>
+<Details plainTxt="False" ><![CDATA[: Wait until Invite to Register &... button exists was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:47]]></Time>
+<TimeTick>1611781787</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="21" status="Passed" >
+<Disp><![CDATA[Wait]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T18">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[19: Click on Done button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:47]]></Time>
+<TimeTick>1611781787</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="22" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T19">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[21: Click on Administering institution... textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:48]]></Time>
+<TimeTick>1611781788</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="23" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T20">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[22: Type University of New South Wales in Administering institution... textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:49]]></Time>
+<TimeTick>1611781789</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="24" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T21">
+<Obj plainTxt="False" ><![CDATA[Select]]></Obj>
+<Details plainTxt="False" ><![CDATA[23: Select TC.getParam("AI") from Administering institution... autocomplete was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:50]]></Time>
+<TimeTick>1611781790</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="25" status="Passed" >
+<Disp><![CDATA[Select]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T22">
+<Obj plainTxt="False" ><![CDATA[Select]]></Obj>
+<Details plainTxt="False" ><![CDATA[24: Select 1 from Grant duration   in years... listbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:51]]></Time>
+<TimeTick>1611781791</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="26" status="Passed" >
+<Disp><![CDATA[Select]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T23">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[25: Click on 2 No label was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:52]]></Time>
+<TimeTick>1611781792</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="27" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T24">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[26: Type To analyse vitamin D lev...mmatory markers. in Application DetailsParticipating... textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:55]]></Time>
+<TimeTick>1611781795</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="28" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T25">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[27: Click on Application DetailsParticipating... textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:56]]></Time>
+<TimeTick>1611781796</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="29" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T26">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[28: Type Investigte vitamin D lev...mmatory markers. in Application DetailsParticipating... textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:09:58]]></Time>
+<TimeTick>1611781798</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="30" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T27">
+<Obj plainTxt="False" ><![CDATA[Scroll]]></Obj>
+<Details plainTxt="False" ><![CDATA[36: Scroll browser window to 100px / 3000px was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:00]]></Time>
+<TimeTick>1611781800</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="31" status="Passed" >
+<Disp><![CDATA[Scroll]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T28">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[40: Click on 2 Yes label was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:01]]></Time>
+<TimeTick>1611781801</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="32" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T29">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[42: Click on 5 Yes label was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:01]]></Time>
+<TimeTick>1611781801</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="33" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T30">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[43: Click on 5 Yes label was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:02]]></Time>
+<TimeTick>1611781802</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="34" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T31">
+<Obj plainTxt="False" ><![CDATA[Wait]]></Obj>
+<Details plainTxt="False" ><![CDATA[: Wait until Research institution...  exists was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:04]]></Time>
+<TimeTick>1611781804</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="35" status="Passed" >
+<Disp><![CDATA[Wait]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T32">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[45: Click on Next Page button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:04]]></Time>
+<TimeTick>1611781804</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="36" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T33">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[47: Click on ContactFormLookups.Contacts... textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:05]]></Time>
+<TimeTick>1611781805</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="37" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T34">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[49: Type University of New South Wales in Institutions Q92 textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:06]]></Time>
+<TimeTick>1611781806</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="38" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T35">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[51: Click on Institutions Q92 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:07]]></Time>
+<TimeTick>1611781807</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="39" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T36">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[53: Click on Research effort Q21 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:07]]></Time>
+<TimeTick>1611781807</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="40" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T37">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[55: Type 100 in Research effort Q21 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:11]]></Time>
+<TimeTick>1611781811</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="41" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T38">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[57: Type testing in Department Q20 textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:13]]></Time>
+<TimeTick>1611781813</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="42" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T39">
+<Obj plainTxt="False" ><![CDATA[Wait]]></Obj>
+<Details plainTxt="False" ><![CDATA[: Wait until Research Classification  exists was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:17]]></Time>
+<TimeTick>1611781817</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="43" status="Passed" >
+<Disp><![CDATA[Wait]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T40">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[58: Click on Next Page button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:17]]></Time>
+<TimeTick>1611781817</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="44" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T41">
+<Obj plainTxt="False" ><![CDATA[Select]]></Obj>
+<Details plainTxt="False" ><![CDATA[60: Select Basic Science from Broad research area * listbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:19]]></Time>
+<TimeTick>1611781819</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="45" status="Passed" >
+<Disp><![CDATA[Select]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T42">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[61: Click on Field of research * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:20]]></Time>
+<TimeTick>1611781820</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="46" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T43">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[62: Type BIOCHEMISTRY in Field of research * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:21]]></Time>
+<TimeTick>1611781821</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="47" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T44">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[64: Click on / BIOCHEMISTRY AND CELL... option was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:21]]></Time>
+<TimeTick>1611781821</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="48" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T45">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[66: Click on Save button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:26]]></Time>
+<TimeTick>1611781826</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="49" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T46">
+<Obj plainTxt="False" ><![CDATA[Dialog - Alert]]></Obj>
+<Details plainTxt="False" ><![CDATA[67: Press OK in alert dialog was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:27]]></Time>
+<TimeTick>1611781827</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="50" status="Passed" >
+<Disp><![CDATA[Dialog - Alert]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T47">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[69: Click on Close button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:27]]></Time>
+<TimeTick>1611781827</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="51" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T48">
+<Obj plainTxt="False" ><![CDATA[Select]]></Obj>
+<Details plainTxt="False" ><![CDATA[73: Select Diabetes from Peer Review Areas Q1 * listbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:32]]></Time>
+<TimeTick>1611781832</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="52" status="Passed" >
+<Disp><![CDATA[Select]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T49">
+<Obj plainTxt="False" ><![CDATA[Select]]></Obj>
+<Details plainTxt="False" ><![CDATA[75: Select Endocrinology from Peer Review Areas Q1 * listbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:33]]></Time>
+<TimeTick>1611781833</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="53" status="Passed" >
+<Disp><![CDATA[Select]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T50">
+<Obj plainTxt="False" ><![CDATA[Select]]></Obj>
+<Details plainTxt="False" ><![CDATA[77: Select Inflammation from Peer Review Areas Q1 * listbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:34]]></Time>
+<TimeTick>1611781834</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="54" status="Passed" >
+<Disp><![CDATA[Select]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T51">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[106: Click on Keyword 1 Q719 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:38]]></Time>
+<TimeTick>1611781838</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="55" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T52">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[107: Type blood lipid metabolism in Keyword 1 Q719 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:39]]></Time>
+<TimeTick>1611781839</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="56" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T53">
+<Obj plainTxt="False" ><![CDATA[Press Key]]></Obj>
+<Details plainTxt="False" ><![CDATA[108: Press key Enter on Keyword 1 Q719 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:40]]></Time>
+<TimeTick>1611781840</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="57" status="Passed" >
+<Disp><![CDATA[Press Key]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T54">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[110: Type hyperlipidaemia in Keyword 2 Q716 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:42]]></Time>
+<TimeTick>1611781842</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="58" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T55">
+<Obj plainTxt="False" ><![CDATA[Press Key]]></Obj>
+<Details plainTxt="False" ><![CDATA[111: Press key Enter on Keyword 2 Q716 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:43]]></Time>
+<TimeTick>1611781843</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="59" status="Passed" >
+<Disp><![CDATA[Press Key]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T56">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[113: Type dyslipidaemia in Keyword 3 Q713 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:45]]></Time>
+<TimeTick>1611781845</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="60" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T57">
+<Obj plainTxt="False" ><![CDATA[Press Key]]></Obj>
+<Details plainTxt="False" ><![CDATA[114: Press key Enter on Keyword 3 Q713 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:46]]></Time>
+<TimeTick>1611781846</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="61" status="Passed" >
+<Disp><![CDATA[Press Key]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T58">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[116: Type atherosclerosis in Keyword 4 Q710 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:48]]></Time>
+<TimeTick>1611781848</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="62" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T59">
+<Obj plainTxt="False" ><![CDATA[Press Key]]></Obj>
+<Details plainTxt="False" ><![CDATA[117: Press key Enter on Keyword 4 Q710 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:49]]></Time>
+<TimeTick>1611781849</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="63" status="Passed" >
+<Disp><![CDATA[Press Key]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T60">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[119: Type insulin in Keyword 5 Q97 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:51]]></Time>
+<TimeTick>1611781851</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="64" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T61">
+<Obj plainTxt="False" ><![CDATA[Press Key]]></Obj>
+<Details plainTxt="False" ><![CDATA[120: Press key Enter on Keyword 5 Q97 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:52]]></Time>
+<TimeTick>1611781852</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="65" status="Passed" >
+<Disp><![CDATA[Press Key]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T62">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[123: Click on Research Classification link was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:57]]></Time>
+<TimeTick>1611781857</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="66" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T63">
+<Obj plainTxt="False" ><![CDATA[Wait]]></Obj>
+<Details plainTxt="False" ><![CDATA[: Wait until Research Team  exists was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:59]]></Time>
+<TimeTick>1611781859</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="67" status="Passed" >
+<Disp><![CDATA[Wait]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T64">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[135: Click on Next Page button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:10:59]]></Time>
+<TimeTick>1611781859</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="68" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T65">
+<Obj plainTxt="False" ><![CDATA[Select]]></Obj>
+<Details plainTxt="False" ><![CDATA[136: Select Chief Investigator A from Role Q801 * listbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:00]]></Time>
+<TimeTick>1611781860</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="69" status="Passed" >
+<Disp><![CDATA[Select]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T66">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[137: Type clara.shepherd.1408@testdata.email in Research effort Q21 * textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:02]]></Time>
+<TimeTick>1611781862</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="70" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T67">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[139: Click on / Yes label was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:07]]></Time>
+<TimeTick>1611781867</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="71" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T68">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[142: Click on / Yes label was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:11]]></Time>
+<TimeTick>1611781871</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="72" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T69">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[144: Click on 2000 characters character... textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:12]]></Time>
+<TimeTick>1611781872</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="73" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T70">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[145: Type qualifications information in 2000 characters character... textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:13]]></Time>
+<TimeTick>1611781873</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="74" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T71">
+<Obj plainTxt="False" ><![CDATA[Wait]]></Obj>
+<Details plainTxt="False" ><![CDATA[: Wait until Ethics  exists was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:18]]></Time>
+<TimeTick>1611781878</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="75" status="Passed" >
+<Disp><![CDATA[Wait]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T72">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[148: Click on Ethics link was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:18]]></Time>
+<TimeTick>1611781878</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="76" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T73">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[152: Click on 2 No label was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:22]]></Time>
+<TimeTick>1611781882</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="77" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T74">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[154: Click on / No label was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:25]]></Time>
+<TimeTick>1611781885</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="78" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T75">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[156: Click on 1093 No label was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:28]]></Time>
+<TimeTick>1611781888</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="79" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T76">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[158: Click on 1095 No label was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:31]]></Time>
+<TimeTick>1611781891</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="80" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T77">
+<Obj plainTxt="False" ><![CDATA[Wait]]></Obj>
+<Details plainTxt="False" ><![CDATA[: Wait until Grant Proposal  exists was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:39]]></Time>
+<TimeTick>1611781899</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="81" status="Passed" >
+<Disp><![CDATA[Wait]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T78">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[161: Click on Next Page button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:40]]></Time>
+<TimeTick>1611781900</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="82" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T79">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[163: Click on Upload New button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:48]]></Time>
+<TimeTick>1611781908</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="83" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T80">
+<Obj plainTxt="False" ><![CDATA[Set]]></Obj>
+<Details plainTxt="False" ><![CDATA[164: Set c:\Temp\R4.0_Dummy_GrantProposal_1MB.pdf on Select .pdf file filebox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:49]]></Time>
+<TimeTick>1611781909</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="84" status="Passed" >
+<Disp><![CDATA[Set]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T81">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[166: Click on Start upload button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:50]]></Time>
+<TimeTick>1611781910</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="85" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T82">
+<Obj plainTxt="False" ><![CDATA[Wait]]></Obj>
+<Details plainTxt="False" ><![CDATA[: Wait until Strategic Priorities...  exists was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:55]]></Time>
+<TimeTick>1611781915</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="86" status="Passed" >
+<Disp><![CDATA[Wait]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T83">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[168: Click on Next button was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:11:55]]></Time>
+<TimeTick>1611781915</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="87" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T84">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[173: Click on National Health and Medical... checkbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:12:21]]></Time>
+<TimeTick>1611781941</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="88" status="Failed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="28-Jan-21 - 8:08:54" eTime="28-Jan-21 - 8:12:21" passed="79" failed="1" warnings="0" ></Summary>
+<NodeArgs eType="StartAction" icon="2" nRep="8" status="Failed" >
+<Disp><![CDATA[Action Summary]]></Disp>
+</NodeArgs>
+</Action>
+<NodeArgs eType="StartIteration" icon="3" nRep="7" status="Failed" >
+<Disp><![CDATA[Perf_Apply_Formal_Ideas Iteration 1 (Row 1)]]></Disp>
+</NodeArgs>
+</DIter>
+<DIter rID="T85" iterID="2" >
+<Action rID="T86">
+<AName><![CDATA[Action]]></AName>
+<Step rID="T87">
+<Obj plainTxt="False" ><![CDATA[Navigate]]></Obj>
+<Details plainTxt="False" ><![CDATA[1: Navigate to https://nhmrcomnistarper...olutions.com.au/ was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:12:23]]></Time>
+<TimeTick>1611781943</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="93" status="Passed" >
+<Disp><![CDATA[Navigate]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T88">
+<Obj plainTxt="False" ><![CDATA[Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[2: Click on User name textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:12:24]]></Time>
+<TimeTick>1611781944</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="94" status="Passed" >
+<Disp><![CDATA[Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T89">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[3: Type jade.mcclain.1455@testdata.email in User name textbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:12:25]]></Time>
+<TimeTick>1611781945</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="95" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T90">
+<Obj plainTxt="False" ><![CDATA[Type]]></Obj>
+<Details plainTxt="False" ><![CDATA[6: Type *********** in Password passwordbox was finished]]></Details>
+<Time><![CDATA[28-Jan-21 - 8:12:26]]></Time>
+<TimeTick>1611781946</TimeTick>
+<NodeArgs eType="General" icon="0" nRep="96" status="Passed" >
+<Disp><![CDATA[Type]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="28-Jan-21 - 8:12:21" eTime="28-Jan-21 - 8:12:26" passed="4" failed="0" warnings="0" ></Summary>
+<NodeArgs eType="StartAction" icon="2" nRep="92" status="Passed" >
+<Disp><![CDATA[Action Summary]]></Disp>
+</NodeArgs>
+</Action>
+<NodeArgs eType="StartIteration" icon="3" nRep="91" status="Passed" >
+<Disp><![CDATA[Perf_Apply_Formal_Ideas Iteration 2 (Row 2)]]></Disp>
+</NodeArgs>
+</DIter>
+<Summary sTime="28-Jan-21 - 8:08:50" eTime="28-Jan-21 - 8:12:33" passed="83" failed="1" warnings="0" ></Summary>
+<NodeArgs eType="StartTest" icon="1" nRep="4" status="Failed" >
+<Disp><![CDATA[Test Perf_Apply_Formal_Ideas Summary]]></Disp>
+</NodeArgs>
+</Doc>
+</Report>

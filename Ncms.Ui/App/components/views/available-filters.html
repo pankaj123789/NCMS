@@ -1,0 +1,12 @@
+﻿<h4 class="font-thin m-t-none m-b wrapper-sm" data-bind="reshtml: 'Naati.Resources.Test.resources.AvailableFilters'"></h4>
+<div class="available-filters">
+    <ul data-bind="foreach: { data: currentFilters, as: 'filter' }" class="nav">
+        <li data-bind="css: filter.css">
+            <a href="#" data-bind="click: function() { $parent.select(filter); }">
+                <i class="fa fa-arrow-circle-left"></i>
+                <span data-bind="reshtml: filter.name"></span>
+            </a>
+        </li>
+    </ul>
+    <a href="#" data-bind="if: currentFilters().length == 0"><span data-bind="reshtml: 'Naati.Resources.Test.resources.AllFiltersWereAdded'"></span></a>
+</div>

@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+
+namespace F1Solutions.Naati.Common.Contracts.Dal.DTO
+{
+    public class CredentialRequestTestSessionDto
+    {
+        public int CredentialTestSessionId { get; set; }
+        public int TestSessionId { get; set; }
+        public string TestLocation { get; set; }
+        public string TestLocationState { get; set; }
+        public string Name { get; set; }
+        public DateTime TestDate { get; set; }
+        public bool Rejected { get; set; }
+        public bool Completed { get; set; }
+        public bool Sat { get; set; }
+        public bool HasAssets { get; set; }
+        public bool HasExaminers { get; set; }
+        public bool HasPaidReviewExaminers { get; set; }
+        public string VenueName { get; set; }
+        public int? TestResultStatusId { get; set; }
+        public int? TestStatusTypeId { get; set; }
+        public int? TestResultId { get; set; }
+        public int TotalTestResults { get; set; }
+        public bool Supplementary { get; set; }
+        public bool HasDefaultSpecification { get; set; }
+        public bool? TestResultChecked { get; set; }
+        public bool? AllowIssue { get; set; }
+        public int TestSpecificationId { get; set; }
+        public int MarkingSchemaTypeId { get; set; }
+        public IEnumerable<TestSittingMaterialDto> Materials { get; set; }
+        public bool ShowNonPreferredTestLocationInfo { get; set; }
+        public virtual bool? EligibleForConcededPass { get; set; }
+        public virtual bool? EligibleForSupplementary { get; set; }
+        public bool AutomaticIssuing { get; set; }
+        public double? MaxScoreDifference { get; set; }
+        public DateTime? RejectedDate { get; set; }
+        public DateTime AllocatedDate { get; set; }
+    }
+}

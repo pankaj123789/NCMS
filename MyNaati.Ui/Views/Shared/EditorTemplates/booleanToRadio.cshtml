@@ -1,0 +1,57 @@
+﻿@model bool?
+<div class="editorSet">
+    @{
+        var labelWidth = (ViewData["LabelWidth"] != null && ViewData["LabelWidth"] != string.Empty) ? ViewData["LabelWidth"].ToString() + "px" : "100px";
+        var displayName = ViewData.ModelMetadata.DisplayName;
+        if (!(ViewData["OmitColon"] is bool && (bool)ViewData["OmitColon"] == true))
+        {
+            displayName += ":";
+        }
+    }
+    <div class="editorLabel" style="width:@labelWidth; padding-top: 3px;">
+        @displayName
+    </div>
+    <div class="editorValue @ViewData.TemplateInfo.GetFullHtmlFieldId("")">
+        <label>
+            @if (Model == true)
+            {
+                @Html.RadioButtonFor(e => Model, true, new { @checked = "checked" })
+            }
+            else
+            {
+                @Html.RadioButtonFor(e => Model, true)
+            }
+            @ViewData["TrueLabel"].ToString()
+        </label>
+            <label>
+                @if (Model == false)
+                {
+                    @Html.RadioButtonFor(e => Model, false, new { @checked = "checked" })
+                }
+                else
+                {
+                    @Html.RadioButtonFor(e => Model, false)
+                }
+                @ViewData["FalseLabel"].ToString()
+                @if (ViewData["NullLabel"] == null)
+                {
+                    @Html.ValidationMessageFor(e => Model, "*")
+                }
+            </label>
+        @if (ViewData["NullLabel"] != null)
+        {
+            <label>
+                @if (Model == null)
+                {
+                    @Html.RadioButtonFor(e => Model, "", new { @checked = "checked" })
+                }
+                @ViewData["NullLabel"].ToString()
+            </label>
+            @Html.ValidationMessageFor(e => Model, "*")
+        }
+        @if (ViewData["Note"] != null)
+        {
+            <br />@ViewData["Note"]
+        }
+    </div>
+</div>

@@ -1,0 +1,21 @@
+using System;
+using System.Collections.Generic;
+
+namespace F1Solutions.Naati.Common.Contracts.Dal
+{
+    public class TestMaterialContract
+    {
+        public int TestMaterialID { get; set; }
+        public int JobExaminerID { get; set; }
+        public int JobID { get; set; }
+        public string Language { get; set; }
+        public string Category { get; set; }
+        public string Direction { get; set; }
+        public string Level { get; set; }
+        public DateTime? DueDate { get; set; }
+        public List<MaterialContract> Materials { get; set; }
+        public DateTime? DateReceived { get; set; }
+        public decimal? Cost { get; set; }
+        public bool Approved { get; set; }
+    }
+}

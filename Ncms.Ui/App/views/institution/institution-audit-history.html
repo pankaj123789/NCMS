@@ -1,0 +1,38 @@
+﻿<div id="institutionAuditHistory" tabindex="-1" role="document">
+    <div class="panel panel-default">
+        <div class="panel-primary">
+            <div class="panel-heading">
+                <h2 class="panel-title" data-bind="text: windowTitle"></h2>
+            </div>
+        </div>
+        <div class="wrapper-sm">
+            <table class="table table-bordered table-striped m-b-none">
+                <thead>
+                    <tr>
+                        <th class="w-sm">Record</th>
+                        <th class="w-xxl">Change Description</th>
+                        <th class="w-sm">Updated By</th>
+                        <th class="w-sm">Updated Date</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: audithistory.AuditHistory">
+                <tr>
+                    <td data-bind="text: RecordName"></td>
+                    <td data-bind="text: ChangeDetail"></td>
+                    <td data-bind="text: Username"></td>
+                    <td data-bind="text: $root.dateFormatted(DateTime())"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: close">
+                    <i class="fa fa-times"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span>
+                </button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

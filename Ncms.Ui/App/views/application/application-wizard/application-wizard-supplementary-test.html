@@ -1,0 +1,56 @@
+﻿<div>
+    <div class="form">
+        <div class="form-group" data-bind="validationElement: specification.Components">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.Application.resources.SupplementaryTestHeader'"></label>
+            <span class="help-block" data-bind="validationMessage: specification.Components"></span>
+        </div>
+    </div>
+    <ul class="list-group list-group-alt list-group-lg no-borders pull-in" data-bind="foreach: test.Components">
+        <li class="list-group-item">
+            <a href="#" data-bind="click: $root.toggleSelection">
+                <div class="row">
+                    <div class="col-sm-9 m-t-lg">
+                        <div class="pull-left m-t-n-xs">
+                            <label class="i-switch bg-info">
+                                <input type="checkbox" data-bind="checked: Resit">
+                                <i></i>
+                            </label>
+                        </div>
+                        <div class="pull-left m-l-sm m-t-n-xs" data-bind="text: Name"></div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="pull-right">
+                            <!--ko ifnot: $root.isRubric-->
+                            <div class="wrapper-xs" data-bind="css: { 'bg-danger': Mark() < PassMark(), 'bg-success': Mark() > PassMark() }">
+                                <div class="w-xs block text-center wrapper-xs bg-white">
+                                    <div class="h3 block" data-bind="text: Mark()"></div>
+                                </div>
+                                <div class="w-xs text-center m-t-xs">
+                                    <div class="small" data-bind="text: Requirements"></div>
+                                </div>
+                            </div>
+                            <!--/ko-->
+                            <!--ko if: $root.isRubric-->
+                            <div class="m-t-lg">
+                                <div class="m-t-n-xs">
+                                    <strong>
+                                        <span class="text-success" data-bind="if: WasAttempted() && Successful()">
+                                            <span class="fa fa-check"></span>
+                                            <span data-bind="restext: 'Naati.Resources.Shared.resources.Successful'"></span>
+                                        </span>
+                                        <span class="text-danger" data-bind="if: WasAttempted() && !Successful()">
+                                            <span class="fa fa-times"></span>
+                                            <span data-bind="restext: 'Naati.Resources.Shared.resources.Unsuccessful'"></span>
+                                        </span>
+                                        <span data-bind="if: !WasAttempted(), restext: 'Naati.Resources.Test.resources.NotAttempted'"></span>
+                                    </strong>
+                                </div>
+                            </div>
+                            <!--/ko-->
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>

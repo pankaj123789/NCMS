@@ -1,0 +1,48 @@
+﻿@using MyNaati.Ui.Security
+@using MyNaati.Ui.UI
+@using MyNaati.Ui.ViewModels.Home
+@model MyNaati.Ui.ViewModels.ExaminerTools.IndexModel
+@{
+    ViewBag.Title = "Examiner Tools";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+        new Tuple<string, string>("Examiner Tools", string.Empty)
+    };
+
+    var links = new List<MenuLinkModel>
+{
+        new MenuLinkModel("Manage My Tests", Url.Action("ManageTests", "ExaminerTools"), MenuLinkModel.LinkIconType.Image, "manage-tests.svg", index: 1),
+        new MenuLinkModel("My Availability", Url.Action("AdviseAvailability", "ExaminerTools"), MenuLinkModel.LinkIconType.Image, "calendar.svg", index: 0)
+    };
+
+    if (User.IsInRole(SystemRoles.CHAIR))
+    {
+        links.Add(new MenuLinkModel("My Panels", Url.Action("PanelManagement", "ExaminerTools"), MenuLinkModel.LinkIconType.Image, "panels.svg", index: 3));
+    }
+    links.Add(new MenuLinkModel("My Marking Payments", Url.Action("MarkingPaymentStatus", "ExaminerTools"), MenuLinkModel.LinkIconType.Image, "payments.svg", index: 2));
+    links.Add(new MenuLinkModel("My Test Material Development Payments", Url.Action("TestMaterialCreationPayments", "ExaminerTools"), MenuLinkModel.LinkIconType.Image, "payments.svg", index: 2));
+
+    if (Model.RolePlayerAvailable == "TRUE")
+    {
+        if (User.HasRolePlaySession())
+        {
+            links.Add(new MenuLinkModel("My Role-Play Sessions", Url.Action("RolePlaySessions", "ExaminerTools"), MenuLinkModel.LinkIconType.Image, "role-play-sessions.svg", index: 4));
+        }
+    }
+
+    links.Add(new MenuLinkModel("My Test Material Development", Url.Action("ManageTestMaterials", "ExaminerTools"), MenuLinkModel.LinkIconType.Image, "my-test-material-dev.svg", index: 5));
+    links = links.OrderBy(l => l.Index).ToList();
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">Examiner Tools</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @{ Html.RenderPartial("_MenuLinksPartial", links); }
+        </div>
+    </div>
+</div>

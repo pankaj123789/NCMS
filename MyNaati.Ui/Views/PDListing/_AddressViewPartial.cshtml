@@ -1,0 +1,51 @@
+﻿@using MyNaati.Ui.ViewModels.PDListing
+@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+<div class="row">
+    <div class="col-sm-6">
+        <h3 class="text-primary">Address</h3>
+        @{
+            if (Model.AddressStep.ShowFullAddress.HasValue && Model.AddressStep.ShowFullAddress.Value == WizardModel.AddressType.ShowFullAddress)
+            {
+                if (!Model.Addresses.Exists(add => add.InDirectory))
+                {
+                    var preferredAddress = Model.Addresses.SingleOrDefault(a => a.IsPreferred);
+
+                    <p>@(preferredAddress != null ? preferredAddress.Address : string.Empty)</p>
+                }
+                else
+                {
+                    if (Model.Addresses.Count(add => add.InDirectory) > 1)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    @foreach (var address in Model.Addresses.Where(add => add.InDirectory))
+                                    {
+                                        <tr>
+                                            <td>@string.Format("{0} {1}", address.StreetAddress, address.Country == "Australia" ? address.Suburb : address.Country)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var address in Model.Addresses.Where(add => add.InDirectory))
+                        {
+                            @address.StreetAddress
+                            <br />
+                            @(address.Country == "Australia" ? address.Suburb : address.Country)
+                        }
+                    }
+                }
+            }
+            else
+            {
+                var preferredAddress = Model.Addresses.FirstOrDefault(add => add.IsPreferred);
+
+                @(preferredAddress != null ? preferredAddress.Suburb : string.Empty)
+            }
+        }
+    </div>
+</div>

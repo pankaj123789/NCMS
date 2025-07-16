@@ -1,0 +1,19 @@
+﻿<div class="form">
+    <div class="row">
+        <div class="form-group" data-bind="validationElement: emailSubject, validationOptions: { insertMessages: false }">
+            <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.Application.resources.Subject'"></label>
+            <div class="col-xs-9 col-sm-4">
+                <input type="text" class="form-control" data-bind="value: emailSubject" />
+                <span class="help-block" data-bind="validationMessage: emailSubject"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row m-t-sm">
+        <div class="form-group">
+            <label class="col-xs-1 control-label" data-bind="restext: 'Naati.Resources.Application.resources.Content'"></label>
+            <div class="col-xs-11">
+                <div data-bind="wysiwyg: wysiwygOptions"></div>
+            </div>
+        </div>
+    </div>
+</div>

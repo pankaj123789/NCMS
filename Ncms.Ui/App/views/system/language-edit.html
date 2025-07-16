@@ -1,0 +1,53 @@
+﻿<div class="vbox">
+	<div class="bg-light lter b-b wrapper-md">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<h1 class="m-n font-thin h3 text-black">
+					<span data-bind="text: title"></span>
+				</h1>
+			</div>
+		</div>
+	</div>
+	<div class="row-row">
+		<div class="cell">
+			<div class="cell-inner wrapper">
+				<div class="hbox bg-white">
+					<div class="col col-lg-5 wrapper">
+						<div class="form">
+							<div class="form-group">
+								<label data-bind="reshtml: 'Naati.Resources.Language.resources.SkillsAttached'"></label>
+								<!--ko if: language.SkillsAttached().length-->
+								<!--ko foreach: { data: language.SkillsAttached, as: 's' }-->
+								<div class="m-b-md m-t-sm">
+									<div class="text-base wrapper-xs label no-text-shadow text-dark pos-rlt m-r b b-3x b-danger" data-bind="css: 'b-gray'">
+										<i class="arrow right arrow-danger" data-bind="css: 'arrow-gray'"></i>
+										<span data-bind="text: s.TypeDisplayName"></span>
+									</div>
+									<strong data-bind="text: s.DisplayName"></strong>
+								</div>
+								<!--/ko-->
+								<!--/ko-->
+								<!--ko ifnot: language.SkillsAttached().length-->
+								<p class="form-control-static" data-bind="reshtml: 'Naati.Resources.Language.resources.NoAttachedSkills'"></p>
+								<!--/ko-->
+							</div>
+						</div>
+					</div>
+					<div class="col col-lg-7 wrapper b-l b-light">
+						<!-- ko compose: languageDetailsOptions --><!-- /ko -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="padder b-t b-gray bg-white wrapper-sm">
+		<div class="pull-right">
+			<button class="btn btn-success" data-bind="click: save, enable: canSave">
+				<i class="fa fa-check"></i>
+				<span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+			</button>
+			<a href="#system/language" class="btn btn-default"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></a>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>

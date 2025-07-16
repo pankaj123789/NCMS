@@ -1,0 +1,94 @@
+﻿@model MyNaati.Ui.ViewModels.Stamp.WizardModel
+@{
+    ViewBag.Title = "Place an Order";
+    ViewBag.Subtitle = "Translator Stamps";
+    Layout = "~/Views/Shared/MasterPages/_ProductWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Products", Url.Action("index", "Product")),
+        new Tuple<string, string>("Stamps", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(nextButtons).show();
+
+            var quantitySelfInkingSelector = "input.quantity";
+            var totalSelfInkingSelector = "#total";
+            var totalSelfInking = 0;
+
+            function calculateTotalSelfInking() {
+                totalSelfInking = 0;
+
+                $(quantitySelfInkingSelector).each(function () {
+                    var $quantity = $(this);
+                    var value = parseInt(($quantity.val()));
+
+                    if (isNaN(value) || value < 0) {
+                        $quantity.val(0);
+                    } else {
+                        totalSelfInking += value;
+                    }
+                });
+
+                $(totalSelfInkingSelector).html(totalSelfInking);
+            }
+
+            $(quantitySelfInkingSelector).change(function () {
+                calculateTotalSelfInking();
+            });
+
+            calculateTotalSelfInking();
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            Select the quantity stamps you require.  Note: a fee is charged for each stamp.<br />
+            If you would like a stamp in both directions that is not available in the list, please contact NAATI.<br />
+            Stamps are self-inking all-in-one, mechanical stamps which do not require a separate ink pad.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>Skill</th>
+                        <th>Level</th>
+                        <th>Direction</th>
+                        <th>Expiry</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.SelectStampModel.StampOrders.Count; i++)
+                    {
+                        var stampOrder = Model.SelectStampModel.StampOrders[i];
+
+                        <tr>
+                            <td>@stampOrder.Skill</td>
+                            <td>@stampOrder.Level</td>
+                            <td>@stampOrder.Direction</td>
+                            <td>@{ var expiry = stampOrder.Expiry.HasValue ? stampOrder.Expiry.Value.ToString("d/MM/yyyy") : string.Empty; }
+                                @expiry</td>
+                            <td>@Html.TextBoxFor(stamp => stamp.SelectStampModel.StampOrders[i].QuantitySelfInking, new { @class = "quantity", type = "number" })</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">Total</td>
+                        <td id="total">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

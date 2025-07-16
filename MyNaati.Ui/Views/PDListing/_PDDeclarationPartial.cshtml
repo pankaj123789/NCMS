@@ -1,0 +1,20 @@
+﻿@using MyNaati.Ui.Common
+@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+@{
+    var listingEndDate = Model.ListingEndDate.Year >= 2018 ? new DateTime(2017, 12, 31) : Model.ListingEndDate;
+}
+<div class="row">
+    <div class="col-lg-12">
+        <ul>
+            <li>
+                I acknowledge that by completing this form, I am providing personal information to NAATI. I agree that NAATI will collect, use, disclose and store my personal information in accordance with its
+                <a href="@Url.ExternalUrlFromConfig("PrivacyPolicy")" target="_blank">Privacy Policy</a>.
+            </li>
+            <li>I understand NAATI will take due care to publish my details in the Directory; NAATI accepts no responsibility for any error or omission beyond its control.</li>
+            <li>I authorise NAATI to list my name, suburb, state, postcode and the contact details I have nominated in the National Directory of Accredited and Recognised Practitioners of Translation and Interpreting.</li>
+            <li>I understand the Directory is a publicly available resource, which lists accredited and recognised translation and interpreting practitioners who are available for work.</li>
+            <li>I understand that the contact details that have been ticked will be the only details listed in the Directory other than my name, suburb, state and postcode.</li>
+            <li>I understand the Directory listing is valid until my subscription expires on @listingEndDate.ToString("dd MMM yyyy").</li>
+        </ul>
+    </div>
+</div>

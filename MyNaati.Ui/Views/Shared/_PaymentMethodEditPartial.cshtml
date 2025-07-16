@@ -1,0 +1,52 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.BasePurchaseWizardModel
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            If you choose to pay by credit card, you can complete and pay online.<br />
+            For all other payment methods, the system will prepare a pre-filled form for you to print and return by mail with your payment.
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <p>How would you like to make your payment?</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <p>Now (complete and pay online)</p>
+        <div class="radio">
+            @Html.RadioButtonFor(e => e.PaymentMethodModel.PaymentMethodId, 1, new { id = "CreditCard" })
+            <label for="CreditCard">Credit Card</label>
+        </div>
+        <p>We accept MasterCard and Visa.</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            Later (download a pre-filled form)<br />
+            We will process your request when we receive your form and payment.
+        </p>
+        <div class="radio">
+            @Html.RadioButtonFor(e => e.PaymentMethodModel.PaymentMethodId, 6, new { id = "Amex" })
+            <label for="Amex">Amex</label>
+        </div>
+        <div class="radio">
+            @Html.RadioButtonFor(e => e.PaymentMethodModel.PaymentMethodId, 2, new { id = "AustralianMoneyOrder" })
+            <label for="AustralianMoneyOrder">Australian Money Order</label>
+        </div>
+        <div class="radio">
+            @Html.RadioButtonFor(e => e.PaymentMethodModel.PaymentMethodId, 3, new { id = "BankCheque" })
+            <label for="BankCheque">Bank Cheque (a cheque purchased from a bank)</label>
+        </div>
+        <div class="radio">
+            @Html.RadioButtonFor(e => e.PaymentMethodModel.PaymentMethodId, 4, new { id = "OverseasBankDraft" })
+            <label for="OverseasBankDraft">Overseas Bank Draft</label>
+        </div>
+        <div class="radio">
+            @Html.RadioButtonFor(e => e.PaymentMethodModel.PaymentMethodId, 5, new { id = "Cash" })
+            <label for="Cash">Cash</label>
+        </div>
+    </div>
+</div>

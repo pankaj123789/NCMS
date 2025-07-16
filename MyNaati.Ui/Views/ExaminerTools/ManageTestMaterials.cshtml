@@ -1,0 +1,251 @@
+﻿@using F1Solutions.Naati.Common.Contracts.Dal.Enum
+@model MyNaati.Ui.ViewModels.ExaminerTools.ManageTestMaterialsModel
+@{
+    ViewBag.Title = "My Test Material Development";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+new Tuple<string, string>("Examiner Tools", Url.Action("Index")),
+new Tuple<string, string>("My Test Material Development", null)
+};
+}
+@helper TestField(string label, string value, int size)
+{
+    <div class="col-xs-@size">
+        <div class="form-group">
+            <label>@label</label>
+            <p class="form-control-static">@Html.Raw(value)</p>
+        </div>
+    </div>
+}
+@section Scripts
+{
+    @Scripts.Render("~/bundles/render")
+    @Scripts.Render("~/bundles/knockout")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $form = $('#formMaterialRequest');
+            var $credentialTypeId = $form.find('[name=CredentialTypes]');
+            var $testMaterialId = $form.find('[name=TestMaterialId]');
+            var $from = $form.find('[name=From]');
+            var $to = $form.find('[name=To]');
+            var $button = $form.find('button');
+
+            $.each($(".chosen"), function () {
+                var $chosen = $(this);
+                $chosen.chosen();
+                $chosen.removeClass('invisible');
+                $chosen.parent().find('.chosen-choices').addClass('chosen-auto-height');
+            });
+
+            $("[data-toggle=tooltip]").tooltip();
+            var $table = $('#testMaterial').DataTable({
+                serverSide: true,
+                processing: true,
+                ordering: false,
+                searching: false,
+                ajax: function (data, callback, settings) {
+                    var tmpl = $.templates("#materialRequestTmpl");
+                    var credentials = $credentialTypeId.val();
+                    var req = {
+                        DueDateFrom: $from.val(),
+                        DueDateTo: $to.val(),
+                        TestMaterialId: getTestMaterialId().values,
+                        Take: data.length,
+                        Skip: data.start
+                    };
+
+                    if (credentials && credentials.length) {
+                        req.CredentialTypeId = credentials;
+                    }
+
+                    $.get("@Url.Action("ManageTestMaterialsData")", $.param(req, true), function (resp) {
+                        var out = [];
+
+                        for (var i = 0; i < resp.TestMaterialsList.length; i++) {
+                            var test = resp.TestMaterialsList[i];
+
+                            var date = new Date(parseInt(test.DueDate.substr(6)));
+                            test.DueDate = moment(date).format('DD/MM/YYYY');
+
+                            var status = test.RoundStatusId;
+                            test.ActionName = status == @((int)MaterialRequestRoundStatusTypeName.SentForDevelopment) ? "Manage" : "View";
+
+                            if (status == @((int)MaterialRequestRoundStatusTypeName.SentForDevelopment))
+                            {
+                                test.RoundStatusName = "Awaiting Development";
+                                test.StatusClass = "dark-yellow";
+                            }
+                            else if(status == @((int)MaterialRequestRoundStatusTypeName.AwaitingApproval))
+                            {
+                                test.RoundStatusName = "Awaiting NAATI’s Approval";
+                                test.StatusClass = "orange";
+                            }
+                            else if (status == @((int)MaterialRequestRoundStatusTypeName.Rejected))
+                            {
+                                test.StatusClass = "danger";
+                            }
+                            else if (status == @((int)MaterialRequestRoundStatusTypeName.Approved))
+                            {
+                                test.StatusClass = "success";
+                            }
+                            else if (status == @((int)MaterialRequestRoundStatusTypeName.Cancelled))
+                            {
+                                test.StatusClass = "purple";
+                            }
+
+                            var html = tmpl.render(test);
+                            out.push([html]);
+                        }
+
+                        callback({
+                            draw: data.draw,
+                            data: out,
+                            recordsTotal: resp.TotalAvailableRows,
+                            recordsFiltered: resp.TotalAvailableRows
+                        });
+                    });
+                },
+                language: {
+                    processing: $('#loader').html(),
+                    zeroRecords: 'No material requests'
+                },
+            });
+
+            function getTestMaterialId() {
+                var testMaterialIds = [];
+                if (!$testMaterialId.val()) {
+                    return { valid: true, values: [] };
+                }
+
+                var testMaterialId = $testMaterialId.val().replace(/ /g, ',');
+                var tmp = testMaterialId.split(',');
+                for (var i = 0; i < tmp.length; i++) {
+                    var value = parseInt(tmp[i]);
+                    if (!value) {
+                        continue;
+                    }
+                    if (isNaN(value)) {
+                        return { valid: false, values: [-1] };
+                    }
+                    testMaterialIds.push(value);
+                }
+
+                return { valid: true, values: testMaterialIds };
+            }
+
+            $button.click(function () {
+                $testMaterialId.closest('.form-group').removeClass('has-error');
+                if (!getTestMaterialId().valid) {
+                    $testMaterialId.closest('.form-group').addClass('has-error');
+                    return;
+                }
+                $table.ajax.reload();
+            });
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+    <div id="formMaterialRequest">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="control-label">Credential Type</label>
+                @Html.DropDownList("CredentialTypes", Model.CredentialTypes, new { @class = "form-control chosen invisible", multiple = "true", data_placeholder = "Select..." })
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="control-label">Test Material ID</label>
+                <input type="text" name="TestMaterialId" class="form-control" />
+                <span class="help-block">Use comma or white space separator</span>
+            </div>
+            <div class="form-group col-md-2">
+                <label class="control-label">&nbsp;</label>
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 table-list-container">
+            <table id="testMaterial" class="display table table-bordered" style="width:100%">
+                <thead class="hide">
+                    <tr>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <script id="materialRequestTmpl" type="text/x-jsrender">
+        <div class="row m-b">
+            @TestField("Test Material ID", "<span>{{:TestMaterialId}}</span>", 3)
+            @TestField("Title", "{{:Title}}", 3)
+            @TestField("Credential Type", "{{:CredentialTypeExternalName}}", 3)
+            @TestField("Skill/Language", "{{:SkillDisplayName}}", 3)
+        </div>
+        <div class="row m-b">
+            @TestField("Task Type", "{{:TaskTypeName}}", 3)
+            @TestField("Request Status", "{{:RequestStatusName}}", 3)
+            <div class="col-lg-3 availability">
+                <div class="form-group">
+                    <label>Round</label>
+                    <p class="form-control-static"> Round {{:RoundNumber}}</p>
+                </div>
+            </div>
+            <div class="col-lg-3 availability">
+                <label>Round Status</label>
+                <div>
+                    <span class="text-base label label-{{:StatusClass}}">{{:RoundStatusName}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row m-b">
+            @TestField("Request Type", "{{:RequestTypeName}}", 3)
+            @TestField("Due Date", "{{:DueDate}}", 3)
+        </div>
+        <div class="row m-b">
+            <div class="col-lg-9">
+                <a class="btn btn-primary" href="@Url.Action("ManageTestMaterial", "ExaminerTools")/{{:MaterialRequestId}}">{{:ActionName}}</a>
+            </div>
+        </div>
+    </script>
+    <script id="loader" type="text/html">
+        <div class="loader">
+            <div>
+                <div class="sk-circle">
+                    <div class="sk-circle1 sk-child">
+                    </div>
+                    <div class="sk-circle2 sk-child">
+                    </div>
+                    <div class="sk-circle3 sk-child">
+                    </div>
+                    <div class="sk-circle4 sk-child">
+                    </div>
+                    <div class="sk-circle5 sk-child">
+                    </div>
+                    <div class="sk-circle6 sk-child">
+                    </div>
+                    <div class="sk-circle7 sk-child">
+                    </div>
+                    <div class="sk-circle8 sk-child">
+                    </div>
+                    <div class="sk-circle9 sk-child">
+                    </div>
+                    <div class="sk-circle10 sk-child">
+                    </div>
+                    <div class="sk-circle11 sk-child">
+                    </div>
+                    <div class="sk-circle12 sk-child">
+                    </div>
+                </div>
+                <span>Loading...</span>
+            </div>
+        </div>
+    </script>
+</div>

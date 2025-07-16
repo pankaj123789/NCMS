@@ -1,0 +1,57 @@
+﻿<div>
+    <div class="r item hbox no-border v-middle text-center">
+        <div class="col v-middle no-border wrapper-sm font-thin">
+            <div class="h1 text-info"><span data-bind="textCurrency: total"></span></div>
+            <span class="text-xs text-info" data-bind="restext: 'Naati.Resources.Finance.resources.Total'"></span>
+            <div class="h3 m-t text-success"><span data-bind="textCurrency: amountPaid"></span></div>
+            <span class="text-xs text-success" data-bind="restext: 'Naati.Resources.Finance.resources.PaymentTotal'"></span>
+            <div class="h3 m-t text-danger"><span data-bind="textCurrency: amountDue"></span></div>
+            <span class="text-xs text-danger" data-bind="restext: 'Naati.Resources.Finance.resources.Balance'"></span>
+        </div>
+        <div class="col text-center no-border v-middle padder-v">
+            <div data-bind="sparkline: { values: sparklineValues, options: sparklineOptions }" class="sparkline inline"></div>
+            <div class="line pull-in"></div>
+            <div class="text-xs">
+                <i class="fa fa-circle text-success"></i>
+                <span data-bind="restext: 'Naati.Resources.Finance.resources.PaymentTotal'"></span>
+                <i class="fa fa-circle text-danger m-l"></i>
+                <span data-bind="restext: 'Naati.Resources.Finance.resources.Balance'"></span>
+            </div>
+        </div>
+    </div>
+    <!--ko component: { name: 'table-component', params: tableDefinition }-->
+    <!--/ko-->
+</div>
+<script id="bill-header-template" type="text/html">
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.BillNo'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.Status'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.Total'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.AmountDue'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.CreatedDate'"></th>
+    <th data-bind="restext: 'Naati.Resources.NaatiEntity.resources.WiiseReference'"></th>
+    <th class="w-xs"></th>
+</script>
+<script id="bill-row-template" type="text/html">
+    <tr>
+        <td data-bind="attr: { 'data-order': InvoiceNumber }, text: InvoiceNumber"></td>
+        <td data-bind="text: StatusText, attr: { 'data-order': StatusText }"></td>
+        <td data-bind="textCurrency: { value: Total, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Total }"></td>
+        <td data-bind="textCurrency: { value: AmountDue, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': AmountDue }, css: { 'text-danger': AmountDue > 0, 'text-info': AmountDue < 0 }"></td>
+        <td data-bind="text: Date"></td>
+        <td data-bind="text: InvoiceNumber, attr: { 'data-order': InvoiceNumber }"></td>
+        <td class="w-xs text-center">
+            <div class="btn-group">
+                <!--ko if: showLog-->
+                <a href="#" class="btn btn-default btn-xs" data-bind="click: showLog">
+                    <i class="fa fa-history"></i>
+                </a>
+                <!--/ko-->
+                <!--ko if: downloadUrl-->
+                <a href="#" class="btn btn-default btn-xs" data-bind="resattr: { title: 'Naati.Resources.Finance.resources.DownloadInvoice' }, tooltip: { trigger: 'hover' }, downloadFile: { url: downloadUrl }">
+                    <span class="fa fa-download"></span>
+                </a>
+                <!--/ko-->
+            </div>
+        </td>
+    </tr>
+</script>

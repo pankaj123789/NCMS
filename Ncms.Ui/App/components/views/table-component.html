@@ -1,0 +1,11 @@
+﻿<div class="panel panel-default">
+    <div class="table-responsive" data-bind="css: css">
+        <table data-bind="attr: { id: id }, datatable: dataTable" class="table table-striped table-hover b-t b-b" style="width: 100%">
+            <thead>
+            <tr data-bind="template: headerTemplate"></tr>
+            </thead>
+            <tbody data-bind="template: { name: rowTemplate, foreach: source }">
+            </tbody>
+        </table>
+    </div>
+</div>

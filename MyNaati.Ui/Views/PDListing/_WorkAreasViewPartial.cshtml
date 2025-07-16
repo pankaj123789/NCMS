@@ -1,0 +1,19 @@
+﻿@model MyNaati.Ui.ViewModels.PDListing.WizardModel
+<div class="row">
+    <div class="col-sm-6">
+        <h3 class="text-primary">Work Areas</h3>
+        @if (Model.WorkAreas.Exists(wa => wa.IsChecked))
+        {
+            <p>
+                @string.Join(", ", Model.GetSelectedWorkAreas())
+            </p>
+        }
+        else
+        {
+            <p>
+                As you have made no selection, the directory will show: <br />
+                Any Area
+            </p>
+        }
+    </div>
+</div>

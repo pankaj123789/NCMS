@@ -1,0 +1,131 @@
+﻿<!--ko if: fields() && fields().length-->
+<div class="m-t-sm bg-light wrapper-sm clearfix">
+    <!--ko foreach: { data: fields, as: 'f', afterRender: updateYesNoComponent }-->
+    <!--ko if: $component.isApplicationFieldType(f.DataTypeId(), 'Text') || $component.isApplicationFieldType(f.DataTypeId(), 'Email')-->
+    <div class="form-group col-sm-3" data-bind="validationElement: f.Value, css: { hidden: f.DisplayNone }">
+        <label class="control-label" data-bind="text: f.Name"></label>
+        <input type="text" class="form-control" data-bind="value: f.Value, disable: f.Disabled" />
+    </div>
+    <!--/ko-->
+    <!--ko if: $component.isApplicationFieldType(f.DataTypeId(), 'YesNo')-->
+    <div class="form-group col-sm-3 m-b-none">
+        <label class="control-label">&nbsp;</label>
+        <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+            <label class="checkbox-inline i-checks">
+                <input type="checkbox" data-bind="event: { change: $component.yesNoComponentClick }, attr: { id: $component.componentId + '_' + $index()}"><i></i>
+                <span class="padder-md" data-bind="text: f.Name"></span>
+            </label>
+            <!--<label>
+                <span data-bind="text: f.Name"></span>
+            </label>-->
+        </div>
+    </div>
+    <!--/ko-->
+    <!--ko if: $component.isApplicationFieldType(f.DataTypeId(), 'Date')-->
+    <div class="form-group col-sm-3 m-b-none">
+        <label class="control-label" data-bind="text: f.Name"></label>
+        <!--ko component: {
+            name: 'date-input',
+            params: {
+                value: f.Value,
+                placeholder: f.Name
+            }
+        }-->
+        <!--/ko-->
+    </div>
+    <!--/ko-->
+    <!--ko if: $component.isApplicationFieldType(f.DataTypeId(), 'EndorsedQualificationStartDate')-->
+    <div class="form-group col-sm-3 m-b-none">
+        <label class="control-label" data-bind="text: f.Name"></label>
+        <!--ko component: {
+        name: 'date-input',
+        params: {
+        value: f.Value,
+        placeholder: f.Name
+        }
+        }-->
+        <!--/ko-->
+    </div>
+    <!--/ko-->
+    <!--ko if: $component.isApplicationFieldType(f.DataTypeId(), 'EndorsedQualificationEndDate')-->
+    <div class="form-group col-sm-3 m-b-none">
+        <label class="control-label" data-bind="text: f.Name"></label>
+        <!--ko component: {
+        name: 'date-input',
+        params: {
+        value: f.Value,
+        placeholder: f.Name
+        }
+        }-->
+        <!--/ko-->
+    </div>
+    <!--/ko-->
+    <!--ko if: $component.isApplicationFieldType(f.DataTypeId(), 'CountryLookup')-->
+    <div class="form-group col-sm-3">
+        <label class="control-label" data-bind="text: f.Name"></label>
+        <!-- ko component: {
+                name: 'entity-select',
+                params: {
+                    value: f.Value,
+                    entity: 'Country',
+                    valueField: ko.observable('CountryId'),
+                    textField: ko.observable('Name'),
+                    multiple: false
+                }
+            } -->
+        <!-- /ko -->
+    </div>
+    <!--/ko-->
+    <!--ko if: $component.isApplicationFieldType(f.DataTypeId(), 'Options')-->
+    <div class="form-group col-sm-3">
+        <label class="control-label" data-bind="text: f.Name"></label>
+        <!-- ko component: {
+                    name: 'select-component',
+                    params: {
+                    value: f.FieldOptionId,
+                    options: f.Options,
+                    multiple: false,
+                    optionsValue: 'FieldOptionId',
+                    optionsText: 'DisplayName',
+                }
+         } -->
+        <!-- /ko -->
+    </div>
+    <!--/ko-->
+    <!--ko if: $component.isApplicationFieldType(f.DataTypeId(), 'RadioOptions')-->
+    <div class="form-group col-sm-3">
+        <label class="control-label" data-bind="text: f.Name"></label>
+        <!-- ko component: {
+        name: 'radio-component',
+        params: {
+                selectedValue: f.FieldOptionId,
+                options: f.Options
+                }
+            } -->
+        <!-- /ko -->
+    </div>
+    <!--/ko-->
+    <!--ko if: $component.isApplicationFieldType(f.DataTypeId(), 'EndorsedQualificationLookup')-->
+    <div class="form-group col-sm-3">
+        <label class="control-label" data-bind="text: 'Institution'"></label>
+        <!-- ko component: { name: 'select-component', params: f.getEndorsedQualificationOptions().institution } --><!-- /ko -->
+    </div>
+    <div class="form-group col-sm-3">
+        <label class="control-label" data-bind="text: 'Location'"></label>
+        <!-- ko component: { name: 'select-component', params: f.getEndorsedQualificationOptions().location } --><!-- /ko -->
+    </div>
+    <div class="form-group col-sm-3">
+        <label class="control-label" data-bind="text: f.Name"></label>
+        <!-- ko component: { name: 'select-component', params: f.getEndorsedQualificationOptions().qualification } -->
+        <!-- /ko -->
+    </div>
+    <!--/ko-->
+    <!--ko if: $component.isApplicationFieldType(f.DataTypeId(), 'EndorsedQualificationIdText')-->
+    <div class="form-group col-sm-3 hidden">
+        <label class="control-label" data-bind="text: f.Name"></label>
+        <input type="text" class="form-control" data-bind="value: f.Value" />
+    </div>
+    <!--/ko-->
+    <!--/ko-->
+</div>
+<!--/ko-->

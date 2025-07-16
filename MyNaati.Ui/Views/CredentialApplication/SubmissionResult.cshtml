@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.ShowLogon = false;
+    ViewBag.ShowMenu = false;
+    ViewBag.RedirectLogoUrl = System.Configuration.ConfigurationManager.AppSettings["ExternalUrl_NAATI_URL"];
+    ViewBag.Title = "Application submission result";
+}
+@section Head {
+    @Styles.Render("~/Bundles/Forms")
+}
+<h2>@ViewBag.Title</h2>
+<div class="text-center wrapper-xl">
+    <span class="fa fa-check-circle text-primary fa-5x"></span>
+    <div class="text-center wrapper">
+        <h4>
+            Thanks for submitting the application to NAATI. <br />
+            Here is your application reference number for future correspondence<br />
+        </h4>
+        <h3>
+            @ViewBag.ApplicationReference.
+        </h3>
+
+
+        @if (ViewBag.IsSecurePayStatusSuccess && !ViewBag.IsSecurePayResponseSuccess)
+        {
+            <h4>
+                <span>
+                    An error occurred when processing your transaction after your card was charged. Please contact NAATI to ensure your payment was successfully logged. 
+                    <br/>Attempting to process your payment again may result in your card being billed multiple times. 
+                    <br/>Please quote your naati number and application Id when contacting NAATI. NAATI Number: <strong>@ViewBag.NAATINumber</strong>, Application Id: <strong>@ViewBag.ApplicationReference</strong>
+                </span>
+            </h4>
+        }
+
+        @if (ViewBag.IsSecurePayStatusSuccess && ViewBag.IsSecurePayResponseSuccess)
+        {
+            <h4>
+                <span>&nbsp;Also note the Credit Card transaction reference - <strong>@ViewBag.ReferenceNumber</strong></span>
+            </h4>
+        }
+        <br/>
+        <h4><a href="@ViewBag.NAATIHomePage">CLICK HERE</a> TO RETURN TO THE NAATI HOME PAGE</h4>
+    </div>
+</div>

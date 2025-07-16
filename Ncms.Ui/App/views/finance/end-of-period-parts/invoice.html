@@ -1,0 +1,61 @@
+﻿<div>
+    <h4 class="print-only font-thin m-l-sm m-t-none m-b-none" data-bind="restext: 'Naati.Resources.Finance.resources.Invoices'"></h4>
+    <!--ko component: { name: 'table-component', params: tableDefinition }-->
+    <!--/ko-->
+    <script id="invoice-header-template" type="text/html">
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Office'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.InvoiceNo'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Total'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Payments'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Balance'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.NAATINumber'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Customer'"></th>
+        <th class="w-xxs print-hide"></th>
+    </script>
+    <script id="invoice-row-template" type="text/html">
+        <tr>
+            <!-- ko if: Payments.length > 0 -->
+            <td data-bind="attr: { 'data-order': Office }">
+                <a href="#" data-bind="click: $root.selectInvoice, clickBubble: false"><i class="fa fa-chevron-right"></i></a>
+                <span data-bind="text: Office"></span>
+            </td>
+            <!-- /ko -->
+            <!-- ko if: Payments.length === 0 -->
+            <td data-bind="text: Office, attr: { 'data-order': Office }"></td>
+            <!-- /ko -->
+            <td data-bind="attr: { 'data-order': InvoiceNumber }, text: InvoiceNumber"></td>
+            <td data-bind="textCurrency: { value: Total, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Total }"></td>
+            <td data-bind="textCurrency: { value: Payment, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Payment }"></td>
+            <td data-bind="textCurrency: { value: Balance, format: '{signal}{value}', negativeFormat: '{signal}({value})' }, attr: { 'data-order': Balance }, css: { 'text-danger': Balance > 0, 'text-info': Balance < 0 }"></td>
+            <td data-bind="attr: { 'data-order': NaatiNumber }"><a href="#" class="text-info" data-bind="attr: { href: '#/person/' + NaatiNumber + '?tab=transactions' }, text: NaatiNumber"></a></td>
+            <td data-bind="text: Customer, attr: { 'data-order': Customer }"></td>
+            <td class="text-center print-hide">
+                <a href="#" class="btn btn-xs btn-default" data-bind="tooltip: { container: 'body' }, attr: { href: InvoiceUrl }, resattr: { title: 'Naati.Resources.Finance.resources.DownloadInvoiceFromWiise' }, downloadFile: { url: downloadUrl }">
+                    <i class="fa fa-download"></i>
+                </a>
+            </td>
+        </tr>
+    </script>
+    <div class="hide" id="invoiceRowDetail">
+        <table class="table table-bordered table-striped b-t b-b" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th data-bind="restext: 'Naati.Resources.Finance.resources.Office'"></th>
+                    <th data-bind="restext: 'Naati.Resources.Finance.resources.Type'"></th>
+                    <th data-bind="restext: 'Naati.Resources.Finance.resources.Amount'"></th>
+                    <th data-bind="restext: 'Naati.Resources.Finance.resources.DatePaid'"></th>
+                    <th data-bind="restext: 'Naati.Resources.Finance.resources.WiiseReference'"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: { data: payments }">
+                <tr>
+                    <td data-bind="text: Office"></td>
+                    <td data-bind="text: PaymentType"></td>
+                    <td data-bind="textCurrency: { value: Amount, format: '{signal}{value}', negativeFormat: '{signal}({value})' }"></td>
+                    <td data-bind="textDate: DatePaid"></td>
+                    <td data-bind="text: Reference"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

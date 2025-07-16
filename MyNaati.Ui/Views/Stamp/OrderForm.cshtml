@@ -1,0 +1,88 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.Stamp.WizardModel
+
+@{ Layout = null; }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Application for NAATI Translator Stamp</title>
+    <link href="@Url.Content("~/Content/Reports.css")" rel="stylesheet" type="text/css" media="print, screen" />
+</head>
+<body>
+    <div id="report">
+
+        <div id="header">
+            <div id="title">
+                <img src="@Url.Content("~/Content/Images/NaatiLogo.png")" alt="NAATI Logo" id="logo" />
+                <div class="container">
+                    <div>
+                        <h1>Application for<br />NAATI Translator Stamp</h1>
+                        <p>All Translator Stamps will record the date at which your Accreditation(s) and/or Recognition(s) expire if part of the revalidation system.</p>
+                    </div>
+                </div>
+            </div>
+            <p class="clear">Please complete all parts of this form and send it to: <br />
+            <strong style="padding-left:140px">NAATI PO Box 223 DEAKIN WEST ACT 2600 AUSTRALIA</strong></p>
+        </div>
+           
+        <div id="body">            
+            @{Html.RenderPartial("_ProductReportPersonalDetailsPartial", Model);}
+                        
+            <div class="part">
+                <table class="wide">
+                    <tr class="header">
+                        <th class="part">Part 1</th>
+                        <th>Stamp Details</th>
+                    </tr>
+                    <tr class="comment">
+                        <th colspan="2">A <strong>Rubber stamp</strong> is a standard stamp which requires a separate ink-pad - which NAATI does not provide.  A <strong>Self Inking</strong> stamp is an all in one, mechanical stamp which does not require a separate ink pad.</th>
+                    </tr>
+                </table>
+
+                @{Html.RenderPartial("_ProductReportOrderItemsPartial", Model);}
+            </div>
+            
+                       
+            <div class="part" style="page-break-before: always">
+                <table class="wide">
+                    <tr class="header">
+                        <th class="part">Part 2</th>
+                        <th>Declaration</th>
+                    </tr>            
+                </table>
+                <div class="box">
+                    <p>This declaration must be signed and dated</p>
+
+                    @{Html.RenderPartial("_DeclarationPartial");}
+                
+                    <div style="display: inline-block; width:100%">
+                        <span class="signature">Signature:</span><span class="centred"><span class="box-container">Date </span>@FormBoxHelper.DateBox()</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="part">
+                <table class="wide">
+                    <tr class="header">
+                        <th class="part">Part 3</th>
+                        <th>Payment Details</th>
+                    </tr>
+                </table>
+                @{Html.RenderPartial("_ProductReportPaymentDetailsPartial", Model);}
+            </div>        
+
+            @{ Html.RenderPartial("_ProductReportNoteAboutMandatoryFieldsPartial"); }
+            <br />
+            
+            @{Html.RenderPartial("_ProductReportOfficeUseOnlyPartial");}
+            
+            <div id="footer">
+                @{Html.RenderPartial("_OrderFormFooterPartial");}
+            </div>                     
+        </div>
+    </div>
+
+</body>
+</html>

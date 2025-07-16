@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mynaati.fullname" . }}
+  labels:
+    {{- include "mynaati.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+   type: {{ .Values.strategy.type }}
+  selector:
+    matchLabels:
+      {{- include "mynaati.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "mynaati.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "mynaati.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+           - secretRef:
+              name: {{ include "mynaati.keyVaultSecret" . }}
+           - configMapRef:
+              name: {{ include "mynaati.fullname" . }}
+           - secretRef:
+              name: {{ include "mynaati.machineKeySecret" . }}
+          env:  
+           - name: PodIp
+             valueFrom:
+               fieldRef:
+                 fieldPath: status.podIP
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP		
+          volumeMounts:
+           - name: {{ include "mynaati.persistentStorage" . }}	
+             mountPath: "/storage" 
+           - name: {{ include "mynaati.tempPersistentStorage" . }}	
+             mountPath: "/tempStorage"
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.livenessProbe.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.readinessProbe.path }}
+              port: http
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          lifecycle:          
+           postStart:
+            exec:
+             command: {{ .Values.lifecycle.postStart.exec.command }}
+           preStop:
+            exec:
+             command: {{ .Values.lifecycle.preStop.exec.command }}
+          
+         
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}     
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      volumes:
+       - name: {{ include "mynaati.persistentStorage" . }}	
+         persistentVolumeClaim:
+          claimName: {{ include "mynaati.volumeClaimName" . }}
+       - name: {{ include "mynaati.tempPersistentStorage" . }}	
+         persistentVolumeClaim:
+          claimName: {{ include "mynaati.tempVolumeClaimName" . }}	    
+
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

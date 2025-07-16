@@ -1,0 +1,187 @@
+﻿<div class="vbox" id="personSettings">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black" data-bind="text: windowTitle"></h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="panel-body">
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.Gender'"></label>
+                    <div class="col-sm-2 col-xs-6">
+                        <!-- ko component: { name: 'select-component', params: genderOptions } -->
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.CountryOfBirth'"></label>
+                    <div class="col-sm-2 col-xs-6">
+                        <!-- ko component: { name: 'entity-select', params: countryOfBirthOptions } -->
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="form-group m-b-none" data-bind="validationElement: settings.BirthDate, validationOptions: { insertMessages: false }">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.DateOfBirth'"></label>
+                    <div class="col-sm-2 col-xs-6">
+                        <!-- ko component: { name: 'date-input', params: dateOfBirthOptions } -->
+                        <!-- /ko -->
+                        <span class="help-block" data-bind="validationMessage: settings.BirthDate"></span>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.Deceased'"></label>
+                    <div class="col-xs-4">
+                        <label class="i-switch i-switch-md bg-info">
+                            <input type="checkbox" data-bind="enableWithPermission: 'PersonMyNaatiRegistration.Delete', checked: settings.Deceased" />
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.AllowVerifyOnline'"></label>
+                    <div class="col-xs-4">
+                        <label class="i-switch i-switch-md bg-info">
+                            <input type="checkbox" data-bind="checked: settings.AllowVerifyOnline" />
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.ShowPhotoOnline'"></label>
+                    <div class="col-xs-4">
+                        <label class="i-switch i-switch-md bg-info">
+                            <input type="checkbox" data-bind="checked: settings.ShowPhotoOnline" />
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.EthicalCompetency'"></label>
+                    <div class="col-xs-4">
+                        <label class="i-switch i-switch-md bg-info">
+                            <input type="checkbox" data-bind="checked: settings.EthicalCompetency" />
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.InterculturalCompetency'"></label>
+                    <div class="col-xs-4">
+                        <label class="i-switch i-switch-md bg-info">
+                            <input type="checkbox" data-bind="checked: settings.InterculturalCompetency" />
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.KnowledgeTest'"></label>
+                    <div class="col-xs-4">
+                        <label class="i-switch i-switch-md bg-info">
+                            <input type="checkbox" data-bind="checked: settings.KnowledgeTest" />
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.SendCorrespondence'"></label>
+                    <div class="col-xs-4">
+                        <label class="i-switch i-switch-md bg-info">
+                            <input type="checkbox" data-bind="checked: settings.SendCorrespondence" />
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+                <!-- ko if: settings.ShowAllowAutoRecertification() -->
+                <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.AllowAutoRecertification'"></label>
+                    <div class="col-xs-4">
+                        <label class="i-switch i-switch-md bg-info">
+                            <input type="checkbox" data-bind="checked: settings.AllowAutoRecertification" />
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <div class="form-group">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.AccountNumber'"></label>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        <input type="text" data-bind="enableWithPermission:'Person.Configure', value: accountNumberOptions.value">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.TrackingCategory'"></label>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        <input type="text" data-bind="enableWithPermission:'Person.Configure', value: trackingCategoryOptions.value">
+                    </div>
+                </div>
+                <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.AccessDisabledByNcms'"></label>
+                    <div class="col-xs-4">
+                        <label class="i-switch i-switch-md bg-info">
+                            <input type="checkbox" data-bind="checked: settings.AccessDisabledByNcms" />
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+                <!-- ko if: settings.IsRolePlayer() -->
+                <div class="form-group">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.RolePlayerTestLocations'"></label>
+                    <div class="col-sm-2 col-xs-6">
+                        <!-- ko component: { name: 'select-component', params: rolePlayLocationOptions } -->
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <div class="form-group" data-bind="validationElement: rolePlayerRatingOptions.value">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.RolePlayerRating'"></label>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        <input type="text" class="form-control" data-bind="value: rolePlayerRatingOptions.value, enableWithPermission:'RolePlayer.Configure'">
+                    </div>
+                </div>
+                <div class="form-group" data-bind="validationElement: rolePlayerSessionOptions.value">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.RolePlayerSession'"></label>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="display: flex">
+                        <input type="text" class="form-control" data-bind="value: rolePlayerSessionOptions.value, enableWithPermission:'RolePlayer.Configure'">
+                        <a class="ml-1" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Person.resources.RolePlayerSessionToolTip' }" title="" data-original-title="View" style="padding-top:3px;">
+                            <span class="glyphicon glyphicon-info-sign" style="font-size: 21px;color: #337ab7;"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="col-sm-2 col-xs-6 control-label" data-bind="restext: 'Naati.Resources.Person.resources.SeniorRolePlayer'"></label>
+                    <div class="col-xs-4">
+                        <label class="i-switch i-switch-md bg-info">
+                            <input type="checkbox" data-bind="checked: settings.Senior,  enableWithPermission:'RolePlayer.Configure'" />
+                            <i></i>
+                        </label>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="click: save">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" data-bind="click: close">
+                <i class="fa fa-ban"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Cancel'"></span>
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

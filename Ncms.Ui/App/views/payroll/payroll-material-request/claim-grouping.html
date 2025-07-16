@@ -1,0 +1,20 @@
+﻿<div class="bg-white">
+    <!--ko foreach: { data: items, as: 'item' }-->
+    <div class="clearfix">
+        <div class="pull-left w-md wrapper-sm">
+            <span data-bind="text: item.ClaimType"></span>
+        </div>
+        <div class="pull-left w-sm wrapper-sm">
+        </div>
+        <div class="pull-left w-xs wrapper-sm">
+            <span data-bind="text: item.HoursSpent"></span>
+            <!-- ko if: item.HoursSpent -->
+            <span data-bind="restext: 'Naati.Resources.Shared.resources.Hours'"></span>
+            <!--/ko-->
+        </div>
+        <div class="pull-left wrapper-sm clearfix">
+            <span data-bind="textCurrency: item.Amount"></span>
+        </div>
+    </div>
+    <!--/ko-->
+</div>

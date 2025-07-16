@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="NCMS_DEV1" Class="PractitionerRepositoryDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\MSSQLSERVER2016;Initial Catalog=NCMS_DEV1;Integrated Security=True" SettingsObjectName="F1Solutions.NAATI.ePortal.SAMIntegration.Data.Properties.Settings" SettingsPropertyName="NAATI_2_4_x_4ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tluAccreditationLevel" Member="tluAccreditationLevels">
+    <Type Name="tluAccreditationLevel">
+      <Column Name="AccreditationLevelId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="StandardLetterDisplay" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="WebDisplay" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AbbreviatedStandardLetterDisplay" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Association Name="tluAccreditationLevel_tblApplication" Member="tblApplications" ThisKey="AccreditationLevelId" OtherKey="AccreditationLevelId" Type="tblApplication" />
+      <Association Name="tluAccreditationLevel_tblAccreditationResult" Member="tblAccreditationResults" ThisKey="AccreditationLevelId" OtherKey="AccreditationLevelId" Type="tblAccreditationResult" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tluAccreditationDescription" Member="tluAccreditationDescriptions">
+    <Type Name="tluAccreditationDescription">
+      <Column Name="AccreditationDescriptionId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AccreditationLevelId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccreditationMethodId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccreditationCategoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vwPractitioners" Member="vwPractitioners">
+    <Type Name="vwPractitioner">
+      <Column Name="NAATINumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Surname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="GivenName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="OtherNames" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PersonId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LanguageId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AccreditationLevelId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Area" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ExpertiseFreeText" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="AccreditationCategoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StateId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CountryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StateName" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="CountryName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Postcode" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="Suburb" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StreetDetails" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="SkillCategoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SubstituteLanguage" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ToEnglish" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="AccreditationMethodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ToLanguageId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vwPractitionerContactDetails" Member="vwPractitionerContactDetails">
+    <Type Name="vwPractitionerContactDetail">
+      <Column Name="NAATINumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Contact" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Type" Type="System.String" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblApplication" Member="tblApplications">
+    <Type Name="tblApplication">
+      <Column Name="ApplicationId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LanguageExperienceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ToEnglish" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ToLanguageExperienceId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccreditationMethodId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EnteredDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceLineId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccreditationLevelId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccreditationCategoryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReceivingOfficeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InviteToTesting" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PreferredTestCentreId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaxOpportunities" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Prerequisite1" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Prerequisite2" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Prerequisite3" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ForMigration" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CountryOfTrainingId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="SOD" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ScanRequired" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ProjectId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblApplication_tblAccreditationResult" Member="tblAccreditationResults" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="tblAccreditationResult" />
+      <Association Name="tluAccreditationLevel_tblApplication" Member="tluAccreditationLevel" ThisKey="AccreditationLevelId" OtherKey="AccreditationLevelId" Type="tluAccreditationLevel" IsForeignKey="true" />
+      <Association Name="tblLanguageExperience_tblApplication" Member="tblLanguageExperience" ThisKey="LanguageExperienceId" OtherKey="LanguageExperienceId" Type="tblLanguageExperience" IsForeignKey="true" />
+      <Association Name="tblLanguageExperience_tblApplication1" Member="tblLanguageExperience1" ThisKey="ToLanguageExperienceId" OtherKey="LanguageExperienceId" Type="tblLanguageExperience" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblLanguageExperience" Member="tblLanguageExperiences">
+    <Type Name="tblLanguageExperience">
+      <Column Name="LanguageExperienceId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PersonId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LanguageId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Classification" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Rank" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Association Name="tblLanguageExperience_tblApplication" Member="tblApplications" ThisKey="LanguageExperienceId" OtherKey="LanguageExperienceId" Type="tblApplication" />
+      <Association Name="tblLanguageExperience_tblApplication1" Member="tblApplications1" ThisKey="LanguageExperienceId" OtherKey="ToLanguageExperienceId" Type="tblApplication" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblAccreditationResult" Member="tblAccreditationResults">
+    <Type Name="tblAccreditationResult">
+      <Column Name="AccreditationResultId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ApplicationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ResultDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FailureReasonId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Days" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CertificateNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IncludeInPD" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccreditationLevelId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Column Name="ExpiryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Expired" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="tblApplication_tblAccreditationResult" Member="tblApplication" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="tblApplication" IsForeignKey="true" />
+      <Association Name="tluAccreditationLevel_tblAccreditationResult" Member="tluAccreditationLevel" ThisKey="AccreditationLevelId" OtherKey="AccreditationLevelId" Type="tluAccreditationLevel" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vwPractitionerAddressDetails" Member="vwPractitionerAddressDetails">
+    <Type Name="vwPractitionerAddressDetail">
+      <Column Name="NAATINumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Surname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="GivenName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="OtherNames" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="WebsiteUrl" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="StreetDetails" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Postcode" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="Suburb" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="State" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="CountryId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CountryName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ODAddressVisibilityTypeId" Type="System.Int32" DbType="Int" CanBeNull="false" />
+      <Column Name="ODAddressVisibilityTypeName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

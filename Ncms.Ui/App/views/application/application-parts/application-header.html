@@ -1,0 +1,30 @@
+<div class="panel panel-default no-border no-shadow m-b-none">
+    <div class="panel-body">
+        <div class="m-b-md">
+            <button type="button" class="btn btn-primary" data-bind="click: collapser.expandAll, tooltip:  { trigger: 'hover' }, resattr: { title: 'Naati.Resources.Application.resources.ExpandAllSections' }">
+                <i class="fa fa-plus-square"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.ExpandAll'"></span>
+            </button>
+            <button type="button" class="btn btn-primary" data-bind="click: collapser.collapseAll, tooltip: { trigger: 'hover' }, resattr: { title: 'Naati.Resources.Application.resources.CollapseAllSections' }">
+                <i class="fa fa-minus-square-o"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.CollapseAll'"></span>
+            </button>
+        </div>
+        <!--ko foreach: { data: sections, as: 's' }-->
+        <article class="media allow-overflow">
+            <div class="pull-left cursor-pointer" data-bind="click: $root.collapser.toggleCollapse">
+                <span class="fa" data-bind="css: { 'fa-minus-circle': $root.collapser.isOpened(s), 'fa-plus-circle': !$root.collapser.isOpened(s), 'text-white':  !s.Fields() || !s.Fields().length, 'text-danger':  !s.valid() }"></span>
+            </div>
+            <div class="media-body allow-overflow">
+                <div class="cursor-pointer" data-bind="click: $root.collapser.toggleCollapse, text: Name, css: { 'text-danger':  !s.valid() }"></div>
+                <div class="animated fadeIn" data-bind="css: { 'hidden': !$root.collapser.isOpened(s) }">
+                    <!--ko component: { name: 'application-fields', params: s.applicationFieldsOptions }--><!--/ko-->
+                </div>
+            </div>
+        </article>
+        <!--ko if: $index() != $root.sections().length - 1-->
+        <div class="line bg-light"></div> 
+        <!--/ko-->
+        <!--/ko-->
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿<div>
+    <!--ko if: allowEdit-->
+    <div class="form row">
+        <div class="form-group col-sm-11" data-bind="validationElement: link">
+            <input type="text" class="form-control" data-bind="value: link, valueUpdate: 'input', resattr: { placeholder: 'Naati.Resources.MaterialRequest.resources.TypeToAddANewLink' }, event: { focus: linkFocus, focusout: linkFocusOut }" />
+        </div>
+        <div class="form-group col-sm-1" data-bind="validationElement: link">
+            <button class="btn btn-success btn-block" data-bind="click: addLink">
+                <span class="fa fa-plus"></span>
+                <span data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.AddLink'"></span>
+            </button>
+        </div>
+    </div>
+    <!--/ko-->
+    <div class="form">
+        <!--ko foreach: { data: links, as: 'l' }-->
+        <div class="form-group" data-bind="validationElement: l">
+            <p class="form-control-static">
+                <!--ko if: $root.allowEdit-->
+                <button class="btn btn-danger btn-sm" data-bind="click: $root.removeLink">
+                    <span class="fa fa-trash"></span>
+                </button>
+                <!--/ko-->
+                <span class="text-info">
+                    <a href="#" target="_blank" data-bind="html: l, attr: { href: l }"></a>
+                    <span class="fa fa-link"></span>
+                </span>
+            </p>
+        </div>
+        <!--/ko-->
+    </div>
+</div>

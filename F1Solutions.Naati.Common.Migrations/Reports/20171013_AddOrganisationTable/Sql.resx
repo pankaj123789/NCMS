@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddOrganisationContactsProcedure" xml:space="preserve">
+    <value>CREATE PROCEDURE [dbo].[ReportingSnapshot_OrganisationContacts]
+AS
+BEGIN
+	SELECT
+		CASE WHEN [Source].[ContactPersonId] IS NULL THEN [OrganisationContacts].[ContactPersonId] ELSE [Source].[ContactPersonId] END AS [ContactPersonId]
+		,CASE WHEN [Source].[ContactPersonId] IS NULL THEN [OrganisationContacts].[OrganisationId] ELSE [Source].[OrganisationId] END AS [OrganisationId]
+		,CASE WHEN [Source].[ContactPersonId] IS NULL THEN [OrganisationContacts].[Name] ELSE [Source].[Name] END AS [Name]
+		,CASE WHEN [Source].[ContactPersonId] IS NULL THEN [OrganisationContacts].[Email] ELSE [Source].[Email] END AS [Email]
+		,CASE WHEN [Source].[ContactPersonId] IS NULL THEN [OrganisationContacts].[Phone] ELSE [Source].[Phone] END AS [Phone]
+		,CASE WHEN [Source].[ContactPersonId] IS NULL THEN [OrganisationContacts].[Address] ELSE [Source].[Address] END AS [Address]
+		,CASE WHEN [Source].[ContactPersonId] IS NULL THEN [OrganisationContacts].[Description] ELSE [Source].[Description] END AS [Description]
+		,CASE WHEN [OrganisationContacts].[ContactPersonId] IS NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS 'IsNew'
+		,CASE WHEN [Source].[ContactPersonId] IS NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS 'IsDeleted'
+	FROM
+	(
+		SELECT
+			cp.[InstitutionId] AS 'OrganisationId'
+			,cp.[ContactPersonId]
+			,cp.[Name]
+			,cp.[Email] COLLATE Latin1_General_CI_AS AS 'Email'
+			,cp.[Phone] COLLATE Latin1_General_CI_AS AS 'Phone'
+			,cp.[Address] COLLATE Latin1_General_CI_AS AS 'Address'
+			,cp.[Surname] COLLATE Latin1_General_CI_AS AS 'Description'
+		FROM [naati_db]..[tblContactPerson] cp
+	) [Source]
+	FULL OUTER JOIN [OrganisationContacts] ON [Source].[ContactPersonId] = [OrganisationContacts].[ContactPersonId]
+	WHERE (([Source].[OrganisationId] IS NOT NULL AND [OrganisationContacts].[OrganisationId] IS NULL) OR ([Source].[OrganisationId] IS NULL AND [OrganisationContacts].[OrganisationId] IS NOT NULL) OR (([Source].[OrganisationId] IS NOT NULL AND [OrganisationContacts].[OrganisationId] IS NOT NULL) AND [Source].[OrganisationId] != [OrganisationContacts].[OrganisationId]))
+	OR (([Source].[Name] IS NOT NULL AND [OrganisationContacts].[Name] IS NULL) OR ([Source].[Name] IS NULL AND [OrganisationContacts].[Name] IS NOT NULL) OR (([Source].[Name] IS NOT NULL AND [OrganisationContacts].[Name] IS NOT NULL) AND [Source].[Name] != [OrganisationContacts].[Name]))
+	OR (([Source].[Email] IS NOT NULL AND [OrganisationContacts].[Email] IS NULL) OR ([Source].[Email] IS NULL AND [OrganisationContacts].[Email] IS NOT NULL) OR (([Source].[Email] IS NOT NULL AND [OrganisationContacts].[Email] IS NOT NULL) AND [Source].[Email] != [OrganisationContacts].[Email]))
+	OR (([Source].[Phone] IS NOT NULL AND [OrganisationContacts].[Phone] IS NULL) OR ([Source].[Phone] IS NULL AND [OrganisationContacts].[Phone] IS NOT NULL) OR (([Source].[Phone] IS NOT NULL AND [OrganisationContacts].[Phone] IS NOT NULL) AND [Source].[Phone] != [OrganisationContacts].[Phone]))
+	OR (([Source].[Address] IS NOT NULL AND [OrganisationContacts].[Address] IS NULL) OR ([Source].[Address] IS NULL AND [OrganisationContacts].[Address] IS NOT NULL) OR (([Source].[Address] IS NOT NULL AND [OrganisationContacts].[Address] IS NOT NULL) AND [Source].[Address] != [OrganisationContacts].[Address]))
+	OR (([Source].[Description] IS NOT NULL AND [OrganisationContacts].[Description] IS NULL) OR ([Source].[Description] IS NULL AND [OrganisationContacts].[Description] IS NOT NULL) OR (([Source].[Description] IS NOT NULL AND [OrganisationContacts].[Description] IS NOT NULL) AND [Source].[Description] != [OrganisationContacts].[Description]))
+END</value>
+  </data>
+  <data name="AddOrganisationContactsView" xml:space="preserve">
+    <value>CREATE VIEW [dbo].[OrganisationContacts] AS
+SELECT
+	[ContactPersonId]
+	,DATEADD(dd, DATEDIFF(dd, 0, GETDATE()), 0) AS [DateRecorded]
+	,[OrganisationId]
+	,[Name]
+	,[Email]
+	,[Phone]
+	,[Address]
+	,[Description]
+FROM [OrganisationContactsHistory] a
+WHERE a.[ModifiedDate] =
+(
+    SELECT MAX([ModifiedDate])
+    FROM [OrganisationContactsHistory] a2
+    WHERE a2.[ContactPersonId] = a.[ContactPersonId]
+)
+AND [DeletedDate] IS NULL</value>
+  </data>
+  <data name="AddOrganisationProcedure" xml:space="preserve">
+    <value>CREATE PROCEDURE [dbo].[ReportingSnapshot_Organisation]
+AS
+BEGIN
+	SELECT
+		CASE WHEN [Source].[OrganisationId] IS NULL THEN [Organisation].[OrganisationId] ELSE [Source].[OrganisationId] END AS [OrganisationId]
+		,CASE WHEN [Source].[OrganisationId] IS NULL THEN [Organisation].[NAATINumber] ELSE [Source].[NAATINumber] END AS [NAATINumber]
+		,CASE WHEN [Source].[OrganisationId] IS NULL THEN [Organisation].[Name] ELSE [Source].[Name] END AS [Name]
+		,CASE WHEN [Source].[OrganisationId] IS NULL THEN [Organisation].[PrimaryAddress] ELSE [Source].[PrimaryAddress] END AS [PrimaryAddress]
+		,CASE WHEN [Source].[OrganisationId] IS NULL THEN [Organisation].[Suburb] ELSE [Source].[Suburb] END AS [Suburb]
+		,CASE WHEN [Source].[OrganisationId] IS NULL THEN [Organisation].[Country] ELSE [Source].[Country] END AS [Country]
+		,CASE WHEN [Source].[OrganisationId] IS NULL THEN [Organisation].[PrimaryPhone] ELSE [Source].[PrimaryPhone] END AS [PrimaryPhone]
+		,CASE WHEN [Source].[OrganisationId] IS NULL THEN [Organisation].[PrimaryEmail] ELSE [Source].[PrimaryEmail] END AS [PrimaryEmail]
+		,CASE WHEN [Source].[OrganisationId] IS NULL THEN [Organisation].[TrustedPayer] ELSE [Source].[TrustedPayer] END AS [TrustedPayer]
+		,CASE WHEN [Organisation].[OrganisationId] IS NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS 'IsNew'
+		,CASE WHEN [Source].[OrganisationId] IS NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS 'IsDeleted'
+	FROM
+	(
+		SELECT
+			i.[InstitutionId] AS 'OrganisationId'
+			,e.[NAATINumber]
+			,ina.[Name]
+			,a.[StreetDetails] COLLATE Latin1_General_CI_AS AS 'PrimaryAddress'
+			,s.[Suburb] COLLATE Latin1_General_CI_AS AS 'Suburb'
+			,c.[Name] COLLATE Latin1_General_CI_AS AS 'Country'
+			,ph.[Number] COLLATE Latin1_General_CI_AS AS 'PrimaryPhone'
+			,pe.[Email] COLLATE Latin1_General_CI_AS AS 'PrimaryEmail'
+			,i.[TrustedPayer]
+		FROM [naati_db]..[tblInstitution] i
+		LEFT JOIN [naati_db]..[tblEntity] e ON i.[EntityId] = e.[EntityId]
+		LEFT JOIN [naati_db]..[tblInstitutionName] ina ON i.[InstitutionId] = ina.[InstitutionId]
+		OUTER APPLY
+		(
+			SELECT TOP 1
+			[StreetDetails]
+			,[AddressId]
+			,[PostcodeId]
+			FROM [naati_db]..[tblAddress] a
+			WHERE a.[EntityId] = e.[EntityId] AND a.[PimaryContact] = 1
+		) ad
+		LEFT JOIN [naati_db]..[tblPostCode] p ON ad.[PostcodeId] = p.[PostcodeId]
+		LEFT JOIN [naati_db]..[tblSuburb] s ON s.[SuburbId] = p.[SuburbId]
+		LEFT JOIN [naati_db]..[tblCountry] c ON c.[CountryId] = ad.[CountryId]
+		OUTER APPLY
+		(
+			SELECT TOP 1
+			[Number]
+			FROM [naati_db]..[tblPhone] ph
+			WHERE ph.[EntityId] = e.[EntityId] AND ph.[PrimaryContact] = 1
+		) ph
+		OUTER APPLY
+		(
+			SELECT TOP 1
+			[EmailId]
+			,[Email]
+			FROM [naati_db]..[tblEmail] pe
+			WHERE pe.[EntityId] = e.[EntityId] AND pe.[IsPreferredEmail] = 1
+		) pe
+	) [Source]
+	FULL OUTER JOIN [Organisation] ON [Source].[OrganisationId] = [Organisation].[OrganisationId]
+	WHERE (([Source].[PersonId] IS NOT NULL AND [Organisation].[PersonId] IS NULL) OR ([Source].[PersonId] IS NULL AND [Organisation].[PersonId] IS NOT NULL) OR (([Source].[PersonId] IS NOT NULL AND [Organisation].[PersonId] IS NOT NULL) AND [Source].[PersonId] != [Organisation].[PersonId]))
+	OR (([Source].[NAATINumber] IS NOT NULL AND [Organisation].[NAATINumber] IS NULL) OR ([Source].[NAATINumber] IS NULL AND [Organisation].[NAATINumber] IS NOT NULL) OR (([Source].[NAATINumber] IS NOT NULL AND [Organisation].[NAATINumber] IS NOT NULL) AND [Source].[NAATINumber] != [Organisation].[NAATINumber]))
+	OR (([Source].[Name] IS NOT NULL AND [Organisation].[Name] IS NULL) OR ([Source].[Name] IS NULL AND [Organisation].[Name] IS NOT NULL) OR (([Source].[Name] IS NOT NULL AND [Organisation].[Name] IS NOT NULL) AND [Source].[Name] != [Organisation].[Name]))
+	OR (([Source].[PrimaryAddress] IS NOT NULL AND [Organisation].[PrimaryAddress] IS NULL) OR ([Source].[PrimaryAddress] IS NULL AND [Organisation].[PrimaryAddress] IS NOT NULL) OR (([Source].[PrimaryAddress] IS NOT NULL AND [Organisation].[PrimaryAddress] IS NOT NULL) AND [Source].[PrimaryAddress] != [Organisation].[PrimaryAddress]))
+	OR (([Source].[Suburb] IS NOT NULL AND [Organisation].[Suburb] IS NULL) OR ([Source].[Suburb] IS NULL AND [Organisation].[Suburb] IS NOT NULL) OR (([Source].[Suburb] IS NOT NULL AND [Organisation].[Suburb] IS NOT NULL) AND [Source].[Suburb] != [Organisation].[Suburb]))
+	OR (([Source].[Country] IS NOT NULL AND [Organisation].[Country] IS NULL) OR ([Source].[Country] IS NULL AND [Organisation].[Country] IS NOT NULL) OR (([Source].[Country] IS NOT NULL AND [Organisation].[Country] IS NOT NULL) AND [Source].[Country] != [Organisation].[Country]))
+	OR (([Source].[PrimaryPhone] IS NOT NULL AND [Organisation].[PrimaryPhone] IS NULL) OR ([Source].[PrimaryPhone] IS NULL AND [Organisation].[PrimaryPhone] IS NOT NULL) OR (([Source].[PrimaryPhone] IS NOT NULL AND [Organisation].[PrimaryPhone] IS NOT NULL) AND [Source].[PrimaryPhone] != [Organisation].[PrimaryPhone]))
+	OR (([Source].[PrimaryEmail] IS NOT NULL AND [Organisation].[PrimaryEmail] IS NULL) OR ([Source].[PrimaryEmail] IS NULL AND [Organisation].[PrimaryEmail] IS NOT NULL) OR (([Source].[PrimaryEmail] IS NOT NULL AND [Organisation].[PrimaryEmail] IS NOT NULL) AND [Source].[PrimaryEmail] != [Organisation].[PrimaryEmail]))
+	OR (([Source].[TrustedPayer] IS NOT NULL AND [Organisation].[TrustedPayer] IS NULL) OR ([Source].[TrustedPayer] IS NULL AND [Organisation].[TrustedPayer] IS NOT NULL) OR (([Source].[TrustedPayer] IS NOT NULL AND [Organisation].[TrustedPayer] IS NOT NULL) AND [Source].[TrustedPayer] != [Organisation].[TrustedPayer]))
+END</value>
+  </data>
+  <data name="AddOrganisationView" xml:space="preserve">
+    <value>CREATE VIEW [dbo].[Organisation] AS
+SELECT
+	[OrganisationId]
+	,DATEADD(dd, DATEDIFF(dd, 0, GETDATE()), 0) AS [DateRecorded]
+	,[NAATINumber]
+	,[Name]
+	,[PrimaryAddress]
+	,[Suburb]
+	,[Country]
+	,[PrimaryPhone]
+	,[PrimaryEmail]
+	,[TrustedPayer]
+FROM [OrganisationHistory] a
+WHERE a.[ModifiedDate] =
+(
+    SELECT MAX([ModifiedDate])
+    FROM [OrganisationHistory] a2
+    WHERE a2.[OrganisationId] = a.[OrganisationId]
+)
+AND [DeletedDate] IS NULL</value>
+  </data>
+</root>

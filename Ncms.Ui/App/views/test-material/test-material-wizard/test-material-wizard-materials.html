@@ -1,0 +1,64 @@
+﻿<div>
+    <div data-bind="validationElement: model.TestMaterialAssignments, validationOptions: { insertMessages: false }" class="m-l-sm">
+        <span class="help-block" data-bind="validationMessage: model.TestMaterialAssignments"></span>
+    </div>
+    <div class="hbox hbox-auto-xs no-border">
+        <div class="col wrapper b b-l-white b-b-white b-t-white" data-bind="css: { 'b-success b-dashed': draggingTypeId(), 'b-light': !draggingTypeId() }">
+            <h4 class="font-thin m-t-none" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Tasks'"></h4>
+            <span class="m-b block text-sm text-muted" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TasksDragAndDropHelp'"></span>
+            <div class="material-scroll" data-bind="overlayScrollbars">
+                <!--ko foreach: { data: tasks, as: 't' }-->
+                <div class="panel m-b-sm" data-bind="css: t.Css, style: { 'opacity': !t.AllowDrop() ? '0.3' : '1' }">
+                    <div class="panel-heading wrapper-xs override-task-panel-heading">
+                        <i class="fa" data-bind="css: { 'fa-check': t.TestMaterials().length, 'fa-times': !t.TestMaterials().length }"></i>
+                        <span class="text-base">
+                            <span data-bind="text: t.TaskLabel"></span>
+                            <span>-</span>
+                            #<span data-bind="text: t.Id"></span>
+                        </span>
+                    </div>
+                    <!--ko ifnot: t.TestMaterials().length-->
+                    <div class="panel-body wrapper-sm text-center" data-bind="dropZone: { accepts: ['task.source', 'task.target'], drop: t.drop }, css: { 'drag-disabled': !t.AllowDrop() }">
+                        <span class="font-thin h5" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.DropTestMaterialHere'"></span>
+                    </div>
+                    <!--/ko-->
+                    <ul class="list-group alt" data-bind="foreach: { data: t.TestMaterials, as: 'tm' }, dropZone: { accepts: ['task.source', 'task.target'], drop: t.drop }, css: { 'drag-disabled': !t.AllowDrop() }">
+                        <li class="list-group-item" data-bind="dragZone: { name: 'task.target', dragStart: $root.dragStart, dragEnd: $root.dragEnd }">
+                            <span class="label text-base pos-rlt m-r-xs" data-bind="tooltip : { trigger: 'hover', container: 'body' }, attr: { title: tm.BadgeTooltip },  text:tm.BadgeText, css: 'bg-' + tm.BadgeColor">&nbsp;</span>
+                            #<span data-bind="text: tm.Id"></span>
+                            <span data-bind="text: tm.Title" class="m-r-xs"></span>
+                            <span class="label text-base text-dark no-text-shadow b b-3x" data-bind="css: 'b-' + tm.DomainBadgeColor, text: tm.Domain"></span>
+                            <span class="label text-base text-dark no-text-shadow b b-3x" data-bind="css: 'b-' + tm.BadgeColor, text: tm.ApplicantsRangeType"></span>
+                        </li>
+                    </ul>
+                </div>
+                <!--/ko-->
+            </div>
+        </div>
+        <div class="col wrapper b b-l-white" data-bind="css: { 'b-success b-dashed bg-light': draggingTypeId(), 'b-white': !draggingTypeId() }, dropZone: { accepts: 'task.target', drop: drop }">
+            <h4 class="font-thin m-t-none" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialsTitle'"></h4>
+            <!-- ko component: { name: 'select-component', params: taskTypeOptions } --><!-- /ko -->
+            <div class="m-t material-scroll" data-bind="overlayScrollbars">
+                <ul class="list-unstyled" data-bind="foreach: { data: testMaterialsFromTaskTypeAndStatusType, as: 'tm' }">
+                    <li data-bind="dragZone: { name: 'task.source', dragStart: $parent.dragStart, dragEnd: $parent.dragEnd }">
+                        <div class="b-b b-light">
+                            <div class="m-t m-b">
+                                <span class="label text-base pos-rlt m-r-xs" data-bind="tooltip : { trigger: 'hover', container: 'body' }, attr: { title: tm.BadgeTooltip }, text:tm.BadgeText,  css: 'bg-' + tm.BadgeColor">&nbsp;</span>
+                                #<span data-bind="text: tm.Id"></span>
+                                <span data-bind="text: tm.Title" class="m-r-xs"></span>
+                                <!--ko if: tm.IsSourceTestMaterialType-->
+                                <span class="label text-base text-dark no-text-shadow b b-3x" data-bind="css: 'b-gray', text: tm.IsSourceTestMaterialTypeText"></span>
+                                <!--/ko-->
+                                <span class="label text-base text-dark no-text-shadow b b-3x" data-bind="css: 'b-' + tm.DomainBadgeColor, text: tm.Domain"></span>
+                                <span class="label text-base text-dark no-text-shadow b b-3x" data-bind="css: 'b-' + tm.BadgeColor, text: tm.ApplicantsRangeType"></span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!--ko if: showMoreButton-->
+            <button class="btn btn-success m-t" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.ShowMore', click: showMore"></button>
+            <!--/ko-->
+        </div>
+    </div>
+</div>

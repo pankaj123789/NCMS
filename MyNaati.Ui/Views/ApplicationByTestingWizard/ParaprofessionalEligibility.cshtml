@@ -1,0 +1,47 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.ApplicationByTestingWizard.ParaprofessionalEligibilityModel
+@{
+    ViewBag.Title = "Application for Accreditation by Testing";
+    ViewBag.Subtitle = "Paraprofessional Eligibility";
+    Layout = "~/Views/Shared/MasterPages/_ApplicationWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Testing", Url.Action("Index", "ApplicationByTestingWizard")),
+        new Tuple<string, string>("New Application", string.Empty)
+    };
+}
+@section Scripts
+{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(cancelButtons).show();
+        $(previousButtons).show();
+        $(nextButtons).show();
+    });
+</script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>You need to meet one of the following eligibility criteria</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        @for (var i = 1; i < 7; ++i)
+        {
+            <div class="radio">
+                <label>
+                    @Html.RadioButtonFor(m => Model.SelectedCriteriaId, i, new { id = "rbSelectedCriteria" + i })
+                    <label for="@string.Format("rbSelectedCriteria{0}",i)">
+                        @Model.EligibilityCriteria.CriteriaList[i].Text.ToMvcHtmlString()
+                        @if (i == 3)
+                        {
+                            @ViewData["langaugeList"]
+                        }
+                    </label>
+                </label>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿@using MyNaati.Ui.Common
+@model MyNaati.Ui.ViewModels.Shared.BasePurchaseWizardModel
+@{
+    ViewBag.Title = "Place an Order";
+    ViewBag.Subtitle = "Declaration";
+    Layout = "~/Views/Shared/MasterPages/_ProductWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Products", Url.Action("index", "Product")),
+        new Tuple<string, string>("Certificates", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $nextButton = $(nextButtons);
+            var $checkbox = $('#CertificateDeclarationModel_UserAgrees');
+
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $nextButton.show();
+
+            if (!$checkbox.prop('checked')) {
+                $nextButton.prop('disabled', true);
+            }
+
+            $checkbox.change(function () {
+                var checked = $checkbox.prop('checked');
+                $nextButton.prop('disabled', !checked);
+                $checkbox.val(checked);
+            });
+        });      
+    </script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div>
+            <ul>
+                <li>
+                    I acknowledge that by completing this form, I am providing personal information to NAATI. I agree that NAATI will collect,
+                    use, disclose and store my personal information in accordance with its <a href="@Url.ExternalUrlFromConfig("PrivacyPolicy")" target="_blank">Privacy Policy</a>.
+                </li>
+                <li>
+                    I understand and acknowledge that NAATI will only issue this product with my official name - the name as shown on the photograph identification
+                    document which I have previously provided to NAATI. NAATI will not substitute or omit any part of my name, unless shortening is required to
+                    adequately contain my name on the product. In this case, NAATI will use the initial of one or more of my given names.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="checkbox">
+            <label>
+                <input id="CertificateDeclarationModel_UserAgrees" name="CertificateDeclarationModel.UserAgrees" type="checkbox" value="@Model.CertificateDeclarationModel.UserAgrees.ToString().ToLower()" />
+                @Html.LabelFor(x => x.CertificateDeclarationModel.UserAgrees)
+            </label>
+        </div>
+    </div>
+</div>

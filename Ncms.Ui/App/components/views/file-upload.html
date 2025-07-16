@@ -1,0 +1,18 @@
+﻿<span class="fileinput-button dropzone" data-bind="css: { selected: selected, 'b-white': isLoading }">
+    <!--ko ifnot: isLoading-->
+    <i class="glyphicon glyphicon-plus"></i>
+    <span data-bind="html: buttonLabel()"></span>
+    <!--/ko-->
+    <div data-bind="css: { hide: isLoading }">
+        <input data-bind="fileupload: fileupload" type="file" name="file">
+    </div>
+    <!--ko if: isLoading-->
+    <div class="progress m-b-xs">
+        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" data-bind="attr: { 'aria-valuenow': percent }, style: { width: percent() + '%' }" aria-valuemin="0" aria-valuemax="100">
+            <span data-bind="text: percent"></span>%
+        </div>
+    </div>
+    <div class="pull-left text-sm m-t-n-md" data-bind="html: uploadLoadedMessage"></div>
+    <div class="pull-right text-sm m-t-n-md" data-bind="html: uploadRemainingMessage"></div>
+    <!--/ko-->
+</span>

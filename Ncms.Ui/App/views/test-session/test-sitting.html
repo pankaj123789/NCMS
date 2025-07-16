@@ -1,0 +1,192 @@
+﻿<div class="vbox">
+
+    <div data-bind="compose: { model: createMaterialInstance, view: 'views/test-session/assign-material.html' }"></div>
+    <div data-bind="compose: { model: downloadAllMaterialInstance, view: 'views/test-session/download-material.html' }"></div>
+    <div data-bind="compose: { model: validateTestSittingInstance, view: 'views/test-session/validate-test-sitting.html' }"></div>
+
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <div style="display: inline-block;">
+                    <h1 class="m-n font-thin h3 text-black" data-bind="text: title"></h1>
+                </div>
+                <div style="display: inline-block; padding-left: 50px;">
+                    <span>
+                        <!--ko if: isCompletedStatus() -->
+                        <button class="btn btn-success" data-bind="click: assignTestMaterial, enable:canAssign, enableWithPermission:'TestMaterial.Manage'">
+                            <i class="fa fa-address-card"></i>&nbsp;
+                            <span data-bind="reshtml: 'Naati.Resources.TestSession.resources.AssignTestMaterial'"></span>
+                        </button>
+                        <!--/ko-->
+                        <!--ko if: !isCompletedStatus() -->
+                        <button class="btn btn-success" data-bind="click: assignTestMaterial, enable:canAssign, enableWithPermission:'TestMaterial.Assign'">
+                            <i class="fa fa-address-card"></i>&nbsp;
+                            <span data-bind="reshtml: 'Naati.Resources.TestSession.resources.AssignTestMaterial'"></span>
+                        </button>
+                        <!--/ko-->
+                    </span>
+                    
+                    <span style="padding-left: 10px;">
+                        <button class="btn btn-success" data-bind="click:removeTestMaterials, enable:canRemoveTestMaterials, enableWithPermission:'TestMaterial.Delete'">
+                            <i class="fa fa-times"></i>&nbsp;
+                            <span data-bind="reshtml: 'Naati.Resources.TestSession.resources.RemoveTestMaterials'"></span>
+                        </button>
+                    </span>
+
+                    <span style="padding-left: 10px;">
+                        <button class="btn btn-success" data-bind="click:downloadAllMaterial, enableWithPermission:'TestMaterial.Download'">
+                            <i class="fa fa-download"></i>&nbsp;
+                            <span data-bind="reshtml: 'Naati.Resources.TestSession.resources.DownloadAllMaterial'"></span>
+                        </button>
+                    </span>
+
+                    <span style="padding-left: 10px;">
+                        <button class="btn btn-success" data-bind="click:markAsComplete, enable: canMarkAsComplete">
+                            <i class="fa fa-check"></i>&nbsp;
+                            <span data-bind="text: txtMarkAsComplete"></span>
+                        </button>
+                    </span>
+                    <span style="padding-left: 10px;">
+                        <button class="btn btn-success" data-bind="click:validatesTestSitting, enableWithPermission:'TestSitting.Validate'">
+                            <i class="fa fa-tasks"></i>&nbsp;
+                            <span data-bind="reshtml: 'Naati.Resources.TestSession.resources.ValidateTestSitting'"></span>
+                        </button>
+                    </span>
+                </div>
+
+                <p class="form-control-static text-info">
+                    <a data-bind="attr: { href: testSessionAddressUrl, title: subtitle}" target="_blank"><span data-bind="text: subtitle"></span></a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="hbox" data-bind="component: { name: 'table-component', params: tableDefinition}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <a href="#" class="btn btn-default" data-bind="click: back, clickBubble: false"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <script id="testsitting-header-template" type="text/html">
+        <th class="sortable w-xs" data-bind="reshtml: 'Naati.Resources.TestSession.resources.CustomerNo'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Name'"></th>
+
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Gender'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.DateOfBirth'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.PrimaryEmail'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.AttendanceID'"></th>
+
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Application'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Skill'"></th>
+        <th class="sortable text-center" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Status'"></th>
+        <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestTasks'"></th>               
+        <th></th>
+        <th></th>
+    </script>
+    <script id="testsetting-row-template" type="text/html">
+        <tr>
+            <td>
+                <a href="#" data-bind="click: $root.showDetails, clickBubble: false"><i class="fa fa-chevron-right"></i></a>
+                <span><a href="#" class="text-info" target="_blank" data-bind="text: CustomerNo(), attr: { href: '#/person/' + CustomerNo() }"></a></span>
+            </td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: Gender"></td>
+            <td data-bind="text: DateOfBirth"></td>
+            <td data-bind="text: Email"></td>
+            <td>
+                <!--ko if: ShowAttendanceLink-->
+                <a class="text-info" target="_blank" data-bind="text: AttendanceId(), attr: { href: '#/test/' + AttendanceId() }"></a>
+                <!--/ko-->
+                <!--ko ifnot: ShowAttendanceLink-->
+                <span data-bind="text: AttendanceId()"></span>
+                <!--/ko-->
+                <!--ko if: Supplementary -->
+                <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Shared.resources.SupplementaryTest' }">S</span>
+                <!--/ko-->
+                <!--ko ifnot: HasDefaultSpecification -->
+                <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.Shared.resources.NotDefaultSpecification' }"> ! </span>
+                <!--/ko-->
+            </td>
+            <td><a class="text-info" target="_blank" data-bind="text: ApplicationReference(), attr: { href: '#/application/' + ApplicationId() }"></a></td>
+            <td>
+                <span data-bind="text: Skill" />
+                <!--ko if: CharacterTypeSimplified -->
+                <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.TestSpecification.resources.SimplifiedChinese' }">S</span>
+                <!--/ko-->
+                <!--ko if: CharacterTypeTraditional -->
+                <span class="info-glyph badge" data-bind="tooltip: { container: 'body', trigger: 'hover' }, resattr: { title: 'Naati.Resources.TestSpecification.resources.TraditionalChinese' }">T</span>
+                <!--/ko-->
+            </td>
+            <td class="text-center"><span class="label text-base m-t-n-xs m-l-sm" data-bind="text: Status(), css: 'label-' + StatusCss()"></span></td>
+
+            <td>              
+                <span data-bind="html: TestTaskHtml"></span>
+            </td>
+            <td class="text-center w-xs">
+
+                <div class="pull-right dropdown">
+                    <button class="btn btn-sm btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="tooltip: { container: '#credentialRequests'  }, resattr: { title: 'Naati.Resources.Application.resources.TakeAction' }, click: $root.getActions">
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </button>
+                    <ul class="dropdown-menu" data-bind="foreach: { data: Actions, as: 'a' }">
+                        <li data-bind="css: { disabled: a.Disabled }">
+                            <a data-bind="text: a.Name, click: function() { $root.takeAction($parent, a); }"></a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+            <td class="w-xxs select-checkbox"></td>
+        </tr>
+    </script>
+
+    <script id="testsitting-applicant-template" type="text/html">
+        <div class="hbox hbox-auto-xs animated fadeIn">
+            <div class="col photo-container w-md">
+                <!--ko component: { name: 'person-photo', params: personPhotoOptions }--><!--/ko-->
+            </div>
+            <div class="col">
+                <div class="m-l-sm">
+
+                    <table class="table table-bordered table-striped b-t b-b w-full">
+                        <thead>
+                        <tr>
+                            <th class="sortable w-sm" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestTask'"></th>
+                            <th class="sortable" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Material'"></th>
+                            <th class="w-xs"></th>
+                        </tr>
+                        </thead>
+                        <tbody data-bind="foreach: testTasks">
+                        <tr>
+                            <td>
+                                <span data-bind="text: TestComponentTypeLabel() + Label()"></span>
+                            </td>
+                            <td>
+                                <!-- ko component: { name: 'select-component', params: materialOptions } -->
+                                <!-- /ko -->
+                            </td>
+                            <td class="text-right">
+                                <button class="btn btn-success" data-bind="enable: dirtyFlag().isDirty(), tooltip: tooltip, resattr: { title: 'Naati.Resources.Shared.resources.Save' }, click: save">
+                                    <span class="fa fa-check"></span>
+                                </button>
+                                <a href="#" class="btn btn-danger" data-bind="click: remove, tooltip: { trigger: 'hover', container: 'body' }, resattr: { title: 'Naati.Resources.Shared.resources.Delete' }">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>

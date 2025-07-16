@@ -1,0 +1,2369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.7.12\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.7.12\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" />
+  <Import Project="..\..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5646B25B-0CBE-45D7-8D2F-7CE2BD6FDD8B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyNaati.Ui</RootNamespace>
+    <AssemblyName>MyNaati.Ui</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseIISExpress>false</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerLaunchUrl>http://{ServiceIPAddress}</DockerLaunchUrl>
+    <DockerfileRunArguments>--name mynaatiui  -p 63494:80 -v "C:\storage\FileStorage:C:\storage\FileStorage" -v "C:\tempStorage\TemporaryFiles:C:\tempStorage\TemporaryFiles"</DockerfileRunArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisAdditionalOptions>/assemblyCompareMode:StrongNameIgnoringVersion</CodeAnalysisAdditionalOptions>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisAdditionalOptions>/assemblyCompareMode:StrongNameIgnoringVersion</CodeAnalysisAdditionalOptions>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisAdditionalOptions>/assemblyCompareMode:StrongNameIgnoringVersion</CodeAnalysisAdditionalOptions>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisAdditionalOptions>/assemblyCompareMode:StrongNameIgnoringVersion</CodeAnalysisAdditionalOptions>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BootstrapBundleConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="Attributes\DisableRemoteCallsAttribute.cs" />
+    <Compile Include="Attributes\LessThanOrEqualToCurrentDate.cs" />
+    <Compile Include="Attributes\MvcRecaptchaValidationAttribute.cs" />
+    <Compile Include="Attributes\HttpRecaptchaValidationAttribute.cs" />
+    <Compile Include="AutoMapperRegistry\AutoMapperRegister.cs" />
+    <Compile Include="AutoMappingProfiles\ApplicationForAccreditationWizardProfile.cs" />
+    <Compile Include="AutoMapperRegistry\BaseMapper.cs" />
+    <Compile Include="AutoMappingProfiles\ApplicationProfile.cs" />
+    <Compile Include="AutoMappingProfiles\ExaminerToolsProfile.cs" />
+    <Compile Include="AutoMappingProfiles\TestMaterialProfile.cs" />
+    <Compile Include="AutoMappingProfiles\TestProfile.cs" />
+    <Compile Include="AutoMappingProfiles\CredentialProfile.cs" />
+    <Compile Include="AutoMapperRegistry\DynamicMapper.cs" />
+    <Compile Include="AutoMapperRegistry\IMapper.cs" />
+    <Compile Include="AutoMappingProfiles\OrdersProfile.cs" />
+    <Compile Include="AutoMappingProfiles\PDListingProfile.cs" />
+    <Compile Include="AutoMappingProfiles\PDSearchProfile.cs" />
+    <Compile Include="AutoMappingProfiles\PersonalDetailsProfile.cs" />
+    <Compile Include="AutoMappingProfiles\UnraisedInvoiceProfile.cs" />
+    <Compile Include="CastleWindsor\Components.cs" />
+    <Compile Include="Controllers\VerifyPractitionerController.cs" />
+    <Compile Include="Controllers\VerifyCredentialController.cs" />
+    <Compile Include="Controllers\UnraisedInvoicesController.cs" />
+    <Compile Include="Controllers\LifecycleController.cs" />
+    <Compile Include="Helpers\MyNaatiThrottlingTracer.cs" />
+    <Compile Include="Helpers\MyNaatiThrottlingCustomAddressParser.cs" />
+    <Compile Include="Helpers\MyNaatiThrottlingHandler.cs" />
+    <Compile Include="Ioc\CustomServiceLocator.cs" />
+    <Compile Include="CastleWindsor\WcfSessionFacility.cs" />
+    <Compile Include="CastleWindsor\WindsorDependencyResolver.cs" />
+    <Compile Include="Common\CachedLookupProvider.cs" />
+    <Compile Include="Common\DateComparisonValidator.cs" />
+    <Compile Include="Common\DisplayExtensionMethods.cs" />
+    <Compile Include="Common\DisplayHelpers.cs" />
+    <Compile Include="Common\HmacAuthenticationAttribute.cs" />
+    <Compile Include="Common\JsonNetResult.cs" />
+    <Compile Include="Common\MapperExtensions.cs" />
+    <Compile Include="Controllers\API\PrivateApiController.cs" />
+    <Compile Include="Ioc\NinjectDependecyResolver.cs" />
+    <Compile Include="Ioc\NinjectHttpControllerActivator.cs" />
+    <Compile Include="Ioc\NinjectWebCommon.cs" />
+    <Compile Include="Ioc\QueryServiceInterceptor.cs" />
+    <Compile Include="Ioc\Service.cs" />
+    <Compile Include="Ioc\ServiceInterceptor.cs" />
+    <Compile Include="Security\HtmlEncodeAttribute.cs" />
+    <Compile Include="Security\HtmlEncodeControllerAttribute.cs" />
+    <Compile Include="Security\MyNaatiHangfireAuthorizationFilter.cs" />
+    <Compile Include="Security\MyNaatiPrivateApiAuthenticationAttribute.cs" />
+    <Compile Include="Common\MyNaatiSecurityException.cs" />
+    <Compile Include="Common\OnlineDirectorySearch.cs" />
+    <Compile Include="Controllers\API\1.0\PublicController.cs" />
+    <Compile Include="Controllers\API\2.0\ApiV2Controller.cs" />
+    <Compile Include="Controllers\OnlineDirectoryController.cs" />
+    <Compile Include="Controllers\NewtonsoftController.cs" />
+    <Compile Include="Controllers\BillsController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
+    <Compile Include="Controllers\LogbookController.cs" />
+    <Compile Include="Controllers\CredentialApplicationController.cs" />
+    <Compile Include="Controllers\CredentialController.cs" />
+    <Compile Include="Helpers\Common.cs" />
+    <Compile Include="Helpers\ExaminerHelper.cs" />
+    <Compile Include="Common\HandleCustomErrorAttribute.cs" />
+    <Compile Include="Helpers\IExaminerHelper.cs" />
+    <Compile Include="Common\IntegerValidators.cs" />
+    <Compile Include="Common\ListValidators.cs" />
+    <Compile Include="Common\LookupExtensionMethods.cs" />
+    <Compile Include="Common\RequiredIfAttribute.cs" />
+    <Compile Include="Common\SessionStorage.cs" />
+    <Compile Include="Common\StreamHelper.cs" />
+    <Compile Include="Common\UrlExtensionMethods.cs" />
+    <Compile Include="Common\ViewContextExtensions.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API\AccountApiController.cs" />
+    <Compile Include="Controllers\API\BaseApiController.cs" />
+    <Compile Include="Controllers\API\PDSearchApiController.cs" />
+    <Compile Include="Controllers\ApplicationsController.cs" />
+    <Compile Include="Controllers\AutocompleteController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ConfigurationController.cs" />
+    <Compile Include="Controllers\ExaminerToolsController.cs" />
+    <Compile Include="Controllers\FileController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PDSearchController.cs" />
+    <Compile Include="Controllers\PersonalDetailsController.cs" />
+    <Compile Include="Common\SessionExpiredException.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\FormBoxHelper.cs" />
+    <Compile Include="Helpers\IMenuHelper.cs" />
+    <Compile Include="Helpers\IRegisterHelper.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\DataTableExtensions.cs" />
+    <Compile Include="Helpers\DefaultModelBinderWithHtmlValidation.cs" />
+    <Compile Include="Helpers\MenuHelper.cs" />
+    <Compile Include="Helpers\OrderItemHelper.cs" />
+    <Compile Include="Helpers\MvcExtensions.cs" />
+    <Compile Include="LINQtoCSV\CsvColumnAttribute.cs" />
+    <Compile Include="LINQtoCSV\CsvContext.cs" />
+    <Compile Include="LINQtoCSV\CsvFileDescription.cs" />
+    <Compile Include="LINQtoCSV\CsvInputFormatAttribute.cs" />
+    <Compile Include="LINQtoCSV\CsvOutputFormatAttribute.cs" />
+    <Compile Include="LINQtoCSV\CsvStream.cs" />
+    <Compile Include="LINQtoCSV\DataRowItem.cs" />
+    <Compile Include="LINQtoCSV\Exceptions.cs" />
+    <Compile Include="LINQtoCSV\FieldMapper.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Helpers\RegisterHelper.cs" />
+    <Compile Include="Models\DataTable\Parameters.cs" />
+    <Compile Include="Models\DataTable\Column.cs" />
+    <Compile Include="Models\DataTable\Order.cs" />
+    <Compile Include="Models\DataTable\Row.cs" />
+    <Compile Include="Models\DataTable\Search.cs" />
+    <Compile Include="Models\DataTable\Result.cs" />
+    <Compile Include="Models\PublicCertifications.cs" />
+    <Compile Include="Models\PublicCredentials.cs" />
+    <Compile Include="Models\PublicError.cs" />
+    <Compile Include="Models\PublicPractitioner.cs" />
+    <Compile Include="Models\ServiceRolesProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\OnlineOrderDetails\IOrderCsvGenerator.cs" />
+    <Compile Include="Reports\OnlineOrderDetails\IRegistrationUserRequestCsvGenerator.cs" />
+    <Compile Include="Reports\OnlineOrderDetails\IUserCsvGenerator.cs" />
+    <Compile Include="Reports\OnlineOrderDetails\OrderCsv.cs" />
+    <Compile Include="Reports\OnlineOrderDetails\OrderCsvGenerator.cs" />
+    <Compile Include="Reports\OnlineOrderDetails\RegistrationUserRequestCsv.cs" />
+    <Compile Include="Reports\OnlineOrderDetails\RegistrationUserRequestCsvGenerator.cs" />
+    <Compile Include="Reports\OnlineOrderDetails\UserCsvGenerator.cs" />
+    <Compile Include="Reports\OnlineOrderDetails\UserCsv.cs" />
+    <Compile Include="Reports\PDFTokenisation\BasicChecklistRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\BasicGridRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\Application Certificate\ApplicationCertificateOrderTotalFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\Application Certificate\ApplicationCertificatePersonalDetailsFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\Application Id Card\ApplicationIdCardOrderTotalFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\Application Id Card\ApplicationIdCardPersonalDetailsFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\Application Stamp\ApplicationStampOrderTotalFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\Application Stamp\ApplicationStampPersonalDetailsFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationMigrationSkillsAssessmentFeeReplacement.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationMigrationSkillsAssessmentFormChecklistRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationTestingFormChecklistRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationTestingLocationFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationContactGridRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationPersonalDetailsFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationAddressDetailsFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationResidencyDetailsFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationPurposeOfCredentialsFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationTestingEligibilityGridRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationBaseFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationTestingLanguageProficiencyFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationTestingFeeGridRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationCourseFeeGridRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationTestingFeeReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationCourseFeeReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationCourseCredentialGridRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationCourseDetailsReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\ApplicationCourseFormChecklistRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\CheckList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CheckList.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\PDFTokenisation\Forms\PD Listing\PdListingContactDetailsFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\PD Listing\PdListingCredentialDetailsFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\PD Listing\PDListingPersonalDetailsFromReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\Forms\PD Listing\PdListingWorkAreasAndAddressFormReplacements.cs" />
+    <Compile Include="Reports\PDFTokenisation\IInputField.cs" />
+    <Compile Include="Reports\PDFTokenisation\IPdfRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\ITokenRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\ITokenReplacement.cs" />
+    <Compile Include="Reports\PDFTokenisation\PdfFormField.cs" />
+    <Compile Include="Reports\PDFTokenisation\PdfRenderer.cs" />
+    <Compile Include="Reports\PDFTokenisation\PdfWordWrapper.cs" />
+    <Compile Include="Security\AuthorizeRolesAttribute.cs" />
+    <Compile Include="Security\SystemRoles.cs" />
+    <Compile Include="Security\WebContextUserBehavior.cs" />
+    <Compile Include="Swashbuckle\Filters\DocumentFilter.cs" />
+    <Compile Include="Swashbuckle\Filters\OperationFilter.cs" />
+    <Compile Include="Swashbuckle\Helpers\RequestParameterExampleAttribute.cs" />
+    <Compile Include="Swashbuckle\Helpers\SwaggerResponseNaatiApiAttribute.cs" />
+    <Compile Include="Swashbuckle\Models\ApiPublicRequestExample.cs" />
+    <Compile Include="Swashbuckle\Models\ApiPublicResponseExample.cs" />
+    <Compile Include="UI\HtmlHelperExtensions.cs" />
+    <Compile Include="UI\UserExtensions.cs" />
+    <Compile Include="ViewModels\Account\AccessCodeModel.cs" />
+    <Compile Include="ViewModels\Account\MfaAndAccessCodeModel.cs" />
+    <Compile Include="ViewModels\Account\MfaModel.cs" />
+    <Compile Include="ViewModels\ApplicationByCourseWizard\ApplicationByCourseFormModel.cs" />
+    <Compile Include="ViewModels\ApplicationByCourseWizard\CredentialEditModel.cs" />
+    <Compile Include="ViewModels\ApplicationByCourseWizard\DownloadFormModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\AddressModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\AllocateTestSessionConfirmationMessages.cs" />
+    <Compile Include="ViewModels\CredentialApplication\MakeApplicationConfirmationMessages.cs" />
+    <Compile Include="ViewModels\CredentialApplication\ApplicationFormAnswerActionModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\ApplicationFormAnswerDocumentModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\ApplicationFormAnswerModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\ApplicationFormQuestionLogicModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\ApplicationFormQuestionModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\ApplicationFormSectionModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\CredentialApplicationModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\CredentialRequestModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\CredentialRequestRequestModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\CustomerDetailsModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\DeleteRequestModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\DocumentModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\EndorsedQualificationLookupRequestModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\GetCustomerApplicationModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\GetDocumentTypesModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\GetSectionsRequestModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\ISponsoredPaymentConfirmationMessages.cs" />
+    <Compile Include="ViewModels\CredentialApplication\LookupsRequestModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\ManageTestModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\MyTestResultViewModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\MyTestViewModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\RefundRequestModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\RefundViewModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\SupplementaryTestConfirmationMessages.cs" />
+    <Compile Include="ViewModels\CredentialApplication\PaidTestReviewConfirmationMessages.cs" />
+    <Compile Include="ViewModels\CredentialApplication\PayOnlineResponseModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\PersonVerificationModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\SaveApplicationFormRequestModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\SubmissionResultModel.cs" />
+    <Compile Include="ViewModels\CredentialApplication\SubmitApplicationResponse.cs" />
+    <Compile Include="ViewModels\CredentialApplication\TermsAndConditionsViewModel.cs" />
+    <Compile Include="ViewModels\Credential\CredentialDetailRequestModel.cs" />
+    <Compile Include="ViewModels\Credential\CredentialIdCardModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\IndexModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\ManageTestMaterialsModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\TestMaterialCreationPaymentsModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\MaterialRequestPanelMembershipModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\MaterialRequestRoundAttachmentModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\MaterialRequestRoundLinkModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\MaterialRequestTaskModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\PostMaterialRequestMembersRequestModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\RolePlayerSettingsModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\AdviseAvailabilityModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\ManageTestsModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\MarkingPayrollHistoryModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\PanelManagementModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\ExaminerUnavailableModel.cs" />
+    <Compile Include="ViewModels\ApplicationByTestingWizard\DownloadFormModel.cs" />
+    <Compile Include="ViewModels\ApplicationByTestingWizard\TestEditModel.cs" />
+    <Compile Include="ViewModels\ApplicationByTestingWizard\TestingFeesModel.cs" />
+    <Compile Include="ViewModels\ApplicationByCourseWizard\ApplicationByCourseWizardModel.cs" />
+    <Compile Include="ViewModels\ApplicationByCourseWizard\AvailableCredential.cs" />
+    <Compile Include="ViewModels\ApplicationByCourseWizard\CourseDetailsModel.cs" />
+    <Compile Include="ViewModels\ApplicationByCourseWizard\CredentialDetailsModel.cs" />
+    <Compile Include="ViewModels\ApplicationByCourseWizard\CredentialDetailsRow.cs" />
+    <Compile Include="ViewModels\ApplicationByCourseWizard\CourseFeesModel.cs" />
+    <Compile Include="ViewModels\Configuration\ConfigurationModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\SubmitTestModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\TestAssessmentModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\TestBandModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\TestCompetenceModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\TestComponentModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\TestMaterialRequestModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\TestMaterialModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\MaterialModel.cs" />
+    <Compile Include="ViewModels\ExaminerTools\TestModel.cs" />
+    <Compile Include="ViewModels\File\FileListingModel.cs" />
+    <Compile Include="ViewModels\File\FileUploadModel.cs" />
+    <Compile Include="ViewModels\Bills\InvoiceModelRequest.cs" />
+    <Compile Include="ViewModels\Bills\PaymentDetailsModel.cs" />
+    <Compile Include="ViewModels\Home\MenuLinkModel.cs" />
+    <Compile Include="ViewModels\IDownloadFormModel.cs" />
+    <Compile Include="ViewModels\PDSearch\VerifyCredentialsModel.cs" />
+    <Compile Include="ViewModels\PersonalDetails\AddressEditGoogleModel.cs" />
+    <Compile Include="ViewModels\PersonalDetails\IAddressGoogleModel.cs" />
+    <Compile Include="ViewModels\PersonalDetails\PersonalDetailsModel.cs" />
+    <Compile Include="ViewModels\Shared\AddAddressModel.cs" />
+    <Compile Include="ViewModels\Shared\AddressDetailsModel.cs" />
+    <Compile Include="ViewModels\Shared\AddressListResultItem.cs" />
+    <Compile Include="ViewModels\Shared\ApplicationForAccreditation\AddressModel.cs" />
+    <Compile Include="ViewModels\Shared\ApplicationForAccreditation\ApplicationFormModel.cs" />
+    <Compile Include="ViewModels\Shared\ApplicationForAccreditation\ApplicationWizardModel.cs" />
+    <Compile Include="ViewModels\Shared\ApplicationForAccreditation\EmailListModel.cs" />
+    <Compile Include="ViewModels\Shared\ApplicationForAccreditation\PhoneListModel.cs" />
+    <Compile Include="ViewModels\Shared\ApplicationForAccreditation\PersonalDetailsModel.cs" />
+    <Compile Include="ViewModels\Shared\ApplicationForAccreditation\PurposeOfCredentialsModel.cs" />
+    <Compile Include="ViewModels\Shared\ApplicationForAccreditation\ResidencyStatusModel.cs" />
+    <Compile Include="ViewModels\ApplicationByTestingWizard\AdvancedTranslatorEligibilityModel.cs" />
+    <Compile Include="ViewModels\ApplicationByTestingWizard\ApplicationByTestingWizardModel.cs" />
+    <Compile Include="ViewModels\ApplicationByTestingWizard\LanguageProficiencyModel.cs" />
+    <Compile Include="ViewModels\ApplicationByTestingWizard\ParaprofessionalEligibilityModel.cs" />
+    <Compile Include="ViewModels\ApplicationByTestingWizard\ProfessionalEligibilityModel.cs" />
+    <Compile Include="ViewModels\ApplicationByTestingWizard\TestDetailsModel.cs" />
+    <Compile Include="ViewModels\ApplicationByTestingWizard\TestLocationModel.cs" />
+    <Compile Include="ViewModels\Home\DiagnosticsModel.cs" />
+    <Compile Include="ViewModels\Orders\PortalStatisticsModel.cs" />
+    <Compile Include="ViewModels\Orders\ExportOnlineOrderDetailsModel.cs" />
+    <Compile Include="ViewModels\PDListing\PDListingIndexViewModel.cs" />
+    <Compile Include="ViewModels\PDSearch\WizardViewModel.cs" />
+    <Compile Include="ViewModels\PersonalDetails\AddressListViewModel.cs" />
+    <Compile Include="ViewModels\PersonalDetails\EmailListViewModel.cs" />
+    <Compile Include="ViewModels\PersonalDetails\PhoneListViewModel.cs" />
+    <Compile Include="ViewModels\Shared\BaseWizardModel.cs" />
+    <Compile Include="ViewModels\Shared\DeclarationEditModel.cs" />
+    <Compile Include="ViewModels\Shared\DragAndDropUploaderModel.cs" />
+    <Compile Include="ViewModels\Shared\JsonUpdateResponse.cs" />
+    <Compile Include="ViewModels\Shared\JsonUpdateWithMessageResponse.cs" />
+    <Compile Include="ViewModels\Shared\ModelValidation.cs" />
+    <Compile Include="ViewModels\Shared\OrderTotalViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ErrorModel.cs" />
+    <Compile Include="ViewModels\Shared\ProductOrderItem.cs" />
+    <Compile Include="ViewModels\Certificate\SelectCertificateViewModel.cs" />
+    <Compile Include="ViewModels\Home\AboutModel.cs" />
+    <Compile Include="ViewModels\IdCard\WizardModel.cs" />
+    <Compile Include="ViewModels\PagingData.cs" />
+    <Compile Include="ViewModels\PDListing\WizardModel.cs" />
+    <Compile Include="ViewModels\PDSearch\ContactDetailsModel.cs" />
+    <Compile Include="ViewModels\PDSearch\PDSearchModel.cs" />
+    <Compile Include="ViewModels\Products\AvailableProduct.cs" />
+    <Compile Include="ViewModels\Certificate\WizardModel.cs" />
+    <Compile Include="ViewModels\Shared\BasePurchaseWizardModel.cs" />
+    <Compile Include="ViewModels\Shared\DeliveryDetailsEditModel.cs" />
+    <Compile Include="ViewModels\IdCard\SelectOrderEditModel.cs" />
+    <Compile Include="ViewModels\Shared\PaymentDetailsEditModel.cs" />
+    <Compile Include="ViewModels\Products\ProductListViewModel.cs" />
+    <Compile Include="ViewModels\IdCard\IdCardListViewModel.cs" />
+    <Compile Include="ViewModels\Certificate\CertificateOrder.cs" />
+    <Compile Include="ViewModels\Shared\ReviewAddressModel.cs" />
+    <Compile Include="ViewModels\Shared\TemporaryAddressModel.cs" />
+    <Compile Include="ViewModels\Shared\WizardStep.cs" />
+    <Compile Include="ViewModels\Stamp\SelectStampViewModel.cs" />
+    <Compile Include="ViewModels\Stamp\StampOrder.cs" />
+    <Compile Include="ViewModels\Stamp\WizardModel.cs" />
+    <Compile Include="ViewModels\Stamp\StampProduct.cs" />
+    <Compile Include="ViewModels\PersonalDetails\AddressEditModel.cs" />
+    <Compile Include="ViewModels\PersonalDetails\AddressSearchResultItem.cs" />
+    <Compile Include="ViewModels\PersonalDetails\PhoneSearchResultItem.cs" />
+    <Compile Include="ViewModels\PersonalDetails\EmailSearchResultItem.cs" />
+    <Compile Include="ViewModels\PersonalDetails\WebSiteEditModel.cs" />
+    <Compile Include="ViewModels\PersonalDetails\PhoneEditModel.cs" />
+    <Compile Include="ViewModels\PersonalDetails\EmailEditModel.cs" />
+    <Compile Include="ViewModels\Shared\PaymentMethodEditModel.cs" />
+    <Compile Include="ViewModels\UnraisedInvoices\UnraisedInvoicesAnswerDocumentModel.cs" />
+    <Compile Include="ViewModels\UnraisedInvoices\UnraisedInvoicesQuestionLogicModel.cs" />
+    <Compile Include="ViewModels\UnraisedInvoices\UnraisedInvoicesAnswerModel.cs" />
+    <Compile Include="ViewModels\UnraisedInvoices\UnraisedInvoicesAnswerActionModel.cs" />
+    <Compile Include="ViewModels\UnraisedInvoices\UnraisedInvoicesQuestionModel.cs" />
+    <Compile Include="ViewModels\UnraisedInvoices\UnraisedInvoicesSectionModel.cs" />
+    <Compile Include="ViewModels\VerifyCredential\VerifyCredentialModel.cs" />
+    <Compile Include="ViewModels\VerifyPractitioner\VerifyPractitionerModel.cs" />
+    <Compile Include="ViewModels\ViewModelExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="apple-touch-icon-precomposed.png" />
+    <Content Include="apple-touch-icon.png" />
+    <Content Include="App\build.js" />
+    <Content Include="App\components\ko.wizard.js" />
+    <Content Include="App\components\ko.loader.js" />
+    <Content Include="App\components\ko.credentialSelector.js" />
+    <Content Include="App\components\ko.selectComponent.js" />
+    <Content Include="App\components\ko.tableComponent.js" />
+    <Content Include="App\components\views\credential-selector.html" />
+    <Content Include="App\components\views\credential-selector.js" />
+    <Content Include="App\components\views\loader.html" />
+    <Content Include="App\components\views\loader.js" />
+    <Content Include="App\components\views\wizard-parts\fees-embedded.html" />
+    <Content Include="App\components\views\wizard-parts\fees-embedded.js" />
+    <Content Include="App\components\views\wizard-parts\fees.html" />
+    <Content Include="App\components\views\wizard-parts\fees.js" />
+    <Content Include="App\components\views\wizard.html" />
+    <Content Include="App\components\views\wizard.js" />
+    <Content Include="App\components\views\select-component.html" />
+    <Content Include="App\components\views\select-component.js" />
+    <Content Include="App\components\views\table-component.html" />
+    <Content Include="App\components\views\table-component.js" />
+    <Content Include="App\customBindings\ko.dropzone.js" />
+    <Content Include="App\customBindings\ko.bytesToSize.js" />
+    <Content Include="App\customBindings\ko.addressAutoComplete.js" />
+    <Content Include="App\customBindings\ko.dataTable.js" />
+    <Content Include="App\customBindings\ko.downloadFile.js" />
+    <Content Include="App\customBindings\ko.sparkline.js" />
+    <Content Include="App\customBindings\ko.textCurrency.js" />
+    <Content Include="App\customBindings\ko.selectIfSingle.js" />
+    <Content Include="App\customBindings\ko.textDate.js" />
+    <Content Include="App\customBindings\ko.fileinput.js" />
+    <Content Include="App\customBindings\ko.popover.js" />
+    <Content Include="App\customBindings\ko.tooltip.js" />
+    <Content Include="App\main.dist.js" />
+    <Content Include="App\main.js" />
+    <Content Include="App\node_modules\.bin\r.js" />
+    <Content Include="App\node_modules\requirejs\bin\r.js" />
+    <Content Include="App\node_modules\requirejs\require.js" />
+    <Content Include="App\services\credential-application-service.js" />
+    <Content Include="App\services\enums.js" />
+    <Content Include="App\services\constant.js" />
+    <Content Include="App\services\message.js" />
+    <Content Include="App\services\queued-query-requester.js" />
+    <Content Include="App\services\requester.js" />
+    <Content Include="App\services\server-callback-processor.js" />
+    <Content Include="App\services\util.js" />
+    <Content Include="App\validationRules\ko.validation.dateGreaterThan.js" />
+    <Content Include="App\validationRules\ko.validation.dateLessThan.js" />
+    <Content Include="App\validationRules\ko.validation.url.js" />
+    <Content Include="App\views\unraised-invoice\payment-information.js" />
+    <Content Include="App\views\unraised-invoice\payment-information.html" />
+    <Content Include="App\views\unraised-invoice\payment-control.html" />
+    <Content Include="App\views\unraised-invoice\payment-control.js" />
+    <Content Include="App\views\unraised-invoice\raise-and-pay-invoice.js" />
+    <Content Include="App\views\applications\select-test-session.html" />
+    <Content Include="App\views\applications\select-test-session.js" />
+    <Content Include="App\views\applications\special-controls\supplementary-test-tasks.html" />
+    <Content Include="App\views\applications\special-controls\supplementary-test-tasks.js" />
+    <Content Include="App\views\applications\supplementary-test.html" />
+    <Content Include="App\views\applications\supplementary-test.js" />
+    <Content Include="App\views\applications\special-controls\payment-control.html" />
+    <Content Include="App\views\applications\special-controls\payment-control.js" />
+    <Content Include="App\views\applications\special-controls\test-details.html" />
+    <Content Include="App\views\applications\special-controls\test-details.js" />
+    <Content Include="App\views\credential-application\special-controls\language-selector.html" />
+    <Content Include="App\views\credential-application\special-controls\language-selector.js" />
+    <Content Include="App\views\credential-application\special-controls\credential-inprogress.html" />
+    <Content Include="App\views\credential-application\special-controls\credential-inprogress.js" />
+    <Content Include="App\views\credential-application\special-controls\credential-future.html" />
+    <Content Include="App\views\credential-application\special-controls\credential-future.js" />
+    <Content Include="App\views\examiner-tools\manage-test-material.html" />
+    <Content Include="App\views\examiner-tools\manage-test-material.js" />
+    <Content Include="App\views\unraised-invoice\raise-and-pay-invoice.html" />
+    <Content Include="App\views\unraised-invoice\unraised-invoice-index.js" />
+    <Content Include="App\views\unraised-invoice\unraised-invoice-index.html" />
+    <Content Include="App\views\logbook\logbook-period-selector.html" />
+    <Content Include="App\views\logbook\logbook-period-selector.js" />
+    <Content Include="App\views\applications\apply-for-paid-review.html" />
+    <Content Include="App\views\applications\apply-for-paid-review.js" />
+    <Content Include="App\views\wizard\recertification-credential.js" />
+    <Content Include="App\views\wizard\date-question.html" />
+    <Content Include="App\views\wizard\date-question.js" />
+    <Content Include="App\views\wizard\check-question.html" />
+    <Content Include="App\views\wizard\check-question.js" />
+    <Content Include="App\views\wizard\list-question.html" />
+    <Content Include="App\views\wizard\list-question.js" />
+    <Content Include="App\views\wizard\email-question.html" />
+    <Content Include="App\views\wizard\email-question.js" />
+    <Content Include="App\views\wizard\text-question.html" />
+    <Content Include="App\views\wizard\text-question.js" />
+    <Content Include="App\views\online-directory\online-directory-index.html" />
+    <Content Include="App\views\online-directory\online-directory-index.js" />
+    <Content Include="App\views\credential-application\credential-application-index.html" />
+    <Content Include="App\views\credential-application\special-controls\credential-selector-upgrade-same-level.html" />
+    <Content Include="App\views\credential-application\special-controls\credential-selector-upgrade-same-level.js" />
+    <Content Include="App\views\credential-application\special-controls\fees.html" />
+    <Content Include="App\views\credential-application\special-controls\fees.js" />
+    <Content Include="App\views\credential-application\special-controls\test-sessions.html" />
+    <Content Include="App\views\credential-application\special-controls\test-sessions.js" />
+    <Content Include="App\views\credential-application\special-controls\person-photo.html" />
+    <Content Include="App\views\credential-application\special-controls\person-photo.js" />
+    <Content Include="App\views\credential-application\special-controls\document-upload.html" />
+    <Content Include="App\views\credential-application\special-controls\document-upload.js" />
+    <Content Include="App\views\credential-application\special-controls\credential-selector.html" />
+    <Content Include="App\views\credential-application\special-controls\credential-selector.js" />
+    <Content Include="App\views\credential-application\special-controls\person-details.html" />
+    <Content Include="App\views\credential-application\special-controls\person-details.js" />
+    <Content Include="App\views\credential-application\special-controls\person-verification.html" />
+    <Content Include="App\views\credential-application\special-controls\person-verification.js" />
+    <Content Include="App\views\invoice\invoice-index.html" />
+    <Content Include="App\views\invoice\invoice-index.js" />
+    <Content Include="App\views\logbook\logbook-work-practice-attachments.html" />
+    <Content Include="App\views\logbook\logbook-work-practice-attachments.js" />
+    <Content Include="App\views\logbook\logbook-work-practice-edit.html" />
+    <Content Include="App\views\logbook\logbook-work-practice-edit.js" />
+    <Content Include="App\views\logbook\logbook-activity-edit.html" />
+    <Content Include="App\views\logbook\logbook-attachments.html" />
+    <Content Include="App\views\logbook\logbook-attachments.js" />
+    <Content Include="App\views\logbook\logbook-dashboard.html" />
+    <Content Include="App\views\logbook\logbook-dashboard.js" />
+    <Content Include="App\views\logbook\logbook-activity-edit.js" />
+    <Content Include="App\views\logbook\logbook-credential.html" />
+    <Content Include="App\views\logbook\logbook-credential.js" />
+    <Content Include="App\views\logbook\logbook-professional-development.html" />
+    <Content Include="App\views\logbook\logbook-professional-development.js" />
+    <Content Include="App\views\logbook\logbook-index.html" />
+    <Content Include="App\views\logbook\logbook-index.js" />
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.js" />
+    <Content Include="Client Scripts\mvcfoolproof.unobtrusive.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofJQueryValidation.min.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.js" />
+    <Content Include="Client Scripts\MvcFoolproofValidation.min.js" />
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput-rtl.css" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput-rtl.min.css" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput.css" />
+    <Content Include="Content\bootstrap-fileinput\css\fileinput.min.css" />
+    <Content Include="Content\bootstrap-fileinput\img\loading-sm.gif" />
+    <Content Include="Content\bootstrap-fileinput\img\loading.gif" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fa\theme.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fa\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fa\theme.min.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer-fa\theme.min.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.min.css" />
+    <Content Include="Content\bootstrap-fileinput\themes\explorer\theme.min.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\fa\fa.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\fa\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\fa\theme.min.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\gly\gly.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\gly\theme.js" />
+    <Content Include="Content\bootstrap-fileinput\themes\gly\theme.min.js" />
+    <Content Include="Content\bootstrap-multiselect.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-toggle.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen-sprite.png" />
+    <Content Include="Content\chosen.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.min.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.min.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.min.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\select.foundation.css" />
+    <Content Include="Content\DataTables\css\select.foundation.min.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.min.css" />
+    <Content Include="Content\DataTables\images\details_close.png" />
+    <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="Content\DataTables\images\sort_asc.png" />
+    <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\images\sort_both.png" />
+    <Content Include="Content\DataTables\images\sort_desc.png" />
+    <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\durandal.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Forms.css">
+      <DependentUpon>Forms.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Forms.min.css">
+      <DependentUpon>Forms.css</DependentUpon>
+    </Content>
+    <Content Include="Content\HelpStyle.css" />
+    <Content Include="Content\Help\context.xml" />
+    <Content Include="Content\Help\css\nethelp.css" />
+    <Content Include="Content\Help\css\nethelp.responsive.css" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\scrollbar-horizontal.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\scrollbar-vertical.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\scrollbutton-vertical.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\scroller-down-arrow.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\scroller-down-arrow_hover.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\scroller-left-arrow.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\scroller-left-arrow_hover.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\scroller-right-arrow.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\scroller-right-arrow_hover.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\scroller-up-arrow.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\scroller-up-arrow_hover.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-bg_flat_0_2d5972_40x100.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-bg_flat_0_4f4f4f_40x100.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-bg_highlight-hard_80_c4c4c4_1x100.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-bg_highlight-soft_100_83b0ca_1x100.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-bg_highlight-soft_100_c0c0c0_1x100.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-bg_highlight-soft_100_c4c4c4_1x100.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-bg_highlight-soft_100_ccccd1_1x100.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-bg_inset-hard_65_85b2cb_1x100.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-icons_38667f_256x240.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-icons_616161_256x240.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-icons_898989_256x240.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\vertical-menu-item.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\wijmo-ui-icons_000000_240x112.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\images\wijmo-ui-icons_ffffff_240x112.png" />
+    <Content Include="Content\Help\css\wijmo\aristo\jquery-wijmo.css" />
+    <Content Include="Content\Help\default.htm" />
+    <Content Include="Content\Help\Documents\accessingnaationline.htm" />
+    <Content Include="Content\Help\Documents\applyforcredentials.htm" />
+    <Content Include="Content\Help\Documents\changeyourpassword.htm" />
+    <Content Include="Content\Help\Documents\findapractitioner.htm" />
+    <Content Include="Content\Help\Documents\findapractitioner1.htm" />
+    <Content Include="Content\Help\Documents\learningmoreaboutnaa.htm" />
+    <Content Include="Content\Help\Documents\login.htm" />
+    <Content Include="Content\Help\Documents\maintaindetails.htm" />
+    <Content Include="Content\Help\Documents\mylisting.htm" />
+    <Content Include="Content\Help\Documents\purchaseproducts.htm" />
+    <Content Include="Content\Help\Documents\recoveryourpassword.htm" />
+    <Content Include="Content\Help\Documents\registerwithnaationl.htm" />
+    <Content Include="Content\Help\Documents\toupdateyourlisting.htm" />
+    <Content Include="Content\Help\Documents\updateyourdetails.htm" />
+    <Content Include="Content\Help\Documents\verifypractitionercr.htm" />
+    <Content Include="Content\Help\Documents\viewpersonaldetails.htm" />
+    <Content Include="Content\Help\Documents\welcometonaationline.htm" />
+    <Content Include="Content\Help\Documents\whatisnaationline.htm" />
+    <Content Include="Content\Help\groups.js" />
+    <Content Include="Content\Help\groups.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Help\ImagesExt\image18_0.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_1.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_1.png" />
+    <Content Include="Content\Help\ImagesExt\image18_10.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_10.png" />
+    <Content Include="Content\Help\ImagesExt\image18_11.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_12.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_13.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_13.png" />
+    <Content Include="Content\Help\ImagesExt\image18_14.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_14.png" />
+    <Content Include="Content\Help\ImagesExt\image18_15.png" />
+    <Content Include="Content\Help\ImagesExt\image18_16.png" />
+    <Content Include="Content\Help\ImagesExt\image18_17.png" />
+    <Content Include="Content\Help\ImagesExt\image18_2.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_2.png" />
+    <Content Include="Content\Help\ImagesExt\image18_3.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_3.png" />
+    <Content Include="Content\Help\ImagesExt\image18_4.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_4.png" />
+    <Content Include="Content\Help\ImagesExt\image18_5.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_5.png" />
+    <Content Include="Content\Help\ImagesExt\image18_6.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_7.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_8.jpg" />
+    <Content Include="Content\Help\ImagesExt\image18_8.png" />
+    <Content Include="Content\Help\ImagesExt\image18_9.jpg" />
+    <Content Include="Content\Help\js\jquery-ui.js" />
+    <Content Include="Content\Help\js\jquery.js" />
+    <Content Include="Content\Help\js\jquery.mobile.js" />
+    <Content Include="Content\Help\js\nethelp.connect.js" />
+    <Content Include="Content\Help\js\nethelp.eclipse.js" />
+    <Content Include="Content\Help\js\nethelp.js" />
+    <Content Include="Content\Help\js\nethelp.redirector.js" />
+    <Content Include="Content\Help\js\nethelp.responsive.jqm.js" />
+    <Content Include="Content\Help\js\nethelp.responsive.js" />
+    <Content Include="Content\Help\js\nethelp.sandcastle.js" />
+    <Content Include="Content\Help\js\nethelp.xml" />
+    <Content Include="Content\Help\js\nodejs\index.js" />
+    <Content Include="Content\Help\js\nodejs\nethelp.search.engine.js" />
+    <Content Include="Content\Help\js\nodejs\requestHandlers.js" />
+    <Content Include="Content\Help\js\nodejs\router.js" />
+    <Content Include="Content\Help\js\nodejs\searchserverconfig.js" />
+    <Content Include="Content\Help\js\nodejs\server.js" />
+    <Content Include="Content\Help\keywords.js" />
+    <Content Include="Content\Help\keywords.xml" />
+    <Content Include="Content\Help\LinksExt\NAATI Online Help Aug 2013.css" />
+    <Content Include="Content\Help\nethelppage.js" />
+    <Content Include="Content\Help\searchindex.js" />
+    <Content Include="Content\Help\settings.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Help\themes\Tabs\custom-icons.css" />
+    <Content Include="Content\Help\themes\Tabs\images\custom-icon-1-active.png" />
+    <Content Include="Content\Help\themes\Tabs\images\custom-icon-1-default.png" />
+    <Content Include="Content\Help\themes\Tabs\images\custom-icon-1-error.png" />
+    <Content Include="Content\Help\themes\Tabs\images\custom-icon-1-focus.png" />
+    <Content Include="Content\Help\themes\Tabs\images\custom-icon-1-highlight.png" />
+    <Content Include="Content\Help\themes\Tabs\images\custom-icon-1.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-favicon.ico" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-1-active.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-1-default.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-1-error.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-1-focus.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-1-highlight.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-1.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-2-active.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-2-default.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-2-error.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-2-focus.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-2-highlight.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h-icon-2.png" />
+    <Content Include="Content\Help\themes\Tabs\images\d2h_logo_placeholder.png" />
+    <Content Include="Content\Help\themes\Tabs\images\empty.gif" />
+    <Content Include="Content\Help\themes\Tabs\images\gray50.png" />
+    <Content Include="Content\Help\themes\Tabs\images\spinner.gif" />
+    <Content Include="Content\Help\themes\Tabs\layout.html" />
+    <Content Include="Content\Help\themes\Tabs\search-addons.js" />
+    <Content Include="Content\Help\themes\Tabs\settings.en-us.xml" />
+    <Content Include="Content\Help\themes\Tabs\settings.theme.xml" />
+    <Content Include="Content\Help\themes\Tabs\settings.xml" />
+    <Content Include="Content\Help\themes\Tabs\theme.css" />
+    <Content Include="Content\Help\themes\Tabs\theme.js" />
+    <Content Include="Content\Help\themes\Tabs\topic.css" />
+    <Content Include="Content\Help\themes\Tabs\user.css" />
+    <Content Include="Content\Help\themes\Tabs\user.js" />
+    <Content Include="Content\Help\toc.js" />
+    <Content Include="Content\Help\toc.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Images\access-64.png" />
+    <Content Include="Content\Images\additional-certifications.png" />
+    <Content Include="Content\Images\Administration.png" />
+    <Content Include="Content\Images\advanced-and-specialist.png" />
+    <Content Include="Content\Images\advanced-and-specialist.svg" />
+    <Content Include="Content\Images\american-express-10063.jpg" />
+    <Content Include="Content\Images\American_Express_Logo.svg" />
+    <Content Include="Content\Images\American_Express_Logo10064.jpg" />
+    <Content Include="Content\Images\Applications.png" />
+    <Content Include="Content\Images\ApplicationsWhite.png" />
+    <Content Include="Content\Images\ApplyForCertification.png" />
+    <Content Include="Content\Images\ApplyForCertificationFull.png" />
+    <Content Include="Content\Images\binoculars.png" />
+    <Content Include="Content\Images\bookmark.png" />
+    <Content Include="Content\Images\Briefcase.png" />
+    <Content Include="Content\Images\calendar.gif" />
+    <Content Include="Content\ePortalStyle.css" />
+    <Content Include="Content\Images\calendar.svg" />
+    <Content Include="Content\Images\CardLogoMasterCard.jpg" />
+    <Content Include="Content\Images\CardLogoVisa.gif" />
+    <Content Include="Content\Images\CCL-testing.png" />
+    <Content Include="Content\Images\certificate-50.png" />
+    <Content Include="Content\Images\certificatecircle-50.png" />
+    <Content Include="Content\Images\certification-testing.png" />
+    <Content Include="Content\Images\change-my-password.png" />
+    <Content Include="Content\Images\ChangeMyListing.png" />
+    <Content Include="Content\Images\CLA-testing.png" />
+    <Content Include="Content\Images\Config-Tools.png" />
+    <Content Include="Content\Images\ContainerBackground.png" />
+    <Content Include="Content\Images\ContainerBorderBackground.png" />
+    <Content Include="Content\Images\ContainerFooterBackground.png" />
+    <Content Include="Content\Images\ContainerHeaderBackground.png" />
+    <Content Include="Content\Images\credential-icon-personhead.png" />
+    <Content Include="Content\Images\dci_logo_2_color.jpg" />
+    <Content Include="Content\Images\dinerclubc95wAX8q_400x400.jpeg" />
+    <Content Include="Content\Images\Diners-Club-Logo.jpg" />
+    <Content Include="Content\Images\Diners-Club-Logo20070.jpg" />
+    <Content Include="Content\Images\Diners_Club_Logo1280.svg.png" />
+    <Content Include="Content\Images\Diners_Club_Logo3.svg" />
+    <Content Include="Content\Images\dinner-club10050.jpg" />
+    <Content Include="Content\Images\Diploma.png" />
+    <Content Include="Content\Images\ExaminerToolsMenu.png" />
+    <Content Include="Content\Images\ExaminerTools.png" />
+    <Content Include="Content\Images\ExportDetails.png" />
+    <Content Include="Content\Images\File.png" />
+    <Content Include="Content\Images\find-a-translator-or-interpreter.png" />
+    <Content Include="Content\Images\FindTranslatorInterpreter.png" />
+    <Content Include="Content\Images\HeaderBackground.png" />
+    <Content Include="Content\Images\Help.png" />
+    <Content Include="Content\Images\Help\ApplyCourseDetails.png" />
+    <Content Include="Content\Images\Help\ApplyDownloadForm.png" />
+    <Content Include="Content\Images\Help\ChangePassword.png" />
+    <Content Include="Content\Images\Help\CreateNewPersonalRecord.png" />
+    <Content Include="Content\Images\Help\LoginScreen.png" />
+    <Content Include="Content\Images\Help\NaatiOnlineRegistration.png" />
+    <Content Include="Content\Images\Help\OnlineDirectory.png" />
+    <Content Include="Content\Images\Help\OnlineDirectoryAdvancedSearch.png" />
+    <Content Include="Content\Images\Help\OnlineDirectoryScreen.png" />
+    <Content Include="Content\Images\Help\PractitionersDirectoryLinks.png" />
+    <Content Include="Content\Images\Help\PractitionersDirectoryLinks2.png" />
+    <Content Include="Content\Images\Help\PractitionersDirectoryMenu.png" />
+    <Content Include="Content\Images\Help\PurchaseNAATIProducts.png" />
+    <Content Include="Content\Images\Help\ResetPassword.png" />
+    <Content Include="Content\Images\Help\SearchResults.png" />
+    <Content Include="Content\Images\Help\UpdateMyListing.png" />
+    <Content Include="Content\Images\Help\UpdatePersonalDetails.png" />
+    <Content Include="Content\Images\Help\VerifyDetails.png" />
+    <Content Include="Content\Images\Help\ViewPractitioner.png" />
+    <Content Include="Content\Images\credential-icon.png" />
+    <Content Include="Content\Images\credential-user-icon.png" />
+    <Content Include="Content\Images\icon.png" />
+    <Content Include="Content\Images\id-card-3.png" />
+    <Content Include="Content\Images\information.png" />
+    <Content Include="Content\Images\investment.png" />
+    <Content Include="Content\Images\invoice-48.png" />
+    <Content Include="Content\Images\invoice-50.png" />
+    <Content Include="Content\Images\invoice-96.png" />
+    <Content Include="Content\Images\ios-startup-image-landscape.png" />
+    <Content Include="Content\Images\ios-startup-image-portrait.png" />
+    <Content Include="Content\Images\jcb_logo.png" />
+    <Content Include="Content\Images\ListNow.png" />
+    <Content Include="Content\Images\location.jpg" />
+    <Content Include="Content\Images\locked-4.png" />
+    <Content Include="Content\Images\LoginPageImage.jpg" />
+    <Content Include="Content\Images\LogonBackground.png" />
+    <Content Include="Content\Images\manage-my-tests.png" />
+    <Content Include="Content\Images\manage-tests.svg" />
+    <Content Include="Content\Images\ManageFormTemplates.png" />
+    <Content Include="Content\Images\ManageRequests.png" />
+    <Content Include="Content\Images\ManageUsers.png" />
+    <Content Include="Content\Images\map-location.png" />
+    <Content Include="Content\Images\mastercard-5032.png" />
+    <Content Include="Content\Images\mastercard.png" />
+    <Content Include="Content\Images\MenuBackground.png" />
+    <Content Include="Content\Images\MenuItemSelectedBackgroundLeft.png" />
+    <Content Include="Content\Images\MenuItemSelectedBackgroundRight.png" />
+    <Content Include="Content\Images\mfa.png" />
+    <Content Include="Content\Images\my-account.png" />
+    <Content Include="Content\Images\my-bills.png" />
+    <Content Include="Content\Images\my-credential-id.png" />
+    <Content Include="Content\Images\my-credentials.png" />
+    <Content Include="Content\Images\my-logbook.png" />
+    <Content Include="Content\Images\my-test-material-dev.svg" />
+    <Content Include="Content\Images\my-test-results.png" />
+    <Content Include="Content\Images\MyDetails.png" />
+    <Content Include="Content\Images\NaatiLogo.png" />
+    <Content Include="Content\Images\NaatiAltLogo.png" />
+    <Content Include="Content\Images\NaatiOnlineLearnMore.png" />
+    <Content Include="Content\Images\NAATIOnlineLogo.png" />
+    <Content Include="Content\Images\NAATIOnlineMainImage.png" />
+    <Content Include="Content\Images\NaatiOnlineMainImageCropped.png" />
+    <Content Include="Content\Images\NaatiOnlineRegisterNow.png" />
+    <Content Include="Content\Images\NaatiOnlineVerifyCredentials.png" />
+    <Content Include="Content\Images\notebook.png" />
+    <Content Include="Content\Images\OnlinePDDetails.png" />
+    <Content Include="Content\Images\panels.svg" />
+    <Content Include="Content\Images\payments.svg" />
+    <Content Include="Content\Images\pd.png" />
+    <Content Include="Content\Images\PDSearch.png" />
+    <Content Include="Content\Images\PDSearchWizard-Interpreter.png" />
+    <Content Include="Content\Images\PDSearchWizard-Translator.png" />
+    <Content Include="Content\Images\PhotoHere.png" />
+    <Content Include="Content\Images\PortalStatistics.png" />
+    <Content Include="Content\Images\PracticeTest.svg" />
+    <Content Include="Content\Images\PractitionerDefault.jpg" />
+    <Content Include="Content\Images\Products.png" />
+    <Content Include="Content\Images\professional-development.png" />
+    <Content Include="Content\Images\recertification.png" />
+    <Content Include="Content\Images\RenewNow.png" />
+    <Content Include="Content\Images\role-play-sessions.svg" />
+    <Content Include="Content\Images\stamp-1.png" />
+    <Content Include="Content\Images\symbol-check-trans.png" />
+    <Content Include="Content\Images\SymbolError.png" />
+    <Content Include="Content\Images\SystemSettings.png" />
+    <Content Include="Content\Images\television-1.png" />
+    <Content Include="Content\Images\TickedBox.png" />
+    <Content Include="Content\Images\UntickedBox.png" />
+    <Content Include="Content\Images\update-my-details.png" />
+    <Content Include="Content\Images\Users.png" />
+    <Content Include="Content\Images\VISA-logo-10060.png" />
+    <Content Include="Content\Images\VISA-logo10062.png" />
+    <Content Include="Content\Images\WizardArrow.png" />
+    <Content Include="Content\Images\work-practice.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_flat_0_000000_40x100.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_hexagon_75_cccccc_12x10.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_highlight-soft_75_00756b_1x100.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Content\jQueryUI\images\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="Content\jQueryUI\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\jQueryUI\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Content\jQueryUI\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\jQueryUI\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\jQueryUI\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\jQueryUI\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\jQueryUI\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Content\jQueryUI\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Content\jQueryUI\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jQueryUI\jquery-ui-1.8.7.custom.css" />
+    <Content Include="Content\jQueryUI\ui.jqgrid.css" />
+    <Content Include="Content\Images\NAATI_Primary_Logo_22_White.svg" />
+    <Content Include="Content\Overrides.css">
+      <DependentUpon>Overrides.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Overrides.min.css">
+      <DependentUpon>Overrides.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Reports.css" />
+    <Content Include="Content\themes\base\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="EmailTemplates\EmailChangeConfirmation.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\EmailChangeRequest.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\EoiSubmission.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\NewPersonCreated.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\RegisterSuccess.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\NonCandidateRegisterSuccess.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\SendAccessCode.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="EmailTemplates\ResetPassword.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="error.html" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\Roboto\roboto.css">
+      <DependentUpon>roboto.less</DependentUpon>
+    </Content>
+    <Content Include="fonts\Roboto\roboto.min.css">
+      <DependentUpon>roboto.css</DependentUpon>
+    </Content>
+    <Content Include="Content\SWFobject\swfobject.js" />
+    <Content Include="Content\swf\Introduction to NAATI Online.swf" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="fonts\SourceSansPro\sourcesanspro.css">
+      <DependentUpon>sourcesanspro.less</DependentUpon>
+    </Content>
+    <Content Include="fonts\SourceSansPro\sourcesanspro.min.css">
+      <DependentUpon>sourcesanspro.css</DependentUpon>
+    </Content>
+    <Content Include="Global.asax" />
+    <Content Include="robots.txt" />
+    <Content Include="Scripts\almond-custom.js" />
+    <Content Include="Scripts\autosize.js" />
+    <Content Include="Scripts\autosize.min.js" />
+    <Content Include="Scripts\bootstrap-multiselect.js" />
+    <Content Include="Scripts\bootstrap-toggle.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\chosen.jquery.js" />
+    <Content Include="Scripts\chosen.proto.js" />
+    <Content Include="Scripts\Custom\credentials.js" />
+    <Content Include="Scripts\Custom\loading-overlay.js" />
+    <Content Include="Scripts\Custom\pd-search.js" />
+    <Content Include="Scripts\Custom\personal-details.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.min.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.min.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.min.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.min.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.print.js" />
+    <Content Include="Scripts\DataTables\buttons.print.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.min.js" />
+    <Content Include="Scripts\DataTables\datetime-moment.js" />
+    <Content Include="Scripts\DataTables\datetime.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.min.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
+    <Content Include="Scripts\date-en-AU.js" />
+    <Content Include="Scripts\dropzone\basic.css" />
+    <Content Include="Scripts\dropzone\basic.min.css" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="Scripts\dropzone\dropzone.css" />
+    <Content Include="Scripts\dropzone\dropzone.js" />
+    <Content Include="Scripts\dropzone\dropzone.min.css" />
+    <Content Include="Scripts\dropzone\dropzone.min.js" />
+    <Content Include="Scripts\durandal\activator.js" />
+    <Content Include="Scripts\durandal\app.js" />
+    <Content Include="Scripts\durandal\binder.js" />
+    <Content Include="Scripts\durandal\composition.js" />
+    <Content Include="Scripts\durandal\events.js" />
+    <Content Include="Scripts\durandal\plugins\dialog.js" />
+    <Content Include="Scripts\durandal\plugins\history.js" />
+    <Content Include="Scripts\durandal\plugins\http.js" />
+    <Content Include="Scripts\durandal\plugins\observable.js" />
+    <Content Include="Scripts\durandal\plugins\router.js" />
+    <Content Include="Scripts\durandal\plugins\serializer.js" />
+    <Content Include="Scripts\durandal\plugins\widget.js" />
+    <Content Include="Scripts\durandal\system.js" />
+    <Content Include="Scripts\durandal\viewEngine.js" />
+    <Content Include="Scripts\durandal\viewLocator.js" />
+    <Content Include="Scripts\f1.grid.common.js" />
+    <Content Include="Scripts\fileinput.js" />
+    <Content Include="Scripts\grid.history.js" />
+    <Content Include="Scripts\grid.locale-en.js" />
+    <Content Include="Scripts\handlebars-v4.0.5.js" />
+    <Content Include="App\customBindings\ko.map.js" />
+    <Content Include="Content\Forms.less" />
+    <Content Include="Scripts\Chart.titleInside.js" />
+    <Content Include="fonts\Roboto\roboto.less" />
+    <Content Include="fonts\SourceSansPro\sourcesanspro.less" />
+    <Content Include="fonts\SourceSansPro\SourceSansPro-Regular.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold-Cyrillic-Ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold-Cyrillic.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold-Greek-Ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold-Greek.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold-Latin-Ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold-Latin.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold-Vietnamese.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular-Cyrillic-Ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular-Cyrillic.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular-Greek-Ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular-Greek.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular-Latin-Ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular-Latin.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular-Vietnamese.woff2" />
+    <Content Include="Content\Overrides.less" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
+    <Content Include="App\node_modules\.bin\r.js.cmd" />
+    <Content Include="App\node_modules\requirejs\package.json" />
+    <Content Include="App\node_modules\requirejs\README.md" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="NHibernate.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-fileinput\sass\fileinput.scss" />
+    <Content Include="Content\DataTables\css\mixins.scss" />
+    <Content Include="Content\DataTables\css\common.scss" />
+    <None Include="Dockerfile" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-2.0.0.intellisense.js" />
+    <Content Include="Scripts\jquery-2.0.0.js" />
+    <Content Include="Scripts\jquery-ui-1.10.2.js" />
+    <Content Include="Scripts\jquery.ba-bbq.js" />
+    <Content Include="Content\jQueryUI\jquery.comiseo.daterangepicker.css" />
+    <Content Include="Scripts\jquery.comiseo.daterangepicker.min.js" />
+    <Content Include="Scripts\jquery.fileDownload.js" />
+    <Content Include="Scripts\jquery.fileupload.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.iframe-transport.js" />
+    <Content Include="Scripts\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jquery.mask.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Scripts\jquery.ui.datepicker-en-GB.js" />
+    <Content Include="Scripts\jquery.ui.widget.js" />
+    <Content Include="Scripts\jquery-2.0.0.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jsrender.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\knockout-jqueryui.js" />
+    <Content Include="Scripts\knockout.chart.js" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\knockout.validation.js" />
+    <Content Include="Scripts\knockout.validation.min.js" />
+    <Content Include="Scripts\knockout.viewmodel.2.0.3.js" />
+    <Content Include="Scripts\locales\ar.js" />
+    <Content Include="Scripts\locales\bg.js" />
+    <Content Include="Scripts\locales\ca.js" />
+    <Content Include="Scripts\locales\cr.js" />
+    <Content Include="Scripts\locales\cz.js" />
+    <Content Include="Scripts\locales\da.js" />
+    <Content Include="Scripts\locales\de.js" />
+    <Content Include="Scripts\locales\el.js" />
+    <Content Include="Scripts\locales\es.js" />
+    <Content Include="Scripts\locales\fa.js" />
+    <Content Include="Scripts\locales\fi.js" />
+    <Content Include="Scripts\locales\fr.js" />
+    <Content Include="Scripts\locales\hu.js" />
+    <Content Include="Scripts\locales\id.js" />
+    <Content Include="Scripts\locales\it.js" />
+    <Content Include="Scripts\locales\ja.js" />
+    <Content Include="Scripts\locales\LANG.js" />
+    <Content Include="Scripts\locales\nl.js" />
+    <Content Include="Scripts\locales\pl.js" />
+    <Content Include="Scripts\locales\pt-BR.js" />
+    <Content Include="Scripts\locales\pt.js" />
+    <Content Include="Scripts\locales\ro.js" />
+    <Content Include="Scripts\locales\ru.js" />
+    <Content Include="Scripts\locales\sk.js" />
+    <Content Include="Scripts\locales\th.js" />
+    <Content Include="Scripts\locales\tr.js" />
+    <Content Include="Scripts\locales\uk.js" />
+    <Content Include="Scripts\locales\zh-TW.js" />
+    <Content Include="Scripts\locales\zh.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\plugins\canvas-to-blob.js" />
+    <Content Include="Scripts\plugins\canvas-to-blob.min.js" />
+    <Content Include="Scripts\plugins\piexif.js" />
+    <Content Include="Scripts\plugins\piexif.min.js" />
+    <Content Include="Scripts\plugins\purify.js" />
+    <Content Include="Scripts\plugins\purify.min.js" />
+    <Content Include="Scripts\plugins\sortable.js" />
+    <Content Include="Scripts\plugins\sortable.min.js" />
+    <Content Include="Scripts\q.js" />
+    <Content Include="Scripts\q.min.js" />
+    <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\text.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\Views\Shared\DragAndDropUploader.js" />
+    <Content Include="Scripts\ui.spinner.js" />
+    <Content Include="Scripts\Views\ExaminerTools\jqGrid.js" />
+    <Content Include="App\views\credential-application\credential-application-index.js" />
+    <Content Include="Template\css\app.css" />
+    <Content Include="Template\css\app.min.css" />
+    <Content Include="Template\css\app.rtl.css" />
+    <Content Include="Content\fonts.css" />
+    <Content Include="Template\js\app.min.js" />
+    <Content Include="Template\js\app.src.js" />
+    <Content Include="Template\js\ui-client.js" />
+    <Content Include="Template\libs\jquery\jquery.sparkline\dist\jquery.sparkline.retina.js" />
+    <Content Include="Views\ExaminerTools\RolePlaySession.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="User.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
+    <Content Include="Views\Shared\MasterPages\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Shared\MasterPages\_LayoutFluid.cshtml" />
+    <Content Include="Views\Shared\MasterPages\_SideMenuLayout.cshtml" />
+    <Content Include="Views\Shared\_ApplicationForAccreditationDownloadFormLayout.cshtml" />
+    <Content Include="Views\PersonalDetails\Index.cshtml" />
+    <Content Include="Views\Shared\_MenuLinksPartial.cshtml" />
+    <Content Include="Views\Shared\MasterPages\_ProductWizardLayout.cshtml" />
+    <Content Include="Views\Shared\PaymentDetails.cshtml" />
+    <Content Include="Views\ExaminerTools\ManageTests.cshtml" />
+    <Content Include="Views\Shared\_LoadingOverlayPartial.cshtml" />
+    <Content Include="Views\ExaminerTools\MarkingPaymentStatus.cshtml" />
+    <Content Include="Views\CredentialApplication\Index.cshtml" />
+    <Content Include="Views\CredentialApplication\SubmissionResult.cshtml" />
+    <Content Include="Views\Credential\Index.cshtml" />
+    <Content Include="Views\Account\ChangeLogOnEmail.cshtml" />
+    <Content Include="Views\Account\EmailLogonChangeSuccess.cshtml" />
+    <Content Include="Views\Account\RegisterError.cshtml" />
+    <Content Include="Views\Account\ChangeLogOnEmailError.cshtml" />
+    <Content Include="Views\Logbook\Index.cshtml" />
+    <Content Include="Views\Bills\Invoice.cshtml" />
+    <Content Include="Views\Bills\Index.cshtml" />
+    <Content Include="Template\libs\jquery\jquery.sparkline\.DS_Store" />
+    <Content Include="Views\Bills\PaymentSuccess.cshtml" />
+    <Content Include="Views\Bills\PayOnline.cshtml" />
+    <Content Include="Views\Shared\MasterPages\_PayOnlineLayout.cshtml" />
+    <Content Include="Views\Applications\MyTests.cshtml" />
+    <Content Include="Views\Applications\ManageTest.cshtml" />
+    <Content Include="Views\Applications\AvailableTestSessions.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Shared\Unauthorized.cshtml" />
+    <Content Include="Views\ExaminerTools\RubricTest.cshtml" />
+    <Content Include="Views\ExaminerTools\StandardTest.cshtml" />
+    <Content Include="Views\OnlineDirectory\Index.cshtml" />
+    <Content Include="Views\Shared\MasterPages\_KnockoutLayout.cshtml" />
+    <Content Include="Views\Applications\MyTestResults.cshtml" />
+    <Content Include="Views\Applications\ApplyForAPaidReview.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Applications\SupplementaryTest.cshtml" />
+    <Content Include="Views\ExaminerTools\RolePlaySessions.cshtml" />
+    <Content Include="Views\ExaminerTools\FileTooLarge.cshtml" />
+    <Content Include="Views\Applications\SelectTestSession.cshtml" />
+    <Content Include="Views\Shared\ReasonError.cshtml" />
+    <Content Include="Views\ExaminerTools\ManageTestMaterials.cshtml" />
+    <Content Include="Views\ExaminerTools\ManageTestMaterial.cshtml" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\knockout.validation.min.js.map" />
+    <Content Include="Service References\Key Vault\ConnectedService.json" />
+    <Content Include="Views\Applications\RefundDetails.cshtml" />
+    <Content Include="Views\ExaminerTools\TestMaterialCreationPayments.cshtml" />
+    <Content Include="Views\UnraisedInvoices\Index.cshtml" />
+    <Content Include="Views\UnraisedInvoices\RaiseAndPayInvoice.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\MultiFactorAuthentication.cshtml" />
+    <Content Include="Views\Account\SetupMfa.cshtml" />
+    <Content Include="Views\Account\ReenterMfa.cshtml" />
+    <Content Include="Views\Credential\CredentialComponent.cshtml" />
+    <Content Include="Views\CredentialIdCard\CredentialIdCardIndex.cshtml" />
+    <Content Include="Views\Credential\DigitalIDCard.cshtml" />
+    <Content Include="Views\VerifyPractitioner\Index.cshtml" />
+    <Content Include="Views\VerifyPractitioner\Invalid.cshtml" />
+    <Content Include="Views\Account\EnterAccessCode.cshtml" />
+    <Content Include="Views\Shared\_MfaAndAccessCodePartial.cshtml" />
+    <Content Include="Views\VerifyCredential\Index.cshtml" />
+    <Content Include="Views\VerifyCredential\Invalid.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Code\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="App_Readme\" />
+    <Folder Include="Areas\HelpPage\App_Start\" />
+    <Folder Include="Areas\HelpPage\Controllers\" />
+    <Folder Include="Areas\HelpPage\ModelDescriptions\" />
+    <Folder Include="Areas\HelpPage\Models\" />
+    <Folder Include="Areas\HelpPage\SampleGeneration\" />
+    <Folder Include="Areas\HelpPage\Views\Help\DisplayTemplates\" />
+    <Folder Include="Areas\HelpPage\Views\Shared\" />
+    <Folder Include="Content\Help\Media\" />
+    <Folder Include="Views\Accounting\" />
+    <Folder Include="Views\Errors\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\F1Solutions.Global.Azure\F1Solutions.Naati.Common.Azure.csproj">
+      <Project>{842615eb-909c-4e2b-a240-33c35445c8d4}</Project>
+      <Name>F1Solutions.Naati.Common.Azure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Global.Common\F1Solutions.Global.Common.csproj">
+      <Project>{F41C4166-5B4D-4721-97BC-125F3CF0204A}</Project>
+      <Name>F1Solutions.Global.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Bl\F1Solutions.Naati.Common.Bl.csproj">
+      <Project>{68c50f46-c6ff-4ca5-89d0-173f84fa4809}</Project>
+      <Name>F1Solutions.Naati.Common.Bl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Contracts\F1Solutions.Naati.Common.Contracts.csproj">
+      <Project>{039e6de4-aeb9-4a6e-ac19-135239ddbde2}</Project>
+      <Name>F1Solutions.Naati.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Dal.Domain\F1Solutions.Naati.Common.Dal.Domain.csproj">
+      <Project>{128bdbbb-ce32-48a8-b07c-d1be04b1f488}</Project>
+      <Name>F1Solutions.Naati.Common.Dal.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Dal.Nhibernate.Mappings\F1Solutions.Naati.Common.Dal.Nhibernate.Mappings.csproj">
+      <Project>{1ac7dabc-06be-4eb3-ae77-8a55bcbeb31d}</Project>
+      <Name>F1Solutions.Naati.Common.Dal.Nhibernate.Mappings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Dal.NHibernate\F1Solutions.Naati.Common.Dal.NHibernate.csproj">
+      <Project>{50C2AB12-2B81-4984-AD06-0D228B58272C}</Project>
+      <Name>F1Solutions.Naati.Common.Dal.NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Dal\F1Solutions.Naati.Common.Dal.csproj">
+      <Project>{CC15921F-F11D-4BEE-BCC0-C449997102A3}</Project>
+      <Name>F1Solutions.Naati.Common.Dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\F1Solutions.NAATI.Common.Wiise\F1Solutions.Naati.Common.Wiise.csproj">
+      <Project>{00d21610-a7a2-4e9e-b720-94aea281d4f7}</Project>
+      <Name>F1Solutions.Naati.Common.Wiise</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyNaati.Bl\MyNaati.Bl.csproj">
+      <Project>{18f3473d-dfb8-4a13-96d0-a244371a7c5a}</Project>
+      <Name>MyNaati.Bl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyNaati.Contracts\MyNaati.Contracts.csproj">
+      <Project>{3b282190-56f0-494b-b94b-fa76efffb895}</Project>
+      <Name>MyNaati.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ncms.Contracts\Ncms.Contracts.csproj">
+      <Project>{B684501E-4F34-45EF-A6BC-2C00088BA2A2}</Project>
+      <Name>Ncms.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_GridIncludesPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Certificate\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\IdCard\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Stamp\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ProductFeeListPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_AvailableProductListPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ProductMenuPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\boolean.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\stringToTextarea.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\string.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\booleanToRadio.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\listToSelect.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Stamp\Select.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Certificate\Select.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\IdCard\Select.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\SelectAddress.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\ContactDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\WorkAreas.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\Credentials.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\Declaration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\RegistrationConfirmation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\PaymentFailure.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\PaymentMethod.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\ManualRegister.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\Registrations.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\UserSearch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\PaymentUnsuccessful.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Stamp\Declaration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\IdCard\Photograph.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\IdCard\Review.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Certificate\Review.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_OrderTotalViewPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_PaymentMethodEditPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LogOn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_PublicMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_AuthorizedMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Welcome.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDSearch\ContactDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\MasterPages\_WizardLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DeliveryDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\PaymentDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\PaymentMethod.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\ResetPasswordSuccess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Stamp\Review.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Stamp\OrderSuccess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Certificate\OrderSuccess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\MasterPages\_PersonalDetailsLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\RegisterSuccess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\integer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Stamp\_DeclarationPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_DeliveryDetailsViewPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orders\ExportOnlineOrderDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_PaymentMethodViewPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_PaymentDetailsViewPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\dateOnly.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\IdCard\OrderForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\decimal.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ProductReportPersonalDetailsPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Certificate\OrderForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ProductReportOfficeUseOnlyPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Stamp\OrderForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ProductReportPaymentDetailsPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ProductReportOrderItemsPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\OrderConfirmation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\IdCard\OrderSuccess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Orders\PortalStatistics.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\Review.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\radioButtonListInt.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\MasterPages\_PDListingWizardLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_CommonWizardScript.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_CommonWizardMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\_PDDeclarationPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\_CredentialViewPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\_WorkAreasViewPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\_AddressViewPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\_ContactDetailsViewPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\OrderForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\_FormWorkAreaPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_OrderFormFooterPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\SessionExpired.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_PaymentDetailsEditPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\creditCardNumber.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\month.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\MasterPages\_PDSearchWizardLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\HelpContent.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\HelpWindow.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\HelpMenu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\ComingSoon.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Diagnostics.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_MessageNodePartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ProductReportNoteAboutMandatoryFieldsPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\MasterPages\_ApplicationWizardLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByCourseWizard\CourseDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByCourseWizard\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_SideWizardMenu.cshtml" />
+    <Content Include="Views\Applications\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationForAccreditation\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\MasterPages\_ApplicationsIntroLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByCourseWizard\DownloadForm.cshtml" />
+    <Content Include="Views\Shared\_ApplicationForAccreditationPersonalDetailsPartial.cshtml" />
+    <Content Include="Views\ApplicationByCourseWizard\PurposeOfCredentials.cshtml" />
+    <Content Include="Views\ApplicationByCourseWizard\ResidencyStatus.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ApplicationForAccreditationAddressPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByCourseWizard\Phone.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByCourseWizard\Email.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\TestLocation.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\AdvancedTranslatorEligibility.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\LanguageProficiency.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\ParaprofessionalEligibility.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\ProfessionalEligibility.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByCourseWizard\Address.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ApplicationForAccreditationPhonePartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ApplicationForAccreditationEmailPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ApplicationForAccreditationResidencyStatusPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ApplicationForAccreditationPurposeOfCredentialsPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByCourseWizard\PersonalDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\DownloadForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\PersonalDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\Address.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\Phone.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\Email.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\ResidencyStatus.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ApplicationByTestingWizard\PurposeOfCredentials.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ApplicationForAccreditationFormPersonalDetailsPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reports\PDFTokenisation\Forms\CheckList.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CheckList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDListing\Address.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Certificate\Declaration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\IdCard\Declaration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_CertificateAndIdCardDeclarationPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\File\UploadFile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\MasterPages\_ApplicationIntroLayout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_GoogleAnalytics.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ApplicationForAccreditationSkillAssessmentPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDSearch\VerifyCredentials.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDSearch\PractitionerCredentials.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PDSearch\Credentials.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_ProcessingPaymentMessagePartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_OrderSuccessfulMessagePartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\LearnMore.cshtml" />
+    <Content Include="Views\Configuration\SystemSettings.cshtml" />
+    <Content Include="Views\Shared\_HomeButtons.cshtml" />
+    <Content Include="Views\Shared\_CourseApprovalDetails.cshtml" />
+    <Content Include="Views\PDSearch\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app_offline.htm.off" />
+    <None Include="Content\Help\js\nodejs\settings.json" />
+    <Content Include="Views\Applications\ExpressionOfInterest.cshtml" />
+    <Content Include="Views\Account\DuplicateUserResolution.cshtml" />
+    <Content Include="Views\ApplicationByTestingWizard\SubmitApplication.cshtml" />
+    <Content Include="Views\Shared\_ApplicationForAccreditationSubmitPartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\enumToSelect.cshtml" />
+    <Content Include="Views\Home\ValidateExaminer.cshtml" />
+    <Content Include="Views\ExaminerTools\Index.cshtml" />
+    <Content Include="Views\ExaminerTools\_SubmitTestResults.cshtml" />
+    <Content Include="Views\ExaminerTools\AdviseAvailability.cshtml" />
+    <Content Include="Views\ExaminerTools\SubmitNewTestMaterial.cshtml" />
+    <Content Include="Views\ExaminerTools\PanelManagement.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ActiveReports.Document">
+      <HintPath>..\Binaries\ActiveReports\ActiveReports.Document.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveReports.PdfExport">
+      <HintPath>..\Binaries\ActiveReports\ActiveReports.PdfExport.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveReports.Viewer6">
+      <HintPath>..\Binaries\ActiveReports\ActiveReports.Viewer6.dll</HintPath>
+    </Reference>
+    <Reference Include="ActiveReports6">
+      <HintPath>..\Binaries\ActiveReports\ActiveReports6.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.1.2\lib\net461\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="FoolproofValidation, Version=0.9.5851.39121, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Foolproof.0.9.4518\lib\net45\FoolproofValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Console, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Console.1.4.2\lib\net45\Hangfire.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.Core, Version=1.7.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.7.8\lib\net46\Hangfire.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Hangfire.SqlServer, Version=1.7.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.SqlServer.1.7.8\lib\net45\Hangfire.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.11.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.11\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="JsonSubTypes, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JsonSubTypes.1.5.2\lib\net47\JsonSubTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="KellermanSoftware.Compare-NET-Objects, Version=4.57.0.0, Culture=neutral, PublicKeyToken=d970ace04cc85217, processorArchitecture=MSIL">
+      <HintPath>..\packages\CompareNETObjects.4.57.0\lib\net46\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.2.3.2\lib\net452\Microsoft.Azure.KeyVault.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.KeyVault.WebKey, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.KeyVault.WebKey.2.0.7\lib\net452\Microsoft.Azure.KeyVault.WebKey.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Azure.Services.AppAuthentication, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Azure.Services.AppAuthentication.1.0.3\lib\net452\Microsoft.Azure.Services.AppAuthentication.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Azure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.Azure.1.0.1\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Azure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Base, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.Base.1.0.1\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Configuration.ConfigurationBuilders.Environment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Configuration.ConfigurationBuilders.Environment.1.0.2\lib\Net471\Microsoft.Configuration.ConfigurationBuilders.Environment.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory, Version=3.14.2.11, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.14.2\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Clients.ActiveDirectory.Platform, Version=3.14.2.11, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Clients.ActiveDirectory.3.14.2\lib\net45\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.2.3.8\lib\net452\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Rest.ClientRuntime.Azure, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.Azure.3.3.7\lib\net452\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="MoreLinq, Version=2.0.20029.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.2.3.0\lib\net35\MoreLinq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=5.1.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.5.1.3\lib\net461\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Conventions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Conventions.3.3.0\lib\net45\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Factory, Version=3.3.2.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Factory.3.3.2\lib\net45\Ninject.Extensions.Factory.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Interception, Version=3.3.3.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Interception.3.3.3\lib\net45\Ninject.Extensions.Interception.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Interception.DynamicProxy, Version=3.3.3.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Extensions.Interception.DynamicProxy.3.3.3\lib\net45\Ninject.Extensions.Interception.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.3.0\lib\net45\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common.WebHost, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.WebHost.3.3.0\lib\net45\Ninject.Web.Common.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MVC5.3.3.0\lib\net45\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.WebApi, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.WebApi.3.3.0\lib\net45\Ninject.Web.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.WebApi.WebHost, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.WebApi.WebHost.3.3.0\lib\net45\Ninject.Web.WebApi.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PayPal, Version=1.9.1.0, Culture=neutral, PublicKeyToken=5b4afc1ccaef40fb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PayPal.1.9.1\lib\net451\PayPal.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Recaptcha, Version=1.0.5.0, Culture=neutral, PublicKeyToken=9afc4d65b28c38c2, processorArchitecture=MSIL">
+      <HintPath>..\packages\recaptcha.1.0.5.0\lib\.NetFramework 4.0\Recaptcha.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq.EagerFetching, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.EagerFetching.2.2.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Examples, Version=3.12.0.0, Culture=neutral, PublicKeyToken=aa1e9c5053bfbe95, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Examples.3.12.0\lib\net40\Swashbuckle.Examples.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="TwoFactorAuth.Net, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TwoFactorAuth.Net.1.4.0\lib\net46\TwoFactorAuth.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.1.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebApiThrottle, Version=1.5.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebApiThrottle.1.5.4\lib\net45\WebApiThrottle.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55508</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/mynaati</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.9.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.7.12\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.7.12\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.7.12\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.7.12\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Azure.Services.AppAuthentication.1.0.3\build\Microsoft.Azure.Services.AppAuthentication.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Azure.Services.AppAuthentication.1.0.3\build\Microsoft.Azure.Services.AppAuthentication.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.7.12\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.7.12\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\Microsoft.Azure.Services.AppAuthentication.1.0.3\build\Microsoft.Azure.Services.AppAuthentication.targets" Condition="Exists('..\packages\Microsoft.Azure.Services.AppAuthentication.1.0.3\build\Microsoft.Azure.Services.AppAuthentication.targets')" />
+</Project>

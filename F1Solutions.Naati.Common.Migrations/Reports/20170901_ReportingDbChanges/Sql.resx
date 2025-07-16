@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CreateCredentialRequestsProcedure" xml:space="preserve">
+    <value>CREATE PROCEDURE [dbo].[ReportingSnapshot_CredentialRequests]
+AS
+BEGIN
+	SELECT
+		CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[CredentialRequestId] ELSE [Source].[CredentialRequestId] END AS [CredentialRequestId]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[PersonId] ELSE [Source].[PersonId] END AS [PersonId]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[Title] ELSE [Source].[Title] END AS [Title]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[GivenName] ELSE [Source].[GivenName] END AS [GivenName]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[OtherNames] ELSE [Source].[OtherNames] END AS [OtherNames]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[FamilyName] ELSE [Source].[FamilyName] END AS [FamilyName]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[PrimaryAddress] ELSE [Source].[PrimaryAddress] END AS [PrimaryAddress]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[Country] ELSE [Source].[Country] END AS [Country]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[PrimaryPhone] ELSE [Source].[PrimaryPhone] END AS [PrimaryPhone]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[PrimaryEmail] ELSE [Source].[PrimaryEmail] END AS [PrimaryEmail]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[ApplicationId] ELSE [Source].[ApplicationId] END AS [ApplicationId]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[ApplicationType] ELSE [Source].[ApplicationType] END AS [ApplicationType]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[ApplicationReference] ELSE [Source].[ApplicationReference] END AS [ApplicationReference]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[ApplicationOwner] ELSE [Source].[ApplicationOwner] END AS [ApplicationOwner]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[CredentialTypeInternalName] ELSE [Source].[CredentialTypeInternalName] END AS [CredentialTypeInternalName]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[CredentialTypeExternalName] ELSE [Source].[CredentialTypeExternalName] END AS [CredentialTypeExternalName]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[Certification] ELSE [Source].[Certification] END AS [Certification]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[Language1] ELSE [Source].[Language1] END AS [Language1]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[Language2] ELSE [Source].[Language2] END AS [Language2]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[DirectionDisplayName] ELSE [Source].[DirectionDisplayName] END AS [DirectionDisplayName]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[ModifiedUser] ELSE [Source].[ModifiedUser] END AS [ModifiedUser]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[StatusChangedDate] ELSE [Source].[StatusChangedDate] END AS [StatusChangedDate]
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN [CredentialRequests].[Status] ELSE [Source].[Status] END AS [Status]
+		,CASE WHEN [CredentialRequests].[CredentialRequestId] IS NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS 'IsNew'
+		,CASE WHEN [Source].[CredentialRequestId] IS NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS 'IsDeleted'
+	FROM
+	(
+		SELECT
+			cr.[CredentialRequestId]
+			,cap.[CredentialApplicationId] AS 'ApplicationId'
+			,p.[PersonId]
+			,pn.[Title]
+			,pn.[GivenName]
+			,pn.[OtherNames]
+			,pn.[SurName] AS 'FamilyName'
+			,a.[StreetDetails] AS 'PrimaryAddress'
+			,(
+				SELECT TOP 1
+					[Name]
+				FROM [naati_db]..[tblCountry] c
+				WHERE c.[CountryId] = a.[CountryId]
+			) COLLATE Latin1_General_CI_AS AS 'Country'
+			,PrimaryPhone.[Number] COLLATE Latin1_General_CI_AS AS 'PrimaryPhone'
+			,(SELECT TOP 1 
+				[Email]
+			  FROM [naati_db]..[tblEmail] email
+			  WHERE email.[EntityId] = p.[EntityId] AND email.IsPreferredEmail = 1) COLLATE Latin1_General_CI_AS as 'PrimaryEmail'
+			,capt.[DisplayName] AS 'ApplicationType'
+			,CONCAT('APP', cap.[CredentialApplicationId]) COLLATE Latin1_General_CI_AS AS 'ApplicationReference'
+			,CASE
+				WHEN cap.[OwnedByApplicant] = 1 THEN 'Applicant'
+				WHEN cap.[OwnedByApplicant] = 0 THEN (SELECT TOP 1 
+				  [FullName]
+				  FROM [naati_db]..[tblUser] ownedByUser
+				  WHERE ownedByUser.[UserId] = cap.[OwnedByUserId])
+			END COLLATE Latin1_General_CI_AS AS 'ApplicationOwner'
+			,ct.[InternalName] AS 'CredentialTypeInternalName'
+			,ct.[ExternalName] AS 'CredentialTypeExternalName'
+			,ct.[Certification]
+			,(SELECT TOP 1
+				[Name]
+				FROM [naati_db]..[tblLanguage] l
+				WHERE l.LanguageId = s.[Language1Id]) AS 'Language1'
+			,(SELECT TOP 1
+				[Name]
+				FROM [naati_db]..[tblLanguage] l
+				WHERE l.LanguageId = s.[Language2Id]) AS 'Language2'
+			,d.[DisplayName] AS 'DirectionDisplayName'
+			,(SELECT TOP 1 
+				  [FullName]
+				  FROM [naati_db]..[tblUser] ModifiedUser
+				  WHERE ModifiedUser.[UserId] = cr.[StatusChangeUserId]) AS 'ModifiedUser'
+			,cr.[StatusChangeDate] AS 'StatusChangedDate'
+			,crst.[DisplayName] AS 'Status'
+		FROM [naati_db]..[tblCredentialRequest] cr
+		INNER JOIN [naati_db]..[tblCredentialApplication] cap ON cr.CredentialApplicationId = cap.CredentialApplicationId
+		INNER JOIN [naati_db]..[tblPerson] p ON cap.PersonId = p.PersonId
+		LEFT JOIN
+		(
+				SELECT TOP 1
+					[Title]
+					,[GivenName]
+					,[OtherNames]
+					,[SurName]
+					,[PersonId]
+				FROM [naati_db]..[tblPersonName] pn
+				LEFT JOIN [naati_db]..[tluTitle] t ON pn.[TitleId] = t.[TitleId]
+				ORDER BY pn.[EffectiveDate] DESC
+		) pn ON pn.PersonId = p.PersonId
+		LEFT JOIN (SELECT [EntityId], MAX([AddressId]) AS 'LastAddressId' FROM [naati_db]..[tblAddress] WHERE [PrimaryContact] = 1 GROUP BY [EntityId]) ppAd ON ppAd.[EntityId] = p.[EntityId]
+		LEFT JOIN [naati_db]..[tblAddress] a ON ppAd.[LastAddressId] = a.[AddressId]
+		OUTER APPLY [dbo].[GetPhoneNumber](p.[EntityId], 1) PrimaryPhone
+		INNER JOIN [naati_db]..[tblCredentialApplicationType] capt ON cap.[CredentialApplicationTypeId] = capt.[CredentialApplicationTypeId]
+		INNER JOIN [naati_db]..[tblCredentialType] ct ON ct.[CredentialTypeId] = cr.[CredentialTypeId]
+		INNER JOIN [naati_db]..[tblSkill] s ON cr.[SkillId] = s.[SkillId]
+		INNER JOIN [naati_db]..[tblDirectionType] d ON d.[DirectionTypeId] = s.[DirectionTypeId]
+		INNER JOIN [naati_db]..[tblCredentialRequestStatusType] crst ON crst.[CredentialRequestStatusTypeId] = cr.[CredentialRequestStatusTypeId]
+	) [Source]
+	FULL OUTER JOIN [CredentialRequests] ON [Source].[CredentialRequestId] = [CredentialRequests].[CredentialRequestId]
+	WHERE (([Source].[PersonId] IS NOT NULL AND [CredentialRequests].[PersonId] IS NULL) OR ([Source].[PersonId] IS NULL AND [CredentialRequests].[PersonId] IS NOT NULL) OR (([Source].[PersonId] IS NOT NULL AND [CredentialRequests].[PersonId] IS NOT NULL) AND [Source].[PersonId] != [CredentialRequests].[PersonId]))
+	OR (([Source].[Title] IS NOT NULL AND [CredentialRequests].[Title] IS NULL) OR ([Source].[Title] IS NULL AND [CredentialRequests].[Title] IS NOT NULL) OR (([Source].[Title] IS NOT NULL AND [CredentialRequests].[Title] IS NOT NULL) AND [Source].[Title] != [CredentialRequests].[Title]))
+	OR (([Source].[OtherNames] IS NOT NULL AND [CredentialRequests].[OtherNames] IS NULL) OR ([Source].[OtherNames] IS NULL AND [CredentialRequests].[OtherNames] IS NOT NULL) OR (([Source].[OtherNames] IS NOT NULL AND [CredentialRequests].[OtherNames] IS NOT NULL) AND [Source].[OtherNames] != [CredentialRequests].[OtherNames]))
+	OR (([Source].[FamilyName] IS NOT NULL AND [CredentialRequests].[FamilyName] IS NULL) OR ([Source].[FamilyName] IS NULL AND [CredentialRequests].[FamilyName] IS NOT NULL) OR (([Source].[FamilyName] IS NOT NULL AND [CredentialRequests].[FamilyName] IS NOT NULL) AND [Source].[FamilyName] != [CredentialRequests].[FamilyName]))
+	OR (([Source].[PrimaryAddress] IS NOT NULL AND [CredentialRequests].[PrimaryAddress] IS NULL) OR ([Source].[PrimaryAddress] IS NULL AND [CredentialRequests].[PrimaryAddress] IS NOT NULL) OR (([Source].[PrimaryAddress] IS NOT NULL AND [CredentialRequests].[PrimaryAddress] IS NOT NULL) AND [Source].[PrimaryAddress] != [CredentialRequests].[PrimaryAddress]))
+	OR (([Source].[Country] IS NOT NULL AND [CredentialRequests].[Country] IS NULL) OR ([Source].[Country] IS NULL AND [CredentialRequests].[Country] IS NOT NULL) OR (([Source].[Country] IS NOT NULL AND [CredentialRequests].[Country] IS NOT NULL) AND [Source].[Country] != [CredentialRequests].[Country]))
+	OR (([Source].[PrimaryPhone] IS NOT NULL AND [CredentialRequests].[PrimaryPhone] IS NULL) OR ([Source].[PrimaryPhone] IS NULL AND [CredentialRequests].[PrimaryPhone] IS NOT NULL) OR (([Source].[PrimaryPhone] IS NOT NULL AND [CredentialRequests].[PrimaryPhone] IS NOT NULL) AND [Source].[PrimaryPhone] != [CredentialRequests].[PrimaryPhone]))
+	OR (([Source].[PrimaryEmail] IS NOT NULL AND [CredentialRequests].[PrimaryEmail] IS NULL) OR ([Source].[PrimaryEmail] IS NULL AND [CredentialRequests].[PrimaryEmail] IS NOT NULL) OR (([Source].[PrimaryEmail] IS NOT NULL AND [CredentialRequests].[PrimaryEmail] IS NOT NULL) AND [Source].[PrimaryEmail] != [CredentialRequests].[PrimaryEmail]))
+	OR (([Source].[ApplicationId] IS NOT NULL AND [CredentialRequests].[ApplicationId] IS NULL) OR ([Source].[ApplicationId] IS NULL AND [CredentialRequests].[ApplicationId] IS NOT NULL) OR (([Source].[ApplicationId] IS NOT NULL AND [CredentialRequests].[ApplicationId] IS NOT NULL) AND [Source].[ApplicationId] != [CredentialRequests].[ApplicationId]))
+	OR (([Source].[ApplicationType] IS NOT NULL AND [CredentialRequests].[ApplicationType] IS NULL) OR ([Source].[ApplicationType] IS NULL AND [CredentialRequests].[ApplicationType] IS NOT NULL) OR (([Source].[ApplicationType] IS NOT NULL AND [CredentialRequests].[ApplicationType] IS NOT NULL) AND [Source].[ApplicationType] != [CredentialRequests].[ApplicationType]))
+	OR (([Source].[ApplicationReference] IS NOT NULL AND [CredentialRequests].[ApplicationReference] IS NULL) OR ([Source].[ApplicationReference] IS NULL AND [CredentialRequests].[ApplicationReference] IS NOT NULL) OR (([Source].[ApplicationReference] IS NOT NULL AND [CredentialRequests].[ApplicationReference] IS NOT NULL) AND [Source].[ApplicationReference] != [CredentialRequests].[ApplicationReference]))
+	OR (([Source].[ApplicationOwner] IS NOT NULL AND [CredentialRequests].[ApplicationOwner] IS NULL) OR ([Source].[ApplicationOwner] IS NULL AND [CredentialRequests].[ApplicationOwner] IS NOT NULL) OR (([Source].[ApplicationOwner] IS NOT NULL AND [CredentialRequests].[ApplicationOwner] IS NOT NULL) AND [Source].[ApplicationOwner] != [CredentialRequests].[ApplicationOwner]))
+	OR (([Source].[CredentialTypeInternalName] IS NOT NULL AND [CredentialRequests].[CredentialTypeInternalName] IS NULL) OR ([Source].[CredentialTypeInternalName] IS NULL AND [CredentialRequests].[CredentialTypeInternalName] IS NOT NULL) OR (([Source].[CredentialTypeInternalName] IS NOT NULL AND [CredentialRequests].[CredentialTypeInternalName] IS NOT NULL) AND [Source].[CredentialTypeInternalName] != [CredentialRequests].[CredentialTypeInternalName]))
+	OR (([Source].[CredentialTypeExternalName] IS NOT NULL AND [CredentialRequests].[CredentialTypeExternalName] IS NULL) OR ([Source].[CredentialTypeExternalName] IS NULL AND [CredentialRequests].[CredentialTypeExternalName] IS NOT NULL) OR (([Source].[CredentialTypeExternalName] IS NOT NULL AND [CredentialRequests].[CredentialTypeExternalName] IS NOT NULL) AND [Source].[CredentialTypeExternalName] != [CredentialRequests].[CredentialTypeExternalName]))
+	OR (([Source].[Certification] IS NOT NULL AND [CredentialRequests].[Certification] IS NULL) OR ([Source].[Certification] IS NULL AND [CredentialRequests].[Certification] IS NOT NULL) OR (([Source].[Certification] IS NOT NULL AND [CredentialRequests].[Certification] IS NOT NULL) AND [Source].[Certification] != [CredentialRequests].[Certification]))
+	OR (([Source].[Language1] IS NOT NULL AND [CredentialRequests].[Language1] IS NULL) OR ([Source].[Language1] IS NULL AND [CredentialRequests].[Language1] IS NOT NULL) OR (([Source].[Language1] IS NOT NULL AND [CredentialRequests].[Language1] IS NOT NULL) AND [Source].[Language1] != [CredentialRequests].[Language1]))
+	OR (([Source].[Language2] IS NOT NULL AND [CredentialRequests].[Language2] IS NULL) OR ([Source].[Language2] IS NULL AND [CredentialRequests].[Language2] IS NOT NULL) OR (([Source].[Language2] IS NOT NULL AND [CredentialRequests].[Language2] IS NOT NULL) AND [Source].[Language2] != [CredentialRequests].[Language2]))
+	OR (([Source].[DirectionDisplayName] IS NOT NULL AND [CredentialRequests].[DirectionDisplayName] IS NULL) OR ([Source].[DirectionDisplayName] IS NULL AND [CredentialRequests].[DirectionDisplayName] IS NOT NULL) OR (([Source].[DirectionDisplayName] IS NOT NULL AND [CredentialRequests].[DirectionDisplayName] IS NOT NULL) AND [Source].[DirectionDisplayName] != [CredentialRequests].[DirectionDisplayName]))
+	OR (([Source].[ModifiedUser] IS NOT NULL AND [CredentialRequests].[ModifiedUser] IS NULL) OR ([Source].[ModifiedUser] IS NULL AND [CredentialRequests].[ModifiedUser] IS NOT NULL) OR (([Source].[ModifiedUser] IS NOT NULL AND [CredentialRequests].[ModifiedUser] IS NOT NULL) AND [Source].[ModifiedUser] != [CredentialRequests].[ModifiedUser]))
+	OR (([Source].[StatusChangedDate] IS NOT NULL AND [CredentialRequests].[StatusChangedDate] IS NULL) OR ([Source].[StatusChangedDate] IS NULL AND [CredentialRequests].[StatusChangedDate] IS NOT NULL) OR (([Source].[StatusChangedDate] IS NOT NULL AND [CredentialRequests].[StatusChangedDate] IS NOT NULL) AND [Source].[StatusChangedDate] != [CredentialRequests].[StatusChangedDate]))
+	OR (([Source].[Status] IS NOT NULL AND [CredentialRequests].[Status] IS NULL) OR ([Source].[Status] IS NULL AND [CredentialRequests].[Status] IS NOT NULL) OR (([Source].[Status] IS NOT NULL AND [CredentialRequests].[Status] IS NOT NULL) AND [Source].[Status] != [CredentialRequests].[Status]))
+END</value>
+  </data>
+  <data name="CreateCredentialRequestsView" xml:space="preserve">
+    <value>CREATE VIEW [dbo].[CredentialRequests] AS
+SELECT
+	[CredentialRequestId]
+	,DATEADD(dd, DATEDIFF(dd, 0, GETDATE()), 0) AS [DateRecorded]
+	,[PersonId]
+	,[Title]
+	,[GivenName]
+	,[OtherNames]
+	,[FamilyName]
+	,[PrimaryAddress]
+	,[Country]
+	,[PrimaryPhone]
+	,[PrimaryEmail]
+	,[ApplicationId]
+	,[ApplicationType]
+	,[ApplicationReference]
+	,[ApplicationOwner]
+	,[CredentialTypeInternalName]
+	,[CredentialTypeExternalName]
+	,[Certification]
+	,[Language1]
+	,[Language2]
+	,[DirectionDisplayName]
+	,[ModifiedDate]
+	,[ObsoletedDate]
+	,[DeletedDate]
+	,[StatusChangedDate]
+	,[ModifiedUser]
+	,[Status]
+FROM [CredentialRequestsHistory] c
+WHERE c.[ModifiedDate] =
+(
+    SELECT MAX([ModifiedDate])
+    FROM [CredentialRequestsHistory] c2
+    WHERE c2.[CredentialRequestId] = c.[CredentialRequestId]
+)
+AND [DeletedDate] IS NULL</value>
+  </data>
+  <data name="CreateCredentialsProcedure" xml:space="preserve">
+    <value>CREATE PROCEDURE [dbo].[ReportingSnapshot_Credentials]
+AS
+BEGIN
+	SELECT
+		CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[CredentialId] ELSE [Source].[CredentialId] END AS [CredentialId]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[PersonId] ELSE [Source].[PersonId] END AS [PersonId]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[Title] ELSE [Source].[Title] END AS [Title]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[GivenName] ELSE [Source].[GivenName] END AS [GivenName]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[OtherNames] ELSE [Source].[OtherNames] END AS [OtherNames]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[FamilyName] ELSE [Source].[FamilyName] END AS [FamilyName]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[PrimaryAddress] ELSE [Source].[PrimaryAddress] END AS [PrimaryAddress]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[Country] ELSE [Source].[Country] END AS [Country]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[PrimaryPhone] ELSE [Source].[PrimaryPhone] END AS [PrimaryPhone]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[PrimaryEmail] ELSE [Source].[PrimaryEmail] END AS [PrimaryEmail]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[CredentialType] ELSE [Source].[CredentialType] END AS [CredentialType]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[Direction] ELSE [Source].[Direction] END AS [Direction]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[StartDate] ELSE [Source].[StartDate] END AS [StartDate]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[ExpiryDate] ELSE [Source].[ExpiryDate] END AS [ExpiryDate]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[TerminationDate] ELSE [Source].[TerminationDate] END AS [TerminationDate]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[Status] ELSE [Source].[Status] END AS [Status]
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN [Credentials].[ShowInOnlineDirectory] ELSE [Source].[ShowInOnlineDirectory] END AS [ShowInOnlineDirectory]
+		,CASE WHEN [Credentials].[CredentialId] IS NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS 'IsNew'
+		,CASE WHEN [Source].[CredentialId] IS NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS 'IsDeleted'
+	FROM
+	(
+		SELECT
+			c.[CredentialId]
+			,p.[PersonId]
+			,pn.[Title]
+			,pn.[GivenName]
+			,pn.[OtherNames]
+			,pn.[SurName] AS 'FamilyName'
+			,a.[StreetDetails] AS 'PrimaryAddress'
+			,(
+				SELECT TOP 1
+					[Name]
+				FROM [naati_db]..[tblCountry] c
+				WHERE c.[CountryId] = a.[CountryId]
+			) COLLATE Latin1_General_CI_AS AS 'Country'
+			,PrimaryPhone.[Number] COLLATE Latin1_General_CI_AS AS 'PrimaryPhone'
+			,(SELECT TOP 1 
+				[Email]
+			  FROM [naati_db]..[tblEmail] email
+			  WHERE email.[EntityId] = p.[EntityId] AND email.IsPreferredEmail = 1) COLLATE Latin1_General_CI_AS as 'PrimaryEmail'
+			,ct.[InternalName] AS 'CredentialType'
+			,dt.[DisplayName] AS 'Direction'
+			,c.[StartDate]
+			,c.[ExpiryDate]
+			,c.[TerminationDate]
+			,crst.[DisplayName] AS 'Status'
+			,c.[ShowInOnlineDirectory]
+		FROM [naati_db]..[tblCredentialCredentialRequest] ccr
+		INNER JOIN [naati_db]..[tblCredential] c ON c.CredentialId = ccr.CredentialId
+		INNER JOIN [naati_db]..[tblCredentialRequest] cr ON cr.CredentialRequestId = ccr.CredentialRequestId
+		LEFT JOIN [naati_db]..[tblCredentialApplication] ca ON ca.CredentialApplicationId = cr.CredentialApplicationId
+		INNER JOIN [naati_db]..[tblPerson] p ON ca.PersonId = p.PersonId
+		LEFT JOIN
+		(
+				SELECT TOP 1
+					[Title]
+					,[GivenName]
+					,[OtherNames]
+					,[SurName]
+					,[PersonId]
+				FROM [naati_db]..[tblPersonName] pn
+				LEFT JOIN [naati_db]..[tluTitle] t ON pn.[TitleId] = t.[TitleId]
+				ORDER BY pn.[EffectiveDate] DESC
+		) pn ON pn.PersonId = p.PersonId
+		LEFT JOIN (SELECT [EntityId], MAX([AddressId]) AS 'LastAddressId' FROM [naati_db]..[tblAddress] WHERE [PrimaryContact] = 1 GROUP BY [EntityId]) ppAd ON ppAd.[EntityId] = p.[EntityId]
+		LEFT JOIN [naati_db]..[tblAddress] a ON ppAd.[LastAddressId] = a.[AddressId]
+		OUTER APPLY [dbo].[GetPhoneNumber](p.[EntityId], 1) PrimaryPhone
+		LEFT JOIN [naati_db]..[tblCredentialType] ct ON cr.CredentialTypeId = ct.CredentialTypeId
+		LEFT JOIN [naati_db]..[tblSkill] s ON cr.SkillId = s.SkillId
+		LEFT JOIN [naati_db]..[tblDirectionType] dt ON s.DirectionTypeId = dt.DirectionTypeId
+		LEFT JOIN [naati_db]..[tblCredentialRequestStatusType] crst ON crst.CredentialRequestStatusTypeId = cr.CredentialRequestStatusTypeId
+	) [Source]
+	FULL OUTER JOIN [Credentials] ON [Source].[CredentialId] = [Credentials].[CredentialId]
+	WHERE (([Source].[PersonId] IS NOT NULL AND [Credentials].[PersonId] IS NULL) OR ([Source].[PersonId] IS NULL AND [Credentials].[PersonId] IS NOT NULL) OR (([Source].[PersonId] IS NOT NULL AND [Credentials].[PersonId] IS NOT NULL) AND [Source].[PersonId] != [Credentials].[PersonId]))
+	OR (([Source].[Title] IS NOT NULL AND [Credentials].[Title] IS NULL) OR ([Source].[Title] IS NULL AND [Credentials].[Title] IS NOT NULL) OR (([Source].[Title] IS NOT NULL AND [Credentials].[Title] IS NOT NULL) AND [Source].[Title] != [Credentials].[Title]))
+	OR (([Source].[GivenName] IS NOT NULL AND [Credentials].[GivenName] IS NULL) OR ([Source].[GivenName] IS NULL AND [Credentials].[GivenName] IS NOT NULL) OR (([Source].[GivenName] IS NOT NULL AND [Credentials].[GivenName] IS NOT NULL) AND [Source].[GivenName] != [Credentials].[GivenName]))
+	OR (([Source].[OtherNames] IS NOT NULL AND [Credentials].[OtherNames] IS NULL) OR ([Source].[OtherNames] IS NULL AND [Credentials].[OtherNames] IS NOT NULL) OR (([Source].[OtherNames] IS NOT NULL AND [Credentials].[OtherNames] IS NOT NULL) AND [Source].[OtherNames] != [Credentials].[OtherNames]))
+	OR (([Source].[FamilyName] IS NOT NULL AND [Credentials].[FamilyName] IS NULL) OR ([Source].[FamilyName] IS NULL AND [Credentials].[FamilyName] IS NOT NULL) OR (([Source].[FamilyName] IS NOT NULL AND [Credentials].[FamilyName] IS NOT NULL) AND [Source].[FamilyName] != [Credentials].[FamilyName]))
+	OR (([Source].[PrimaryAddress] IS NOT NULL AND [Credentials].[PrimaryAddress] IS NULL) OR ([Source].[PrimaryAddress] IS NULL AND [Credentials].[PrimaryAddress] IS NOT NULL) OR (([Source].[PrimaryAddress] IS NOT NULL AND [Credentials].[PrimaryAddress] IS NOT NULL) AND [Source].[PrimaryAddress] != [Credentials].[PrimaryAddress]))
+	OR (([Source].[Country] IS NOT NULL AND [Credentials].[Country] IS NULL) OR ([Source].[Country] IS NULL AND [Credentials].[Country] IS NOT NULL) OR (([Source].[Country] IS NOT NULL AND [Credentials].[Country] IS NOT NULL) AND [Source].[Country] != [Credentials].[Country]))
+	OR (([Source].[PrimaryPhone] IS NOT NULL AND [Credentials].[PrimaryPhone] IS NULL) OR ([Source].[PrimaryPhone] IS NULL AND [Credentials].[PrimaryPhone] IS NOT NULL) OR (([Source].[PrimaryPhone] IS NOT NULL AND [Credentials].[PrimaryPhone] IS NOT NULL) AND [Source].[PrimaryPhone] != [Credentials].[PrimaryPhone]))
+	OR (([Source].[PrimaryEmail] IS NOT NULL AND [Credentials].[PrimaryEmail] IS NULL) OR ([Source].[PrimaryEmail] IS NULL AND [Credentials].[PrimaryEmail] IS NOT NULL) OR (([Source].[PrimaryEmail] IS NOT NULL AND [Credentials].[PrimaryEmail] IS NOT NULL) AND [Source].[PrimaryEmail] != [Credentials].[PrimaryEmail]))
+	OR (([Source].[CredentialType] IS NOT NULL AND [Credentials].[CredentialType] IS NULL) OR ([Source].[CredentialType] IS NULL AND [Credentials].[CredentialType] IS NOT NULL) OR (([Source].[CredentialType] IS NOT NULL AND [Credentials].[CredentialType] IS NOT NULL) AND [Source].[CredentialType] != [Credentials].[CredentialType]))
+	OR (([Source].[Direction] IS NOT NULL AND [Credentials].[Direction] IS NULL) OR ([Source].[Direction] IS NULL AND [Credentials].[Direction] IS NOT NULL) OR (([Source].[Direction] IS NOT NULL AND [Credentials].[Direction] IS NOT NULL) AND [Source].[Direction] != [Credentials].[Direction]))
+	OR (([Source].[StartDate] IS NOT NULL AND [Credentials].[StartDate] IS NULL) OR ([Source].[StartDate] IS NULL AND [Credentials].[StartDate] IS NOT NULL) OR (([Source].[StartDate] IS NOT NULL AND [Credentials].[StartDate] IS NOT NULL) AND [Source].[StartDate] != [Credentials].[StartDate]))
+	OR (([Source].[ExpiryDate] IS NOT NULL AND [Credentials].[ExpiryDate] IS NULL) OR ([Source].[ExpiryDate] IS NULL AND [Credentials].[ExpiryDate] IS NOT NULL) OR (([Source].[ExpiryDate] IS NOT NULL AND [Credentials].[ExpiryDate] IS NOT NULL) AND [Source].[ExpiryDate] != [Credentials].[ExpiryDate]))
+	OR (([Source].[TerminationDate] IS NOT NULL AND [Credentials].[TerminationDate] IS NULL) OR ([Source].[TerminationDate] IS NULL AND [Credentials].[TerminationDate] IS NOT NULL) OR (([Source].[TerminationDate] IS NOT NULL AND [Credentials].[TerminationDate] IS NOT NULL) AND [Source].[TerminationDate] != [Credentials].[TerminationDate]))
+	OR (([Source].[Status] IS NOT NULL AND [Credentials].[Status] IS NULL) OR ([Source].[Status] IS NULL AND [Credentials].[Status] IS NOT NULL) OR (([Source].[Status] IS NOT NULL AND [Credentials].[Status] IS NOT NULL) AND [Source].[Status] != [Credentials].[Status]))
+	OR (([Source].[ShowInOnlineDirectory] IS NOT NULL AND [Credentials].[ShowInOnlineDirectory] IS NULL) OR ([Source].[ShowInOnlineDirectory] IS NULL AND [Credentials].[ShowInOnlineDirectory] IS NOT NULL) OR (([Source].[ShowInOnlineDirectory] IS NOT NULL AND [Credentials].[ShowInOnlineDirectory] IS NOT NULL) AND [Source].[ShowInOnlineDirectory] != [Credentials].[ShowInOnlineDirectory]))
+END</value>
+  </data>
+  <data name="CreateCredentialsView" xml:space="preserve">
+    <value>CREATE VIEW [dbo].[Credentials] AS
+SELECT
+	[CredentialId]
+	,DATEADD(dd, DATEDIFF(dd, 0, GETDATE()), 0) AS [DateRecorded]
+	,[PersonId]
+	,[Title]
+	,[GivenName]
+	,[OtherNames]
+	,[FamilyName]
+	,[PrimaryAddress]
+	,[Country]
+	,[PrimaryPhone]
+	,[PrimaryEmail]
+	,[CredentialType]
+	,[Direction]
+	,[StartDate]
+	,[ExpiryDate]
+	,[ModifiedDate]
+	,[ObsoletedDate]
+	,[DeletedDate]
+	,[TerminationDate]
+	,[Status]
+	,[ShowInOnlineDirectory]
+FROM [CredentialsHistory] c
+WHERE c.[ModifiedDate] =
+(
+    SELECT MAX([ModifiedDate])
+    FROM [CredentialsHistory] c2
+    WHERE c2.[CredentialId] = c.[CredentialId]
+)
+AND [DeletedDate] IS NULL</value>
+  </data>
+  <data name="CreateNewPersonHistoryIndex" xml:space="preserve">
+    <value>CREATE NONCLUSTERED INDEX [IX_Person_ObsoletedDate] ON [dbo].[PersonHistory]
+(
+	[ObsoletedDate] ASC
+)
+INCLUDE ( 	[PersonId],
+	[GivenName],
+	[OtherNames],
+	[FamilyName],
+	[Title],
+	[Gender],
+	[DateOfBirth],
+	[CountryOfBirth],
+	[PrimaryAddress],
+	[Country],
+	[PrimaryEmail],
+	[PrimaryPhone],
+	[SecondaryAddress],
+	[SecondaryPhone],
+	[SecondaryEmail]) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]</value>
+  </data>
+  <data name="DropPersonHistoryIndex" xml:space="preserve">
+    <value>DROP INDEX IX_Person_ObsoletedDate ON [dbo].[PersonHistory]</value>
+  </data>
+  <data name="DropProcedures" xml:space="preserve">
+    <value>DROP PROCEDURE [dbo].[ReportingSnapshot_Accreditation]
+DROP PROCEDURE [dbo].[ReportingSnapshot_ExpressionOfInterest]
+DROP PROCEDURE [dbo].[ReportingSnapshot_Invoice]
+DROP PROCEDURE [dbo].[ReportingSnapshot_Payment]
+DROP PROCEDURE [dbo].[ReportingSnapshot_Revalidation]</value>
+  </data>
+  <data name="DropViews" xml:space="preserve">
+    <value>DROP VIEW [dbo].[Accreditation]
+DROP VIEW [dbo].[ExpressionOfInterest]
+DROP VIEW [dbo].[Invoice]
+DROP VIEW [dbo].[Payment]
+DROP VIEW [dbo].[Revalidation]</value>
+  </data>
+</root>

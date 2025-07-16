@@ -1,0 +1,7 @@
+﻿@if (ViewBag.OmitLogOnLink == null)
+{
+    var action = Url.Action(Request.IsAuthenticated ? "LogOff" : "LogOn", "Account");
+    var linkText = Request.IsAuthenticated ? "Log Off" : "Log On";
+
+    <a href="@action" class="navbar-link navbar-right">@linkText</a>
+}

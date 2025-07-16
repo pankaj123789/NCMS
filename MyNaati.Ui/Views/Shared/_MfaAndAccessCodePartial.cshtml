@@ -1,0 +1,35 @@
+﻿@model MyNaati.Ui.ViewModels.Account.MfaAndAccessCodeModel
+
+@if (!Model.MfaConfigured)
+{
+    <h2 class="text-primary">MULTI-FACTOR AUTHENTICATION NOT ACTIVE</h2>
+    <p>This screen is secured by multi-factor authentication. Please set up @Html.ActionLink("multi-factor authentication", "SetupMfa", "Account") from the My Account screen. Alternatively you can have an access code @Html.ActionLink("emailed to you", "SendAccessCode", "Account", Model, new { }).</p>
+}
+else
+{
+    <h2 class="text-primary">MULTI-FACTOR AUTHENTICATION EXPIRED</h2>
+    <p>Enter the 6-digit code found in your Authenticator app under 'NAATI - @Html.Raw(Model.Email)'</p>
+    <p>Alternatively, you can have an access code @Html.ActionLink("emailed to you", "SendAccessCode", "Account", Model, new { }).</p>
+
+    if (Model.Error != null)
+    {
+        <span class="text-danger">@Model.Error</span>
+    }
+    using (Html.BeginForm("ReenterMfa", "Account", FormMethod.Post))
+    {
+
+        <div>
+            @Html.TextBoxFor(x => x.MfaCode, new { style = "width:50%;margin:10px;" })
+        </div>
+        <div>
+            Click Save after entering the code in the email or click Close if you do not have the code ready.
+        </div>
+        @Html.HiddenFor(x => x.MfaActive)
+        @Html.HiddenFor(x => x.ReturnView)
+        @Html.HiddenFor(x => x.ReturnController)
+        <div class="pos-a-r m-t-lg">
+            <input type="submit" id="save" name="action" value="SAVE" class="btn btn-primary" />
+            <input type="submit" id="cancel" name="action" value="CLOSE" class="btn btn-danger" />
+        </div>
+    }
+}

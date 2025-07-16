@@ -1,0 +1,49 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">
+            <span data-bind="restext: 'Naati.Resources.SystemResources.resources.Motd'"></span>
+        </h2>
+    </div>
+
+    <div class="panel-body">
+        <div>
+            <label class="control-label">This section allows configuring the message to be shown on the myNAATI login screen and to login for myNAATI users.</label>
+        </div>
+        <div class="row JustifyLeft">
+            <div class="form-group col-md-2">
+                <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="checkbox-inline i-checks">
+                        <input type="checkbox" data-bind="checked: showMessageOfTheDay"><i></i>
+                        <span class="padder-md">Enable myNAATI Message</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div>
+                    <textarea class="form-control" rows="4" data-bind="value: messageOfTheDay, valueUpdate: 'input'"></textarea>
+                </div>
+
+            </div>
+        </div>
+        <div class="row JustifyLeft">
+            <div class="form-group col-md-2">
+                <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+                    <label class="checkbox-inline i-checks">
+                        <input type="checkbox" data-bind="checked: myNaatiAvailable"><i></i>
+                        <span class="padder-md">Disable myNAATI Login</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div>
+                    <label class="control-label" data-bind="text: myNaatiAvailableMessage" />
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary" data-bind="click: save">
+                <i class="fa fa-check"></i>
+                <span>Save</span>
+            </button>
+        </div>
+    </div>

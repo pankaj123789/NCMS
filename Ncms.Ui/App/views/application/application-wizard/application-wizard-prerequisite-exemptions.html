@@ -1,0 +1,71 @@
+﻿<div>
+    <span data-bind="text: stepDescriptionStep"></span>
+</div>
+<div class="m-t-n-md">
+    <!-- ko if: hasLoaded -->
+    <!-- ko if: isCreatePrereqAction-->
+    <table id="exemptionTable" class="table table-primary table-bordered table-striped" data-bind="datatable: tableDefinition">
+        <thead>
+            <tr>
+                <th class="w-xxs">&nbsp;</th>
+                <th class="w-xxl" data-bind="reshtml: 'Naati.Resources.Application.resources.PrerequisiteCredential'"></th>
+                <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Application.resources.Skill'"></th>
+                <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.Exempted'"></th>
+                <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.ExemptedDate'"></th>
+                <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Application.resources.ExemptedBy'"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- ko foreach: { data: prerequisiteExemptions(), as: 'e' }-->
+            <tr>
+                <td class="text-center select-checkbox sorting_1"></td>
+                <td data-bind="text: e.PrerequisiteCredentialName"></td>
+                <td data-bind="text: e.PrerequisiteSkill"></td>
+                <!-- ko if: e.Checked -->
+                <td>
+                    <span class="label text-base m-t-xs label-success">Exempted</span>
+                </td>
+                <!-- /ko -->
+                <!-- ko ifnot: e.Checked -->
+                <td></td>
+                <!-- /ko -->
+                <td data-bind="text: e.ExemptionStartDate"></td>
+                <td data-bind="text: e.ExemptionGrantedByUser"></td>
+            </tr>
+            <!-- /ko -->
+        </tbody>
+    </table>
+    <!-- /ko -->
+    <!-- ko ifnot: isCreatePrereqAction-->
+    <table id="exemptionTable" class="table table-primary table-bordered table-striped" data-bind="datatable: tableDefinitionNonSelectable">
+        <thead>
+            <tr>
+                <th class="w-xxl" data-bind="reshtml: 'Naati.Resources.Application.resources.PrerequisiteCredential'"></th>
+                <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Application.resources.Skill'"></th>
+                <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.Exempted'"></th>
+                <th class="w-xs" data-bind="reshtml: 'Naati.Resources.Application.resources.ExemptedDate'"></th>
+                <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Application.resources.ExemptedBy'"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- ko foreach: { data: prerequisiteExemptions(), as: 'e' }-->
+            <tr>
+                <td data-bind="text: e.PrerequisiteCredentialName"></td>
+                <td data-bind="text: e.PrerequisiteSkill"></td>
+                <!-- ko if: e.Checked -->
+                <td>
+                    <span class="label text-base m-t-xs label-success">Exempted</span>
+                </td>
+                <!-- /ko -->
+                <!-- ko ifnot: e.Checked -->
+                <td></td>
+                <!-- /ko -->
+                <td data-bind="text: e.ExemptionStartDate"></td>
+                <td data-bind="text: e.ExemptionGrantedByUser"></td>
+            </tr>
+            <!-- /ko -->
+        </tbody>
+    </table>
+    <!-- /ko -->
+    <!-- /ko -->
+</div>

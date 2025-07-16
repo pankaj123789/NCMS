@@ -1,0 +1,6 @@
+﻿@model decimal
+
+@{
+    IFormatProvider formatProvider = new System.Globalization.CultureInfo("en-US");
+    @Model.ToString("C", formatProvider)
+}

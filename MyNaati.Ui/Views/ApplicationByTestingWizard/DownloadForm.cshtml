@@ -1,0 +1,37 @@
+﻿@model MyNaati.Ui.ViewModels.ApplicationByTestingWizard.DownloadFormModel
+@{
+    ViewBag.Title = "Application for Accreditation by Testing";
+    Layout = "~/Views/Shared/_ApplicationForAccreditationDownloadFormLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Testing", Url.Action("Index", "ApplicationByTestingWizard")),
+        new Tuple<string, string>("New Application", string.Empty)
+    };
+}
+@section Table
+{
+    <table class="table">
+        <thead class="bg-primary">
+            <tr>
+                <th>Fee</th>
+                <th>Skill</th>
+                <th>Level</th>
+                <th>Direction</th>
+                <th>Total ($AUD)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fee in Model.ApplicationFeesList)
+            {
+                <tr>
+                    <td>@fee.Description</td>
+                    <td>@fee.Skill</td>
+                    <td>@fee.Level</td>
+                    <td>@fee.Direction</td>
+                    <td class="currency">@fee.Total.ToString("c")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

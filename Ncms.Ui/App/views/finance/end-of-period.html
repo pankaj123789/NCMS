@@ -1,0 +1,15 @@
+﻿<div class="hbox" data-bind="component: searchComponentOptions"></div>
+<script type="text/html" id="invoicesAndPaymentsTemplate">
+	<div class="panel hbox hbox-auto-xs animated fadeIn" data-bind="css: { hide: !showResult() }">
+		<div class="col wrapper dk r-r b">
+			<h4 class="font-thin m-t-none m-b" data-bind="restext: 'Naati.Resources.Finance.resources.Payments'"></h4>
+			<div>
+				<!--ko foreach: { data: paymentsInfo.bars(), as: 'b' }-->
+				<!--ko component: { name: 'percent-bar', params: b }-->
+				<!--/ko-->
+				<!--/ko-->
+			</div>
+		</div>
+	</div>
+	<!-- ko compose: paymentOptions --><!-- /ko -->
+</script>

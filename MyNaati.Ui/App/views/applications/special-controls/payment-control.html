@@ -1,0 +1,16 @@
+﻿<div>
+	<!--ko if: sponsor.Trusted() && sponsor.OrganisationName()-->
+	<div class="text-xl">
+		This application is sponsored, therefore you will not be required to make a payment.
+	</div>
+	<!--/ko-->
+	<!--ko if: sponsor.OrganisationName() && sponsor.OrganisationName() !=='Scholarship - NAATI funded' -->
+	<div class="text-xl">
+		<span class="fa fa-envelope"></span> Since this application is sponsored by <span data-bind="text: sponsor.OrganisationName"></span>, the invoice will be sent to <span data-bind="text: sponsor.OrganisationName"></span>. Please ensure that your sponsoring organisation pays this invoice.
+	</div>
+	<!--/ko-->
+	<p class="text-muted">
+		<em>Below are the fees associated with this test.</em>
+	</p>
+	<!--ko compose: feesOptions--><!--/ko-->
+</div>

@@ -1,0 +1,191 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.ExaminerTools.PanelManagementModel
+@{
+    ViewBag.Title = "My Panels";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Examiner Tools", Url.Action("Index")),
+        new Tuple<string, string>("My Panels", null)
+    };
+
+    var singlePanel = Model.Panels.SingleOrNull();
+
+    if (singlePanel != null)
+    {
+        singlePanel.Selected = true;
+    }
+
+    var dateDueFrom = Model.DateDueFrom.HasValue ? Model.DateDueFrom.Value.ToString("yyyy-MM-dd") : string.Empty;
+    var dateDueTo = Model.DateDueTo.HasValue ? Model.DateDueTo.Value.ToString("yyyy-MM-dd") : string.Empty;
+    var dateAllocatedFrom = Model.DateAllocatedFrom.HasValue ? Model.DateAllocatedFrom.Value.ToString("yyyy-MM-dd") : string.Empty;
+    var dateAllocatedTo = Model.DateAllocatedTo.HasValue ? Model.DateAllocatedTo.Value.ToString("yyyy-MM-dd") : string.Empty;
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var $chosen = $('.chosen');
+
+            $chosen.chosen();
+            $chosen.removeClass('invisible');
+            $chosen.height('auto');
+
+            @if (singlePanel != null)
+            {
+                @:$('#PanelId').prop('disabled', true);
+            }
+            
+            var dataTable = $('#resultsTable').DataTable({
+                ajax: {
+                    url: '@Url.Action("PanelManagement", "ExaminerTools")',
+                    type: 'POST',
+                    data: function(data) {
+                        var formFieldIds = [
+                            'PanelId',
+                            'NAATINumber',
+                            'TestStatus',
+                            'DateDueFrom',
+                            'DateDueTo',
+                            'DateAllocatedFrom',
+                            'DateAllocatedTo'
+                        ];
+                        var extendedData = {};
+
+                        for (var i = 0; i < formFieldIds.length; i++) {
+                            var formFieldId = formFieldIds[i];
+                            var $formField = $('#' + formFieldId);
+
+                            if ($formField.val()) {
+                                extendedData[formFieldId] = $formField.val();
+                            }
+                        }
+
+                        return $.extend({}, data, extendedData);
+                    }
+                },
+                columns: [
+                    { data: 'Examiner' },
+                    { data: 'TestSittingId' },
+                    { data: 'Description' },
+                    { data: 'DateAllocated' },
+                    {
+                        data: 'DueDate',
+                        render: function(data, type, row) {
+                            return row.Overdue ? data + '<i class="fa fa-times-circle"></i>' : data;
+                        }
+                    },
+                    { data: 'Status' }
+                ],
+                deferLoading: 0,
+                dom: "<'row v-offset-xs-1'<'col-sm-12'<'table-responsive't>>>" +
+                    "r",
+                info: false,
+                language: {
+                    processing: $('#loadingOverlayTemplate').html(),
+                    zeroRecords: 'No Results'
+                },
+                ordering: false,
+                paging: false,
+                processing: true,
+                searching: false,
+                serverSide: true
+            });
+
+            $('#searchForm').submit(function() {
+                dataTable.ajax.reload();
+
+                return false;
+            });
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-1 col-sm-10">
+            @using (Html.BeginForm("PanelManagement", "ExaminerTools", FormMethod.Post, new { id = "searchForm", @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(x => x.PanelId, "Panel name", new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(x => x.PanelId, Model.Panels, new { multiple = "multiple", @class = "form-control chosen invisible", style = "height: 34px;" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.NAATINumber, "Examiner", new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(x => x.NAATINumber, Model.People, new { multiple = "multiple", @class = "form-control chosen invisible", style = "height: 34px;" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.TestStatus, "Test status", new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(x => x.TestStatus, Model.Statuses, new { multiple = "multiple", @class = "form-control chosen invisible", style = "height: 34px;" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.DateDueFrom, "Date Due", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => dateDueFrom, new { id = "DateDueFrom", @class = "form-control", type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.DateDueTo, "To", new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => dateDueTo, new { id = "DateDueTo", @class = "form-control", type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.DateAllocatedFrom, "Date Allocated From", new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => dateAllocatedFrom, new { id = "DateAllocatedFrom", @class = "form-control", type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.DateAllocatedTo, "To", new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(x => dateAllocatedTo, new { id = "DateAllocatedTo", @class = "form-control", type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row v-offset-xs-2">
+                    <div class="col-sm-12">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row v-offset-xs-3">
+        <div class="col-lg-12">
+            <table id="resultsTable" class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>Examiner</th>
+                        <th>Test ID</th>
+                        <th>Description</th>
+                        <th>Date Allocated</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>

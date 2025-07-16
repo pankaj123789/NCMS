@@ -1,0 +1,50 @@
+
+
+<div style="padding-bottom: 7px; padding-left: 5px;">
+    <strong><span data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.SourceTestMaterialRelations'"></span></strong>
+</div>
+<div class="hbox" data-bind="component: {
+    name: 'table-component',
+    params: tableDefinition
+}">
+</div>
+<script id="source-material-relations-header-template" type="text/html">
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.SourceMaterial'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialID'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Title'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialDomain'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.Language'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.CredentialType'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.TestMaterialStatus'"></th>
+    <th class="w-md"></th>
+</script>
+<script id="source-material-relations-row-template" type="text/html">
+    <tr>
+        <td>
+            <a href="#" class="text-info" data-bind="text: sourceId, attr: { href: '#test-material/' + sourceId }"></a>
+        </td>
+        <td>
+            <a href="#" class="text-info" data-bind="text: Id, attr: { href: '#test-material/' + Id }"></a>
+        </td>
+        <td data-bind="text: Title"></td>
+        <td data-bind="text: Domain"></td>
+        <td data-bind="text: LanguageOrSkill"></td>
+        <td data-bind="text: CredentialType"></td>
+        <td class="w-sm">              
+            <span class="label text-base" data-bind="tooltip, attr: { title: BadgeTooltip },  text:BadgeText, css: 'bg-' + BadgeColor">&nbsp;</span>
+        </td>
+        <td class="w-xs text-left">
+            <!--ko if: HasFile -->
+            <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover' }, resattr: { title: 'Naati.Resources.TestMaterial.resources.ContainsFiles' }">
+                <span class="fa fa-paperclip"></span>
+            </a>
+            <!--/ko-->
+            <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover', container: 'body', title: function () { return $root.availableMessage($data); } }">
+                <i class="fa" data-bind="css: { 'fa-check text-success': Available, 'fa-times text-danger': !Available }"></i>
+            </a>
+        </td>
+    </tr>
+</script>
+
+
+

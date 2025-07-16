@@ -1,0 +1,8 @@
+﻿<div>
+    <!-- ko ifnot: newApplications -->
+    <div class="alert alert-info" data-bind="reshtml: 'Naati.Resources.Application.resources.NoSelectionNewApplications'"></div>
+    <!-- /ko -->
+    <!-- ko if: credentialOnHold-->
+    <div class="alert alert-info" data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialOnHold'"></div>
+    <!-- /ko -->
+</div>

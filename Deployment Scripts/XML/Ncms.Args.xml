@@ -1,0 +1,105 @@
+<?xml version="1.0" ?>
+<configuration client="%%CLIENT%%" enviroment="%%ENVIRONMENT%%" version="0.00" >
+  <system name="SAMService">
+    <file-deploy name="%%NCMS_SERVICE_WEBSITE_NAME%%"
+                targetdir="%%NCMS_SERVICE_FOLDER%%"
+                file=".\websites\SAMService.zip"
+                args='' />
+
+    <iis-unlock name="/section:security/authentication/windowsAuthentication" />
+    <iis-unlock name="/section:security/authentication/anonymousAuthentication" />
+
+    <location path="%%NCMS_SERVICE_FOLDER%%" />
+
+    <file type="xml" name="Web.config" path="\" backup="Web.config.backup"
+            namespace-name="netconfig" namespace-value="http://schemas.microsoft.com/.NetConfiguration/v2.0"
+            website="%%NCMS_SERVICE_WEBSITE_NAME%%"
+            vdir="">
+
+      <update xpath="/configuration/appSettings/add[@key = '{0}']" if-missing="ignore">
+        <param key="CONNECTION_STRING" attributeName = "value">
+          Data Source=%%DATABASE_SERVER%%,%%DATABASE_PORT%%; Initial Catalog=%%NCMS_DATABASE%%; Integrated Security=SSPI; encrypt=%%DATABASE_ENCRYPT%%; trustServerCertificate=%%DATABASE_TRUSTSERVER%%;
+        </param>
+        <param key="fileSystemFileStorageServiceBasePath" attributeName = "value">
+          %%STORAGE_SHARE%%
+        </param>
+        <param key="ReportServer.ReportExecution" attributeName = "value">
+          %%REPORT_EXECUTION_SERVER%%
+        </param>
+        <param key="CertificateStoreName" attributeName = "value">
+          %%CERTIFICATE_STORE_NAME%%
+        </param>
+        <param key="XeroApiCertificateThumbprint" attributeName = "value">
+          %%XERO_CERTIFICATE_THUMBPRINT%%
+        </param>
+        <param key="AadAuthRedirectUri" attributeName = "value">
+          %%AAD_AUTH_REDIRECT_URI%%
+        </param>
+        <param key="Office365AppId" attributeName = "value">
+          %%AAD_AUTH_APP_ID%%
+        </param>
+        <param key="Office365AppKey" attributeName = "value">
+          %%AAD_AUTH_APP_KEY%%
+        </param>
+        <param key="logging:SeqUrl" attributeName = "value">
+          %%SEQ_URL%%
+        </param>
+        <param key="EnvironmentType" attributeName = "value">
+          %%ENVIRONMENT_TYPE%%
+        </param>
+        <param key="EnvironmentName" attributeName = "value">
+          %%ENVIRONMENT%%
+        </param>
+      </update>
+      
+      <update xpath="/configuration/system.web/machineKey" if-missing="ignore">
+        <param Key="" attributeName="validationKey">
+          %%MACHINE_KEY_VALIDATION_KEY%%
+        </param>
+        <param Key="" attributeName="decryptionKey">
+          %%MACHINE_KEY_DECRYPTION_KEY%%
+        </param>
+      </update>
+      
+      <update xpath="/configuration/system.net/mailSettings/smtp/network" namespace-name="netconfig" namespace-value="http://schemas.microsoft.com/.NetConfiguration/v2.0">
+        <param Key="" attributeName="host">
+          %%MAIL_SERVER%%
+        </param>
+      </update>
+
+      <!--<update xpath="/configuration/system.serviceModel/client/endpoint[@name='{0}']" namespace-name="netconfig" namespace-value="http://schemas.microsoft.com/.NetConfiguration/v2.0">
+        <param Key="BasicHttpBinding_IApplicationService" attributeName="address">
+          %%MYNAATI_SERVICE_LOCAL_URL%%/ApplicationService.svc
+        </param>
+        <param Key="BasicHttpBinding_IOrderService" attributeName="address">
+          %%MYNAATI_SERVICE_LOCAL_URL%%/OrderService.svc
+        </param>
+      </update>-->
+
+      <update xpath="/configuration/system.net/defaultProxy[@enabled='{0}']" namespace-name="netconfig" namespace-value="http://schemas.microsoft.com/.NetConfiguration/v2.0">
+        <param Key="true" attributeName="enabled">
+          false
+        </param>        
+      </update>
+
+      <update xpath="/configuration/MsmqTransportConfig">
+        <param key="" attributeName="InputQueue">
+          %%MSMQ_NCMS_INPUT_QUEUE%%
+        </param>
+        <param key="" attributeName="ErrorQueue">
+          %%MSMQ_NCMS_ERROR_QUEUE%%
+        </param>
+      </update>
+
+      <update xpath="/configuration/log4net/appender/seqUrl" if-missing="ignore">
+        <param Key="" attributeName="value">
+          %%SEQ_URL%%
+        </param>
+      </update>
+
+      <remove xpath="/configuration/system.web/compilation/@debug" />
+      
+    </file>
+    <reset-location />
+  </system>
+</configuration>

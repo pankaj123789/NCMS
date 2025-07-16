@@ -1,0 +1,309 @@
+﻿@using System.Configuration
+@using System.Linq
+@using System.Linq.Expressions
+@using MyNaati.Ui.Models
+@using Recaptcha
+@model MyNaati.Ui.Models.NonCandidateRegisterModel
+@{
+    ViewBag.Title = "myNAATI Registration";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+new Tuple<string, string>("Register", Url.Action("Register", "Account"))
+};
+
+    //var validationSummary = Html.ValidationSummary("", new { id = "valSum" });
+
+    var displayForm = !(ViewData.ModelState.IsValid || ViewData.ModelState.Any());
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //  var $validationSummary = $('#valSum');
+            //var $validationItems = $validationSummary.find('li');
+
+            var $naatiNumber = $("#NaatiNumber");
+            var $title = $("#Title");
+            var $givenName = $("#GivenName");
+            var $familyName = $("#FamilyName");
+            var $middleNames = $("#MiddleNames");
+            var $genderMale = $("#Male");
+            var $genderFemale = $("#Female");
+            var $genderUnspecified = $("#Unspecified");
+            var $dateOfBirth = $("#DateOfBirth");
+            var $email = $("#Email");
+            var $confirmEmail = $("#ConfirmEmail");
+
+            @if (ConfigurationManager.AppSettings["kosettings:allowEmailPaste"] == "false")
+            { 
+            <text>
+            $confirmEmail.bind("cut copy paste", function (e) {
+                e.preventDefault();
+            });
+            </text>
+            }
+
+
+                // var $haveNaatiNumberButton = $('#haveNaatiNumber');
+                //  var $dontHaveNaatiNumberButton = $('#dontHaveNaatiNumber');
+
+                //var $haveNaatiNumber = $('[data-has-naati-number="true"]');
+                // var $dontHaveNaatiNumber = $('[data-has-naati-number="false"]');
+
+                var $registerForm = $('#formRegister');
+
+            $registerForm.on('submit', function () {
+                $('.btn.btn-lg', $registerForm)
+                    .prop('disabled', 'disabled')
+                    .addClass('disabled');
+                });
+
+                function insertSubList(targetElement, subItems) {
+                    targetElement.innerText = '';
+
+                    // re-insert the first line
+                    var textNode = document.createTextNode(subItems[0]);
+                    targetElement.appendChild(textNode);
+
+                    // insert the middle lines as a sub-lists
+                    var ul = document.createElement('ul');
+                    for (var i = 1; i < subItems.length - 1; i++) {
+
+                        var li = document.createElement("li");
+                        textNode = document.createTextNode(subItems[i]);
+
+                        li.appendChild(textNode);
+                        ul.appendChild(li);
+                    }
+
+                    targetElement.appendChild(ul);
+
+                    // insert the last line outside of the sub-list
+                    textNode = document.createTextNode(subItems[subItems.length - 1]);
+                    targetElement.appendChild(textNode);
+                }
+
+                //for (var iValidationItem = 0; iValidationItem < $validationItems.length; iValidationItem++) {
+                //    var item = $validationItems[iValidationItem];
+                //    if (item.innerText.indexOf('|') > 0) {
+                //        // there's an embedded pipe-delimited list. Break it out into a sub list.
+                //        var subItems = item.innerText.split('|');
+                //        insertSubList(item, subItems);
+                //    }
+                //}
+
+                function clearRegisterForm() {
+                $naatiNumber.val('');
+                $title.val(0);
+                $givenName.val('');
+                $middleNames.val('');
+                $familyName.val('');
+                $genderMale.prop('checked', false);
+                $genderFemale.prop('checked', false);
+                $genderUnspecified.prop('checked', false);
+                $dateOfBirth.val('');
+                $email.val('');
+                $confirmEmail.val('');
+                }
+
+                function clearValidation() {
+                    // $validationSummary.hide();
+                    // $validationSummary.find('li').remove();
+                }
+
+                function haveNaatiNumber() {
+               // clearRegisterForm();
+                // clearValidation();
+
+                //  $haveNaatiNumberButton.addClass('active');
+                //  $dontHaveNaatiNumberButton.removeClass('active');
+
+                $registerForm.removeClass('hidden');
+                $registerForm.slideDown();
+
+                    //$haveNaatiNumber.show();
+                    // $dontHaveNaatiNumber.hide();
+
+                    //$hasNaatiNumber.val(true);
+                }
+
+                //function dontHaveNaatiNumber() {
+                //    clearRegisterForm();
+                //    clearValidation();
+
+                //    $haveNaatiNumberButton.removeClass('active');
+                //    $dontHaveNaatiNumberButton.addClass('active');
+
+                //    $registerForm.removeClass('hidden');
+                //    $registerForm.slideDown();
+
+                //    $haveNaatiNumber.hide();
+                //    $dontHaveNaatiNumber.show();
+
+                //    $hasNaatiNumber.val(null);
+                //}
+
+                // $dontHaveNaatiNumberButton.click(dontHaveNaatiNumber);
+
+                // $haveNaatiNumberButton.click(haveNaatiNumber);
+                haveNaatiNumber();
+            });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2><span style="text-transform: none">myNAATI</span> Registration</h2>
+        </div>
+    </div>
+    @*<div class="row v-offset-xs-2">
+            <div class="col-sm-6">
+                <button id="dontHaveNaatiNumber" class="btn btn-danger btn-lg">
+                    <span class="h4">I don't have a Customer Number</span>
+                </button>
+            </div>
+            <div class="col-sm-6">
+                <button id="haveNaatiNumber" class="btn btn-primary btn-lg">
+                    <span class="h4">I do have a Customer Number</span>
+                </button>
+            </div>
+        </div>*@
+    <div class="clearfix"></div>
+    @*@if (!ViewData.ModelState.IsValid)
+    {
+        <div class="row v-offset-xs-2">
+            <div class="col-lg-12">
+                @validationSummary
+            </div>
+        </div>
+    }*@
+    <div class="row v-offset-xs-2">
+        <div class="col-lg-12">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { id = "formRegister", @class = "form-horizontal" + (displayForm ? string.Empty : " hidden") }))
+            {
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <p>
+                                Register now to access all myNAATI services. Please note that we can only register one myNAATI account per person.
+                            </p>
+                            <p>
+                                <a href="@Url.Action("ResetPassword", "Account")">Click here</a> if you need to reset your password. <a href="@Model.GmailWhiteListUrl" target="_blank">For Gmail users, please check this out to avoid emails going to your spam folder.</a>
+                            </p>
+                            <p>
+                                <strong>(*)</strong> Required Fields
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        @FormField(Html.LabelFor(m => m.Email, "Email (*):", new { @class = "control-label" }), Html.TextBoxFor(m => m.Email, new { type = "email", @class = "form-control" }), Html.ValidationMessageFor(m => m.Email))
+
+                    </div>
+                    <div class="col-lg-6">
+                        @FormField(Html.LabelFor(m => m.ConfirmEmail, "Confirm Email (*):", new { @class = "control-label" }), Html.TextBoxFor(m => m.ConfirmEmail, new { type = "email", @class = "form-control" }), Html.ValidationMessageFor(m => m.ConfirmEmail))
+                    </div>
+                </div>
+
+                if (Model.DetailsRequired)
+                {
+                    <input type="hidden" name="DetailsRequired" value="true" id="DetailsRequired" />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <br>
+                            <p> To continue with the registration process we need some additional details from you: </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            @FormField(Html.LabelFor(m => m.Title, "Title:", new { @class = "control-label" }), Html.DropDownListFor(m => m.Title, Model.TitleList, new { @class = "form-control" }), Html.ValidationMessageFor(m => m.Title))
+                        </div>
+                        <div class="col-lg-6">
+                            @FormField(Html.LabelFor(m => m.GivenName, "Given Name (*):", new { @class = "control-label" }), Html.TextBoxFor(m => m.GivenName, new { @class = "form-control" }), Html.ValidationMessageFor(m => m.GivenName))
+                            
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            @FormField(Html.LabelFor(m => m.MiddleNames, "Middle Names:", new { @class = "control-label" }), Html.TextBoxFor(m => m.MiddleNames, new { @class = "form-control" }), Html.ValidationMessageFor(m => m.MiddleNames))
+                        </div>
+                        <div class="col-lg-6">
+                            @FormField(Html.LabelFor(m => m.FamilyName, "Family Name:", new { @class = "control-label" }), Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control" }), Html.ValidationMessageFor(m => m.FamilyName))
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            @FormField(Html.LabelFor(m => m.DateOfBirth, "Date Of Birth (*):", new { @class = "control-label" }), Html.TextBoxFor(m => m.DateOfBirth, new { type = "date", @class = "form-control", MinYear = DateTime.Now.Year - 100, MaxYear = DateTime.Now.Year, MaxDate = DateTime.Now, DefaultYear = DateTime.Now.Year }), Html.ValidationMessageFor(m => m.DateOfBirth))
+                        </div>
+                        <div class="col-lg-6">                            
+                        </div>
+                    </div>
+                   
+                }
+                <div class="row" style="margin-top: 35px;">
+                    <div class="col-lg-offset-4 col-lg-6">
+                        @if (ConfigurationManager.AppSettings["kosettings:skipRecaptcha"].AsBool())
+                        {
+                            <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                        }
+                        else
+                        {
+                            <button data-sitekey="6LcAPjMUAAAAAO9MGOKhFfw6hEwmK_OjO8G_pH_z" data-callback="onSubmit" type="submit" class="g-recaptcha btn btn-primary btn-lg">Register</button>
+                        }
+
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-danger btn-lg">Cancel</a>
+                    </div>
+                </div>
+                <script>
+                    function onSubmit() {
+                        $('#formRegister').submit();
+                    }
+                </script>
+
+            }
+        </div>
+    </div>
+</div>
+@helper FormField(MvcHtmlString labelHtml, MvcHtmlString fieldHtml, MvcHtmlString validation = null)
+{
+<div class="form-group col-lg-10">
+    @labelHtml
+    @fieldHtml
+    @if (validation != null)
+    {
+        @validation
+    }
+   
+</div>
+
+    <div class="form-group col-lg-2">
+    </div>
+}
+@helper RadioField(Expression<Func<NonCandidateRegisterModel, string>> expression, IList<RadioButton> buttons)
+{
+    <div>
+        @foreach (var button in buttons)
+        {
+            <label class="radio-inline">
+                @Html.RadioButtonFor(expression, button.Value, button.HtmlAttributes) @button.Label
+            </label>
+        }
+    </div>
+}
+
+
+@functions
+{
+    public class RadioButton
+    {
+        public string Label { get; set; }
+        public string Value { get; set; }
+        public object HtmlAttributes { get; set; }
+    }
+}

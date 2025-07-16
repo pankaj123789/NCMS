@@ -1,0 +1,258 @@
+﻿@{
+    ViewBag.Title = "Registration Requests";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Manage Requests", null)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            var $registrationsTable = $('#registrationsTable');
+
+            var dataTable = $registrationsTable.DataTable({
+                ajax: {
+                    url: '@Url.Action("RegistrationSearch", "Account")',
+                    type: 'POST'
+                },
+                columns: [
+                    {
+                        data: 'NaatiNumberOnlineDisplay',
+                        orderable: true,
+                        render: function (data) {
+                            if (data.indexOf('Eoi') >= 0) {
+                                data = data.replace(/Eoi/, "");
+
+                                if (parseInt(data) === 0) {
+                                    return 'Multiple';
+                                } else {
+                                    return 'Unknown';
+                                }
+                            }
+
+                            return data;
+                        }
+                    },
+                    {
+                        data: 'FullName',
+                        orderable: true
+                    },
+                    {
+                        data: 'EmailAddress',
+                        orderable: true
+                    },
+                    {
+                        data: 'DateOfBirth',
+                        orderable: true
+                    },
+                    {
+                        data: 'DateRequested',
+                        orderable: true
+                    },
+                    {
+                        data: null,
+                        orderable: false,
+                        render: function (data, type, row) {
+                            return '' +
+                                '<div class="btn-group pull-right">' +
+                                    (row.Deceased
+                                    ? '<button class="btn btn-default" disabled="disabled">Deceased</button>'
+                                    : '<button class="btn btn-primary" data-action="approve">Approve</button>') +
+                                    '<button class="btn btn-danger" data-action="delete">Delete</button>' +
+                                '</div>';
+                        }
+                    }
+                ],
+                dom: "<'row v-offset-xs-1'<'col-sm-12'<'table-responsive't>>>" +
+                     "<'row'<'col-sm-5'i><'col-sm-7'<'pull-right'p>>>" +
+                    "r",
+                language: {
+                    processing: $('#loadingOverlayTemplate').html(),
+                    zeroRecords: 'No Registrations'
+                },
+                orderMulti: false,
+                processing: true,
+                searching: false,
+                serverSide: true
+            });
+
+            var $deleteModal = $('#deleteModal');
+            var $confirmButton = $('#confirmDelete');
+
+            var $duplicateUserModal = $('#duplicateUserModal');
+            var $resolveButton = $('#resolveDuplicate');
+
+            $confirmButton.click(function () {
+                postAndReload('@VirtualPathUtility.ToAbsolute("~/Account/DeleteRegistration/")' + $deleteModal.data('id'));
+                $deleteModal.modal("hide");
+            });
+
+            $resolveButton.click(function () {
+                var naatiNumber = $('#NaatiNumber').val();
+
+                if (naatiNumber !== '' && naatiNumber != null) {
+                    $duplicateUserModal.modal("hide");
+                    postAndReload('@VirtualPathUtility.ToAbsolute("~/Account/ResolveDuplicateUser/")' + '?id=' + $duplicateUserModal.data('id') + '&naatiNumber=' + naatiNumber);
+                }
+            });
+
+            function reloadDataTable() {
+                dataTable.ajax.reload();
+            }
+
+            function postAndReload(url) {
+                $.post(url, {}, function () {
+                    reloadDataTable();
+                });
+            }
+
+            function showResolutionModal(approveId, givenName, familyName, birthDate) {
+                var url = '@Html.Raw(@Url.Action("DuplicateUserResolution", "Account", new { givenNameDTO = "PLACEHOLDERgN", familyNameDTO = "PLACEHOLDERfN", birthDateDTO = "PLACEHOLDERdB" }))'
+                    .replace(/PLACEHOLDERgN/, givenName.replace(" ", "%20"))
+                    .replace(/PLACEHOLDERfN/, familyName.replace(" ", "%20"))
+                    .replace(/PLACEHOLDERdB/, birthDate.replace(" ", "%20").replace(" ", "%20"));
+
+                $duplicateUserModal.data('id', approveId);
+
+                $('#NaatiNumber').val(null);
+
+                $duplicateUserModal.find('.modal-body').load(url, {}, function () {
+                    $(this).find('input').click(function () {
+                        $('#NaatiNumber').val($(this).val());
+                    });
+                });
+
+                $duplicateUserModal.modal('show');
+            }
+
+            var actions = {
+                approveRequest: function () {
+                    var data = dataTable.row($(this).parents('tr')).data();
+
+                    if (data.NaatiNumberOnlineDisplay < 0 || data.NaatiNumberOnlineDisplay > 0) {
+                        postAndReload('@VirtualPathUtility.ToAbsolute("~/Account/ApproveRegistration/")' + data.Id);
+                    } else {
+                        showResolutionModal(data.Id, data.GivenName, data.FamilyName, data.DateOfBirth);
+                    }
+                },
+                deleteRequest: function () {
+                    var data = dataTable.row($(this).parents('tr')).data();
+                    var message = data.FullName + ' has not been registered as a user.  The request will be permanently deleted.\nAre you sure you want to continue?';
+
+                    $deleteModal.data('id', data.Id);
+                    $deleteModal.find('.modal-body p').html(message);
+
+                    $deleteModal.modal('show');
+                }
+            }
+
+            var $exportButton = $('#btnExport');
+
+            $registrationsTable.on('draw.dt', function () {
+                $exportButton.prop('disabled', false);
+
+                $registrationsTable.find('.btn').click(function () {
+                    var $this = $(this);
+                    actions[$this.data('action') + 'Request'].call(this);
+                });
+            });
+
+            $(document).ajaxError(function () {
+                alert('An error occurred while processing your request.');
+                reloadDataTable();
+            });
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-primary">@ViewBag.Title</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                The following is a list of registration requests that could not be processed automatically.<br />
+                Manually verify the person's identity and either:
+            </p>
+            <ul>
+                <li>Approve the registration if the person's identity has been verified; or</li>
+                <li>Delete the registration and manually notify the person.</li>
+            </ul>
+            <p>
+                If the registration is approved, the person will be sent their login details automatically.<br />
+                Note: When approved, the email address will be saved in SAM.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @using (Html.BeginForm("ExportUserRegistration", "Account", FormMethod.Post, new { id = "searchForm" }))
+            {
+                <button id="btnExport" class="btn btn-success pull-right" type="button" onclick="$('#exportForm').submit();">Export</button>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="registrationsTable" class="table table-bordered">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>Customer Number</th>
+                        <th>Name</th>
+                        <th>Email Address</th>
+                        <th>Date Of Birth</th>
+                        <th>Requested</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("ExportUserRegistration", "Account", FormMethod.Post, new { id = "exportForm" }))
+{
+
+}
+<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmDelete" type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="NaatiNumber" type="hidden" name="NaatiNumber" />
+<div id="duplicateUserModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Resolve Duplicate Users</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button id="resolveDuplicate" type="button" class="btn btn-primary">Ok</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

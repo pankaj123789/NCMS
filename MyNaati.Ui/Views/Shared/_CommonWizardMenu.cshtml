@@ -1,0 +1,20 @@
+﻿@using MyNaati.Ui.Helpers
+@model MyNaati.Ui.ViewModels.Shared.BaseWizardModel
+<div class="list-group list-inline-sm" data-wizard-progress="true">
+    @{ var stepNumber = 1; }
+    @foreach (var step in Model.Steps.Where(x => !x.HideInStepList))
+    {
+        var isCurrentStep = ViewContext.IsInAction(step.Action);
+        var linkText = string.Format("{0}. {1}", stepNumber++, step.Name);
+        var className = string.Format("list-group-item{0}", isCurrentStep ? " active" : step.AllowDirectNavigation ? string.Empty : " disabled");
+
+        if (!isCurrentStep && step.AllowDirectNavigation && !step.Skipped)
+        {
+            @Html.ActionLink(linkText, step.Action, new { Model.WizardId }, new { @class = className })
+        }
+        else
+        {
+            <a class="@className" href="#">@linkText</a>
+        }
+    }
+</div>

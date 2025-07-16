@@ -1,0 +1,24 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.ApplicationForAccreditation.PersonalDetailsModel
+
+@{
+    ViewBag.Title = "Application for Accreditation by Course";
+    Layout = "~/Views/Shared/MasterPages/_ApplicationWizardLayout.cshtml";
+    ViewBag.Subtitle = "Personal Details";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Course", Url.Action("Index", "ApplicationByCourseWizard")),
+        new Tuple<string, string>("New Application", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+        });
+    </script>
+}
+@{ Html.RenderPartial("_ApplicationForAccreditationPersonalDetailsPartial", Model); }

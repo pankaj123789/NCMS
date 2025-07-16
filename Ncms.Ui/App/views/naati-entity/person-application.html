@@ -1,0 +1,89 @@
+<div>
+    <!--ko if: isPerson-->
+    <p>
+        <button type="button" class="btn btn-primary" data-bind="click: newApplication, enableWithPermission:'Application.Create'">
+            <span class="fa fa-plus"></span>
+            <span data-bind="restext: 'Naati.Resources.Application.resources.NewApplication'"></span>
+        </button>
+    </p>
+    <!--/ko-->
+    <!--ko component: { name: 'table-component', params: tableDefinition }--><!--/ko-->
+    <!--ko ifnot: isPerson-->
+    <div class="text-danger">
+        * <em data-bind="reshtml: 'Naati.Resources.NaatiEntity.resources.OrganizationApplicationNote'"></em>
+    </div>
+    <!--/ko-->
+    <script id="person-application-header-template" type="text/html">
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.NaatiEntity.resources.ApplicationType'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.NaatiEntity.resources.Reference'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.NaatiEntity.resources.Status'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.StatusDate'"></th>
+        <!--ko if: $root.isPerson-->
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.NaatiEntity.resources.SponsorNaatiNo'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.NaatiEntity.resources.Sponsor'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.NaatiEntity.resources.AutoCreated'"></th>
+        <!--/ko-->
+        <!--ko ifnot: $root.isPerson-->
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Shared.resources.NaatiNo'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.Name'"></th>
+        <th class="sortable" data-bind="reshtml: 'Naati.Resources.Application.resources.ContactNumber'"></th>
+        <!--/ko-->
+        <th>&nbsp;</th>
+    </script>
+    <script id="person-application-row-template" type="text/html">
+        <tr>
+            <td>
+                <a href="#" data-bind="click: $root.showDetails, clickBubble: false"><i class="fa fa-chevron-right"></i></a>
+                <span data-bind="text: ApplicationType"></span>
+            </td>
+            <td>
+                <a href="#" class="text-info" data-bind="text: ApplicationReference, attr: { href: '#application/' + Id }, clickBubble: false"></a>
+            </td>
+            <td data-bind="text: ApplicationStatus"></td>
+            <td data-bind="text: StatusChangeDate"></td>
+            <!--ko if: $root.isPerson-->
+            <td>
+                <a href="#" target="_blank" class="text-info" data-bind="text: SponsorNaatiNumber, attr: { href: '#organisation/' + SponsorNaatiNumber }, clickBubble: false"></a>
+            </td>
+            <td data-bind="text: SponsorName"></td>
+            <td data-bind="text: AutoCreated === true ? 'Yes' : 'No'"></td>
+            <!--/ko-->
+            <!--ko ifnot: $root.isPerson-->
+            <td data-bind="text: NaatiNumber"></td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: PrimaryContactNumber"></td>
+            <!--/ko-->
+            <td class="text-center w-xs">
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#application/' + Id }, clickBubble: false, tooltip: { container: '#' + $root.tableDefinition.id }, resattr: { title: 'Naati.Resources.Shared.resources.Edit' }">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </script>
+    <script id="person-application-detail-template" type="text/html">
+        <table class="table table-bordered table-striped b-t b-b w-full" data-bind="datatable: tableDefinition">
+            <thead>
+                <tr>
+                    <th data-bind="reshtml: 'Naati.Resources.Application.resources.Category'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Application.resources.CredentialName'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Application.resources.Direction'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Application.resources.Status'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Application.resources.StatusDate'"></th>
+                    <th data-bind="reshtml: 'Naati.Resources.Application.resources.AutoCreated'"></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: data">
+                <tr>
+                    <td data-bind="text: Category"></td>
+                    <td data-bind="text: CredentialName"></td>
+                    <td data-bind="text: Direction"></td>
+                    <td data-bind="text: Status"></td>
+                    <td data-bind="textDate: StatusChangeDate"></td>
+                    <td data-bind="text: AutoCreated === true ? 'Yes' : 'No'"></td>
+                </tr>
+            </tbody>
+        </table>
+    </script>
+</div>

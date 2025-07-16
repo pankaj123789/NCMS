@@ -1,0 +1,41 @@
+﻿@model MyNaati.Ui.ViewModels.Shared.ApplicationForAccreditation.ResidencyStatusModel
+@{
+    ViewBag.Title = "Application for Accreditation by Course";
+    ViewBag.Subtitle = "Residency Status";
+    Layout = "~/Views/Shared/MasterPages/_ApplicationWizardLayout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+    {
+        new Tuple<string, string>("Apply", Url.Action("Index", "ApplicationForAccreditation")),
+        new Tuple<string, string>("Accreditation by Course", Url.Action("Index", "ApplicationByCourseWizard")),
+        new Tuple<string, string>("New Application", string.Empty)
+    };
+}
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(cancelButtons).show();
+            $(previousButtons).show();
+            $(nextButtons).show();
+
+            var currentlyResidingInAustraliaYesSelector = '#rbCurrentlyResidingInAustraliaYes';
+            var currentlyResidingInAustraliaNoSelector = '#rbCurrentlyResidingInAustraliaNo';
+            var countrySelector = '#CountryId';
+
+            function updateControlStatus() {
+                if ($(currentlyResidingInAustraliaNoSelector).prop('checked')) {
+                    $(countrySelector).prop('disabled', false);
+                }
+                else {
+                    $(countrySelector).prop('disabled', true);
+                    $(countrySelector).val('');
+                }
+            }
+
+            $(currentlyResidingInAustraliaYesSelector).change(function () { updateControlStatus(); });
+            $(currentlyResidingInAustraliaNoSelector).change(function () { updateControlStatus(); });
+            updateControlStatus();
+        });
+    </script>
+}
+@{ Html.RenderPartial("_ApplicationForAccreditationResidencyStatusPartial", Model); } 

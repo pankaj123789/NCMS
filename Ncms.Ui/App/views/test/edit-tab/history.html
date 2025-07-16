@@ -1,0 +1,7 @@
+﻿<div>
+    <!--ko foreach: logs-->
+    <h5 data-bind="html: $root.getHeader($data)"></h5>
+    <div data-bind="html: $root.formatLog(ChangeDetail)"></div>
+    <hr />
+    <!--/ko-->
+</div>

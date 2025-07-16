@@ -1,0 +1,55 @@
+﻿<div class="col">
+    <div class="vbox">
+        <div class="bg-light lter b-b wrapper-md">
+            <h1 class="m-n font-thin h3">
+                <span data-bind="reshtml: 'Naati.Resources.Venue.resources.VenueSearch'"></span>
+                <!--ko if: canEdit-->
+                <button type="button" class="btn btn-success" data-bind="click: create"><span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-bind="reshtml: 'Naati.Resources.Venue.resources.NewVenue'"></span></button>
+                <!--/ko-->
+                <div class="form-group pull-right">
+                    <div class="input-group">
+                        <input type="number" data-bind="event: { keypress: checkEnterPressed }, resattr: { placeholder: 'Naati.Resources.Shared.resources.IDSearch' }, value: idSearchValue, valueUpdate: 'input'" class="form-control bg-white input-sm no-border rounded padder" autocomplete="off">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-sm bg-white rounded" data-bind="click: idSearchClick"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </h1>
+        </div>
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner">
+                    <div class="wrapper-md">
+                        <div data-bind="component: { name: 'table-component', params: tableDefinition }"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ko compose: venueCreateOptions --><!-- /ko -->
+    <script id="venues-header-template" type="text/html">
+        <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Venue.resources.VenueId'"></th>
+        <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Venue.resources.Location'"></th>
+        <th class="w-lg" data-bind="reshtml: 'Naati.Resources.Venue.resources.Name'"></th>
+        <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Venue.resources.Capacity'"></th>
+        <th class="w-xxs"></th>
+    </script>
+    <script id="venues-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: VenueId"></td>
+            <td data-bind="text: Location"></td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: Capacity"></td>
+            <td class="w-xs text-right">
+                <!--ko if: $root.canEdit-->
+                <a href="#" class="btn btn-xs" data-bind="clickBubble: false, click: function() { return false; }, tooltip: { trigger: 'hover', container: 'body', title: function () { return $root.activeMessage($data); } }">
+                    <i class="fa" data-bind="css: { 'fa-check text-success': !Inactive, 'fa-times text-danger': Inactive }"></i>
+                </a>
+                <a href="#" class="btn btn-default btn-xs" data-bind="attr: { href: '#system/venue/' + VenueId }">
+                    <i class="fa fa-pencil-alt"></i>
+                </a>
+                <!--/ko-->
+            </td>
+        </tr>
+	</script>
+</div>

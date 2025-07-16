@@ -1,0 +1,63 @@
+﻿<div class="col">
+    <div class="vbox">
+        <div class="bg-light lter b-b wrapper-md">
+            <h1 class="m-n font-thin h3">
+                <span data-bind="html: title"></span>
+                <button type="button" class="btn btn-success" data-bind="click: expandAll">
+                    <i class="fa fa-plus-square-o"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.ExpandAll'"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-bind="click: collapseAll">
+                    <i class="fa fa-minus-square-o"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.CollapseAll'"></span>
+                </button>
+            </h1>
+        </div>
+        <div class="row-row">
+            <div class="cell scrollable">
+                <div class="cell-inner" data-bind="css: { 'bg-white': users().length === 0 }">
+                    <div class="wrapper-md">
+                        <!--ko component: payrollComponent -->
+                        <!--/ko-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="payroll-header-template">
+    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Language'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Examiner'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Test.resources.AttendanceId'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Test.resources.ProductSpecificationCodeLabel'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Payroll.resources.GLCode'"></th>
+    <th data-bind="reshtml: 'Naati.Resources.Payroll.resources.UnitCost'"></th>
+    <th class="w-sm"></th>
+</script>
+<script type="text/html" id="payroll-row-template">
+    <tr>
+        <td data-bind="text: Language"></td>
+        <td data-bind="text: Examiner"></td>
+        <td data-bind="text: TestAttendanceId"></td>
+        <td data-bind="text: ProductSpecificationCode"></td>
+        <td data-bind="text: GlCode"></td>
+        <td data-bind="text: Cost"></td>
+        <td class="w-sm">
+            <button type="button" class="btn btn-success" data-bind="click: $root.validate">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Payroll.resources.Verified'"></span>
+            </button>
+        </td>
+    </tr>
+</script>
+<script type="text/html" id="group-header-template">
+    <span class="pull-right">
+        <span data-bind="text: counterInfo"></span> <i class="fa fa-circle text-info m-r-xs m-l-sm"></i>
+    </span>
+    <h5 class="m-t-none m-b-none">
+        <span data-bind="html: TestType"></span>
+    </h5>
+</script>
+<script type="text/html" id="user-header-template">
+    <span data-bind="text: EnteredInfo"></span>
+</script>

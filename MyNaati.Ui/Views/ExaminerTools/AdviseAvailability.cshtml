@@ -1,0 +1,351 @@
+﻿@using MyNaati.Ui.UI
+@model MyNaati.Ui.ViewModels.ExaminerTools.AdviseAvailabilityModel
+@{
+    ViewBag.Title = "My Availability";
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+    ViewBag.BreadCrumb = new List<Tuple<string, string>>
+{
+new Tuple<string, string>("Examiner Tools", Url.Action("Index")),
+new Tuple<string, string>("My Availability", null)
+};
+}
+@section Scripts
+{
+    <script type="text/javascript">
+		var rolePlayer = function () {
+
+			return {
+				onAjaxSuccess: function (ajaxResponse) {
+					var $form = $('#rolePlayer')
+					var $errors = $form.find('.validation-summary-errors');
+
+					$errors.empty();
+
+					if (ajaxResponse.Success) {
+						$errors.hide();
+						$form.find('.text-success').removeClass('hide');
+						$form.find('.text-success').show();
+						setTimeout(function () {
+							$form.find('.text-success').fadeOut();
+						}, 2000);
+					} else {
+						$errors.show();
+						$errors.append('<ul></ul>');
+
+						$.each(ajaxResponse.Errors, function (index, value) {
+							$errors.find('ul').append('<li>' + value + '</li>');
+						});
+					}
+				},
+				onAjaxFailure: function () {
+					alert('An error occurred, please try again.');
+				}
+			};
+		}();
+
+        var adviseAvailability = function () {
+            function reloadDataTable() {
+                $('#availabilityTable').DataTable().ajax.reload();
+			};
+
+            return {
+                reloadDataTable: reloadDataTable,
+                onAjaxSuccess: function (ajaxResponse) {
+                    var $modal = $('#addModal');
+                    var $errors = $('.validation-summary-errors:not(#rolePlayerErrors)');
+
+                    $errors.empty();
+
+                    if (ajaxResponse.Success) {
+                        $errors.hide();
+                        $modal.modal('hide');
+                        reloadDataTable();
+                    } else {
+                        $errors.show();
+                        $errors.append('<ul></ul>');
+
+                        $.each(ajaxResponse.Errors, function (index, value) {
+                            $errors.find('ul').append('<li>' + value + '</li>');
+                        });
+                    }
+                },
+                onAjaxFailure: function () {
+                    alert('An error occurred, please try again.');
+				},
+				editPeriod: function (id) {
+					var table = $('#availabilityTable').DataTable();
+					var row = table.row('#' + id).data();
+					editDate(row);
+				},
+				deletePeriod: function (id) {
+					var $deleteModal = $('#deleteModal');
+
+					$deleteModal.data('periodId', id);
+					$deleteModal.modal('show');
+				}
+            };
+		}();
+
+		function setDate(field, date) {
+			if (!date) {
+				return field.val(null);
+			}
+			var dateParts = date.split('/');
+			field.val(dateParts[2] + '-' + padZeroLeft(dateParts[1]) + '-' + padZeroLeft(dateParts[0]));
+		}
+
+		function padZeroLeft(str) {
+			var pad = "00"
+			var ans = pad.substring(0, pad.length - str.length) + str;
+			return ans;
+		}
+
+		function editDate(row) {
+			var $errors = $('.validation-summary-errors:not(#rolePlayerErrors)');
+			$errors.empty();
+			$errors.hide();
+
+			var $addModal = $('#addModal');
+			$addModal.find('[name=Id]').val(row.Id);
+			setDate($addModal.find('[name=StartDate]'), row.StartDate);
+			setDate($addModal.find('[name=EndDate]'), row.EndDate);
+			$addModal.find('.modal-title').text(row.StartDate ? 'Edit Unavailable Period' : 'Add Unavailable Period');
+			$addModal.modal('show');
+		}
+
+		$(document).ready(function () {
+            var $availabilityTable = $('#availabilityTable');
+
+            $availabilityTable.DataTable({
+                ajax: {
+                    url: '@Url.Action("Availabilities")',
+                    type: 'POST'
+                },
+                buttons: {
+                    buttons: [{
+                        action: function () {
+							editDate({});
+                        },
+						text: 'Add Unavailable Period'
+                    }],
+                    dom: {
+                        button: {
+                            tag: 'button',
+                            className: 'btn btn-primary'
+                        },
+                        container: {
+                            className: 'btn-group'
+                        }
+                    }
+				},
+				rowId: 'Id',
+                columns: [
+                    { data: 'StartDate' },
+                    { data: 'EndDate' },
+                    {
+                        data: null,
+                        width: 200,
+                        render: function (data, type, row) {
+							return '\
+	<button class="btn btn-danger pull-right" type="button" data-action="delete" data-id="' + row.Id + '">Delete</button>\
+	<button class="btn btn-primary pull-right m-r-sm" type="button" data-action="edit" data-id="' + row.Id + '">Edit</button>';
+                        }
+                    }
+                ],
+                dom:
+                    "<'row'<'col-sm-12'B>>" +
+                        "<'row v-offset-xs-1'<'col-sm-12'<'table-responsive't>>>",
+                info: false,
+                language: {
+                    processing: $('#loadingOverlayTemplate').html(),
+                    zeroRecords: 'No Periods'
+                },
+                ordering: false,
+                paging: false,
+                processing: true,
+                searching: false,
+                serverSide: true
+            });
+
+            $availabilityTable.on('draw.dt', function () {
+                $(this).find('tbody tr').on('click', '.btn', function () {
+                    var $this = $(this);
+                    var action = $this.data('action');
+                    var id = $this.data('id');
+
+                    adviseAvailability[action + 'Period'](id);
+                });
+            });
+
+            $('#confirmAdd').click(function () {
+                $('#adviseAvailability').submit();
+            });
+
+            $('#confirmDelete').click(function () {
+                var $deleteModal = $('#deleteModal');
+
+                $.ajax({
+                    type: 'POST',
+                    data: { id: $deleteModal.data('periodId') },
+                    cache: false,
+                    url: '@Url.Action("DeleteAdviseAvailability")',
+                    success: function () {
+                        adviseAvailability.reloadDataTable();
+                        $deleteModal.modal('hide');
+                    },
+                    error: function (error) {
+                        if (error.responseText.indexOf('User is not authorised to access this item.') !== -1) {
+                            toastr.error('User is not authorised to access this item.');
+                        } else {
+                            toastr.error("An error occurred while processing your request.");
+                        }
+                    }
+                });
+			});
+
+			var $chosen = $('.chosen');
+
+			$chosen.chosen();
+			$chosen.removeClass('invisible');
+            $chosen.parent().find('.chosen-choices').addClass('chosen-auto-height');
+        });
+    </script>
+}
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.ValidationSummary()
+        </div>
+    </div>
+</div>
+@{
+    if (Model.RolePlayerAvailable == "TRUE")
+    {
+        if (User.IsRolePlayer())
+        {
+            var rolePlayerAjaxOptions = new AjaxOptions
+            {
+                OnSuccess = "rolePlayer.onAjaxSuccess",
+                OnFailure = "rolePlayer.onAjaxFailure"
+            };
+            using (Ajax.BeginForm("RolePlayerSettings", "ExaminerTools", null, rolePlayerAjaxOptions, new { id = "rolePlayer", @class = "form" }))
+            {
+                <div class="panel panel-default m-t-lg">
+                    <div class="panel-heading">Role-player Settings</div>
+                    <div class="panel-body">
+                        <div id="rolePlayerErrors" class="validation-summary-errors" style="display: none;">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Maximum Sessions</label>
+                            <input type="number" name="MaximumRolePlaySessions" value="@Model.RolePlayerSettings.MaximumRolePlaySessions" class="form-control" />
+                            <span class="help-block">
+                                Please indicate the maximum number of role-play sessions you are willing to attend in a 4 week period.
+                            </span>
+                        </div>
+                        <div class="form-group col-md-9">
+                            <label class="control-label">Locations</label>
+                            <select name="RolePlayLocations" multiple class="form-control chosen invisible" style="height: 34px;">
+                                @foreach (var l in Model.Locations)
+                                {
+                                    <option value="@l.Value" @(Model.RolePlayerSettings.RolePlayLocations.Contains(Convert.ToInt32(l.Value)) ? " selected" : "")>@l.Text</option>
+                                }
+                            </select>
+                            <span class="help-block">
+                                Please indicate which locations you are willing to attend for test sessions as a role-player.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-primary">Save</button>
+                        <span class="m-l-md text-success hide">Saved successfully</span>
+                    </div>
+                </div>
+            }
+        }
+    }
+}
+<div class="row">
+    <div class="col-lg-12">
+        <p>Tests will not be allocated to you during the following periods</p>
+    </div>
+</div>
+<div class="row m-b-xxl">
+    <div class="col-lg-12">
+        <table id="availabilityTable" class="table table-bordered">
+            <thead class="bg-primary">
+                <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+	</div>
+<div id="addModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add Unavailable Period</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="validation-summary-errors" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+                @{
+                    var ajaxOptions = new AjaxOptions
+                    {
+                        OnSuccess = "adviseAvailability.onAjaxSuccess",
+                        OnFailure = "adviseAvailability.onAjaxFailure"
+                    };
+                }
+                @using (Ajax.BeginForm("AdviseAvailability", "ExaminerTools", null, ajaxOptions, new { id = "adviseAvailability", @class = "form-horizontal" }))
+                {
+                    <input type="hidden" name="Id">
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.StartDate, new { @class = "control-label col-sm-offset-1 col-sm-3" })
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.StartDate, new { @class = "form-control", type = "date" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.EndDate, new { @class = "control-label col-sm-offset-1 col-sm-3" })
+                        <div class="col-sm-6">
+                            @Html.TextBoxFor(x => x.EndDate, new { @class = "form-control", type = "date" })
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button id="confirmAdd" type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Delete Period</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Are you sure you want to delete the period?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmDelete" type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

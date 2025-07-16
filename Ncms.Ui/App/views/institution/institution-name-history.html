@@ -1,0 +1,36 @@
+﻿<div id="institutionArchiveHistory" tabindex="-1" role="document">
+        <div class="panel panel-default">
+            <div class="panel-primary">
+                <div class="panel-heading">
+                    <h2 class="panel-title" data-bind="text: windowTitle"></h2>
+                </div>
+            </div>
+            <div class="wrapper-sm">
+                <table class="table table-bordered table-striped m-b-none">
+                    <thead>
+                        <tr>
+                            <th data-bind="reshtml: 'Naati.Resources.Institution.resources.Name'"></th>
+                            <th data-bind="reshtml: 'Naati.Resources.Institution.resources.AbbreviatedName'"></th>
+                            <th data-bind="reshtml: 'Naati.Resources.Person.resources.EffectiveDate'"></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: institution.NameHistory">
+                        <tr>
+                            <td data-bind="text: Name"></td>
+                            <td data-bind="text: Abbreviation"></td>
+                            <td data-bind="text: $root.dateService.toUIDate(EffectiveDate())"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" data-bind="click: close">
+                        <i class="fa fa-times"></i>
+                        <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span>
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+</div>

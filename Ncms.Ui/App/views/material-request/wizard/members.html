@@ -1,0 +1,129 @@
+﻿<div class="form">
+    <!--ko if: coordinator()-->
+    <div class="row">
+        <div class="form-group col-md-3 m-b-none" data-bind="validationElement: collaborators, validationOptions: { insertMessages: false }">
+            <label class="control-label" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Coordinator'"></label>
+            <p class="form-control-static" data-bind="text: coordinator().Name"></p>
+        </div>
+        <div class="col-md-5 m-b-none">
+            <label class="control-label">
+                <span data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Task'"></span>
+                <span>/</span>
+                <span data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Hours'"></span>
+            </label>
+            <!--ko foreach: { data: coordinator().Tasks, as: 't' }-->
+            <div class="row m-t-xs">
+                <div class="form-group col-sm-3 m-b-none" data-bind="validationElement: t.MaterialRequestTaskTypeId, validationOptions: { insertMessages: false }">
+                    <select type="text" class="w-full form-control" data-bind="
+                                options: t.AvailableTasks,
+                                optionsText: 'DisplayName',
+                                optionsValue: 'Id',
+                                value: t.MaterialRequestTaskTypeId"></select>
+                    <span class="help-block" data-bind="validationMessage: t.MaterialRequestTaskTypeId"></span>
+                </div>
+                <div class="form-group col-sm-3 m-b-none" data-bind="validationElement: t.HoursSpent, validationOptions: { insertMessages: false }">
+                    <input type="number" class="w-full form-control text-right" data-bind="value: t.HoursSpent, disable: t.PreSelected" />
+                    <span class="help-block" data-bind="validationMessage: t.HoursSpent"></span>
+                </div>
+                <div class="form-group col-sm-3 m-b-none">
+                    <!--ko if: $index() === 0-->
+                    <!--ko if: $root.coordinator().Tasks().length < $root.maxTasks()-->
+                    <button class="btn btn-default" data-bind="click: function() { $root.addTask($root.coordinator()); }">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </button>
+                    <!--/ko-->
+                    <!--ko ifnot: $root.coordinator().Tasks().length < $root.maxTasks()-->
+                    <p class="form-control-static">&nbsp;</p>
+                    <!--/ko-->
+                    <!--/ko-->
+                    <!--ko if: $index() > 0-->
+                    <button class="btn btn-default" data-bind="click: function() { $root.removeTask($root.coordinator(), t); }">
+                        <i class="glyphicon glyphicon-minus"></i>
+                    </button>
+                    <!--/ko-->
+                </div>
+            </div>
+            <!--/ko-->
+        </div>
+    </div>
+    <!--/ko-->
+    <div class="row">
+        <div class="form-group col-sm-12" data-bind="validationElement: collaborators, validationOptions: { insertMessages: false }">
+            <div class="b-t b-light m-t-md"></div>
+            <label class="control-label m-t" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Collaborators'"></label>
+            <table data-bind="datatable: tableDefinition, attr: { id: tableId }" class="table table-striped table-hover b-t b-b" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th class="w-xxs">&nbsp;</th>
+                        <th data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></th>
+                        <th class="w-xxl">
+                            <span data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Task'"></span>
+                            <span>/</span>
+                            <span data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Hours'"></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: { data: members, as: 'm', afterRender: function() { preSelectMembers(); } }">
+                    <tr>
+                        <td class="text-center"></td>
+                        <td data-bind="text: m.Name"></td>
+                        <td>
+                            <!--ko foreach: { data: Tasks, as: 't' }-->
+                            <div class="form row">
+                                <div class="col-sm-5" data-bind="css: { 'm-t-xs': $index() > 0 }">
+                                    <div class="form-group w-full" data-bind="validationElement: t.MaterialRequestTaskTypeId, validationOptions: { insertMessages: false }">
+                                        <select type="text" class="w-full form-control" data-bind="
+                                click: function() { return false; },
+                                clickBubble: false,
+                                options: t.AvailableTasks,
+                                optionsText: 'DisplayName',
+                                optionsValue: 'Id',
+                                value: t.MaterialRequestTaskTypeId"></select>
+                                        <span class="help-block" data-bind="validationMessage: t.MaterialRequestTaskTypeId"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5" data-bind="css: { 'm-t-xs': $index() > 0 }">
+                                    <div class="form-group" data-bind="validationElement: t.HoursSpent, validationOptions: { insertMessages: false }">
+                                        <input type="number" class="w-full form-control text-right" data-bind="
+                                       event: {
+                                           select: function(m, e) {
+                                               e.preventDefault();
+                                               e.stopPropagation();
+                                               return false;
+                                           }
+                                       },
+                                       value: t.HoursSpent,
+                                       clickBubble: false,
+                                       click: function() {
+                                            return false;
+                                       }" />
+                                        <span class="help-block" data-bind="validationMessage: t.HoursSpent"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2" data-bind="css: { 'm-t-xs': $index() > 0 }">
+                                    <!--ko if: $index() === 0-->
+                                    <!--ko if: m.Tasks().length < $root.maxTasks()-->
+                                    <button class="btn btn-default" data-bind="click: function() { $root.addTask(m); }">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </button>
+                                    <!--/ko-->
+                                    <!--ko ifnot: m.Tasks().length < $root.maxTasks()-->
+                                    <p class="form-control-static">&nbsp;</p>
+                                    <!--/ko-->
+                                    <!--/ko-->
+                                    <!--ko if: $index() > 0-->
+                                    <button class="btn btn-default" data-bind="click: function() { $root.removeTask(m, t); }">
+                                        <i class="glyphicon glyphicon-minus"></i>
+                                    </button>
+                                    <!--/ko-->
+                                </div>
+                            </div>
+                            <!--/ko-->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <span class="help-block" data-bind="validationMessage: collaborators"></span>
+        </div>
+    </div>
+</div>

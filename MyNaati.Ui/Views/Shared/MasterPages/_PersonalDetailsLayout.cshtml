@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "~/Views/Shared/MasterPages/_Layout.cshtml";
+}
+@section Head
+{
+    @RenderSection("Head", false)
+}
+@section Scripts
+{
+    @RenderSection("Scripts", false)
+}
+<div class="col-lg-12">
+    <h2>My Personal Details</h2>
+</div>
+<div class="col-lg-12">
+    @RenderBody()
+</div>
+<div class="col-lg-12">
+    <p>I acknowledge that, by completing this form, I have read and understood the <a href="https://www.naati.com.au/media/1312/privacy_policy.pdf" target="_blank">NAATI Privacy Policy</a>, which explains:</p>
+</div>
+<div class="col-lg-12">
+    <ul>
+        <li>how and why NAATI collects; manages and uses my personal information;</li>
+        <li>to whom NAATI may disclose my personal information (including to overseas recipients if I ask to be tested at an overseas venue);</li>
+        <li>how I can access and request correction of my personal information which NAATI holds;</li>
+        <li>how I can complain about a breach of the Australian Privacy Principles by NAATI.</li>
+        <li class="v-offset-xs-2">
+            I understand NAATI will use the personal information collected in this form (plus any further information that I provide to NAATI as
+            part of my application) to process my application, administer tests to me, and determine and record the outcome of my application. I understand that,
+            if I am accredited, NAATI may disclose to people and organisations (to verify my accreditation, including
+            via an online verification register) my name, NAATI credentials, expiry date, suburb and photograph.
+        </li>
+    </ul>
+</div>

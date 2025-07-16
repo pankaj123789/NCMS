@@ -1,0 +1,65 @@
+﻿<div data-bind="attr: {class: !isCreate? 'panel-body col-lg-3 col-md-6 col-xs-12' : ''}">
+
+    <div class="form-group" data-bind="validationElement: venue.VenueId, visible: !isCreate">
+        <span>
+            <strong data-bind="reshtml: 'Naati.Resources.Venue.resources.VenueId'"></strong>:
+            <span class="upper-text" data-bind="text: venue.VenueId"></span>
+        </span>
+    </div>
+
+    <div class="form-group" data-bind="validationElement: venue.Name">
+        <label data-bind="reshtml: 'Naati.Resources.Venue.resources.Name'"></label>
+        <input type="text" class="form-control" data-bind="value: venue.Name" />
+    </div>
+
+    <div class="form-group" data-bind="validationElement: venue.TestLocationId">
+        <label data-bind="reshtml: 'Naati.Resources.Venue.resources.Location'"></label>
+        <!-- ko component: { name: 'select-component', params: locationOptions } --><!-- /ko -->
+    </div>
+
+    <div class="form-group" data-bind="validationElement: venue.Address">
+        <label data-bind="reshtml: 'Naati.Resources.Venue.resources.Address'"></label>
+        <input id="addressInput" type="text" class="form-control" address-search-minlength="3" data-bind="value: venue.Address" />
+    </div>
+
+    <div class="form-group" data-bind="validationElement: venue.Latitude, visible: !isCreate">
+        <label data-bind="reshtml: 'Naati.Resources.Venue.resources.Latitude'"></label>
+        <input type="number" class="form-control" data-bind="value: venue.Latitude, valueUpdate: 'input'" />
+    </div>
+
+    <div class="form-group" data-bind="validationElement: venue.Longitude, visible: !isCreate">
+        <label data-bind="reshtml: 'Naati.Resources.Venue.resources.Longitude'"></label>
+        <input type="number" class="form-control" data-bind="value: venue.Longitude, valueUpdate: 'input'" />
+    </div>
+
+    <div class="form-group" data-bind="validationElement: venue.Capacity">
+        <label data-bind="reshtml: 'Naati.Resources.Venue.resources.Capacity'"></label>
+        <input type="number" class="form-control" data-bind="value: venue.Capacity" />
+    </div>
+
+    <div class="form-group" data-bind="validationElement: venue.PublicNotes, visible: !isCreate">
+        <label class="control-label" data-bind="reshtml: 'Naati.Resources.Venue.resources.Notes'"></label>
+        <textarea class="form-control" rows="5" data-bind="value: venue.PublicNotes, valueUpdate: 'input'" />
+    </div>
+
+    <div class="form-group" data-bind="validationElement: venue.Active">
+        <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+            <label class="checkbox-inline i-checks">
+                <input type="checkbox" data-bind="checked: venue.Active"><i></i>
+                <span class="padder-md" data-bind="reshtml: 'Naati.Resources.Venue.resources.Active'"></span>
+            </label>
+        </div>
+    </div>
+
+</div>
+
+<div class="panel-body col-lg-3 col-md-6 col-xs-12" data-bind="visible: !isCreate">
+    <div class="form-group" id="selectedAddress">
+        <img id="map" class="map margin-left-xs" data-bind="attr: { src: mapSource, title: mapTitle }" style="width: 550px; margin-top: 60px;" />
+    </div>
+    <div style="padding-left: 33px;">
+        <button type="button" data-bind="click: updateMap" class="btn btn-success">
+            <span>Update Map</span>
+        </button>
+    </div>
+</div>

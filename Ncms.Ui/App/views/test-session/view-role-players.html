@@ -1,0 +1,173 @@
+﻿<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black" data-bind="html: title"></h1>
+            </div>
+        </div>
+        <div class="row m-t-md">
+            <div class="col-md-6">
+                <h2 class="m-n font-thin h3 text-black" data-bind="reshtml: 'Naati.Resources.TestSession.resources.RehearsalDetails'"></h2>
+                <p class="form-control-static" data-bind="textDate: { value: testsession.RehearsalDate, outputFormat: 'DD/MM/YYYY h:mm a' }"></p>
+                <!--ko if: testsession.RehearsalNotes-->
+                <p class="form-control-static" data-bind="text: testsession.RehearsalNotes"></p>
+                <!--/ko-->
+            </div>
+            <div class="col-md-6">
+                <h2 class="m-n font-thin h3 text-black" data-bind="reshtml: 'Naati.Resources.TestSession.resources.TestSessionDetails'"></h2>
+                <p class="form-control-static" data-bind="textDate: { value: testsession.TestDate, outputFormat: 'DD/MM/YYYY h:mm a' }"></p>
+                <!--ko if: testsession.PublicNote-->
+                <p class="form-control-static" data-bind="text: testsession.PublicNote"></p>
+                <!--/ko-->
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <!--ko foreach: { data: skills, as: 's' }-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading cursor-pointer" data-bind="click: $root.collapser.toggleCollapse">
+                            <span class="fa" data-bind="css: { 'fa-chevron-down': $root.collapser.isOpened(s), 'fa-chevron-right': !$root.collapser.isOpened(s), 'text-danger':  !s.valid() }"></span>
+                            <span data-bind="text: s.SkillDisplayName, css: { 'text-danger':  !s.valid() }"></span>
+                        </div>
+                        <div class="panel-body animated fadeIn" data-bind="css: { 'hidden': !$root.collapser.isOpened(s) }">
+                            <h4 data-bind="reshtml: 'Naati.Resources.TestSession.resources.AssignedRolePlayers'"></h4>
+                            <div data-bind="component: { name: 'tab-component', params: s.tabOptions }"></div>
+                        </div>
+                    </div>
+                    <!--/ko-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm text-right">
+        <button class="btn btn-default" data-bind="click: back, clickBubble: false"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+        <button class="btn btn-success" data-bind="click: save, clickBubble: false, enable: canSave"><i class="fa fa-check"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span></button>
+    </div>
+    <script type="text/html" id="view-role-player-task">
+        <div data-bind="validationElement: assignedRolePlayers1Primary, validationOptions: { insertMessages: false }" class="m-l-sm">
+            <span class="help-block" data-bind="validationMessage: assignedRolePlayers1Primary"></span>
+        </div>
+        <div data-bind="validationElement: assignedRolePlayers2Primary, validationOptions: { insertMessages: false }" class="m-l-sm">
+            <span class="help-block" data-bind="validationMessage: assignedRolePlayers2Primary"></span>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered role-player-matrix" style="table-layout: fixed">
+                    <thead>
+                        <tr>
+                            <th class="w-xs"></th>
+                            <th class="bg-info">
+                                <span data-bind="reshtml: 'Naati.Resources.Skill.resources.Language1'"></span>:
+                                <span data-bind="text: skill.Language1DisplayName"></span>
+                            </th>
+                            <!--ko if: showLanguage2-->
+                            <th class="bg-info">
+                                <span data-bind="reshtml: 'Naati.Resources.Skill.resources.Language2'"></span>:
+                                <span data-bind="text: skill.Language2DisplayName"></span>
+                            </th>
+                            <!--/ko-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="w-xs bg-light dker" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Primary'"></td>
+                            <td class="no-padder">
+                                <ul class="list-unstyled" data-bind="foreach: { data: assignedRolePlayers1Primary, as: 'rp' }">
+                                    <li data-bind="template: { name: 'view-role-player-tile', data: rp }"></li>
+                                </ul>
+                            </td>
+                            <!--ko if: showLanguage2-->
+                            <td class="no-padder">
+                                <ul class="list-unstyled" data-bind="foreach: { data: assignedRolePlayers2Primary, as: 'rp' }">
+                                    <li data-bind="template: { name: 'view-role-player-tile', data: rp }"></li>
+                                </ul>
+                            </td>
+                            <!--/ko-->
+                        </tr>
+                        <tr>
+                            <td class="bg-light" data-bind="reshtml: 'Naati.Resources.TestSession.resources.Backup'"></td>
+                            <td class="no-padder">
+                                <ul class="list-unstyled" data-bind="foreach: { data: assignedRolePlayers1Secondary, as: 'rp' }">
+                                    <li data-bind="template: { name: 'view-role-player-tile', data: rp }"></li>
+                                </ul>
+                            </td>
+                            <!--ko if: showLanguage2-->
+                            <td class="no-padder">
+                                <ul class="list-unstyled" data-bind="foreach: { data: assignedRolePlayers2Secondary, as: 'rp' }">
+                                    <li data-bind="template: { name: 'view-role-player-tile', data: rp }"></li>
+                                </ul>
+                            </td>
+                            <!--/ko-->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right m-l-md">
+                    <span class="label label-gray">&nbsp;&nbsp;&nbsp;</span>
+                    <span>Unspecified</span>
+                </div>
+                <div class="pull-right m-l-md">
+                    <span class="label label-pink">&nbsp;&nbsp;&nbsp;</span>
+                    <span>Female</span>
+                </div>
+                <div class="pull-right">
+                    <span class="label label-info">&nbsp;&nbsp;&nbsp;</span>
+                    <span>Male</span>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/html" id="view-role-player-tile">
+        <div class="role-player wrapper b b-light">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="m-b-xs">
+                        <a href="#" class="text-info" target="_blank" data-bind="attr: { href: '#person/' + CustomerNo }, text: CustomerNo"></a>
+                        <strong data-bind="text: Name"></strong>
+                        <!--ko if: NotMatchTestLocationTooltip-->
+                        <!--ko if: MatchTestLocation-->
+                        <span class="pull-right label label-success m-l-xs cursor-pointer" data-bind="text: MatchTestLocation.DisplayName, popover: NotMatchTestLocationTooltip"></span>
+                        <!--/ko-->
+                        <!--ko ifnot: MatchTestLocation-->
+                        <span class="pull-right label label-danger m-l-xs cursor-pointer" data-bind="popover: NotMatchTestLocationTooltip, reshtml: 'Naati.Resources.TestSession.resources.OtherLocations'"></span>
+                        <!--/ko-->
+                        <!--/ko-->
+                        <!--ko ifnot: NotMatchTestLocationTooltip-->
+                        <!--ko if: MatchTestLocation-->
+                        <span class="pull-right label label-success m-l-xs" data-bind="text: MatchTestLocation.DisplayName"></span>
+                        <!--/ko-->
+                        <!--/ko-->
+                        <div class="pull-right label" data-bind="attr: { title: GenderDescription }, css: { 'label-info': Gender == 'M', 'label-pink': Gender == 'F', 'label-default': Gender != 'F' && Gender != 'M' }, tooltip">
+                            <span>Age</span>
+                            <span data-bind="text: Age"></span>
+                        </div>
+                    </div>
+                    <div class="m-b-xs">
+                        <!--ko if: Senior-->
+                        <span class="label label-primary">Senior</span>
+                        <!--/ko-->
+                        <span class="label label-gray" data-bind="text: Languages"></span>
+                        <!--ko if: AssignedTasks-->
+                        <div class="pull-right  m-l-xs">
+                            Assigned to
+                            <span data-bind="text: AssignedTasks"></span>
+                        </div>
+                        <!--/ko-->
+                        <span class="pull-right m-t-xs fa m-l-xs" data-bind="css: { 'fas fa-thermometer-quarter text-success': HasCapacity, 'fas fa-temperature-high text-danger': !HasCapacity }, tooltip, resattr: { title: 'Naati.Resources.TestSession.resources.Capacity' }"></span>
+                        <span class="pull-right m-t-xs fa" data-bind="css: { 'fa-calendar-check text-success': Available, 'fa-calendar-times text-danger': !Available }, tooltip, resattr: { title: Available ? 'Naati.Resources.TestSession.resources.Available' : 'Naati.Resources.TestSession.resources.NotAvailable' }"></span>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <!-- ko component: { name: 'select-component', params: stateOptions } -->
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </script>
+</div>

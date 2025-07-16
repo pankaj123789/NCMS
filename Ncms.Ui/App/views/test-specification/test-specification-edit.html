@@ -1,0 +1,136 @@
+<div class="vbox">
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black">
+                    <span data-bind="text: title"></span>
+                    <!-- ko if: canUpload -->
+                    <button type="button" class="btn btn-success" data-bind="click: upload" , enable: inEditMode()>
+                        <i class="fa fa-upload"></i>
+                        <span>Upload Spreadsheet</span>
+                    </button>
+                    <!-- /ko -->
+                    <button type="button" class="btn btn-success" data-bind="downloadFile: { url: $root.download($data) }">
+                        <i class="fa fa-download"></i>
+                        <span>Download Spreadsheet</span>
+                    </button>
+                    <!--ko if: testSpecification.IsRubric-->
+                    <div class="btn-group pull-right">
+                        <div class="pull-right dropdown">
+                            <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="tooltip: { container: 'body', trigger: 'hover', placement: 'left' }, resattr: { title: 'Naati.Resources.Shared.resources.RubricConfiguration' }">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#" data-bind="attr: { href: '#rubric-configuration/question-pass-rule/' + testSpecification.Id() }">
+                                        <span data-bind="reshtml: 'Naati.Resources.RubricConfiguration.resources.QuestionPassRules'"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bind="attr: { href: '#rubric-configuration/test-band-rule/' + testSpecification.Id() }">
+                                        <span data-bind="reshtml: 'Naati.Resources.RubricConfiguration.resources.TestBandRules'"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bind="attr: { href: '#rubric-configuration/test-question-rule/' + testSpecification.Id() }">
+                                        <span data-bind="reshtml: 'Naati.Resources.RubricConfiguration.resources.TestQuestionRules'"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" data-bind="attr: { href: '#rubric-configuration/' + testSpecification.Id() }">
+                                        <span data-bind="reshtml: 'Naati.Resources.Shared.resources.RubricConfiguration'"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!--/ko-->
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="row-row">
+        <div class="cell">
+            <div class="cell-inner">
+                <div class="wrapper">
+                    <div class="panel wrapper form">
+                        <div class="row">
+                            <div class="form-group col-sm-12" data-bind="validationElement: testSpecification.Description">
+                                <label class="control-label" data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.Description'"></label>
+                                <textarea class="form-control" rows="5" data-bind="value: testSpecification.Description, valueUpdate: 'input'" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-1 w-sm" data-bind="validationElement: testSpecification.OverallPassMark">
+                                <label class="control-label" data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.OverallPassMark'"></label>
+                                <p class="form-control-static" data-bind="text: testSpecification.OverallPassMark"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <div class="form-control-static" data-bind="validationOptions: { insertMessages: false }">
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="checkbox" data-bind="checked: testSpecification.Active"><i></i>
+                                        <span class="padder-md" data-bind="restext: 'Naati.Resources.TestSpecification.resources.Active'"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--ko if: testSpecification.IsRubric-->
+                        <div class="row">
+                            <div class="form-group col-sm-6" data-bind="validationElement: testSpecification.ResultAutoCalculation">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" data-bind="checked: enableRubricCalculations"><i></i>
+                                    <span class="padder-md" data-bind="restext: 'Naati.Resources.NaatiEntity.resources.EnableRubricCalculations'"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <!--/ko-->
+                    </div>
+                    <div data-bind="component: { name: 'table-component', params: tableDefinition }"></div>
+                    <!--ko compose: { model: documentsInstance, view: 'views/document/document-form' }--><!--/ko-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="padder b-t b-gray bg-white wrapper-sm">
+        <div class="pull-right">
+            <button class="btn btn-success" data-bind="click: save, enable: canSave">
+                <i class="fa fa-check"></i>
+                <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Save'"></span>
+            </button>
+            <a href="#test-specification" class="btn btn-default"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <script id="specificationcomponennts-header-template" type="text/html">
+        <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.Order'" class="w-xs"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.TaskType'"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.TaskTypeDescription'" class="w-xsm"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.BasedOn'" class="w-xsm"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.PassMark'" class="w-xsm text-center"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.TaskName'" class="w-xsm"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.MinNaatiCommentLength'" class="w-sm"></th>
+        <th data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.MinExaminersCommentLength'" class="w-sm"></th>
+    </script>
+    <script id="specificationcomponennts-row-template" type="text/html">
+        <tr>
+            <td data-bind="text: ComponentNumber" class="w-xs"></td>
+            <td data-bind="text: TaskType"></td>
+            <td data-bind="text: TaskTypeDescription"></td>
+            <td data-bind="text: BasedOn" class="w-sm"></td>
+            <td class="text-center w-sm">
+                <span data-bind="text: PassMark"></span>
+                <span>/</span>
+                <span data-bind="text: TotalMarks"></span>
+            </td>
+            <td data-bind="text: Name"></td>
+            <td><span data-bind="text: MinNaatiCommentLength"></span><span data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.Characters'"></span></td>
+            <td><span data-bind="text: MinExaminerCommentLength"></span><span data-bind="reshtml: 'Naati.Resources.TestSpecification.resources.Characters'"></span></td>
+
+        </tr>
+    </script>
+    <div data-bind="compose: testSpecificationUploadOptions" />
+</div>
+

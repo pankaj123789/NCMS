@@ -1,0 +1,29 @@
+﻿@using MyNaati.Ui.Controllers
+@using MyNaati.Ui.Helpers
+@using MyNaati.Ui.Security
+@if (!HttpContext.Current.User.IsInRole(SystemRoles.TEMPORARYPASSWORDUSERS))
+{
+    var isInAccountController = ViewContext.IsInController("Account");
+    var isInOrdersController = ViewContext.IsInController("Orders");
+
+    var isInWelcome = ViewContext.IsInController("Home") && (ViewContext.IsInAction("Index") || ViewContext.IsInAction("Welcome"));
+    var isInChangePassword = isInAccountController && ViewContext.IsInAction("ChangePassword");
+
+    <li @(isInWelcome ? "class=active" : string.Empty)>
+        <a href='@Url.Action("index", "Home")'>
+            <span>Home</span>
+        </a>
+    </li>
+
+    foreach (var link in HomeController.Menus(User))
+    {
+        if (link.Id != "MobileCredentialCards")
+        {
+            <li>
+                <a href="@link.UrlAction">
+                    <span>@link.Text</span>
+                </a>
+            </li>
+        }
+    }
+}

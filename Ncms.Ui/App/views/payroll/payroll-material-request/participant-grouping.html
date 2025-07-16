@@ -1,0 +1,38 @@
+﻿<table class="table table-bordered m-b-none bg-light dker">
+    <thead>
+        <tr>
+            <th class="w-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Participant'"></th>
+            <th class="w-md" data-bind="reshtml: 'Naati.Resources.Shared.resources.Role'"></th>
+            <th class="w-xs" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Hours'"></th>
+            <th data-bind="reshtml: 'Naati.Resources.Finance.resources.Amount'"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--ko foreach: { data: items, as: 'item' }-->
+        <!--ko collapser: item.expanded-->
+        <tr class="cursor-pointer" data-bind="collapserHeader">
+            <td>
+                <i class="fa" data-bind="css: { 'fa-open': !$expanded(), 'fa-close': $expanded }"></i>
+                <span data-bind="text: item.DisplayName"></span>
+            </td>
+            <td>
+                <span data-bind="text: item.MemberTypeDisplayName"></span>
+            </td>
+            <td>
+                <span data-bind="text: item.HoursSpent"></span>
+                <span data-bind="restext: 'Naati.Resources.Shared.resources.Hours'"></span>
+            </td>
+            <td>
+                <span data-bind="textCurrency: item.Amount"></span>
+            </td>
+        </tr>
+        <tr data-bind="collapserContent">
+            <td colspan="4" class="no-padder">
+                <!--ko compose: groupingCompose -->
+                <!--/ko-->
+            </td>
+        </tr>
+        <!--/ko-->
+        <!--/ko-->
+    </tbody>
+</table>

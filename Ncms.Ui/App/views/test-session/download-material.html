@@ -1,0 +1,53 @@
+﻿<div id="downloadMaterialModal" class="modal fade" tabindex="-1" data-backdrop="static"  role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-light">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" data-bind="reshtml: 'Naati.Resources.TestMaterial.resources.DownloadAllMaterial'"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div data-bind="visible:showWarningMessage">
+                            <strong data-bind="reshtml:'Naati.Resources.TestMaterial.resources.PendingMaterialsMessage'"></strong>
+                            <br  data-bind="text:limitMessage, visible:displayLimitMesssage"/>
+                            <span data-bind="text:limitMessage, visible:displayLimitMesssage"></span>
+                            <br/>
+                            <br/>
+                            <ul>
+                                <!-- ko foreach: { data: pendingTestTasks, as: 'tt' } -->
+                                <li>
+                                    <span data-bind="text:tt.NaatiNumber + ' '"></span>
+                                    <span data-bind="text:tt.PersonName + ' - '"></span>
+                                    <span data-bind="text:tt.TaskLabel"></span>
+                                </li>
+                                <!--/ko-->
+                            </ul>
+                            <strong class="text-danger" data-bind="visible:showWarningMessage, reshtml:'Naati.Resources.TestMaterial.resources.DownloadWithPendingMaterialsMessage'"> </strong>
+                        </div>
+                        <!-- ko ifnot: showWarningMessage -->
+                        <strong data-bind="reshtml:'Naati.Resources.TestMaterial.resources.DownloadMaterialMessage'"> </strong>
+                        <!--/ko-->
+                        <div class="form-group">
+                            <div class="form-control-static">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" data-bind="checked: includeExaminer"><i></i>
+                                    <span class="padder-md" data-bind="restext: 'Naati.Resources.TestMaterial.resources.IncludeExaminer'"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-bind="click: download, disableOnAjaxStart">
+                    <i class="fa fa-check"></i>
+                    <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Download'"></span>
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> <span data-bind="reshtml: 'Naati.Resources.Shared.resources.Close'"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

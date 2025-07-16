@@ -1,0 +1,18 @@
+﻿<div class="modal" data-backdrop="static" tabindex="-1" role="dialog" id="invoiceCreatedSuccessfullyModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center">
+                    <p>
+                        <i class="fa fa-check-circle text-shadow text-success no-text-shadow"></i>
+                    </p>
+                    <p class="h3 font-thin padder-v" data-bind="html: message"></p>
+                    <div class="padder-v">
+                        <a href="#" class="btn btn-primary btn-lg" data-bind="downloadFile:{url: $root.downloadInvoice() }, restext: 'Naati.Resources.Finance.resources.DownloadInvoice' "></a>
+                        <a href="#" class="btn btn-primary btn-lg" data-bind="click: newInvoce, restext: 'Naati.Resources.Finance.resources.OrContinue'"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

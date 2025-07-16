@@ -1,0 +1,10 @@
+Virtual User Script started at : 2021-06-10 11:52:04
+Running Vuser...
+Starting iteration 1.
+Notify: Transaction "01_Navigate to myNaati" started.
+Notify: Transaction "01_Navigate to myNaati" ended with a "Pass" status (Duration: 8.4640 Wasted Time: 0.4990).
+t=00015334ms: Warning -205179: The TC.getParam API is deprecated because it is synchronous. Use the asynchronous API TCA.getParam instead. For details, see https://admhelp.microfocus.com/tc/en/2021.0.0/Content/TruClient/procedures/Async_API_Example.htm.    [MsgId: MWAR-205179]
+Notify: Transaction "02_Login" started.
+Notify: Transaction "02_Login" ended with a "Pass" status (Duration: 3.0240 Wasted Time: 0.6220).
+Ending Vuser...
+Vuser Terminated.

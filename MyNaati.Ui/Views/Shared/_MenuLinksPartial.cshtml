@@ -1,0 +1,30 @@
+﻿@using MyNaati.Ui.ViewModels.Home
+@model IEnumerable<MyNaati.Ui.ViewModels.Home.MenuLinkModel>
+
+<div class="menu-link-container">
+
+    @foreach (var link in Model)
+    {
+        <div @(link.Id !=null ? string.Format("id={0}", link.Id):"") class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <a href="@link.UrlAction">
+                    @switch (link.IconType)
+                    {
+                        case MenuLinkModel.LinkIconType.FontAwesome:
+                            <i class="fa fa-@link.Icon fa-5x"></i>
+                            break;
+                        case MenuLinkModel.LinkIconType.Image:
+                            <img class="img-responsive" src="@Url.Content(string.Format("~/Content/Images/{0}", link.Icon))" alt="@link.AltImageText" />
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                </a>
+                <div class="caption">
+                    <h3><a href="@link.UrlAction">@link.Text</a></h3>
+                </div>
+            </div>
+        </div>
+    }
+
+</div> 

@@ -1,0 +1,45 @@
+
+<div class="hbox" data-bind="component: {
+    name: 'table-component',
+    params: tableDefinition
+}">
+</div>
+<script id="material-participants-header-template" type="text/html">
+    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.Shared.resources.NAATINumber'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.Shared.resources.Name'"></th>
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.RoleType'"></th>
+    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.TaskDescription'"></th>  
+    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.TotalCost'"></th>  
+    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.ApprovedDate'"></th>  
+    <th class="w-sm" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.PaymentDate'"></th>  
+    <th class="w-md" data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.PrimaryEmail'"></th>  
+</script>
+<script id="material-participants-row-template" type="text/html">
+    <tr>
+        <td>
+            <a href="#" target="_blank" class="text-info" data-bind="text: NaatiNumber, attr: { href: '#person/'+ NaatiNumber()}"></a>
+        </td>
+        <td data-bind="text: GivenName"></td>
+        <td data-bind="text: MemberTypeName"></td>
+        <td>
+            <!--ko foreach: { data: Tasks, as: 't' }-->
+            <div class="row m-b-sm">
+                <div class="col-sm-6 text-left">
+                    <label data-bind="html: t.MaterialRequestTaskTypeName"></label>
+                </div>
+                <div class="col-sm-6">
+                    <label data-bind="text:t.HoursSpent"></label>
+                    <label data-bind="reshtml: 'Naati.Resources.MaterialRequest.resources.Hours'"></label>
+                </div>
+            </div>
+
+            <!--/ko-->
+        </td>
+        <td style="text-align: right; padding-right: 75px;">
+            <span data-bind="text: TotalCost, visible:$root.showTotalCost"> </span>
+        </td>
+        <td data-bind="text: DisplayApprovedDate"></td>
+        <td data-bind="text: DisplayPaymentDate"></td>
+        <td data-bind="text: PrimaryEmail"></td>
+    </tr>
+</script>

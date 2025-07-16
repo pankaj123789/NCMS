@@ -1,0 +1,120 @@
+﻿@using MyNaati.Ui.UI
+@model MyNaati.Ui.Models.LogOnModel
+@{
+    Layout = "../Shared/MasterPages/_LayoutFluid.cshtml";
+    var offset = 4;
+}
+@section Head {
+    <script type="text/javascript">
+        $(function () {
+            $('form.form-horizontal').on('submit', function () {
+                var $this = $(this);
+                $this.find('button').prop('disabled', 'disabled');
+                $this.find('input').prop('readOnly', 'true');
+                $this.find('a').addClass('disabled').on('click', function (e) {
+                    e.preventDefault();
+                    return false;
+                });
+            });
+        });
+    </script>
+}
+@RenderBody()
+<div class="login-screen row">
+    <div class="col-lg-12 primary-overlay-container" style="background-image: url(@Url.Content("~/Content/Images/LogonBackground.png"));">
+        <div class="primary-overlay">
+            <div class="col-lg-12">
+                <img class="logo v-offset-xs-5" src="@Url.Content("~/Content/Images/NAATIAltLogo.png")" alt="Naati Logo" />
+            </div>
+            @if (Model == null || Model.MyNaatiAvailable)
+            {
+                <div class="col-lg-12 v-offset-xs-4">
+                    <h2 class="h1">Log into <span style="text-transform: none">myNAATI</span></h2>
+                </div>
+            }
+            @if (Model != null && Model.CredentialsRejected)
+            {
+                offset = 3;
+                if (Model.CredentialLockedOut)
+                {
+                    <div class="col-lg-12 v-offset-xs-4">
+                        <h4 class="text-warning text-no-transform">Your account has been locked.</h4>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-lg-12 v-offset-xs-4">
+                        <h4 class="text-warning text-no-transform">Incorrect password or unknown Email</h4>
+                    </div>
+                }
+
+            }
+            @if (Model != null && Model.AccessDisabledByNaati)
+            {
+                <div class="col-lg-12 v-offset-xs-4">
+                    <h4 class="text-warning text-no-transform">Your account has been disabled. Please contact Naati.</h4>
+                </div>
+            }
+            @if (Model != null && Model.ShowMessageOfTheDay)
+            {
+                <div class="col-lg-12 v-offset-xs-4">
+                    <span class="col-lg-4">&nbsp;</span>
+                    <span class="env-label col-lg-4" style="white-space: pre-line; text-align: left; line-height: 1.6;">
+                        @Model.MessageOfTheDay
+                    </span>
+                    <span class="col-lg-4">&nbsp;</span>
+                </div>
+            }
+            @if (Model == null || Model.MyNaatiAvailable)
+            {
+                <div class="col-sm-offset-4 col-sm-4 @string.Format("v-offset-sm-{0}", offset)">
+                    @using (Html.BeginForm("LogOn", "Account", new { ReturnUrl = Request.QueryString["ReturnUrl"] ?? string.Empty }, FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <div class="row">
+                                    @Html.LabelFor(m => m.UserName, "Email", new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-offset-1 col-sm-9">
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", tabindex = "1" })
+                                        @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "text-warning" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-8">
+                                <div class="row">
+                                    @Html.LabelFor(m => m.Password, "Password", new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-offset-1 col-sm-9">
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", type = "password", tabindex = "2" })
+                                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-warning" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="row">
+                                <div class="col-sm-offset-1 col-sm-12">
+                                    <button type="submit" class="btn btn-default btn-lg btn-signin" tabindex="3">Sign In</button>
+                                    <a href="@Url.Action("ResetPassword", "Account")" class="btn btn-default btn-lg btn-reset-password" role="button" tabindex="5">Reset Password</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="register">
+                                <p> If you do not have a myNAATI Account, please <a href="@Url.Action("Register", "Account")" class="register-link">click here</a> to register.</p>
+                            </div>
+                        </div>
+
+                        if (!string.IsNullOrEmpty(User.GetEnvironment()))
+                        {
+                            <span class="env-label" id="environment">@User.GetEnvironment()</span>
+                        }
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

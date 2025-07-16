@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="NAATI_Dev" Class="SamKeyGenerationDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.tblTableData" Member="TableDatas">
+    <Type Name="TableData">
+      <Column Name="TableName" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NextKey" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AllocateQuantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DefaultId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RowVersion" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+    </Type>
+  </Table>
+</Database>
