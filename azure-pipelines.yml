@@ -28,11 +28,11 @@ steps:
   inputs:
     restoreSolution: '**/*.sln'
 
-- task: VSBuild@1
-  displayName: 'Build Ncms.Ui'
-  inputs:
-    solution: 'Ncms.Ui/Ncms.Ui.csproj'
-    configuration: '$(buildConfiguration)'
+# - task: VSBuild@1
+#   displayName: 'Build Ncms.Ui'
+#   inputs:
+#     solution: 'Ncms.Ui/Ncms.Ui.csproj'
+#     configuration: '$(buildConfiguration)'
 
 - task: VSBuild@1
   displayName: 'Build MyNaati.Ui'
