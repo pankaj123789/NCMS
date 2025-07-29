@@ -75,7 +75,7 @@ steps:
       $(containerTag)
 
 
- - task: Docker@2
+- task: Docker@2
   displayName: 'Build NcmsUi Image'
   inputs:
     containerRegistry: 'naati-serviceconnection'
