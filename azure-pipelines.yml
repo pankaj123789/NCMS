@@ -118,7 +118,7 @@
 
 
 trigger:
-- main   # or your default branch
+- master   # or your default branch
 
 variables:
   buildConfiguration: 'Release'
