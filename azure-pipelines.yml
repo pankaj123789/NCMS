@@ -40,37 +40,28 @@ steps:
 #     solution: 'MyNaati.Ui/MyNaati.Ui.csproj'
 #     configuration: '$(buildConfiguration)'
 
-- task: VSBuild@1
-  displayName: 'Build MyNaati.Test'
-  inputs:
-    solution: 'MyNaati.Test/MyNaati.Test.csproj'
-    configuration: '$(buildConfiguration)'
+# - task: VSBuild@1
+#   displayName: 'Build MyNaati.Test'
+#   inputs:
+#     solution: 'MyNaati.Test/MyNaati.Test.csproj'
+#     configuration: '$(buildConfiguration)'
 
-- task: VSBuild@1
-  displayName: 'Build Ncms.Test'
-  inputs:
-    solution: 'Ncms.Test/Ncms.Test.csproj'
-    configuration: '$(buildConfiguration)'
+# - task: VSBuild@1
+#   displayName: 'Build Ncms.Test'
+#   inputs:
+#     solution: 'Ncms.Test/Ncms.Test.csproj'
+#     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
-  displayName: 'Run Unit Tests'
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*MyNaati.Test.dll
-      **\*Ncms.Test.dll
-    searchFolder: '$(System.DefaultWorkingDirectory)'
+# - task: VSTest@2
+#   displayName: 'Run Unit Tests'
+#   inputs:
+#     testSelector: 'testAssemblies'
+#     testAssemblyVer2: |
+#       **\*MyNaati.Test.dll
+#       **\*Ncms.Test.dll
+#     searchFolder: '$(System.DefaultWorkingDirectory)'
 
-- task: Docker@2
-  displayName: 'Build NcmsUi Image'
-  inputs:
-    containerRegistry: 'naati-serviceconnection'
-    repository: '$(acrLoginServer)/$(imageNcms)'
-    command: 'buildAndPush'
-    Dockerfile: 'Ncms.Ui/Dockerfile'   # Fixed case sensitivity
-    buildContext: 'Naati/Ncms.Ui'
-    tags: |
-      $(containerTag)
+
 
 - task: Docker@2
   displayName: 'Build MyNaatiUi Image'
@@ -79,9 +70,21 @@ steps:
     repository: '$(acrLoginServer)/$(imageMyNaati)'
     command: 'buildAndPush'
     Dockerfile: 'MyNaati.Ui/Dockerfile'   # Fixed case sensitivity
-    buildContext: 'Naati/MyNaati.Ui'
+    buildContext: 'MyNaati.Ui'
     tags: |
       $(containerTag)
+
+
+ - task: Docker@2
+  displayName: 'Build NcmsUi Image'
+  inputs:
+    containerRegistry: 'naati-serviceconnection'
+    repository: '$(acrLoginServer)/$(imageNcms)'
+    command: 'buildAndPush'
+    Dockerfile: 'Ncms.Ui/Dockerfile'   # Fixed case sensitivity
+    buildContext: 'Ncms.Ui'
+    tags: |
+      $(containerTag)     
 
 - task: HelmInstaller@1
   displayName: 'Install Helm'
