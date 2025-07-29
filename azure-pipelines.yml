@@ -43,13 +43,13 @@ steps:
 - task: VSBuild@1
   displayName: 'Build MyNaati.Test'
   inputs:
-    solution: 'Naati/MyNaati.Test/MyNaati.Test.csproj'
+    solution: 'MyNaati.Test/MyNaati.Test.csproj'
     configuration: '$(buildConfiguration)'
 
 - task: VSBuild@1
   displayName: 'Build Ncms.Test'
   inputs:
-    solution: 'Naati/Ncms.Test/Ncms.Test.csproj'
+    solution: 'Ncms.Test/Ncms.Test.csproj'
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
@@ -67,7 +67,7 @@ steps:
     containerRegistry: 'naati-serviceconnection'
     repository: '$(acrLoginServer)/$(imageNcms)'
     command: 'buildAndPush'
-    Dockerfile: 'Naati/Ncms.Ui/Dockerfile'   # Fixed case sensitivity
+    Dockerfile: 'Ncms.Ui/Dockerfile'   # Fixed case sensitivity
     buildContext: 'Naati/Ncms.Ui'
     tags: |
       $(containerTag)
@@ -78,7 +78,7 @@ steps:
     containerRegistry: 'naati-serviceconnection'
     repository: '$(acrLoginServer)/$(imageMyNaati)'
     command: 'buildAndPush'
-    Dockerfile: 'Naati/MyNaati.Ui/Dockerfile'   # Fixed case sensitivity
+    Dockerfile: 'MyNaati.Ui/Dockerfile'   # Fixed case sensitivity
     buildContext: 'Naati/MyNaati.Ui'
     tags: |
       $(containerTag)
