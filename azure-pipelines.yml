@@ -34,11 +34,11 @@ steps:
 #     solution: 'Ncms.Ui/Ncms.Ui.csproj'
 #     configuration: '$(buildConfiguration)'
 
-- task: VSBuild@1
-  displayName: 'Build MyNaati.Ui'
-  inputs:
-    solution: 'MyNaati.Ui/MyNaati.Ui.csproj'
-    configuration: '$(buildConfiguration)'
+# - task: VSBuild@1
+#   displayName: 'Build MyNaati.Ui'
+#   inputs:
+#     solution: 'MyNaati.Ui/MyNaati.Ui.csproj'
+#     configuration: '$(buildConfiguration)'
 
 - task: VSBuild@1
   displayName: 'Build MyNaati.Test'
