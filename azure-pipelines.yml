@@ -147,13 +147,13 @@ steps:
 - task: VSBuild@1
   displayName: 'Build Ncms.Ui'
   inputs:
-    solution: 'Naati/Ncms.Ui/Ncms.Ui.csproj'
+    solution: 'Ncms.Ui/Ncms.Ui.csproj'
     configuration: '$(buildConfiguration)'
 
 - task: VSBuild@1
   displayName: 'Build MyNaati.Ui'
   inputs:
-    solution: 'Naati/MyNaati.Ui/MyNaati.Ui.csproj'
+    solution: 'MyNaati.Ui/MyNaati.Ui.csproj'
     configuration: '$(buildConfiguration)'
 
 - task: VSBuild@1
