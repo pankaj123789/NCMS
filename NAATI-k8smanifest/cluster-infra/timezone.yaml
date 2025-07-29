@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: timezone-setter-config
+  namespace: default  # Change this to your namespace if different
+data:  
+  Set-SydneyTime.ps1: |
+    # Start logging
+    Start-Transcript -Path C:\scripts\timezone-log.txt
+    Write-Output "Starting timezone script at $(Get-Date)"
+    
+    # Copy SSH key from mounted secret
+    Write-Output "Copying SSH key..."
+    cp C:\.ssh\id_rsa C:\trader_rsa
+    
+    # Set proper permissions on SSH key
+    Write-Output "Setting SSH key permissions..."
+    $acl = Get-Acl C:\trader_rsa
+    $acl.SetAccessRuleProtection($true, $false)
+    $acl.SetAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule("$env:USERNAME", "FullControl", "Allow")))
+    $acl | Set-Acl C:\trader_rsa 
+    
+    # Remove passphrase from key for non-interactive use
+    Write-Output "Removing passphrase from SSH key..."
+    Write-Output "SSH_PASSPHRASE environment variable: $($env:SSH_PASSPHRASE -ne $null)"
+    ssh-keygen -p -P "$env:SSH_PASSPHRASE" -N '""' -f C:\trader_rsa
+    
+    if ($LASTEXITCODE -eq 0) {
+        Write-Output "SSH key passphrase removed successfully"
+    } else {
+        Write-Output "Failed to remove SSH key passphrase. Exit code: $LASTEXITCODE"
+    }
+    
+    # Test SSH connection first
+    Write-Output "Testing SSH connection to $env:SSH_USER@$env:NODE_IP..."
+    $testProc = Start-Process -FilePath ssh.exe -ArgumentList "-oStrictHostKeyChecking=no -i C:\\trader_rsa $env:SSH_USER@$env:NODE_IP echo 'SSH connection test successful'" -PassThru -Wait
+    
+    if ($testProc.ExitCode -eq 0) {
+        Write-Output "SSH connection test successful"
+        
+        # Now set the timezone on the node
+        Write-Output "Setting timezone on node $env:NODE_IP..."
+        $sshProc = Start-Process -FilePath ssh.exe -ArgumentList "-oStrictHostKeyChecking=no -i C:\\trader_rsa $env:SSH_USER@$env:NODE_IP powershell Set-TimeZone 'AUS Eastern Standard Time'" -PassThru
+        Wait-Process -InputObject $sshProc
+        
+        if ($sshProc.ExitCode -eq 0) {
+            Write-Output "Timezone set successfully on node"
+            
+            # Verify the timezone was set
+            Write-Output "Verifying timezone on node..."
+            $verifyProc = Start-Process -FilePath ssh.exe -ArgumentList "-oStrictHostKeyChecking=no -i C:\\trader_rsa $env:SSH_USER@$env:NODE_IP powershell Get-TimeZone" -PassThru -Wait -RedirectStandardOutput C:\scripts\timezone-verify.txt
+            
+            if (Test-Path C:\scripts\timezone-verify.txt) {
+                $timezoneResult = Get-Content C:\scripts\timezone-verify.txt
+                Write-Output "Current node timezone: $timezoneResult"
+            }
+            
+            Write-Output "Timezone setter completed successfully at $(Get-Date)"
+        } else {
+            Write-Output "Failed to set timezone. SSH process exited with code: $($sshProc.ExitCode)"
+        }
+    } else {
+        Write-Output "SSH connection test failed. Exit code: $($testProc.ExitCode)"
+        Write-Output "Please check SSH credentials and network connectivity"
+    }
+    
+    # Stop logging
+    Stop-Transcript
+    
+    # Keep container running for a while to allow log inspection
+    Write-Output "Keeping container alive for 10 minutes for log inspection..."
+    Start-Sleep -Seconds 600

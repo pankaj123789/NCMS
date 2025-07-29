@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: timezone-setter
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      name: timezone-setter
+  template:
+    metadata:
+      labels:
+        name: timezone-setter
+    spec:
+      imagePullSecrets:
+       - name: acr-secret-new
+      containers:
+      - name: timezonesetter
+        image: naatidevacri0q0.azurecr.io/node-timezone2019:latest
+        command: ["powershell"]
+        args:
+        - C:\\scripts\\Set-SydneyTime.ps1       
+        volumeMounts:
+        - name: ssh-key
+          mountPath: /.ssh
+        - name: script-mount
+          mountPath: /scripts
+        env:
+        - name: NODE_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP  # Gets the host node's IP address
+        - name: SSH_PASSPHRASE
+          valueFrom:
+            secretKeyRef:
+              name: timezone-setter-credentials
+              key: SSH_PASSPHRASE
+        - name: SSH_USER
+          valueFrom:
+            secretKeyRef:
+
+              name: timezone-setter-credentials
+              key: SSH_USER
+      nodeSelector:
+        beta.kubernetes.io/os: windows  # Only run on Windows nodes
+      # tolerations:
+      # - key: dedicated
+      #   operator: Equal
+      #   value: trader
+      #   effect: NoSchedule              # Can run on nodes with "trader" taint
+      volumes:
+      - name: ssh-key
+        secret:
+          secretName: timezone-setter-ssh-key
+          defaultMode: 0777             # Full permissions for SSH key
+      - name: script-mount
+        configMap:
+          name: timezone-setter-config

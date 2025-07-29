@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-ncms
+  labels:
+    helm.sh/chart: ncms-0.1.0
+    app.kubernetes.io/name: ncms
+    app.kubernetes.io/instance: dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ncms
+      app.kubernetes.io/instance: dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ncms
+        app.kubernetes.io/instance: dev
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.nodeName }}
+      nodeName: {{ .Values.nodeName }}
+      {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      containers:
+        - name: ncms
+          securityContext: {{ toYaml .Values.containerSecurityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: dev-naati-keyvault
+            - configMapRef:
+                name: dev-ncms
+          env:
+            - name: KeyVaultUrl
+              value: "{{ .Values.env.KeyVaultUrl }}"
+            - name: PodIp
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: dev-naati-persistent-storage
+              mountPath: "{{ .Values.persistentStorage.mountPath }}"
+            - name: dev-naati-temp-persistent-storage
+              mountPath: "{{ .Values.tempPersistentStorage.mountPath }}"
+          lifecycle:
+            postStart:
+              exec:
+                command: 
+                  - "powershell.exe"
+                  - "-Command"
+                  - "Start-Sleep -s 10; try { Invoke-WebRequest -URI http://localhost/login -UseBasicParsing -TimeoutSec 5 } catch { Write-Host 'PostStart hook - app not ready yet' }; Write-Host 'postStartNcmsExecuted';"
+            preStop:
+              exec:
+                command:
+                  - "powershell.exe"
+                  - "-Command"
+                  - "try { Invoke-WebRequest -URI http://localhost/api/lifecycle/stop -UseBasicParsing -TimeoutSec 5 } catch { Write-Host 'PreStop endpoint not available' }; Start-Sleep -s 15; Write-Host 'preStopNcmsExecuted';"
+      volumes:
+        - name: dev-naati-persistent-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistentStorage.claimName }}
+        - name: dev-naati-temp-persistent-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.tempPersistentStorage.claimName }}

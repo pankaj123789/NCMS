@@ -1,0 +1,18 @@
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: "dev-ncms"
+spec:
+  scaleTargetRef:
+    apiVersion: extensions/v1beta2
+    kind: Deployment
+    name: dev-ncms
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 175

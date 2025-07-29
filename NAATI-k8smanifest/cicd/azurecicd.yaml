@@ -1,0 +1,117 @@
+trigger:
+  - main   # or your default branch
+
+variables:
+  buildConfiguration: 'Release'
+  # Set those variables in your pipeline library or as pipeline variables, or replace them here:
+  acrName: 'naatidevacri0q0'               # e.g., naatidevacri0q0
+  acrLoginServer: 'naatidevacri0q0.azurecr.io' # e.g., naatidevacri0q0.azurecr.io
+  containerTag: '$(Build.BuildNumber)'      # Automatically uses Azure build number
+  helmChartPath: 'Naati/Deployment Scripts/Helm'    # Relative path to Helm chart
+  imageNcms: 'ncmsui'
+  imageMyNaati: 'mynaatiui'
+
+pool:
+  name: 'SelfHostedWindows'    # Your agent pool
+
+steps:
+
+  - checkout: self
+
+  - task: NuGetToolInstaller@1
+
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '**/*.sln'
+
+  - task: VSBuild@1
+    displayName: 'Build Ncms.Ui'
+    inputs:
+      solution: 'Naati/Ncms.Ui/Ncms.Ui.csproj'
+      configuration: '$(buildConfiguration)'
+
+  - task: VSBuild@1
+    displayName: 'Build MyNaati.Ui'
+    inputs:
+      solution: 'Naati/MyNaati.Ui/MyNaati.Ui.csproj'
+      configuration: '$(buildConfiguration)'
+
+  - task: VSBuild@1
+    displayName: 'Build MyNaati.Test'
+    inputs:
+      solution: 'Naati/MyNaati.Test/MyNaati.Test.csproj'
+      configuration: '$(buildConfiguration)'
+  
+  - task: VSBuild@1
+    displayName: 'Build Ncms.Test'
+    inputs:
+      solution: 'Naati/Ncms.Test/Ncms.Test.csproj'
+      configuration: '$(buildConfiguration)'
+
+  - task: VSTest@2
+    displayName: 'Run Unit Tests'
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*MyNaati.Test.dll
+        **\*Ncms.Test.dll
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+
+  - task: Docker@2
+    displayName: 'Build NcmsUi Image'
+    inputs:
+      containerRegistry: '$(acrName)-serviceconnection'
+      repository: '$(acrLoginServer)/$(imageNcms)'
+      command: 'buildAndPush'
+      Dockerfile: 'Naati/Ncms.Ui/DockerFile'   # Adjust path if needed
+      buildContext: 'Naati/Ncms.Ui'
+      tags: |
+        $(containerTag)
+
+  - task: Docker@2
+    displayName: 'Build MyNaatiUi Image'
+    inputs:
+      containerRegistry: '$(acrName)-serviceconnection'
+      repository: '$(acrLoginServer)/$(imageMyNaati)'
+      command: 'buildAndPush'
+      Dockerfile: 'Naati/MyNaati.Ui/DockerFile'   # Adjust path if needed
+      buildContext: 'Naati/MyNaati.Ui'
+      tags: |
+        $(containerTag)
+
+  - task: HelmInstaller@1
+    displayName: 'Install Helm'
+    inputs:
+      helmVersionToInstall: 'latest'
+
+  - script: |
+      helm package $(helmChartPath) --version $(containerTag)
+    displayName: 'Package Helm Chart'
+
+  - task: AzureCLI@2
+    displayName: 'Push Helm Chart to ACR'
+    inputs:
+      azureSubscription: 'ed413ed7-5e7b-44da-a3f2-dd46585f604e'  # Service connection name
+      scriptType: 'ps'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az acr login --name $(acrName)
+        # Push Helm chart package (*.tgz) to ACR helm repo (adjust path if needed)
+        $package = Get-ChildItem -Path $(helmChartPath) -Filter *.tgz | Select-Object -First 1
+        if ($package) {
+          az acr helm push $package.FullName --name $(acrName)
+        }
+
+  # (Optional) Deploy/upgrade with Helm directly from pipeline, if desired:
+  - task: AzureCLI@2
+    displayName: 'Helm Upgrade Deploy'
+    inputs:
+      azureSubscription: 'ed413ed7-5e7b-44da-a3f2-dd46585f604e'
+      scriptType: 'ps'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks
+        helm upgrade uat naati --install --namespace uat \
+          --version $(containerTag) \
+          -f "$(helmChartPath)/_values.UAT.yaml"
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))

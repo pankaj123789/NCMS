@@ -1,0 +1,61 @@
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: timezone-setter-config
+#   namespace: default
+# data:  
+#   Set-SydneyTime.ps1: | 
+#   Write-Host "Starting timezone script"
+# # ... your code ...
+     
+#     cp C:\.ssh\id_rsa C:\trader_rsa
+#     $acl = Get-Acl C:\trader_rsa
+#     $acl.SetAccessRuleProtection(<#isProtected#>$true, <#preserveInheritance#>$false)
+#     $acl.SetAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule("$env:USERNAME", "FullControl", "Allow")))
+#     $acl | Set-Acl C:\trader_rsa 
+
+#     # Remove passphrase from key for non-interactive use
+#     #ssh-keygen -p -P $env:SSH_PASSPHRASE -N '""' -f C:\trader_rsa
+
+#     $sshProc = Start-Process -FilePath ssh.exe -ArgumentList "-oStrictHostKeyChecking=no -t -i C:\\trader_rsa  $env:SSH_USER@$env:NODE_IP powershell Set-TimeZone `'AUS Eastern Standard Time`'" -Passthru
+#     Wait-Process -InputObject $sshProc
+
+#     if ($sshProc.ExitCode -ne 0) {
+#       Write-Warning "Timezone setter exited with status code $($sshProc.ExitCode)"
+#     } else {
+#       Write-Host "Set timezone completed"
+#       Wait-Event
+#     }
+
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: timezone-setter-config
+  namespace: default
+data:  
+  Set-SydneyTime.ps1: |
+    Start-Transcript -Path C:\scripts\timezone-log.txt
+
+    Write-Output "Starting timezone script"
+    cp C:\.ssh\id_rsa C:\trader_rsa
+    $acl = Get-Acl C:\trader_rsa
+    $acl.SetAccessRuleProtection($true, $false)
+    $acl.SetAccessRule((New-Object System.Security.AccessControl.FileSystemAccessRule("$env:USERNAME", "FullControl", "Allow")))
+    $acl | Set-Acl C:\trader_rsa 
+
+    # Remove passphrase from key for non-interactive use
+    #ssh-keygen -p -P $env:SSH_PASSPHRASE -N '""' -f C:\trader_rsa
+
+    $sshProc = Start-Process -FilePath ssh.exe -ArgumentList "-oStrictHostKeyChecking=no -t -i C:\\trader_rsa  $env:SSH_USER@$env:NODE_IP powershell Set-TimeZone `'AUS Eastern Standard Time`'" -Passthru
+    Wait-Process -InputObject $sshProc
+
+    if ($sshProc.ExitCode -ne 0) {
+      Write-Output "Timezone setter exited with status code $($sshProc.ExitCode)"
+    } else {
+      Write-Output "Set timezone completed"
+    }
+
+    Stop-Transcript
+    Start-Sleep -Seconds 600

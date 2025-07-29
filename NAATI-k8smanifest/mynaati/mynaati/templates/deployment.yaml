@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-mynaati-release-mynaati  # SPECIFY FULL NAME MANUALLY
+  labels:
+    helm.sh/chart: mynaati-1.0.0
+    app.kubernetes.io/name: mynaati
+    app.kubernetes.io/instance: my-mynaati-release
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: {{ .Values.strategy.type }}
+    rollingUpdate:
+      maxSurge: {{ .Values.strategy.rollingUpdate.maxSurge }}
+      maxUnavailable: {{ .Values.strategy.rollingUpdate.maxUnavailable }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mynaati
+      app.kubernetes.io/instance: my-mynaati-release
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mynaati
+        app.kubernetes.io/instance: my-mynaati-release
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      {{- if .Values.nodeName }}
+      nodeName: {{ .Values.nodeName }}
+      {{- end }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+      securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      containers:
+        - name: mynaati
+          securityContext: {{ toYaml .Values.containerSecurityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - secretRef:
+                name: dev-naati-keyvault
+            - configMapRef:
+                name: mynaati-config
+          env:
+            - name: KeyVaultUrl
+              value: "{{ .Values.env.KeyVaultUrl }}"
+            - name: PodIp
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: my-mynaati-release-naati-persistent-storage
+              mountPath: "{{ .Values.persistentStorage.mountPath }}"
+            - name: my-mynaati-release-naati-temp-persistent-storage
+              mountPath: "{{ .Values.tempPersistentStorage.mountPath }}"
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - "powershell.exe"
+                  - "-Command"
+                  - "Start-Sleep -s 10; try { Invoke-WebRequest -URI http://localhost/home -UseBasicParsing -TimeoutSec 10 } catch { Write-Host 'PostStart hook - app not ready yet' }; Write-Host 'postStartMyNaatiExecuted';"
+            preStop:
+              exec:
+                command:
+                  - "powershell.exe"
+                  - "-Command"
+                  - "try { Invoke-WebRequest -URI http://localhost/lifecycle/stop -UseBasicParsing -TimeoutSec 10 } catch { Write-Host 'PreStop endpoint not available' }; Start-Sleep -s 15; Write-Host 'preStopMyNaatiExecuted';"
+      volumes:
+        - name: my-mynaati-release-naati-persistent-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistentStorage.claimName }}
+        - name: my-mynaati-release-naati-temp-persistent-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.tempPersistentStorage.claimName }}
+      affinity: {{ toYaml .Values.affinity | nindent 8 }}
+      tolerations: {{ toYaml .Values.tolerations | nindent 8 }}

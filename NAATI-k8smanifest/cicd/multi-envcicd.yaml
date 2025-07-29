@@ -1,0 +1,160 @@
+trigger:
+- main
+
+variables:
+  buildConfiguration: 'Release'
+  aksCluster: 'YourAKSClusterName'
+  resourceGroup: 'YourResourceGroup'
+  acrName: 'acrtest0002'
+  acrLoginServer: 'acrtest0002.azurecr.io'
+  uatNamespace: 'uat'
+  prodNamespace: 'production'
+  helmChartPath: 'Naati/Deployment Scripts/Helm'
+  scriptsPath: 'Naati/Deployment Scripts'
+  tag: '$(Build.BuildId)'
+
+pool:
+  vmImage: 'windows-latest'
+
+stages:
+# ----------------- CI: Build & Test -----------------
+- stage: Build
+  displayName: 'Build and Test'
+  jobs:
+  - job: Build
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Use .NET Framework 4.8'
+      inputs:
+        packageType: 'sdk'
+        version: '4.8.x'
+        includePreviewVersions: true
+
+    - task: NuGetToolInstaller@1
+
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '**/*.sln'
+
+    - script: |
+        msbuild Naati/Ncms.Ui/Ncms.Ui.csproj /p:Configuration=$(buildConfiguration)
+        msbuild Naati/MyNaati.Ui/MyNaati.Ui.csproj /p:Configuration=$(buildConfiguration)
+      displayName: 'Build Solutions'
+
+    - script: |
+        msbuild Naati/MyNaati.Test/MyNaati.Test.csproj /p:Configuration=$(buildConfiguration)
+        msbuild Naati/Ncms.Test/Ncms.Test.csproj /p:Configuration=$(buildConfiguration)
+      displayName: 'Build Tests'
+
+    - task: VSTest@2
+      inputs:
+        testSelector: 'testAssemblies'
+        testAssemblyVer2: |
+          **\*Test.dll
+        searchFolder: '$(System.DefaultWorkingDirectory)'
+        codeCoverageEnabled: true
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+
+# ----------------- CD: Build Docker, Push, Deploy to UAT -----------------
+- stage: Deploy_UAT
+  displayName: 'Deploy to UAT'
+  dependsOn: Build
+  jobs:
+  - deployment: DeployUAT
+    environment: 'uat'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+
+          - task: AzureCLI@2
+            displayName: 'Login to Azure'
+            inputs:
+              azureSubscription: 'YourAzureRMServiceConnection'
+              scriptType: 'ps'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az acr login --name $(acrName)
+
+          - task: PowerShell@2
+            displayName: 'Build, Push Docker Images, Push Helm Charts (UAT)'
+            inputs:
+              filePath: '$(Build.SourcesDirectory)/$(scriptsPath)/BuildLocalEnv.ps1'
+              arguments: '-deployEnvironment $(uatNamespace)'
+              pwsh: false
+
+          - task: HelmInstaller@1
+            inputs:
+              helmVersionToInstall: 'latest'
+
+          - task: HelmDeploy@0
+            displayName: 'Helm Upgrade UAT'
+            inputs:
+              connectionType: 'Azure Resource Manager'
+              azureSubscription: 'YourAzureRMServiceConnection'
+              azureResourceGroup: '$(resourceGroup)'
+              kubernetesCluster: '$(aksCluster)'
+              namespace: '$(uatNamespace)'
+              command: upgrade
+              chartType: FilePath
+              chartPath: '$(Build.SourcesDirectory)/$(helmChartPath)'
+              releaseName: 'naati'
+              overrideValues: |
+                image.tag=$(tag)
+              install: true
+
+# ----------------- CD: Deploy to Production (Manual Approval) -----------------
+- stage: Deploy_Production
+  displayName: 'Deploy to Production'
+  dependsOn: Deploy_UAT
+  condition: succeeded()
+  jobs:
+  - deployment: DeployProd
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+
+          - task: AzureCLI@2
+            displayName: 'Login to Azure'
+            inputs:
+              azureSubscription: 'YourAzureRMServiceConnection'
+              scriptType: 'ps'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                az acr login --name $(acrName)
+
+          - task: PowerShell@2
+            displayName: 'Build, Push Docker Images, Push Helm Charts (Production)'
+            inputs:
+              filePath: '$(Build.SourcesDirectory)/$(scriptsPath)/BuildLocalEnv.ps1'
+              arguments: '-deployEnvironment $(prodNamespace)'
+              pwsh: false
+
+          - task: HelmInstaller@1
+            inputs:
+              helmVersionToInstall: 'latest'
+
+          - task: HelmDeploy@0
+            displayName: 'Helm Upgrade Production'
+            inputs:
+              connectionType: 'Azure Resource Manager'
+              azureSubscription: 'YourAzureRMServiceConnection'
+              azureResourceGroup: '$(resourceGroup)'
+              kubernetesCluster: '$(aksCluster)'
+              namespace: '$(prodNamespace)'
+              command: upgrade
+              chartType: FilePath
+              chartPath: '$(Build.SourcesDirectory)/$(helmChartPath)'
+              releaseName: 'naati'
+              overrideValues: |
+                image.tag=$(tag)
+              install: true

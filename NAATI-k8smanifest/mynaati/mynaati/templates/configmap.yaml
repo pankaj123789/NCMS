@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mynaati-config  # MANUAL NAME
+  labels:
+    app: mynaati
+    component: config
+data:
+{{- range $key, $value := .Values.config }}
+  {{ $key }}: "{{ $value }}"
+{{- end }}

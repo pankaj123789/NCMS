@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: resource-quota-mem-cpu-pvc
+spec:
+  hard:
+    requests.cpu: "0.2"
+    requests.memory: 600M
+    limits.cpu: "0.5"
+    limits.memory: 1500M
+    persistentvolumeclaims: 1
+    requests.storage: 1Gi
+    services: 2
+    services.loadbalancers: 2

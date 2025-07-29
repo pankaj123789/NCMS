@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-mynaati-release-mynaati # Derived from `mynaati.fullname` (ReleaseName-ChartName)
+  labels:
+    helm.sh/chart: mynaati-1.0.0 # Derived from `mynaati.chart` (ChartName-ChartVersion)
+    app.kubernetes.io/name: mynaati # Derived from `mynaati.name`
+    app.kubernetes.io/instance: my-mynaati-release # Derived from `.Release.Name`
+    app.kubernetes.io/version: "1.0.0" # Assuming .Chart.AppVersion is 1.0.0
+    app.kubernetes.io/managed-by: Helm # Derived from .Release.Service
+spec:
+
+  replicas: 1 # From .Values.replicaCount
+  strategy:
+    type: RollingUpdate # From .Values.strategy.type
+    rollingUpdate:
+      maxSurge: 1 # From .Values.strategy.rollingUpdate.maxSurge
+      maxUnavailable: 0 # From .Values.strategy.rollingUpdate.maxUnavailable
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mynaati # Derived from `mynaati.name`
+      app.kubernetes.io/instance: my-mynaati-release # Derived from .Release.Name
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mynaati # Derived from `mynaati.name`
+        app.kubernetes.io/instance: my-mynaati-release # Derived from .Release.Name
+    spec:
+      imagePullSecrets:
+       - name: acr-secret-new
+      serviceAccountName: kv-reader-sa
+      securityContext: {} 
+   
+      nodeName: akse2asv5000000      
+      containers:
+        - name: mynaati # From .Chart.Name
+          securityContext: {} # From .Values.securityContext (empty object)
+          image: naatidevacri0q0.azurecr.io/mynaati-production:v2  # From .Values.image.repository and assumed Chart.AppVersion
+          imagePullPolicy: IfNotPresent # From .Values.image.pullPolicy
+          envFrom:
+            - secretRef:
+                name: dev-naati-keyvault # Derived from `mynaati.keyVaultSecret`
+            - configMapRef:
+                name: mynaati-config # Derived from `mynaati.fullname`
+            # - secretRef:
+            #     name: dev-naati-machinekey
+          env:
+            - name: KeyVaultUrl
+              value: "https://naati-dev-kv-jyrb.vault.azure.net/"
+            - name: PodIp
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: my-mynaati-release-naati-persistent-storage # Derived from `mynaati.persistentStorage`
+              mountPath: "/storage"
+            - name: my-mynaati-release-naati-temp-persistent-storage # Derived from `mynaati.tempPersistentStorage`
+              mountPath: "/tempStorage"
+          # livenessProbe:
+          #   httpGet:
+          #     path: /home # From .Values.livenessProbe.path
+          #     port: http
+          #   initialDelaySeconds: 240 # From .Values.livenessProbe.initialDelaySeconds
+          #   periodSeconds: 45 # From .Values.livenessProbe.periodSeconds
+          #   timeoutSeconds: 15 # From .Values.livenessProbe.timeoutSeconds
+          #   failureThreshold: 4 # From .Values.livenessProbe.failureThreshold
+          # readinessProbe:
+          #   httpGet:
+          #     path: /home/testconnection # From .Values.readinessProbe.path
+          #     port: http
+          #   timeoutSeconds: 15 # From .Values.readinessProbe.timeoutSeconds (repeated from liveness, assuming intent)
+          #   initialDelaySeconds: 90 # From .Values.readinessProbe.initialDelaySeconds
+          #   periodSeconds: 45 # From .Values.readinessProbe.periodSeconds
+          #   successThreshold: 1 # From .Values.readinessProbe.successThreshold
+          #   failureThreshold: 3 # From .Values.readinessProbe.failureThreshold
+          lifecycle:
+            postStart:
+              exec:
+                command: 
+                  - "powershell.exe"
+                  - "-Command"
+                  - "Start-Sleep -s 10; try { Invoke-WebRequest -URI http://localhost/home -UseBasicParsing -TimeoutSec 10 } catch { Write-Host 'PostStart hook - app not ready yet' }; Write-Host 'postStartMyNaatiExecuted';"
+            preStop:
+              exec:
+                command: 
+                  - "powershell.exe"
+                  - "-Command"
+                  - "try { Invoke-WebRequest -URI http://localhost/lifecycle/stop -UseBasicParsing -TimeoutSec 10 } catch { Write-Host 'PreStop endpoint not available' }; Start-Sleep -s 15; Write-Host 'preStopMyNaatiExecuted';"
+      #   kubernetes.io/os: windows # From .Values.nodeSelector
+      terminationGracePeriodSeconds: 15 
+      volumes:
+        - name: my-mynaati-release-naati-persistent-storage # Derived from `mynaati.persistentStorage`
+          persistentVolumeClaim:
+            claimName: dev-naati-volume-claim # Derived from `mynaati.volumeClaimName`
+        - name: my-mynaati-release-naati-temp-persistent-storage # Derived from `mynaati.tempPersistentStorage`
+          persistentVolumeClaim:
+            claimName: dev-naati-temp-volume-claim # Derived from `mynaati.tempVolumeClaimName`
+      affinity: {} # From .Values.affinity (empty object)
+      tolerations: [] # From .Values.tolerations (empty array)

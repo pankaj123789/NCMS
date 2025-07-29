@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: pod-limit-range
+spec:
+  limits:
+  - max:
+      cpu: "450m"
+      memory: "1000M"
+    min:
+      cpu: "400m"
+      memory: "300M"
+    default:
+      cpu: "450m"
+      memory: "1000M"
+    defaultRequest:
+      cpu: "400"
+      memory: "900M"
+    type: Container

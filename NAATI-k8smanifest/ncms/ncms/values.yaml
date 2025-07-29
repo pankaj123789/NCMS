@@ -1,0 +1,39 @@
+replicaCount: 1
+
+image:
+  repository: naatidevacri0q0.azurecr.io/ncmsui-production
+  tag: v2
+  pullPolicy: IfNotPresent
+
+imagePullSecrets:
+  - name: acr-secret-new
+
+nodeName: akse2asv5000000
+
+serviceAccount:
+  name: kv-reader-sa
+
+persistentStorage:
+  claimName: dev-naati-volume-claim
+  mountPath: /storage
+
+tempPersistentStorage:
+  claimName: dev-naati-temp-volume-claim
+  mountPath: /tempStorage
+
+env:
+  KeyVaultUrl: https://naati-dev-kv-jyrb.vault.azure.net/
+
+service:
+  loadBalancerIP: 10.50.4.100
+  type: LoadBalancer
+  port: 80
+  targetPort: http
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+
+podSecurityContext: {}
+containerSecurityContext: {}
+terminationGracePeriodSeconds: 15
+
+# Add more if needed

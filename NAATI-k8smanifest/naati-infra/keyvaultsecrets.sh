@@ -1,0 +1,78 @@
+#!/bin/bash
+ 
+# Configuration
+KEYVAULT_NAME="naati-dev-kv-jyrb"
+SECRET_PREFIX="UAT"
+CONNECTION_STRING="Server=tcp:sql-todoapp-1750099827.database.windows.net,1433;Initial Catalog=TodoAppDB;Persist Security Info=False;User ID=sqladmin;Password=TodoApp@2025!;MultipleActiveResultSets=False;Encrypt=true;TrustServerCertificate=False;Connection Timeout=30;"
+ AAD_AUTH_TENANT="41bb5789-7441-4051-b270-c49376cfab28"
+ AZURE_APP_TENANT="41bb5789-7441-4051-b270-c49376cfab28"
+ AAD_AUTH_CLIENT_ID="48f81f97-9008-40ff-866c-7357733e91d9"
+ AZURE_APP_CLIENT_ID="48f81f97-9008-40ff-866c-7357733e91d9"
+ OFFICE365_APP_ID="48f81f97-9008-40ff-866c-7357733e91d9"
+ SAS_ACCOUNT_NAME="naatidevappfilesi0q0"
+ SAS_SHARE_NAME="app-files-share"
+ SAS_ACCOUNT_KEY="AvSrgnmB7259VtkmTUki/dXvkyF3YKte1zqEIIfa2VanGG8SqZVWVj/TEBkuTZg+vMbDoBpAEfKQ+AStiS0GXg=="
+ DEFAULT_USER_DOMAIN="hoshodigital.com"
+ AZURE_EMAIL_ACCOUNT="vanshj@hoshodigital.com"
+
+
+# missing varialbe 
+
+NCMS_DEFAULT_IDENTITY="defaultncmsuser"
+MYNAATI_DEFAULT_IDENTITY="defaultmynaatiuser"
+RECAPTCHA_SECRET_KEY="placeholder-recaptcha-key"
+SECUREPAY_CLIENT_ID="placeholder-securepay-id"
+SECUREPAY_CLIENT_SECRET="placeholder-securepay-secret"
+SECUREPAY_MERCHANT_ID="placeholder-merchant-id"
+SECUREPAY_MERCHANT_PASSWORD="placeholder-merchant-password"
+SECUREPAY_MERCHANT_CODE="placeholder-merchant-code"
+GOOGLE_API_KEY="placeholder-google-key"
+PAYPAL_CLIENT_ID="placeholder-paypal-id"
+PAYPAL_CLIENT_SECRET="placeholder-paypal-secret"
+WIISE_AUTH_CLIENT_ID="placeholder-wiise-id"
+WIISE_CLIENT_SECRET="placeholder-wiise-secret"
+WIISE_AUTH_TENANT="placeholder-wiise-tenant"
+OUTBOUND_IP="0.0.0.0"
+SHARED_ACCOUNTS="admin@example.com"
+REPORTING_DB_CONNECTION_STRING="$CONNECTION_STRING"
+NCMS_MIGRATION_CONNECTION_STRING="$CONNECTION_STRING"
+REPORTING_MIGRATION_CONNECTION_STRING="$CONNECTION_STRING"
+
+
+
+# Batch set secrets using Azure CLI
+echo "Setting secrets in Key Vault: $KEYVAULT_NAME"
+ 
+# Method 1: Direct commands
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}ConnectionString" --value "$CONNECTION_STRING"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}ReportingDbConnectionString" --value "$REPORTING_DB_CONNECTION_STRING"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}NcmsMigrationConnectionString" --value "$NCMS_MIGRATION_CONNECTION_STRING"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}ReportingMigrationConnectionString" --value "$REPORTING_MIGRATION_CONNECTION_STRING"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}AadAuthTenant" --value "$AAD_AUTH_TENANT"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}AadAuthClientId" --value "$AAD_AUTH_CLIENT_ID"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}AzureEmailAccount" --value "$AZURE_EMAIL_ACCOUNT"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}SharedAccounts" --value "$SHARED_ACCOUNTS"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}GoogleApiKey" --value "$GOOGLE_API_KEY"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}Office365AppId" --value "$OFFICE365_APP_ID"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}AzureAppClientId" --value "$AZURE_APP_CLIENT_ID"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}AzureAppTenant" --value "$AZURE_APP_TENANT"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}SASAccountName" --value "$SAS_ACCOUNT_NAME"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}SASShareName" --value "$SAS_SHARE_NAME"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}SASAccountKey" --value "$SAS_ACCOUNT_KEY"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}DefaultUserDomain" --value "$DEFAULT_USER_DOMAIN"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}RecaptchaSecretKey" --value "$RECAPTCHA_SECRET_KEY"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}SecurePayMerchantId" --value "$SECUREPAY_MERCHANT_ID"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}SecurePayMerchantPassword" --value "$SECUREPAY_MERCHANT_PASSWORD"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}NcmsDefaultIdentity" --value "$NCMS_DEFAULT_IDENTITY"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}MyNaatiDefaultIdentity" --value "$MYNAATI_DEFAULT_IDENTITY"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}SecurePayClientId" --value "$SECUREPAY_CLIENT_ID"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}SecurePayMerchantCode" --value "$SECUREPAY_MERCHANT_CODE"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}SecurePayClientSecret" --value "$SECUREPAY_CLIENT_SECRET"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}OutboundIP" --value "$OUTBOUND_IP"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}PayPalClientId" --value "$PAYPAL_CLIENT_ID"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}PayPalClientSecret" --value "$PAYPAL_CLIENT_SECRET"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}WiiseAuthClientId" --value "$WIISE_AUTH_CLIENT_ID"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}WiiseClientSecret" --value "$WIISE_CLIENT_SECRET"
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "${SECRET_PREFIX}WiiseAuthTenant" --value "$WIISE_AUTH_TENANT"
+ 
+echo "All secrets have been set in Key Vault: $KEYVAULT_NAME"

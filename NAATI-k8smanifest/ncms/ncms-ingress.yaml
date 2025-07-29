@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dev-ncms
+  labels:
+    helm.sh/chart: ncms-0.1.0
+    app.kubernetes.io/name: ncms
+    app.kubernetes.io/instance: dev
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    kubernetes.io/ingress.class: nginx  # Use this if your nginx ingress controller is installed
+spec:
+  rules:
+    - host: chart-example.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix  # Required in v1
+            backend:
+              service:
+                name: dev-ncms
+                port:
+                  number: 80
+
+            

@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-ncms
+  labels:
+    helm.sh/chart: ncms-0.1.0
+    app.kubernetes.io/name: ncms
+    app.kubernetes.io/instance: dev
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ncms
+      app.kubernetes.io/instance: dev
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ncms
+        app.kubernetes.io/instance: dev
+    spec:
+      serviceAccountName: kv-reader-sa
+      imagePullSecrets:
+       - name: acr-secret-new
+      # serviceAccountName: default
+      securityContext: {}
+    
+      nodeName: akse2asv5000000     
+      containers:
+        - name: ncms
+          securityContext: {}
+          image: naatidevacri0q0.azurecr.io/ncmsui-production:v2
+        
+
+          
+          envFrom:
+            - secretRef:
+               name: dev-naati-keyvault
+            - configMapRef:
+                name: dev-ncms
+            # - secretRef:
+            #     name: dev-naati-machinekey
+          env:
+            - name: KeyVaultUrl
+              value: "https://naati-dev-kv-jyrb.vault.azure.net/"
+            - name: PodIp
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: dev-naati-persistent-storage
+              mountPath: "/storage"
+            - name: dev-naati-temp-persistent-storage
+              mountPath: "/tempStorage"
+          # livenessProbe:
+          #   httpGet:
+          #     path: /login
+          #     port: http
+          #   initialDelaySeconds: 240
+          #   periodSeconds: 45
+          #   timeoutSeconds: 15
+          #   failureThreshold: 4
+          # readinessProbe:
+          #   httpGet:
+          #     path: /login
+          #     port: http
+          #   timeoutSeconds: 15
+          #   initialDelaySeconds: 90
+          #   periodSeconds: 45
+          #   successThreshold: 1
+          #   failureThreshold: 3
+          lifecycle:
+            postStart:
+              exec: 
+                command: ["powershell.exe", "-Command", "Start-Sleep -s 10; try { Invoke-WebRequest -URI http://localhost/login -UseBasicParsing-TimeoutSec 5 } catch { Write-Host 'PostStart hook - app not ready yet' }; Write-Host 'postStartNcmsExecuted';"]
+            preStop:
+              exec:
+                command: ["powershell.exe", "-Command", "try { Invoke-WebRequest -URI http://localhost/api/lifecycle/stop -UseBasicParsing -TimeoutSec 5 } catch { Write-Host 'PreStop endpoint not available' }; Start-Sleep -s 15; Write-Host 'preStopNcmsExecuted';"]
+      # nodeSelector:
+      #   "kubernetes.io/os": windows
+      terminationGracePeriodSeconds: 15
+      volumes:
+        - name: dev-naati-persistent-storage
+          persistentVolumeClaim:
+            claimName: dev-naati-volume-claim
+        - name: dev-naati-temp-persistent-storage
+          persistentVolumeClaim:
+            claimName: dev-naati-temp-volume-claim

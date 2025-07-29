@@ -1,0 +1,57 @@
+replicaCount: 1
+
+image:
+  repository: naatidevacri0q0.azurecr.io/mynaati-production
+  tag: v2
+  pullPolicy: IfNotPresent
+
+imagePullSecrets:
+  - name: acr-secret-new
+
+serviceAccount:
+  name: kv-reader-sa
+
+podSecurityContext: {}
+
+containerSecurityContext: {}
+
+nodeName: akse2asv5000000
+
+persistentStorage:
+  claimName: dev-naati-volume-claim
+  mountPath: /storage
+
+tempPersistentStorage:
+  claimName: dev-naati-temp-volume-claim
+  mountPath: /tempStorage
+
+env:
+  KeyVaultUrl: https://naati-dev-kv-jyrb.vault.azure.net/
+
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: http
+  loadBalancerIP: 10.50.4.101
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+
+resources: {}
+
+affinity: {}
+
+tolerations: []
+
+terminationGracePeriodSeconds: 15
+
+config:
+  CertificationApiLimit: "3"
+  aspnet_MaxJsonDeserializerMembers: "160000"
+  # (Put all configmap values from your example here…)
+

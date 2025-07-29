@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: "2025-06-21T08:45:43Z"
+  labels:
+    kubernetes.io/metadata.name: naati
+  name: naati
+  resourceVersion: "93877"
+  uid: a21df4ee-c2a0-40fd-89b3-398c9d198c89
+spec:
+  finalizers:
+  - kubernetes
+status:
+  phase: Active

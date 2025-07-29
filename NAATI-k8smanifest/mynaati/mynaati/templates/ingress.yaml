@@ -1,0 +1,34 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-mynaati-release-mynaati
+  labels:
+    helm.sh/chart: mynaati-1.0.0
+    app.kubernetes.io/name: mynaati
+    app.kubernetes.io/instance: my-mynaati-release
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+{{ toYaml .Values.ingress.annotations | indent 4 }}
+spec:
+  {{- if .Values.ingress.tls }}
+  tls:
+    {{- toYaml .Values.ingress.tls | nindent 4 }}
+  {{- end }}
+  rules:
+  {{- range .Values.ingress.hosts }}
+    - host: {{ .host }}
+      http:
+        paths:
+        {{- range .paths }}
+          - path: {{ .path }}
+            pathType: {{ .pathType | default "Prefix" }}
+            backend:
+              service:
+                name: my-mynaati-release-mynaati
+                port:
+                  number: 80
+        {{- end }}
+  {{- end }}
+{{- end }}
