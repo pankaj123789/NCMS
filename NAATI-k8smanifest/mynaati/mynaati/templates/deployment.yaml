@@ -30,7 +30,8 @@ spec:
       nodeName: {{ .Values.nodeName }}
       {{- end }}
       imagePullSecrets:
-{{ toYaml .Values.imagePullSecrets | indent 8 }}
+       - name: acr-secret-new
+# {{ toYaml .Values.imagePullSecrets | indent 8 }}
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       containers:
