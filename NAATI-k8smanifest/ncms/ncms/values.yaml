@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: naatidevacri0q0.azurecr.io/ncmsui-production
+  repository: naatidevacri0q0.azurecr.io/ncmsui
   tag: v2
   pullPolicy: IfNotPresent
 

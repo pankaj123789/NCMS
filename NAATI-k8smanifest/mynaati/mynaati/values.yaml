@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: naatidevacri0q0.azurecr.io/mynaati-production
+  repository: naatidevacri0q0.azurecr.io/mynaatiui 
   tag: v2
   pullPolicy: IfNotPresent
 
@@ -9,7 +9,7 @@ imagePullSecrets:
   - name: acr-secret-new
 
 serviceAccount:
-  name: kv-reader-sa
+  name: kv-reader-sa     
 
 podSecurityContext: {}
 
