@@ -157,7 +157,7 @@ steps:
       az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks
       
       # Deploy MyNaati
-      helm upgrade $(releaseNameMyNaati) mynaati --install --namespace $(targetNamespace) --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageMyNaati) --set image.tag=$(containerTag)
+      helm upgrade $(releaseNameMyNaati) $(helmChartPathMyNaati) --install --namespace $(targetNamespace) --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageMyNaati) --set image.tag=$(containerTag)
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
 
 # Deploy NCMS
@@ -171,7 +171,7 @@ steps:
       az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks
       
       # Deploy NCMS
-      helm upgrade $(releaseNameNcms) ncms --install --namespace $(targetNamespace) --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageNcms) --set image.tag=$(containerTag)
+      helm upgrade $(releaseNameNcms) $(helmChartPathNcms) --install --namespace $(targetNamespace) --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageNcms) --set image.tag=$(containerTag)
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
 
 
