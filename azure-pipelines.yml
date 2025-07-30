@@ -22,15 +22,15 @@ pool:
 steps:
 - checkout: self
 
-- powershell: |
-    $containerFontsPath = "Naati/Ncms.Ui/ContainerFonts"
-    if (Test-Path $containerFontsPath) {
-        $files = Get-ChildItem $containerFontsPath
-        if (-not $files) {
-            Write-Host "ContainerFonts directory is empty, creating placeholder file"
-            New-Item -Path "$containerFontsPath/placeholder.txt" -ItemType File -Value "Placeholder file to prevent InstallFonts.ps1 from failing" -Force
-        }
-    }
+# - powershell: |
+#     $containerFontsPath = "Naati/Ncms.Ui/ContainerFonts"
+#     if (Test-Path $containerFontsPath) {
+#         $files = Get-ChildItem $containerFontsPath
+#         if (-not $files) {
+#             Write-Host "ContainerFonts directory is empty, creating placeholder file"
+#             New-Item -Path "$containerFontsPath/placeholder.txt" -ItemType File -Value "Placeholder file to prevent InstallFonts.ps1 from failing" -Force
+#         }
+#     }
 
 
 - task: NuGetToolInstaller@1
