@@ -58,4 +58,11 @@ affinity: {}
 
 tolerations: []
 
+hpa:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  cpu:
+    averageUtilization: 80
+
 # Add more if needed

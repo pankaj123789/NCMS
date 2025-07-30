@@ -66,6 +66,13 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+hpa:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  cpu:
+    averageUtilization: 80
+
 config:
   CertificationApiLimit: "3"
   aspnet_MaxJsonDeserializerMembers: "160000"
