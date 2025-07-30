@@ -37,7 +37,7 @@ spec:
         - name: mynaati
           securityContext: {{ toYaml .Values.containerSecurityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
             - secretRef:
                 name: dev-naati-keyvault
