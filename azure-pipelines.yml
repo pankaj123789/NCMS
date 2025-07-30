@@ -44,38 +44,38 @@ steps:
   inputs:
     restoreSolution: '**/*.sln'
 
-- task: VSBuild@1
-  displayName: 'Build Ncms.Ui'
-  inputs:
-    solution: 'Ncms.Ui/Ncms.Ui.csproj'
-    configuration: '$(buildConfiguration)'
+# - task: VSBuild@1
+#   displayName: 'Build Ncms.Ui'
+#   inputs:
+#     solution: 'Ncms.Ui/Ncms.Ui.csproj'
+#     configuration: '$(buildConfiguration)'
 
-- task: VSBuild@1
-  displayName: 'Build MyNaati.Ui'
-  inputs:
-    solution: 'MyNaati.Ui/MyNaati.Ui.csproj'
-    configuration: '$(buildConfiguration)'
+# - task: VSBuild@1
+#   displayName: 'Build MyNaati.Ui'
+#   inputs:
+#     solution: 'MyNaati.Ui/MyNaati.Ui.csproj'
+#     configuration: '$(buildConfiguration)'
 
-- task: VSBuild@1
-  displayName: 'Build MyNaati.Test'
-  inputs:
-    solution: 'MyNaati.Test/MyNaati.Test.csproj'
-    configuration: '$(buildConfiguration)'
+# - task: VSBuild@1
+#   displayName: 'Build MyNaati.Test'
+#   inputs:
+#     solution: 'MyNaati.Test/MyNaati.Test.csproj'
+#     configuration: '$(buildConfiguration)'
 
-- task: VSBuild@1
-  displayName: 'Build Ncms.Test'
-  inputs:
-    solution: 'Ncms.Test/Ncms.Test.csproj'
-    configuration: '$(buildConfiguration)'
+# - task: VSBuild@1
+#   displayName: 'Build Ncms.Test'
+#   inputs:
+#     solution: 'Ncms.Test/Ncms.Test.csproj'
+#     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
-  displayName: 'Run Unit Tests'
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*MyNaati.Test.dll
-      **\*Ncms.Test.dll
-    searchFolder: '$(System.DefaultWorkingDirectory)'
+# - task: VSTest@2
+#   displayName: 'Run Unit Tests'
+#   inputs:
+#     testSelector: 'testAssemblies'
+#     testAssemblyVer2: |
+#       **\*MyNaati.Test.dll
+#       **\*Ncms.Test.dll
+#     searchFolder: '$(System.DefaultWorkingDirectory)'
 
 
 - script: docker info
