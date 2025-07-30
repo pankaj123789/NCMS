@@ -8,13 +8,17 @@ variables:
   buildConfiguration: 'Release'
   # Set those variables in your pipeline library or as pipeline variables, or replace them here:
   acrName: 'naatidevacri0q0'               # e.g., naatidevacri0q0
-  acrLoginServer: 'naatidevacri0q0.azurecr.io' # e.g., naatidevacri0q0.azurecr.io
+  acrLoginServer: 'naatidevacri0q0.azurecr.io'  # e.g., naatidevacri0q0.azurecr.io
   containerTag: '$(Build.BuildNumber)'      # Automatically uses Azure build number
   helmChartPathMyNaati: 'NAATI-k8smanifest/mynaati/mynaati'    # Path to MyNaati Helm chart
   helmChartPathNcms: 'NAATI-k8smanifest/ncms/ncms'             # Path to NCMS Helm chart
   helmChartPathInfra: 'NAATI-k8smanifest/naati-infra/naati-infra' # Path to Infrastructure Helm chart
   imageNcms: 'ncmsui'
   imageMyNaati: 'mynaatiui'
+  # Helm release names - YOU can change these!
+  releaseNameMyNaati: 'my-mynaati-release'  # Match your current setup
+  releaseNameNcms: 'dev-ncms'               # Match your current setup
+  targetNamespace: 'default'                # Your current namespace
 
 pool:
   name: 'Naatipool'    # Your agent pool
@@ -22,15 +26,16 @@ pool:
 steps:
 - checkout: self
 
-# - powershell: |
-#     $containerFontsPath = "Naati/Ncms.Ui/ContainerFonts"
-#     if (Test-Path $containerFontsPath) {
-#         $files = Get-ChildItem $containerFontsPath
-#         if (-not $files) {
-#             Write-Host "ContainerFonts directory is empty, creating placeholder file"
-#             New-Item -Path "$containerFontsPath/placeholder.txt" -ItemType File -Value "Placeholder file to prevent InstallFonts.ps1 from failing" -Force
-#         }
-#     }
+- powershell: |
+    $containerFontsPath = "Naati/Ncms.Ui/ContainerFonts"
+    if (Test-Path $containerFontsPath) {
+        $files = Get-ChildItem $containerFontsPath
+        if (-not $files) {
+            Write-Host "ContainerFonts directory is empty, creating placeholder file"
+            New-Item -Path "$containerFontsPath/placeholder.txt" -ItemType File -Value "Placeholder file to prevent InstallFonts.ps1 from failing" -Force
+        }
+    }
+  displayName: 'Fix ContainerFonts Directory'
 
 
 - task: NuGetToolInstaller@1
@@ -97,7 +102,9 @@ steps:
     Dockerfile: 'Ncms.Ui/Dockerfile'   # Fixed case sensitivity
     buildContext: 'Ncms.Ui'
     tags: |
-      $(containerTag)     
+      $(containerTag)  
+
+
 
 - task: HelmInstaller@1
   displayName: 'Install Helm'
@@ -119,22 +126,6 @@ steps:
     helm package $(helmChartPathInfra) --version $(containerTag) --destination $(Build.ArtifactStagingDirectory)
   displayName: 'Package Infrastructure Helm Chart'
 
-- task: AzureCLI@2
-  displayName: 'Push Helm Charts to ACR'
-  inputs:
-    azureSubscription: 'f7fdab19-cae1-4b90-8af8-45052e6b72ca'  # Service connection name
-    scriptType: 'ps'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      az acr login --name $(acrName)
-      
-      # Push all Helm chart packages (*.tgz) to ACR helm repo
-      $packages = Get-ChildItem -Path $(Build.ArtifactStagingDirectory) -Filter *.tgz
-      foreach ($package in $packages) {
-          Write-Host "Pushing $($package.Name) to ACR..."
-          az acr helm push $package.FullName --name $(acrName)
-      }
-
 # Deploy MyNaati
 - task: AzureCLI@2
   displayName: 'Helm Deploy MyNaati'
@@ -146,7 +137,7 @@ steps:
       az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks
       
       # Deploy MyNaati
-      helm upgrade mynaati-uat mynaati --install --namespace uat \
+      helm upgrade $(releaseNameMyNaati) mynaati --install --namespace $(targetNamespace) \
         --version $(containerTag) \
         --set image.repository=$(acrLoginServer)/$(imageMyNaati) \
         --set image.tag=$(containerTag)
@@ -163,11 +154,28 @@ steps:
       az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks
       
       # Deploy NCMS
-      helm upgrade ncms-uat ncms --install --namespace uat \
+      helm upgrade $(releaseNameNcms) ncms --install --namespace $(targetNamespace) \
         --version $(containerTag) \
         --set image.repository=$(acrLoginServer)/$(imageNcms) \
         --set image.tag=$(containerTag)
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
+
+# Push Helm Charts to ACR
+- task: AzureCLI@2
+  displayName: 'Push Helm Charts to ACR'
+  inputs:
+    azureSubscription: 'f7fdab19-cae1-4b90-8af8-45052e6b72ca'  # Service connection name
+    scriptType: 'ps'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az acr login --name $(acrName)
+      
+      # Push all Helm chart packages (*.tgz) to ACR helm repo
+      $packages = Get-ChildItem -Path $(Build.ArtifactStagingDirectory) -Filter *.tgz
+      foreach ($package in $packages) {
+          Write-Host "Pushing $($package.Name) to ACR..."
+          az acr helm push $package.FullName --name $(acrName)
+      }
 
 
 
