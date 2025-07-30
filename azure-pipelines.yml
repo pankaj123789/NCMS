@@ -62,7 +62,9 @@ steps:
 #     searchFolder: '$(System.DefaultWorkingDirectory)'
 
 
-
+- script: docker info
+  displayName: 'Test Docker Access from Agent'
+  
 - task: Docker@2
   displayName: 'Build MyNaatiUi Image'
   inputs:
