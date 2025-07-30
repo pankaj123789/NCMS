@@ -161,7 +161,7 @@ steps:
         --version $(containerTag) \
         --set image.repository=$(acrLoginServer)/$(imageMyNaati) \
         --set image.tag=$(containerTag)
-  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
 
 # Deploy NCMS
 - task: AzureCLI@2
@@ -178,7 +178,7 @@ steps:
         --version $(containerTag) \
         --set image.repository=$(acrLoginServer)/$(imageNcms) \
         --set image.tag=$(containerTag)
-  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/main'))
+  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
 
 
 
