@@ -1,6 +1,3 @@
-
-
-
 trigger:
 - master   # or your default branch
 
@@ -37,7 +34,6 @@ steps:
     }
   displayName: 'Fix ContainerFonts Directory'
 
-
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
@@ -45,27 +41,9 @@ steps:
     restoreSolution: '**/*.sln'
 
 - task: VSBuild@1
-  displayName: 'Build Ncms.Ui'
+  displayName: 'Build Entire Solution'
   inputs:
-    solution: 'Ncms.Ui/Ncms.Ui.csproj'
-    configuration: '$(buildConfiguration)'
-
-- task: VSBuild@1
-  displayName: 'Build MyNaati.Ui'
-  inputs:
-    solution: 'MyNaati.Ui/MyNaati.Ui.csproj'
-    configuration: '$(buildConfiguration)'
-
-- task: VSBuild@1
-  displayName: 'Build MyNaati.Test'
-  inputs:
-    solution: 'MyNaati.Test/MyNaati.Test.csproj'
-    configuration: '$(buildConfiguration)'
-
-- task: VSBuild@1
-  displayName: 'Build Ncms.Test'
-  inputs:
-    solution: 'Ncms.Test/Ncms.Test.csproj'
+    solution: '**/*.sln'
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
@@ -76,7 +54,6 @@ steps:
       **\*MyNaati.Test.dll
       **\*Ncms.Test.dll
     searchFolder: '$(System.DefaultWorkingDirectory)'
-
 
 - script: docker info
   displayName: 'Test Docker Access from Agent'
@@ -92,7 +69,6 @@ steps:
     tags: |
       $(containerTag)
 
-
 - task: Docker@2
   displayName: 'Build NcmsUi Image'
   inputs:
@@ -103,8 +79,6 @@ steps:
     buildContext: 'Ncms.Ui'
     tags: |
       $(containerTag)  
-
-
 
 - task: HelmInstaller@1
   displayName: 'Install Helm'
@@ -126,7 +100,6 @@ steps:
     helm package $(helmChartPathInfra) --version $(containerTag) --destination $(Build.ArtifactStagingDirectory)
   displayName: 'Package Infrastructure Helm Chart'
 
-
 # Push Helm Charts to ACR
 # - task: AzureCLI@2
 #   displayName: 'Push Helm Charts to ACR'
@@ -143,8 +116,6 @@ steps:
 #           Write-Host "Pushing $($package.Name) to ACR..."
 #           az acr helm push $package.FullName --name $(acrName)
 #       }
-
-
 
 # Deploy MyNaati
 - task: AzureCLI@2
@@ -219,6 +190,3 @@ steps:
       
       Write-Host "=== NCMS Deployment Complete ==="
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-
-
-
