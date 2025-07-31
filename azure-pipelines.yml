@@ -44,38 +44,38 @@ steps:
   inputs:
     restoreSolution: '**/*.sln'
 
-# - task: VSBuild@1
-#   displayName: 'Build Ncms.Ui'
-#   inputs:
-#     solution: 'Ncms.Ui/Ncms.Ui.csproj'
-#     configuration: '$(buildConfiguration)'
+- task: VSBuild@1
+  displayName: 'Build Ncms.Ui'
+  inputs:
+    solution: 'Ncms.Ui/Ncms.Ui.csproj'
+    configuration: '$(buildConfiguration)'
 
-# - task: VSBuild@1
-#   displayName: 'Build MyNaati.Ui'
-#   inputs:
-#     solution: 'MyNaati.Ui/MyNaati.Ui.csproj'
-#     configuration: '$(buildConfiguration)'
+- task: VSBuild@1
+  displayName: 'Build MyNaati.Ui'
+  inputs:
+    solution: 'MyNaati.Ui/MyNaati.Ui.csproj'
+    configuration: '$(buildConfiguration)'
 
-# - task: VSBuild@1
-#   displayName: 'Build MyNaati.Test'
-#   inputs:
-#     solution: 'MyNaati.Test/MyNaati.Test.csproj'
-#     configuration: '$(buildConfiguration)'
+- task: VSBuild@1
+  displayName: 'Build MyNaati.Test'
+  inputs:
+    solution: 'MyNaati.Test/MyNaati.Test.csproj'
+    configuration: '$(buildConfiguration)'
 
-# - task: VSBuild@1
-#   displayName: 'Build Ncms.Test'
-#   inputs:
-#     solution: 'Ncms.Test/Ncms.Test.csproj'
-#     configuration: '$(buildConfiguration)'
+- task: VSBuild@1
+  displayName: 'Build Ncms.Test'
+  inputs:
+    solution: 'Ncms.Test/Ncms.Test.csproj'
+    configuration: '$(buildConfiguration)'
 
-# - task: VSTest@2
-#   displayName: 'Run Unit Tests'
-#   inputs:
-#     testSelector: 'testAssemblies'
-#     testAssemblyVer2: |
-#       **\*MyNaati.Test.dll
-#       **\*Ncms.Test.dll
-#     searchFolder: '$(System.DefaultWorkingDirectory)'
+- task: VSTest@2
+  displayName: 'Run Unit Tests'
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*MyNaati.Test.dll
+      **\*Ncms.Test.dll
+    searchFolder: '$(System.DefaultWorkingDirectory)'
 
 
 - script: docker info
@@ -154,10 +154,33 @@ steps:
     scriptType: 'ps'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks
+      Write-Host "=== Starting MyNaati Deployment ==="
+      
+      # Get AKS credentials
+      Write-Host "Getting AKS credentials..."
+      az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks --overwrite-existing
+      
+      # Verify kubectl connection
+      Write-Host "Testing kubectl connection..."
+      kubectl cluster-info
+      
+      # Check if chart exists
+      $chartPath = "$(helmChartPathMyNaati)"
+      Write-Host "Chart path: $chartPath"
+      if (-not (Test-Path "$chartPath/Chart.yaml")) {
+        Write-Error "Chart.yaml not found at $chartPath"
+        exit 1
+      }
+      
+      # Validate Helm template first
+      Write-Host "Validating Helm template..."
+      helm template test-mynaati $chartPath --set image.repository=$(acrLoginServer)/$(imageMyNaati) --set image.tag=$(containerTag) --dry-run
       
       # Deploy MyNaati
-      helm upgrade $(releaseNameMyNaati) $(helmChartPathMyNaati) --install --namespace $(targetNamespace) --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageMyNaati) --set image.tag=$(containerTag)
+      Write-Host "Deploying MyNaati..."
+      helm upgrade $(releaseNameMyNaati) $chartPath --install --namespace $(targetNamespace) --create-namespace --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageMyNaati) --set image.tag=$(containerTag) --wait --timeout=10m
+      
+      Write-Host "=== MyNaati Deployment Complete ==="
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
 
 # Deploy NCMS
@@ -168,10 +191,33 @@ steps:
     scriptType: 'ps'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks
+      Write-Host "=== Starting NCMS Deployment ==="
+      
+      # Get AKS credentials
+      Write-Host "Getting AKS credentials..."
+      az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks --overwrite-existing
+      
+      # Verify kubectl connection
+      Write-Host "Testing kubectl connection..."
+      kubectl cluster-info
+      
+      # Check if chart exists
+      $chartPath = "$(helmChartPathNcms)"
+      Write-Host "Chart path: $chartPath"
+      if (-not (Test-Path "$chartPath/Chart.yaml")) {
+        Write-Error "Chart.yaml not found at $chartPath"
+        exit 1
+      }
+      
+      # Validate Helm template first
+      Write-Host "Validating Helm template..."
+      helm template test-ncms $chartPath --set image.repository=$(acrLoginServer)/$(imageNcms) --set image.tag=$(containerTag) --dry-run
       
       # Deploy NCMS
-      helm upgrade $(releaseNameNcms) $(helmChartPathNcms) --install --namespace $(targetNamespace) --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageNcms) --set image.tag=$(containerTag)
+      Write-Host "Deploying NCMS..."
+      helm upgrade $(releaseNameNcms) $chartPath --install --namespace $(targetNamespace) --create-namespace --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageNcms) --set image.tag=$(containerTag) --wait --timeout=10m
+      
+      Write-Host "=== NCMS Deployment Complete ==="
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
 
 
