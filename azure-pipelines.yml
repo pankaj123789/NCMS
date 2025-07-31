@@ -81,7 +81,7 @@ steps:
   displayName: 'Build MyNaatiUi Image'
   inputs:
     containerRegistry: 'naati-serviceconnection'
-    repository: '$(acrLoginServer)/$(imageMyNaati)'
+    repository: '$(imageMyNaati)'  # This will create the double ACR name pattern
     command: 'buildAndPush'
     Dockerfile: 'MyNaati.Ui/Dockerfile'   # Fixed case sensitivity
     buildContext: 'MyNaati.Ui'
@@ -92,7 +92,7 @@ steps:
   displayName: 'Build NcmsUi Image'
   inputs:
     containerRegistry: 'naati-serviceconnection'
-    repository: '$(acrLoginServer)/$(imageNcms)'
+    repository: '$(imageNcms)'  # This will create the double ACR name pattern
     command: 'buildAndPush'
     Dockerfile: 'Ncms.Ui/Dockerfile'   # Fixed case sensitivity
     buildContext: 'Ncms.Ui'
@@ -168,7 +168,12 @@ steps:
       
       # Deploy MyNaati
       Write-Host "Deploying MyNaati..."
-      helm upgrade $(releaseNameMyNaati) $chartPath --install --namespace $(targetNamespace) --create-namespace --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageMyNaati) --set image.tag=$(containerTag) --wait --timeout=10m
+      helm upgrade $(releaseNameMyNaati) $chartPath --install --namespace $(targetNamespace) --create-namespace --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageMyNaati) --set image.tag=$(containerTag) --wait --timeout=20m --debug
+      
+      # Check deployment status
+      Write-Host "Checking deployment status..."
+      # kubectl get pods -n $(targetNamespace) -l app.kubernetes.io/instance=$(releaseNameMyNaati)
+      # kubectl describe pods -n $(targetNamespace) -l app.kubernetes.io/instance=$(releaseNameMyNaati)
       
       Write-Host "=== MyNaati Deployment Complete ==="
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
@@ -205,7 +210,13 @@ steps:
       
       # Deploy NCMS
       Write-Host "Deploying NCMS..."
-      helm upgrade $(releaseNameNcms) $chartPath --install --namespace $(targetNamespace) --create-namespace --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageNcms) --set image.tag=$(containerTag) --wait --timeout=10m
+      helm upgrade $(releaseNameNcms) $chartPath --install --namespace $(targetNamespace) --create-namespace --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageNcms) --set image.tag=$(containerTag) --wait --timeout=20m --debug
+      
+      # Check deployment status
+      Write-Host "Checking deployment status..."
+
+      # kubectl get pods -n $(targetNamespace) -l app.kubernetes.io/instance=$(releaseNameNcms)
+      # kubectl describe pods -n $(targetNamespace) -l app.kubernetes.io/instance=$(releaseNameNcms)
       
       Write-Host "=== NCMS Deployment Complete ==="
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
