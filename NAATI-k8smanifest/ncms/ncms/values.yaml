@@ -1,8 +1,8 @@
 replicaCount: 1
 
 image:
-  repository: naatidevacri0q0.azurecr.io/ncmsui
-  tag: v2
+  repository: naatidevacri0q0.azurecr.io/naatidevacri0q0.azurecr.io/ncmsui
+  tag: "20250730.14"  # Use the working tag from your successful pod
   pullPolicy: IfNotPresent
 
 imagePullSecrets:

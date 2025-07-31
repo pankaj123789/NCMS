@@ -1,8 +1,8 @@
 replicaCount: 1
 
 image:
-  repository: naatidevacri0q0.azurecr.io/mynaatiui 
-  tag: v2
+  repository: naatidevacri0q0.azurecr.io/naatidevacri0q0.azurecr.io/mynaatiui
+  tag: "20250730.14"  # Use the same working tag pattern
   pullPolicy: IfNotPresent
 
 imagePullSecrets:
