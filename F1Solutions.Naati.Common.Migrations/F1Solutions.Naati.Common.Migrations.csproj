@@ -1932,7 +1932,7 @@
     <Folder Include="Reports\20170830_DropCitizenCreateCountryOfCitizenship\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Naati\F1Solutions.Naati.Common.Contracts\F1Solutions.Naati.Common.Contracts.csproj">
+    <ProjectReference Include="..\F1Solutions.Naati.Common.Contracts\F1Solutions.Naati.Common.Contracts.csproj">
       <Project>{039e6de4-aeb9-4a6e-ac19-135239ddbde2}</Project>
       <Name>F1Solutions.Naati.Common.Contracts</Name>
     </ProjectReference>
