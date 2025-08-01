@@ -308,13 +308,13 @@ steps:
 #     configuration: '$(buildConfiguration)'
 #   continueOnError: true
 
-# Build Ncms.Ui with aggressive dependency exclusion
-- task: VSBuild@1
-  displayName: 'Build Ncms.Ui (Skip Dependencies)'
-  inputs:
-    solution: 'Ncms.Ui/Ncms.Ui.csproj'
-    configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true'
+# # Build Ncms.Ui with aggressive dependency exclusion
+# - task: VSBuild@1
+#   displayName: 'Build Ncms.Ui (Skip Dependencies)'
+#   inputs:
+#     solution: 'Ncms.Ui/Ncms.Ui.csproj'
+#     configuration: '$(buildConfiguration)'
+#     msbuildArgs: '/p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true'
 
 # Search for the missing Contracts project and attempt workaround
 - powershell: |
