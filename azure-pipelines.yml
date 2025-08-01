@@ -256,11 +256,11 @@ steps:
     configuration: '$(buildConfiguration)'    
 
 
-- task: VSBuild@1
-  displayName: 'Build F1Solutions.Naati.Common.Migrations'
-  inputs:
-    solution: '**/F1Solutions.Naati.Common.Migrations.csproj'
-    configuration: '$(buildConfiguration)'   
+# - task: VSBuild@1
+#   displayName: 'Build F1Solutions.Naati.Common.Migrations'
+#   inputs:
+#     solution: '**/F1Solutions.Naati.Common.Migrations.csproj'
+#     configuration: '$(buildConfiguration)'   
 
 - task: VSBuild@1
   displayName: 'Build F1Solutions.Naati.Common.Dal.Nhibernate.Mappings'
