@@ -223,7 +223,7 @@ steps:
 - task: VSBuild@1
   displayName: 'Build F1Solutions.Global.Azure'
   inputs:
-    solution: '**/F1Solutions.Global.Azure.csproj'
+    solution: '**/F1Solutions.Naati.Common.Azure.csproj' 
     configuration: '$(buildConfiguration)'  
 
 
