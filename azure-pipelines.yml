@@ -234,19 +234,19 @@ steps:
     configuration: '$(buildConfiguration)'
   continueOnError: true
 
-- task: VSBuild@1
-  displayName: 'Build F1Solutions.Naati.Contracts'
-  inputs:
-    solution: '**/F1Solutions.Naati.Contracts.csproj'
-    configuration: '$(buildConfiguration)'
-  continueOnError: true
+# - task: VSBuild@1
+#   displayName: 'Build F1Solutions.Naati.Contracts'
+#   inputs:
+#     solution: '**/F1Solutions.Naati.Contracts.csproj'
+#     configuration: '$(buildConfiguration)'
+#   continueOnError: true
 
-- task: VSBuild@1
-  displayName: 'Build Naati.Common.Contracts'
-  inputs:
-    solution: '**/Naati.Common.Contracts.csproj'
-    configuration: '$(buildConfiguration)'
-  continueOnError: true
+# - task: VSBuild@1
+#   displayName: 'Build Naati.Common.Contracts'
+#   inputs:
+#     solution: '**/Naati.Common.Contracts.csproj'
+#     configuration: '$(buildConfiguration)'
+#   continueOnError: true
 
 # Build Ncms.Ui with aggressive dependency exclusion
 - task: VSBuild@1
@@ -272,26 +272,26 @@ steps:
     $guid1 = [guid]::NewGuid().ToString().ToUpper()
     $guid2 = [guid]::NewGuid().ToString().ToUpper()
     $slnContent = @"
-Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ncms.Ui", "Ncms.Ui\Ncms.Ui.csproj", "{$guid1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNaati.Ui", "MyNaati.Ui\MyNaati.Ui.csproj", "{$guid2}"
-EndProject
-Global
-    GlobalSection(SolutionConfigurationPlatforms) = preSolution
-        Release|Any CPU = Release|Any CPU
-    EndGlobalSection
-    GlobalSection(ProjectConfigurationPlatforms) = postSolution
-        {$guid1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-        {$guid1}.Release|Any CPU.Build.0 = Release|Any CPU
-        {$guid2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-        {$guid2}.Release|Any CPU.Build.0 = Release|Any CPU
-    EndGlobalSection
-EndGlobal
-"@
-    $slnContent | Out-File -FilePath "TempBuild.sln" -Encoding UTF8
-    Write-Host "Created temporary solution: TempBuild.sln"
-  displayName: 'Attempt Workaround: Create Temp Solution'
+# Microsoft Visual Studio Solution File, Format Version 12.00
+# Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ncms.Ui", "Ncms.Ui\Ncms.Ui.csproj", "{$guid1}"
+# EndProject
+# Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNaati.Ui", "MyNaati.Ui\MyNaati.Ui.csproj", "{$guid2}"
+# EndProject
+# Global
+#     GlobalSection(SolutionConfigurationPlatforms) = preSolution
+#         Release|Any CPU = Release|Any CPU
+#     EndGlobalSection
+#     GlobalSection(ProjectConfigurationPlatforms) = postSolution
+#         {$guid1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+#         {$guid1}.Release|Any CPU.Build.0 = Release|Any CPU
+#         {$guid2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+#         {$guid2}.Release|Any CPU.Build.0 = Release|Any CPU
+#     EndGlobalSection
+# EndGlobal
+# "@
+#     $slnContent | Out-File -FilePath "TempBuild.sln" -Encoding UTF8
+#     Write-Host "Created temporary solution: TempBuild.sln"
+#   displayName: 'Attempt Workaround: Create Temp Solution'
 
 # Try building with the temporary solution that excludes Migrations
 - task: VSBuild@1
