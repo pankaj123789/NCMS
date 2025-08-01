@@ -219,6 +219,15 @@ steps:
     configuration: '$(buildConfiguration)'
   continueOnError: true
 
+
+- task: VSBuild@1
+  displayName: 'Build F1Solutions.Global.Azure'
+  inputs:
+    solution: '**/F1Solutions.Global.Azure.csproj'
+    configuration: '$(buildConfiguration)'  
+
+
+
 - task: VSBuild@1
   displayName: 'Build Dal.NHibernate'
   inputs:
@@ -233,6 +242,57 @@ steps:
     solution: '**/F1Solutions.Naati.Common.Contracts.csproj'
     configuration: '$(buildConfiguration)'
   continueOnError: true
+
+- task: VSBuild@1
+  displayName: 'Build F1Solutions.Naati.Common.Bl'
+  inputs:
+    solution: '**/F1Solutions.Naati.Common.Bl.csproj'
+    configuration: '$(buildConfiguration)'
+
+- task: VSBuild@1
+  displayName: 'Build F1Solutions.Naati.Common.Dal'
+  inputs:
+    solution: '**/F1Solutions.Naati.Common.Dal.csproj'
+    configuration: '$(buildConfiguration)'    
+
+
+- task: VSBuild@1
+  displayName: 'Build F1Solutions.Naati.Common.Migrations'
+  inputs:
+    solution: '**/F1Solutions.Naati.Common.Migrations.csproj'
+    configuration: '$(buildConfiguration)'   
+
+- task: VSBuild@1
+  displayName: 'Build F1Solutions.Naati.Common.Dal.Nhibernate.Mappings'
+  inputs:
+    solution: '**/F1Solutions.Naati.Common.Dal.Nhibernate.Mappings.csproj'
+    configuration: '$(buildConfiguration)'   
+
+
+
+- task: VSBuild@1
+  displayName: 'Build F1Solutions.NAATI.Common.Wiise'
+  inputs:
+    solution: '**/F1Solutions.NAATI.Common.Wiise.csproj'
+    configuration: '$(buildConfiguration)'
+
+- task: VSBuild@1
+  displayName: 'Build Ncms.Bl'
+  inputs:
+    solution: '**/Ncms.Bl.csproj'
+    configuration: '$(buildConfiguration)'
+
+
+  task: VSBuild@1
+  displayName: 'Build Ncms.Contracts'
+  inputs:
+    solution: '**/Ncms.Contracts.csproj'
+    configuration: '$(buildConfiguration)'   
+
+
+
+
+
 
 # - task: VSBuild@1
 #   displayName: 'Build F1Solutions.Naati.Contracts'
