@@ -366,6 +366,18 @@ steps:
   condition: failed()
   continueOnError: true
 
+   - task: VSBuild@1
+   displayName: 'Build MyNaati.Bl'
+  inputs:
+     solution: 'MyNaati.Bl/MyNaati.Bl.csproj'
+     configuration: '$(buildConfiguration)'
+
+   - task: VSBuild@1
+   displayName: 'Build MyNaati.Contracts'
+  inputs:
+     solution: 'MyNaati.Contracts/MyNaati.Contracts.csproj'
+     configuration: '$(buildConfiguration)'
+
 - task: VSBuild@1
   displayName: 'Build MyNaati.Ui Project'
   inputs:
