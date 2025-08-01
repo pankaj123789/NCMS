@@ -255,12 +255,7 @@ steps:
     solution: '**/F1Solutions.Naati.Common.Dal.csproj'
     configuration: '$(buildConfiguration)'    
 
-
-# - task: VSBuild@1
-#   displayName: 'Build F1Solutions.Naati.Common.Migrations'
-#   inputs:
-#     solution: '**/F1Solutions.Naati.Common.Migrations.csproj'
-#     configuration: '$(buildConfiguration)'   
+ 
 
 - task: VSBuild@1
   displayName: 'Build F1Solutions.Naati.Common.Dal.Nhibernate.Mappings'
@@ -290,23 +285,21 @@ steps:
     configuration: '$(buildConfiguration)'   
 
 
+- task: VSBuild@1
+  displayName: 'Build F1Solutions.Naati.Common.Migrations'
+  inputs:
+    solution: '**/F1Solutions.Naati.Common.Migrations.csproj'
+    configuration: '$(buildConfiguration)'      
 
 
 
 
-# - task: VSBuild@1
-#   displayName: 'Build F1Solutions.Naati.Contracts'
-#   inputs:
-#     solution: '**/F1Solutions.Naati.Contracts.csproj'
-#     configuration: '$(buildConfiguration)'
-#   continueOnError: true
 
-# - task: VSBuild@1
-#   displayName: 'Build Naati.Common.Contracts'
-#   inputs:
-#     solution: '**/Naati.Common.Contracts.csproj'
-#     configuration: '$(buildConfiguration)'
-#   continueOnError: true
+
+
+
+
+
 
 # # Build Ncms.Ui with aggressive dependency exclusion
 # - task: VSBuild@1
