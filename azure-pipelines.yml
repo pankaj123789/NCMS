@@ -283,7 +283,7 @@ steps:
     configuration: '$(buildConfiguration)'
 
 
-  task: VSBuild@1
+- task: VSBuild@1
   displayName: 'Build Ncms.Contracts'
   inputs:
     solution: '**/Ncms.Contracts.csproj'
