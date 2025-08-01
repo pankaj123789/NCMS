@@ -291,6 +291,18 @@ steps:
     solution: '**/F1Solutions.Naati.Common.Migrations.csproj'
     configuration: '$(buildConfiguration)'      
 
+- task: VSBuild@1
+  displayName: 'Build MyNaati.Bl'
+  inputs:
+    solution: '**/MyNaati.Bl.csproj'
+    configuration: '$(buildConfiguration)'      
+
+- task: VSBuild@1
+  displayName: 'Build MyNaati.Contracts'
+  inputs:
+    solution: '**/MyNaati.Contracts.csproj'
+    configuration: '$(buildConfiguration)'      
+
 
 
 
@@ -365,18 +377,6 @@ steps:
   displayName: 'Last Resort: Force Build UI Projects'
   condition: failed()
   continueOnError: true
-
-   - task: VSBuild@1
-   displayName: 'Build MyNaati.Bl'
-  inputs:
-     solution: 'MyNaati.Bl/MyNaati.Bl.csproj'
-     configuration: '$(buildConfiguration)'
-
-   - task: VSBuild@1
-   displayName: 'Build MyNaati.Contracts'
-  inputs:
-     solution: 'MyNaati.Contracts/MyNaati.Contracts.csproj'
-     configuration: '$(buildConfiguration)'
 
 - task: VSBuild@1
   displayName: 'Build MyNaati.Ui Project'
