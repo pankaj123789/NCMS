@@ -316,28 +316,28 @@ steps:
 #     configuration: '$(buildConfiguration)'
 #     msbuildArgs: '/p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true'
 
-# Search for the missing Contracts project and attempt workaround
-- powershell: |
-    Write-Host "=== Searching for Contracts project ==="
-    $contractsProjects = Get-ChildItem -Recurse -Name "*Contracts*.csproj"
-    Write-Host "Found Contracts projects:"
-    $contractsProjects | ForEach-Object { Write-Host "  $_" }
+# # Search for the missing Contracts project and attempt workaround
+# - powershell: |
+#     Write-Host "=== Searching for Contracts project ==="
+#     $contractsProjects = Get-ChildItem -Recurse -Name "*Contracts*.csproj"
+#     Write-Host "Found Contracts projects:"
+#     $contractsProjects | ForEach-Object { Write-Host "  $_" }
     
-    Write-Host "`n=== Checking if Contracts assembly exists in bin folders ==="
-    $contractsAssemblies = Get-ChildItem -Recurse -Name "*Contracts*.dll"
-    $contractsAssemblies | ForEach-Object { Write-Host "  $_" }
+#     Write-Host "`n=== Checking if Contracts assembly exists in bin folders ==="
+#     $contractsAssemblies = Get-ChildItem -Recurse -Name "*Contracts*.dll"
+#     $contractsAssemblies | ForEach-Object { Write-Host "  $_" }
 
-    Write-Host "`n=== Creating temporary solution without Migrations ==="
-    # Try to create a minimal solution file that excludes the problematic project
-    $guid1 = [guid]::NewGuid().ToString().ToUpper()
-    $guid2 = [guid]::NewGuid().ToString().ToUpper()
-    $slnContent = @"
-# Microsoft Visual Studio Solution File, Format Version 12.00
-# Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ncms.Ui", "Ncms.Ui\Ncms.Ui.csproj", "{$guid1}"
-# EndProject
-# Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNaati.Ui", "MyNaati.Ui\MyNaati.Ui.csproj", "{$guid2}"
-# EndProject
-# Global
+#     Write-Host "`n=== Creating temporary solution without Migrations ==="
+#     # Try to create a minimal solution file that excludes the problematic project
+#     $guid1 = [guid]::NewGuid().ToString().ToUpper()
+#     $guid2 = [guid]::NewGuid().ToString().ToUpper()
+#     $slnContent = @"
+#       Microsoft Visual Studio Solution File, Format Version 12.00
+#       Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ncms.Ui", "Ncms.Ui\Ncms.Ui.csproj", "{$guid1}"
+#             EndProject
+#            Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyNaati.Ui", "MyNaati.Ui\MyNaati.Ui.csproj", "{$guid2}"
+#       EndProject
+#      Global
 #     GlobalSection(SolutionConfigurationPlatforms) = preSolution
 #         Release|Any CPU = Release|Any CPU
 #     EndGlobalSection
