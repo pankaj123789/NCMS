@@ -7,5 +7,5 @@ metadata:
     component: config
 data:
 {{- range $key, $value := .Values.config }}
-  {{ $key }}: "{{ $value }}"
+  {{ $key }}: {{ $value | quote }}
 {{- end }}
