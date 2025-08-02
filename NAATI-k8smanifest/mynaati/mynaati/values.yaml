@@ -74,7 +74,7 @@ hpa:
     averageUtilization: 80
 
 config:
-   "CertificationApiLimit": "3"
+  "CertificationApiLimit": "3"
   "aspnet_MaxJsonDeserializerMembers": "160000"
   "owin_AutomaticAppStartup": "false"
   "ClientValidationEnabled": "false"
