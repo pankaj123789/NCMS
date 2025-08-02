@@ -41,8 +41,8 @@ spec:
             - configMapRef:
                 name: dev-ncms
           env:
-            - name: KeyVaultUrl
-              value: "{{ .Values.env.KeyVaultUrl }}"
+            # - name: KeyVaultUrl
+            #   value: "{{ .Values.env.KeyVaultUrl }}"
             - name: PodIp
               valueFrom:
                 fieldRef:
