@@ -12,5 +12,7 @@ RUN powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
 RUN powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force; .\InstallFonts.ps1
 RUN Remove-Item -path ncmstest09.local.pfx -force
 RUN Remove-Item -path InstallFonts.ps1 -force
-RUN Remove-Item -path ContainerFonts -force -Recurse
+# RUN Remove-Item -path ContainerFonts -force -Recurse
+RUN powershell -Command "Remove-Item -path ContainerFonts -Force -Recurse -ErrorAction SilentlyContinue"
+
 RUN icacls "c:\inetpub\wwwroot" /grant IIS_IUSRS:F /t
