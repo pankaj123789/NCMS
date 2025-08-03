@@ -188,10 +188,14 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:PublishDir=$(Build.ArtifactStagingDirectory)/Ncms.Ui/publish/'
 
 # Copy all source code (for reference) next to the publish folder if desired
-- script: |
-    echo "Copying Ncms.Ui source for debugging (optional)..."
-    mkdir -p $(Build.ArtifactStagingDirectory)/Ncms.Ui/src
-    cp -R Ncms.Ui/* $(Build.ArtifactStagingDirectory)/Ncms.Ui/src/
+- powershell: |
+    Write-Host "Copying Ncms.Ui source for debugging (optional)..."
+    $src = "$(Build.SourcesDirectory)\Ncms.Ui"
+    $dest = "$(Build.ArtifactStagingDirectory)\Ncms.Ui\src"
+    # Create destination directory if it doesn't exist
+    New-Item -ItemType Directory -Path $dest -Force | Out-Null
+    # Copy all files and folders, overwrite if exists
+    Copy-Item -Path "$src\*" -Destination $dest -Recurse -Force
   displayName: 'Copy Source to Publish Artifact (optional)'
 
 
