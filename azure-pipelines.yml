@@ -24,7 +24,7 @@ variables:
   imageNcmsUat: 'uatacrimagereg.azurecr.io/ncmsui'
   imageMyNaatiUat: 'uatacrimagereg.azurecr.io/mynaatiui'
   containerRegistryUat: 'naati-uat-serviceconnection'
-
+  #varibale for prod 
   acrNameProd: 'prodacrimagereg'
   acrLoginServerProd: 'prodacrimagereg.azurecr.io'
   imageNcmsProd: 'prodacrimagereg.azurecr.io/ncmsui'
@@ -32,12 +32,8 @@ variables:
   containerRegistryProd: 'naati-prod-serviceconnection'
 
 
-  #varibale for prod 
-  acrNameProd: 'prodacrimagereg'
-  acrLoginServerProd: 'prodacrimagereg.azurecr.io'
-  imageNcmsProd: 'prodacrimagereg.azurecr.io/ncmsui'
-  imageMyNaatiProd: 'prodacrimagereg.azurecr.io/mynaatiui'
-  containerRegistryProd: 'naati-prod-serviceconnection' 
+
+ 
 
 
 
