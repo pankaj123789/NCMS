@@ -173,7 +173,7 @@ steps:
   inputs:
     solution: 'Ncms.Ui/Ncms.Ui.csproj'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true'
+    msbuildArgs: ' /p:SkipInvalidConfigurations=true'
 
 # Publish Ncms.Ui project (Release, all dependencies to /publish)
 # - task: VSBuild@1
