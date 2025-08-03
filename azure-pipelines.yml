@@ -181,7 +181,7 @@ steps:
   inputs:
     solution: 'Ncms.Ui/Ncms.Ui.csproj'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:PublishDir=$(Build.ArtifactStagingDirectory)/Ncms.Ui/publish/'
+    msbuildArgs: '/p:DeployOnBuild=true  /p:PublishDir=$(Build.ArtifactStagingDirectory)/Ncms.Ui/publish/'
 
 # Copy all source code (for reference) next to the publish folder if desired
 - powershell: |
