@@ -176,12 +176,26 @@ steps:
     msbuildArgs: '/p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true'
 
 # Publish Ncms.Ui project (Release, all dependencies to /publish)
+# - task: VSBuild@1
+#   displayName: 'Publish Ncms.Ui'
+#   inputs:
+#     solution: 'Ncms.Ui/Ncms.Ui.csproj'
+#     configuration: '$(buildConfiguration)'
+#     msbuildArgs: '/p:DeployOnBuild=true  /p:PublishDir=$(Build.ArtifactStagingDirectory)/Ncms.Ui/publish/'
+
+
 - task: VSBuild@1
   displayName: 'Publish Ncms.Ui'
   inputs:
     solution: 'Ncms.Ui/Ncms.Ui.csproj'
     configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:DeployOnBuild=true  /p:PublishDir=$(Build.ArtifactStagingDirectory)/Ncms.Ui/publish/'
+    msbuildArgs: >
+      /t:WebPublish
+      /p:WebPublishMethod=FileSystem
+      /p:DeployOnBuild=true
+      /p:PublishUrl=$(Build.ArtifactStagingDirectory)/Ncms.Ui/publish
+      /p:DeleteExistingFiles=True
+      /p:Configuration=$(buildConfiguration)
 
 # Copy all source code (for reference) next to the publish folder if desired
 - powershell: |
