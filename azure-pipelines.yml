@@ -18,6 +18,35 @@ variables:
   releaseNameNcms: 'dev-ncms'               # Match your current setup
   targetNamespace: 'default'                # Use default namespace for CI/CD
 
+# variable for uat 
+  acrNameUat: 'uatacrimagereg'
+  acrLoginServerUat: 'uatacrimagereg.azurecr.io'
+  imageNcmsUat: 'uatacrimagereg.azurecr.io/ncmsui'
+  imageMyNaatiUat: 'uatacrimagereg.azurecr.io/mynaatiui'
+  containerRegistryUat: 'naati-uat-serviceconnection'
+
+  acrNameProd: 'prodacrimagereg'
+  acrLoginServerProd: 'prodacrimagereg.azurecr.io'
+  imageNcmsProd: 'prodacrimagereg.azurecr.io/ncmsui'
+  imageMyNaatiProd: 'prodacrimagereg.azurecr.io/mynaatiui'
+  containerRegistryProd: 'naati-prod-serviceconnection'
+
+
+  #varibale for prod 
+  acrNameProd: 'prodacrimagereg'
+  acrLoginServerProd: 'prodacrimagereg.azurecr.io'
+  imageNcmsProd: 'prodacrimagereg.azurecr.io/ncmsui'
+  imageMyNaatiProd: 'prodacrimagereg.azurecr.io/mynaatiui'
+  containerRegistryProd: 'naati-prod-serviceconnection' 
+
+
+
+
+
+
+
+
+
 pool:
   name: 'Naatipool'    # Your agent pool
 
@@ -150,26 +179,42 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true'
 
+# Publish Ncms.Ui project (Release, all dependencies to /publish)
+- task: VSBuild@1
+  displayName: 'Publish Ncms.Ui'
+  inputs:
+    solution: 'Ncms.Ui/Ncms.Ui.csproj'
+    configuration: '$(buildConfiguration)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:PublishProfile=FolderProfile /p:PublishDir=$(Build.ArtifactStagingDirectory)/Ncms.Ui/publish/'
+
+# Copy all source code (for reference) next to the publish folder if desired
+- script: |
+    echo "Copying Ncms.Ui source for debugging (optional)..."
+    mkdir -p $(Build.ArtifactStagingDirectory)/Ncms.Ui/src
+    cp -R Ncms.Ui/* $(Build.ArtifactStagingDirectory)/Ncms.Ui/src/
+  displayName: 'Copy Source to Publish Artifact (optional)'
+
+
 
 # Try building with the temporary solution that excludes Migrations
-- task: VSBuild@1
-  displayName: 'Build with Temporary Solution (No Migrations)'
-  inputs:
-    solution: 'TempBuild.sln'
-    configuration: '$(buildConfiguration)'
-  condition: failed()
-  continueOnError: true
+# - task: VSBuild@1
+#   displayName: 'Build with Temporary Solution (No Migrations)'
+#   inputs:
+#     solution: 'TempBuild.sln'
+#     configuration: '$(buildConfiguration)'
+#   condition: failed()
+#   continueOnError: true
 
-# Last resort: Force build just the assemblies we need for Docker
-- script: |
-    echo "Force building Ncms.Ui"
-    "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe" "Ncms.Ui\Ncms.Ui.csproj" /p:Configuration=$(buildConfiguration) /p:Platform="Any CPU" /p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true /verbosity:minimal
+# # Last resort: Force build just the assemblies we need for Docker
+# - script: |
+#     echo "Force building Ncms.Ui"
+#     "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe" "Ncms.Ui\Ncms.Ui.csproj" /p:Configuration=$(buildConfiguration) /p:Platform="Any CPU" /p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true /verbosity:minimal
     
-    echo "Force building MyNaati.Ui"
-    "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe" "MyNaati.Ui\MyNaati.Ui.csproj" /p:Configuration=$(buildConfiguration) /p:Platform="Any CPU" /p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true /verbosity:minimal
-  displayName: 'Last Resort: Force Build UI Projects'
-  condition: failed()
-  continueOnError: true
+#     echo "Force building MyNaati.Ui"
+#     "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe" "MyNaati.Ui\MyNaati.Ui.csproj" /p:Configuration=$(buildConfiguration) /p:Platform="Any CPU" /p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true /verbosity:minimal
+#   displayName: 'Last Resort: Force Build UI Projects'
+#   condition: failed()
+#   continueOnError: true
 
 - task: VSBuild@1
   displayName: 'Build MyNaati.Ui'
@@ -178,29 +223,29 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true'
 
-- task: VSBuild@1
-  displayName: 'Build Test Projects'
-  inputs:
-    solution: 'MyNaati.Test/MyNaati.Test.csproj'
-    configuration: '$(buildConfiguration)'
-  continueOnError: true
+# - task: VSBuild@1
+#   displayName: 'Build mynaati Test Projects'
+#   inputs:
+#     solution: 'MyNaati.Test/MyNaati.Test.csproj'
+#     configuration: '$(buildConfiguration)'
+#   continueOnError: true
 
-- task: VSBuild@1
-  displayName: 'Build Ncms Test Project'
-  inputs:
-    solution: 'Ncms.Test/Ncms.Test.csproj'
-    configuration: '$(buildConfiguration)'
-  continueOnError: true
+# - task: VSBuild@1
+#   displayName: 'Build Ncms Test Project'
+#   inputs:
+#     solution: 'Ncms.Test/Ncms.Test.csproj'
+#     configuration: '$(buildConfiguration)'
+#   continueOnError: true
 
-- task: VSTest@2
-  displayName: 'Run Unit Tests'
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*MyNaati.Test.dll
-      **\*Ncms.Test.dll
-    searchFolder: '$(System.DefaultWorkingDirectory)'
-  continueOnError: true
+# - task: VSTest@2
+#   displayName: 'Run Unit Tests'
+#   inputs:
+#     testSelector: 'testAssemblies'
+#     testAssemblyVer2: |
+#       **\*MyNaati.Test.dll
+#       **\*Ncms.Test.dll
+#     searchFolder: '$(System.DefaultWorkingDirectory)'
+#   continueOnError: true
 
 - script: docker info
   displayName: 'Test Docker Access from Agent'
@@ -224,9 +269,66 @@ steps:
     repository: '$(imageNcms)'  # This will create the double ACR name pattern
     command: 'buildAndPush'
     Dockerfile: 'Ncms.Ui/Dockerfile'   # Fixed case sensitivity
-    buildContext: 'Ncms.Ui'
+    # buildContext: 'Ncms.Ui'
+    buildContext: '$(Build.ArtifactStagingDirectory)/Ncms.Ui'
     tags: |
       $(containerTag)  
+
+# - task: Docker@2
+#   displayName: 'Build MyNaatiUi Image (UAT)'
+#   condition: eq(variables['Build.SourceBranchName'], 'uat')
+#   inputs:
+#     containerRegistry: '$(containerRegistryUat)'
+#     repository: '$(imageMyNaatiUat)'
+#     command: 'buildAndPush'
+#     Dockerfile: 'MyNaati.Ui/Dockerfile'
+#     buildContext: 'MyNaati.Ui'
+#     tags: |
+#       $(containerTag)
+
+
+
+# - task: Docker@2
+#   displayName: 'Build Ncms Image (UAT)'
+#   condition: eq(variables['Build.SourceBranchName'], 'uat')
+#   inputs:
+#     containerRegistry: '$(containerRegistryUat)'
+#     repository: '$(imageMyNaatiUat)'
+#     command: 'buildAndPush'
+#     Dockerfile: 'Ncms.Ui/Dockerfile'
+#     buildContext: 'Ncms.Ui'
+#     tags: |
+#       $(containerTag)   
+
+
+# - task: Docker@2
+#   displayName: 'Build MyNaatiUi Image (Prod)'
+#   condition: eq(variables['Build.SourceBranchName'], 'prod')
+#   inputs:
+#     containerRegistry: '$(containerRegistryProd)'
+#     repository: '$(imageMyNaatiProd)'
+#     command: 'buildAndPush'
+#     Dockerfile: 'MyNaati.Ui/Dockerfile'
+#     buildContext: 'MyNaati.Ui'
+#     tags: |
+#       $(containerTag)
+
+
+# - task: Docker@2
+#   displayName: 'Build Ncms Image (Prod)'
+#   condition: eq(variables['Build.SourceBranchName'], 'prod')
+#   inputs:
+#     containerRegistry: '$(containerRegistryProd)'
+#     repository: '$(imageMyNaatiProd)'
+#     command: 'buildAndPush'
+#     Dockerfile: 'Ncms.Ui/Dockerfile'
+#     buildContext: 'Ncms.Ui'
+#     tags: | 
+#       $(containerTag)              
+
+
+
+
 
 - task: HelmInstaller@1
   displayName: 'Install Helm'
@@ -334,3 +436,136 @@ steps:
       
       Write-Host "=== NCMS Deployment Complete ==="
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+
+
+ 
+# # ==== UAT DEPLOYMENT STAGE ====
+# - stage: Deploy_UAT
+#   displayName: 'Deploy to UAT'
+#   dependsOn: Build
+#   condition: succeeded()
+#   variables:
+#     azureSubscription: 'f7fdab19-cae1-4b90-8af8-45052e6b72ca'
+#     aks_resource_group: 'RG_UAT'
+#     aks_cluster: 'aksclusteruat'
+#     releaseNameMyNaati: 'uat-mynaati'
+#     releaseNameNcms: 'uat-ncms'
+#     releaseNameInfra: 'uat-naati-infra'
+#     targetNamespace: 'uat'
+#   jobs:
+#   - deployment: DeployUAT
+#     environment: 'uat'
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - download: current
+#             artifact: 'helm-charts'
+
+#          
+
+#           - task: AzureCLI@2
+#             displayName: 'Deploy MyNaati to UAT'
+#             inputs:
+#               azureSubscription: '$(azureSubscription)'
+#               scriptType: 'ps'
+#               scriptLocation: 'inlineScript'
+#               inlineScript: |
+#                 Write-Host "=== Deploying MyNaati to UAT ==="
+                
+#                 # Get AKS credentials
+#                 az aks get-credentials --resource-group $(aks_resource_group) --name $(aks_cluster) --overwrite-existing
+                
+#                 # Deploy MyNaati using UAT Helm chart
+#                 helm upgrade $(releaseNameMyNaati) mynaati --install --namespace $(targetNamespace) \
+#                   --version $(containerTag) \
+#                   --set image.repository=$(acrLoginServerUat)/mynaatiui \
+#                   --set image.tag=$(containerTag) \
+#                   --wait --timeout=20m --debug
+
+#           - task: AzureCLI@2
+#             displayName: 'Deploy NCMS to UAT'
+#             inputs:
+#               azureSubscription: '$(azureSubscription)'
+#               scriptType: 'ps'
+#               scriptLocation: 'inlineScript'
+#               inlineScript: |
+#                 Write-Host "=== Deploying NCMS to UAT ==="
+                
+#                 # Get AKS credentials
+#                 az aks get-credentials --resource-group $(aks_resource_group) --name $(aks_cluster) --overwrite-existing
+                
+#                 # Deploy NCMS using UAT Helm chart
+#                 helm upgrade $(releaseNameNcms) ncms --install --namespace $(targetNamespace) \
+#                   --version $(containerTag) \
+#                   --set image.repository=$(acrLoginServerUat)/ncmsui \
+#                   --set image.tag=$(containerTag) \
+#                   --wait --timeout=20m --debug
+
+# # ==== PROD DEPLOYMENT STAGE ====
+# - stage: Deploy_PROD
+#   displayName: 'Deploy to Production'
+#   dependsOn: Deploy_UAT
+#   condition: succeeded()
+#   variables:
+#     azureSubscription: 'f7fdab19-cae1-4b90-8af8-45052e6b72ca'
+#     aks_resource_group: 'RG_PROD'
+#     aks_cluster: 'akscluster4'
+
+#     releaseNameNaati: 'prod'
+#     releaseNameInfra: 'prod-naati-infra'
+#     releaseNameClusterInfra: 'prod-cluster-infra'
+#     targetNamespace: 'prod'
+#   jobs:
+#   - deployment: DeployPROD
+#     environment: 'production'
+#     strategy:
+#       runOnce:
+#         deploy:
+#           steps:
+#           - download: current
+#             artifact: 'helm-charts'
+
+#           
+#           - task: AzureCLI@2
+#             displayName: 'Deploy NAATI Application to PROD'
+#             inputs:
+#               azureSubscription: '$(azureSubscription)'
+#               scriptType: 'ps'
+#               scriptLocation: 'inlineScript'
+#               inlineScript: |
+#                 Write-Host "=== Deploying NAATI Application to PROD ==="
+                
+#                 # Get AKS credentials
+#                 az aks get-credentials --resource-group $(aks_resource_group) --name $(aks_cluster) --overwrite-existing
+                
+#                 # Deploy NAATI using PROD Helm chart with values file
+#                 helm upgrade $(releaseNameNaati) naati --install --namespace $(targetNamespace) \
+#                   --version $(containerTag) \
+#                   -f "$(helmChartPathProd)/naati/_values.prod.yaml" \
+#                   --set ncms.image.repository=$(acrLoginServerprod)/ncmsui \
+#                   --set ncms.image.tag=$(containerTag) \
+#                   --set mynaati.image.repository=$(acrLoginServerprod)/mynaatiui \
+#                   --set mynaati.image.tag=$(containerTag) \
+#                   --wait --timeout=20m --debug
+
+#           - task: AzureCLI@2
+#             displayName: 'Verify PROD Deployment'
+#             inputs:
+#               azureSubscription: '$(azureSubscription)'
+#               scriptType: 'ps'
+#               scriptLocation: 'inlineScript'
+#               inlineScript: |
+#                 Write-Host "=== Verifying PROD Deployment ==="
+                
+#                 # Get AKS credentials
+#                 az aks get-credentials --resource-group $(aks_resource_group) --name $(aks_cluster) --overwrite-existing
+                
+#                 # Check deployment status
+#                 kubectl get pods -n $(targetNamespace)
+#                 kubectl get services -n $(targetNamespace)
+                
+#                 # Check Helm releases
+#                 helm list -n $(targetNamespace)
+                
+#                 Write-Host "=== PROD Deployment Complete ===" 

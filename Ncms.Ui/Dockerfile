@@ -7,7 +7,14 @@ WORKDIR /inetpub/wwwroot
 RUN c:\windows\System32\inetsrv\appcmd.exe unlock config -section:system.webServer/security/authentication/anonymousAuthentication
 RUN c:\windows\system32\inetsrv\appcmd.exe set apppool /apppool.name:DefaultAppPool /enable32BitAppOnWin64:true /autoStart:true /startMode:AlwaysRunning
 
-COPY . .
+
+# Copy only the published output for the web app
+COPY publish/ .
+
+# Optionally, copy the source code into /src for reference
+
+
+COPY . /src
 RUN powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force; .\NCMSCertificate.ps1
 RUN powershell Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force; .\InstallFonts.ps1
 RUN Remove-Item -path ncmstest09.local.pfx -force
