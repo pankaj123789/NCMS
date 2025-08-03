@@ -61,6 +61,12 @@
       
     </Reference>
   <ProjectReference Include="..\F1Solutions.Naati.Common.Dal.Domain\F1Solutions.Naati.Common.Dal.Domain.csproj" />
+
+  <Reference Include="AutoMapper">
+  <HintPath>..\packages\AutoMapper.9.0.0\lib\net45\AutoMapper.dll</HintPath>
+  <Private>True</Private>
+</Reference>
+
  
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
