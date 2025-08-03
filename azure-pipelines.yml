@@ -194,6 +194,12 @@ steps:
     Copy-Item -Path "$src\*" -Destination $dest -Recurse -Force
   displayName: 'Copy Source to Publish Artifact (optional)'
 
+- powershell: |
+    Write-Host "Checking publish folder contents:"
+    Get-ChildItem -Recurse "$(Build.ArtifactStagingDirectory)\Ncms.Ui\publish"
+  displayName: 'List Published Files'
+
+
 
 
 # Try building with the temporary solution that excludes Migrations
