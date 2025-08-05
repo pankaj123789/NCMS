@@ -1,6 +1,6 @@
 trigger:
 - master   # or your default branch
-
+- vigna
 variables:
   buildConfiguration: 'Release'
   # Set those variables in your pipeline library or as pipeline variables, or replace them here:
