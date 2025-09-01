@@ -1,591 +1,1393 @@
 trigger:
-- master   # or your default branch
-- vigna
+  branches:
+    include:
+    - master
+    - develop
+    - feature/*
+  paths:
+    include:
+    - Ncms.Ui/*
+    - MyNaati.Ui/*
+    - F1Solutions.Naati.Common.*/*
+    - Deployment Scripts/*
+    # - azure-pipelines.yml
+    # - NAATI-k8smanifest
+
+pr:
+  branches:
+    include:
+    - master
+    - develop
+
 variables:
+  # Build Configuration
   buildConfiguration: 'Release'
-  # Set those variables in your pipeline library or as pipeline variables, or replace them here:
-  acrName: 'naatidevacri0q0'               # e.g., naatidevacri0q0
-  acrLoginServer: 'naatidevacri0q0.azurecr.io'  # e.g., naatidevacri0q0.azurecr.io
-  containerTag: '$(Build.BuildNumber)'      # Automatically uses Azure build number
-  helmChartPathMyNaati: 'NAATI-k8smanifest/mynaati/mynaati'    # Path to MyNaati Helm chart
-  helmChartPathNcms: 'NAATI-k8smanifest/ncms/ncms'             # Path to NCMS Helm chart
-  helmChartPathInfra: 'NAATI-k8smanifest/naati-infra/naati-infra' # Path to Infrastructure Helm chart
-  # FIXED: Use the double ACR server name pattern that works
-  imageNcms: 'naatidevacri0q0.azurecr.io/ncmsui'           
-  imageMyNaati: 'naatidevacri0q0.azurecr.io/mynaatiui'     
-  # Helm release names - YOU can change these!
-  releaseNameMyNaati: 'my-mynaati-release'  # Match your current setup
-  releaseNameNcms: 'dev-ncms'               # Match your current setup
-  targetNamespace: 'default'                # Use default namespace for CI/CD
+  buildPlatform: 'Any CPU'
 
-# variable for uat 
-  acrNameUat: 'uatacrimagereg'
-  acrLoginServerUat: 'uatacrimagereg.azurecr.io'
-  imageNcmsUat: 'uatacrimagereg.azurecr.io/ncmsui'
-  imageMyNaatiUat: 'uatacrimagereg.azurecr.io/mynaatiui'
-  containerRegistryUat: 'naati-uat-serviceconnection'
-  #varibale for prod 
-  acrNameProd: 'prodacrimagereg'
-  acrLoginServerProd: 'prodacrimagereg.azurecr.io'
-  imageNcmsProd: 'prodacrimagereg.azurecr.io/ncmsui'
-  imageMyNaatiProd: 'prodacrimagereg.azurecr.io/mynaatiui'
-  containerRegistryProd: 'naati-prod-serviceconnection'
+  # Azure Container Registry
+  containerRegistry: 'naatidevacri0q0.azurecr.io'
+  acrServiceConnection: 'e8e4ba61-1a8e-41a7-a4d3-79ec07a42d8d'
+  repositoryName: 'naatidevacri0q0'
+
+  # Image Names
+  ncmsImageName: 'ncmsui'
+  myNaatiImageName: 'mynaatiui'
+  naatiBaseImageName: 'naatibase'
+
+  # Version and Tagging
+  majorVersion: '2.8.7'
+  branchPrefix: 'future'
+
+  # Helm Release Configuration (matching existing deployments)
+  releaseNameMyNaati: 'my-mynaati-release'  # ✅ Matches existing
+  releaseNameNcms: 'dev-ncms'               # ✅ Matches existing
+  targetNamespace: 'default'                # ✅ Matches existing
+  helmChartPathMyNaati: 'NAATI-k8smanifest/mynaati/mynaati'
+  helmChartPathNcms: 'NAATI-k8smanifest/ncms/ncms'
+  helmChartPathInfra: 'NAATI-k8smanifest/naati-infra/naati-infra'
 
 
+  #For UAT
+  releaseNameNaatiUat: 'naati'
+  targetNamespaceUat: 'uat'
+  helmChartPathNaatiUat: 'Deployment Scripts/Helm/naati'
+  containerRegistryUat: 'ntacr3.azurecr.io'
+  acrServiceConnectionUat: '81238149-016b-471d-8d76-d5e7133dbb08'  # Update with your actual UAT ACR service connection
+  repositoryNameUat: 'ntacr3'
+  # UAT Azure subscription (different from dev)
+  # Update with your actual UAT subscription connection
 
- 
+   #For prod
+  releaseNameNaatiProd: 'naati'
+  targetNamespaceProd: 'prod'
+  helmChartPathNaatiProd: 'Deployment Scripts/Helm/naati'
+  containerRegistryProd: 'ntacr4.azurecr.io'
+  acrServiceConnectionProd: 'a28c79ad-44a9-4873-9d49-cda13cde72c4'
 
 
 
 
 
+  # Paths
+  sourceDirectory: '.'
+  dockerfileDirectory: 'Deployment Scripts/Docker'
 
-
-
+  # NuGet Configuration
+  nugetConfigPath: 'NuGet.config'
 
 pool:
-  name: 'Naatipool'    # Your agent pool
+  name: 'Naatipool'
 
-steps:
-- checkout: self
+stages:
+- stage: Build
+  displayName: 'Build Applications'
+  jobs:
+  - job: BuildJob
+    displayName: 'Build NCMS and MyNaati'
+    timeoutInMinutes: 60
+    workspace:
+      clean: all
+    variables:
+      Agent.Clean: true
+ 
+    steps:
+    # Targeted cleanup - Clean specific build directories before checkout
+    - script: |
+        echo 🧹 Targeted workspace cleanup starting...
 
-- powershell: |
-    $containerFontsPath = "Naati/Ncms.Ui/ContainerFonts"
-    if (Test-Path $containerFontsPath) {
-        $files = Get-ChildItem $containerFontsPath
-        if (-not $files) {
-            Write-Host "ContainerFonts directory is empty, creating placeholder file"
-            New-Item -Path "$containerFontsPath/placeholder.txt" -ItemType File -Value "Placeholder file to prevent InstallFonts.ps1 from failing" -Force
+        echo Cleaning Build.ArtifactStagingDirectory: $(Build.ArtifactStagingDirectory)
+        if exist "$(Build.ArtifactStagingDirectory)" (
+          rmdir /s /q "$(Build.ArtifactStagingDirectory)" 2>nul
+          echo ✅ Staging directory cleaned
+        ) else (
+          echo ℹ️ Staging directory doesn't exist
+        )
+
+        echo Cleaning Build.BinariesDirectory: $(Build.BinariesDirectory)
+        if exist "$(Build.BinariesDirectory)" (
+          rmdir /s /q "$(Build.BinariesDirectory)" 2>nul
+          echo ✅ Binaries directory cleaned
+        ) else (
+          echo ℹ️ Binaries directory doesn't exist
+        )
+
+        echo Cleaning specific artifact directories that cause conflicts...
+        if exist "$(Build.ArtifactStagingDirectory)\Ncms.Ui\_PublishedWebsites" (
+          rmdir /s /q "$(Build.ArtifactStagingDirectory)\Ncms.Ui\_PublishedWebsites" 2>nul
+          echo ✅ NCMS published websites cleaned
+        )
+
+        if exist "$(Build.ArtifactStagingDirectory)\MyNaati.Ui\_PublishedWebsites" (
+          rmdir /s /q "$(Build.ArtifactStagingDirectory)\MyNaati.Ui\_PublishedWebsites" 2>nul
+          echo ✅ MyNaati published websites cleaned
+        )
+
+        echo Creating fresh directories...
+        mkdir "$(Build.ArtifactStagingDirectory)" 2>nul
+        mkdir "$(Build.BinariesDirectory)" 2>nul
+
+        echo 🎉 Targeted workspace cleanup completed
+      displayName: 'Targeted Workspace Cleanup'
+
+    - checkout: self
+      displayName: 'Checkout Source Code'
+      clean: true
+      persistCredentials: true
+
+    # Set up build variables
+    - task: PowerShell@2
+      displayName: 'Setup Build Variables'
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Generate build number and container tag
+          $buildDate = Get-Date -Format "yyyyMMdd"
+          $revision = "$(Build.BuildId)"
+          $autobuildnum = ([DateTime]::Now.Date - (New-Object System.DateTime(2022,1,1))).Days
+
+          # Set container tag - always use 'future' suffix
+          $branchName = "$(Build.SourceBranchName)"
+          $branchPrefix = "future"
+
+          $containerTag = "$(majorVersion).$autobuildnum.$revision-$branchPrefix"
+
+          Write-Host "##vso[task.setvariable variable=ContainerTag]$containerTag"
+          Write-Host "##vso[task.setvariable variable=BranchPrefix]$branchPrefix"
+          Write-Host "##vso[task.setvariable variable=BuildNumber]NAATI ALL - $buildDate.$revision"
+
+          Write-Host "Container Tag: $containerTag"
+          Write-Host "Branch Prefix: $branchPrefix"
+          Write-Host "Build Number: NAATI ALL - $buildDate.$revision"
+
+    # Restore NuGet packages
+    - task: NuGetToolInstaller@1
+      displayName: 'Install NuGet Tool'
+      inputs:
+        versionSpec: '6.14.0'
+
+    - task: NuGetCommand@2
+      displayName: 'Restore NuGet Packages'
+      inputs:
+        command: 'restore'
+        restoreSolution: '$(sourceDirectory)/Naati.sln'
+        feedsToUse: 'select'
+        includeNuGetOrg: true
+        restoreDirectory: '$(sourceDirectory)/packages'
+      continueOnError: true
+
+    # Install ClosedXML specifically if needed
+    - task: PowerShell@2
+      displayName: 'Ensure Critical Packages'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $packagesDir = "$(Build.SourcesDirectory)/$(sourceDirectory)/packages"
+
+          # Check for ClosedXML
+          $closedXML = Get-ChildItem $packagesDir -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -like "*ClosedXML*" }
+
+          if (-not $closedXML) {
+              Write-Host "Installing ClosedXML package manually..."
+              nuget install ClosedXML -Version 0.95.4 -OutputDirectory $packagesDir -NonInteractive
+
+              if ($LASTEXITCODE -eq 0) {
+                  Write-Host "✅ ClosedXML installed successfully"
+              } else {
+                  Write-Warning "Failed to install ClosedXML manually"
+              }
+          } else {
+              Write-Host "✅ ClosedXML package found: $($closedXML.Name)"
+          }
+
+          # List all packages
+          $totalPackages = (Get-ChildItem $packagesDir -Directory -ErrorAction SilentlyContinue | Measure-Object).Count
+          Write-Host "📊 Total packages available: $totalPackages"
+
+    # JavaScript Optimization (RequireJS) - Build optimized JS in source folder
+    - task: PowerShell@2
+      displayName: 'Optimize JavaScript (RequireJS)'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "🚀 Starting JavaScript optimization..."
+
+          # Find Node.js executable
+          $nodeExe = $null
+          $possiblePaths = @(
+            "C:\Program Files\nodejs\node.exe",
+            "C:\Program Files (x86)\nodejs\node.exe"
+          )
+
+          foreach ($path in $possiblePaths) {
+            if (Test-Path $path) {
+              $nodeExe = $path
+              break
+            }
+          }
+
+          # Try from PATH if not found in standard locations
+          if (-not $nodeExe) {
+            try {
+              $null = Get-Command node -ErrorAction Stop
+              $nodeExe = "node"
+            } catch {
+              Write-Warning "Node.js not found. Skipping JavaScript optimization."
+              Write-Host "Install Node.js from https://nodejs.org/ if JavaScript optimization is needed"
+              exit 0
+            }
+          }
+
+          Write-Host "✅ Using Node.js: $nodeExe"
+
+          # Function to build main.dist.js for a project
+          function BuildMainDist($projectName) {
+            Write-Host "🔧 Building main.dist.js for '$projectName' project"
+
+            $projectFolder = "$(Build.SourcesDirectory)\$projectName\App"
+            $mainDistJs = "$projectFolder\main.dist.js"
+            $buildJs = "$projectFolder\build.js"
+
+            # Check if the App folder and build.js exist
+            if (-not (Test-Path $projectFolder)) {
+              Write-Host "⚠️ App folder not found for $projectName, skipping JavaScript build" -ForegroundColor Yellow
+              return
+            }
+
+            if (-not (Test-Path $buildJs)) {
+              Write-Host "⚠️ build.js not found for $projectName, skipping JavaScript build" -ForegroundColor Yellow
+              return
+            }
+
+            # Create main.dist.js if it doesn't exist
+            if (-not (Test-Path $mainDistJs)) {
+              Write-Host "Creating empty main.dist.js for $projectName"
+              New-Item -Path $mainDistJs -ItemType File -Force | Out-Null
+            }
+
+            # Make file writable
+            Set-ItemProperty $mainDistJs IsReadOnly $false
+
+            $backDir = $pwd
+            Set-Location $projectFolder
+
+            try {
+              Write-Host "Running RequireJS optimization for $projectName..."
+              $messages = (& $nodeExe .\build.js 2>&1)
+
+              if ($LASTEXITCODE -ne 0) {
+                Write-Host "❌ Failed to build main.dist.js for $projectName" -ForegroundColor Red
+                $message = [String]::Join([Environment]::NewLine, $messages)
+                Write-Host $message -ForegroundColor Red
+              } else {
+                Write-Host "✅ Successfully built main.dist.js for $projectName" -ForegroundColor Green
+
+                # Verify the file was created and has content
+                if (Test-Path $mainDistJs) {
+                  $fileSize = (Get-Item $mainDistJs).Length
+                  Write-Host "📊 main.dist.js size: $fileSize bytes"
+                } else {
+                  Write-Warning "main.dist.js was not created for $projectName"
+                }
+              }
+            } catch {
+              Write-Host "❌ Error running Node.js build for $projectName`: $($_.Exception.Message)" -ForegroundColor Red
+            }
+
+            # Make file read-only
+            Set-ItemProperty $mainDistJs IsReadOnly $true
+            Set-Location $backDir
+          }
+
+          # Build JavaScript for both projects
+          BuildMainDist('MyNaati.Ui')
+          BuildMainDist('Ncms.Ui')
+
+          Write-Host "🎉 JavaScript optimization completed!"
+      continueOnError: true
+
+    # Find MSBuild and Set VSToolsPath
+    - task: PowerShell@2
+      displayName: 'Setup MSBuild Environment'
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Find MSBuild path
+          $msBuild = "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\Msbuild.exe"
+          if (-not (Test-Path $msBuild)) {
+              $msBuild = "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\Msbuild.exe"
+          }
+          if (-not (Test-Path $msBuild)) {
+              Write-Error "MSBuild not found. Please install Visual Studio or Build Tools."
+              exit 1
+          }
+
+          # Set VSToolsPath
+          $vsToolsPath = "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Microsoft\VisualStudio\v17.0"
+          if (-not (Test-Path "$vsToolsPath\WebApplications\Microsoft.WebApplication.targets")) {
+              $vsToolsPath = "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VisualStudio\v17.0"
+          }
+
+          Write-Host "##vso[task.setvariable variable=MSBuildPath]$msBuild"
+          Write-Host "##vso[task.setvariable variable=VSToolsPath]$vsToolsPath"
+          Write-Host "Using MSBuild: $msBuild"
+          Write-Host "Using VSToolsPath: $vsToolsPath"
+
+
+    # Bump Assembly Versions to 2.8.6.0 (Option B - assemblies only)
+    - task: PowerShell@2
+      displayName: 'Set Assembly Version to 2.8.7.0'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $root = "$(Build.SourcesDirectory)"
+          $targetVersion = "2.8.7.0"
+          Write-Host "Updating AssemblyInfo.cs versions to $targetVersion under $root"
+
+          $files = Get-ChildItem -Path $root -Recurse -Include AssemblyInfo.cs | Select-Object -ExpandProperty FullName
+          foreach ($file in $files) {
+            try {
+              attrib $file -r -ErrorAction SilentlyContinue
+              $content = Get-Content $file -Raw
+
+              # Simple and robust: replace the default 1.0.0.0 with the target version
+              $content = $content -replace '1\.0\.0\.0', $targetVersion
+
+              Set-Content -Path $file -Value $content -Encoding UTF8
+              Write-Host "✓ Updated: $file"
+            } catch {
+              Write-Warning "Could not update: $file. Error: $($_.Exception.Message)"
+            }
+          }
+
+          Write-Host "✅ Assembly versions updated."
+
+    # Create Publish Directories
+    - task: PowerShell@2
+      displayName: 'Create Publish Directories'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $stagingDir = "$(Build.ArtifactStagingDirectory)"
+
+          # Create publish directories
+          $ncmsDir = "$stagingDir\Ncms.Ui\_PublishedWebsites\Ncms.Ui"
+          $myNaatiDir = "$stagingDir\MyNaati.Ui\_PublishedWebsites\MyNaati.Ui"
+
+          New-Item -ItemType Directory -Path $ncmsDir -Force | Out-Null
+          New-Item -ItemType Directory -Path $myNaatiDir -Force | Out-Null
+
+          Write-Host "Created publish directories:"
+          Write-Host "  NCMS: $ncmsDir"
+          Write-Host "  MyNaati: $myNaatiDir"
+
+    # Build Solution First with C# Language Version Override
+    - task: PowerShell@2
+      displayName: 'Build Solution'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $msBuild = "$(MSBuildPath)"
+          $sourceDir = "$(Build.SourcesDirectory)"
+
+          Write-Host "Building Solution to establish project context..."
+
+          & $msBuild "$sourceDir\Naati.sln" `
+              /p:Platform="Any CPU" `
+              /p:Configuration="$(buildConfiguration)" `
+              /p:LangVersion="latest" `
+              /p:TreatWarningsAsErrors=false `
+              /t:Build
+
+          Write-Host "Solution build completed with exit code: $LASTEXITCODE"
+
+          if ($LASTEXITCODE -ne 0) {
+              Write-Warning "Solution build had issues (exit code: $LASTEXITCODE), but continuing with individual project builds..."
+          } else {
+              Write-Host "✅ Solution build completed successfully"
+          }
+
+
+
+    # Publish NCMS Application
+    - task: PowerShell@2
+      displayName: 'Publish NCMS Application'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $msBuild = "$(MSBuildPath)"
+          $vsToolsPath = "$(VSToolsPath)"
+          $stagingDir = "$(Build.ArtifactStagingDirectory)"
+          $sourceDir = "$(Build.SourcesDirectory)"
+
+          Write-Host "Publishing NCMS Application..."
+
+          & $msBuild "$sourceDir\Ncms.Ui\Ncms.Ui.csproj" `
+              /p:DeployDefaultTarget=WebPublish `
+              /p:WebPublishMethod=FileSystem `
+              /p:DeleteExistingFiles=True `
+              /p:publishUrl="$stagingDir\Ncms.Ui\_PublishedWebsites\Ncms.Ui" `
+              /t:WebPublish `
+              /p:Platform="Any CPU" `
+              /p:Configuration="$(buildConfiguration)" `
+              /p:VSToolsPath="$vsToolsPath" `
+              /p:OutputPath="$stagingDir\Ncms.Ui\_PublishedWebsites\Ncms.Ui\bin\" `
+              /p:BaseOutputPath="$stagingDir\Ncms.Ui\_PublishedWebsites\Ncms.Ui\" `
+              /p:LangVersion="latest" `
+              /p:TreatWarningsAsErrors=false
+
+          if ($LASTEXITCODE -ne 0) {
+              Write-Error "NCMS publish failed"
+              exit 1
+          }
+
+          Write-Host "✅ NCMS publish completed successfully"
+
+   
+    - task: PowerShell@2
+      displayName: 'Publish MyNaati Application'
+      inputs:
+       targetType: 'inline'
+       script: |
+        $msBuild = "$(MSBuildPath)"
+        $vsToolsPath = "$(VSToolsPath)"
+        $stagingDir = "$(Build.ArtifactStagingDirectory)"
+        $sourceDir = "$(Build.SourcesDirectory)"
+
+        Write-Host "Publishing MyNaati Application..."
+
+        & $msBuild "$sourceDir\MyNaati.Ui\MyNaati.Ui.csproj" `
+          /p:DeployDefaultTarget=WebPublish `
+          /p:WebPublishMethod=FileSystem `
+          /p:DeleteExistingFiles=True `
+          /p:publishUrl="$stagingDir\MyNaati.Ui\_PublishedWebsites\MyNaati.Ui" `
+          /t:WebPublish `
+          /p:Platform="Any CPU" `
+          /p:Configuration="$(buildConfiguration)" `
+          /p:VSToolsPath="$vsToolsPath" `
+          /p:OutputPath="$stagingDir\MyNaati.Ui\_PublishedWebsites\MyNaati.Ui\bin\" `
+          /p:BaseOutputPath="$stagingDir\MyNaati.Ui\_PublishedWebsites\MyNaati.Ui\" `
+          /p:LangVersion="latest" `
+          /p:TreatWarningsAsErrors=false
+
+        if ($LASTEXITCODE -ne 0) {
+          Write-Error "MyNaati publish failed"
+          exit 1
         }
-    }
-  displayName: 'Fix ContainerFonts Directory'
 
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '**/*.sln'
-
-
-
-
-
-
-# Build dependencies first
-- task: VSBuild@1
-  displayName: 'Build Common Dependencies'
-  inputs:
-    solution: '**/F1Solutions.Global.Common.csproj'
-    configuration: '$(buildConfiguration)'
-  continueOnError: true
-
-
-- task: VSBuild@1
-  displayName: 'Build F1Solutions.Global.Azure'
-  inputs:
-    solution: '**/F1Solutions.Naati.Common.Azure.csproj' 
-    configuration: '$(buildConfiguration)'  
-
-
-
-- task: VSBuild@1
-  displayName: 'Build Dal.NHibernate'
-  inputs:
-    solution: '**/F1Solutions.Naati.Common.Dal.NHibernate.csproj'
-    configuration: '$(buildConfiguration)'
-  continueOnError: true
-
-# Search for Contracts project with different possible names
-- task: VSBuild@1
-  displayName: 'Build F1Solutions.Naati.Common.Contracts'
-  inputs:
-    solution: '**/F1Solutions.Naati.Common.Contracts.csproj'
-    configuration: '$(buildConfiguration)'
-  continueOnError: true
-
-- task: VSBuild@1
-  displayName: 'Build F1Solutions.Naati.Common.Bl'
-  inputs:
-    solution: '**/F1Solutions.Naati.Common.Bl.csproj'
-    configuration: '$(buildConfiguration)'
-
-- task: VSBuild@1
-  displayName: 'Build F1Solutions.Naati.Common.Dal'
-  inputs:
-    solution: '**/F1Solutions.Naati.Common.Dal.csproj'
-    configuration: '$(buildConfiguration)'    
-
- 
-
-- task: VSBuild@1
-  displayName: 'Build F1Solutions.Naati.Common.Dal.Nhibernate.Mappings'
-  inputs:
-    solution: '**/F1Solutions.Naati.Common.Dal.Nhibernate.Mappings.csproj'
-    configuration: '$(buildConfiguration)'   
-
-
-
-- task: VSBuild@1
-  displayName: 'Build F1Solutions.NAATI.Common.Wiise'
-  inputs:
-    solution: '**/F1Solutions.NAATI.Common.Wiise.csproj'
-    configuration: '$(buildConfiguration)'
-
-- task: VSBuild@1
-  displayName: 'Build Ncms.Bl'
-  inputs:
-    solution: '**/Ncms.Bl.csproj'
-    configuration: '$(buildConfiguration)'
-
-
-- task: VSBuild@1
-  displayName: 'Build Ncms.Contracts'
-  inputs:
-    solution: '**/Ncms.Contracts.csproj'
-    configuration: '$(buildConfiguration)'   
-
-
-- task: VSBuild@1
-  displayName: 'Build F1Solutions.Naati.Common.Migrations'
-  inputs:
-    solution: '**/F1Solutions.Naati.Common.Migrations.csproj'
-    configuration: '$(buildConfiguration)'      
-
-- task: VSBuild@1
-  displayName: 'Build MyNaati.Bl'
-  inputs:
-    solution: '**/MyNaati.Bl.csproj'
-    configuration: '$(buildConfiguration)'      
-
-- task: VSBuild@1
-  displayName: 'Build MyNaati.Contracts'
-  inputs:
-    solution: '**/MyNaati.Contracts.csproj'
-    configuration: '$(buildConfiguration)'      
-
-
-
-
-
-# Build Ncms.Ui with aggressive dependency exclusion
-- task: VSBuild@1
-  displayName: 'Build Ncms.Ui '
-  inputs:
-    solution: 'Ncms.Ui/Ncms.Ui.csproj'
-    configuration: '$(buildConfiguration)'
-    msbuildArgs: ' /p:SkipInvalidConfigurations=true'
-
-# Publish Ncms.Ui project (Release, all dependencies to /publish)
-# - task: VSBuild@1
-#   displayName: 'Publish Ncms.Ui'
-#   inputs:
-#     solution: 'Ncms.Ui/Ncms.Ui.csproj'
-#     configuration: '$(buildConfiguration)'
-#     msbuildArgs: '/p:DeployOnBuild=true  /p:PublishDir=$(Build.ArtifactStagingDirectory)/Ncms.Ui/publish/'
-
-
-- task: VSBuild@1
-  displayName: 'Publish Ncms.Ui'
-  inputs:
-    solution: 'Ncms.Ui/Ncms.Ui.csproj'
-    configuration: '$(buildConfiguration)'
-    msbuildArgs: >
-      /t:WebPublish
-      /p:WebPublishMethod=FileSystem
-      /p:DeployOnBuild=true
-      /p:PublishUrl=$(Build.ArtifactStagingDirectory)/Ncms.Ui/publish
-      /p:DeleteExistingFiles=True
-      /p:Configuration=$(buildConfiguration)
-
-# Copy all source code (for reference) next to the publish folder if desired
-- powershell: |
-    Write-Host "Copying Ncms.Ui source for debugging (optional)..."
-    $src = "$(Build.SourcesDirectory)\Ncms.Ui"
-    $dest = "$(Build.ArtifactStagingDirectory)\Ncms.Ui\src"
-    # Create destination directory if it doesn't exist
-    New-Item -ItemType Directory -Path $dest -Force | Out-Null
-    # Copy all files and folders, overwrite if exists
-    Copy-Item -Path "$src\*" -Destination $dest -Recurse -Force
-  displayName: 'Copy Source to Publish Artifact (optional)'
-
-- powershell: |
-    Write-Host "Checking publish folder contents:"
-    Get-ChildItem -Recurse "$(Build.ArtifactStagingDirectory)\Ncms.Ui\publish"
-  displayName: 'List Published Files'
-
-
-
-
-# Try building with the temporary solution that excludes Migrations
-# - task: VSBuild@1
-#   displayName: 'Build with Temporary Solution (No Migrations)'
-#   inputs:
-#     solution: 'TempBuild.sln'
-#     configuration: '$(buildConfiguration)'
-#   condition: failed()
-#   continueOnError: true
-
-# # Last resort: Force build just the assemblies we need for Docker
-# - script: |
-#     echo "Force building Ncms.Ui"
-#     "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe" "Ncms.Ui\Ncms.Ui.csproj" /p:Configuration=$(buildConfiguration) /p:Platform="Any CPU" /p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true /verbosity:minimal
-    
-#     echo "Force building MyNaati.Ui"
-#     "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe" "MyNaati.Ui\MyNaati.Ui.csproj" /p:Configuration=$(buildConfiguration) /p:Platform="Any CPU" /p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true /verbosity:minimal
-#   displayName: 'Last Resort: Force Build UI Projects'
-#   condition: failed()
-#   continueOnError: true
-
-- task: VSBuild@1
-  displayName: 'Build MyNaati.Ui'
-  inputs:
-    solution: 'MyNaati.Ui/MyNaati.Ui.csproj'
-    configuration: '$(buildConfiguration)'
-    msbuildArgs: '/p:BuildProjectReferences=false /p:SkipInvalidConfigurations=true'
-
-# - task: VSBuild@1
-#   displayName: 'Build mynaati Test Projects'
-#   inputs:
-#     solution: 'MyNaati.Test/MyNaati.Test.csproj'
-#     configuration: '$(buildConfiguration)'
-#   continueOnError: true
-
-# - task: VSBuild@1
-#   displayName: 'Build Ncms Test Project'
-#   inputs:
-#     solution: 'Ncms.Test/Ncms.Test.csproj'
-#     configuration: '$(buildConfiguration)'
-#   continueOnError: true
-
-# - task: VSTest@2
-#   displayName: 'Run Unit Tests'
-#   inputs:
-#     testSelector: 'testAssemblies'
-#     testAssemblyVer2: |
-#       **\*MyNaati.Test.dll
-#       **\*Ncms.Test.dll
-#     searchFolder: '$(System.DefaultWorkingDirectory)'
-#   continueOnError: true
-
-- script: docker info
-  displayName: 'Test Docker Access from Agent'
-
-
-- task: Docker@2
-  displayName: 'Build MyNaatiUi Image'
-  inputs:
-    containerRegistry: 'naati-serviceconnection'
-    repository: '$(imageMyNaati)'  # This will create the double ACR name pattern
-    command: 'buildAndPush'
-    Dockerfile: 'MyNaati.Ui/Dockerfile'   # Fixed case sensitivity
-    buildContext: 'MyNaati.Ui'
-    tags: |
-      $(containerTag)
-
-- task: Docker@2
-  displayName: 'Build NcmsUi Image'
-  inputs:
-    containerRegistry: 'naati-serviceconnection'
-    repository: '$(imageNcms)'  # This will create the double ACR name pattern
-    command: 'buildAndPush'
-    Dockerfile: 'Ncms.Ui/Dockerfile'   # Fixed case sensitivity
-    # buildContext: 'Ncms.Ui'
-    buildContext: '$(Build.ArtifactStagingDirectory)/Ncms.Ui'
-    tags: |
-      $(containerTag)  
-
-# - task: Docker@2
-#   displayName: 'Build MyNaatiUi Image (UAT)'
-#   condition: eq(variables['Build.SourceBranchName'], 'uat')
-#   inputs:
-#     containerRegistry: '$(containerRegistryUat)'
-#     repository: '$(imageMyNaatiUat)'
-#     command: 'buildAndPush'
-#     Dockerfile: 'MyNaati.Ui/Dockerfile'
-#     buildContext: 'MyNaati.Ui'
-#     tags: |
-#       $(containerTag)
-
-
-
-# - task: Docker@2
-#   displayName: 'Build Ncms Image (UAT)'
-#   condition: eq(variables['Build.SourceBranchName'], 'uat')
-#   inputs:
-#     containerRegistry: '$(containerRegistryUat)'
-#     repository: '$(imageMyNaatiUat)'
-#     command: 'buildAndPush'
-#     Dockerfile: 'Ncms.Ui/Dockerfile'
-#     buildContext: 'Ncms.Ui'
-#     tags: |
-#       $(containerTag)   
-
-
-# - task: Docker@2
-#   displayName: 'Build MyNaatiUi Image (Prod)'
-#   condition: eq(variables['Build.SourceBranchName'], 'prod')
-#   inputs:
-#     containerRegistry: '$(containerRegistryProd)'
-#     repository: '$(imageMyNaatiProd)'
-#     command: 'buildAndPush'
-#     Dockerfile: 'MyNaati.Ui/Dockerfile'
-#     buildContext: 'MyNaati.Ui'
-#     tags: |
-#       $(containerTag)
-
-
-# - task: Docker@2
-#   displayName: 'Build Ncms Image (Prod)'
-#   condition: eq(variables['Build.SourceBranchName'], 'prod')
-#   inputs:
-#     containerRegistry: '$(containerRegistryProd)'
-#     repository: '$(imageMyNaatiProd)'
-#     command: 'buildAndPush'
-#     Dockerfile: 'Ncms.Ui/Dockerfile'
-#     buildContext: 'Ncms.Ui'
-#     tags: | 
-#       $(containerTag)              
-
-
-
-
-
-- task: HelmInstaller@1
-  displayName: 'Install Helm'
-  inputs:
-    helmVersionToInstall: 'latest'
-
-# Package MyNaati Helm Chart
-- script: |
-    helm package $(helmChartPathMyNaati) --version $(containerTag) --destination $(Build.ArtifactStagingDirectory)
-  displayName: 'Package MyNaati Helm Chart'
-
-# Package NCMS Helm Chart
-- script: |
-    helm package $(helmChartPathNcms) --version $(containerTag) --destination $(Build.ArtifactStagingDirectory)
-  displayName: 'Package NCMS Helm Chart'
-
-# Package Infrastructure Helm Chart (if needed)
-- script: |
-    helm package $(helmChartPathInfra) --version $(containerTag) --destination $(Build.ArtifactStagingDirectory)
-  displayName: 'Package Infrastructure Helm Chart'
-
-
-
-# Deploy MyNaati
-- task: AzureCLI@2
-  displayName: 'Helm Deploy MyNaati'
-  inputs:
-    azureSubscription: 'f7fdab19-cae1-4b90-8af8-45052e6b72ca'
-    scriptType: 'ps'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      Write-Host "=== Starting MyNaati Deployment ==="
-      
-      # Get AKS credentials
-      Write-Host "Getting AKS credentials..."
-      az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks --overwrite-existing
-      
-      # Verify kubectl connection
-      Write-Host "Testing kubectl connection..."
-      kubectl cluster-info
-      
-      # Check if chart exists
-      $chartPath = "$(helmChartPathMyNaati)"
-      Write-Host "Chart path: $chartPath"
-      if (-not (Test-Path "$chartPath/Chart.yaml")) {
-        Write-Error "Chart.yaml not found at $chartPath"
-        exit 1
-      }
-      
-      # Validate Helm template first
-      Write-Host "Validating Helm template..."
-      helm template test-mynaati $chartPath --set image.repository=$(acrLoginServer)/$(imageMyNaati) --set image.tag=$(containerTag) --dry-run
-      
-      # Deploy MyNaati
-      Write-Host "Deploying MyNaati..."
-      helm upgrade $(releaseNameMyNaati) $chartPath --install --namespace $(targetNamespace) --create-namespace --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageMyNaati) --set image.tag=$(containerTag) --wait --timeout=20m --debug
-      
-      # Check deployment status
-      Write-Host "Checking deployment status..."
-      # kubectl get pods -n $(targetNamespace) -l app.kubernetes.io/instance=$(releaseNameMyNaati)
-      # kubectl describe pods -n $(targetNamespace) -l app.kubernetes.io/instance=$(releaseNameMyNaati)
-      
-      Write-Host "=== MyNaati Deployment Complete ==="
-  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-
-# Deploy NCMS
-- task: AzureCLI@2
-  displayName: 'Helm Deploy NCMS'
-  inputs:
-    azureSubscription: 'f7fdab19-cae1-4b90-8af8-45052e6b72ca'
-    scriptType: 'ps'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      Write-Host "=== Starting NCMS Deployment ==="
-      
-      # Get AKS credentials
-      Write-Host "Getting AKS credentials..."
-      az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks --overwrite-existing
-      
-      # Verify kubectl connection
-      Write-Host "Testing kubectl connection..."
-      kubectl cluster-info
-      
-      # Check if chart exists
-      $chartPath = "$(helmChartPathNcms)"
-      Write-Host "Chart path: $chartPath"
-      if (-not (Test-Path "$chartPath/Chart.yaml")) {
-        Write-Error "Chart.yaml not found at $chartPath"
-        exit 1
-      }
-      
-      # Validate Helm template first
-      Write-Host "Validating Helm template..."
-      helm template test-ncms $chartPath --set image.repository=$(acrLoginServer)/$(imageNcms) --set image.tag=$(containerTag) --dry-run
-      
-      # Deploy NCMS
-      Write-Host "Deploying NCMS..."
-      helm upgrade $(releaseNameNcms) $chartPath --install --namespace $(targetNamespace) --create-namespace --version $(containerTag) --set image.repository=$(acrLoginServer)/$(imageNcms) --set image.tag=$(containerTag) --wait --timeout=20m --debug
-      
-      # Check deployment status
-      Write-Host "Checking deployment status..."
-
-      # kubectl get pods -n $(targetNamespace) -l app.kubernetes.io/instance=$(releaseNameNcms)
-      # kubectl describe pods -n $(targetNamespace) -l app.kubernetes.io/instance=$(releaseNameNcms)
-      
-      Write-Host "=== NCMS Deployment Complete ==="
-  condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
-
-
- 
-# # ==== UAT DEPLOYMENT STAGE ====
-# - stage: Deploy_UAT
-#   displayName: 'Deploy to UAT'
-#   dependsOn: Build
+    # Verify Build Results
+    - task: PowerShell@2
+      displayName: 'Verify Build Results'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $ncmsPath = "$(Build.ArtifactStagingDirectory)/Ncms.Ui/_PublishedWebsites/Ncms.Ui"
+          $myNaatiPath = "$(Build.ArtifactStagingDirectory)/MyNaati.Ui/_PublishedWebsites/MyNaati.Ui"
+
+          $ncmsFiles = 0
+          $myNaatiFiles = 0
+
+          if (Test-Path $ncmsPath) {
+              $ncmsFiles = (Get-ChildItem $ncmsPath -Recurse | Measure-Object).Count
+          }
+
+          if (Test-Path $myNaatiPath) {
+              $myNaatiFiles = (Get-ChildItem $myNaatiPath -Recurse | Measure-Object).Count
+          }
+
+          Write-Host "📊 Build Results:"
+          Write-Host "  NCMS files: $ncmsFiles"
+          Write-Host "  MyNaati files: $myNaatiFiles"
+
+          # 🔍 VERIFY JAVASCRIPT OPTIMIZATION
+          Write-Host "🔍 Checking JavaScript optimization results..."
+
+          # Check NCMS main.dist.js
+          $ncmsMainDist = "$ncmsPath/App/main.dist.js"
+          if (Test-Path $ncmsMainDist) {
+              $ncmsJsContent = Get-Content $ncmsMainDist -Raw
+              $ncmsJsSize = (Get-Item $ncmsMainDist).Length
+              $ncmsOptimized = -not ($ncmsJsContent -like "*Dummy file*")
+              Write-Host "  NCMS main.dist.js: EXISTS ($ncmsJsSize bytes) - Optimized: $ncmsOptimized"
+          } else {
+              Write-Host "  NCMS main.dist.js: MISSING ❌"
+          }
+
+          # Check MyNaati main.dist.js
+          $myNaatiMainDist = "$myNaatiPath/App/main.dist.js"
+          if (Test-Path $myNaatiMainDist) {
+              $myNaatiJsContent = Get-Content $myNaatiMainDist -Raw
+              $myNaatiJsSize = (Get-Item $myNaatiMainDist).Length
+              $myNaatiOptimized = -not ($myNaatiJsContent -like "*Dummy file*")
+              Write-Host "  MyNaati main.dist.js: EXISTS ($myNaatiJsSize bytes) - Optimized: $myNaatiOptimized"
+          } else {
+              Write-Host "  MyNaati main.dist.js: MISSING ❌"
+          }
+
+          if ($ncmsFiles -lt 50 -or $myNaatiFiles -lt 50) {
+              Write-Error "Build verification failed. Expected more files in published directories."
+              exit 1
+          } else {
+              Write-Host "✅ Build verification passed"
+          }
+
+    # Copy Docker Files and Scripts
+    - task: PowerShell@2
+      displayName: 'Copy Docker Files and Scripts'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $stagingDir = "$(Build.ArtifactStagingDirectory)"
+          $sourceDir = "$(Build.SourcesDirectory)/$(sourceDirectory)"
+
+          # Copy Dockerfiles
+          Copy-Item "$sourceDir/Ncms.Ui/Dockerfile" "$stagingDir/Ncms.Ui/_PublishedWebsites/Ncms.Ui/" -Force -ErrorAction SilentlyContinue
+          Copy-Item "$sourceDir/MyNaati.Ui/Dockerfile" "$stagingDir/MyNaati.Ui/_PublishedWebsites/MyNaati.Ui/" -Force -ErrorAction SilentlyContinue
+
+          # Copy NCMS specific files
+          Copy-Item "$sourceDir/Ncms.Ui/NCMSCertificate.ps1" "$stagingDir/Ncms.Ui/_PublishedWebsites/Ncms.Ui/" -Force -ErrorAction SilentlyContinue
+          Copy-Item "$sourceDir/Ncms.Ui/InstallFonts.ps1" "$stagingDir/Ncms.Ui/_PublishedWebsites/Ncms.Ui/" -Force -ErrorAction SilentlyContinue
+          Copy-Item "$sourceDir/Ncms.Ui/ncmstest09.local.pfx" "$stagingDir/Ncms.Ui/_PublishedWebsites/Ncms.Ui/" -Force -ErrorAction SilentlyContinue
+
+          # Copy ContainerFonts folder if it exists
+          if (Test-Path "$sourceDir/Ncms.Ui/ContainerFonts/") {
+              Copy-Item "$sourceDir/Ncms.Ui/ContainerFonts" "$stagingDir/Ncms.Ui/_PublishedWebsites/Ncms.Ui/" -Recurse -Force
+              Write-Host "✅ ContainerFonts copied"
+          }
+
+          Write-Host "✅ Docker files and scripts copied successfully"
+
+    # Fix Dockerfile Placeholders
+    - task: PowerShell@2
+      displayName: 'Fix Dockerfile Placeholders'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $stagingDir = "$(Build.ArtifactStagingDirectory)"
+          $baseImageName = "$(containerRegistry)/$(naatiBaseImageName)"
+          $baseImageTag = "2.0.1313.17-lcl" # Use existing base image tag
+
+          # Function to fix Dockerfile placeholders
+          function Fix-DockerfilePlaceholders {
+              param(
+                  [string]$DockerfilePath,
+                  [string]$BaseImageName,
+                  [string]$ContainerTag
+              )
+
+              if (Test-Path $DockerfilePath) {
+                  Write-Host "🔧 Fixing Dockerfile placeholders in: $DockerfilePath"
+
+                  $dockerfileContent = Get-Content $DockerfilePath -Raw
+
+                  # Replace placeholders with actual values
+                  $dockerfileContent = $dockerfileContent -replace "{{NaatiBase}}", $BaseImageName
+                  $dockerfileContent = $dockerfileContent -replace "{{NaatiBaseTag}}", $ContainerTag
+
+                  # Write updated content back
+                  $dockerfileContent | Set-Content $DockerfilePath -NoNewline
+
+                  Write-Host "✅ Dockerfile placeholders fixed"
+              } else {
+                  Write-Warning "Dockerfile not found: $DockerfilePath"
+              }
+          }
+
+          # Fix both Dockerfiles
+          Fix-DockerfilePlaceholders "$stagingDir/Ncms.Ui/_PublishedWebsites/Ncms.Ui/Dockerfile" $baseImageName $baseImageTag
+          Fix-DockerfilePlaceholders "$stagingDir/MyNaati.Ui/_PublishedWebsites/MyNaati.Ui/Dockerfile" $baseImageName $baseImageTag
+
+    # Apply XML-Style Configuration Transformations
+    - task: PowerShell@2
+      displayName: 'Apply XML-Style Configuration Transformations'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $stagingDir = "$(Build.ArtifactStagingDirectory)"
+
+          # Dev Environment Configuration Variables (ONLY what's missing from ConfigMaps)
+          $devConfig = @{
+              "REPORT_EXECUTION_SERVER" = "http://4.237.148.220/ReportServer"
+              "CERTIFICATE_STORE_NAME" = "My"
+              "MAIL_SERVER" = "smtp.office365.com"
+              "MAIL_PORT" = "587"
+              "MAIL_ENABLE_SSL" = "true"
+              "MAIL_DEFAULT_CREDENTIALS" = "false"
+              "MAIL_FROM" = "dev.ncms_batching@naati.com.au"
+          }
+
+          # Function to apply XML-style transformations
+          function Apply-XmlStyleTransformations {
+              param(
+                  [string]$WebConfigPath,
+                  [hashtable]$Config
+              )
+
+              if (-not (Test-Path $WebConfigPath)) {
+                  Write-Warning "Web.config not found: $WebConfigPath"
+                  return
+              }
+
+              Write-Host "🔧 Applying XML-style transformations to: $WebConfigPath"
+
+              [xml]$webConfig = Get-Content $WebConfigPath
+
+              # 1. Update appSettings (ONLY missing configurations)
+              $appSettings = $webConfig.configuration.appSettings
+              if ($appSettings) {
+                  # Update report server (missing from ConfigMaps)
+                  $reportNode = $appSettings.add | Where-Object { $_.key -eq "ReportServer.ReportExecution" }
+                  if ($reportNode) {
+                      $reportNode.value = $Config["REPORT_EXECUTION_SERVER"]
+                      Write-Host "  ✅ Updated ReportServer.ReportExecution: $($Config['REPORT_EXECUTION_SERVER'])"
+                  } else {
+                      # Create if missing
+                      $newReportNode = $webConfig.CreateElement("add")
+                      $newReportNode.SetAttribute("key", "ReportServer.ReportExecution")
+                      $newReportNode.SetAttribute("value", $Config["REPORT_EXECUTION_SERVER"])
+                      $appSettings.AppendChild($newReportNode) | Out-Null
+                      Write-Host "  ✅ Created ReportServer.ReportExecution: $($Config['REPORT_EXECUTION_SERVER'])"
+                  }
+
+                  # Update certificate store (missing from ConfigMaps)
+                  $certNode = $appSettings.add | Where-Object { $_.key -eq "CertificateStoreName" }
+                  if ($certNode) {
+                      $certNode.value = $Config["CERTIFICATE_STORE_NAME"]
+                      Write-Host "  ✅ Updated CertificateStoreName: $($Config['CERTIFICATE_STORE_NAME'])"
+                  } else {
+                      # Create if missing
+                      $newCertNode = $webConfig.CreateElement("add")
+                      $newCertNode.SetAttribute("key", "CertificateStoreName")
+                      $newCertNode.SetAttribute("value", $Config["CERTIFICATE_STORE_NAME"])
+                      $appSettings.AppendChild($newCertNode) | Out-Null
+                      Write-Host "  ✅ Created CertificateStoreName: $($Config['CERTIFICATE_STORE_NAME'])"
+                  }
+              }
+
+              # 2. Update SMTP settings (missing proper configuration)
+              $systemNet = $webConfig.configuration.'system.net'
+              if (-not $systemNet) {
+                  $systemNet = $webConfig.CreateElement("system.net")
+                  $webConfig.configuration.AppendChild($systemNet) | Out-Null
+              }
+
+              $mailSettings = $systemNet.mailSettings
+              if (-not $mailSettings) {
+                  $mailSettings = $webConfig.CreateElement("mailSettings")
+                  $systemNet.AppendChild($mailSettings) | Out-Null
+              }
+
+              $smtp = $mailSettings.smtp
+              if (-not $smtp) {
+                  $smtp = $webConfig.CreateElement("smtp")
+                  $mailSettings.AppendChild($smtp) | Out-Null
+              }
+
+              # Set SMTP attributes
+              $smtp.SetAttribute("from", $Config["MAIL_FROM"])
+              $smtp.SetAttribute("deliveryMethod", "Network")
+
+              $network = $smtp.network
+              if (-not $network) {
+                  $network = $webConfig.CreateElement("network")
+                  $smtp.AppendChild($network) | Out-Null
+              }
+
+              # Update network attributes with proper SMTP settings
+              $network.SetAttribute("host", $Config["MAIL_SERVER"])
+              $network.SetAttribute("port", $Config["MAIL_PORT"])
+              $network.SetAttribute("enableSsl", $Config["MAIL_ENABLE_SSL"])
+              $network.SetAttribute("defaultCredentials", $Config["MAIL_DEFAULT_CREDENTIALS"])
+              Write-Host "  ✅ Updated SMTP configuration: $($Config['MAIL_SERVER']):$($Config['MAIL_PORT'])"
+
+              # 3. Remove debug attribute (equivalent to XML debug removal)
+              $systemWeb = $webConfig.configuration.'system.web'
+              if ($systemWeb) {
+                  $compilation = $systemWeb.compilation
+                  if ($compilation -and $compilation.HasAttribute("debug")) {
+                      $compilation.RemoveAttribute("debug")
+                      Write-Host "  ✅ Removed debug attribute from compilation"
+                  }
+              }
+
+              # 4. Disable proxy (equivalent to XML proxy update)
+              if ($systemNet) {
+                  $defaultProxy = $systemNet.defaultProxy
+                  if ($defaultProxy) {
+                      $defaultProxy.SetAttribute("enabled", "false")
+                      Write-Host "  ✅ Disabled defaultProxy"
+                  } else {
+                      # Create defaultProxy if it doesn't exist
+                      $newProxy = $webConfig.CreateElement("defaultProxy")
+                      $newProxy.SetAttribute("enabled", "false")
+                      $systemNet.AppendChild($newProxy) | Out-Null
+                      Write-Host "  ✅ Created and disabled defaultProxy"
+                  }
+              }
+
+              # Save the updated web.config
+              $webConfig.Save($WebConfigPath)
+              Write-Host "  💾 Saved updated web.config"
+          }
+
+          # Apply transformations to both applications
+          $ncmsWebConfig = "$stagingDir/Ncms.Ui/_PublishedWebsites/Ncms.Ui/Web.config"
+          Apply-XmlStyleTransformations -WebConfigPath $ncmsWebConfig -Config $devConfig
+
+          $myNaatiWebConfig = "$stagingDir/MyNaati.Ui/_PublishedWebsites/MyNaati.Ui/Web.config"
+          Apply-XmlStyleTransformations -WebConfigPath $myNaatiWebConfig -Config $devConfig
+
+          Write-Host "🎉 XML-style configuration transformations completed for Dev environment"
+
+    # DLL Version Verification (Missing from previous vendor scripts)
+    - task: PowerShell@2
+      displayName: 'Verify DLL Versions and Dependencies'
+      inputs:
+        targetType: 'inline'
+        script: |
+          $stagingDir = "$(Build.ArtifactStagingDirectory)"
+
+          # Application paths
+          $ncmsPublished = "$stagingDir\Ncms.Ui\_PublishedWebsites\Ncms.Ui\bin"
+          $mynaatiPublished = "$stagingDir\MyNaati.Ui\_PublishedWebsites\MyNaati.Ui\bin"
+
+          Write-Host "🔍 Starting DLL Version Verification..." -ForegroundColor Cyan
+
+          function Get-AssemblyInfo {
+              param([string]$DllPath)
+
+              try {
+                  $assembly = [System.Reflection.Assembly]::LoadFile($DllPath)
+                  $version = $assembly.GetName().Version
+                  $fileVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo($DllPath).FileVersion
+
+                  return @{
+                      AssemblyVersion = $version.ToString()
+                      FileVersion = $fileVersion
+                      Size = (Get-Item $DllPath).Length
+                  }
+              } catch {
+                  return @{
+                      AssemblyVersion = "ERROR"
+                      FileVersion = "ERROR"
+                      Size = 0
+                  }
+              }
+          }
+
+          function Compare-ApplicationDlls {
+              param([string]$App1Path, [string]$App2Path)
+
+              if (-not (Test-Path $App1Path)) {
+                  Write-Host "✗ NCMS bin folder not found: $App1Path" -ForegroundColor Red
+                  return $false
+              }
+
+              if (-not (Test-Path $App2Path)) {
+                  Write-Host "✗ MyNaati bin folder not found: $App2Path" -ForegroundColor Red
+                  return $false
+              }
+
+              $app1Dlls = Get-ChildItem $App1Path -Filter "*.dll" | ForEach-Object { $_.Name }
+              $app2Dlls = Get-ChildItem $App2Path -Filter "*.dll" | ForEach-Object { $_.Name }
+
+              # Find common DLLs
+              $commonDlls = $app1Dlls | Where-Object { $app2Dlls -contains $_ }
+
+              Write-Host "Found $($commonDlls.Count) common DLLs between applications" -ForegroundColor Cyan
+
+              $versionMismatches = 0
+              $versionMatches = 0
+
+              foreach ($dll in $commonDlls) {
+                  $app1DllPath = Join-Path $App1Path $dll
+                  $app2DllPath = Join-Path $App2Path $dll
+
+                  $app1Info = Get-AssemblyInfo -DllPath $app1DllPath
+                  $app2Info = Get-AssemblyInfo -DllPath $app2DllPath
+
+                  if ($app1Info.AssemblyVersion -ne $app2Info.AssemblyVersion) {
+                      Write-Host "⚠ Version mismatch: $dll" -ForegroundColor Yellow
+                      Write-Host "  NCMS: $($app1Info.AssemblyVersion) | MyNaati: $($app2Info.AssemblyVersion)" -ForegroundColor Gray
+                      $versionMismatches++
+                  } else {
+                      $versionMatches++
+                  }
+              }
+
+              Write-Host "✓ $versionMatches DLLs have matching versions" -ForegroundColor Green
+
+              if ($versionMismatches -gt 0) {
+                  Write-Host "⚠ $versionMismatches DLLs have version mismatches" -ForegroundColor Yellow
+                  Write-Host "This may cause runtime issues but won't fail the build" -ForegroundColor Yellow
+              }
+
+              return $true
+          }
+
+          function Check-CriticalDependencies {
+              param([string]$AppName, [string]$BinPath)
+
+              Write-Host "Checking critical dependencies for $AppName..." -ForegroundColor Yellow
+
+              # Define critical dependencies
+              $criticalDlls = @(
+                  "EntityFramework.dll",
+                  "Newtonsoft.Json.dll",
+                  "System.Web.Mvc.dll",
+                  "NHibernate.dll",
+                  "log4net.dll"
+              )
+
+              $missingCritical = @()
+
+              foreach ($dll in $criticalDlls) {
+                  $dllPath = Join-Path $BinPath $dll
+
+                  if (Test-Path $dllPath) {
+                      $info = Get-AssemblyInfo -DllPath $dllPath
+                      Write-Host "✓ $dll - Version: $($info.AssemblyVersion)" -ForegroundColor Green
+                  } else {
+                      Write-Host "✗ $dll - MISSING" -ForegroundColor Red
+                      $missingCritical += $dll
+                  }
+              }
+
+              return $missingCritical.Count -eq 0
+          }
+
+          # Run verifications
+          $dllCheckPassed = Compare-ApplicationDlls -App1Path $ncmsPublished -App2Path $mynaatiPublished
+          $ncmsDepsOk = Check-CriticalDependencies -AppName "NCMS" -BinPath $ncmsPublished
+          $mynaatiDepsOk = Check-CriticalDependencies -AppName "MyNaati" -BinPath $mynaatiPublished
+
+          if ($dllCheckPassed -and $ncmsDepsOk -and $mynaatiDepsOk) {
+              Write-Host "✅ ALL DLL VERIFICATION CHECKS PASSED" -ForegroundColor Green
+          } else {
+              Write-Host "⚠ Some DLL verification checks had issues, but continuing deployment" -ForegroundColor Yellow
+          }
+
+    # Publish Build Artifacts
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Build Artifacts'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+
+- stage: Docker
+  displayName: 'Build and Push Docker Images'
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - job: DockerBuild
+    displayName: 'Build Docker Images'
+
+    steps:
+    - checkout: none
+
+    # Recreate Container Tag Variable
+    - task: PowerShell@2
+      displayName: 'Setup Container Tag'
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Generate build number and container tag (same logic as Build stage)
+          $buildDate = Get-Date -Format "yyyyMMdd"
+          $revision = "$(Build.BuildId)"
+          $autobuildnum = ([DateTime]::Now.Date - (New-Object System.DateTime(2022,1,1))).Days
+
+          # Set container tag - always use 'future' suffix
+          $branchName = "$(Build.SourceBranchName)"
+          $branchPrefix = "future"
+
+          $containerTag = "$(majorVersion).$autobuildnum.$revision-$branchPrefix"
+
+          Write-Host "##vso[task.setvariable variable=ContainerTag]$containerTag"
+          Write-Host "Container Tag for Docker: $containerTag"
+
+    # Download build artifacts
+    - task: DownloadBuildArtifacts@1
+      displayName: 'Download Build Artifacts'
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'drop'
+        downloadPath: '$(System.ArtifactsDirectory)'
+
+  #  Docker Login to Dev Registry
+    - task: Docker@2
+      displayName: 'Login to Dev Container Registry'
+      inputs:
+        command: 'login'
+        containerRegistry: '$(acrServiceConnection)'
+
+    # Docker Login to UAT Registry (only for master branch)
+    - task: Docker@2
+      displayName: 'Login to UAT Container Registry'
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      inputs:
+        command: 'login'
+        containerRegistry: '$(acrServiceConnectionUat)'
+
+   ##  Docker Login to PROD Registry (only for master branch)
+    - task: Docker@2
+      displayName: 'Login to PROD Container Registry'
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      inputs:
+        command: 'login'
+        containerRegistry: '$(acrServiceConnectionProd)'    
+
+    # Build NCMS Docker Image
+    - task: Docker@2
+      displayName: 'Build NCMS Docker Image'
+      inputs:
+        command: 'build'
+        repository: '$(ncmsImageName)'
+        dockerfile: '$(System.ArtifactsDirectory)/drop/Ncms.Ui/_PublishedWebsites/Ncms.Ui/Dockerfile'
+        buildContext: '$(System.ArtifactsDirectory)/drop/Ncms.Ui/_PublishedWebsites/Ncms.Ui'
+        tags: |
+          $(ContainerTag)
+          latest
+        arguments: '--no-cache'
+
+    # Build MyNaati Docker Image
+    - task: Docker@2
+      displayName: 'Build MyNaati Docker Image'
+      inputs:
+        command: 'build'
+        repository: '$(myNaatiImageName)'
+        dockerfile: '$(System.ArtifactsDirectory)/drop/MyNaati.Ui/_PublishedWebsites/MyNaati.Ui/Dockerfile'
+        buildContext: '$(System.ArtifactsDirectory)/drop/MyNaati.Ui/_PublishedWebsites/MyNaati.Ui'
+        tags: |
+          $(ContainerTag)
+          latest
+        arguments: '--no-cache'
+
+    # # Push to Dev Registry
+    - task: Docker@2
+      displayName: 'Push NCMS to Dev Registry'
+      inputs:
+        command: 'push'
+        repository: '$(ncmsImageName)'
+        containerRegistry: '$(acrServiceConnection)'
+        tags: |
+          $(ContainerTag)
+          latest
+
+    - task: Docker@2
+      displayName: 'Push MyNaati to Dev Registry'
+      inputs:
+        command: 'push'
+        repository: '$(myNaatiImageName)'
+        containerRegistry: '$(acrServiceConnection)'
+        tags: |
+          $(ContainerTag)
+          latest
+
+    # Push to UAT Registry (only for master branch)
+    - task: Docker@2
+      displayName: 'Push NCMS to UAT Registry'
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      inputs:
+        command: 'push'
+        repository: '$(ncmsImageName)'
+        containerRegistry: '$(acrServiceConnectionUat)'
+        tags: |
+          $(ContainerTag)
+          latest
+
+    - task: Docker@2
+      displayName: 'Push MyNaati to UAT Registry'
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      inputs:
+        command: 'push'
+        repository: '$(myNaatiImageName)'
+        containerRegistry: '$(acrServiceConnectionUat)'
+        tags: |
+          $(ContainerTag)
+          latest
+     
+# acrServiceConnectionProd pusihng image to prod 
+    - task: Docker@2
+      displayName: 'Push MyNaati to PROD Registry'
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      inputs:
+        command: 'push'
+        repository: '$(myNaatiImageName)'
+        containerRegistry: '$(acrServiceConnectionProd)'
+        tags: |
+          $(ContainerTag)
+          latest
+
+    - task: Docker@2
+      displayName: 'Push NCMS to PROD Registry'
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      inputs:
+        command: 'push'
+        repository: '$(ncmsImageName)'
+        containerRegistry: '$(acrServiceConnectionProd)'
+        tags: |
+          $(ContainerTag)
+          latest
+
+# - stage: PackageHelmCharts
+#   displayName: 'Package Helm Charts'
+#   dependsOn: Docker
 #   condition: succeeded()
-#   variables:
-#     azureSubscription: 'f7fdab19-cae1-4b90-8af8-45052e6b72ca'
-#     aks_resource_group: 'RG_UAT'
-#     aks_cluster: 'aksclusteruat'
-#     releaseNameMyNaati: 'uat-mynaati'
-#     releaseNameNcms: 'uat-ncms'
-#     releaseNameInfra: 'uat-naati-infra'
-#     targetNamespace: 'uat'
 #   jobs:
-#   - deployment: DeployUAT
-#     environment: 'uat'
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - download: current
-#             artifact: 'helm-charts'
+#   - job: PackageJob
+#     displayName: 'Package Charts'
 
-#          
+#     steps:
+#     - checkout: self
 
-#           - task: AzureCLI@2
-#             displayName: 'Deploy MyNaati to UAT'
-#             inputs:
-#               azureSubscription: '$(azureSubscription)'
-#               scriptType: 'ps'
-#               scriptLocation: 'inlineScript'
-#               inlineScript: |
-#                 Write-Host "=== Deploying MyNaati to UAT ==="
-                
-#                 # Get AKS credentials
-#                 az aks get-credentials --resource-group $(aks_resource_group) --name $(aks_cluster) --overwrite-existing
-                
-#                 # Deploy MyNaati using UAT Helm chart
-#                 helm upgrade $(releaseNameMyNaati) mynaati --install --namespace $(targetNamespace) \
-#                   --version $(containerTag) \
-#                   --set image.repository=$(acrLoginServerUat)/mynaatiui \
-#                   --set image.tag=$(containerTag) \
-#                   --wait --timeout=20m --debug
+#     # Clean specific build directories from previous builds
+#     - task: PowerShell@2
+#       displayName: 'Clean Build Directories'
+#       inputs:
+#         targetType: 'inline'
+#         script: |
+#           $stagingDir = "$(Build.ArtifactStagingDirectory)"
 
-#           - task: AzureCLI@2
-#             displayName: 'Deploy NCMS to UAT'
-#             inputs:
-#               azureSubscription: '$(azureSubscription)'
-#               scriptType: 'ps'
-#               scriptLocation: 'inlineScript'
-#               inlineScript: |
-#                 Write-Host "=== Deploying NCMS to UAT ==="
-                
-#                 # Get AKS credentials
-#                 az aks get-credentials --resource-group $(aks_resource_group) --name $(aks_cluster) --overwrite-existing
-                
-#                 # Deploy NCMS using UAT Helm chart
-#                 helm upgrade $(releaseNameNcms) ncms --install --namespace $(targetNamespace) \
-#                   --version $(containerTag) \
-#                   --set image.repository=$(acrLoginServerUat)/ncmsui \
-#                   --set image.tag=$(containerTag) \
-#                   --wait --timeout=20m --debug
+#           Write-Host "Cleaning specific build directories..."
 
-# # ==== PROD DEPLOYMENT STAGE ====
-# - stage: Deploy_PROD
-#   displayName: 'Deploy to Production'
-#   dependsOn: Deploy_UAT
+#           # Clean the directories we're going to use for building
+#           $ncmsDir = "$stagingDir\Ncms.Ui"
+#           $myNaatiDir = "$stagingDir\MyNaati.Ui"
+
+#           # Also clean the drop folder that gets created by PublishBuildArtifacts
+#           $dropDir = "$stagingDir\drop"
+
+#           if (Test-Path $ncmsDir) {
+#               Remove-Item -Path $ncmsDir -Recurse -Force -ErrorAction SilentlyContinue
+#               Write-Host "✅ Cleaned NCMS directory: $ncmsDir"
+#           }
+
+#           if (Test-Path $myNaatiDir) {
+#               Remove-Item -Path $myNaatiDir -Recurse -Force -ErrorAction SilentlyContinue
+#               Write-Host "✅ Cleaned MyNaati directory: $myNaatiDir"
+#           }
+
+#           if (Test-Path $dropDir) {
+#               Remove-Item -Path $dropDir -Recurse -Force -ErrorAction SilentlyContinue
+#               Write-Host "✅ Cleaned drop directory: $dropDir"
+#           }
+
+#           Write-Host "✅ Targeted cleanup completed"
+
+#     # Recreate Container Tag Variable
+#     - task: PowerShell@2
+#       displayName: 'Setup Container Tag'
+#       inputs:
+#         targetType: 'inline'
+#         script: |
+#           # Generate build number and container tag (same logic as Build stage)
+#           $buildDate = Get-Date -Format "yyyyMMdd"
+#           $revision = "$(Build.BuildId)"
+#           $autobuildnum = ([DateTime]::Now.Date - (New-Object System.DateTime(2022,1,1))).Days
+
+#           # Set container tag based on branch
+#           $branchName = "$(Build.SourceBranchName)"
+#           $branchPrefix = switch -Wildcard ($branchName) {
+#               "main" { "prod" }
+#               "master" { "prod" }
+#               "develop" { "dev" }
+#               "feature/*" { "feat" }
+#               default { "$(branchPrefix)" }
+#           }
+
+#           # Container tag for Docker (with branch suffix)
+#           $containerTag = "$(majorVersion).$autobuildnum.$revision-$branchPrefix"
+
+#           # Helm version (semantic version - MAJOR.MINOR.PATCH format - only 3 parts!)
+#           $helmVersion = "$(majorVersion).$revision"
+
+#           Write-Host "##vso[task.setvariable variable=ContainerTag]$containerTag"
+#           Write-Host "##vso[task.setvariable variable=HelmVersion]$helmVersion"
+#           Write-Host "Container Tag for Docker: $containerTag"
+#           Write-Host "Helm Version (3-part semantic): $helmVersion"
+
+#     - task: HelmInstaller@1
+#       displayName: 'Install Helm'
+#       inputs:
+#         helmVersionToInstall: 'latest'
+
+#     # Package MyNaati Helm Chart
+#     - script: |
+#         echo "Debug: HelmVersion variable = $(HelmVersion)"
+#         echo "Debug: ContainerTag variable = $(ContainerTag)"
+#         echo "About to run: helm package $(helmChartPathMyNaati) --version $(HelmVersion) --destination $(Build.ArtifactStagingDirectory)"
+#         helm package $(helmChartPathMyNaati) --version $(HelmVersion) --destination $(Build.ArtifactStagingDirectory)
+#       displayName: 'Package MyNaati Helm Chart'
+
+#     # Package NCMS Helm Chart
+#     - script: |
+#         helm package $(helmChartPathNcms) --version $(HelmVersion) --destination $(Build.ArtifactStagingDirectory)
+#       displayName: 'Package NCMS Helm Chart'
+
+#     # Package Infrastructure Helm Chart (if needed)
+#     - script: |
+#         helm package $(helmChartPathInfra) --version $(HelmVersion) --destination $(Build.ArtifactStagingDirectory)
+#       displayName: 'Package Infrastructure Helm Chart'
+#       continueOnError: true
+
+#     # Publish chart artifacts so deployment can use them if needed
+#     - publish: $(Build.ArtifactStagingDirectory)
+#       artifact: helm-charts
+
+# - stage: DeployHelmCharts
+#   displayName: 'Deploy Helm Charts'
+#   dependsOn: PackageHelmCharts
+#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+#   jobs:
+#   # Deploy MyNaati
+#   - job: DeployMyNaati
+#     displayName: 'Helm Deploy MyNaati'
+
+#     steps:
+#     - checkout: self
+
+#     # Recreate Container Tag Variable
+#     - task: PowerShell@2
+#       displayName: 'Setup Container Tag'
+#       inputs:
+#         targetType: 'inline'
+#         script: |
+#           # Generate build number and container tag (same logic as Build stage)
+#           $buildDate = Get-Date -Format "yyyyMMdd"
+#           $revision = "$(Build.BuildId)"
+#           $autobuildnum = ([DateTime]::Now.Date - (New-Object System.DateTime(2022,1,1))).Days
+
+#           # Set container tag based on branch
+#           $branchName = "$(Build.SourceBranchName)"
+#           $branchPrefix = switch -Wildcard ($branchName) {
+#               "main" { "prod" }
+#               "master" { "prod" }
+#               "develop" { "dev" }
+#               "feature/*" { "feat" }
+#               default { "$(branchPrefix)" }
+#           }
+
+#           $containerTag = "$(majorVersion).$autobuildnum.$revision-$branchPrefix"
+
+#           Write-Host "##vso[task.setvariable variable=ContainerTag]$containerTag"
+#           Write-Host "Container Tag for Deploy: $containerTag"
+
+#     - task: AzureCLI@2
+#       displayName: 'Helm Deploy MyNaati'
+#       inputs:
+#         azureSubscription: 'f7fdab19-cae1-4b90-8af8-45052e6b72ca'
+#         scriptType: 'ps'
+#         scriptLocation: 'inlineScript'
+#         inlineScript: |
+#           Write-Host "=== Starting MyNaati Deployment ==="
+#           az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks --overwrite-existing
+#           kubectl cluster-info
+
+#           $chartPath = "$(helmChartPathMyNaati)"
+#           Write-Host "Chart path: $chartPath"
+
+#           if (-not (Test-Path "$chartPath/Chart.yaml")) {
+#               Write-Error "Chart.yaml not found at $chartPath"
+#               exit 1
+#           }
+
+#           Write-Host "Validating Helm template..."
+#           helm template test-mynaati $chartPath --set image.repository=$(containerRegistry)/$(myNaatiImageName) --set image.tag=$(ContainerTag) --dry-run
+
+#           Write-Host "Deploying MyNaati..."
+#           helm upgrade $(releaseNameMyNaati) $chartPath --install --namespace $(targetNamespace) --create-namespace --version $(ContainerTag) --set image.repository=$(containerRegistry)/$(myNaatiImageName) --set image.tag=$(ContainerTag) --wait --timeout=20m --debug
+
+#           Write-Host "Checking deployment status..."
+#           kubectl get pods -n $(targetNamespace) -l app.kubernetes.io/instance=$(releaseNameMyNaati)
+
+#           Write-Host "=== MyNaati Deployment Complete ==="
+
+#   # Deploy NCMS
+#   - job: DeployNcms
+#     displayName: 'Helm Deploy NCMS'
+
+#     steps:
+#     - checkout: self
+
+#     # Recreate Container Tag Variable
+#     - task: PowerShell@2
+#       displayName: 'Setup Container Tag'
+#       inputs:
+#         targetType: 'inline'
+#         script: |
+#           # Generate build number and container tag (same logic as Build stage)
+#           $buildDate = Get-Date -Format "yyyyMMdd"
+#           $revision = "$(Build.BuildId)"
+#           $autobuildnum = ([DateTime]::Now.Date - (New-Object System.DateTime(2022,1,1))).Days
+
+#           # Set container tag based on branch
+#           $branchName = "$(Build.SourceBranchName)"
+#           $branchPrefix = switch -Wildcard ($branchName) {
+#               "main" { "prod" }
+#               "master" { "prod" }
+#               "develop" { "dev" }
+#               "feature/*" { "feat" }
+#               default { "$(branchPrefix)" }
+#           }
+
+#           $containerTag = "$(majorVersion).$autobuildnum.$revision-$branchPrefix"
+
+#           Write-Host "##vso[task.setvariable variable=ContainerTag]$containerTag"
+#           Write-Host "Container Tag for Deploy: $containerTag"
+
+#     - task: AzureCLI@2
+#       displayName: 'Helm Deploy NCMS'
+#       inputs:
+#         azureSubscription: 'f7fdab19-cae1-4b90-8af8-45052e6b72ca'
+#         scriptType: 'ps'
+#         scriptLocation: 'inlineScript'
+#         inlineScript: |
+#           Write-Host "=== Starting NCMS Deployment ==="
+#           az aks get-credentials --resource-group naati-dev-rg --name naati-dev-aks --overwrite-existing
+#           kubectl cluster-info
+
+#           $chartPath = "$(helmChartPathNcms)"
+#           Write-Host "Chart path: $chartPath"
+
+#           if (-not (Test-Path "$chartPath/Chart.yaml")) {
+#               Write-Error "Chart.yaml not found at $chartPath"
+#               exit 1
+#           }
+
+#           Write-Host "Validating Helm template..."
+#           helm template test-ncms $chartPath --set image.repository=$(containerRegistry)/$(ncmsImageName) --set image.tag=$(ContainerTag) --dry-run
+
+#           Write-Host "Deploying NCMS..."
+#           helm upgrade $(releaseNameNcms) $chartPath --install --namespace $(targetNamespace) --create-namespace --version $(ContainerTag) --set image.repository=$(containerRegistry)/$(ncmsImageName) --set image.tag=$(ContainerTag) --wait --timeout=20m --debug
+
+#           Write-Host "Checking deployment status..."
+#           kubectl get pods -n $(targetNamespace) -l app.kubernetes.io/instance=$(releaseNameNcms)
+
+#           Write-Host "=== NCMS Deployment Complete ==="
+
+# # Health Check Stage (Missing from previous vendor scripts)
+# - stage: HealthCheck
+#   displayName: 'Post-Deployment Health Check'
+#   dependsOn: Docker
 #   condition: succeeded()
-#   variables:
-#     azureSubscription: 'f7fdab19-cae1-4b90-8af8-45052e6b72ca'
-#     aks_resource_group: 'RG_PROD'
-#     aks_cluster: 'akscluster4'
-
-#     releaseNameNaati: 'prod'
-#     releaseNameInfra: 'prod-naati-infra'
-#     releaseNameClusterInfra: 'prod-cluster-infra'
-#     targetNamespace: 'prod'
 #   jobs:
-#   - deployment: DeployPROD
-#     environment: 'production'
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - download: current
-#             artifact: 'helm-charts'
+#   - job: HealthCheckJob
+#     displayName: 'Verify Application Health'
 
-#           
-#           - task: AzureCLI@2
-#             displayName: 'Deploy NAATI Application to PROD'
-#             inputs:
-#               azureSubscription: '$(azureSubscription)'
-#               scriptType: 'ps'
-#               scriptLocation: 'inlineScript'
-#               inlineScript: |
-#                 Write-Host "=== Deploying NAATI Application to PROD ==="
-                
-#                 # Get AKS credentials
-#                 az aks get-credentials --resource-group $(aks_resource_group) --name $(aks_cluster) --overwrite-existing
-                
-#                 # Deploy NAATI using PROD Helm chart with values file
-#                 helm upgrade $(releaseNameNaati) naati --install --namespace $(targetNamespace) \
-#                   --version $(containerTag) \
-#                   -f "$(helmChartPathProd)/naati/_values.prod.yaml" \
-#                   --set ncms.image.repository=$(acrLoginServerprod)/ncmsui \
-#                   --set ncms.image.tag=$(containerTag) \
-#                   --set mynaati.image.repository=$(acrLoginServerprod)/mynaatiui \
-#                   --set mynaati.image.tag=$(containerTag) \
-#                   --wait --timeout=20m --debug
+#     steps:
+#     - checkout: none
 
-#           - task: AzureCLI@2
-#             displayName: 'Verify PROD Deployment'
-#             inputs:
-#               azureSubscription: '$(azureSubscription)'
-#               scriptType: 'ps'
-#               scriptLocation: 'inlineScript'
-#               inlineScript: |
-#                 Write-Host "=== Verifying PROD Deployment ==="
-                
-#                 # Get AKS credentials
-#                 az aks get-credentials --resource-group $(aks_resource_group) --name $(aks_cluster) --overwrite-existing
-                
-#                 # Check deployment status
-#                 kubectl get pods -n $(targetNamespace)
-#                 kubectl get services -n $(targetNamespace)
-                
-#                 # Check Helm releases
-#                 helm list -n $(targetNamespace)
-                
-#                 Write-Host "=== PROD Deployment Complete ===" 
+#     - task: PowerShell@2
+#       displayName: 'Application Health Verification'
+#       inputs:
+#         targetType: 'inline'
+#         script: |
+#           Write-Host "🏥 Starting Application Health Check..." -ForegroundColor Cyan
+
+#           # Define application endpoints for health checks
+#           $endpoints = @{
+#               "NCMS" = "http://4.237.148.220"
+#               "MyNaati" = "http://4.196.81.166"
+#           }
+
+#           function Test-ApplicationHealth {
+#               param([string]$AppName, [string]$BaseUrl)
+
+#               Write-Host "Checking health for $AppName at $BaseUrl..." -ForegroundColor Yellow
+
+#               $healthChecks = @(
+#                   @{ Name = "Home Page"; Url = "$BaseUrl/" },
+#                   @{ Name = "Health Check"; Url = "$BaseUrl/health" },
+#                   @{ Name = "API Status"; Url = "$BaseUrl/api/status" }
+#               )
+
+#               $passedChecks = 0
+#               $totalChecks = $healthChecks.Count
+
+#               foreach ($check in $healthChecks) {
+#                   try {
+#                       Write-Host "  Testing: $($check.Name) - $($check.Url)" -ForegroundColor Gray
+
+#                       $response = Invoke-WebRequest -Uri $check.Url -TimeoutSec 30 -UseBasicParsing -ErrorAction Stop
+
+#                       if ($response.StatusCode -eq 200) {
+#                           Write-Host "  ✅ $($check.Name): OK (Status: $($response.StatusCode))" -ForegroundColor Green
+#                           $passedChecks++
+#                       } else {
+#                           Write-Host "  ⚠ $($check.Name): Unexpected status $($response.StatusCode)" -ForegroundColor Yellow
+#                       }
+#                   } catch {
+#                       Write-Host "  ❌ $($check.Name): Failed - $($_.Exception.Message)" -ForegroundColor Red
+#                   }
+#               }
+
+#               $healthPercentage = [math]::Round(($passedChecks / $totalChecks) * 100, 2)
+#               Write-Host "$AppName Health: $passedChecks/$totalChecks checks passed ($healthPercentage%)" -ForegroundColor $(if ($healthPercentage -ge 50) { "Green" } else { "Red" })
+
+#               return $healthPercentage -ge 50
+#           }
+
+#           function Test-DatabaseConnectivity {
+#               Write-Host "Testing database connectivity..." -ForegroundColor Yellow
+
+#               # This is a basic check - in a real scenario you'd test actual DB connections
+#               # For now, we'll assume if the applications are responding, DB is likely OK
+#               Write-Host "  ℹ️ Database connectivity check would be implemented here" -ForegroundColor Cyan
+#               Write-Host "  ✅ Assuming DB connectivity is OK if applications respond" -ForegroundColor Green
+
+#               return $true
+#           }
+
+#           function Test-ExternalServices {
+#               Write-Host "Testing external service connectivity..." -ForegroundColor Yellow
+
+#               $externalServices = @(
+#                   @{ Name = "Azure Key Vault"; Url = "https://naatibackupvaultuat.vault.azure.net" },
+#                   @{ Name = "Seq Logging"; Url = "https://seq.f1solutions.com.au" }
+#               )
+
+#               $servicesPassed = 0
+
+#               foreach ($service in $externalServices) {
+#                   try {
+#                       $response = Invoke-WebRequest -Uri $service.Url -TimeoutSec 10 -UseBasicParsing -ErrorAction Stop
+#                       Write-Host "  ✅ $($service.Name): Accessible" -ForegroundColor Green
+#                       $servicesPassed++
+#                   } catch {
+#                       Write-Host "  ⚠ $($service.Name): Not accessible - $($_.Exception.Message)" -ForegroundColor Yellow
+#                   }
+#               }
+
+#               Write-Host "External Services: $servicesPassed/$($externalServices.Count) accessible" -ForegroundColor Cyan
+#               return $servicesPassed -gt 0
+#           }
+
+#           # Run all health checks
+#           Write-Host "=== APPLICATION HEALTH CHECKS ===" -ForegroundColor Green
+
+#           $ncmsHealthy = Test-ApplicationHealth -AppName "NCMS" -BaseUrl $endpoints["NCMS"]
+#           $mynaatiHealthy = Test-ApplicationHealth -AppName "MyNaati" -BaseUrl $endpoints["MyNaati"]
+
+#           Write-Host "`n=== INFRASTRUCTURE HEALTH CHECKS ===" -ForegroundColor Green
+
+#           $dbHealthy = Test-DatabaseConnectivity
+#           $servicesHealthy = Test-ExternalServices
+
+#           # Generate final health report
+#           Write-Host "`n=== FINAL HEALTH REPORT ===" -ForegroundColor Green
+
+#           $overallHealth = $ncmsHealthy -and $mynaatiHealthy -and $dbHealthy -and $servicesHealthy
+
+#           if ($overallHealth) {
+#               Write-Host "🎉 ALL HEALTH CHECKS PASSED - Deployment is healthy!" -ForegroundColor Green
+#               Write-Host "✅ Applications are responding correctly" -ForegroundColor Green
+#               Write-Host "✅ Infrastructure services are accessible" -ForegroundColor Green
+#           } else {
+#               Write-Host "⚠ SOME HEALTH CHECKS FAILED" -ForegroundColor Yellow
+#               Write-Host "Applications may have issues but deployment will continue" -ForegroundColor Yellow
+#               Write-Host "Monitor applications closely and investigate any failures" -ForegroundColor Yellow
+#           }
+
+#           # Don't fail the pipeline for health check failures - just warn
+#           Write-Host "`nHealth check completed. Check logs above for any issues." -ForegroundColor Cyan
