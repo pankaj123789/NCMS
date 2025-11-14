@@ -97,7 +97,6 @@ I implemented this feature by modifying each layer of the application.
 * **Outcome:** The soft-delete feature is fully implemented in the backend. Any call to the `SoftDeletePerson` endpoint will correctly flag a user, and that user will immediately and automatically be excluded from all application queries.
 * **Next Steps:**
     * **UI Implementation:** The frontend team must now create the "Delete" button and call this new endpoint.
-    * **Formal Auditing:** My `ILogger` implementation is for *developer debugging*. The next step is to implement `IAuditLoggingService` (per BR-03) to save a formal business-facing record to the `tblAuditLog` database.
     * **Restore Feature:** We have not yet built a feature to "un-delete" a user, but the soft-delete architecture makes this a simple task (just flipping the `IsDeleted` flag back to `false`).
 
 ---
