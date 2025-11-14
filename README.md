@@ -15,8 +15,6 @@ This approach cleans up the application UI by hiding inactive or test profiles w
     
 *   **Global Invisibility:** Once a profile is deleted, it is **automatically** hidden from all application-wide searches, lists, and filters.
     
-*   **Auditing:** The system now records _who_ performed the delete and _when_ it occurred by populating the DeletedBy and DeletedOn fields in the database.
-    
 *   **Data Preservation:** No data is ever permanently lost. The IsDeleted flag can be reversed in the database to restore a profile.
     
 
