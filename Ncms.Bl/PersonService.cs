@@ -28,7 +28,6 @@ using Ncms.Contracts.Models.Audit;
 using Ncms.Contracts.Models.Application;
 using Ncms.Contracts.Models.Logbook;
 using Ncms.Contracts.Models.Person;
-using IPersonService = Ncms.Contracts.IPersonService;
 using ISystemService = Ncms.Contracts.ISystemService;
 using IUserService = Ncms.Contracts.IUserService;
 using SearchRequest = F1Solutions.Naati.Common.Contracts.Dal.Request.SearchRequest;

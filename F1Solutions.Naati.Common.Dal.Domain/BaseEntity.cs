@@ -4,8 +4,6 @@ using System;
 
 namespace F1Solutions.Naati.Common.Dal.Domain
 {
-    // If your solution already has an EntityBase type, keep the inheritance.
-    // Otherwise remove ": EntityBase" so the class stands alone.
     public abstract class BaseEntity : EntityBase
     {
         // Soft-delete audit fields (virtual for NHibernate proxying)

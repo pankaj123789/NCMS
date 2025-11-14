@@ -66,12 +66,7 @@ namespace Ncms.Ui.Controllers.Api
 
         [HttpPost]
         [Route("soft-delete")]
-
-        // --- THIS IS THE FIX ---
-        // Add this attribute to lock the endpoint to only the roles you listed.
-        // We use the internal names from SecurityRoleScriptGenerator.cs
         //[Authorize(Roles = "SystemAdministrator,SeniorManagement,GeneralAccount")]
-        // ---------------------
 
         public IHttpActionResult SoftDeletePerson([FromBody] DeletePersonRequestModel request)
         {
@@ -85,7 +80,6 @@ namespace Ncms.Ui.Controllers.Api
                 var currentAdminUser = _userService.Get();
                 if (currentAdminUser == null)
                 {
-                    // This will be caught by [Authorize] first, but it's good practice.
                     return Unauthorized();
                 }
 
