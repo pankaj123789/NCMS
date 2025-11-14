@@ -1,4 +1,6 @@
-﻿using F1Solutions.Naati.Common.Dal.Domain;
+﻿// F1Solutions.Naati.Common.Dal.Nhibernate.Mappings\Mappings\PersonMap.cs
+
+using F1Solutions.Naati.Common.Dal.Domain;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Automapping.Alterations;
 using FluentNHibernate.Mapping;
@@ -44,6 +46,19 @@ namespace F1Solutions.Naati.Common.Dal.Nhibernate.Mappings.Mappings
                 .Cascade.AllDeleteOrphan()
                 .Inverse();
 
+            // --- OPTIONAL: set explicit table/id if you want (automapper may already do this)
+            mapping.Table("tblPerson");
+            mapping.Id(x => x.Id).GeneratedBy.Identity();
+
+            // 1) map the soft-delete columns (must exist in Person/BaseEntity)
+            mapping.Map(x => x.IsDeleted).Column("IsDeleted").Not.Nullable();
+            mapping.Map(x => x.DeletedOn).Column("DeletedOn").Nullable();
+            mapping.Map(x => x.DeletedBy).Column("DeletedBy").Length(256).Nullable();
+
+            // 2) apply default WHERE so soft-deleted rows are excluded
+            mapping.Where("IsDeleted = 0");
+
+            // --- existing formula maps follow ---
             mapping.Map(x => x.HasPhoto).Formula("(isnull((select top 1 (case when tblPersonImage.Photo Is null then 0 else 1 end) from tblPersonImage where tblPersonImage.PersonId = PersonId order by tblPersonImage.PhotoDate desc),0))");
             mapping.Map(x => x.PhotoDate).Formula("(select top 1 tblPersonImage.PhotoDate from tblPersonImage where tblPersonImage.PersonId = PersonId order by tblPersonImage.PhotoDate desc)");
             mapping.Map(x => x.Surname).Formula("(select top 1 tblPersonName.Surname from tblPersonName where tblPersonName.PersonId = PersonId order by tblPersonName.EffectiveDate desc)");

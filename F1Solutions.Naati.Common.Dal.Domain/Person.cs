@@ -1,10 +1,13 @@
-﻿using System;
+﻿// F1Solutions.Naati.Common.Dal.Domain/Person.cs
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using F1Solutions.Naati.Common.Dal.Domain.Extensions;
+
 namespace F1Solutions.Naati.Common.Dal.Domain
 {
-    public class Person : EntityBase
+    public class Person : BaseEntity
     {
         public virtual NaatiEntity Entity { get; set; }
         public virtual string Gender { get; set; }

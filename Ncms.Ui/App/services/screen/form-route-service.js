@@ -373,6 +373,17 @@
                         secNoun: enums.SecNoun.Venue,
                     },
                     {
+                        name: 'Location',
+                        title: ko.Localization('Naati.Resources.Shared.resources.Locations'),
+                        ico: 'fa fa-map-marker',
+                        route: 'system/location',
+                        moduleId: 'views/system/location-search',
+                        showInMenu: true,
+                        menuGroup: { name: ko.Localization('Naati.Resources.Shared.resources.System') },
+                        secVerb: enums.SecVerb.Manage,
+                        secNoun: enums.SecNoun.Location,
+                    },
+                    {
                         name: 'ApiAdmin',
                         title: ko.Localization('Naati.Resources.Shared.resources.ApiAdmin'),
                         ico: 'fas fa-key',
@@ -831,6 +842,13 @@
                 title: ko.Localization('Naati.Resources.Venue.resources.EditVenue'),
                 secVerb: enums.SecVerb.Update,
                 secNoun: enums.SecNoun.Venue
+            },
+            {
+                route: 'system/location/:id',
+                moduleId: 'views/system/location-edit',
+                title: ko.Localization('Naati.Resources.Location.resources.EditLocation'),
+                secVerb: enums.SecVerb.Update,
+                secNoun: enums.SecNoun.Location
             },
             {
                 route: 'system/apiadmin/:id',

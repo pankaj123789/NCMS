@@ -53,7 +53,10 @@ namespace F1Solutions.Naati.Common.Dal.AutoMappingProfiles
                 .ForMember(x => x.MfaExpireStartDate, y => y.Ignore())
                 .ForMember(x => x.EmailCodeExpireStartDate, y => y.Ignore())
                 .ForMember(x => x.AccessDisabledByNcms, y => y.Ignore())
-                .ForMember(x => x.LastEmailCode, y => y.Ignore());
+                .ForMember(x => x.LastEmailCode, y => y.Ignore())
+                .ForMember(dest => dest.IsDeleted, opt => opt.Ignore())
+                .ForMember(dest => dest.DeletedOn, opt => opt.Ignore()) 
+                .ForMember(dest => dest.DeletedBy, opt => opt.Ignore());
 
             //CreateMap<UpdatePersonDetailsRequest, Entity>();
 
@@ -97,7 +100,9 @@ namespace F1Solutions.Naati.Common.Dal.AutoMappingProfiles
                 .ForMember(x => x.MfaExpireStartDate, y => y.Ignore())
                 .ForMember(x => x.EmailCodeExpireStartDate, y => y.Ignore())
                 .ForMember(x => x.LastEmailCode, y => y.Ignore())
-                ; 
+                .ForMember(dest => dest.IsDeleted, opt => opt.Ignore())
+                .ForMember(dest => dest.DeletedOn, opt => opt.Ignore())
+                .ForMember(dest => dest.DeletedBy, opt => opt.Ignore());
 
             CreateMap<AddressDetailsDto, Address>()
                 .ForMember(x => x.Postcode, y => y.Ignore())

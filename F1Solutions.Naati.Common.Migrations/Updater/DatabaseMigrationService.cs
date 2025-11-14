@@ -55,14 +55,14 @@ namespace F1Solutions.Naati.Common.Migrations.Updater
 
                     LoggingHelper.LogInfo("Running Reporting Migrations...");
 
-                    var naatiConnectionStringBuilder = new SqlConnectionStringBuilder(ncmsConnectionString);
+                    //var naatiConnectionStringBuilder = new SqlConnectionStringBuilder(ncmsConnectionString);
 
-                    var reportingDbConnectionString = _secretsProvider.Get("ReportingMigrationConnectionString");
-                    var reportArgs = new[] { $"-m={ReportingMigration}", $"-c={reportingDbConnectionString}", $"-timeout:{scriptTimeoutSeconds}" };
-                    var reportingDbMigration = GetNcmsReportTargetDefinition(reportArgs, true, naatiConnectionStringBuilder.InitialCatalog);
-                    naatiRunner.MigrationTargetDefinitions.Add(reportingDbMigration);
-                    migrated = naatiRunner.Run(reportArgs, reportingDbMigration.Name);
-                    LoggingHelper.LogInfo("DB Migration Finished...");
+                    //var reportingDbConnectionString = _secretsProvider.Get("ReportingMigrationConnectionString");
+                    //var reportArgs = new[] { $"-m={ReportingMigration}", $"-c={reportingDbConnectionString}", $"-timeout:{scriptTimeoutSeconds}" };
+                    //var reportingDbMigration = GetNcmsReportTargetDefinition(reportArgs, true, naatiConnectionStringBuilder.InitialCatalog);
+                    //naatiRunner.MigrationTargetDefinitions.Add(reportingDbMigration);
+                    //migrated = naatiRunner.Run(reportArgs, reportingDbMigration.Name);
+                    //LoggingHelper.LogInfo("DB Migration Finished...");
                     return (migrated, !migrated);
                 }
                 catch (Exception ex)

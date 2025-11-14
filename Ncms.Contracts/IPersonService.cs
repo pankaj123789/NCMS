@@ -20,6 +20,8 @@ namespace Ncms.Contracts
         GenericResponse<bool> UnlockMyNaatiUser(string username);
         GenericResponse<bool> DeleteMyNaatiUser(string username);
         GenericResponse<bool> DeleteMfaAccount(int naatiNumber);
+        GenericResponse<bool> SoftDeletePerson(Ncms.Contracts.Models.Person.DeletePersonRequestModel request);
+
 
         GenericResponse<IEnumerable<PersonCredentialRequestModel>> GetPersonCredentialRequests(int personId);
         GenericResponse<IEnumerable<EntitySearchResultModel>> NaatiEntitySearch(EntitySearchRequest request);

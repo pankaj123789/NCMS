@@ -451,6 +451,7 @@
     <None Include="Portal\Repositories\SamLinqRepository.dbml.layout" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Domain\" />
     <Folder Include="ServiceInterceptor\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

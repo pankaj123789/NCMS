@@ -93,6 +93,7 @@ namespace F1Solutions.Naati.Common.Contracts.Security
         [Description("Panel Member")]
         PanelMember = 46,
         Dashboard =47,
-        ApiAdministrator = 48
+        ApiAdministrator = 48,
+        Location = 50
     }
 }

@@ -66,7 +66,7 @@ namespace MyNaati.Ui.Common
             _languagesCacheQueryService.RefreshAllCache();
             _countriesCacheQueryService.RefreshAllCache();
             _testLocationsCacheQueryService.RefreshAllCache();
-            _postcodesCacheQueryService.RefreshAllCache();
+            //_postcodesCacheQueryService.RefreshAllCache();
             _personTitlesCacheQueryService.RefreshAllCache();
             _odAddressVisibilityTypesCacheQueryService.RefreshAllCache();
             SystemValues.RefreshAllCache();

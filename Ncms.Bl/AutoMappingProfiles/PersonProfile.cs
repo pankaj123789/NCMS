@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using F1Solutions.Naati.Common.Contracts.Dal.DTO;
 using F1Solutions.Naati.Common.Contracts.Dal.Request;
+using F1Solutions.Naati.Common.Dal.Domain;
 using Ncms.Contracts;
 using Ncms.Contracts.Models.Person;
 
@@ -26,7 +27,10 @@ namespace Ncms.Bl.AutoMappingProfiles
                 .ForMember(x => x.Rating, y => y.Ignore())
                 .ForMember(x => x.Senior, y => y.Ignore())
                 .ForMember(x => x.ShowAllowAutoRecertification, y => y.Ignore())
-                .ForMember(x => x.MfaModeIsSet, y => y.Ignore());
+                .ForMember(x => x.MfaModeIsSet, y => y.Ignore())
+                .ForMember(dest => dest.IsDeleted, opt => opt.MapFrom(src => src.IsDeleted))
+                .ForMember(dest => dest.DeletedOn, opt => opt.MapFrom(src => src.DeletedOn)) 
+                .ForMember(dest => dest.DeletedBy, opt => opt.MapFrom(src => src.DeletedBy));
 
             CreateMap<PersonDetailsBasicDto, PersonBasicModel>();
 

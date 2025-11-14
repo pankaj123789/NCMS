@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29306.81
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "F1Solutions.Global.Common", "F1Solutions.Global.Common\F1Solutions.Global.Common.csproj", "{F41C4166-5B4D-4721-97BC-125F3CF0204A}"
 EndProject
@@ -115,6 +115,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "naati", "naati", "{FC246E64-C68F-4B5A-A9AE-59BF7FB99527}"
 	ProjectSection(SolutionItems) = preProject
 		Deployment Scripts\Helm\naati\.helmignore = Deployment Scripts\Helm\naati\.helmignore
+		Deployment Scripts\Helm\naati\Chart.yaml = Deployment Scripts\Helm\naati\Chart.yaml
+		Deployment Scripts\Helm\naati\values.yaml = Deployment Scripts\Helm\naati\values.yaml
 		Deployment Scripts\Helm\naati\_values.dev.yaml = Deployment Scripts\Helm\naati\_values.dev.yaml
 		Deployment Scripts\Helm\naati\_values.prod.yaml = Deployment Scripts\Helm\naati\_values.prod.yaml
 		Deployment Scripts\Helm\naati\_values.proddr.yaml = Deployment Scripts\Helm\naati\_values.proddr.yaml
@@ -124,8 +126,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "naati", "naati", "{FC246E64
 		Deployment Scripts\Helm\naati\_values.test4.yaml = Deployment Scripts\Helm\naati\_values.test4.yaml
 		Deployment Scripts\Helm\naati\_values.uat.yaml = Deployment Scripts\Helm\naati\_values.uat.yaml
 		Deployment Scripts\Helm\naati\_values.uatdr.yaml = Deployment Scripts\Helm\naati\_values.uatdr.yaml
-		Deployment Scripts\Helm\naati\Chart.yaml = Deployment Scripts\Helm\naati\Chart.yaml
-		Deployment Scripts\Helm\naati\values.yaml = Deployment Scripts\Helm\naati\values.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "naati-infra", "naati-infra", "{555B0EC0-AC6A-43CE-89C9-FF687B5FF26B}"
@@ -139,7 +139,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "charts", "charts", "{753092
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{E9ABAAFE-493C-4266-8CB9-8EE6682D48FC}"
 	ProjectSection(SolutionItems) = preProject
-		Deployment Scripts\Helm\naati-infra\templates\_helpers.tpl = Deployment Scripts\Helm\naati-infra\templates\_helpers.tpl
 		Deployment Scripts\Helm\naati-infra\templates\keyvault-secret.yaml = Deployment Scripts\Helm\naati-infra\templates\keyvault-secret.yaml
 		Deployment Scripts\Helm\naati-infra\templates\limit-pvc.yaml = Deployment Scripts\Helm\naati-infra\templates\limit-pvc.yaml
 		Deployment Scripts\Helm\naati-infra\templates\limit-range-pods.yaml = Deployment Scripts\Helm\naati-infra\templates\limit-range-pods.yaml
@@ -154,12 +153,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{
 		Deployment Scripts\Helm\naati-infra\templates\temp-storage-persistent-volume-claim.yaml = Deployment Scripts\Helm\naati-infra\templates\temp-storage-persistent-volume-claim.yaml
 		Deployment Scripts\Helm\naati-infra\templates\temp-storage-persistent-volume.yaml = Deployment Scripts\Helm\naati-infra\templates\temp-storage-persistent-volume.yaml
 		Deployment Scripts\Helm\naati-infra\templates\temp-storage-secret.yaml = Deployment Scripts\Helm\naati-infra\templates\temp-storage-secret.yaml
+		Deployment Scripts\Helm\naati-infra\templates\_helpers.tpl = Deployment Scripts\Helm\naati-infra\templates\_helpers.tpl
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{4DD88109-C004-4064-AF6E-8C4DDE7A60D0}"
 	ProjectSection(SolutionItems) = preProject
-		Deployment Scripts\Helm\naati\templates\_helpers.tpl = Deployment Scripts\Helm\naati\templates\_helpers.tpl
 		Deployment Scripts\Helm\naati\templates\NOTES.txt = Deployment Scripts\Helm\naati\templates\NOTES.txt
+		Deployment Scripts\Helm\naati\templates\_helpers.tpl = Deployment Scripts\Helm\naati\templates\_helpers.tpl
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "charts", "charts", "{7AD6E6D5-CB19-4965-AFDC-5633B6D6BBD0}"
@@ -184,24 +184,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "charts", "charts", "{C6F706
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{7428DCE2-2704-4109-907E-BB23860C86CC}"
 	ProjectSection(SolutionItems) = preProject
-		Deployment Scripts\Helm\naati\charts\ncms\templates\_helpers.tpl = Deployment Scripts\Helm\naati\charts\ncms\templates\_helpers.tpl
-		Deployment Scripts\Helm\naati\charts\ncms\templates\_ingress.yaml = Deployment Scripts\Helm\naati\charts\ncms\templates\_ingress.yaml
 		Deployment Scripts\Helm\naati\charts\ncms\templates\deployment.yaml = Deployment Scripts\Helm\naati\charts\ncms\templates\deployment.yaml
 		Deployment Scripts\Helm\naati\charts\ncms\templates\ncms-config-map.yaml = Deployment Scripts\Helm\naati\charts\ncms\templates\ncms-config-map.yaml
 		Deployment Scripts\Helm\naati\charts\ncms\templates\NOTES.txt = Deployment Scripts\Helm\naati\charts\ncms\templates\NOTES.txt
 		Deployment Scripts\Helm\naati\charts\ncms\templates\service.yaml = Deployment Scripts\Helm\naati\charts\ncms\templates\service.yaml
 		Deployment Scripts\Helm\naati\charts\ncms\templates\serviceaccount.yaml = Deployment Scripts\Helm\naati\charts\ncms\templates\serviceaccount.yaml
+		Deployment Scripts\Helm\naati\charts\ncms\templates\_helpers.tpl = Deployment Scripts\Helm\naati\charts\ncms\templates\_helpers.tpl
+		Deployment Scripts\Helm\naati\charts\ncms\templates\_ingress.yaml = Deployment Scripts\Helm\naati\charts\ncms\templates\_ingress.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{71C5E0EB-7767-41D9-BACC-F4CC451DB419}"
 	ProjectSection(SolutionItems) = preProject
-		Deployment Scripts\Helm\naati\charts\mynaati\templates\_helpers.tpl = Deployment Scripts\Helm\naati\charts\mynaati\templates\_helpers.tpl
-		Deployment Scripts\Helm\naati\charts\mynaati\templates\_ingress.yaml = Deployment Scripts\Helm\naati\charts\mynaati\templates\_ingress.yaml
 		Deployment Scripts\Helm\naati\charts\mynaati\templates\deployment.yaml = Deployment Scripts\Helm\naati\charts\mynaati\templates\deployment.yaml
 		Deployment Scripts\Helm\naati\charts\mynaati\templates\mynaati-config-map.yaml = Deployment Scripts\Helm\naati\charts\mynaati\templates\mynaati-config-map.yaml
 		Deployment Scripts\Helm\naati\charts\mynaati\templates\NOTES.txt = Deployment Scripts\Helm\naati\charts\mynaati\templates\NOTES.txt
 		Deployment Scripts\Helm\naati\charts\mynaati\templates\service.yaml = Deployment Scripts\Helm\naati\charts\mynaati\templates\service.yaml
 		Deployment Scripts\Helm\naati\charts\mynaati\templates\serviceaccount.yaml = Deployment Scripts\Helm\naati\charts\mynaati\templates\serviceaccount.yaml
+		Deployment Scripts\Helm\naati\charts\mynaati\templates\_helpers.tpl = Deployment Scripts\Helm\naati\charts\mynaati\templates\_helpers.tpl
+		Deployment Scripts\Helm\naati\charts\mynaati\templates\_ingress.yaml = Deployment Scripts\Helm\naati\charts\mynaati\templates\_ingress.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B7A679D7-5C76-4DBA-BE2A-8511EBFFCA4B}"
@@ -228,12 +228,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cluster-infra", "cluster-in
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{1958036F-BC3E-4431-9585-1714FA95527E}"
 	ProjectSection(SolutionItems) = preProject
-		Deployment Scripts\Helm\cluster-infra\templates\_helpers.tpl = Deployment Scripts\Helm\cluster-infra\templates\_helpers.tpl
 		Deployment Scripts\Helm\cluster-infra\templates\limit-range-pods.yaml = Deployment Scripts\Helm\cluster-infra\templates\limit-range-pods.yaml
 		Deployment Scripts\Helm\cluster-infra\templates\timezone-setter-config-map.yaml = Deployment Scripts\Helm\cluster-infra\templates\timezone-setter-config-map.yaml
 		Deployment Scripts\Helm\cluster-infra\templates\timezone-setter-daemonset.yaml = Deployment Scripts\Helm\cluster-infra\templates\timezone-setter-daemonset.yaml
 		Deployment Scripts\Helm\cluster-infra\templates\timezone-setter-ssh-key-passphrase.yaml = Deployment Scripts\Helm\cluster-infra\templates\timezone-setter-ssh-key-passphrase.yaml
 		Deployment Scripts\Helm\cluster-infra\templates\timezone-setter-ssh-key-secret.yaml = Deployment Scripts\Helm\cluster-infra\templates\timezone-setter-ssh-key-secret.yaml
+		Deployment Scripts\Helm\cluster-infra\templates\_helpers.tpl = Deployment Scripts\Helm\cluster-infra\templates\_helpers.tpl
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NaatiBase", "NaatiBase", "{F0E8D432-1044-47C6-A56C-E7AC2EE3F898}"
@@ -462,7 +462,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContainerFonts", "Container
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\kokilab.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\kokilab.ttf
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\kokilabi.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\kokilabi.ttf
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\kokilai.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\kokilai.ttf
-		Deployment Scripts\Docker\NaatiBase\ContainerFonts\l_10646.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\l_10646.ttf
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\LaoUI.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\LaoUI.ttf
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\LaoUIb.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\LaoUIb.ttf
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\latha.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\latha.ttf
@@ -475,6 +474,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ContainerFonts", "Container
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\LeelUIsl.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\LeelUIsl.ttf
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\lvnm.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\lvnm.ttf
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\lvnmbd.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\lvnmbd.ttf
+		Deployment Scripts\Docker\NaatiBase\ContainerFonts\l_10646.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\l_10646.ttf
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\majalla.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\majalla.ttf
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\majallab.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\majallab.ttf
 		Deployment Scripts\Docker\NaatiBase\ContainerFonts\malgun.ttf = Deployment Scripts\Docker\NaatiBase\ContainerFonts\malgun.ttf
@@ -936,71 +936,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DEA699F4-EF37-4E78-8E0C-CA446AA5AADF}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 21
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://f1tfs001-int.f1solutions.com.au/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = F1Solutions.Global.Common\\F1Solutions.Global.Common.csproj
-		SccProjectName1 = F1Solutions.Global.Common
-		SccLocalPath1 = F1Solutions.Global.Common
-		SccProjectUniqueName2 = F1Solutions.Naati.Common.Contracts\\F1Solutions.Naati.Common.Contracts.csproj
-		SccProjectName2 = F1Solutions.Naati.Common.Contracts
-		SccLocalPath2 = F1Solutions.Naati.Common.Contracts
-		SccProjectUniqueName3 = F1Solutions.Naati.Common.Dal\\F1Solutions.Naati.Common.Dal.csproj
-		SccProjectName3 = F1Solutions.Naati.Common.Dal
-		SccLocalPath3 = F1Solutions.Naati.Common.Dal
-		SccProjectUniqueName4 = F1Solutions.Naati.Common.Dal.Domain\\F1Solutions.Naati.Common.Dal.Domain.csproj
-		SccProjectName4 = F1Solutions.Naati.Common.Dal.Domain
-		SccLocalPath4 = F1Solutions.Naati.Common.Dal.Domain
-		SccProjectUniqueName5 = F1Solutions.Naati.Common.Dal.NHibernate\\F1Solutions.Naati.Common.Dal.NHibernate.csproj
-		SccProjectName5 = F1Solutions.Naati.Common.Dal.NHibernate
-		SccLocalPath5 = F1Solutions.Naati.Common.Dal.NHibernate
-		SccProjectUniqueName6 = F1Solutions.Naati.Common.Dal.Nhibernate.Mappings\\F1Solutions.Naati.Common.Dal.Nhibernate.Mappings.csproj
-		SccProjectName6 = F1Solutions.Naati.Common.Dal.Nhibernate.Mappings
-		SccLocalPath6 = F1Solutions.Naati.Common.Dal.Nhibernate.Mappings
-		SccProjectUniqueName7 = F1Solutions.Naati.Common.Resources\\Naati.Resources.csproj
-		SccProjectName7 = F1Solutions.Naati.Common.Resources
-		SccLocalPath7 = F1Solutions.Naati.Common.Resources
-		SccProjectUniqueName8 = MyNaati.Bl\\MyNaati.Bl.csproj
-		SccProjectName8 = MyNaati.Bl
-		SccLocalPath8 = MyNaati.Bl
-		SccProjectUniqueName9 = MyNaati.Contracts\\MyNaati.Contracts.csproj
-		SccProjectName9 = MyNaati.Contracts
-		SccLocalPath9 = MyNaati.Contracts
-		SccProjectUniqueName10 = MyNaati.Ui\\MyNaati.Ui.csproj
-		SccProjectName10 = MyNaati.Ui
-		SccLocalPath10 = MyNaati.Ui
-		SccProjectUniqueName11 = Ncms.Bl\\Ncms.Bl.csproj
-		SccProjectName11 = Ncms.Bl
-		SccLocalPath11 = Ncms.Bl
-		SccProjectUniqueName12 = Ncms.Contracts\\Ncms.Contracts.csproj
-		SccProjectName12 = Ncms.Contracts
-		SccLocalPath12 = Ncms.Contracts
-		SccProjectUniqueName13 = F1Solutions.Naati.Common.Bl\\F1Solutions.Naati.Common.Bl.csproj
-		SccProjectName13 = F1Solutions.Naati.Common.Bl
-		SccLocalPath13 = F1Solutions.Naati.Common.Bl
-		SccProjectUniqueName14 = Ncms.Ui\\Ncms.Ui.csproj
-		SccProjectName14 = Ncms.Ui
-		SccLocalPath14 = Ncms.Ui
-		SccProjectUniqueName15 = F1Solutions.Global.Azure\\F1Solutions.Naati.Common.Azure.csproj
-		SccProjectName15 = F1Solutions.Global.Azure
-		SccLocalPath15 = F1Solutions.Global.Azure
-		SccProjectUniqueName16 = F1Solutions.Naati.Common.Migrations\\F1Solutions.Naati.Common.Migrations.csproj
-		SccProjectName16 = F1Solutions.Naati.Common.Migrations
-		SccLocalPath16 = F1Solutions.Naati.Common.Migrations
-		SccProjectUniqueName17 = F1Solutions.Naati.Common.Utils\\F1Solutions.Naati.Common.Utils.csproj
-		SccProjectName17 = F1Solutions.Naati.Common.Utils
-		SccLocalPath17 = F1Solutions.Naati.Common.Utils
-		SccProjectUniqueName18 = Ncms.Test\\Ncms.Test.csproj
-		SccProjectName18 = Ncms.Test
-		SccLocalPath18 = Ncms.Test
-		SccProjectUniqueName19 = MyNaati.Test\\MyNaati.Test.csproj
-		SccProjectName19 = MyNaati.Test
-		SccLocalPath19 = MyNaati.Test
-		SccProjectUniqueName20 = F1Solutions.NAATI.Common.Wiise\\F1Solutions.Naati.Common.Wiise.csproj
-		SccProjectName20 = F1Solutions.NAATI.Common.Wiise
-		SccLocalPath20 = F1Solutions.NAATI.Common.Wiise
 	EndGlobalSection
 EndGlobal

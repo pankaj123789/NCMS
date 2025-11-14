@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiAccess.cs" />
+    <Compile Include="BaseEntity.cs" />
     <Compile Include="CandidateBrief.cs" />
     <Compile Include="CredentialPrerequisiteExemption.cs" />
     <Compile Include="CredentialQrCode.cs" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿// F1Solutions.Naati.Common.Dal\Portal\Repositories\PersonRepository.cs
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using F1Solutions.Naati.Common.Contracts.Dal.Portal;
@@ -14,6 +16,10 @@ namespace F1Solutions.Naati.Common.Dal.Portal.Repositories
         IEnumerable<Person> FindByNameAndBirthDate(string givenName, string familyName, DateTime BirthDate);
         Person FindByPractitionerNo(string practitionerNo);
         Person FindByPersonId(int personId);
+
+        // Soft-delete contract: implemented by repository
+        void SoftDelete(Person person, string deletedBy);
+        void Restore(Person person);
     }
 
     public class PersonRepository : Repository<Person>, IPersonRepository
@@ -92,6 +98,28 @@ namespace F1Solutions.Naati.Common.Dal.Portal.Repositories
             });
 
             return personResponse.Select(p => p.Person);
+        }
+
+        // --- SOFT DELETE / RESTORE IMPLEMENTATION ---
+        public void SoftDelete(Person person, string deletedBy)
+        {
+            if (person == null) throw new ArgumentNullException(nameof(person));
+
+            // This line now works:
+            person.SoftDelete(deletedBy);
+
+            Session.Update(person);
+            Session.Flush();
+        }
+
+        public void Restore(Person person)
+        {
+            if (person == null) throw new ArgumentNullException(nameof(person));
+
+            person.Restore();
+
+            Session.Update(person);
+            Session.Flush();
         }
     }
 }

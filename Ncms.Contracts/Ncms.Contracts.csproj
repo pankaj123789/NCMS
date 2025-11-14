@@ -147,6 +147,7 @@
     <Compile Include="Models\Panel\PanelMembershipInfoModel.cs" />
     <Compile Include="Models\Person\PersonAttachmentModel.cs" />
     <Compile Include="Models\Person\QrCodeSummaryModel.cs" />
+    <Compile Include="Models\Person\DeletePersonRequestModel.cs" />
     <Compile Include="Models\RolePlayer\RolePlayerActionWizardModel.cs" />
     <Compile Include="Models\System\StepDataModel.cs" />
     <Compile Include="Models\ExaminerDocumentModel.cs" />

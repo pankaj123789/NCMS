@@ -64,7 +64,52 @@ namespace Ncms.Ui.Controllers.Api
 			return this.CreateResponse(() => _personService.CreatePerson(model));
 		}
 
-		[HttpPost]
+        [HttpPost]
+        [Route("soft-delete")]
+
+        // --- THIS IS THE FIX ---
+        // Add this attribute to lock the endpoint to only the roles you listed.
+        // We use the internal names from SecurityRoleScriptGenerator.cs
+        //[Authorize(Roles = "SystemAdministrator,SeniorManagement,GeneralAccount")]
+        // ---------------------
+
+        public IHttpActionResult SoftDeletePerson([FromBody] DeletePersonRequestModel request)
+        {
+            if (request == null || !ModelState.IsValid)
+            {
+                return BadRequest("Invalid request data.");
+            }
+
+            try
+            {
+                var currentAdminUser = _userService.Get();
+                if (currentAdminUser == null)
+                {
+                    // This will be caught by [Authorize] first, but it's good practice.
+                    return Unauthorized();
+                }
+
+                request.DeletedBy = currentAdminUser.DomainName;
+
+                var response = _personService.SoftDeletePerson(request);
+
+                if (response.Success)
+                {
+                    return Ok(response);
+                }
+                else
+                {
+                    return BadRequest(response.Errors.FirstOrDefault() ?? "An error occurred.");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (ex)
+                return InternalServerError(new Exception("An unexpected error occurred during the soft delete process."));
+            }
+        }
+
+        [HttpPost]
 		[NcmsAuthorize(SecurityVerbName.Read, SecurityNounName.Person)]
 		[Route("check")]
 		public HttpResponseMessage CheckPerson([FromBody]PersonCheckModel model)

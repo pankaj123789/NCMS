@@ -170,7 +170,7 @@ namespace Ncms.Ui
         {
             try
             {
-                RunDatabaseMigrations();
+                //RunDatabaseMigrations();
                 SystemLifecycleHelper.UpdateLifecycleStatus(SystemLifecycleStatus.Running);
             }
             catch (Exception ex)

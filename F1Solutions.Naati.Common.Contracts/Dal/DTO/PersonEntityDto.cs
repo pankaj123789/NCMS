@@ -78,5 +78,8 @@ namespace F1Solutions.Naati.Common.Contracts.Dal.DTO
         public DateTime? MfaExpireStartDate { get; set; }
         public DateTime? EmailCodeExpireStartDate { get; set; }
         public bool AccessDisabledByNcms { get; set; }
+        public virtual bool IsDeleted { get; set; }
+        public virtual DateTimeOffset? DeletedOn { get; set; }
+        public virtual string DeletedBy { get; set; }
     }
 }

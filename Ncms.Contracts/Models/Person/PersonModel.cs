@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using F1Solutions.Naati.Common.Contracts.Dal.Enum;
 using Ncms.Contracts.Models.Application;
 using Newtonsoft.Json;
+using F1Solutions.Naati.Common.Dal.Domain;
 
 namespace Ncms.Contracts.Models.Person
 {
@@ -82,6 +83,11 @@ namespace Ncms.Contracts.Models.Person
         public DateTime? MfaExpireStartDate { get; set; }
         public DateTime? EmailCodeExpireStartDate { get; set; }
         public bool AccessDisabledByNcms { get; set; }
+
+        // These will now be available to the UI and AutoMapper
+        public virtual bool IsDeleted { get; set; }
+        public virtual DateTimeOffset? DeletedOn { get; set; }
+        public virtual string DeletedBy { get; set; }
 
 
     }

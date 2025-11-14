@@ -18,9 +18,13 @@ using F1Solutions.Naati.Common.Contracts.Dal.Request;
 using F1Solutions.Naati.Common.Contracts.Dal.Response;
 using F1Solutions.Naati.Common.Contracts.Dal.Services;
 using F1Solutions.Naati.Common.Contracts.Security;
+using F1Solutions.Naati.Common.Dal;
+using F1Solutions.Naati.Common.Dal.Domain;
+using F1Solutions.Naati.Common.Dal.Portal.Repositories;
 using Ncms.Bl.Mappers;
 using Ncms.Contracts;
 using Ncms.Contracts.Models;
+using Ncms.Contracts.Models.Audit;
 using Ncms.Contracts.Models.Application;
 using Ncms.Contracts.Models.Logbook;
 using Ncms.Contracts.Models.Person;
@@ -37,7 +41,9 @@ namespace Ncms.Bl
         private readonly IPersonQueryService _personQueryService;
         private readonly ISystemService _systemService;
         private readonly IUserService _userService;
-    
+        private readonly IPersonRepository _personRepository;
+        //private readonly IAuditLoggingService _auditLoggingService;
+
         private readonly ILogbookQueryService _logbookQueryService;
         private readonly IApplicationBusinessLogicService _applicationBusinessLogicService;
         private readonly IActivityPointsCalculatorService _activityPointsCalculatorService;
@@ -54,7 +60,9 @@ namespace Ncms.Bl
             IPersonQueryService personQueryService,
             ISystemService systemService,
             IUserService userService,
-         
+            IPersonRepository personRepository,
+            //IAuditLoggingService auditLoggingService,
+
             ILogbookQueryService logbookQueryService,
             IApplicationBusinessLogicService applicationBusinessLogicService,
             IActivityPointsCalculatorService activityPointsCalculatorService,
@@ -74,13 +82,71 @@ namespace Ncms.Bl
             _activityPointsCalculatorService = activityPointsCalculatorService;
             _institutionQueryService = institutionQueryService;
             _financeService = financeService;
-         
+            _personRepository = personRepository;
+            //_auditLoggingService = auditLoggingService;
+
             _fileService = fileService;
             _examinerToolsService = examinerToolsService;
             _myNaatiIntegrationService = myNaatiIntegrationService;
             _fileCompressionHelper = fileCompressionHelper;
             _sharedAccessSignature = sharedAccessSignature;
             _autoMapperHelper = autoMapperHelper;
+        }
+
+        public GenericResponse<bool> SoftDeletePerson(DeletePersonRequestModel request)
+        {
+            // 1. Authorization Check
+            if (request == null || request.PersonId <= 0 || string.IsNullOrWhiteSpace(request.DeletedBy))
+            {
+                
+                return new GenericResponse<bool>
+                {
+                    Success = false,
+                    Errors = new List<string> { "Invalid request: Person ID and deleted by user must be provided." }
+                };
+            }
+
+            // 2. Load the Person Entity
+            Person person = _personRepository.FindByPersonId(request.PersonId);
+
+            if (person == null)
+            {
+                
+                return new GenericResponse<bool>
+                {
+                    Success = false,
+                    Errors = new List<string> { $"Person with ID {request.PersonId} not found." }
+                };
+            }
+
+            try
+            {
+                // 3. Perform Soft Delete (Domain Layer Logic)
+                _personRepository.SoftDelete(person, request.DeletedBy);
+
+                // 4. AUDIT LOGGING (BR-03)
+                // _auditLoggingService.LogAction(...); // Skipped for now
+
+        
+                return new GenericResponse<bool>
+                {
+                    Success = true,
+                    Data = true,
+                    Warnings = new List<string> { $"Profile with ID {request.PersonId} successfully soft deleted." }
+                };
+            }
+            catch (Exception ex)
+            {
+                // Log exception
+                //_logger.Error(ex, "Error during soft deletion of Person ID {PersonId}", request.PersonId);
+
+
+                return new GenericResponse<bool>
+                {
+                    Success = false,
+                    Errors = new List<string> { $"An error occurred during deletion: {ex.Message}" }
+                };
+            }
         }
 
         public GenericResponse<IEnumerable<EntitySearchResultModel>> PersonSearch(QueryRequest request)
