@@ -39,7 +39,7 @@ I implemented this feature by modifying each layer of the application.
 
 #### Layer 1: Database & Entity Foundation
 * **What I did:** I defined the new data structure for soft-delete.
-* **Files:** `BaseEntity.cs` (New), `Person.cs`
+* **Files:** [`BaseEntity.cs`](./F1Solutions.Naati.Common.Dal.Domain/BaseEntity.cs) (New), [`Person.cs`](./F1Solutions.Naati.Common.Dal.Domain/Person.cs)
 * **How:**
     1.  I created the new `BaseEntity.cs` file to hold the shared soft-delete properties.
     2.  I added three new properties to this base class: `IsDeleted` (the `bool` flag), `DeletedOn` (a `DateTime?` for the timestamp), and `DeletedBy` (a `string` for the admin's username).
@@ -48,7 +48,7 @@ I implemented this feature by modifying each layer of the application.
 
 #### Layer 2: Data Access Mapping (The "Rulebook")
 * **What I did:** I taught NHibernate (our ORM) how to handle these new columns and, most importantly, how to filter them.
-* **File:** `PersonMap.cs`
+* **File:** [`PersonMap.cs`](./F1Solutions.Naati.Common.Dal.Nhibernate.Mappings/Mappings/PersonMap.cs)
 * **How:**
     1.  **Column Mapping:** I added `mapping.Map(...)` entries for `IsDeleted`, `DeletedOn`, and `DeletedBy` to link the C# properties to their SQL column names and set constraints (like `IsDeleted` cannot be null).
     2.  **Global Filter:** I added one critical line: `mapping.Where("IsDeleted = 0");`.
@@ -56,7 +56,7 @@ I implemented this feature by modifying each layer of the application.
 
 #### Layer 3: Data Access Repository (The "Worker")
 * **What I did:** I implemented the logic to perform the *actual* database "write".
-* **File:** `PersonRepository.cs`
+* **File:** [`PersonRepository.cs`](./F1Solutions.Naati.Common.Dal/Portal/Repositories/PersonRepository.cs)
 * **How:** I created a `SoftDelete` method. When called by the `PersonService`, this method:
     1.  Takes the `Person` object and the `deletedBy` user as arguments.
     2.  Sets the entity's properties: `person.IsDeleted = true`, `person.DeletedOn = DateTime.UtcNow`, `person.DeletedBy = deletedBy`.
@@ -64,7 +64,7 @@ I implemented this feature by modifying each layer of the application.
 
 #### Layer 4: Business Logic (The "Brain")
 * **What I did:** I created the central "brain" to orchestrate the delete operation.
-* **Files:** `IPersonService.cs`, `PersonService.cs`
+* **Files:** [`IPersonService.cs`](./Ncms.Contracts/IPersonService.cs), [`PersonService.cs`](./Ncms.Bl/PersonService.cs)
 * **How:**
     1.  I added the `SoftDeletePerson` function to the `IPersonService` interface.
     2.  In `PersonService.cs`, I injected the `ILogger` for developer-facing logs.
@@ -77,7 +77,7 @@ I implemented this feature by modifying each layer of the application.
 
 #### Layer 5: API & DTOs (The "Front Door")
 * **What I did:** I exposed this new functionality as a public API endpoint.
-* **Files:** `PersonController.cs`, `DeletePersonRequestModel.cs` (New)
+* **Files:** [`PersonController.cs`](./Ncms.Ui/Controllers/Api/PersonController.cs), [`DeletePersonRequestModel.cs`](./Ncms.Contracts/Models/Person/DeletePersonRequestModel.cs) (New)
 * **How:**
     1.  I created `DeletePersonRequestModel.cs`. This is a "Data Transfer Object" (DTO) whose only job is to safely carry the `PersonId` and `DeletedBy` username from the frontend to the API.
     2.  In `PersonController.cs`, I added a new endpoint (e.g., `[HttpPost, "softdelete"]`). This endpoint:
@@ -87,7 +87,7 @@ I implemented this feature by modifying each layer of the application.
 
 #### Layer 6: Data Transfer Models
 * **What I did:** I updated our "internal" DTOs to be aware of the new fields.
-* **Files:** `PersonModel.cs`, `PersonEntityDto.cs`, `PersonProfile.cs`
+* **Files:** [`PersonModel.cs`](./Ncms.Contracts/Models/Person/PersonModel.cs), [`PersonEntityDto.cs`](./F1Solutions.Naati.Common.Contracts/Dal/DTO/PersonEntityDto.cs), [`PersonProfile.cs`](./Ncms.Bl/AutoMappingProfiles/PersonProfile.cs)
 * **How:** I added the `IsDeleted`, `DeletedOn`, and `DeletedBy` properties to these models and updated the `PersonProfile` (our AutoMapper config) to map them. This ensures that if any *other* part of the application needs to know this information, the data can flow correctly from the entity to the model.
 
 ---
