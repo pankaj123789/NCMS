@@ -46,7 +46,7 @@ namespace F1Solutions.Naati.Common.Dal.Nhibernate.Mappings.Mappings
                 .Cascade.AllDeleteOrphan()
                 .Inverse();
 
-            // --- OPTIONAL: set explicit table/id if you want (automapper may already do this)
+            // set explicit table
             mapping.Table("tblPerson");
             mapping.Id(x => x.Id).GeneratedBy.Identity();
 
